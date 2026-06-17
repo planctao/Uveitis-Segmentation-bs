@@ -1,0 +1,115 @@
+project:
+  name: uveitis_segmentation_convnext
+  seed: 42
+
+runtime:
+  device: cuda
+  precision: amp
+  num_workers: 8
+
+data:
+  root: dataset/dataset/split_dataorigin
+  image_dir: img
+  mask_dir: mask
+  hrnet_result_dir: HRNet_Result
+  image_extensions: [.jpg, .jpeg, .png, .bmp, .tif, .tiff]
+  mask_extensions: [.nii.gz, .nii, .png, .jpg, .jpeg, .bmp, .tif, .tiff]
+  result_extensions: [.png, .jpg, .jpeg, .bmp, .tif, .tiff]
+  train_folds: [f1, f2, f3, f4]
+  val_folds: [f5]
+  label_values: [0, 1, 2, 3]
+  ignore_index: 255
+
+train:
+  image_size: [768, 768]
+  batch_size: 4
+  grad_accum_steps: 1
+  epochs: 30
+  learning_rate: 0.0001
+  backbone_learning_rate: 0.00001
+  min_learning_rate: 0.0000001
+  weight_decay: 0.0001
+  freeze_backbone: false
+  amp: true
+  clip_grad_norm: 1.0
+  progress_log_interval: 200
+  val_interval: 1
+  save_interval: 5
+  lesion2_sample_weight: 4.0
+  max_train_samples:
+  max_val_samples:
+
+model:
+  backbone: dinov3_convnext_tiny
+  variant: tiny
+  dinov3_code_dir: backbone/dinov3
+  backbone_weights: weights/dinov3_convnext_tiny_pretrain_lvd1689m-21b726bb.pth
+  decoder_channels: 192
+  num_outputs: 2
+
+loss:
+  pos_weight: [1.0, 20.0]
+  bce_weight: 0.5
+  tversky_weight: 1.0
+  tversky_alpha: 0.3
+  tversky_beta: 0.7
+  focal_gamma: 0.75
+
+metric:
+  threshold: 0.5
+
+augmentations:
+  enabled: true
+  pipeline:
+    - name: hflip
+      prob: 0.5
+    - name: vflip
+      prob: 0.15
+    - name: affine
+      prob: 0.75
+      strength: 1.0
+      degrees: [-15, 15]
+      scale: [0.9, 1.12]
+      translate: 0.06
+    - name: foreground_resized_crop
+      prob: 0.35
+      strength: 1.0
+      scale: [0.86, 1.0]
+      foreground_labels: [1, 2, 3]
+      ignore_index: 255
+      min_keep: 0.65
+      attempts: 8
+    - name: random_order
+      prob: 1.0
+      blocks:
+        - name: brightness_contrast
+          prob: 0.8
+          strength: 1.0
+          brightness: [-0.12, 0.12]
+          contrast: [0.82, 1.25]
+        - name: gamma
+          prob: 0.45
+          strength: 1.0
+          gamma: [0.75, 1.35]
+    - name: one_of
+      prob: 0.4
+      weights: [0.65, 0.35]
+      blocks:
+        - name: gaussian_noise
+          prob: 1.0
+          strength: 1.0
+          std: [0.0, 0.035]
+        - name: gaussian_blur
+          prob: 1.0
+          strength: 1.0
+          kernel_size: 5
+          sigma: [0.2, 1.0]
+    - name: coarse_dropout
+      prob: 0.15
+      strength: 1.0
+      holes: 2
+      size: [0.025, 0.06]
+      fill: 0.0
+
+outputs:
+  root: runs

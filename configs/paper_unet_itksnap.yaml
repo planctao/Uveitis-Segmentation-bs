@@ -1,0 +1,85 @@
+project:
+  name: paper_unet_itksnap_baseline
+  seed: 42
+
+runtime:
+  device: cuda
+  precision: amp
+  num_workers: 8
+
+data:
+  root: dataset/dataset/split_dataorigin
+  image_dir: img
+  mask_dir: mask_only_itksnap
+  image_extensions: [.jpg, .jpeg, .png, .bmp, .tif, .tiff]
+  mask_extensions: [.nii.gz, .nii, .png, .jpg, .jpeg, .bmp, .tif, .tiff]
+  folds: [f1, f2, f3, f4, f5]
+  label_values: [0, 1, 2, 3]
+  ignore_index: 255
+
+paper_explicit:
+  image_size: [512, 512]
+  image_resize: bilinear
+  mask_resize: nearest
+  augmentations: [random_horizontal_flip, random_vertical_flip, random_rotation_minus30_to_plus30]
+  optimizer: sgd
+  momentum: 0.9
+  weight_decay: 0.0001
+  initialization: kaiming_from_scratch
+  pretrained_weights: false
+  initial_learning_rate: 0.05
+  epochs: 100
+  batch_size: 8
+  validation: five_fold_cross_validation
+  targeted_offline_augmentation: ME-containing images 10x multiplicity
+
+paper_assumptions:
+  loss: four_class_cross_entropy
+  class_weighting: median_frequency_style_capped_for_extreme_class_imbalance
+  lr_decay: poly_decay_power_0.9
+  threshold: 0.5
+  input_scaling: rgb_0_to_1_without_imagenet_normalization
+  normalization_layers: no_batchnorm_because_not_specified_in_paper
+  mask_source: mask_only_itksnap_rgb_palette_decoded_to_labels_0_1_2_3
+  note: The paper image states decay method but not the exact scheduler, and does not specify the loss; this baseline uses the ITK-SNAP RGB masks decoded to label values.
+
+train:
+  image_size: [512, 512]
+  batch_size: 8
+  epochs: 100
+  learning_rate: 0.05
+  min_learning_rate: 0.0
+  lr_power: 0.9
+  momentum: 0.9
+  weight_decay: 0.0001
+  amp: true
+  clip_grad_norm:
+  progress_log_interval: 100
+  save_interval: 20
+  me_positive_multiplicity: 10
+  max_train_samples:
+  max_val_samples:
+  folds_to_run: [f1, f2, f3, f4, f5]
+
+model:
+  name: paper_unet
+  in_channels: 3
+  out_channels: 4
+  base_channels: 64
+  use_batchnorm: false
+
+loss:
+  name: cross_entropy
+  class_weight: [0.05, 1.0, 20.0, 20.0]
+
+metric:
+  threshold: 0.5
+
+augmentation:
+  hflip_prob: 0.5
+  vflip_prob: 0.5
+  rotate_prob: 1.0
+  rotate_degrees: [-30.0, 30.0]
+
+outputs:
+  root: runs
