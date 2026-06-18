@@ -7,6 +7,8 @@ import torch
 import torch.nn.functional as F
 from torch import Tensor, nn
 
+from bs.wavelet import MultiScaleWBE
+
 
 class ConvNormAct(nn.Sequential):
     def __init__(self, in_channels: int, out_channels: int, kernel_size: int = 3, dropout: float = 0.0) -> None:
@@ -60,6 +62,12 @@ class DinoV3SegmentationModel(nn.Module):
         dropout: float = 0.1,
         freeze_backbone: bool = True,
         unfreeze_last_blocks: int = 0,
+        use_wbe: bool = False,
+        wbe_shared: bool = False,
+        wbe_reduction: int = 4,
+        wbe_bottleneck: int = 256,
+        wbe_version: int = 1,
+        wbe_snr_temperature: float = 1.0,
     ) -> None:
         super().__init__()
         self.intermediate_layers = intermediate_layers
@@ -73,6 +81,20 @@ class DinoV3SegmentationModel(nn.Module):
         self.backbone = dinov3_vitb16(pretrained=False)
         state_dict = torch.load(weights_path, map_location="cpu", weights_only=True)
         self.backbone.load_state_dict(state_dict, strict=True)
+
+        # Wavelet Boundary Enhancement module (optional)
+        self.use_wbe = use_wbe
+        if use_wbe:
+            self.wbe = MultiScaleWBE(
+                channels=embed_dim,
+                num_scales=len(intermediate_layers),
+                bottleneck_channels=wbe_bottleneck,
+                reduction=wbe_reduction,
+                shared=wbe_shared,
+                version=wbe_version,
+                snr_temperature=wbe_snr_temperature,
+            )
+
         self.decode_head = TokenFPNHead(
             in_channels=embed_dim,
             num_inputs=len(intermediate_layers),
@@ -127,4 +149,8 @@ class DinoV3SegmentationModel(nn.Module):
                     reshape=True,
                     norm=True,
                 )
-        return self.decode_head(list(features), output_size=output_size)
+        features = list(features)
+        # Apply Wavelet Boundary Enhancement if enabled
+        if self.use_wbe:
+            features = self.wbe(features)
+        return self.decode_head(features, output_size=output_size)

@@ -210,6 +210,9 @@ def build_model(config: dict[str, Any]) -> nn.Module:
     train_cfg = config["train"]
     backbone = str(model_cfg["backbone"])
     if backbone == "dinov3_vitb16":
+        # WBE (Wavelet Boundary Enhancement) config
+        wbe_cfg = config.get("wbe", {})
+        use_wbe = bool(wbe_cfg.get("enabled", False))
         return DinoV3SegmentationModel(
             dinov3_code_dir=project_path(model_cfg["dinov3_code_dir"]),
             weights_path=project_path(model_cfg["backbone_weights"]),
@@ -220,6 +223,12 @@ def build_model(config: dict[str, Any]) -> nn.Module:
             dropout=float(model_cfg["dropout"]),
             freeze_backbone=bool(train_cfg["freeze_backbone"]),
             unfreeze_last_blocks=int(train_cfg.get("unfreeze_last_blocks", 0)),
+            use_wbe=use_wbe,
+            wbe_shared=bool(wbe_cfg.get("shared", False)),
+            wbe_reduction=int(wbe_cfg.get("reduction", 4)),
+            wbe_bottleneck=int(wbe_cfg.get("bottleneck_channels", 256)),
+            wbe_version=int(wbe_cfg.get("version", 1)),
+            wbe_snr_temperature=float(wbe_cfg.get("snr_temperature", 1.0)),
         )
     if backbone.startswith("dinov3_convnext_"):
         return DinoV3ConvNeXtSegmentationModel(
@@ -248,7 +257,11 @@ def build_loss(config: dict[str, Any]) -> AsymmetricFocalTverskyBCE:
 def build_optimizer(model: nn.Module, config: dict[str, Any]) -> torch.optim.Optimizer:
     decoder = [p for p in model.decode_head.parameters() if p.requires_grad]
     backbone = [p for p in model.backbone.parameters() if p.requires_grad]
+    # WBE module params (if present)
+    wbe_params = [p for p in model.wbe.parameters() if p.requires_grad] if hasattr(model, "wbe") else []
     groups = [{"params": decoder, "lr": float(config["train"]["learning_rate"])}]
+    if wbe_params:
+        groups.append({"params": wbe_params, "lr": float(config["train"]["learning_rate"])})
     if backbone:
         groups.append({"params": backbone, "lr": float(config["train"]["backbone_learning_rate"])})
     return torch.optim.AdamW(groups, weight_decay=float(config["train"]["weight_decay"]))
