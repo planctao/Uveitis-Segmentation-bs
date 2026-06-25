@@ -1,0 +1,49 @@
+# MAE-SAM2 configuration for retinal vascular leakage segmentation
+# Reference: arXiv:2509.10554
+
+data:
+  root: dataset/dataset/split_dataorigin
+  image_dir: img
+  mask_dir: mask_only_itksnap
+  folds: [f1, f2, f3, f4, f5]
+  image_size: [768, 768]
+  label_values: [0, 1, 2, 3]   # 0=bg, 1=lesion1, 2=lesion2, 3=overlap
+  ignore_index: 255
+
+model:
+  variant: small              # tiny or small
+  sam2_weights: null          # auto-resolved from modelscope cache
+  num_classes: 2              # lesion1, lesion2 (multi-label)
+  seg_mid_channels: 128
+
+loss:
+  # Paper's combined loss: 0.9 * Dice + 0.1 * BCE
+  type: combined
+  dice_weight: 0.9
+  bce_weight: 0.1
+
+train:
+  epochs: 50
+  batch_size: 4
+  learning_rate: 1.0e-4
+  weight_decay: 0.01
+  warmup_epochs: 5
+  amp: true
+  clip_grad_norm: 1.0
+  save_interval: 5
+  seed: 42
+  mask_ratio: 0.75            # MAE mask ratio for pre-training
+  folds_to_run: [f1]
+
+metric:
+  threshold: 0.5
+
+augmentations:
+  enabled: true
+  pipeline:
+    - name: hflip
+    - name: vflip
+
+runtime:
+  num_workers: 4
+  device: cuda

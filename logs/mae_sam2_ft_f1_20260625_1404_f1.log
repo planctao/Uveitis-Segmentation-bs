@@ -1,0 +1,210 @@
+2026-06-25 15:44:07 | INFO | === MAE-SAM2 Training ===
+2026-06-25 15:44:07 | INFO | stage=finetune fold=f1 run_dir=/root/autodl-tmp/Uveitis-Segmentation-bs/runs/mae_sam2_ft_f1_20260625_1404
+2026-06-25 15:44:07 | INFO | config={"augmentations": {"enabled": true, "pipeline": [{"name": "hflip"}, {"name": "vflip"}]}, "data": {"folds": ["f1", "f2", "f3", "f4", "f5"], "ignore_index": 255, "image_dir": "img", "image_size": [768, 768], "label_values": [0, 1, 2, 3], "mask_dir": "mask_only_itksnap", "root": "dataset/dataset/split_dataorigin"}, "loss": {"bce_weight": 0.1, "dice_weight": 0.9, "type": "combined"}, "metric": {"threshold": 0.5}, "model": {"num_classes": 2, "sam2_weights": null, "seg_mid_channels": 128, "variant": "small"}, "runtime": {"device": "cuda", "num_workers": 4}, "train": {"amp": true, "batch_size": 4, "clip_grad_norm": 1.0, "epochs": 50, "folds_to_run": ["f1"], "learning_rate": 0.0001, "mask_ratio": 0.75, "save_interval": 5, "seed": 42, "warmup_epochs": 5, "weight_decay": 0.01}}
+2026-06-25 15:44:08 | INFO | model params: 37.1M (encoder: 34.3M)
+2026-06-25 15:44:08 | INFO | train samples: 1965 (folds=['f2', 'f3', 'f4', 'f5'])
+2026-06-25 15:44:08 | INFO | val samples: 494 (folds=['f1'])
+2026-06-25 15:44:09 | INFO | Starting segmentation fine-tuning for 50 epochs
+2026-06-25 15:44:09 | INFO | loss: {"bce_weight": 0.1, "dice_weight": 0.9, "type": "combined"}
+2026-06-25 15:44:09 | INFO | epoch 1 started lr=1.00e-06
+2026-06-25 15:44:37 | INFO | train epoch=1 step=100/491 progress=20.4% avg_loss=0.9111 elapsed=27s eta=106s
+2026-06-25 15:45:03 | INFO | train epoch=1 step=200/491 progress=40.7% avg_loss=0.9088 elapsed=53s eta=78s
+2026-06-25 15:45:29 | INFO | train epoch=1 step=300/491 progress=61.1% avg_loss=0.9044 elapsed=79s eta=51s
+2026-06-25 15:45:55 | INFO | train epoch=1 step=400/491 progress=81.5% avg_loss=0.9023 elapsed=106s eta=24s
+2026-06-25 15:46:19 | INFO | train epoch=1 step=491/491 progress=100.0% avg_loss=0.8995 elapsed=130s eta=0s
+2026-06-25 15:46:33 | INFO | val epoch=1 step=100/124 progress=80.6% avg_loss=0.9064 elapsed=14s eta=3s
+2026-06-25 15:46:37 | INFO | val epoch=1 step=124/124 progress=100.0% avg_loss=0.9075 elapsed=17s eta=0s
+2026-06-25 15:46:37 | INFO | new best paper_macro_dice=0.105249
+2026-06-25 15:46:38 | INFO | epoch=1 train_loss=0.8995 val_loss=0.9075 val_dice_1=0.2070 val_dice_2=0.0035 val_macro_dice=0.1052 lr=1.00e-06
+2026-06-25 15:46:38 | INFO | epoch 2 started lr=2.08e-05
+2026-06-25 15:47:06 | INFO | train epoch=2 step=100/491 progress=20.4% avg_loss=0.8677 elapsed=28s eta=108s
+2026-06-25 15:47:33 | INFO | train epoch=2 step=200/491 progress=40.7% avg_loss=0.8577 elapsed=55s eta=79s
+2026-06-25 15:48:00 | INFO | train epoch=2 step=300/491 progress=61.1% avg_loss=0.8479 elapsed=81s eta=52s
+2026-06-25 15:48:27 | INFO | train epoch=2 step=400/491 progress=81.5% avg_loss=0.8386 elapsed=109s eta=25s
+2026-06-25 15:48:51 | INFO | train epoch=2 step=491/491 progress=100.0% avg_loss=0.8351 elapsed=133s eta=0s
+2026-06-25 15:49:05 | INFO | val epoch=2 step=100/124 progress=80.6% avg_loss=0.8459 elapsed=14s eta=3s
+2026-06-25 15:49:09 | INFO | val epoch=2 step=124/124 progress=100.0% avg_loss=0.8470 elapsed=17s eta=0s
+2026-06-25 15:49:09 | INFO | new best paper_macro_dice=0.259473
+2026-06-25 15:49:10 | INFO | epoch=2 train_loss=0.8351 val_loss=0.8470 val_dice_1=0.4853 val_dice_2=0.0336 val_macro_dice=0.2595 lr=2.08e-05
+2026-06-25 15:49:10 | INFO | epoch 3 started lr=4.06e-05
+2026-06-25 15:49:36 | INFO | train epoch=3 step=100/491 progress=20.4% avg_loss=0.8029 elapsed=26s eta=103s
+2026-06-25 15:50:03 | INFO | train epoch=3 step=200/491 progress=40.7% avg_loss=0.7998 elapsed=52s eta=76s
+2026-06-25 15:50:29 | INFO | train epoch=3 step=300/491 progress=61.1% avg_loss=0.7947 elapsed=78s eta=50s
+2026-06-25 15:50:54 | INFO | train epoch=3 step=400/491 progress=81.5% avg_loss=0.7878 elapsed=104s eta=24s
+2026-06-25 15:51:18 | INFO | train epoch=3 step=491/491 progress=100.0% avg_loss=0.7831 elapsed=128s eta=0s
+2026-06-25 15:51:31 | INFO | val epoch=3 step=100/124 progress=80.6% avg_loss=0.7814 elapsed=13s eta=3s
+2026-06-25 15:51:34 | INFO | val epoch=3 step=124/124 progress=100.0% avg_loss=0.7818 elapsed=16s eta=0s
+2026-06-25 15:51:35 | INFO | new best paper_macro_dice=0.368594
+2026-06-25 15:51:35 | INFO | epoch=3 train_loss=0.7831 val_loss=0.7818 val_dice_1=0.5481 val_dice_2=0.1891 val_macro_dice=0.3686 lr=4.06e-05
+2026-06-25 15:51:35 | INFO | epoch 4 started lr=6.04e-05
+2026-06-25 15:52:03 | INFO | train epoch=4 step=100/491 progress=20.4% avg_loss=0.7358 elapsed=28s eta=108s
+2026-06-25 15:52:30 | INFO | train epoch=4 step=200/491 progress=40.7% avg_loss=0.7370 elapsed=55s eta=80s
+2026-06-25 15:52:57 | INFO | train epoch=4 step=300/491 progress=61.1% avg_loss=0.7328 elapsed=82s eta=52s
+2026-06-25 15:53:25 | INFO | train epoch=4 step=400/491 progress=81.5% avg_loss=0.7295 elapsed=109s eta=25s
+2026-06-25 15:53:50 | INFO | train epoch=4 step=491/491 progress=100.0% avg_loss=0.7241 elapsed=134s eta=0s
+2026-06-25 15:54:04 | INFO | val epoch=4 step=100/124 progress=80.6% avg_loss=0.7329 elapsed=14s eta=3s
+2026-06-25 15:54:07 | INFO | val epoch=4 step=124/124 progress=100.0% avg_loss=0.7330 elapsed=18s eta=0s
+2026-06-25 15:54:08 | INFO | new best paper_macro_dice=0.381758
+2026-06-25 15:54:09 | INFO | epoch=4 train_loss=0.7241 val_loss=0.7330 val_dice_1=0.6076 val_dice_2=0.1560 val_macro_dice=0.3818 lr=6.04e-05
+2026-06-25 15:54:09 | INFO | epoch 5 started lr=8.02e-05
+2026-06-25 15:54:36 | INFO | train epoch=5 step=100/491 progress=20.4% avg_loss=0.6899 elapsed=27s eta=105s
+2026-06-25 15:55:02 | INFO | train epoch=5 step=200/491 progress=40.7% avg_loss=0.6887 elapsed=53s eta=77s
+2026-06-25 15:55:29 | INFO | train epoch=5 step=300/491 progress=61.1% avg_loss=0.6852 elapsed=80s eta=51s
+2026-06-25 15:55:55 | INFO | train epoch=5 step=400/491 progress=81.5% avg_loss=0.6804 elapsed=106s eta=24s
+2026-06-25 15:56:19 | INFO | train epoch=5 step=491/491 progress=100.0% avg_loss=0.6749 elapsed=130s eta=0s
+2026-06-25 15:56:32 | INFO | val epoch=5 step=100/124 progress=80.6% avg_loss=0.6835 elapsed=14s eta=3s
+2026-06-25 15:56:35 | INFO | val epoch=5 step=124/124 progress=100.0% avg_loss=0.6822 elapsed=17s eta=0s
+2026-06-25 15:56:36 | INFO | new best paper_macro_dice=0.484361
+2026-06-25 15:56:38 | INFO | epoch=5 train_loss=0.6749 val_loss=0.6822 val_dice_1=0.6217 val_dice_2=0.3470 val_macro_dice=0.4844 lr=8.02e-05
+2026-06-25 15:56:38 | INFO | epoch 6 started lr=1.00e-04
+2026-06-25 15:57:06 | INFO | train epoch=6 step=100/491 progress=20.4% avg_loss=0.6444 elapsed=28s eta=111s
+2026-06-25 15:57:34 | INFO | train epoch=6 step=200/491 progress=40.7% avg_loss=0.6474 elapsed=56s eta=82s
+2026-06-25 15:58:02 | INFO | train epoch=6 step=300/491 progress=61.1% avg_loss=0.6457 elapsed=84s eta=54s
+2026-06-25 15:58:30 | INFO | train epoch=6 step=400/491 progress=81.5% avg_loss=0.6420 elapsed=113s eta=26s
+2026-06-25 15:58:57 | INFO | train epoch=6 step=491/491 progress=100.0% avg_loss=0.6362 elapsed=139s eta=0s
+2026-06-25 15:59:10 | INFO | val epoch=6 step=100/124 progress=80.6% avg_loss=0.6717 elapsed=13s eta=3s
+2026-06-25 15:59:13 | INFO | val epoch=6 step=124/124 progress=100.0% avg_loss=0.6647 elapsed=16s eta=0s
+2026-06-25 15:59:14 | INFO | epoch=6 train_loss=0.6362 val_loss=0.6647 val_dice_1=0.6075 val_dice_2=0.1857 val_macro_dice=0.3966 lr=1.00e-04
+2026-06-25 15:59:14 | INFO | epoch 7 started lr=9.99e-05
+2026-06-25 15:59:41 | INFO | train epoch=7 step=100/491 progress=20.4% avg_loss=0.6033 elapsed=26s eta=103s
+2026-06-25 16:00:07 | INFO | train epoch=7 step=200/491 progress=40.7% avg_loss=0.5896 elapsed=53s eta=77s
+2026-06-25 16:00:33 | INFO | train epoch=7 step=300/491 progress=61.1% avg_loss=0.5912 elapsed=78s eta=50s
+2026-06-25 16:00:59 | INFO | train epoch=7 step=400/491 progress=81.5% avg_loss=0.5883 elapsed=104s eta=24s
+2026-06-25 16:01:22 | INFO | train epoch=7 step=491/491 progress=100.0% avg_loss=0.5836 elapsed=128s eta=0s
+2026-06-25 16:01:37 | INFO | val epoch=7 step=100/124 progress=80.6% avg_loss=0.6297 elapsed=14s eta=3s
+2026-06-25 16:01:40 | INFO | val epoch=7 step=124/124 progress=100.0% avg_loss=0.6220 elapsed=18s eta=0s
+2026-06-25 16:01:41 | INFO | new best paper_macro_dice=0.558776
+2026-06-25 16:01:41 | INFO | epoch=7 train_loss=0.5836 val_loss=0.6220 val_dice_1=0.6065 val_dice_2=0.5110 val_macro_dice=0.5588 lr=9.99e-05
+2026-06-25 16:01:41 | INFO | epoch 8 started lr=9.95e-05
+2026-06-25 16:02:09 | INFO | train epoch=8 step=100/491 progress=20.4% avg_loss=0.5514 elapsed=27s eta=107s
+2026-06-25 16:02:35 | INFO | train epoch=8 step=200/491 progress=40.7% avg_loss=0.5517 elapsed=54s eta=78s
+2026-06-25 16:03:01 | INFO | train epoch=8 step=300/491 progress=61.1% avg_loss=0.5433 elapsed=80s eta=51s
+2026-06-25 16:03:29 | INFO | train epoch=8 step=400/491 progress=81.5% avg_loss=0.5455 elapsed=107s eta=24s
+2026-06-25 16:03:54 | INFO | train epoch=8 step=491/491 progress=100.0% avg_loss=0.5430 elapsed=132s eta=0s
+2026-06-25 16:04:08 | INFO | val epoch=8 step=100/124 progress=80.6% avg_loss=0.6205 elapsed=14s eta=3s
+2026-06-25 16:04:11 | INFO | val epoch=8 step=124/124 progress=100.0% avg_loss=0.6118 elapsed=17s eta=0s
+2026-06-25 16:04:11 | INFO | epoch=8 train_loss=0.5430 val_loss=0.6118 val_dice_1=0.6194 val_dice_2=0.4871 val_macro_dice=0.5532 lr=9.95e-05
+2026-06-25 16:04:11 | INFO | epoch 9 started lr=9.89e-05
+2026-06-25 16:04:39 | INFO | train epoch=9 step=100/491 progress=20.4% avg_loss=0.5366 elapsed=27s eta=107s
+2026-06-25 16:05:05 | INFO | train epoch=9 step=200/491 progress=40.7% avg_loss=0.5282 elapsed=54s eta=78s
+2026-06-25 16:05:31 | INFO | train epoch=9 step=300/491 progress=61.1% avg_loss=0.5172 elapsed=80s eta=51s
+2026-06-25 16:05:58 | INFO | train epoch=9 step=400/491 progress=81.5% avg_loss=0.5174 elapsed=107s eta=24s
+2026-06-25 16:06:22 | INFO | train epoch=9 step=491/491 progress=100.0% avg_loss=0.5154 elapsed=131s eta=0s
+2026-06-25 16:06:36 | INFO | val epoch=9 step=100/124 progress=80.6% avg_loss=0.6175 elapsed=14s eta=3s
+2026-06-25 16:06:39 | INFO | val epoch=9 step=124/124 progress=100.0% avg_loss=0.6056 elapsed=17s eta=0s
+2026-06-25 16:06:39 | INFO | new best paper_macro_dice=0.572936
+2026-06-25 16:06:40 | INFO | epoch=9 train_loss=0.5154 val_loss=0.6056 val_dice_1=0.6154 val_dice_2=0.5305 val_macro_dice=0.5729 lr=9.89e-05
+2026-06-25 16:06:40 | INFO | epoch 10 started lr=9.81e-05
+2026-06-25 16:07:09 | INFO | train epoch=10 step=100/491 progress=20.4% avg_loss=0.4968 elapsed=29s eta=112s
+2026-06-25 16:07:37 | INFO | train epoch=10 step=200/491 progress=40.7% avg_loss=0.4983 elapsed=57s eta=83s
+2026-06-25 16:08:06 | INFO | train epoch=10 step=300/491 progress=61.1% avg_loss=0.4970 elapsed=85s eta=54s
+2026-06-25 16:08:34 | INFO | train epoch=10 step=400/491 progress=81.5% avg_loss=0.5014 elapsed=114s eta=26s
+2026-06-25 16:09:02 | INFO | train epoch=10 step=491/491 progress=100.0% avg_loss=0.4998 elapsed=141s eta=0s
+2026-06-25 16:09:15 | INFO | val epoch=10 step=100/124 progress=80.6% avg_loss=0.6233 elapsed=14s eta=3s
+2026-06-25 16:09:18 | INFO | val epoch=10 step=124/124 progress=100.0% avg_loss=0.6112 elapsed=16s eta=0s
+2026-06-25 16:09:20 | INFO | epoch=10 train_loss=0.4998 val_loss=0.6112 val_dice_1=0.6174 val_dice_2=0.4772 val_macro_dice=0.5473 lr=9.81e-05
+2026-06-25 16:09:20 | INFO | epoch 11 started lr=9.70e-05
+2026-06-25 16:09:48 | INFO | train epoch=11 step=100/491 progress=20.4% avg_loss=0.4978 elapsed=28s eta=111s
+2026-06-25 16:10:15 | INFO | train epoch=11 step=200/491 progress=40.7% avg_loss=0.4972 elapsed=56s eta=81s
+2026-06-25 16:10:42 | INFO | train epoch=11 step=300/491 progress=61.1% avg_loss=0.4912 elapsed=83s eta=53s
+2026-06-25 16:11:09 | INFO | train epoch=11 step=400/491 progress=81.5% avg_loss=0.4917 elapsed=109s eta=25s
+2026-06-25 16:11:33 | INFO | train epoch=11 step=491/491 progress=100.0% avg_loss=0.4932 elapsed=134s eta=0s
+2026-06-25 16:11:48 | INFO | val epoch=11 step=100/124 progress=80.6% avg_loss=0.6055 elapsed=14s eta=3s
+2026-06-25 16:11:51 | INFO | val epoch=11 step=124/124 progress=100.0% avg_loss=0.5958 elapsed=18s eta=0s
+2026-06-25 16:11:52 | INFO | new best paper_macro_dice=0.579600
+2026-06-25 16:11:53 | INFO | epoch=11 train_loss=0.4932 val_loss=0.5958 val_dice_1=0.6240 val_dice_2=0.5352 val_macro_dice=0.5796 lr=9.70e-05
+2026-06-25 16:11:53 | INFO | epoch 12 started lr=9.57e-05
+2026-06-25 16:12:19 | INFO | train epoch=12 step=100/491 progress=20.4% avg_loss=0.4861 elapsed=26s eta=103s
+2026-06-25 16:12:44 | INFO | train epoch=12 step=200/491 progress=40.7% avg_loss=0.4798 elapsed=52s eta=75s
+2026-06-25 16:13:10 | INFO | train epoch=12 step=300/491 progress=61.1% avg_loss=0.4829 elapsed=77s eta=49s
+2026-06-25 16:13:35 | INFO | train epoch=12 step=400/491 progress=81.5% avg_loss=0.4846 elapsed=102s eta=23s
+2026-06-25 16:13:58 | INFO | train epoch=12 step=491/491 progress=100.0% avg_loss=0.4881 elapsed=125s eta=0s
+2026-06-25 16:14:10 | INFO | val epoch=12 step=100/124 progress=80.6% avg_loss=0.6166 elapsed=12s eta=3s
+2026-06-25 16:14:12 | INFO | val epoch=12 step=124/124 progress=100.0% avg_loss=0.6057 elapsed=15s eta=0s
+2026-06-25 16:14:13 | INFO | epoch=12 train_loss=0.4881 val_loss=0.6057 val_dice_1=0.6209 val_dice_2=0.5015 val_macro_dice=0.5612 lr=9.57e-05
+2026-06-25 16:14:13 | INFO | epoch 13 started lr=9.41e-05
+2026-06-25 16:14:39 | INFO | train epoch=13 step=100/491 progress=20.4% avg_loss=0.4647 elapsed=26s eta=101s
+2026-06-25 16:15:05 | INFO | train epoch=13 step=200/491 progress=40.7% avg_loss=0.4799 elapsed=51s eta=75s
+2026-06-25 16:15:30 | INFO | train epoch=13 step=300/491 progress=61.1% avg_loss=0.4859 elapsed=77s eta=49s
+2026-06-25 16:15:56 | INFO | train epoch=13 step=400/491 progress=81.5% avg_loss=0.4856 elapsed=103s eta=23s
+2026-06-25 16:16:20 | INFO | train epoch=13 step=491/491 progress=100.0% avg_loss=0.4857 elapsed=127s eta=0s
+2026-06-25 16:16:35 | INFO | val epoch=13 step=100/124 progress=80.6% avg_loss=0.6025 elapsed=15s eta=4s
+2026-06-25 16:16:38 | INFO | val epoch=13 step=124/124 progress=100.0% avg_loss=0.5913 elapsed=18s eta=0s
+2026-06-25 16:16:39 | INFO | new best paper_macro_dice=0.586152
+2026-06-25 16:16:40 | INFO | epoch=13 train_loss=0.4857 val_loss=0.5913 val_dice_1=0.6304 val_dice_2=0.5419 val_macro_dice=0.5862 lr=9.41e-05
+2026-06-25 16:16:40 | INFO | epoch 14 started lr=9.24e-05
+2026-06-25 16:17:06 | INFO | train epoch=14 step=100/491 progress=20.4% avg_loss=0.4823 elapsed=27s eta=104s
+2026-06-25 16:17:32 | INFO | train epoch=14 step=200/491 progress=40.7% avg_loss=0.4661 elapsed=52s eta=76s
+2026-06-25 16:17:57 | INFO | train epoch=14 step=300/491 progress=61.1% avg_loss=0.4754 elapsed=77s eta=49s
+2026-06-25 16:18:23 | INFO | train epoch=14 step=400/491 progress=81.5% avg_loss=0.4809 elapsed=104s eta=24s
+2026-06-25 16:18:47 | INFO | train epoch=14 step=491/491 progress=100.0% avg_loss=0.4769 elapsed=127s eta=0s
+2026-06-25 16:19:01 | INFO | val epoch=14 step=100/124 progress=80.6% avg_loss=0.6314 elapsed=14s eta=3s
+2026-06-25 16:19:04 | INFO | val epoch=14 step=124/124 progress=100.0% avg_loss=0.6260 elapsed=17s eta=0s
+2026-06-25 16:19:05 | INFO | epoch=14 train_loss=0.4769 val_loss=0.6260 val_dice_1=0.6290 val_dice_2=0.3861 val_macro_dice=0.5076 lr=9.24e-05
+2026-06-25 16:19:05 | INFO | epoch 15 started lr=9.05e-05
+2026-06-25 16:19:33 | INFO | train epoch=15 step=100/491 progress=20.4% avg_loss=0.4496 elapsed=28s eta=111s
+2026-06-25 16:20:01 | INFO | train epoch=15 step=200/491 progress=40.7% avg_loss=0.4640 elapsed=57s eta=82s
+2026-06-25 16:20:30 | INFO | train epoch=15 step=300/491 progress=61.1% avg_loss=0.4730 elapsed=85s eta=54s
+2026-06-25 16:20:58 | INFO | train epoch=15 step=400/491 progress=81.5% avg_loss=0.4757 elapsed=113s eta=26s
+2026-06-25 16:21:23 | INFO | train epoch=15 step=491/491 progress=100.0% avg_loss=0.4753 elapsed=138s eta=0s
+2026-06-25 16:21:37 | INFO | val epoch=15 step=100/124 progress=80.6% avg_loss=0.6188 elapsed=14s eta=3s
+2026-06-25 16:21:40 | INFO | val epoch=15 step=124/124 progress=100.0% avg_loss=0.6076 elapsed=17s eta=0s
+2026-06-25 16:21:42 | INFO | epoch=15 train_loss=0.4753 val_loss=0.6076 val_dice_1=0.6279 val_dice_2=0.4789 val_macro_dice=0.5534 lr=9.05e-05
+2026-06-25 16:21:42 | INFO | epoch 16 started lr=8.83e-05
+2026-06-25 16:22:09 | INFO | train epoch=16 step=100/491 progress=20.4% avg_loss=0.4737 elapsed=27s eta=106s
+2026-06-25 16:22:36 | INFO | train epoch=16 step=200/491 progress=40.7% avg_loss=0.4674 elapsed=54s eta=79s
+2026-06-25 16:23:02 | INFO | train epoch=16 step=300/491 progress=61.1% avg_loss=0.4684 elapsed=81s eta=51s
+2026-06-25 16:23:28 | INFO | train epoch=16 step=400/491 progress=81.5% avg_loss=0.4668 elapsed=107s eta=24s
+2026-06-25 16:23:51 | INFO | train epoch=16 step=491/491 progress=100.0% avg_loss=0.4618 elapsed=130s eta=0s
+2026-06-25 16:24:05 | INFO | val epoch=16 step=100/124 progress=80.6% avg_loss=0.5982 elapsed=13s eta=3s
+2026-06-25 16:24:07 | INFO | val epoch=16 step=124/124 progress=100.0% avg_loss=0.5908 elapsed=16s eta=0s
+2026-06-25 16:24:08 | INFO | epoch=16 train_loss=0.4618 val_loss=0.5908 val_dice_1=0.6385 val_dice_2=0.5243 val_macro_dice=0.5814 lr=8.83e-05
+2026-06-25 16:24:08 | INFO | epoch 17 started lr=8.60e-05
+2026-06-25 16:24:34 | INFO | train epoch=17 step=100/491 progress=20.4% avg_loss=0.4420 elapsed=26s eta=101s
+2026-06-25 16:24:59 | INFO | train epoch=17 step=200/491 progress=40.7% avg_loss=0.4447 elapsed=51s eta=74s
+2026-06-25 16:25:25 | INFO | train epoch=17 step=300/491 progress=61.1% avg_loss=0.4532 elapsed=76s eta=49s
+2026-06-25 16:25:50 | INFO | train epoch=17 step=400/491 progress=81.5% avg_loss=0.4543 elapsed=102s eta=23s
+2026-06-25 16:26:13 | INFO | train epoch=17 step=491/491 progress=100.0% avg_loss=0.4592 elapsed=125s eta=0s
+2026-06-25 16:26:27 | INFO | val epoch=17 step=100/124 progress=80.6% avg_loss=0.5963 elapsed=14s eta=3s
+2026-06-25 16:26:30 | INFO | val epoch=17 step=124/124 progress=100.0% avg_loss=0.5841 elapsed=17s eta=0s
+2026-06-25 16:26:30 | INFO | new best paper_macro_dice=0.591763
+2026-06-25 16:26:31 | INFO | epoch=17 train_loss=0.4592 val_loss=0.5841 val_dice_1=0.6415 val_dice_2=0.5420 val_macro_dice=0.5918 lr=8.60e-05
+2026-06-25 16:26:31 | INFO | epoch 18 started lr=8.35e-05
+2026-06-25 16:26:58 | INFO | train epoch=18 step=100/491 progress=20.4% avg_loss=0.4422 elapsed=27s eta=106s
+2026-06-25 16:27:26 | INFO | train epoch=18 step=200/491 progress=40.7% avg_loss=0.4468 elapsed=55s eta=79s
+2026-06-25 16:27:53 | INFO | train epoch=18 step=300/491 progress=61.1% avg_loss=0.4468 elapsed=81s eta=52s
+2026-06-25 16:28:20 | INFO | train epoch=18 step=400/491 progress=81.5% avg_loss=0.4522 elapsed=109s eta=25s
+2026-06-25 16:28:46 | INFO | train epoch=18 step=491/491 progress=100.0% avg_loss=0.4508 elapsed=134s eta=0s
+2026-06-25 16:29:01 | INFO | val epoch=18 step=100/124 progress=80.6% avg_loss=0.6020 elapsed=15s eta=4s
+2026-06-25 16:29:05 | INFO | val epoch=18 step=124/124 progress=100.0% avg_loss=0.5860 elapsed=19s eta=0s
+2026-06-25 16:29:06 | INFO | new best paper_macro_dice=0.598319
+2026-06-25 16:29:06 | INFO | epoch=18 train_loss=0.4508 val_loss=0.5860 val_dice_1=0.6234 val_dice_2=0.5732 val_macro_dice=0.5983 lr=8.35e-05
+2026-06-25 16:29:06 | INFO | epoch 19 started lr=8.08e-05
+2026-06-25 16:29:33 | INFO | train epoch=19 step=100/491 progress=20.4% avg_loss=0.4360 elapsed=27s eta=105s
+2026-06-25 16:30:00 | INFO | train epoch=19 step=200/491 progress=40.7% avg_loss=0.4386 elapsed=53s eta=78s
+2026-06-25 16:30:25 | INFO | train epoch=19 step=300/491 progress=61.1% avg_loss=0.4382 elapsed=79s eta=50s
+2026-06-25 16:30:51 | INFO | train epoch=19 step=400/491 progress=81.5% avg_loss=0.4452 elapsed=105s eta=24s
+2026-06-25 16:31:14 | INFO | train epoch=19 step=491/491 progress=100.0% avg_loss=0.4502 elapsed=128s eta=0s
+2026-06-25 16:31:29 | INFO | val epoch=19 step=100/124 progress=80.6% avg_loss=0.6002 elapsed=15s eta=4s
+2026-06-25 16:31:33 | INFO | val epoch=19 step=124/124 progress=100.0% avg_loss=0.5925 elapsed=18s eta=0s
+2026-06-25 16:31:34 | INFO | epoch=19 train_loss=0.4502 val_loss=0.5925 val_dice_1=0.6368 val_dice_2=0.4984 val_macro_dice=0.5676 lr=8.08e-05
+2026-06-25 16:31:34 | INFO | epoch 20 started lr=7.80e-05
+2026-06-25 16:32:00 | INFO | train epoch=20 step=100/491 progress=20.4% avg_loss=0.4609 elapsed=27s eta=104s
+2026-06-25 16:32:27 | INFO | train epoch=20 step=200/491 progress=40.7% avg_loss=0.4509 elapsed=54s eta=78s
+2026-06-25 16:32:54 | INFO | train epoch=20 step=300/491 progress=61.1% avg_loss=0.4506 elapsed=81s eta=51s
+2026-06-25 16:33:21 | INFO | train epoch=20 step=400/491 progress=81.5% avg_loss=0.4475 elapsed=108s eta=25s
+2026-06-25 16:33:45 | INFO | train epoch=20 step=491/491 progress=100.0% avg_loss=0.4439 elapsed=132s eta=0s
+2026-06-25 16:33:58 | INFO | val epoch=20 step=100/124 progress=80.6% avg_loss=0.5853 elapsed=13s eta=3s
+2026-06-25 16:34:01 | INFO | val epoch=20 step=124/124 progress=100.0% avg_loss=0.5713 elapsed=16s eta=0s
+2026-06-25 16:34:02 | INFO | new best paper_macro_dice=0.623576
+2026-06-25 16:34:04 | INFO | epoch=20 train_loss=0.4439 val_loss=0.5713 val_dice_1=0.6422 val_dice_2=0.6050 val_macro_dice=0.6236 lr=7.80e-05
+2026-06-25 16:34:04 | INFO | epoch 21 started lr=7.50e-05
+2026-06-25 16:34:31 | INFO | train epoch=21 step=100/491 progress=20.4% avg_loss=0.4465 elapsed=27s eta=107s
+2026-06-25 16:34:58 | INFO | train epoch=21 step=200/491 progress=40.7% avg_loss=0.4471 elapsed=54s eta=79s
+2026-06-25 16:35:25 | INFO | train epoch=21 step=300/491 progress=61.1% avg_loss=0.4455 elapsed=81s eta=52s
+2026-06-25 16:35:52 | INFO | train epoch=21 step=400/491 progress=81.5% avg_loss=0.4409 elapsed=108s eta=25s
+2026-06-25 16:36:17 | INFO | train epoch=21 step=491/491 progress=100.0% avg_loss=0.4363 elapsed=133s eta=0s
+2026-06-25 16:36:32 | INFO | val epoch=21 step=100/124 progress=80.6% avg_loss=0.5929 elapsed=15s eta=4s
+2026-06-25 16:36:35 | INFO | val epoch=21 step=124/124 progress=100.0% avg_loss=0.5857 elapsed=18s eta=0s
+2026-06-25 16:36:36 | INFO | epoch=21 train_loss=0.4363 val_loss=0.5857 val_dice_1=0.6466 val_dice_2=0.5275 val_macro_dice=0.5870 lr=7.50e-05
+2026-06-25 16:36:36 | INFO | epoch 22 started lr=7.19e-05
