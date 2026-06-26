@@ -28,7 +28,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from bs.convnext_seg import DinoV3ConvNeXtSegmentationModel
 from bs.dataset import RGB_LABEL_COLORS, UveitisSegmentationDataset, decode_mask_array, discover_samples
-from bs.model import DinoV3SegmentationModel
+from bs.model import DinoV3SegmentationModel, DinoV3FpnSegmentationModel
 from bs.multilabel import AsymmetricFocalTverskyBCE, PaperDice, masks_to_paper_targets
 from bs.paths import project_path
 from bs.seed import set_seed
@@ -209,7 +209,22 @@ def build_model(config: dict[str, Any]) -> nn.Module:
     model_cfg = config["model"]
     train_cfg = config["train"]
     backbone = str(model_cfg["backbone"])
+    head_type = str(model_cfg.get("head", "token_fpn"))
     if backbone == "dinov3_vitb16":
+        if head_type == "vit_fpn":
+            return DinoV3FpnSegmentationModel(
+                dinov3_code_dir=project_path(model_cfg["dinov3_code_dir"]),
+                weights_path=project_path(model_cfg["backbone_weights"]),
+                intermediate_layers=list(model_cfg["intermediate_layers"]),
+                num_classes=int(model_cfg.get("num_outputs", 2)),
+                embed_dim=int(model_cfg["embed_dim"]),
+                decoder_channels=int(model_cfg["decoder_channels"]),
+                dropout=float(model_cfg["dropout"]),
+                freeze_backbone=bool(train_cfg["freeze_backbone"]),
+                unfreeze_last_blocks=int(train_cfg.get("unfreeze_last_blocks", 0)),
+                deep_supervision=bool(model_cfg.get("deep_supervision", True)),
+                aux_loss_weight=float(model_cfg.get("aux_loss_weight", 0.4)),
+            )
         # WBE (Wavelet Boundary Enhancement) config
         wbe_cfg = config.get("wbe", {})
         use_wbe = bool(wbe_cfg.get("enabled", False))
@@ -373,8 +388,16 @@ def run_epoch(
         masks = batch["mask"].to(device, non_blocking=True)
         with torch.set_grad_enabled(training):
             with torch.amp.autocast("cuda", enabled=bool(config["train"]["amp"]) and device.type == "cuda"):
-                logits = model(images)
-                loss = criterion(logits, masks)
+                output = model(images)
+                if isinstance(output, tuple):
+                    logits, aux_logits_list = output
+                    loss = criterion(logits, masks)
+                    aux_w = float(config["model"].get("aux_loss_weight", 0.4))
+                    for i, aux_logits in enumerate(aux_logits_list):
+                        loss = loss + (aux_w ** (i + 1)) * criterion(aux_logits, masks)
+                else:
+                    logits = output
+                    loss = criterion(logits, masks)
             if training:
                 assert scaler is not None
                 scaler.scale(loss / grad_accum).backward()

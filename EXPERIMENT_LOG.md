@@ -11,6 +11,7 @@
 | 5 | 2026-06-25 | mae_sam2_ft_f1_20260625_1404 | SAM2 Hiera-Small (分割微调) | configs/sam2_mae_multilabel.yaml | f1 | ~20 (手动停止) | best_macro_dice=0.6236; dice_1=0.6503; dice_2=0.5969 | runs/mae_sam2_ft_f1_20260625_1404/f1/checkpoints/best.pt | Stage 2 分割微调: 加载MAE encoder权重, 0.9 Dice+0.1 BCE损失; bs=4 768x768 AMP | 用户手动停止; 超论文原文0.5593; 对比DINOv3 ConvNeXt 0.7710差距明显 |
 | 6 | 2026-06-25 | dinov3_mae_f1_20260625_1718 | DINOv3 ViT-B/16 (荧光MAE预训练) | configs/dinov3_vitb16_mae_multilabel.yaml | f1 | 30 | best_mae_val_loss=0.3984 | runs/dinov3_mae_f1_20260625_1718/f1/checkpoints/best.pt | Stage 1 荧光MAE预训练: mask_mode=fluorescence, mask_ratio=0.75, 亮度加权掩码概率[0.3,0.8]; lr=1e-5 cosine; bs=2 grad_accum=2 768x768 AMP | best_epoch=27; train_loss=0.2922; 全backbone解冻适配FA域 |
 | 7 | 2026-06-25 | dinov3_mae_ft_f1_20260625_1718 | DINOv3 ViT-B/16 (荧光MAE+分割微调) | configs/dinov3_vitb16_mae_multilabel.yaml | f1 | 30 | best_macro_dice=0.6818; dice_1=0.6907; dice_2=0.6730 | runs/dinov3_mae_ft_f1_20260625_1718/f1/checkpoints/best.pt | Stage 2 分割微调: 加载MAE-adapted backbone, AsymmetricFocalTverskyBCE损失; lr=1e-4 backbone_lr=1e-5; bs=1 grad_accum=4 768x768 AMP | best_epoch=18; **未超ViT baseline 0.7337 (-5.19pp)**; MAE域适配导致backbone漂移 |
+| 8 | 2026-06-26 | dinov3_vitb16_fpn_f1 | ViT-B/16 + SAM2 FPN | configs/dinov3_vitb16_fpn_multilabel.yaml | f1 | 30 | best_macro_dice=0.6939; dice_1=0.7098; dice_2=0.6779; sweep_macro=0.6984 | runs/dinov3_vitb16_fpn_f1/f1/checkpoints/best.pt | SAM2 FPN Neck适配ViT: 虚拟金字塔(48→24→12→6)+top-down融合+深度监督(3个辅助损失); 不改backbone; bs=1 grad_accum=4 768x768 AMP | best_epoch=24; **未超baseline 0.7337 (-3.98pp)**; 虚拟金字塔非真多尺度 |
 
 ---
 
@@ -176,4 +177,101 @@ patch亮度 → 归一化[0,1] → mask_prob = 0.3 + 0.5 × brightness
 
 - DINOv3 ViT-B/16的LVD-1689M预训练已足够强，直接MAE域适配反而有害
 - 未来方向应考虑：(1) 降低MAE学习率或冻结前几层; (2) 采用token-level masking; (3) 将MAE作为辅助损失而非独立阶段; (4) 创新点应放在分割头/损失函数而非backbone适配
+
+---
+
+## DINOv3 ViT + SAM2 FPN 实验详情
+
+### 创新点：SAM2 FPN Neck 适配 ViT + 深度监督
+
+将 SAM2 的 FPN Neck（lateral connection + top-down pathway）适配到 DINOv3 ViT-B/16 上，通过渐进下采样创建虚拟多尺度金字塔，并加入深度监督辅助训练。
+
+```
+ViT layers [2, 5, 8, 11] → 全部 48×48, 768-dim
+         ↓ 虚拟金字塔下采样
+Level 0 (layer 2):  48×48  (最细，低级特征)
+Level 1 (layer 5):  24×24
+Level 2 (layer 8):  12×12
+Level 3 (layer 11):  6×6   (最粗，高级语义)
+         ↓ SAM2 FPN top-down 融合
+Level 3 → 上采样+add → Level 2 → 上采样+add → Level 1 → 上采样+add → Level 0
+         ↓
+主输出(48×48) + 3个辅助输出(训练时) → 深度监督 loss
+```
+
+### 模型版本信息
+
+| 项目 | 版本/路径 |
+|------|----------|
+| **Backbone** | DINOv3 ViT-B/16 (Meta AI, LVD-1689M预训练) |
+| **权重文件** | `dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth` |
+| **模型定义** | `src/bs/model.py` → `ViTFpnHead` + `DinoV3FpnSegmentationModel` |
+| **训练脚本** | `scripts/train_dinov3_multilabel.py` (复用，新增 `--head vit_fpn` 支持) |
+| **配置文件** | `configs/dinov3_vitb16_fpn_multilabel.yaml` |
+
+### 架构参数
+
+| 组件 | 配置 |
+|------|------|
+| Backbone | ViT-B/16: embed_dim=768, 12 blocks, patch_size=16 (不修改权重) |
+| 总参数量 | 88.8M (backbone 85.7M, FPN head 3.2M) |
+| Lateral convs | 4×Conv1×1(768→256) |
+| Output convs | 4×(Conv3×3+BN+GELU) after top-down fusion |
+| 虚拟金字塔 | avg_pool2d: 48→24→12→6 (2× stride per level) |
+| Top-down融合 | nearest上采样 + 逐元素加 (SAM2 FPN style) |
+| 主分割头 | Dropout2d(0.1) + Conv1×1(256→2) on finest level |
+| 辅助头 (训练) | 3×Conv1×1(256→2) on coarser levels, 权重 0.4/0.16/0.064 |
+| 推理额外开销 | 零 (eval模式只返回主输出) |
+
+### 训练配置
+
+| 参数 | 值 |
+|------|-----|
+| 输入尺寸 | 768×768 |
+| Batch size | 1 (grad_accum=4) |
+| Epochs | 30 |
+| 学习率 | 1e-4 (head) / 1e-5 (backbone), cosine annealing |
+| 优化器 | AdamW (weight_decay=1e-4) |
+| 损失函数 | AsymmetricFocalTverskyBCE + 深度监督辅助损失 |
+| Backbone | 全解冻 |
+| AMP | fp16 |
+| 梯度裁剪 | max_norm=1.0 |
+| 数据增强 | hflip, vflip, affine, foreground_crop, brightness, noise, blur |
+
+### 训练过程 (30 epochs, ~2.5小时)
+
+| Epoch | Val Macro Dice | Val Dice_1 | Val Dice_2 | 备注 |
+|-------|---------------|-----------|-----------|------|
+| 1 | 0.5157 | 0.5879 | 0.4436 | 起步低（深度监督拖慢收敛） |
+| 3 | 0.6388 | 0.6732 | 0.6043 | 快速上升 |
+| 10 | 0.6787 | 0.6927 | 0.6647 | 接近最佳平台 |
+| 24 | **0.6939** | 0.7098 | 0.6779 | **best** (最终保存) |
+| 30 | 0.6777 | 0.6871 | 0.6683 | 训练结束 |
+
+### 结果对比（全实验汇总）
+
+| # | 模型 | Backbone | 预训练 | f1 Macro Dice | 与baseline差 |
+|---|------|----------|--------|--------------|-------------|
+| 1 | **DINOv3 ViT-B/16 (baseline)** | ViT-B/16 | LVD-1689M | **0.7337** | - |
+| 2 | DINOv3 ViT-B/16 + WBE v1 | ViT-B/16 | LVD-1689M | 0.7248 | -0.89pp |
+| 3 | DINOv3 ViT-B/16 + WBE v2 | ViT-B/16 | LVD-1689M | 0.7253 | -0.84pp |
+| 4 | DINOv3 ViT-B/16 + 荧光MAE | ViT-B/16 | LVD-1689M + FA-MAE | 0.6818 | -5.19pp |
+| 5 | **DINOv3 ViT-B/16 + SAM2 FPN** | ViT-B/16 | LVD-1689M | **0.6939** | **-3.98pp** |
+| 6 | MAE-SAM2 | Hiera-Small | SA-1B + MAE | 0.6236 | -11.01pp |
+| - | DINOv3 ConvNeXt-Tiny | ConvNeXt-Tiny | LVD-1689M | - (4折均值0.7710) | - |
+
+### 失败分析
+
+SAM2 FPN Neck 适配 ViT 未提升反而降低性能（0.6939 vs 0.7337, -3.98pp），原因分析：
+
+1. **虚拟金字塔是"假"多尺度**: ViT 所有层都是同一分辨率（48×48），下采样只是模糊化同一组特征，未引入新的尺度信息。对比 SAM2 Hiera 天然有 4 个不同感受野的 stage（192→96→48→24），FPN 的 top-down 融合在真多尺度上才有效
+2. **下采样丢失空间细节**: TokenFPNHead 保留 4 层特征在 48×48 全分辨率拼接，FPN 把 layer 5/8/11 下采样到 24/12/6，对病灶边界定位丢失了精细空间信息
+3. **深度监督在粗尺度上可能有害**: 6×6/12×12 分辨率下病灶仅 1-2 像素，Dice 梯度噪声大，干扰主头训练
+4. **top-down 融合不如拼接有效**: 对同分辨率特征，`upsample+add` 本质是加权平均，而 TokenFPNHead 的 `concat+Conv3×3` 让网络自学习各层权重，表达力更强
+
+### 启示
+
+- **SAM2 FPN 是为层级 backbone（Hiera/CNN）设计的，强行适配到非层级 ViT 上不成立**
+- ViT 的优势在于全局注意力建模，不是多尺度；创新方向不应强行补"多尺度"
+- 综合所有实验（#1-#8），DINOv3 ViT-B/16 baseline 仍为最优；创新应转向损失函数设计、后处理或多模型集成
 

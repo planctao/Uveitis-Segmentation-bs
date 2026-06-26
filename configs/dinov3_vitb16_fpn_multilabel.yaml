@@ -1,0 +1,124 @@
+# DINOv3 ViT-B/16 + SAM2 FPN Neck (单折实验)
+# Innovation: SAM2 FPN top-down fusion adapted for ViT + deep supervision
+# Backbone untouched, only decoder replaced
+
+project:
+  name: uveitis_dinov3_vitb16_fpn
+  seed: 42
+
+runtime:
+  device: cuda
+  precision: amp
+  num_workers: 8
+
+data:
+  root: dataset/dataset/split_dataorigin
+  image_dir: img
+  mask_dir: mask_only_itksnap
+  hrnet_result_dir: HRNet_Result
+  image_extensions: [.jpg, .jpeg, .png, .bmp, .tif, .tiff]
+  mask_extensions: [.nii.gz, .nii, .png, .jpg, .jpeg, .bmp, .tif, .tiff]
+  result_extensions: [.png, .jpg, .jpeg, .bmp, .tif, .tiff]
+  folds: [f1, f2, f3, f4, f5]
+  label_values: [0, 1, 2, 3]
+  ignore_index: 255
+
+train:
+  image_size: [768, 768]
+  batch_size: 1
+  grad_accum_steps: 4
+  epochs: 30
+  learning_rate: 0.0001
+  backbone_learning_rate: 0.00001
+  min_learning_rate: 0.0000001
+  scheduler: cosine
+  weight_decay: 0.0001
+  freeze_backbone: false
+  unfreeze_last_blocks: 0
+  amp: true
+  clip_grad_norm: 1.0
+  progress_log_interval: 100
+  save_interval: 5
+  sample_interval: 5
+  lesion1_sample_weight: 1.0
+  lesion2_sample_weight: 6.0
+  sampler_epoch_multiplier: 1.0
+  folds_to_run: [f1]
+
+model:
+  backbone: dinov3_vitb16
+  head: vit_fpn                    # "vit_fpn" or "token_fpn"
+  dinov3_code_dir: backbone/dinov3
+  backbone_weights: weights/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth
+  intermediate_layers: [2, 5, 8, 11]
+  embed_dim: 768
+  decoder_channels: 256
+  num_outputs: 2
+  dropout: 0.1
+  # FPN + deep supervision
+  deep_supervision: true
+  aux_loss_weight: 0.4             # 0.4, 0.16, 0.064 for 3 aux heads
+
+loss:
+  pos_weight: [3.0, 60.0]
+  bce_weight: 0.5
+  tversky_weight: 1.0
+  tversky_alpha: 0.2
+  tversky_beta: 0.8
+  focal_gamma: 0.75
+
+metric:
+  threshold: 0.5
+  threshold_sweep:
+    enabled: true
+    thresholds: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.60, 0.70, 0.80, 0.90]
+
+augmentations:
+  enabled: true
+  pipeline:
+    - name: hflip
+      prob: 0.5
+    - name: vflip
+      prob: 0.2
+    - name: affine
+      prob: 0.8
+      strength: 1.0
+      degrees: [-25, 25]
+      scale: [0.9, 1.1]
+      translate: 0.04
+    - name: foreground_resized_crop
+      prob: 0.25
+      strength: 1.0
+      scale: [0.88, 1.0]
+      foreground_labels: [1, 2, 3]
+      ignore_index: 255
+      min_keep: 0.7
+      attempts: 8
+    - name: random_order
+      prob: 1.0
+      blocks:
+        - name: brightness_contrast
+          prob: 0.55
+          strength: 0.75
+          brightness: [-0.1, 0.1]
+          contrast: [0.85, 1.2]
+        - name: gamma
+          prob: 0.35
+          strength: 0.75
+          gamma: [0.8, 1.25]
+    - name: one_of
+      prob: 0.25
+      weights: [0.7, 0.3]
+      blocks:
+        - name: gaussian_noise
+          prob: 1.0
+          strength: 0.75
+          std: [0.0, 0.025]
+        - name: gaussian_blur
+          prob: 1.0
+          strength: 0.75
+          kernel_size: 5
+          sigma: [0.2, 0.8]
+
+outputs:
+  root: runs
