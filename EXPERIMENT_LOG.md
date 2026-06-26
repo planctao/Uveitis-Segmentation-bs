@@ -8,7 +8,9 @@
 | 2 | 2026-06-17 | dinov3_wbe_f1 | ViT-B/16 + WBE v1 | configs/dinov3_vitb16_multilabel_wbe.yaml | f1 | 30 | best_macro_dice=0.7248; dice_1=0.7179; dice_2=0.7318 | runs/dinov3_wbe_f1/f1/checkpoints/ | 新增小波边界增强WBE v1模块(4-scale, bottleneck=256, 6.44M参数); bs=8 grad_accum=2 | best_epoch=18; WBE未提点(-0.89%); batch_size不同影响公平对比 |
 | 3 | 2026-06-17 | dinov3_wbe_v2_f1 | ViT-B/16 + WBE v2 | configs/dinov3_vitb16_multilabel_wbe_v2.yaml | f1 | 30 | best_macro_dice=0.7253; dice_1=0.7194; dice_2=0.7312; sweep_macro=0.7492 | runs/dinov3_wbe_v2_f1/f1/checkpoints/ | WBE升级v2: 借鉴PFESA加入SNR零参数边缘先验+Structure Attention+snr_gate自适应融合; bs=8 grad_accum=2 | best_epoch=13; 仍未超baseline(-0.84%); 过拟合严重(ep13后无提升) |
 | 4 | 2026-06-25 | mae_sam2_f1_20260625_1404 | SAM2 Hiera-Small (MAE预训练) | configs/sam2_mae_multilabel.yaml | f1 | 50 | best_mae_val_loss=0.2365 | runs/mae_sam2_f1_20260625_1404/f1/checkpoints/best.pt | Stage 1 MAE自监督预训练: mask_ratio=0.75, MSE重建损失, lr=1e-4 warmup5+cosine; bs=4 768x768 AMP | best_epoch=50; encoder权重将用于Stage 2微调; train_loss=0.2131 |
-| 5 | 2026-06-25 | mae_sam2_ft_f1_20260625_1404 | SAM2 Hiera-Small (分割微调) | configs/sam2_mae_multilabel.yaml | f1 | 50 (进行中) | best_macro_dice=0.5983; dice_1=0.6234; dice_2=0.5732 (epoch 18, 训练中) | runs/mae_sam2_ft_f1_20260625_1404/f1/checkpoints/best.pt | Stage 2 分割微调: 加载MAE encoder权重, 0.9 Dice+0.1 BCE损失; bs=4 768x768 AMP | 5折pipeline运行中(f1微调中, f2-f5待跑); 对比DINOv3 ConvNeXt 0.7710差距明显 |
+| 5 | 2026-06-25 | mae_sam2_ft_f1_20260625_1404 | SAM2 Hiera-Small (分割微调) | configs/sam2_mae_multilabel.yaml | f1 | ~20 (手动停止) | best_macro_dice=0.6236; dice_1=0.6503; dice_2=0.5969 | runs/mae_sam2_ft_f1_20260625_1404/f1/checkpoints/best.pt | Stage 2 分割微调: 加载MAE encoder权重, 0.9 Dice+0.1 BCE损失; bs=4 768x768 AMP | 用户手动停止; 超论文原文0.5593; 对比DINOv3 ConvNeXt 0.7710差距明显 |
+| 6 | 2026-06-25 | dinov3_mae_f1_20260625_1718 | DINOv3 ViT-B/16 (荧光MAE预训练) | configs/dinov3_vitb16_mae_multilabel.yaml | f1 | 30 | best_mae_val_loss=0.3984 | runs/dinov3_mae_f1_20260625_1718/f1/checkpoints/best.pt | Stage 1 荧光MAE预训练: mask_mode=fluorescence, mask_ratio=0.75, 亮度加权掩码概率[0.3,0.8]; lr=1e-5 cosine; bs=2 grad_accum=2 768x768 AMP | best_epoch=27; train_loss=0.2922; 全backbone解冻适配FA域 |
+| 7 | 2026-06-25 | dinov3_mae_ft_f1_20260625_1718 | DINOv3 ViT-B/16 (荧光MAE+分割微调) | configs/dinov3_vitb16_mae_multilabel.yaml | f1 | 30 | best_macro_dice=0.6818; dice_1=0.6907; dice_2=0.6730 | runs/dinov3_mae_ft_f1_20260625_1718/f1/checkpoints/best.pt | Stage 2 分割微调: 加载MAE-adapted backbone, AsymmetricFocalTverskyBCE损失; lr=1e-4 backbone_lr=1e-5; bs=1 grad_accum=4 768x768 AMP | best_epoch=18; **未超ViT baseline 0.7337 (-5.19pp)**; MAE域适配导致backbone漂移 |
 
 ---
 
@@ -73,3 +75,105 @@
 | MAE-SAM2 (本文) | Hiera-Small | SA-1B + MAE | 0.5983 (训练中) | 待完成 |
 
 > 结论: SAM2在FA泄漏分割上远不如DINOv3, 验证了"通用foundation model直接迁移不如领域预训练"的判断。SAM2实验作为对比基线, 为面向FA特性的专用创新方案提供动机。
+
+---
+
+## DINOv3 ViT + 荧光MAE 实验详情
+
+### 创新点：荧光先验引导的MAE掩码策略
+
+标准MAE使用均匀随机遮盖patch，本方案根据FA图像的荧光亮度调整遮盖概率：
+
+```
+patch亮度 → 归一化[0,1] → mask_prob = 0.3 + 0.5 × brightness
+```
+
+高荧光区域（血管渗漏区）有更高概率被遮盖（最高80%），迫使模型从周围上下文重建渗漏区域，学习更强的结构理解能力。
+
+### 模型版本信息
+
+| 项目 | 版本/路径 |
+|------|----------|
+| **Backbone** | DINOv3 ViT-B/16 (Meta AI, LVD-1689M预训练) |
+| **权重文件** | `dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth` |
+| **代码来源** | `backbone/dinov3/` (Meta官方实现) |
+| **模型定义** | `src/bs/dinov3_mae.py` |
+| **训练脚本** | `scripts/train_dinov3_mae.py` |
+| **配置文件** | `configs/dinov3_vitb16_mae_multilabel.yaml` |
+| **Pipeline** | `scripts/run_dinov3_mae.sh` |
+
+### 架构参数
+
+| 组件 | 配置 |
+|------|------|
+| Backbone | ViT-B/16: embed_dim=768, 12 blocks, patch_size=16 |
+| 总参数量 | 110.7M (backbone 85.7M, MAE decoder 14.5M, seg head 10.5M) |
+| MAE Decoder | 4×(Conv3x3+BN+ReLU+Upsample2x): 48×48→768×768 |
+| Seg Head | TokenFPNHead: 4×Conv1x1(768→256) → fuse → Conv1x1(256→2) |
+| 中间层特征 | layers [2, 5, 8, 11] |
+| 荧光掩码 | avg_pool2d(image.mean, 16, 16) → brightness_norm → mask_prob ∈ [0.3, 0.8] |
+| 掩码比例 | 0.75 (75% patches被遮盖) |
+
+### 两阶段训练配置
+
+| 参数 | Stage 1 (MAE) | Stage 2 (Fine-tune) |
+|------|---------------|---------------------|
+| 输入尺寸 | 768×768 | 768×768 |
+| Batch size | 2 (grad_accum=2) | 1 (grad_accum=4) |
+| Epochs | 30 | 30 |
+| 学习率 | 1e-5 (cosine) | 1e-4 / backbone 1e-5 (cosine) |
+| 优化器 | AdamW (wd=1e-4) | AdamW (wd=1e-4) |
+| 损失函数 | MSE (masked patches only) | AsymmetricFocalTverskyBCE |
+| Backbone | 全解冻 (12 blocks) | 全解冻 |
+| AMP | fp16 | fp16 |
+| 梯度裁剪 | max_norm=1.0 | max_norm=1.0 |
+| 数据增强 | hflip, vflip, affine, foreground_crop, brightness, noise, blur | 同左 |
+
+### 训练过程
+
+**Stage 1 - MAE预训练 (30 epochs, ~5.2小时)**
+
+| Epoch | Train Loss | Val Loss | 备注 |
+|-------|-----------|----------|------|
+| 1 | 0.7195 | 0.5678 | 起始 |
+| 5 | 0.3823 | 0.4711 | 快速下降 |
+| 10 | 0.3289 | 0.4304 | 持续下降 |
+| 20 | 0.3011 | 0.4033 | 趋于收敛 |
+| 27 | 0.2922 | **0.3984** | best (最终保存) |
+| 30 | 0.2944 | 0.4002 | 训练结束 |
+
+**Stage 2 - 分割微调 (30 epochs, ~2.1小时)**
+
+| Epoch | Val Macro Dice | Val Dice_1 | Val Dice_2 | 备注 |
+|-------|---------------|-----------|-----------|------|
+| 1 | 0.4935 | 0.5914 | 0.3955 | 起始 |
+| 4 | 0.6392 | 0.6739 | 0.6044 | 快速上升 |
+| 10 | 0.6195 | 0.7112 | 0.5278 | dice_1最高 |
+| 18 | **0.6818** | 0.6907 | 0.6730 | **best** (最终保存) |
+| 30 | 0.6678 | 0.6734 | 0.6621 | 训练结束 |
+
+### 结果对比
+
+| 模型 | Backbone | 预训练 | f1 Macro Dice | 与ViT baseline差 |
+|------|----------|--------|--------------|-----------------|
+| DINOv3 ConvNeXt-Tiny | ConvNeXt-Tiny | LVD-1689M | - (4折均值0.7710) | - |
+| **DINOv3 ViT-B/16 (baseline)** | ViT-B/16 | LVD-1689M | **0.7337** | - |
+| DINOv3 ViT-B/16 + WBE v1 | ViT-B/16 | LVD-1689M | 0.7248 | -0.89pp |
+| DINOv3 ViT-B/16 + WBE v2 | ViT-B/16 | LVD-1689M | 0.7253 | -0.84pp |
+| **DINOv3 ViT-B/16 + 荧光MAE** | ViT-B/16 | LVD-1689M + FA-MAE | **0.6818** | **-5.19pp** |
+| MAE-SAM2 | Hiera-Small | SA-1B + MAE | 0.6236 | -11.01pp |
+
+### 失败分析
+
+荧光MAE预训练未提升反而降低了分割性能（0.6818 vs 0.7337, -5.19pp），原因分析：
+
+1. **Backbone漂移**: DINOv3 ViT-B/16已在LVD-1689M上充分预训练，MAE微调以1e-5学习率全解冻30 epochs，导致backbone权重从通用特征向FA域偏移，丢失了部分通用表征能力
+2. **特征级掩码 vs token级掩码**: 本实现采用feature-level masking（在backbone输出后遮盖），而非原版MAE的token-level masking（在backbone输入前遮盖visible tokens），学习信号较弱
+3. **重建目标不匹配**: MAE重建的是原始像素(RGB)，而分割任务关注的是语义边界，两者目标不完全对齐
+4. **过拟合**: train_loss持续下降(0.72→0.29)而val_loss在ep10后停滞在0.40附近，MAE decoder可能过拟合训练集
+
+### 启示
+
+- DINOv3 ViT-B/16的LVD-1689M预训练已足够强，直接MAE域适配反而有害
+- 未来方向应考虑：(1) 降低MAE学习率或冻结前几层; (2) 采用token-level masking; (3) 将MAE作为辅助损失而非独立阶段; (4) 创新点应放在分割头/损失函数而非backbone适配
+

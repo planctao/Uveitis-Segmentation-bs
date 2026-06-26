@@ -1,0 +1,486 @@
+2026-06-25 17:18:45 | INFO | === DINOv3 ViT + Fluorescence MAE Training ===
+2026-06-25 17:18:45 | INFO | stage=mae fold=f1 run_dir=/root/autodl-tmp/Uveitis-Segmentation-bs/runs/dinov3_mae_f1_20260625_1718
+2026-06-25 17:18:45 | INFO | mask_mode=fluorescence mask_ratio=0.75
+2026-06-25 17:18:45 | INFO | config={"augmentations": {"enabled": true, "pipeline": [{"name": "hflip", "prob": 0.5}, {"name": "vflip", "prob": 0.2}, {"degrees": [-25, 25], "name": "affine", "prob": 0.8, "scale": [0.9, 1.1], "strength": 1.0, "translate": 0.04}, {"attempts": 8, "foreground_labels": [1, 2, 3], "ignore_index": 255, "min_keep": 0.7, "name": "foreground_resized_crop", "prob": 0.25, "scale": [0.88, 1.0], "strength": 1.0}, {"blocks": [{"brightness": [-0.1, 0.1], "contrast": [0.85, 1.2], "name": "brightness_contrast", "prob": 0.55, "strength": 0.75}, {"gamma": [0.8, 1.25], "name": "gamma", "prob": 0.35, "strength": 0.75}], "name": "random_order", "prob": 1.0}, {"blocks": [{"name": "gaussian_noise", "prob": 1.0, "std": [0.0, 0.025], "strength": 0.75}, {"kernel_size": 5, "name": "gaussian_blur", "prob": 1.0, "sigma": [0.2, 0.8], "strength": 0.75}], "name": "one_of", "prob": 0.25, "weights": [0.7, 0.3]}]}, "data": {"folds": ["f1", "f2", "f3", "f4", "f5"], "hrnet_result_dir": "HRNet_Result", "ignore_index": 255, "image_dir": "img", "image_extensions": [".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"], "label_values": [0, 1, 2, 3], "mask_dir": "mask_only_itksnap", "mask_extensions": [".nii.gz", ".nii", ".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"], "result_extensions": [".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"], "root": "dataset/dataset/split_dataorigin"}, "loss": {"bce_weight": 0.5, "focal_gamma": 0.75, "pos_weight": [3.0, 60.0], "tversky_alpha": 0.2, "tversky_beta": 0.8, "tversky_weight": 1.0}, "mae_train": {"amp": true, "batch_size": 2, "clip_grad_norm": 1.0, "epochs": 30, "folds_to_run": ["f1"], "freeze_backbone": false, "grad_accum_steps": 2, "image_size": [768, 768], "learning_rate": 1e-05, "min_learning_rate": 1e-07, "save_interval": 5, "scheduler": "cosine", "unfreeze_last_blocks": 12, "weight_decay": 0.0001}, "metric": {"threshold": 0.5, "threshold_sweep": {"enabled": true, "thresholds": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7, 0.8, 0.9]}}, "model": {"backbone": "dinov3_vitb16", "backbone_weights": "weights/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth", "brightness_high": 0.8, "brightness_low": 0.3, "decoder_channels": 256, "dinov3_code_dir": "backbone/dinov3", "dropout": 0.1, "embed_dim": 768, "intermediate_layers": [2, 5, 8, 11], "mask_mode": "fluorescence", "mask_ratio": 0.75, "num_outputs": 2, "patch_size": 16}, "outputs": {"root": "runs"}, "project": {"name": "uveitis_dinov3_vitb16_mae_fluorescence", "seed": 42}, "runtime": {"device": "cuda", "num_workers": 8, "precision": "amp"}, "train": {"amp": true, "backbone_learning_rate": 1e-05, "batch_size": 1, "clip_grad_norm": 1.0, "epochs": 30, "folds_to_run": ["f1"], "freeze_backbone": false, "grad_accum_steps": 4, "image_size": [768, 768], "learning_rate": 0.0001, "lesion1_sample_weight": 1.0, "lesion2_sample_weight": 6.0, "min_learning_rate": 1e-07, "progress_log_interval": 100, "sample_interval": 5, "sampler_epoch_multiplier": 1.0, "save_interval": 5, "scheduler": "cosine", "unfreeze_last_blocks": 0, "weight_decay": 0.0001}}
+2026-06-25 17:18:49 | INFO | model params: 110.7M (backbone: 85.7M)
+2026-06-25 17:18:49 | INFO | train samples: 1965 (folds=['f2', 'f3', 'f4', 'f5'])
+2026-06-25 17:18:49 | INFO | val samples: 494 (folds=['f1'])
+2026-06-25 17:18:49 | INFO | Starting MAE pre-training for 30 epochs (mask_mode=fluorescence)
+2026-06-25 17:18:49 | INFO | epoch 1 started lr=1.00e-05
+2026-06-25 17:18:54 | INFO | === DINOv3 ViT + Fluorescence MAE Training ===
+2026-06-25 17:18:54 | INFO | stage=mae fold=f1 run_dir=/root/autodl-tmp/Uveitis-Segmentation-bs/runs/dinov3_mae_f1_20260625_1718
+2026-06-25 17:18:54 | INFO | mask_mode=fluorescence mask_ratio=0.75
+2026-06-25 17:18:54 | INFO | config={"augmentations": {"enabled": true, "pipeline": [{"name": "hflip", "prob": 0.5}, {"name": "vflip", "prob": 0.2}, {"degrees": [-25, 25], "name": "affine", "prob": 0.8, "scale": [0.9, 1.1], "strength": 1.0, "translate": 0.04}, {"attempts": 8, "foreground_labels": [1, 2, 3], "ignore_index": 255, "min_keep": 0.7, "name": "foreground_resized_crop", "prob": 0.25, "scale": [0.88, 1.0], "strength": 1.0}, {"blocks": [{"brightness": [-0.1, 0.1], "contrast": [0.85, 1.2], "name": "brightness_contrast", "prob": 0.55, "strength": 0.75}, {"gamma": [0.8, 1.25], "name": "gamma", "prob": 0.35, "strength": 0.75}], "name": "random_order", "prob": 1.0}, {"blocks": [{"name": "gaussian_noise", "prob": 1.0, "std": [0.0, 0.025], "strength": 0.75}, {"kernel_size": 5, "name": "gaussian_blur", "prob": 1.0, "sigma": [0.2, 0.8], "strength": 0.75}], "name": "one_of", "prob": 0.25, "weights": [0.7, 0.3]}]}, "data": {"folds": ["f1", "f2", "f3", "f4", "f5"], "hrnet_result_dir": "HRNet_Result", "ignore_index": 255, "image_dir": "img", "image_extensions": [".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"], "label_values": [0, 1, 2, 3], "mask_dir": "mask_only_itksnap", "mask_extensions": [".nii.gz", ".nii", ".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"], "result_extensions": [".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"], "root": "dataset/dataset/split_dataorigin"}, "loss": {"bce_weight": 0.5, "focal_gamma": 0.75, "pos_weight": [3.0, 60.0], "tversky_alpha": 0.2, "tversky_beta": 0.8, "tversky_weight": 1.0}, "mae_train": {"amp": true, "batch_size": 2, "clip_grad_norm": 1.0, "epochs": 30, "folds_to_run": ["f1"], "freeze_backbone": false, "grad_accum_steps": 2, "image_size": [768, 768], "learning_rate": 1e-05, "min_learning_rate": 1e-07, "save_interval": 5, "scheduler": "cosine", "unfreeze_last_blocks": 12, "weight_decay": 0.0001}, "metric": {"threshold": 0.5, "threshold_sweep": {"enabled": true, "thresholds": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7, 0.8, 0.9]}}, "model": {"backbone": "dinov3_vitb16", "backbone_weights": "weights/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth", "brightness_high": 0.8, "brightness_low": 0.3, "decoder_channels": 256, "dinov3_code_dir": "backbone/dinov3", "dropout": 0.1, "embed_dim": 768, "intermediate_layers": [2, 5, 8, 11], "mask_mode": "fluorescence", "mask_ratio": 0.75, "num_outputs": 2, "patch_size": 16}, "outputs": {"root": "runs"}, "project": {"name": "uveitis_dinov3_vitb16_mae_fluorescence", "seed": 42}, "runtime": {"device": "cuda", "num_workers": 8, "precision": "amp"}, "train": {"amp": true, "backbone_learning_rate": 1e-05, "batch_size": 1, "clip_grad_norm": 1.0, "epochs": 30, "folds_to_run": ["f1"], "freeze_backbone": false, "grad_accum_steps": 4, "image_size": [768, 768], "learning_rate": 0.0001, "lesion1_sample_weight": 1.0, "lesion2_sample_weight": 6.0, "min_learning_rate": 1e-07, "progress_log_interval": 100, "sample_interval": 5, "sampler_epoch_multiplier": 1.0, "save_interval": 5, "scheduler": "cosine", "unfreeze_last_blocks": 0, "weight_decay": 0.0001}}
+2026-06-25 17:18:59 | INFO | model params: 110.7M (backbone: 85.7M)
+2026-06-25 17:18:59 | INFO | train samples: 1965 (folds=['f2', 'f3', 'f4', 'f5'])
+2026-06-25 17:18:59 | INFO | val samples: 494 (folds=['f1'])
+2026-06-25 17:18:59 | INFO | Starting MAE pre-training for 30 epochs (mask_mode=fluorescence)
+2026-06-25 17:18:59 | INFO | epoch 1 started lr=1.00e-05
+2026-06-25 17:19:49 | INFO | train mae epoch=1 step=100/982 progress=10.2% loss=1.6782 elapsed=60s eta=531s
+2026-06-25 17:20:48 | INFO | train mae epoch=1 step=200/982 progress=20.4% loss=1.2658 elapsed=119s eta=465s
+2026-06-25 17:21:47 | INFO | train mae epoch=1 step=300/982 progress=30.5% loss=1.0863 elapsed=178s eta=404s
+2026-06-25 17:22:45 | INFO | train mae epoch=1 step=400/982 progress=40.7% loss=0.9801 elapsed=237s eta=344s
+2026-06-25 17:23:44 | INFO | train mae epoch=1 step=500/982 progress=50.9% loss=0.8950 elapsed=295s eta=285s
+2026-06-25 17:24:43 | INFO | train mae epoch=1 step=600/982 progress=61.1% loss=0.8370 elapsed=354s eta=226s
+2026-06-25 17:25:42 | INFO | train mae epoch=1 step=700/982 progress=71.3% loss=0.7946 elapsed=413s eta=166s
+2026-06-25 17:26:41 | INFO | train mae epoch=1 step=800/982 progress=81.5% loss=0.7640 elapsed=472s eta=107s
+2026-06-25 17:27:40 | INFO | train mae epoch=1 step=900/982 progress=91.6% loss=0.7369 elapsed=531s eta=48s
+2026-06-25 17:28:28 | INFO | train mae epoch=1 step=982/982 progress=100.0% loss=0.7195 elapsed=579s eta=0s
+2026-06-25 17:28:47 | INFO | val mae epoch=1 step=100/247 progress=40.5% loss=0.6226 elapsed=19s eta=28s
+2026-06-25 17:29:06 | INFO | val mae epoch=1 step=200/247 progress=81.0% loss=0.5574 elapsed=38s eta=9s
+2026-06-25 17:29:15 | INFO | val mae epoch=1 step=247/247 progress=100.0% loss=0.5678 elapsed=47s eta=0s
+2026-06-25 17:29:17 | INFO | new best mae val_loss=0.567801
+2026-06-25 17:29:18 | INFO | epoch=1 train_loss=0.7195 val_loss=0.5678 lr=1.00e-05
+2026-06-25 17:29:18 | INFO | epoch 2 started lr=9.97e-06
+2026-06-25 17:30:17 | INFO | train mae epoch=2 step=100/982 progress=10.2% loss=0.4921 elapsed=59s eta=523s
+2026-06-25 17:31:16 | INFO | train mae epoch=2 step=200/982 progress=20.4% loss=0.4788 elapsed=118s eta=462s
+2026-06-25 17:32:15 | INFO | train mae epoch=2 step=300/982 progress=30.5% loss=0.4758 elapsed=177s eta=402s
+2026-06-25 17:33:14 | INFO | train mae epoch=2 step=400/982 progress=40.7% loss=0.4790 elapsed=236s eta=343s
+2026-06-25 17:34:13 | INFO | train mae epoch=2 step=500/982 progress=50.9% loss=0.4729 elapsed=295s eta=284s
+2026-06-25 17:35:11 | INFO | train mae epoch=2 step=600/982 progress=61.1% loss=0.4714 elapsed=353s eta=225s
+2026-06-25 17:36:10 | INFO | train mae epoch=2 step=700/982 progress=71.3% loss=0.4732 elapsed=412s eta=166s
+2026-06-25 17:37:09 | INFO | train mae epoch=2 step=800/982 progress=81.5% loss=0.4676 elapsed=471s eta=107s
+2026-06-25 17:38:08 | INFO | train mae epoch=2 step=900/982 progress=91.6% loss=0.4679 elapsed=530s eta=48s
+2026-06-25 17:38:56 | INFO | train mae epoch=2 step=982/982 progress=100.0% loss=0.4655 elapsed=578s eta=0s
+2026-06-25 17:39:15 | INFO | val mae epoch=2 step=100/247 progress=40.5% loss=0.5685 elapsed=19s eta=28s
+2026-06-25 17:39:34 | INFO | val mae epoch=2 step=200/247 progress=81.0% loss=0.5057 elapsed=38s eta=9s
+2026-06-25 17:39:43 | INFO | val mae epoch=2 step=247/247 progress=100.0% loss=0.5155 elapsed=47s eta=0s
+2026-06-25 17:39:45 | INFO | new best mae val_loss=0.515452
+2026-06-25 17:39:46 | INFO | epoch=2 train_loss=0.4655 val_loss=0.5155 lr=9.97e-06
+2026-06-25 17:39:46 | INFO | epoch 3 started lr=9.89e-06
+2026-06-25 17:40:45 | INFO | train mae epoch=3 step=100/982 progress=10.2% loss=0.4179 elapsed=59s eta=522s
+2026-06-25 17:41:44 | INFO | train mae epoch=3 step=200/982 progress=20.4% loss=0.4160 elapsed=118s eta=461s
+2026-06-25 17:42:43 | INFO | train mae epoch=3 step=300/982 progress=30.5% loss=0.4210 elapsed=177s eta=402s
+2026-06-25 17:43:41 | INFO | train mae epoch=3 step=400/982 progress=40.7% loss=0.4168 elapsed=235s eta=343s
+2026-06-25 17:44:40 | INFO | train mae epoch=3 step=500/982 progress=50.9% loss=0.4141 elapsed=294s eta=284s
+2026-06-25 17:45:39 | INFO | train mae epoch=3 step=600/982 progress=61.1% loss=0.4147 elapsed=353s eta=225s
+2026-06-25 17:46:38 | INFO | train mae epoch=3 step=700/982 progress=71.3% loss=0.4195 elapsed=412s eta=166s
+2026-06-25 17:47:36 | INFO | train mae epoch=3 step=800/982 progress=81.5% loss=0.4215 elapsed=470s eta=107s
+2026-06-25 17:48:35 | INFO | train mae epoch=3 step=900/982 progress=91.6% loss=0.4234 elapsed=529s eta=48s
+2026-06-25 17:49:23 | INFO | train mae epoch=3 step=982/982 progress=100.0% loss=0.4220 elapsed=577s eta=0s
+2026-06-25 17:49:43 | INFO | val mae epoch=3 step=100/247 progress=40.5% loss=0.5815 elapsed=19s eta=28s
+2026-06-25 17:50:02 | INFO | val mae epoch=3 step=200/247 progress=81.0% loss=0.5171 elapsed=38s eta=9s
+2026-06-25 17:50:10 | INFO | val mae epoch=3 step=247/247 progress=100.0% loss=0.5283 elapsed=47s eta=0s
+2026-06-25 17:50:12 | INFO | epoch=3 train_loss=0.4220 val_loss=0.5283 lr=9.89e-06
+2026-06-25 17:50:12 | INFO | epoch 4 started lr=9.76e-06
+2026-06-25 17:51:12 | INFO | train mae epoch=4 step=100/982 progress=10.2% loss=0.4289 elapsed=59s eta=524s
+2026-06-25 17:52:10 | INFO | train mae epoch=4 step=200/982 progress=20.4% loss=0.4099 elapsed=118s eta=462s
+2026-06-25 17:53:09 | INFO | train mae epoch=4 step=300/982 progress=30.5% loss=0.4076 elapsed=177s eta=402s
+2026-06-25 17:54:08 | INFO | train mae epoch=4 step=400/982 progress=40.7% loss=0.4053 elapsed=236s eta=343s
+2026-06-25 17:55:07 | INFO | train mae epoch=4 step=500/982 progress=50.9% loss=0.4034 elapsed=294s eta=284s
+2026-06-25 17:56:05 | INFO | train mae epoch=4 step=600/982 progress=61.1% loss=0.4052 elapsed=353s eta=225s
+2026-06-25 17:57:04 | INFO | train mae epoch=4 step=700/982 progress=71.3% loss=0.3997 elapsed=412s eta=166s
+2026-06-25 17:58:03 | INFO | train mae epoch=4 step=800/982 progress=81.5% loss=0.3950 elapsed=470s eta=107s
+2026-06-25 17:59:01 | INFO | train mae epoch=4 step=900/982 progress=91.6% loss=0.3975 elapsed=529s eta=48s
+2026-06-25 17:59:50 | INFO | train mae epoch=4 step=982/982 progress=100.0% loss=0.3976 elapsed=577s eta=0s
+2026-06-25 18:00:09 | INFO | val mae epoch=4 step=100/247 progress=40.5% loss=0.5315 elapsed=19s eta=28s
+2026-06-25 18:00:28 | INFO | val mae epoch=4 step=200/247 progress=81.0% loss=0.4713 elapsed=38s eta=9s
+2026-06-25 18:00:37 | INFO | val mae epoch=4 step=247/247 progress=100.0% loss=0.4802 elapsed=47s eta=0s
+2026-06-25 18:00:38 | INFO | new best mae val_loss=0.480240
+2026-06-25 18:00:40 | INFO | epoch=4 train_loss=0.3976 val_loss=0.4802 lr=9.76e-06
+2026-06-25 18:00:40 | INFO | epoch 5 started lr=9.57e-06
+2026-06-25 18:01:39 | INFO | train mae epoch=5 step=100/982 progress=10.2% loss=0.3770 elapsed=59s eta=523s
+2026-06-25 18:02:38 | INFO | train mae epoch=5 step=200/982 progress=20.4% loss=0.3763 elapsed=118s eta=462s
+2026-06-25 18:03:37 | INFO | train mae epoch=5 step=300/982 progress=30.5% loss=0.3836 elapsed=177s eta=402s
+2026-06-25 18:04:36 | INFO | train mae epoch=5 step=400/982 progress=40.7% loss=0.3836 elapsed=236s eta=343s
+2026-06-25 18:05:35 | INFO | train mae epoch=5 step=500/982 progress=50.9% loss=0.3824 elapsed=295s eta=284s
+2026-06-25 18:06:33 | INFO | train mae epoch=5 step=600/982 progress=61.1% loss=0.3822 elapsed=353s eta=225s
+2026-06-25 18:07:32 | INFO | train mae epoch=5 step=700/982 progress=71.3% loss=0.3831 elapsed=412s eta=166s
+2026-06-25 18:08:31 | INFO | train mae epoch=5 step=800/982 progress=81.5% loss=0.3844 elapsed=471s eta=107s
+2026-06-25 18:09:30 | INFO | train mae epoch=5 step=900/982 progress=91.6% loss=0.3823 elapsed=530s eta=48s
+2026-06-25 18:10:18 | INFO | train mae epoch=5 step=982/982 progress=100.0% loss=0.3823 elapsed=578s eta=0s
+2026-06-25 18:10:37 | INFO | val mae epoch=5 step=100/247 progress=40.5% loss=0.5169 elapsed=19s eta=28s
+2026-06-25 18:10:56 | INFO | val mae epoch=5 step=200/247 progress=81.0% loss=0.4627 elapsed=38s eta=9s
+2026-06-25 18:11:05 | INFO | val mae epoch=5 step=247/247 progress=100.0% loss=0.4711 elapsed=47s eta=0s
+2026-06-25 18:11:07 | INFO | new best mae val_loss=0.471072
+2026-06-25 18:11:08 | INFO | epoch=5 train_loss=0.3823 val_loss=0.4711 lr=9.57e-06
+2026-06-25 18:11:08 | INFO | epoch 6 started lr=9.34e-06
+2026-06-25 18:12:07 | INFO | train mae epoch=6 step=100/982 progress=10.2% loss=0.3779 elapsed=59s eta=523s
+2026-06-25 18:13:06 | INFO | train mae epoch=6 step=200/982 progress=20.4% loss=0.3693 elapsed=118s eta=462s
+2026-06-25 18:14:05 | INFO | train mae epoch=6 step=300/982 progress=30.5% loss=0.3647 elapsed=177s eta=402s
+2026-06-25 18:15:04 | INFO | train mae epoch=6 step=400/982 progress=40.7% loss=0.3661 elapsed=236s eta=343s
+2026-06-25 18:16:03 | INFO | train mae epoch=6 step=500/982 progress=50.9% loss=0.3664 elapsed=295s eta=284s
+2026-06-25 18:17:01 | INFO | train mae epoch=6 step=600/982 progress=61.1% loss=0.3635 elapsed=353s eta=225s
+2026-06-25 18:18:00 | INFO | train mae epoch=6 step=700/982 progress=71.3% loss=0.3655 elapsed=412s eta=166s
+2026-06-25 18:18:59 | INFO | train mae epoch=6 step=800/982 progress=81.5% loss=0.3671 elapsed=471s eta=107s
+2026-06-25 18:19:58 | INFO | train mae epoch=6 step=900/982 progress=91.6% loss=0.3700 elapsed=530s eta=48s
+2026-06-25 18:20:46 | INFO | train mae epoch=6 step=982/982 progress=100.0% loss=0.3679 elapsed=578s eta=0s
+2026-06-25 18:21:05 | INFO | val mae epoch=6 step=100/247 progress=40.5% loss=0.5333 elapsed=19s eta=28s
+2026-06-25 18:21:24 | INFO | val mae epoch=6 step=200/247 progress=81.0% loss=0.4770 elapsed=38s eta=9s
+2026-06-25 18:21:33 | INFO | val mae epoch=6 step=247/247 progress=100.0% loss=0.4858 elapsed=47s eta=0s
+2026-06-25 18:21:34 | INFO | epoch=6 train_loss=0.3679 val_loss=0.4858 lr=9.34e-06
+2026-06-25 18:21:34 | INFO | epoch 7 started lr=9.05e-06
+2026-06-25 18:22:34 | INFO | train mae epoch=7 step=100/982 progress=10.2% loss=0.3678 elapsed=59s eta=524s
+2026-06-25 18:23:33 | INFO | train mae epoch=7 step=200/982 progress=20.4% loss=0.3545 elapsed=118s eta=462s
+2026-06-25 18:24:31 | INFO | train mae epoch=7 step=300/982 progress=30.5% loss=0.3574 elapsed=177s eta=402s
+2026-06-25 18:25:30 | INFO | train mae epoch=7 step=400/982 progress=40.7% loss=0.3562 elapsed=236s eta=343s
+2026-06-25 18:26:29 | INFO | train mae epoch=7 step=500/982 progress=50.9% loss=0.3597 elapsed=295s eta=284s
+2026-06-25 18:27:28 | INFO | train mae epoch=7 step=600/982 progress=61.1% loss=0.3562 elapsed=354s eta=225s
+2026-06-25 18:28:27 | INFO | train mae epoch=7 step=700/982 progress=71.3% loss=0.3581 elapsed=412s eta=166s
+2026-06-25 18:29:26 | INFO | train mae epoch=7 step=800/982 progress=81.5% loss=0.3564 elapsed=471s eta=107s
+2026-06-25 18:30:24 | INFO | train mae epoch=7 step=900/982 progress=91.6% loss=0.3571 elapsed=530s eta=48s
+2026-06-25 18:31:13 | INFO | train mae epoch=7 step=982/982 progress=100.0% loss=0.3571 elapsed=578s eta=0s
+2026-06-25 18:31:32 | INFO | val mae epoch=7 step=100/247 progress=40.5% loss=0.4997 elapsed=19s eta=28s
+2026-06-25 18:31:51 | INFO | val mae epoch=7 step=200/247 progress=81.0% loss=0.4448 elapsed=38s eta=9s
+2026-06-25 18:32:00 | INFO | val mae epoch=7 step=247/247 progress=100.0% loss=0.4525 elapsed=47s eta=0s
+2026-06-25 18:32:01 | INFO | new best mae val_loss=0.452460
+2026-06-25 18:32:03 | INFO | epoch=7 train_loss=0.3571 val_loss=0.4525 lr=9.05e-06
+2026-06-25 18:32:03 | INFO | epoch 8 started lr=8.73e-06
+2026-06-25 18:33:02 | INFO | train mae epoch=8 step=100/982 progress=10.2% loss=0.3616 elapsed=59s eta=522s
+2026-06-25 18:34:01 | INFO | train mae epoch=8 step=200/982 progress=20.4% loss=0.3540 elapsed=118s eta=461s
+2026-06-25 18:35:00 | INFO | train mae epoch=8 step=300/982 progress=30.5% loss=0.3534 elapsed=177s eta=402s
+2026-06-25 18:35:58 | INFO | train mae epoch=8 step=400/982 progress=40.7% loss=0.3498 elapsed=235s eta=343s
+2026-06-25 18:36:57 | INFO | train mae epoch=8 step=500/982 progress=50.9% loss=0.3535 elapsed=294s eta=284s
+2026-06-25 18:37:56 | INFO | train mae epoch=8 step=600/982 progress=61.1% loss=0.3532 elapsed=353s eta=225s
+2026-06-25 18:38:55 | INFO | train mae epoch=8 step=700/982 progress=71.3% loss=0.3503 elapsed=412s eta=166s
+2026-06-25 18:39:53 | INFO | train mae epoch=8 step=800/982 progress=81.5% loss=0.3519 elapsed=470s eta=107s
+2026-06-25 18:40:52 | INFO | train mae epoch=8 step=900/982 progress=91.6% loss=0.3506 elapsed=529s eta=48s
+2026-06-25 18:41:40 | INFO | train mae epoch=8 step=982/982 progress=100.0% loss=0.3497 elapsed=577s eta=0s
+2026-06-25 18:41:59 | INFO | val mae epoch=8 step=100/247 progress=40.5% loss=0.4865 elapsed=19s eta=28s
+2026-06-25 18:42:18 | INFO | val mae epoch=8 step=200/247 progress=81.0% loss=0.4354 elapsed=38s eta=9s
+2026-06-25 18:42:27 | INFO | val mae epoch=8 step=247/247 progress=100.0% loss=0.4418 elapsed=47s eta=0s
+2026-06-25 18:42:29 | INFO | new best mae val_loss=0.441808
+2026-06-25 18:42:30 | INFO | epoch=8 train_loss=0.3497 val_loss=0.4418 lr=8.73e-06
+2026-06-25 18:42:30 | INFO | epoch 9 started lr=8.36e-06
+2026-06-25 18:43:29 | INFO | train mae epoch=9 step=100/982 progress=10.2% loss=0.3307 elapsed=59s eta=521s
+2026-06-25 18:44:28 | INFO | train mae epoch=9 step=200/982 progress=20.4% loss=0.3294 elapsed=118s eta=461s
+2026-06-25 18:45:27 | INFO | train mae epoch=9 step=300/982 progress=30.5% loss=0.3269 elapsed=176s eta=401s
+2026-06-25 18:46:25 | INFO | train mae epoch=9 step=400/982 progress=40.7% loss=0.3286 elapsed=235s eta=342s
+2026-06-25 18:47:24 | INFO | train mae epoch=9 step=500/982 progress=50.9% loss=0.3282 elapsed=294s eta=283s
+2026-06-25 18:48:23 | INFO | train mae epoch=9 step=600/982 progress=61.1% loss=0.3307 elapsed=353s eta=225s
+2026-06-25 18:49:22 | INFO | train mae epoch=9 step=700/982 progress=71.3% loss=0.3319 elapsed=411s eta=166s
+2026-06-25 18:50:20 | INFO | train mae epoch=9 step=800/982 progress=81.5% loss=0.3341 elapsed=470s eta=107s
+2026-06-25 18:51:19 | INFO | train mae epoch=9 step=900/982 progress=91.6% loss=0.3352 elapsed=529s eta=48s
+2026-06-25 18:52:07 | INFO | train mae epoch=9 step=982/982 progress=100.0% loss=0.3359 elapsed=577s eta=0s
+2026-06-25 18:52:27 | INFO | val mae epoch=9 step=100/247 progress=40.5% loss=0.4869 elapsed=19s eta=28s
+2026-06-25 18:52:46 | INFO | val mae epoch=9 step=200/247 progress=81.0% loss=0.4315 elapsed=38s eta=9s
+2026-06-25 18:52:54 | INFO | val mae epoch=9 step=247/247 progress=100.0% loss=0.4390 elapsed=47s eta=0s
+2026-06-25 18:52:56 | INFO | new best mae val_loss=0.438967
+2026-06-25 18:52:58 | INFO | epoch=9 train_loss=0.3359 val_loss=0.4390 lr=8.36e-06
+2026-06-25 18:52:58 | INFO | epoch 10 started lr=7.96e-06
+2026-06-25 18:53:57 | INFO | train mae epoch=10 step=100/982 progress=10.2% loss=0.3225 elapsed=59s eta=523s
+2026-06-25 18:54:56 | INFO | train mae epoch=10 step=200/982 progress=20.4% loss=0.3226 elapsed=118s eta=461s
+2026-06-25 18:55:54 | INFO | train mae epoch=10 step=300/982 progress=30.5% loss=0.3279 elapsed=177s eta=402s
+2026-06-25 18:56:53 | INFO | train mae epoch=10 step=400/982 progress=40.7% loss=0.3310 elapsed=236s eta=343s
+2026-06-25 18:57:52 | INFO | train mae epoch=10 step=500/982 progress=50.9% loss=0.3340 elapsed=294s eta=284s
+2026-06-25 18:58:51 | INFO | train mae epoch=10 step=600/982 progress=61.1% loss=0.3377 elapsed=353s eta=225s
+2026-06-25 18:59:49 | INFO | train mae epoch=10 step=700/982 progress=71.3% loss=0.3362 elapsed=412s eta=166s
+2026-06-25 19:00:48 | INFO | train mae epoch=10 step=800/982 progress=81.5% loss=0.3325 elapsed=471s eta=107s
+2026-06-25 19:01:47 | INFO | train mae epoch=10 step=900/982 progress=91.6% loss=0.3305 elapsed=529s eta=48s
+2026-06-25 19:02:35 | INFO | train mae epoch=10 step=982/982 progress=100.0% loss=0.3289 elapsed=578s eta=0s
+2026-06-25 19:02:55 | INFO | val mae epoch=10 step=100/247 progress=40.5% loss=0.4785 elapsed=19s eta=28s
+2026-06-25 19:03:13 | INFO | val mae epoch=10 step=200/247 progress=81.0% loss=0.4242 elapsed=38s eta=9s
+2026-06-25 19:03:22 | INFO | val mae epoch=10 step=247/247 progress=100.0% loss=0.4304 elapsed=47s eta=0s
+2026-06-25 19:03:24 | INFO | new best mae val_loss=0.430389
+2026-06-25 19:03:25 | INFO | epoch=10 train_loss=0.3289 val_loss=0.4304 lr=7.96e-06
+2026-06-25 19:03:25 | INFO | epoch 11 started lr=7.53e-06
+2026-06-25 19:04:25 | INFO | train mae epoch=11 step=100/982 progress=10.2% loss=0.3348 elapsed=59s eta=523s
+2026-06-25 19:05:23 | INFO | train mae epoch=11 step=200/982 progress=20.4% loss=0.3393 elapsed=118s eta=461s
+2026-06-25 19:06:22 | INFO | train mae epoch=11 step=300/982 progress=30.5% loss=0.3327 elapsed=177s eta=402s
+2026-06-25 19:07:21 | INFO | train mae epoch=11 step=400/982 progress=40.7% loss=0.3327 elapsed=235s eta=343s
+2026-06-25 19:08:20 | INFO | train mae epoch=11 step=500/982 progress=50.9% loss=0.3304 elapsed=294s eta=284s
+2026-06-25 19:09:18 | INFO | train mae epoch=11 step=600/982 progress=61.1% loss=0.3313 elapsed=353s eta=225s
+2026-06-25 19:10:17 | INFO | train mae epoch=11 step=700/982 progress=71.3% loss=0.3301 elapsed=412s eta=166s
+2026-06-25 19:11:16 | INFO | train mae epoch=11 step=800/982 progress=81.5% loss=0.3301 elapsed=470s eta=107s
+2026-06-25 19:12:15 | INFO | train mae epoch=11 step=900/982 progress=91.6% loss=0.3302 elapsed=529s eta=48s
+2026-06-25 19:13:03 | INFO | train mae epoch=11 step=982/982 progress=100.0% loss=0.3285 elapsed=577s eta=0s
+2026-06-25 19:13:22 | INFO | val mae epoch=11 step=100/247 progress=40.5% loss=0.4725 elapsed=19s eta=28s
+2026-06-25 19:13:41 | INFO | val mae epoch=11 step=200/247 progress=81.0% loss=0.4191 elapsed=38s eta=9s
+2026-06-25 19:13:50 | INFO | val mae epoch=11 step=247/247 progress=100.0% loss=0.4260 elapsed=47s eta=0s
+2026-06-25 19:13:51 | INFO | new best mae val_loss=0.425974
+2026-06-25 19:13:53 | INFO | epoch=11 train_loss=0.3285 val_loss=0.4260 lr=7.53e-06
+2026-06-25 19:13:53 | INFO | epoch 12 started lr=7.06e-06
+2026-06-25 19:14:52 | INFO | train mae epoch=12 step=100/982 progress=10.2% loss=0.3189 elapsed=59s eta=523s
+2026-06-25 19:15:51 | INFO | train mae epoch=12 step=200/982 progress=20.4% loss=0.3200 elapsed=118s eta=462s
+2026-06-25 19:16:50 | INFO | train mae epoch=12 step=300/982 progress=30.5% loss=0.3207 elapsed=177s eta=402s
+2026-06-25 19:17:49 | INFO | train mae epoch=12 step=400/982 progress=40.7% loss=0.3235 elapsed=235s eta=343s
+2026-06-25 19:18:47 | INFO | train mae epoch=12 step=500/982 progress=50.9% loss=0.3197 elapsed=294s eta=284s
+2026-06-25 19:19:46 | INFO | train mae epoch=12 step=600/982 progress=61.1% loss=0.3222 elapsed=353s eta=225s
+2026-06-25 19:20:45 | INFO | train mae epoch=12 step=700/982 progress=71.3% loss=0.3241 elapsed=412s eta=166s
+2026-06-25 19:21:44 | INFO | train mae epoch=12 step=800/982 progress=81.5% loss=0.3238 elapsed=470s eta=107s
+2026-06-25 19:22:42 | INFO | train mae epoch=12 step=900/982 progress=91.6% loss=0.3211 elapsed=529s eta=48s
+2026-06-25 19:23:30 | INFO | train mae epoch=12 step=982/982 progress=100.0% loss=0.3211 elapsed=577s eta=0s
+2026-06-25 19:23:50 | INFO | val mae epoch=12 step=100/247 progress=40.5% loss=0.4670 elapsed=19s eta=28s
+2026-06-25 19:24:09 | INFO | val mae epoch=12 step=200/247 progress=81.0% loss=0.4138 elapsed=38s eta=9s
+2026-06-25 19:24:17 | INFO | val mae epoch=12 step=247/247 progress=100.0% loss=0.4193 elapsed=47s eta=0s
+2026-06-25 19:24:19 | INFO | new best mae val_loss=0.419315
+2026-06-25 19:24:21 | INFO | epoch=12 train_loss=0.3211 val_loss=0.4193 lr=7.06e-06
+2026-06-25 19:24:21 | INFO | epoch 13 started lr=6.58e-06
+2026-06-25 19:25:20 | INFO | train mae epoch=13 step=100/982 progress=10.2% loss=0.3262 elapsed=59s eta=522s
+2026-06-25 19:26:18 | INFO | train mae epoch=13 step=200/982 progress=20.4% loss=0.3266 elapsed=118s eta=461s
+2026-06-25 19:27:17 | INFO | train mae epoch=13 step=300/982 progress=30.5% loss=0.3206 elapsed=177s eta=401s
+2026-06-25 19:28:16 | INFO | train mae epoch=13 step=400/982 progress=40.7% loss=0.3182 elapsed=235s eta=342s
+2026-06-25 19:29:15 | INFO | train mae epoch=13 step=500/982 progress=50.9% loss=0.3131 elapsed=294s eta=283s
+2026-06-25 19:30:13 | INFO | train mae epoch=13 step=600/982 progress=61.1% loss=0.3117 elapsed=353s eta=225s
+2026-06-25 19:31:12 | INFO | train mae epoch=13 step=700/982 progress=71.3% loss=0.3146 elapsed=411s eta=166s
+2026-06-25 19:32:11 | INFO | train mae epoch=13 step=800/982 progress=81.5% loss=0.3176 elapsed=470s eta=107s
+2026-06-25 19:33:09 | INFO | train mae epoch=13 step=900/982 progress=91.6% loss=0.3166 elapsed=529s eta=48s
+2026-06-25 19:33:58 | INFO | train mae epoch=13 step=982/982 progress=100.0% loss=0.3176 elapsed=577s eta=0s
+2026-06-25 19:34:17 | INFO | val mae epoch=13 step=100/247 progress=40.5% loss=0.4778 elapsed=19s eta=28s
+2026-06-25 19:34:36 | INFO | val mae epoch=13 step=200/247 progress=81.0% loss=0.4220 elapsed=38s eta=9s
+2026-06-25 19:34:45 | INFO | val mae epoch=13 step=247/247 progress=100.0% loss=0.4279 elapsed=47s eta=0s
+2026-06-25 19:34:46 | INFO | epoch=13 train_loss=0.3176 val_loss=0.4279 lr=6.58e-06
+2026-06-25 19:34:46 | INFO | epoch 14 started lr=6.08e-06
+2026-06-25 19:35:45 | INFO | train mae epoch=14 step=100/982 progress=10.2% loss=0.3191 elapsed=59s eta=522s
+2026-06-25 19:36:44 | INFO | train mae epoch=14 step=200/982 progress=20.4% loss=0.3082 elapsed=118s eta=461s
+2026-06-25 19:37:43 | INFO | train mae epoch=14 step=300/982 progress=30.5% loss=0.3139 elapsed=177s eta=402s
+2026-06-25 19:38:42 | INFO | train mae epoch=14 step=400/982 progress=40.7% loss=0.3120 elapsed=235s eta=343s
+2026-06-25 19:39:40 | INFO | train mae epoch=14 step=500/982 progress=50.9% loss=0.3134 elapsed=294s eta=284s
+2026-06-25 19:40:39 | INFO | train mae epoch=14 step=600/982 progress=61.1% loss=0.3113 elapsed=353s eta=225s
+2026-06-25 19:41:38 | INFO | train mae epoch=14 step=700/982 progress=71.3% loss=0.3103 elapsed=412s eta=166s
+2026-06-25 19:42:37 | INFO | train mae epoch=14 step=800/982 progress=81.5% loss=0.3115 elapsed=470s eta=107s
+2026-06-25 19:43:35 | INFO | train mae epoch=14 step=900/982 progress=91.6% loss=0.3142 elapsed=529s eta=48s
+2026-06-25 19:44:24 | INFO | train mae epoch=14 step=982/982 progress=100.0% loss=0.3155 elapsed=577s eta=0s
+2026-06-25 19:44:43 | INFO | val mae epoch=14 step=100/247 progress=40.5% loss=0.4561 elapsed=19s eta=28s
+2026-06-25 19:45:02 | INFO | val mae epoch=14 step=200/247 progress=81.0% loss=0.4066 elapsed=38s eta=9s
+2026-06-25 19:45:11 | INFO | val mae epoch=14 step=247/247 progress=100.0% loss=0.4137 elapsed=47s eta=0s
+2026-06-25 19:45:12 | INFO | new best mae val_loss=0.413684
+2026-06-25 19:45:14 | INFO | epoch=14 train_loss=0.3155 val_loss=0.4137 lr=6.08e-06
+2026-06-25 19:45:14 | INFO | epoch 15 started lr=5.57e-06
+2026-06-25 19:46:13 | INFO | train mae epoch=15 step=100/982 progress=10.2% loss=0.2965 elapsed=59s eta=522s
+2026-06-25 19:47:12 | INFO | train mae epoch=15 step=200/982 progress=20.4% loss=0.3024 elapsed=118s eta=461s
+2026-06-25 19:48:11 | INFO | train mae epoch=15 step=300/982 progress=30.5% loss=0.3060 elapsed=177s eta=401s
+2026-06-25 19:49:09 | INFO | train mae epoch=15 step=400/982 progress=40.7% loss=0.3094 elapsed=235s eta=342s
+2026-06-25 19:50:08 | INFO | train mae epoch=15 step=500/982 progress=50.9% loss=0.3102 elapsed=294s eta=283s
+2026-06-25 19:51:07 | INFO | train mae epoch=15 step=600/982 progress=61.1% loss=0.3117 elapsed=353s eta=225s
+2026-06-25 19:52:05 | INFO | train mae epoch=15 step=700/982 progress=71.3% loss=0.3105 elapsed=411s eta=166s
+2026-06-25 19:53:04 | INFO | train mae epoch=15 step=800/982 progress=81.5% loss=0.3088 elapsed=470s eta=107s
+2026-06-25 19:54:03 | INFO | train mae epoch=15 step=900/982 progress=91.6% loss=0.3099 elapsed=529s eta=48s
+2026-06-25 19:54:51 | INFO | train mae epoch=15 step=982/982 progress=100.0% loss=0.3103 elapsed=577s eta=0s
+2026-06-25 19:55:10 | INFO | val mae epoch=15 step=100/247 progress=40.5% loss=0.4602 elapsed=19s eta=28s
+2026-06-25 19:55:29 | INFO | val mae epoch=15 step=200/247 progress=81.0% loss=0.4126 elapsed=38s eta=9s
+2026-06-25 19:55:38 | INFO | val mae epoch=15 step=247/247 progress=100.0% loss=0.4188 elapsed=47s eta=0s
+2026-06-25 19:55:40 | INFO | epoch=15 train_loss=0.3103 val_loss=0.4188 lr=5.57e-06
+2026-06-25 19:55:40 | INFO | epoch 16 started lr=5.05e-06
+2026-06-25 19:56:39 | INFO | train mae epoch=16 step=100/982 progress=10.2% loss=0.3160 elapsed=59s eta=523s
+2026-06-25 19:57:38 | INFO | train mae epoch=16 step=200/982 progress=20.4% loss=0.3082 elapsed=118s eta=461s
+2026-06-25 19:58:36 | INFO | train mae epoch=16 step=300/982 progress=30.5% loss=0.3051 elapsed=177s eta=402s
+2026-06-25 19:59:35 | INFO | train mae epoch=16 step=400/982 progress=40.7% loss=0.3023 elapsed=235s eta=342s
+2026-06-25 20:00:34 | INFO | train mae epoch=16 step=500/982 progress=50.9% loss=0.3053 elapsed=294s eta=284s
+2026-06-25 20:01:33 | INFO | train mae epoch=16 step=600/982 progress=61.1% loss=0.3049 elapsed=353s eta=225s
+2026-06-25 20:02:31 | INFO | train mae epoch=16 step=700/982 progress=71.3% loss=0.3063 elapsed=412s eta=166s
+2026-06-25 20:03:30 | INFO | train mae epoch=16 step=800/982 progress=81.5% loss=0.3050 elapsed=470s eta=107s
+2026-06-25 20:04:29 | INFO | train mae epoch=16 step=900/982 progress=91.6% loss=0.3058 elapsed=529s eta=48s
+2026-06-25 20:05:17 | INFO | train mae epoch=16 step=982/982 progress=100.0% loss=0.3049 elapsed=577s eta=0s
+2026-06-25 20:05:36 | INFO | val mae epoch=16 step=100/247 progress=40.5% loss=0.4582 elapsed=19s eta=28s
+2026-06-25 20:05:55 | INFO | val mae epoch=16 step=200/247 progress=81.0% loss=0.4065 elapsed=38s eta=9s
+2026-06-25 20:06:04 | INFO | val mae epoch=16 step=247/247 progress=100.0% loss=0.4129 elapsed=47s eta=0s
+2026-06-25 20:06:05 | INFO | new best mae val_loss=0.412936
+2026-06-25 20:06:07 | INFO | epoch=16 train_loss=0.3049 val_loss=0.4129 lr=5.05e-06
+2026-06-25 20:06:07 | INFO | epoch 17 started lr=4.53e-06
+2026-06-25 20:07:06 | INFO | train mae epoch=17 step=100/982 progress=10.2% loss=0.3120 elapsed=59s eta=523s
+2026-06-25 20:08:05 | INFO | train mae epoch=17 step=200/982 progress=20.4% loss=0.3069 elapsed=118s eta=461s
+2026-06-25 20:09:04 | INFO | train mae epoch=17 step=300/982 progress=30.5% loss=0.2963 elapsed=177s eta=402s
+2026-06-25 20:10:02 | INFO | train mae epoch=17 step=400/982 progress=40.7% loss=0.3000 elapsed=235s eta=343s
+2026-06-25 20:11:01 | INFO | train mae epoch=17 step=500/982 progress=50.9% loss=0.3040 elapsed=294s eta=284s
+2026-06-25 20:12:00 | INFO | train mae epoch=17 step=600/982 progress=61.1% loss=0.3038 elapsed=353s eta=225s
+2026-06-25 20:12:59 | INFO | train mae epoch=17 step=700/982 progress=71.3% loss=0.3053 elapsed=412s eta=166s
+2026-06-25 20:13:57 | INFO | train mae epoch=17 step=800/982 progress=81.5% loss=0.3044 elapsed=470s eta=107s
+2026-06-25 20:14:56 | INFO | train mae epoch=17 step=900/982 progress=91.6% loss=0.3049 elapsed=529s eta=48s
+2026-06-25 20:15:44 | INFO | train mae epoch=17 step=982/982 progress=100.0% loss=0.3045 elapsed=577s eta=0s
+2026-06-25 20:16:04 | INFO | val mae epoch=17 step=100/247 progress=40.5% loss=0.4529 elapsed=19s eta=28s
+2026-06-25 20:16:22 | INFO | val mae epoch=17 step=200/247 progress=81.0% loss=0.4003 elapsed=38s eta=9s
+2026-06-25 20:16:31 | INFO | val mae epoch=17 step=247/247 progress=100.0% loss=0.4075 elapsed=47s eta=0s
+2026-06-25 20:16:33 | INFO | new best mae val_loss=0.407487
+2026-06-25 20:16:34 | INFO | epoch=17 train_loss=0.3045 val_loss=0.4075 lr=4.53e-06
+2026-06-25 20:16:34 | INFO | epoch 18 started lr=4.02e-06
+2026-06-25 20:17:33 | INFO | train mae epoch=18 step=100/982 progress=10.2% loss=0.2922 elapsed=59s eta=522s
+2026-06-25 20:18:32 | INFO | train mae epoch=18 step=200/982 progress=20.4% loss=0.2926 elapsed=118s eta=461s
+2026-06-25 20:19:31 | INFO | train mae epoch=18 step=300/982 progress=30.5% loss=0.2994 elapsed=177s eta=401s
+2026-06-25 20:20:29 | INFO | train mae epoch=18 step=400/982 progress=40.7% loss=0.2987 elapsed=235s eta=342s
+2026-06-25 20:21:28 | INFO | train mae epoch=18 step=500/982 progress=50.9% loss=0.2992 elapsed=294s eta=283s
+2026-06-25 20:22:27 | INFO | train mae epoch=18 step=600/982 progress=61.1% loss=0.3009 elapsed=353s eta=224s
+2026-06-25 20:23:25 | INFO | train mae epoch=18 step=700/982 progress=71.3% loss=0.2997 elapsed=411s eta=166s
+2026-06-25 20:24:24 | INFO | train mae epoch=18 step=800/982 progress=81.5% loss=0.3000 elapsed=470s eta=107s
+2026-06-25 20:25:23 | INFO | train mae epoch=18 step=900/982 progress=91.6% loss=0.3029 elapsed=529s eta=48s
+2026-06-25 20:26:11 | INFO | train mae epoch=18 step=982/982 progress=100.0% loss=0.3050 elapsed=577s eta=0s
+2026-06-25 20:26:30 | INFO | val mae epoch=18 step=100/247 progress=40.5% loss=0.4498 elapsed=19s eta=28s
+2026-06-25 20:26:49 | INFO | val mae epoch=18 step=200/247 progress=81.0% loss=0.3998 elapsed=38s eta=9s
+2026-06-25 20:26:58 | INFO | val mae epoch=18 step=247/247 progress=100.0% loss=0.4060 elapsed=47s eta=0s
+2026-06-25 20:26:59 | INFO | new best mae val_loss=0.406044
+2026-06-25 20:27:01 | INFO | epoch=18 train_loss=0.3050 val_loss=0.4060 lr=4.02e-06
+2026-06-25 20:27:01 | INFO | epoch 19 started lr=3.52e-06
+2026-06-25 20:28:00 | INFO | train mae epoch=19 step=100/982 progress=10.2% loss=0.3002 elapsed=59s eta=522s
+2026-06-25 20:28:58 | INFO | train mae epoch=19 step=200/982 progress=20.4% loss=0.2990 elapsed=118s eta=461s
+2026-06-25 20:29:57 | INFO | train mae epoch=19 step=300/982 progress=30.5% loss=0.2982 elapsed=177s eta=401s
+2026-06-25 20:30:56 | INFO | train mae epoch=19 step=400/982 progress=40.7% loss=0.2978 elapsed=235s eta=342s
+2026-06-25 20:31:55 | INFO | train mae epoch=19 step=500/982 progress=50.9% loss=0.3015 elapsed=294s eta=283s
+2026-06-25 20:32:53 | INFO | train mae epoch=19 step=600/982 progress=61.1% loss=0.2996 elapsed=353s eta=225s
+2026-06-25 20:33:52 | INFO | train mae epoch=19 step=700/982 progress=71.3% loss=0.3008 elapsed=411s eta=166s
+2026-06-25 20:34:51 | INFO | train mae epoch=19 step=800/982 progress=81.5% loss=0.3012 elapsed=470s eta=107s
+2026-06-25 20:35:50 | INFO | train mae epoch=19 step=900/982 progress=91.6% loss=0.3016 elapsed=529s eta=48s
+2026-06-25 20:36:38 | INFO | train mae epoch=19 step=982/982 progress=100.0% loss=0.3008 elapsed=577s eta=0s
+2026-06-25 20:36:57 | INFO | val mae epoch=19 step=100/247 progress=40.5% loss=0.4531 elapsed=19s eta=28s
+2026-06-25 20:37:16 | INFO | val mae epoch=19 step=200/247 progress=81.0% loss=0.4027 elapsed=38s eta=9s
+2026-06-25 20:37:25 | INFO | val mae epoch=19 step=247/247 progress=100.0% loss=0.4077 elapsed=47s eta=0s
+2026-06-25 20:37:26 | INFO | epoch=19 train_loss=0.3008 val_loss=0.4077 lr=3.52e-06
+2026-06-25 20:37:26 | INFO | epoch 20 started lr=3.04e-06
+2026-06-25 20:38:26 | INFO | train mae epoch=20 step=100/982 progress=10.2% loss=0.2974 elapsed=59s eta=525s
+2026-06-25 20:39:25 | INFO | train mae epoch=20 step=200/982 progress=20.4% loss=0.3024 elapsed=118s eta=462s
+2026-06-25 20:40:23 | INFO | train mae epoch=20 step=300/982 progress=30.5% loss=0.3070 elapsed=177s eta=402s
+2026-06-25 20:41:22 | INFO | train mae epoch=20 step=400/982 progress=40.7% loss=0.3064 elapsed=236s eta=343s
+2026-06-25 20:42:21 | INFO | train mae epoch=20 step=500/982 progress=50.9% loss=0.3043 elapsed=295s eta=284s
+2026-06-25 20:43:20 | INFO | train mae epoch=20 step=600/982 progress=61.1% loss=0.3030 elapsed=353s eta=225s
+2026-06-25 20:44:19 | INFO | train mae epoch=20 step=700/982 progress=71.3% loss=0.3005 elapsed=412s eta=166s
+2026-06-25 20:45:17 | INFO | train mae epoch=20 step=800/982 progress=81.5% loss=0.2992 elapsed=471s eta=107s
+2026-06-25 20:46:16 | INFO | train mae epoch=20 step=900/982 progress=91.6% loss=0.3000 elapsed=530s eta=48s
+2026-06-25 20:47:04 | INFO | train mae epoch=20 step=982/982 progress=100.0% loss=0.3011 elapsed=578s eta=0s
+2026-06-25 20:47:24 | INFO | val mae epoch=20 step=100/247 progress=40.5% loss=0.4470 elapsed=19s eta=28s
+2026-06-25 20:47:42 | INFO | val mae epoch=20 step=200/247 progress=81.0% loss=0.3972 elapsed=38s eta=9s
+2026-06-25 20:47:51 | INFO | val mae epoch=20 step=247/247 progress=100.0% loss=0.4033 elapsed=47s eta=0s
+2026-06-25 20:47:53 | INFO | new best mae val_loss=0.403276
+2026-06-25 20:47:55 | INFO | epoch=20 train_loss=0.3011 val_loss=0.4033 lr=3.04e-06
+2026-06-25 20:47:55 | INFO | epoch 21 started lr=2.58e-06
+2026-06-25 20:48:54 | INFO | train mae epoch=21 step=100/982 progress=10.2% loss=0.3068 elapsed=59s eta=522s
+2026-06-25 20:49:53 | INFO | train mae epoch=21 step=200/982 progress=20.4% loss=0.3051 elapsed=118s eta=461s
+2026-06-25 20:50:52 | INFO | train mae epoch=21 step=300/982 progress=30.5% loss=0.3050 elapsed=177s eta=402s
+2026-06-25 20:51:50 | INFO | train mae epoch=21 step=400/982 progress=40.7% loss=0.2991 elapsed=236s eta=343s
+2026-06-25 20:52:49 | INFO | train mae epoch=21 step=500/982 progress=50.9% loss=0.3041 elapsed=294s eta=284s
+2026-06-25 20:53:48 | INFO | train mae epoch=21 step=600/982 progress=61.1% loss=0.3023 elapsed=353s eta=225s
+2026-06-25 20:54:47 | INFO | train mae epoch=21 step=700/982 progress=71.3% loss=0.2977 elapsed=412s eta=166s
+2026-06-25 20:55:46 | INFO | train mae epoch=21 step=800/982 progress=81.5% loss=0.2988 elapsed=471s eta=107s
+2026-06-25 20:56:45 | INFO | train mae epoch=21 step=900/982 progress=91.6% loss=0.2987 elapsed=530s eta=48s
+2026-06-25 20:57:33 | INFO | train mae epoch=21 step=982/982 progress=100.0% loss=0.2993 elapsed=578s eta=0s
+2026-06-25 20:57:52 | INFO | val mae epoch=21 step=100/247 progress=40.5% loss=0.4599 elapsed=19s eta=28s
+2026-06-25 20:58:11 | INFO | val mae epoch=21 step=200/247 progress=81.0% loss=0.4063 elapsed=38s eta=9s
+2026-06-25 20:58:20 | INFO | val mae epoch=21 step=247/247 progress=100.0% loss=0.4136 elapsed=47s eta=0s
+2026-06-25 20:58:21 | INFO | epoch=21 train_loss=0.2993 val_loss=0.4136 lr=2.58e-06
+2026-06-25 20:58:21 | INFO | epoch 22 started lr=2.14e-06
+2026-06-25 20:59:20 | INFO | train mae epoch=22 step=100/982 progress=10.2% loss=0.3044 elapsed=59s eta=523s
+2026-06-25 21:00:19 | INFO | train mae epoch=22 step=200/982 progress=20.4% loss=0.3025 elapsed=118s eta=461s
+2026-06-25 21:01:18 | INFO | train mae epoch=22 step=300/982 progress=30.5% loss=0.2975 elapsed=177s eta=402s
+2026-06-25 21:02:17 | INFO | train mae epoch=22 step=400/982 progress=40.7% loss=0.2983 elapsed=236s eta=343s
+2026-06-25 21:03:15 | INFO | train mae epoch=22 step=500/982 progress=50.9% loss=0.2981 elapsed=294s eta=284s
+2026-06-25 21:04:14 | INFO | train mae epoch=22 step=600/982 progress=61.1% loss=0.2987 elapsed=353s eta=225s
+2026-06-25 21:05:13 | INFO | train mae epoch=22 step=700/982 progress=71.3% loss=0.3007 elapsed=412s eta=166s
+2026-06-25 21:06:12 | INFO | train mae epoch=22 step=800/982 progress=81.5% loss=0.3022 elapsed=470s eta=107s
+2026-06-25 21:07:10 | INFO | train mae epoch=22 step=900/982 progress=91.6% loss=0.2999 elapsed=529s eta=48s
+2026-06-25 21:07:58 | INFO | train mae epoch=22 step=982/982 progress=100.0% loss=0.3007 elapsed=577s eta=0s
+2026-06-25 21:08:18 | INFO | val mae epoch=22 step=100/247 progress=40.5% loss=0.4436 elapsed=19s eta=28s
+2026-06-25 21:08:37 | INFO | val mae epoch=22 step=200/247 progress=81.0% loss=0.3945 elapsed=38s eta=9s
+2026-06-25 21:08:45 | INFO | val mae epoch=22 step=247/247 progress=100.0% loss=0.4012 elapsed=47s eta=0s
+2026-06-25 21:08:47 | INFO | new best mae val_loss=0.401156
+2026-06-25 21:08:49 | INFO | epoch=22 train_loss=0.3007 val_loss=0.4012 lr=2.14e-06
+2026-06-25 21:08:49 | INFO | epoch 23 started lr=1.74e-06
+2026-06-25 21:09:48 | INFO | train mae epoch=23 step=100/982 progress=10.2% loss=0.2930 elapsed=59s eta=523s
+2026-06-25 21:10:47 | INFO | train mae epoch=23 step=200/982 progress=20.4% loss=0.2982 elapsed=118s eta=462s
+2026-06-25 21:11:45 | INFO | train mae epoch=23 step=300/982 progress=30.5% loss=0.2960 elapsed=177s eta=402s
+2026-06-25 21:12:44 | INFO | train mae epoch=23 step=400/982 progress=40.7% loss=0.2969 elapsed=236s eta=343s
+2026-06-25 21:13:43 | INFO | train mae epoch=23 step=500/982 progress=50.9% loss=0.2972 elapsed=294s eta=284s
+2026-06-25 21:14:42 | INFO | train mae epoch=23 step=600/982 progress=61.1% loss=0.2958 elapsed=353s eta=225s
+2026-06-25 21:15:40 | INFO | train mae epoch=23 step=700/982 progress=71.3% loss=0.2959 elapsed=412s eta=166s
+2026-06-25 21:16:39 | INFO | train mae epoch=23 step=800/982 progress=81.5% loss=0.2960 elapsed=471s eta=107s
+2026-06-25 21:17:38 | INFO | train mae epoch=23 step=900/982 progress=91.6% loss=0.2965 elapsed=529s eta=48s
+2026-06-25 21:18:26 | INFO | train mae epoch=23 step=982/982 progress=100.0% loss=0.2950 elapsed=577s eta=0s
+2026-06-25 21:18:45 | INFO | val mae epoch=23 step=100/247 progress=40.5% loss=0.4495 elapsed=19s eta=28s
+2026-06-25 21:19:04 | INFO | val mae epoch=23 step=200/247 progress=81.0% loss=0.3976 elapsed=38s eta=9s
+2026-06-25 21:19:13 | INFO | val mae epoch=23 step=247/247 progress=100.0% loss=0.4040 elapsed=47s eta=0s
+2026-06-25 21:19:15 | INFO | epoch=23 train_loss=0.2950 val_loss=0.4040 lr=1.74e-06
+2026-06-25 21:19:15 | INFO | epoch 24 started lr=1.37e-06
+2026-06-25 21:20:14 | INFO | train mae epoch=24 step=100/982 progress=10.2% loss=0.3077 elapsed=59s eta=522s
+2026-06-25 21:21:12 | INFO | train mae epoch=24 step=200/982 progress=20.4% loss=0.2944 elapsed=118s eta=461s
+2026-06-25 21:22:11 | INFO | train mae epoch=24 step=300/982 progress=30.5% loss=0.2947 elapsed=177s eta=402s
+2026-06-25 21:23:10 | INFO | train mae epoch=24 step=400/982 progress=40.7% loss=0.2989 elapsed=235s eta=343s
+2026-06-25 21:24:09 | INFO | train mae epoch=24 step=500/982 progress=50.9% loss=0.2959 elapsed=294s eta=284s
+2026-06-25 21:25:08 | INFO | train mae epoch=24 step=600/982 progress=61.1% loss=0.2931 elapsed=353s eta=225s
+2026-06-25 21:26:06 | INFO | train mae epoch=24 step=700/982 progress=71.3% loss=0.2923 elapsed=412s eta=166s
+2026-06-25 21:27:05 | INFO | train mae epoch=24 step=800/982 progress=81.5% loss=0.2922 elapsed=470s eta=107s
+2026-06-25 21:28:04 | INFO | train mae epoch=24 step=900/982 progress=91.6% loss=0.2945 elapsed=529s eta=48s
+2026-06-25 21:28:52 | INFO | train mae epoch=24 step=982/982 progress=100.0% loss=0.2957 elapsed=577s eta=0s
+2026-06-25 21:29:11 | INFO | val mae epoch=24 step=100/247 progress=40.5% loss=0.4559 elapsed=19s eta=28s
+2026-06-25 21:29:30 | INFO | val mae epoch=24 step=200/247 progress=81.0% loss=0.4081 elapsed=38s eta=9s
+2026-06-25 21:29:39 | INFO | val mae epoch=24 step=247/247 progress=100.0% loss=0.4133 elapsed=47s eta=0s
+2026-06-25 21:29:40 | INFO | epoch=24 train_loss=0.2957 val_loss=0.4133 lr=1.37e-06
+2026-06-25 21:29:40 | INFO | epoch 25 started lr=1.05e-06
+2026-06-25 21:30:39 | INFO | train mae epoch=25 step=100/982 progress=10.2% loss=0.2835 elapsed=59s eta=522s
+2026-06-25 21:31:38 | INFO | train mae epoch=25 step=200/982 progress=20.4% loss=0.2936 elapsed=118s eta=461s
+2026-06-25 21:32:37 | INFO | train mae epoch=25 step=300/982 progress=30.5% loss=0.3002 elapsed=177s eta=402s
+2026-06-25 21:33:36 | INFO | train mae epoch=25 step=400/982 progress=40.7% loss=0.3023 elapsed=235s eta=342s
+2026-06-25 21:34:34 | INFO | train mae epoch=25 step=500/982 progress=50.9% loss=0.2990 elapsed=294s eta=284s
+2026-06-25 21:35:33 | INFO | train mae epoch=25 step=600/982 progress=61.1% loss=0.2966 elapsed=353s eta=225s
+2026-06-25 21:36:32 | INFO | train mae epoch=25 step=700/982 progress=71.3% loss=0.2971 elapsed=412s eta=166s
+2026-06-25 21:37:31 | INFO | train mae epoch=25 step=800/982 progress=81.5% loss=0.2968 elapsed=470s eta=107s
+2026-06-25 21:38:30 | INFO | train mae epoch=25 step=900/982 progress=91.6% loss=0.2973 elapsed=529s eta=48s
+2026-06-25 21:39:18 | INFO | train mae epoch=25 step=982/982 progress=100.0% loss=0.2958 elapsed=577s eta=0s
+2026-06-25 21:39:37 | INFO | val mae epoch=25 step=100/247 progress=40.5% loss=0.4526 elapsed=19s eta=28s
+2026-06-25 21:39:56 | INFO | val mae epoch=25 step=200/247 progress=81.0% loss=0.4014 elapsed=38s eta=9s
+2026-06-25 21:40:05 | INFO | val mae epoch=25 step=247/247 progress=100.0% loss=0.4083 elapsed=47s eta=0s
+2026-06-25 21:40:07 | INFO | epoch=25 train_loss=0.2958 val_loss=0.4083 lr=1.05e-06
+2026-06-25 21:40:07 | INFO | epoch 26 started lr=7.63e-07
+2026-06-25 21:41:06 | INFO | train mae epoch=26 step=100/982 progress=10.2% loss=0.2785 elapsed=59s eta=523s
+2026-06-25 21:42:05 | INFO | train mae epoch=26 step=200/982 progress=20.4% loss=0.2811 elapsed=118s eta=462s
+2026-06-25 21:43:04 | INFO | train mae epoch=26 step=300/982 progress=30.5% loss=0.2838 elapsed=177s eta=402s
+2026-06-25 21:44:02 | INFO | train mae epoch=26 step=400/982 progress=40.7% loss=0.2903 elapsed=236s eta=343s
+2026-06-25 21:45:01 | INFO | train mae epoch=26 step=500/982 progress=50.9% loss=0.2911 elapsed=294s eta=284s
+2026-06-25 21:46:00 | INFO | train mae epoch=26 step=600/982 progress=61.1% loss=0.2940 elapsed=353s eta=225s
+2026-06-25 21:46:59 | INFO | train mae epoch=26 step=700/982 progress=71.3% loss=0.2933 elapsed=412s eta=166s
+2026-06-25 21:47:57 | INFO | train mae epoch=26 step=800/982 progress=81.5% loss=0.2939 elapsed=471s eta=107s
+2026-06-25 21:48:56 | INFO | train mae epoch=26 step=900/982 progress=91.6% loss=0.2945 elapsed=529s eta=48s
+2026-06-25 21:49:44 | INFO | train mae epoch=26 step=982/982 progress=100.0% loss=0.2944 elapsed=577s eta=0s
+2026-06-25 21:50:03 | INFO | val mae epoch=26 step=100/247 progress=40.5% loss=0.4421 elapsed=19s eta=28s
+2026-06-25 21:50:22 | INFO | val mae epoch=26 step=200/247 progress=81.0% loss=0.3926 elapsed=38s eta=9s
+2026-06-25 21:50:31 | INFO | val mae epoch=26 step=247/247 progress=100.0% loss=0.3985 elapsed=47s eta=0s
+2026-06-25 21:50:33 | INFO | new best mae val_loss=0.398532
+2026-06-25 21:50:34 | INFO | epoch=26 train_loss=0.2944 val_loss=0.3985 lr=7.63e-07
+2026-06-25 21:50:34 | INFO | epoch 27 started lr=5.28e-07
+2026-06-25 21:51:33 | INFO | train mae epoch=27 step=100/982 progress=10.2% loss=0.2927 elapsed=59s eta=522s
+2026-06-25 21:52:32 | INFO | train mae epoch=27 step=200/982 progress=20.4% loss=0.2859 elapsed=118s eta=461s
+2026-06-25 21:53:31 | INFO | train mae epoch=27 step=300/982 progress=30.5% loss=0.2915 elapsed=177s eta=401s
+2026-06-25 21:54:30 | INFO | train mae epoch=27 step=400/982 progress=40.7% loss=0.2932 elapsed=235s eta=342s
+2026-06-25 21:55:28 | INFO | train mae epoch=27 step=500/982 progress=50.9% loss=0.2923 elapsed=294s eta=283s
+2026-06-25 21:56:27 | INFO | train mae epoch=27 step=600/982 progress=61.1% loss=0.2928 elapsed=353s eta=225s
+2026-06-25 21:57:26 | INFO | train mae epoch=27 step=700/982 progress=71.3% loss=0.2936 elapsed=411s eta=166s
+2026-06-25 21:58:24 | INFO | train mae epoch=27 step=800/982 progress=81.5% loss=0.2931 elapsed=470s eta=107s
+2026-06-25 21:59:23 | INFO | train mae epoch=27 step=900/982 progress=91.6% loss=0.2918 elapsed=529s eta=48s
+2026-06-25 22:00:11 | INFO | train mae epoch=27 step=982/982 progress=100.0% loss=0.2922 elapsed=577s eta=0s
+2026-06-25 22:00:31 | INFO | val mae epoch=27 step=100/247 progress=40.5% loss=0.4412 elapsed=19s eta=28s
+2026-06-25 22:00:49 | INFO | val mae epoch=27 step=200/247 progress=81.0% loss=0.3929 elapsed=38s eta=9s
+2026-06-25 22:00:58 | INFO | val mae epoch=27 step=247/247 progress=100.0% loss=0.3984 elapsed=47s eta=0s
+2026-06-25 22:01:00 | INFO | new best mae val_loss=0.398381
+2026-06-25 22:01:01 | INFO | epoch=27 train_loss=0.2922 val_loss=0.3984 lr=5.28e-07
+2026-06-25 22:01:01 | INFO | epoch 28 started lr=3.42e-07
+2026-06-25 22:02:00 | INFO | train mae epoch=28 step=100/982 progress=10.2% loss=0.2913 elapsed=59s eta=523s
+2026-06-25 22:02:59 | INFO | train mae epoch=28 step=200/982 progress=20.4% loss=0.2966 elapsed=118s eta=462s
+2026-06-25 22:03:58 | INFO | train mae epoch=28 step=300/982 progress=30.5% loss=0.2980 elapsed=177s eta=402s
+2026-06-25 22:04:56 | INFO | train mae epoch=28 step=400/982 progress=40.7% loss=0.2939 elapsed=235s eta=343s
+2026-06-25 22:05:55 | INFO | train mae epoch=28 step=500/982 progress=50.9% loss=0.2934 elapsed=294s eta=284s
+2026-06-25 22:06:54 | INFO | train mae epoch=28 step=600/982 progress=61.1% loss=0.2922 elapsed=353s eta=225s
+2026-06-25 22:07:53 | INFO | train mae epoch=28 step=700/982 progress=71.3% loss=0.2902 elapsed=412s eta=166s
+2026-06-25 22:08:51 | INFO | train mae epoch=28 step=800/982 progress=81.5% loss=0.2894 elapsed=470s eta=107s
+2026-06-25 22:09:50 | INFO | train mae epoch=28 step=900/982 progress=91.6% loss=0.2911 elapsed=529s eta=48s
+2026-06-25 22:10:38 | INFO | train mae epoch=28 step=982/982 progress=100.0% loss=0.2911 elapsed=577s eta=0s
+2026-06-25 22:10:57 | INFO | val mae epoch=28 step=100/247 progress=40.5% loss=0.4442 elapsed=19s eta=28s
+2026-06-25 22:11:16 | INFO | val mae epoch=28 step=200/247 progress=81.0% loss=0.3933 elapsed=38s eta=9s
+2026-06-25 22:11:25 | INFO | val mae epoch=28 step=247/247 progress=100.0% loss=0.3999 elapsed=47s eta=0s
+2026-06-25 22:11:26 | INFO | epoch=28 train_loss=0.2911 val_loss=0.3999 lr=3.42e-07
+2026-06-25 22:11:26 | INFO | epoch 29 started lr=2.08e-07
+2026-06-25 22:12:26 | INFO | train mae epoch=29 step=100/982 progress=10.2% loss=0.2978 elapsed=59s eta=522s
+2026-06-25 22:13:24 | INFO | train mae epoch=29 step=200/982 progress=20.4% loss=0.2928 elapsed=118s eta=461s
+2026-06-25 22:14:23 | INFO | train mae epoch=29 step=300/982 progress=30.5% loss=0.2933 elapsed=177s eta=401s
+2026-06-25 22:15:22 | INFO | train mae epoch=29 step=400/982 progress=40.7% loss=0.2912 elapsed=235s eta=342s
+2026-06-25 22:16:20 | INFO | train mae epoch=29 step=500/982 progress=50.9% loss=0.2911 elapsed=294s eta=283s
+2026-06-25 22:17:19 | INFO | train mae epoch=29 step=600/982 progress=61.1% loss=0.2869 elapsed=353s eta=225s
+2026-06-25 22:18:18 | INFO | train mae epoch=29 step=700/982 progress=71.3% loss=0.2880 elapsed=411s eta=166s
+2026-06-25 22:19:16 | INFO | train mae epoch=29 step=800/982 progress=81.5% loss=0.2901 elapsed=470s eta=107s
+2026-06-25 22:20:15 | INFO | train mae epoch=29 step=900/982 progress=91.6% loss=0.2907 elapsed=529s eta=48s
+2026-06-25 22:21:03 | INFO | train mae epoch=29 step=982/982 progress=100.0% loss=0.2924 elapsed=577s eta=0s
+2026-06-25 22:21:23 | INFO | val mae epoch=29 step=100/247 progress=40.5% loss=0.4510 elapsed=19s eta=28s
+2026-06-25 22:21:41 | INFO | val mae epoch=29 step=200/247 progress=81.0% loss=0.4037 elapsed=38s eta=9s
+2026-06-25 22:21:50 | INFO | val mae epoch=29 step=247/247 progress=100.0% loss=0.4084 elapsed=47s eta=0s
+2026-06-25 22:21:52 | INFO | epoch=29 train_loss=0.2924 val_loss=0.4084 lr=2.08e-07
+2026-06-25 22:21:52 | INFO | epoch 30 started lr=1.27e-07
+2026-06-25 22:22:51 | INFO | train mae epoch=30 step=100/982 progress=10.2% loss=0.2848 elapsed=59s eta=522s
+2026-06-25 22:23:50 | INFO | train mae epoch=30 step=200/982 progress=20.4% loss=0.2889 elapsed=118s eta=461s
+2026-06-25 22:24:49 | INFO | train mae epoch=30 step=300/982 progress=30.5% loss=0.2887 elapsed=177s eta=402s
+2026-06-25 22:25:48 | INFO | train mae epoch=30 step=400/982 progress=40.7% loss=0.2889 elapsed=235s eta=342s
+2026-06-25 22:26:46 | INFO | train mae epoch=30 step=500/982 progress=50.9% loss=0.2930 elapsed=294s eta=283s
+2026-06-25 22:27:45 | INFO | train mae epoch=30 step=600/982 progress=61.1% loss=0.2919 elapsed=353s eta=225s
+2026-06-25 22:28:44 | INFO | train mae epoch=30 step=700/982 progress=71.3% loss=0.2930 elapsed=412s eta=166s
+2026-06-25 22:29:42 | INFO | train mae epoch=30 step=800/982 progress=81.5% loss=0.2938 elapsed=470s eta=107s
+2026-06-25 22:30:41 | INFO | train mae epoch=30 step=900/982 progress=91.6% loss=0.2945 elapsed=529s eta=48s
+2026-06-25 22:31:29 | INFO | train mae epoch=30 step=982/982 progress=100.0% loss=0.2944 elapsed=577s eta=0s
+2026-06-25 22:31:49 | INFO | val mae epoch=30 step=100/247 progress=40.5% loss=0.4408 elapsed=19s eta=28s
+2026-06-25 22:32:08 | INFO | val mae epoch=30 step=200/247 progress=81.0% loss=0.3946 elapsed=38s eta=9s
+2026-06-25 22:32:16 | INFO | val mae epoch=30 step=247/247 progress=100.0% loss=0.4002 elapsed=47s eta=0s
+2026-06-25 22:32:18 | INFO | epoch=30 train_loss=0.2944 val_loss=0.4002 lr=1.27e-07
+2026-06-25 22:32:18 | INFO | fold finished best_epoch=27 best_score=-0.398381

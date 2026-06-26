@@ -1,0 +1,51 @@
+=== DINOv3 ViT + Fluorescence MAE Pipeline ===
+Fold: f1 | MAE epochs: 30 | FT epochs: 30
+Start: Thu Jun 25 17:18:52 CST 2026
+
+=== [f1] Stage 1: Fluorescence MAE Pre-training ===
+[f1] MAE checkpoint: runs/dinov3_mae_f1_20260625_1718/f1/checkpoints/best.pt
+
+=== [f1] Stage 2: Segmentation Fine-tuning ===
+[DinoV3-MAE] Loaded MAE-adapted backbone: missing=0, unexpected=0
+
+=== [f1] Pipeline Complete ===
+End: Fri Jun 26 00:39:07 CST 2026
+rics = run_mae_epoch(model, train_loader, device, config, args.stage,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/Uveitis-Segmentation-bs/scripts/train_dinov3_mae.py", line 288, in run_mae_epoch
+    out = model.forward_mae(images)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/Uveitis-Segmentation-bs/src/bs/dinov3_mae.py", line 225, in forward_mae
+    pred = self.mae_decoder(masked_feat)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/Uveitis-Segmentation-bs/src/bs/dinov3_mae.py", line 44, in forward
+    x = blk(x)
+        ^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/nn/functional.py", line 2812, in batch_norm
+    return torch.batch_norm(
+           ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 432.00 MiB. GPU 0 has a total capacity of 21.49 GiB of which 407.38 MiB is free. Process 49647 has 15.72 GiB memory in use. Including non-PyTorch memory, this process has 5.36 GiB memory in use. Of the allocated memory 4.60 GiB is allocated by PyTorch, and 584.25 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
