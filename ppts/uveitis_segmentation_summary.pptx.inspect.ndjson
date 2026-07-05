@@ -1,0 +1,231 @@
+{"kind":"deck","id":"pr/bp961d","name":"Deck"}
+{"kind":"layout","layoutId":"5cad1ac5-d82b-475e-9630-849e2559ab45","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"2590286a-62a2-4135-b31f-7ff924479bfc","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/j7cov8","slide":1,"title":"毕业设计项目总结","textShapes":10}
+{"kind":"textbox","id":"sh/3ylc7u54","slide":1,"text":"毕业设计项目总结","textPreview":"毕业设计项目总结","textChars":8,"textLines":1,"bbox":[42,38,380,32]}
+{"kind":"textbox","id":"sh/sji5snel","slide":1,"text":"葡萄膜炎 FA 泄漏区域分割","textPreview":"葡萄膜炎 FA 泄漏区域分割","textChars":14,"textLines":1,"bbox":[42,128,780,132]}
+{"kind":"textbox","id":"sh/h4byhgn2","slide":1,"text":"从论文 U-Net 复现到 DINOv3 预训练 backbone 的系统化实验","textPreview":"从论文 U-Net 复现到 DINOv3 预训练 backbone 的系统化实验","textChars":40,"textLines":1,"bbox":[46,286,740,80]}
+{"kind":"shape","id":"sh/a5gbq1or","slide":1,"bbox":[830,66,360,520]}
+{"kind":"textbox","id":"sh/3m94fu18","slide":1,"text":"FA image","textPreview":"FA image","textChars":8,"textLines":1,"bbox":[874,108,260,42]}
+{"kind":"textbox","id":"sh/s72x4nap","slide":1,"text":"RGB / NIfTI mask\nITK-SNAP palette\n5-fold split","textPreview":"RGB / NIfTI mask | ITK-SNAP palette | 5-fold split","textChars":46,"textLines":3,"bbox":[874,164,250,94]}
+{"kind":"shape","id":"sh/lszqtcj6","slide":1,"bbox":[964,290,78,28]}
+{"kind":"textbox","id":"sh/a1gvy90j","slide":1,"text":"2-channel lesion masks","textPreview":"2-channel lesion masks","textChars":22,"textLines":1,"bbox":[874,356,274,44]}
+{"kind":"textbox","id":"sh/zidonyd0","slide":1,"text":"lesion_1 = label 1 or 3\nlesion_2 = label 2 or 3","textPreview":"lesion_1 = label 1 or 3 | lesion_2 = label 2 or 3","textChars":47,"textLines":2,"bbox":[874,412,266,72]}
+{"kind":"textbox","id":"sh/re1w7mp0","slide":1,"text":"Code sources: src/bs, scripts, configs, EXPERIMENT_LOG.md","textPreview":"Code sources: src/bs, scripts, configs, EXPERIMENT_LOG.md","textChars":57,"textLines":1,"bbox":[46,626,760,28]}
+{"kind":"textbox","id":"sh/2t83itgf","slide":1,"text":"Repository summary deck","textPreview":"Repository summary deck","textChars":23,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/9knih4by","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/j7cov8","slide":1,"text":""}
+{"kind":"slide","id":"sl/d9c1e7","slide":2,"title":"Overview","textShapes":21}
+{"kind":"textbox","id":"sh/zidonyd0","slide":2,"text":"Overview","textPreview":"Overview","textChars":8,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/s36hcrmh","slide":2,"text":"汇报主线","textPreview":"汇报主线","textChars":4,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[624,170,74,42]}
+{"kind":"textbox","id":"sh/ap4r65wj","slide":2,"text":"任务与数据","textPreview":"任务与数据","textChars":5,"textLines":1,"bbox":[726,169,300,36]}
+{"kind":"textbox","id":"sh/za1gvy90","slide":2,"text":"FA 眼底造影图像中的两类病灶泄漏分割","textPreview":"FA 眼底造影图像中的两类病灶泄漏分割","textChars":19,"textLines":1,"bbox":[726,212,470,36]}
+{"kind":"textbox","id":"sh/svu9knih","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[624,262,74,42]}
+{"kind":"textbox","id":"sh/hgn29gr2","slide":2,"text":"代码架构","textPreview":"代码架构","textChars":4,"textLines":1,"bbox":[726,261,300,36]}
+{"kind":"textbox","id":"sh/adsji5sn","slide":2,"text":"数据、模型、训练脚本、配置和实验记录如何组织","textPreview":"数据、模型、训练脚本、配置和实验记录如何组织","textChars":22,"textLines":1,"bbox":[726,304,470,36]}
+{"kind":"textbox","id":"sh/3ylc7u54","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[624,354,74,42]}
+{"kind":"textbox","id":"sh/bat47y1k","slide":2,"text":"方法体系","textPreview":"方法体系","textChars":4,"textLines":1,"bbox":[726,353,300,36]}
+{"kind":"textbox","id":"sh/mp0bi9s3","slide":2,"text":"U-Net 论文基线与 DINOv3 多标签主线的差异","textPreview":"U-Net 论文基线与 DINOv3 多标签主线的差异","textChars":27,"textLines":1,"bbox":[726,396,470,36]}
+{"kind":"textbox","id":"sh/tgfmlkjm","slide":2,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[624,446,74,42]}
+{"kind":"textbox","id":"sh/4vmtwra5","slide":2,"text":"实验结果","textPreview":"实验结果","textChars":4,"textLines":1,"bbox":[726,445,300,36]}
+{"kind":"textbox","id":"sh/bm58z25k","slide":2,"text":"从 baseline、WBE、MAE 到 SAM2 FPN 的对比","textPreview":"从 baseline、WBE、MAE 到 SAM2 FPN 的对比","textChars":33,"textLines":1,"bbox":[726,488,470,36]}
+{"kind":"textbox","id":"sh/m1cfa9w3","slide":2,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[624,538,74,42]}
+{"kind":"textbox","id":"sh/tsvu9kni","slide":2,"text":"结论","textPreview":"结论","textChars":2,"textLines":1,"bbox":[726,537,300,36]}
+{"kind":"textbox","id":"sh/47y1kre1","slide":2,"text":"哪些路线成立，哪些负结果可写入论文讨论","textPreview":"哪些路线成立，哪些负结果可写入论文讨论","textChars":19,"textLines":1,"bbox":[726,580,470,36]}
+{"kind":"shape","id":"sh/bq1oryts","slide":2,"bbox":[42,180,430,322]}
+{"kind":"textbox","id":"sh/m58z25kb","slide":2,"text":"一句话定位","textPreview":"一句话定位","textChars":5,"textLines":1,"bbox":[82,222,330,40]}
+{"kind":"textbox","id":"sh/qh0fepkz","slide":2,"text":"这个仓库已经形成了完整的医学图像分割实验框架：以论文 U-Net 复现为可解释基线，以 DINOv3 预训练特征为强 baseline，再用实验日志沉淀各类改进尝试的证据。","textPreview":"这个仓库已经形成了完整的医学图像分割实验框架：以论文 U-Net 复现为可解释基线，以 DINOv3 预训练特征为强 baseline，再用实验日志沉淀各类改进尝试的证据。","textChars":86,"textLines":1,"bbox":[82,284,330,154]}
+{"kind":"textbox","id":"sh/j2t83itg","slide":2,"text":"Source: repository code and EXPERIMENT_LOG.md","textPreview":"Source: repository code and EXPERIMENT_LOG.md","textChars":45,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/8nqxs72x","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/d9c1e7","slide":2,"text":""}
+{"kind":"slide","id":"sl/y6lkvi","slide":3,"title":"Dataset","textShapes":13}
+{"kind":"textbox","id":"sh/vahoza1g","slide":3,"text":"Dataset","textPreview":"Dataset","textChars":7,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/ovahoza1","slide":3,"text":"数据与标注方式","textPreview":"数据与标注方式","textChars":7,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":3,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[42,190,260,78]}
+{"kind":"textbox","id":"sh/6hcrmhk3","slide":3,"text":"折交叉验证结构: f1 到 f5","textPreview":"折交叉验证结构: f1 到 f5","textChars":16,"textLines":1,"bbox":[46,274,250,54]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":3,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[330,190,260,78]}
+{"kind":"textbox","id":"sh/onyd0z61","slide":3,"text":"论文指标中的病灶通道","textPreview":"论文指标中的病灶通道","textChars":10,"textLines":1,"bbox":[334,274,250,54]}
+{"kind":"textbox","id":"sh/d8v6psfi","slide":3,"text":"768","textPreview":"768","textChars":3,"textLines":1,"bbox":[618,190,260,78]}
+{"kind":"textbox","id":"sh/6dcbulwv","slide":3,"text":"DINOv3 主线输入尺寸","textPreview":"DINOv3 主线输入尺寸","textChars":13,"textLines":1,"bbox":[622,274,250,54]}
+{"kind":"shape","id":"sh/nuxc3ylc","slide":3,"bbox":[846,166,350,418]}
+{"kind":"textbox","id":"sh/y90je9cv","slide":3,"text":"读取与解码","textPreview":"读取与解码","textChars":5,"textLines":1,"bbox":[882,206,270,42]}
+{"kind":"textbox","id":"sh/5wjudg7a","slide":3,"text":"dataset.py 负责图像读取、NIfTI/RGB 掩码解码、尺寸对齐和 ImageNet 归一化。\n\n当前主线配置使用 mask_only_itksnap，避免混入 HRNet 结果。","textPreview":"dataset.py 负责图像读取、NIfTI/RGB 掩码解码、尺寸对齐和 ImageNet 归一化。 |  | 当前主线配置使用 mask_only_itksnap，避免混入 HRNet 结果。","textChars":95,"textLines":3,"bbox":[882,272,260,182]}
+{"kind":"textbox","id":"sh/gbq1oryt","slide":3,"text":"关键代码: decode_mask_array(), discover_samples(), masks_to_paper_targets()","textPreview":"关键代码: decode_mask_array(), discover_samples(), masks_to_paper_targets()","textChars":71,"textLines":1,"bbox":[882,500,260,48]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":3,"text":"Sources: src/bs/dataset.py, src/bs/multilabel.py, configs/*.yaml","textPreview":"Sources: src/bs/dataset.py, src/bs/multilabel.py, configs/*.yaml","textChars":64,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"table","id":"tb/uxc3ylc7","slide":3,"name":"","rows":5,"cols":3,"preview":"颜色 / 标签 | 语义 | 多标签展开","bbox":[42,430,720,154]}
+{"kind":"notes","id":"nt/y6lkvi","slide":3,"text":""}
+{"kind":"slide","id":"sl/q6xvao","slide":4,"title":"Architecture","textShapes":16}
+{"kind":"textbox","id":"sh/l87ed8ba","slide":4,"text":"Architecture","textPreview":"Architecture","textChars":12,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":4,"text":"代码架构像一个实验工厂","textPreview":"代码架构像一个实验工厂","textChars":11,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"shape","id":"sh/32lszqtc","slide":4,"bbox":[42,190,270,360]}
+{"kind":"textbox","id":"sh/szqtcj6t","slide":4,"text":"数据层","textPreview":"数据层","textChars":3,"textLines":1,"bbox":[66,222,216,42]}
+{"kind":"textbox","id":"sh/lkjm1cfa","slide":4,"text":"dataset.py\npaper_dataset.py\naugmentations.py","textPreview":"dataset.py | paper_dataset.py | augmentations.py","textChars":44,"textLines":3,"bbox":[66,286,222,90]}
+{"kind":"textbox","id":"sh/at47y1kr","slide":4,"text":"样本索引、掩码解码、增强管道与论文复现数据集","textPreview":"样本索引、掩码解码、增强管道与论文复现数据集","textChars":22,"textLines":1,"bbox":[66,410,222,92]}
+{"kind":"shape","id":"sh/3ex0nuxc","slide":4,"bbox":[348,190,270,360]}
+{"kind":"textbox","id":"sh/w3m94fu1","slide":4,"text":"模型层","textPreview":"模型层","textChars":3,"textLines":1,"bbox":[372,222,216,42]}
+{"kind":"textbox","id":"sh/loj2t83i","slide":4,"text":"paper_unet.py\nmodel.py\nconvnext_seg.py\nwavelet.py","textPreview":"paper_unet.py | model.py | convnext_seg.py | wavelet.py","textChars":49,"textLines":4,"bbox":[372,286,222,90]}
+{"kind":"textbox","id":"sh/9knih4by","slide":4,"text":"U-Net、DINOv3 ViT、ConvNeXt、多尺度与频域增强模块","textPreview":"U-Net、DINOv3 ViT、ConvNeXt、多尺度与频域增强模块","textChars":36,"textLines":1,"bbox":[372,410,222,92]}
+{"kind":"shape","id":"sh/kzupwb2h","slide":4,"bbox":[654,190,270,360]}
+{"kind":"textbox","id":"sh/re1w7mp0","slide":4,"text":"训练层","textPreview":"训练层","textChars":3,"textLines":1,"bbox":[678,222,216,42]}
+{"kind":"textbox","id":"sh/2t83itgf","slide":4,"text":"scripts/train_*.py\nrun_*.sh","textPreview":"scripts/train_*.py | run_*.sh","textChars":27,"textLines":2,"bbox":[678,286,222,90]}
+{"kind":"textbox","id":"sh/9w3m94fu","slide":4,"text":"CLI 覆盖配置、单折/五折调度、AMP、checkpoint 和日志","textPreview":"CLI 覆盖配置、单折/五折调度、AMP、checkpoint 和日志","textChars":35,"textLines":1,"bbox":[678,410,222,92]}
+{"kind":"shape","id":"sh/kb6xkf6d","slide":4,"bbox":[960,190,270,360]}
+{"kind":"textbox","id":"sh/rqd4vmtw","slide":4,"text":"证据层","textPreview":"证据层","textChars":3,"textLines":1,"bbox":[984,222,216,42]}
+{"kind":"textbox","id":"sh/25kb6xkf","slide":4,"text":"configs/*.yaml\nEXPERIMENT_LOG.md\nlogs/","textPreview":"configs/*.yaml | EXPERIMENT_LOG.md | logs/","textChars":38,"textLines":3,"bbox":[984,286,222,90]}
+{"kind":"textbox","id":"sh/94fu18jq","slide":4,"text":"固定实验条件、记录指标与失败分析，支撑论文叙事","textPreview":"固定实验条件、记录指标与失败分析，支撑论文叙事","textChars":23,"textLines":1,"bbox":[984,410,222,92]}
+{"kind":"textbox","id":"sh/kjm1cfa9","slide":4,"text":"Sources: src/bs/*.py, scripts/*.py, configs/*.yaml","textPreview":"Sources: src/bs/*.py, scripts/*.py, configs/*.yaml","textChars":50,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/wfyxobm5","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/q6xvao","slide":4,"text":""}
+{"kind":"slide","id":"sl/6oc3hb","slide":5,"title":"Metric System","textShapes":5}
+{"kind":"textbox","id":"sh/r65wjudg","slide":5,"text":"Metric System","textPreview":"Metric System","textChars":13,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/gr2p8nqx","slide":5,"text":"最容易混淆的是两套评估范式","textPreview":"最容易混淆的是两套评估范式","textChars":13,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"textbox","id":"sh/yxobm58z","slide":5,"text":"落地含义: 标签 3 是 overlap，不能简单当成第三病灶类别；论文指标需要把它同时计入 lesion_1 和 lesion_2。","textPreview":"落地含义: 标签 3 是 overlap，不能简单当成第三病灶类别；论文指标需要把它同时计入 lesion_1 和 lesion_2。","textChars":67,"textLines":1,"bbox":[42,566,1080,42]}
+{"kind":"textbox","id":"sh/nih4byhg","slide":5,"text":"Sources: src/bs/metrics.py, src/bs/multilabel.py, src/bs/losses.py","textPreview":"Sources: src/bs/metrics.py, src/bs/multilabel.py, src/bs/losses.py","textChars":66,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/g3ex0nux","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"table","id":"tb/wra5gbq1","slide":5,"name":"","rows":6,"cols":3,"preview":"维度 | 论文 U-Net 复现 | DINOv3 主线实验","bbox":[42,170,1196,365]}
+{"kind":"notes","id":"nt/6oc3hb","slide":5,"text":""}
+{"kind":"slide","id":"sl/oj2gl0","slide":6,"title":"Models","textShapes":12}
+{"kind":"textbox","id":"sh/cbulwval","slide":6,"text":"Models","textPreview":"Models","textChars":6,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/nqxs72x4","slide":6,"text":"模型设计从可复现到强迁移","textPreview":"模型设计从可复现到强迁移","textChars":12,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"shape","id":"sh/u54zidon","slide":6,"bbox":[42,190,374,190]}
+{"kind":"shape","id":"sh/5kb6xkf6","slide":6,"bbox":[66,214,18,18]}
+{"kind":"textbox","id":"sh/czed8v6p","slide":6,"text":"PaperUNet","textPreview":"PaperUNet","textChars":9,"textLines":1,"bbox":[98,210,286,42]}
+{"kind":"textbox","id":"sh/neloj2t8","slide":6,"text":"从零训练的标准 U-Net，512×512，SGD，作为论文叙事中的可解释基线。","textPreview":"从零训练的标准 U-Net，512×512，SGD，作为论文叙事中的可解释基线。","textChars":40,"textLines":1,"bbox":[70,268,318,86]}
+{"kind":"shape","id":"sh/ytsvu9kn","slide":6,"bbox":[454,190,374,190]}
+{"kind":"shape","id":"sh/58z25kb6","slide":6,"bbox":[478,214,18,18]}
+{"kind":"textbox","id":"sh/gn29gr2p","slide":6,"text":"DINOv3 ViT-B/16","textPreview":"DINOv3 ViT-B/16","textChars":15,"textLines":1,"bbox":[510,210,286,42]}
+{"kind":"textbox","id":"sh/u54zidon","slide":6,"text":"取 transformer blocks [2,5,8,11]，TokenFPNHead 拼接融合后输出两病灶通道。","textPreview":"取 transformer blocks [2,5,8,11]，TokenFPNHead 拼接融合后输出两病灶通道。","textChars":58,"textLines":1,"bbox":[482,268,318,86]}
+{"kind":"shape","id":"sh/nqxs72x4","slide":6,"bbox":[866,190,374,190]}
+{"kind":"shape","id":"sh/cbulwval","slide":6,"bbox":[890,214,18,18]}
+{"kind":"textbox","id":"sh/5sneloj2","slide":6,"text":"DINOv3 ConvNeXt","textPreview":"DINOv3 ConvNeXt","textChars":15,"textLines":1,"bbox":[922,210,286,42]}
+{"kind":"textbox","id":"sh/ytsvu9kn","slide":6,"text":"天然 4 stage 多尺度特征，ConvNeXtFPNDecoder 做 top-down 融合，显存更友好。","textPreview":"天然 4 stage 多尺度特征，ConvNeXtFPNDecoder 做 top-down 融合，显存更友好。","textChars":56,"textLines":1,"bbox":[894,268,318,86]}
+{"kind":"shape","id":"sh/neloj2t8","slide":6,"bbox":[42,456,1196,90]}
+{"kind":"textbox","id":"sh/czed8v6p","slide":6,"text":"探索性分支","textPreview":"探索性分支","textChars":5,"textLines":1,"bbox":[72,482,180,34]}
+{"kind":"textbox","id":"sh/5kb6xkf6","slide":6,"text":"WBE 小波边界增强 | DINOv3 荧光 MAE 两阶段训练 | SAM2 Hiera-Small + MAE | ViT + SAM2 FPN 深度监督","textPreview":"WBE 小波边界增强 | DINOv3 荧光 MAE 两阶段训练 | SAM2 Hiera-Small + MAE | ViT + SAM2 FPN 深度监督","textChars":79,"textLines":1,"bbox":[264,482,900,40]}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":6,"text":"Sources: src/bs/paper_unet.py, src/bs/model.py, src/bs/convnext_seg.py, src/bs/dinov3_mae.py, src/bs/sam2_model.py","textPreview":"Sources: src/bs/paper_unet.py, src/bs/model.py, src/bs/convnext_seg.py, src/bs/dinov3_mae.py, src/bs/sam2_model.py","textChars":114,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/oj2gl0","slide":6,"text":""}
+{"kind":"slide","id":"sl/97dzae","slide":7,"title":"Training","textShapes":19}
+{"kind":"textbox","id":"sh/i5sneloj","slide":7,"text":"Training","textPreview":"Training","textChars":8,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/pwb2hwfy","slide":7,"text":"训练流水线已经具备生产化习惯","textPreview":"训练流水线已经具备生产化习惯","textChars":14,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":7,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[42,190,52,40]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":7,"text":"配置解析","textPreview":"配置解析","textChars":4,"textLines":1,"bbox":[104,189,282,38]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":7,"text":"YAML 配置 + CLI 覆盖，固定 run name、fold、batch size、learning rate。","textPreview":"YAML 配置 + CLI 覆盖，固定 run name、fold、batch size、learning rate。","textChars":59,"textLines":1,"bbox":[104,238,276,94]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":7,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[452,190,52,40]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":7,"text":"数据采样","textPreview":"数据采样","textChars":4,"textLines":1,"bbox":[514,189,282,38]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":7,"text":"按验证折拆分；lesion_2 极少时用 WeightedRandomSampler 提高出现概率。","textPreview":"按验证折拆分；lesion_2 极少时用 WeightedRandomSampler 提高出现概率。","textChars":50,"textLines":1,"bbox":[514,238,276,94]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":7,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[862,190,52,40]}
+{"kind":"textbox","id":"sh/032lszqt","slide":7,"text":"增强与损失","textPreview":"增强与损失","textChars":5,"textLines":1,"bbox":[924,189,282,38]}
+{"kind":"textbox","id":"sh/tovahoza","slide":7,"text":"前景感知 crop、仿射、亮度、噪声；用 Focal Tversky + BCE 控制不平衡。","textPreview":"前景感知 crop、仿射、亮度、噪声；用 Focal Tversky + BCE 控制不平衡。","textChars":47,"textLines":1,"bbox":[924,238,276,94]}
+{"kind":"shape","id":"sh/ixczed8v","slide":7,"bbox":[370,310,52,28]}
+{"kind":"shape","id":"sh/bi9s36hc","slide":7,"bbox":[780,310,52,28]}
+{"kind":"textbox","id":"sh/0fepkzup","slide":7,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[250,450,52,40]}
+{"kind":"textbox","id":"sh/p0bi9s36","slide":7,"text":"训练循环","textPreview":"训练循环","textChars":4,"textLines":1,"bbox":[312,449,298,38]}
+{"kind":"textbox","id":"sh/i9s36hcr","slide":7,"text":"AMP、梯度累积、梯度裁剪、cosine/poly LR，按 paper_macro_dice 选 best。","textPreview":"AMP、梯度累积、梯度裁剪、cosine/poly LR，按 paper_macro_dice 选 best。","textChars":55,"textLines":1,"bbox":[312,498,292,94]}
+{"kind":"textbox","id":"sh/bulwval8","slide":7,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[712,450,52,40]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":7,"text":"实验产物","textPreview":"实验产物","textChars":4,"textLines":1,"bbox":[774,449,298,38]}
+{"kind":"textbox","id":"sh/t47y1kre","slide":7,"text":"checkpoints、metrics.csv、TensorBoard、预测样例和 summary.json/fold_summary.csv。","textPreview":"checkpoints、metrics.csv、TensorBoard、预测样例和 summary.json/fold_summary.csv。","textChars":72,"textLines":1,"bbox":[774,498,292,94]}
+{"kind":"textbox","id":"sh/xobm58z2","slide":7,"text":"Sources: scripts/train_dinov3_multilabel.py, scripts/train_paper_unet.py, scripts/run_*.sh","textPreview":"Sources: scripts/train_dinov3_multilabel.py, scripts/train_paper_unet.py, scripts/run_*.sh","textChars":90,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/83itgfml","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/97dzae","slide":7,"text":""}
+{"kind":"slide","id":"sl/fjwnnk","slide":8,"title":"Experiments","textShapes":32}
+{"kind":"textbox","id":"sh/wb2hwfyx","slide":8,"text":"Experiments","textPreview":"Experiments","textChars":11,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":8,"text":"实验矩阵覆盖 baseline 与多条创新尝试","textPreview":"实验矩阵覆盖 baseline 与多条创新尝试","textChars":23,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"shape","id":"sh/e9cvixcz","slide":8,"bbox":[42,152,1196,44]}
+{"kind":"textbox","id":"sh/loj2t83i","slide":8,"text":"模型","textPreview":"模型","textChars":2,"textLines":1,"bbox":[62,162,260,24]}
+{"kind":"textbox","id":"sh/w3m94fu1","slide":8,"text":"核心改动","textPreview":"核心改动","textChars":4,"textLines":1,"bbox":[350,162,300,24]}
+{"kind":"textbox","id":"sh/3itgfmlk","slide":8,"text":"Macro Dice","textPreview":"Macro Dice","textChars":10,"textLines":1,"bbox":[802,162,130,24]}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":8,"text":"结论","textPreview":"结论","textChars":2,"textLines":1,"bbox":[958,162,230,24]}
+{"kind":"shape","id":"sh/lkjm1cfa","slide":8,"bbox":[42,206,1196,54]}
+{"kind":"textbox","id":"sh/szqtcj6t","slide":8,"text":"DINOv3 ConvNeXt-Tiny","textPreview":"DINOv3 ConvNeXt-Tiny","textChars":20,"textLines":1,"bbox":[62,217,270,30]}
+{"kind":"textbox","id":"sh/il0rqd4v","slide":8,"text":"层级 CNN backbone + FPN decoder；记录为 4/5 折均值","textPreview":"层级 CNN backbone + FPN decoder；记录为 4/5 折均值","textChars":41,"textLines":1,"bbox":[350,215,430,34]}
+{"kind":"textbox","id":"sh/b6xkf6dc","slide":8,"text":"0.7710","textPreview":"0.7710","textChars":6,"textLines":1,"bbox":[808,214,116,34]}
+{"kind":"textbox","id":"sh/0rqd4vmt","slide":8,"text":"当前最高均值记录","textPreview":"当前最高均值记录","textChars":8,"textLines":1,"bbox":[958,215,242,34]}
+{"kind":"shape","id":"sh/tcj6tova","slide":8,"bbox":[42,268,1196,54]}
+{"kind":"textbox","id":"sh/idonyd0z","slide":8,"text":"DINOv3 ViT-B/16","textPreview":"DINOv3 ViT-B/16","textChars":15,"textLines":1,"bbox":[62,279,270,30]}
+{"kind":"textbox","id":"sh/byhgn29g","slide":8,"text":"TokenFPNHead baseline；layers [2,5,8,11] 聚合","textPreview":"TokenFPNHead baseline；layers [2,5,8,11] 聚合","textChars":42,"textLines":1,"bbox":[350,277,430,34]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":8,"text":"0.7337","textPreview":"0.7337","textChars":6,"textLines":1,"bbox":[808,276,116,34]}
+{"kind":"textbox","id":"sh/t47y1kre","slide":8,"text":"ViT 单折强 baseline","textPreview":"ViT 单折强 baseline","textChars":16,"textLines":1,"bbox":[958,277,242,34]}
+{"kind":"shape","id":"sh/i9s36hcr","slide":8,"bbox":[42,330,1196,54]}
+{"kind":"textbox","id":"sh/bulwval8","slide":8,"text":"ViT + WBE v1/v2","textPreview":"ViT + WBE v1/v2","textChars":15,"textLines":1,"bbox":[62,341,270,30]}
+{"kind":"textbox","id":"sh/3itgfmlk","slide":8,"text":"小波高频边界增强；v2 加入 SNR 边缘先验","textPreview":"小波高频边界增强；v2 加入 SNR 边缘先验","textChars":23,"textLines":1,"bbox":[350,339,430,34]}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":8,"text":"0.7248 / 0.7253","textPreview":"0.7248 / 0.7253","textChars":15,"textLines":1,"bbox":[808,338,116,34]}
+{"kind":"textbox","id":"sh/loj2t83i","slide":8,"text":"未超过 baseline","textPreview":"未超过 baseline","textChars":12,"textLines":1,"bbox":[958,339,242,34]}
+{"kind":"shape","id":"sh/w3m94fu1","slide":8,"bbox":[42,392,1196,54]}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":8,"text":"ViT + SAM2 FPN","textPreview":"ViT + SAM2 FPN","textChars":14,"textLines":1,"bbox":[62,403,270,30]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":8,"text":"虚拟金字塔 + top-down 融合 + 深度监督","textPreview":"虚拟金字塔 + top-down 融合 + 深度监督","textChars":26,"textLines":1,"bbox":[350,401,430,34]}
+{"kind":"textbox","id":"sh/lwval87e","slide":8,"text":"0.6939","textPreview":"0.6939","textChars":6,"textLines":1,"bbox":[808,400,116,34]}
+{"kind":"textbox","id":"sh/wb2hwfyx","slide":8,"text":"同分辨率 ViT 不适合硬套 FPN","textPreview":"同分辨率 ViT 不适合硬套 FPN","textChars":18,"textLines":1,"bbox":[958,401,242,34]}
+{"kind":"shape","id":"sh/32lszqtc","slide":8,"bbox":[42,454,1196,54]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":8,"text":"ViT + 荧光 MAE","textPreview":"ViT + 荧光 MAE","textChars":12,"textLines":1,"bbox":[62,465,270,30]}
+{"kind":"textbox","id":"sh/knih4byh","slide":8,"text":"亮度加权 mask 的两阶段 MAE 预训练","textPreview":"亮度加权 mask 的两阶段 MAE 预训练","textChars":22,"textLines":1,"bbox":[350,463,430,34]}
+{"kind":"textbox","id":"sh/d8bat47y","slide":8,"text":"0.6818","textPreview":"0.6818","textChars":6,"textLines":1,"bbox":[808,462,116,34]}
+{"kind":"textbox","id":"sh/2lszqtcj","slide":8,"text":"backbone 漂移，收益为负","textPreview":"backbone 漂移，收益为负","textChars":16,"textLines":1,"bbox":[958,463,242,34]}
+{"kind":"shape","id":"sh/v6psfil0","slide":8,"bbox":[42,516,1196,54]}
+{"kind":"textbox","id":"sh/kf6dcbul","slide":8,"text":"MAE-SAM2 / PaperUNet","textPreview":"MAE-SAM2 / PaperUNet","textChars":20,"textLines":1,"bbox":[62,527,270,30]}
+{"kind":"textbox","id":"sh/d0z61032","slide":8,"text":"SAM2 Hiera-Small 微调为 0.6236；PaperUNet 已实现但日志未记录","textPreview":"SAM2 Hiera-Small 微调为 0.6236；PaperUNet 已实现但日志未记录","textChars":47,"textLines":1,"bbox":[350,525,430,34]}
+{"kind":"textbox","id":"sh/29gr2p8n","slide":8,"text":"0.6236 / n.a.","textPreview":"0.6236 / n.a.","textChars":13,"textLines":1,"bbox":[808,524,116,34]}
+{"kind":"textbox","id":"sh/vu9knih4","slide":8,"text":"对比基线与论文复现框架","textPreview":"对比基线与论文复现框架","textChars":11,"textLines":1,"bbox":[958,525,242,34]}
+{"kind":"textbox","id":"sh/k3q5o7qp","slide":8,"text":"Source: EXPERIMENT_LOG.md","textPreview":"Source: EXPERIMENT_LOG.md","textChars":25,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/donyd0z6","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/fjwnnk","slide":8,"text":""}
+{"kind":"slide","id":"sl/1bknkb","slide":9,"title":"Results","textShapes":6}
+{"kind":"textbox","id":"sh/judg7ads","slide":9,"text":"Results","textPreview":"Results","textChars":7,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/cfa9w3m9","slide":9,"text":"结果显示: 强预训练 baseline 比复杂改造更稳","textPreview":"结果显示: 强预训练 baseline 比复杂改造更稳","textChars":27,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"shape","id":"sh/u18jqh0f","slide":9,"bbox":[880,190,304,306]}
+{"kind":"textbox","id":"sh/jm1cfa9w","slide":9,"text":"读图要点","textPreview":"读图要点","textChars":4,"textLines":1,"bbox":[912,224,230,38]}
+{"kind":"textbox","id":"sh/c7u54zid","slide":9,"text":"1. ConvNeXt-Tiny 的 4/5 折均值最高。\n\n2. ViT-B/16 baseline 已足够强，WBE、FPN、MAE 均未稳定超过它。\n\n3. 负结果不是无效工作，而是明确了创新方向应避开强行 backbone 适配。","textPreview":"1. ConvNeXt-Tiny 的 4/5 折均值最高。 |  | 2. ViT-B/16 baseline 已足够强，WBE、FPN、MAE 均未稳定超过它。 |  | 3. 负结果不是无效工作，而是明确了创新方向应避开强行 backbone 适配。","textChars":119,"textLines":5,"bbox":[912,282,230,166]}
+{"kind":"textbox","id":"sh/1orytsvu","slide":9,"text":"Source: EXPERIMENT_LOG.md","textPreview":"Source: EXPERIMENT_LOG.md","textChars":25,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/upwb2hwf","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"chart","id":"ch/xkf6dcbu","slide":9,"name":"","chartType":"bar","bbox":[70,168,760,390]}
+{"kind":"notes","id":"nt/1bknkb","slide":9,"text":""}
+{"kind":"slide","id":"sl/ew6lar","slide":10,"title":"Analysis","textShapes":12}
+{"kind":"textbox","id":"sh/9w3m94fu","slide":10,"text":"Analysis","textPreview":"Analysis","textChars":8,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/25kb6xkf","slide":10,"text":"负结果给出的技术判断","textPreview":"负结果给出的技术判断","textChars":10,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"shape","id":"sh/rqd4vmtw","slide":10,"bbox":[42,172,560,168]}
+{"kind":"textbox","id":"sh/kzupwb2h","slide":10,"text":"WBE","textPreview":"WBE","textChars":3,"textLines":1,"bbox":[70,200,130,42]}
+{"kind":"textbox","id":"sh/9knih4by","slide":10,"text":"边界增强直觉成立，但小波/注意力模块引入额外参数；在当前小数据集上没有转化为 Dice 提升。","textPreview":"边界增强直觉成立，但小波/注意力模块引入额外参数；在当前小数据集上没有转化为 Dice 提升。","textChars":47,"textLines":1,"bbox":[216,200,330,90]}
+{"kind":"shape","id":"sh/2t83itgf","slide":10,"bbox":[678,172,560,168]}
+{"kind":"textbox","id":"sh/re1w7mp0","slide":10,"text":"荧光 MAE","textPreview":"荧光 MAE","textChars":6,"textLines":1,"bbox":[706,200,130,42]}
+{"kind":"textbox","id":"sh/gvy90je9","slide":10,"text":"亮度先验有任务意义，但 feature-level 重建与分割目标不完全对齐，且全解冻造成 backbone 漂移。","textPreview":"亮度先验有任务意义，但 feature-level 重建与分割目标不完全对齐，且全解冻造成 backbone 漂移。","textChars":58,"textLines":1,"bbox":[852,200,330,90]}
+{"kind":"shape","id":"sh/9gr2p8nq","slide":10,"bbox":[42,388,560,168]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":10,"text":"SAM2 FPN","textPreview":"SAM2 FPN","textChars":8,"textLines":1,"bbox":[70,416,130,42]}
+{"kind":"textbox","id":"sh/ovahoza1","slide":10,"text":"FPN 依赖真实层级特征；ViT 各层同分辨率，虚拟下采样会损失边界细节。","textPreview":"FPN 依赖真实层级特征；ViT 各层同分辨率，虚拟下采样会损失边界细节。","textChars":37,"textLines":1,"bbox":[216,416,330,90]}
+{"kind":"shape","id":"sh/vahoza1g","slide":10,"bbox":[678,388,560,168]}
+{"kind":"textbox","id":"sh/6tovahoz","slide":10,"text":"SAM2","textPreview":"SAM2","textChars":4,"textLines":1,"bbox":[706,416,130,42]}
+{"kind":"textbox","id":"sh/d8v6psfi","slide":10,"text":"SAM2 的通用分割能力不能直接保证 FA 泄漏迁移，仍弱于 DINOv3 视觉表征。","textPreview":"SAM2 的通用分割能力不能直接保证 FA 泄漏迁移，仍弱于 DINOv3 视觉表征。","textChars":43,"textLines":1,"bbox":[852,416,330,90]}
+{"kind":"textbox","id":"sh/onyd0z61","slide":10,"text":"Source: EXPERIMENT_LOG.md failure analyses","textPreview":"Source: EXPERIMENT_LOG.md failure analyses","textChars":42,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/ew6lar","slide":10,"text":""}
+{"kind":"slide","id":"sl/x8khuf","slide":11,"title":"Thesis Story","textShapes":10}
+{"kind":"textbox","id":"sh/q1orytsv","slide":11,"text":"Thesis Story","textPreview":"Thesis Story","textChars":12,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/xs72x4na","slide":11,"text":"论文里可以这样讲","textPreview":"论文里可以这样讲","textChars":8,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"shape","id":"sh/87ed8bat","slide":11,"bbox":[42,174,340,388]}
+{"kind":"textbox","id":"sh/je9cvixc","slide":11,"text":"基线","textPreview":"基线","textChars":2,"textLines":1,"bbox":[76,214,250,42]}
+{"kind":"textbox","id":"sh/qtcj6tov","slide":11,"text":"复现论文 U-Net：从零训练、4 分类标签、512×512、SGD 与五折交叉验证。它提供可解释的传统医学分割基线。","textPreview":"复现论文 U-Net：从零训练、4 分类标签、512×512、SGD 与五折交叉验证。它提供可解释的传统医学分割基线。","textChars":59,"textLines":1,"bbox":[76,282,250,142]}
+{"kind":"shape","id":"sh/1gvy90je","slide":11,"bbox":[470,174,340,388]}
+{"kind":"textbox","id":"sh/8z25kb6x","slide":11,"text":"强 baseline","textPreview":"强 baseline","textChars":10,"textLines":1,"bbox":[504,214,250,42]}
+{"kind":"textbox","id":"sh/fa9w3m94","slide":11,"text":"引入 DINOv3 预训练 backbone：ViT-B/16 使用多层 token 聚合，ConvNeXt-Tiny 使用真实多尺度特征，在小样本 FA 任务上显著更稳。","textPreview":"引入 DINOv3 预训练 backbone：ViT-B/16 使用多层 token 聚合，ConvNeXt-Tiny 使用真实多尺度特征，在小样本 FA 任务上显著更稳。","textChars":86,"textLines":1,"bbox":[504,282,250,160]}
+{"kind":"shape","id":"sh/qpg3ex0n","slide":11,"bbox":[898,174,340,388]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":11,"text":"讨论","textPreview":"讨论","textChars":2,"textLines":1,"bbox":[932,214,250,42]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":11,"text":"WBE、MAE、SAM2 FPN 的负结果说明：小数据集里，额外结构不一定带来收益；应优先做与任务目标直接对齐的损失、采样、阈值和后处理。","textPreview":"WBE、MAE、SAM2 FPN 的负结果说明：小数据集里，额外结构不一定带来收益；应优先做与任务目标直接对齐的损失、采样、阈值和后处理。","textChars":69,"textLines":1,"bbox":[932,282,250,170]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":11,"text":"Sources: survey/*.md, configs/*.yaml, EXPERIMENT_LOG.md","textPreview":"Sources: survey/*.md, configs/*.yaml, EXPERIMENT_LOG.md","textChars":55,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/x8khuf","slide":11,"text":""}
+{"kind":"slide","id":"sl/ws7vwa","slide":12,"title":"Takeaways","textShapes":12}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":12,"text":"Takeaways","textPreview":"Takeaways","textChars":9,"textLines":1,"bbox":[42,28,360,26]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":12,"text":"最终结论","textPreview":"最终结论","textChars":4,"textLines":1,"bbox":[42,58,1030,88]}
+{"kind":"textbox","id":"sh/9s36hcrm","slide":12,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[72,218,130,126]}
+{"kind":"textbox","id":"sh/yd0z6103","slide":12,"text":"主线清晰","textPreview":"主线清晰","textChars":4,"textLines":1,"bbox":[228,230,300,46]}
+{"kind":"textbox","id":"sh/rytsvu9k","slide":12,"text":"论文 U-Net 是可复现基线，DINOv3 多标签体系是当前主线。","textPreview":"论文 U-Net 是可复现基线，DINOv3 多标签体系是当前主线。","textChars":34,"textLines":1,"bbox":[228,292,360,60]}
+{"kind":"textbox","id":"sh/gfmlkjm1","slide":12,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[72,394,130,126]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":12,"text":"结果有取舍","textPreview":"结果有取舍","textChars":5,"textLines":1,"bbox":[228,406,300,46]}
+{"kind":"textbox","id":"sh/ylc7u54z","slide":12,"text":"ConvNeXt-Tiny 均值最高；ViT baseline 强；复杂适配没有稳定收益。","textPreview":"ConvNeXt-Tiny 均值最高；ViT baseline 强；复杂适配没有稳定收益。","textChars":45,"textLines":1,"bbox":[228,468,420,60]}
+{"kind":"shape","id":"sh/r65wjudg","slide":12,"bbox":[760,216,418,300]}
+{"kind":"textbox","id":"sh/vahoza1g","slide":12,"text":"建议下一步","textPreview":"建议下一步","textChars":5,"textLines":1,"bbox":[802,256,300,42]}
+{"kind":"textbox","id":"sh/6tovahoz","slide":12,"text":"建议聚焦更贴近任务的环节：类别不平衡损失、阈值校准、后处理、面积量化或不确定性分析。\n\n强行改 backbone 的收益证据不足。","textPreview":"建议聚焦更贴近任务的环节：类别不平衡损失、阈值校准、后处理、面积量化或不确定性分析。 |  | 强行改 backbone 的收益证据不足。","textChars":65,"textLines":3,"bbox":[802,326,300,128]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":12,"text":"Source: full repository review","textPreview":"Source: full repository review","textChars":30,"textLines":1,"bbox":[42,664,850,28]}
+{"kind":"textbox","id":"sh/ovahoza1","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1180,664,58,28]}
+{"kind":"notes","id":"nt/ws7vwa","slide":12,"text":""}
