@@ -7,6 +7,7 @@ import torch
 import torch.nn.functional as F
 from torch import Tensor, nn
 
+from bs.rdh import ReactionDiffusionHead
 from bs.wavelet import MultiScaleWBE
 
 
@@ -24,7 +25,10 @@ class ConvNormAct(nn.Sequential):
 
 
 class TokenFPNHead(nn.Module):
-    """A compact decoder for same-resolution ViT token maps."""
+    """A compact decoder for same-resolution ViT token maps.
+
+    head_type="conv": 普通融合卷积头; head_type="rdh": 反应-扩散演化头 (RDH/S3RD)。
+    """
 
     def __init__(
         self,
@@ -33,20 +37,66 @@ class TokenFPNHead(nn.Module):
         decoder_channels: int,
         num_classes: int,
         dropout: float = 0.1,
+        head_type: str = "conv",
+        rdh_iters: int = 8,
+        rdh_dt: float = 0.2,
+        rdh_reaction: str = "fisher",
+        rdh_use_image_conductance: bool = True,
+        rdh_lambda: float = 0.1,
+        rdh_rho: float = 1.0,
+        rdh_kappa: float = 0.1,
+        rdh_dynamics: str = "pde",
+        rdh_d_state: int = 16,
+        rdh_directions: int = 4,
+        rdh_stride: int = 4,
+        rdh_d_inner: int = 64,
     ) -> None:
         super().__init__()
+        self.head_type = str(head_type).lower()
         self.projections = nn.ModuleList(
             [ConvNormAct(in_channels, decoder_channels, kernel_size=1) for _ in range(num_inputs)]
         )
-        self.fuse = nn.Sequential(
-            ConvNormAct(decoder_channels * num_inputs, decoder_channels, kernel_size=3, dropout=dropout),
-            ConvNormAct(decoder_channels, decoder_channels, kernel_size=3, dropout=dropout),
-            nn.Conv2d(decoder_channels, num_classes, kernel_size=1),
-        )
+        if self.head_type == "rdh":
+            self.neck = nn.Sequential(
+                ConvNormAct(decoder_channels * num_inputs, decoder_channels, kernel_size=3, dropout=dropout),
+                ConvNormAct(decoder_channels, decoder_channels, kernel_size=3, dropout=dropout),
+            )
+            self.rdh_head = ReactionDiffusionHead(
+                decoder_channels,
+                out_channels=num_classes,
+                iters=rdh_iters,
+                dt=rdh_dt,
+                reaction=rdh_reaction,
+                use_image_conductance=rdh_use_image_conductance,
+                lambda_init=rdh_lambda,
+                rho_init=rdh_rho,
+                kappa=rdh_kappa,
+                dynamics=rdh_dynamics,
+                d_state=rdh_d_state,
+                ssm_directions=rdh_directions,
+                ssm_stride=rdh_stride,
+                ssm_d_inner=rdh_d_inner,
+            )
+        else:
+            self.fuse = nn.Sequential(
+                ConvNormAct(decoder_channels * num_inputs, decoder_channels, kernel_size=3, dropout=dropout),
+                ConvNormAct(decoder_channels, decoder_channels, kernel_size=3, dropout=dropout),
+                nn.Conv2d(decoder_channels, num_classes, kernel_size=1),
+            )
 
-    def forward(self, features: list[Tensor], output_size: tuple[int, int]) -> Tensor:
+    def forward(
+        self, features: list[Tensor], output_size: tuple[int, int], images: Tensor | None = None
+    ) -> Tensor:
         projected = [projection(feature) for projection, feature in zip(self.projections, features)]
-        logits = self.fuse(torch.cat(projected, dim=1))
+        fused = torch.cat(projected, dim=1)
+        if self.head_type == "rdh":
+            feat = self.neck(fused)
+            guide = None
+            if images is not None and self.rdh_head.use_image_conductance:
+                guide = F.interpolate(images, size=feat.shape[-2:], mode="bilinear", align_corners=False)
+            logits = self.rdh_head(feat, guide)
+            return F.interpolate(logits, size=output_size, mode="bilinear", align_corners=False)
+        logits = self.fuse(fused)
         return F.interpolate(logits, size=output_size, mode="bilinear", align_corners=False)
 
 
@@ -171,6 +221,19 @@ class DinoV3SegmentationModel(nn.Module):
         wbe_bottleneck: int = 256,
         wbe_version: int = 1,
         wbe_snr_temperature: float = 1.0,
+        head_type: str = "conv",
+        rdh_iters: int = 8,
+        rdh_dt: float = 0.2,
+        rdh_reaction: str = "fisher",
+        rdh_use_image_conductance: bool = True,
+        rdh_lambda: float = 0.1,
+        rdh_rho: float = 1.0,
+        rdh_kappa: float = 0.1,
+        rdh_dynamics: str = "pde",
+        rdh_d_state: int = 16,
+        rdh_directions: int = 4,
+        rdh_stride: int = 4,
+        rdh_d_inner: int = 64,
     ) -> None:
         super().__init__()
         self.intermediate_layers = intermediate_layers
@@ -204,6 +267,19 @@ class DinoV3SegmentationModel(nn.Module):
             decoder_channels=decoder_channels,
             num_classes=num_classes,
             dropout=dropout,
+            head_type=head_type,
+            rdh_iters=rdh_iters,
+            rdh_dt=rdh_dt,
+            rdh_reaction=rdh_reaction,
+            rdh_use_image_conductance=rdh_use_image_conductance,
+            rdh_lambda=rdh_lambda,
+            rdh_rho=rdh_rho,
+            rdh_kappa=rdh_kappa,
+            rdh_dynamics=rdh_dynamics,
+            rdh_d_state=rdh_d_state,
+            rdh_directions=rdh_directions,
+            rdh_stride=rdh_stride,
+            rdh_d_inner=rdh_d_inner,
         )
         self.freeze_backbone = freeze_backbone
         self.unfreeze_last_blocks = unfreeze_last_blocks
@@ -256,7 +332,7 @@ class DinoV3SegmentationModel(nn.Module):
         # Apply Wavelet Boundary Enhancement if enabled
         if self.use_wbe:
             features = self.wbe(features)
-        return self.decode_head(features, output_size=output_size)
+        return self.decode_head(features, output_size=output_size, images=images)
 
 
 class DinoV3FpnSegmentationModel(nn.Module):

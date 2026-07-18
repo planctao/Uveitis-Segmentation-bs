@@ -211,6 +211,8 @@ def build_loss(config: dict) -> nn.Module:
         beta=lcfg["tversky_beta"],
         gamma=lcfg["focal_gamma"],
         ignore_index=config["data"]["ignore_index"],
+        boundary_weight=float(lcfg.get("boundary_weight", 0.0) or 0.0),
+        boundary_kernel=int(lcfg.get("boundary_kernel", 3) or 3),
     )
 
 

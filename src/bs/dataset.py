@@ -1,11 +1,11 @@
 from __future__ import annotations
 
+import logging
 import random
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
-import nibabel as nib
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -13,7 +13,8 @@ from PIL import Image
 from torch import Tensor
 from torch.utils.data import Dataset
 
-from bs.augmentations import build_augmentations
+from bs.augmentations import _normalize_config, build_augmentations
+from bs.preprocess import build_preprocessor
 
 
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff")
@@ -85,6 +86,7 @@ def discover_samples(
     image_extensions: Iterable[str] = IMAGE_EXTENSIONS,
     mask_extensions: Iterable[str] = MASK_EXTENSIONS,
     result_extensions: Iterable[str] = IMAGE_EXTENSIONS,
+    exclude_augmented: bool = False,
 ) -> list[SegmentationSample]:
     samples: list[SegmentationSample] = []
     for fold in folds:
@@ -94,6 +96,8 @@ def discover_samples(
         hrnet = _index_files(hrnet_root, result_extensions) if hrnet_root.exists() else {}
 
         common_ids = sorted(images.keys() & masks.keys())
+        if exclude_augmented:
+            common_ids = [cid for cid in common_ids if "_aug" not in cid]
         if not common_ids:
             raise RuntimeError(f"No image/mask pairs found for fold {fold} under {dataset_root}")
 
@@ -119,14 +123,39 @@ class UveitisSegmentationDataset(Dataset):
         ignore_index: int = 255,
         augment: bool = False,
         augmentation_config: list[dict[str, Any]] | dict[str, Any] | None = None,
+        preprocess_config: dict[str, Any] | None = None,
     ) -> None:
         self.samples = samples
         self.image_size = image_size
         self.label_values = tuple(int(v) for v in label_values)
         self.ignore_index = int(ignore_index)
         self.augment = augment
-        self.augmentation = build_augmentations(augmentation_config)
+        instance_bank = self._build_instance_bank(augmentation_config) if augment else None
+        self.augmentation = build_augmentations(augmentation_config, instance_bank=instance_bank)
+        self.preprocessor = build_preprocessor(preprocess_config)
         self._label_map = {value: idx for idx, value in enumerate(self.label_values)}
+
+    def _build_instance_bank(self, augmentation_config: list[dict[str, Any]] | dict[str, Any] | None) -> Any:
+        for block in _normalize_config(augmentation_config):
+            name = str(block.get("name", ""))
+            if name in {"leakage_copy_paste", "dals"} and bool(block.get("enabled", True)):
+                from bs.leakage_synthesis import build_instance_bank
+
+                return build_instance_bank(
+                    self.samples,
+                    image_size=self.image_size,
+                    lesions=block.get("targets", (2,)),
+                    max_instances=int(block.get("bank_max_instances", 800)),
+                    min_area=int(block.get("bank_min_area", 16)),
+                    context_padding=int(block.get("bank_context_padding", 0)),
+                    min_quality_score=float(block.get("bank_min_quality_score", 0.0)),
+                    min_mean_intensity=float(block.get("bank_min_mean_intensity", 0.0)),
+                    min_mean_contrast=float(block.get("bank_min_mean_contrast", 0.0)),
+                    max_bbox_aspect_ratio=float(block.get("bank_max_bbox_aspect_ratio", 0.0)),
+                    min_extent=float(block.get("bank_min_extent", 0.0)),
+                    logger=logging.getLogger(__name__),
+                )
+        return None
 
     def __len__(self) -> int:
         return len(self.samples)
@@ -153,12 +182,16 @@ class UveitisSegmentationDataset(Dataset):
         image = Image.open(path).convert("RGB")
         array = np.asarray(image, dtype=np.float32) / 255.0
         tensor = torch.from_numpy(array).permute(2, 0, 1)
+        if self.preprocessor is not None:
+            tensor = self.preprocessor(tensor)
         mean = torch.tensor([0.485, 0.456, 0.406], dtype=tensor.dtype).view(3, 1, 1)
         std = torch.tensor([0.229, 0.224, 0.225], dtype=tensor.dtype).view(3, 1, 1)
         return (tensor - mean) / std
 
     def _read_mask(self, path: Path) -> Tensor:
         if path.name.lower().endswith((".nii.gz", ".nii")):
+            import nibabel as nib
+
             array = np.asanyarray(nib.load(str(path)).dataobj)
         else:
             array = np.asarray(Image.open(path))

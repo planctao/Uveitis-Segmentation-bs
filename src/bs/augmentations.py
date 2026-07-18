@@ -311,19 +311,31 @@ def _normalize_config(configs: list[dict[str, Any]] | dict[str, Any] | None) -> 
     return [dict(config) for config in configs]
 
 
-def _build_block(cfg: dict[str, Any]) -> AugmentationBlock:
+def _build_block(cfg: dict[str, Any], instance_bank: Any = None) -> AugmentationBlock:
     cfg = dict(cfg)
     name = cfg.pop("name")
     prob = cfg.pop("prob", 1.0)
     enabled = cfg.pop("enabled", True)
     strength = cfg.pop("strength", 1.0)
+    if name in {"leakage_copy_paste", "dals"}:
+        # 延迟 import 避免与 bs.dataset / bs.leakage_synthesis 的循环依赖
+        from bs.leakage_synthesis import LeakageCopyPaste
+
+        return LeakageCopyPaste(prob=prob, enabled=enabled, strength=strength, instances=instance_bank, **cfg)
     if name not in REGISTRY:
         raise ValueError(f"Unknown augmentation block: {name}. Available: {sorted(REGISTRY)}")
     return REGISTRY[name](prob=prob, enabled=enabled, strength=strength, **cfg)
 
 
-def build_augmentations(configs: list[dict[str, Any]] | dict[str, Any] | None) -> ComposeAugmentations | None:
-    blocks = [_build_block(cfg) for cfg in _normalize_config(configs) if bool(cfg.get("enabled", True))]
+def build_augmentations(
+    configs: list[dict[str, Any]] | dict[str, Any] | None,
+    instance_bank: Any = None,
+) -> ComposeAugmentations | None:
+    blocks = [
+        _build_block(cfg, instance_bank=instance_bank)
+        for cfg in _normalize_config(configs)
+        if bool(cfg.get("enabled", True))
+    ]
     if not blocks:
         return None
     return ComposeAugmentations(blocks)

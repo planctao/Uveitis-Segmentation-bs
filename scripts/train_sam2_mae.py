@@ -209,6 +209,8 @@ def build_loss(config: dict) -> nn.Module:
             beta=loss_cfg["tversky_beta"],
             gamma=loss_cfg["focal_gamma"],
             ignore_index=config["data"]["ignore_index"],
+            boundary_weight=float(loss_cfg.get("boundary_weight", 0.0) or 0.0),
+            boundary_kernel=int(loss_cfg.get("boundary_kernel", 3) or 3),
         )
 
 

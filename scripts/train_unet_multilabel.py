@@ -210,6 +210,8 @@ def build_loss(config: dict[str, Any]) -> AsymmetricFocalTverskyBCE:
         beta=float(loss_cfg["tversky_beta"]),
         gamma=float(loss_cfg["focal_gamma"]),
         ignore_index=int(config["data"]["ignore_index"]),
+        boundary_weight=float(loss_cfg.get("boundary_weight", 0.0) or 0.0),
+        boundary_kernel=int(loss_cfg.get("boundary_kernel", 3) or 3),
     )
 
 

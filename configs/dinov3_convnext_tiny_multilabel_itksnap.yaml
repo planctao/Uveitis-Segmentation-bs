@@ -35,6 +35,9 @@ train:
   progress_log_interval: 50
   save_interval: 5
   sample_interval: 5
+  ema_enabled: false
+  ema_decay: 0.999
+  ema_start_epoch: 1
   lesion1_sample_weight: 1.0
   lesion2_sample_weight: 6.0
   sampler_epoch_multiplier: 1.0
@@ -48,6 +51,10 @@ model:
   dinov3_code_dir: backbone/dinov3
   backbone_weights: weights/dinov3_convnext_tiny_pretrain_lvd1689m-21b726bb.pth
   decoder_channels: 192
+  decoder_attention: none
+  decoder_attention_reduction: 16
+  decoder_deep_supervision: false
+  aux_loss_weight: 0.4
   num_outputs: 2
 
 loss:
@@ -57,6 +64,10 @@ loss:
   tversky_alpha: 0.2
   tversky_beta: 0.8
   focal_gamma: 0.75
+  boundary_dice_weight: 0.0
+  boundary_dice_kernel: 5
+  hard_negative_ratio: 0.0
+  hard_negative_min_pixels: 0
 
 metric:
   threshold: 0.5

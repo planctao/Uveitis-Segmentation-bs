@@ -45,6 +45,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--freeze-backbone", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--learning-rate", type=float, default=None)
     parser.add_argument("--backbone-learning-rate", type=float, default=None)
+    parser.add_argument("--boundary-dice-weight", type=float, default=None)
+    parser.add_argument("--boundary-dice-kernel", type=int, default=None)
+    parser.add_argument("--hard-negative-ratio", default=None, help="Scalar or comma-separated per-lesion ratios, e.g. 0.25 or 0.0,0.35")
+    parser.add_argument("--hard-negative-min-pixels", type=int, default=None)
+    parser.add_argument("--decoder-attention", choices=["none", "cbam"], default=None)
+    parser.add_argument("--decoder-attention-reduction", type=int, default=None)
+    parser.add_argument("--decoder-deep-supervision", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--aux-loss-weight", type=float, default=None)
     parser.add_argument("--init-from", default=None)
     parser.add_argument("--resume", default=None)
     return parser.parse_args()
@@ -53,6 +61,19 @@ def parse_args() -> argparse.Namespace:
 def load_config(path: str) -> dict[str, Any]:
     with project_path(path).open("r", encoding="utf-8") as f:
         return yaml.safe_load(f)
+
+
+def parse_float_or_list(value: Any) -> float | list[float] | None:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        parts = [float(part.strip()) for part in value.split(",") if part.strip()]
+        if not parts:
+            raise ValueError("Expected at least one float value")
+        return parts[0] if len(parts) == 1 else parts
+    return value
 
 
 def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]:
@@ -66,8 +87,16 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         ("train", "freeze_backbone"): args.freeze_backbone,
         ("train", "learning_rate"): args.learning_rate,
         ("train", "backbone_learning_rate"): args.backbone_learning_rate,
+        ("loss", "boundary_dice_weight"): args.boundary_dice_weight,
+        ("loss", "boundary_dice_kernel"): args.boundary_dice_kernel,
+        ("loss", "hard_negative_ratio"): parse_float_or_list(args.hard_negative_ratio),
+        ("loss", "hard_negative_min_pixels"): args.hard_negative_min_pixels,
         ("model", "variant"): args.variant,
         ("model", "backbone_weights"): args.weights,
+        ("model", "decoder_attention"): args.decoder_attention,
+        ("model", "decoder_attention_reduction"): args.decoder_attention_reduction,
+        ("model", "decoder_deep_supervision"): args.decoder_deep_supervision,
+        ("model", "aux_loss_weight"): args.aux_loss_weight,
     }
     for (section, key), value in overrides.items():
         if value is not None:
@@ -177,6 +206,9 @@ def build_model(config: dict[str, Any]) -> DinoV3ConvNeXtSegmentationModel:
         variant=config["model"]["variant"],
         decoder_channels=int(config["model"]["decoder_channels"]),
         freeze_backbone=bool(config["train"]["freeze_backbone"]),
+        decoder_attention=str(config["model"].get("decoder_attention", "none")),
+        decoder_attention_reduction=int(config["model"].get("decoder_attention_reduction", 16)),
+        decoder_deep_supervision=bool(config["model"].get("decoder_deep_supervision", False)),
     )
 
 
@@ -199,6 +231,12 @@ def build_loss(config: dict[str, Any]) -> AsymmetricFocalTverskyBCE:
         beta=float(loss_cfg["tversky_beta"]),
         gamma=float(loss_cfg["focal_gamma"]),
         ignore_index=int(config["data"]["ignore_index"]),
+        boundary_weight=float(loss_cfg.get("boundary_weight", 0.0) or 0.0),
+        boundary_kernel=int(loss_cfg.get("boundary_kernel", 3) or 3),
+        boundary_dice_weight=float(loss_cfg.get("boundary_dice_weight", 0.0) or 0.0),
+        boundary_dice_kernel=int(loss_cfg.get("boundary_dice_kernel", loss_cfg.get("boundary_kernel", 3)) or 3),
+        hard_negative_ratio=loss_cfg.get("hard_negative_ratio", 0.0) or 0.0,
+        hard_negative_min_pixels=int(loss_cfg.get("hard_negative_min_pixels", 0) or 0),
     )
 
 
@@ -239,8 +277,16 @@ def run_epoch(
         masks = batch["mask"].to(device, non_blocking=True)
         with torch.set_grad_enabled(training):
             with torch.amp.autocast("cuda", enabled=bool(config["train"]["amp"]) and device.type == "cuda"):
-                logits = model(images)
-                loss = criterion(logits, masks)
+                output = model(images)
+                if isinstance(output, tuple):
+                    logits, aux_logits_list = output
+                    loss = criterion(logits, masks)
+                    aux_w = float(config["model"].get("aux_loss_weight", 0.4))
+                    for idx, aux_logits in enumerate(aux_logits_list):
+                        loss = loss + (aux_w ** (idx + 1)) * criterion(aux_logits, masks)
+                else:
+                    logits = output
+                    loss = criterion(logits, masks)
             if training:
                 assert scaler is not None
                 scaler.scale(loss / grad_accum).backward()
