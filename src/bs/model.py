@@ -50,6 +50,9 @@ class TokenFPNHead(nn.Module):
         rdh_directions: int = 4,
         rdh_stride: int = 4,
         rdh_d_inner: int = 64,
+        rdh_stable_constraints: bool = False,
+        rdh_flux_scheme: str = "center",
+        rdh_guide_input: str = "normalized",
     ) -> None:
         super().__init__()
         self.head_type = str(head_type).lower()
@@ -76,6 +79,9 @@ class TokenFPNHead(nn.Module):
                 ssm_directions=rdh_directions,
                 ssm_stride=rdh_stride,
                 ssm_d_inner=rdh_d_inner,
+                stable_constraints=rdh_stable_constraints,
+                flux_scheme=rdh_flux_scheme,
+                guide_input=rdh_guide_input,
             )
         else:
             self.fuse = nn.Sequential(
@@ -234,6 +240,9 @@ class DinoV3SegmentationModel(nn.Module):
         rdh_directions: int = 4,
         rdh_stride: int = 4,
         rdh_d_inner: int = 64,
+        rdh_stable_constraints: bool = False,
+        rdh_flux_scheme: str = "center",
+        rdh_guide_input: str = "normalized",
     ) -> None:
         super().__init__()
         self.intermediate_layers = intermediate_layers
@@ -280,6 +289,9 @@ class DinoV3SegmentationModel(nn.Module):
             rdh_directions=rdh_directions,
             rdh_stride=rdh_stride,
             rdh_d_inner=rdh_d_inner,
+            rdh_stable_constraints=rdh_stable_constraints,
+            rdh_flux_scheme=rdh_flux_scheme,
+            rdh_guide_input=rdh_guide_input,
         )
         self.freeze_backbone = freeze_backbone
         self.unfreeze_last_blocks = unfreeze_last_blocks

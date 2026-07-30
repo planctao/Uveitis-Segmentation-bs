@@ -6,6 +6,7 @@ import torch
 import torch.nn.functional as F
 from torch import Tensor, nn
 
+from bs.edge import lesion_edge_target
 from bs.fov import apply_fov_mask
 from bs.intensity_refine import apply_intensity_refiner
 from bs.postprocess import apply_postprocessor
@@ -111,6 +112,8 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         boundary_kernel: int = 3,
         boundary_dice_weight: float = 0.0,
         boundary_dice_kernel: int = 3,
+        boundary_dou_weight: float = 0.0,
+        boundary_dou_alpha_cap: float = 0.8,
         hard_negative_ratio: float | list[float] | tuple[float, ...] = 0.0,
         hard_negative_min_pixels: int = 0,
         soft_boundary_sigma: float = 0.0,
@@ -130,6 +133,8 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         self.boundary_kernel = int(boundary_kernel)
         self.boundary_dice_weight = float(boundary_dice_weight)
         self.boundary_dice_kernel = int(boundary_dice_kernel)
+        self.boundary_dou_weight = float(boundary_dou_weight)
+        self.boundary_dou_alpha_cap = float(boundary_dou_alpha_cap)
         ratios = _float_values(hard_negative_ratio, "hard_negative_ratio")
         self.register_buffer("hard_negative_ratio", ratios)
         self.hard_negative_min_pixels = int(hard_negative_min_pixels)
@@ -193,6 +198,34 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         denominator = (pred_boundary + target_boundary).sum(dim=dims).clamp_min(self.eps)
         return (1.0 - (2.0 * intersection + self.eps) / (denominator + self.eps)).mean()
 
+    def _boundary_dou_loss(self, probs: Tensor, target: Tensor, valid: Tensor) -> Tensor:
+        """Boundary Difference over Union Loss (Sun et al., MICCAI 2023).
+
+        以纯区域运算聚焦边界带：``(z + y - 2·I) / (z + y - (1+α)·I)``，其中
+        I=交集、y/z 为预测与目标的平方和；α 按每通道目标的边界/面积比自适应
+        （小目标 α→0 退化为 Dice，大目标 α→cap 更强调边界）。仅依赖区域统计，
+        训练稳定、无需与其它损失强耦合。
+        """
+        if self.boundary_dou_weight <= 0.0:
+            return probs.new_tensor(0.0)
+        probs = (probs * valid).float()
+        target = (target * valid).float()
+        dims = (0, 2, 3)
+        intersect = (probs * target).sum(dim=dims)
+        y_sum = (target * target).sum(dim=dims)
+        z_sum = (probs * probs).sum(dim=dims)
+        with torch.no_grad():
+            kernel = target.new_tensor([[0.0, 1.0, 0.0], [1.0, 1.0, 1.0], [0.0, 1.0, 0.0]]).view(1, 1, 3, 3)
+            neighbor = F.conv2d(target.reshape(-1, 1, *target.shape[-2:]), kernel, padding=1).view_as(target)
+            foreground = target > 0.5
+            interior = foreground & (neighbor >= 4.5)
+            boundary_count = (foreground & ~interior).sum(dim=dims).float()
+            foreground_count = foreground.sum(dim=dims).float().clamp_min(1.0)
+            alpha = (1.0 - boundary_count / foreground_count).clamp(0.0, self.boundary_dou_alpha_cap)
+        numerator = z_sum + y_sum - 2.0 * intersect
+        denominator = (z_sum + y_sum - (1.0 + alpha) * intersect).clamp_min(self.eps)
+        return (numerator / denominator).mean()
+
     def _hard_negative_ratios(self, channels: int, device: torch.device, dtype: torch.dtype) -> Tensor:
         ratios = self.hard_negative_ratio.to(device=device, dtype=dtype)
         if ratios.numel() == 1:
@@ -253,4 +286,212 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         tversky = (tp + self.eps) / (tp + self.alpha * fp + self.beta * fn + self.eps)
         focal_tversky = torch.pow(1.0 - tversky, self.gamma).mean()
         boundary_dice = self._boundary_dice_loss(probs, target, valid)
-        return self.bce_weight * bce + self.tversky_weight * focal_tversky + self.boundary_dice_weight * boundary_dice
+        boundary_dou = self._boundary_dou_loss(probs, target, valid)
+        return (
+            self.bce_weight * bce
+            + self.tversky_weight * focal_tversky
+            + self.boundary_dice_weight * boundary_dice
+            + self.boundary_dou_weight * boundary_dou
+        )
+
+
+class EdgeGuidedLoss(nn.Module):
+    """分割损失 + PDC 边缘分支的边界辅助监督 (CTO/ET-Net 式边缘引导)。
+
+    包装任意分割损失 (如 ``AsymmetricFocalTverskyBCE``)，并对 ``EdgeGuidedHead`` 输出的
+    边缘 logits 施加边界带 BCE(+Dice) 监督；边缘目标由掩膜形态学梯度得到，可选
+    软边缘（高斯扩散）以贴合 FA 渗漏边界弥散的物理本质。``edge_weight=0`` 时完全
+    退化为原分割损失。
+    """
+
+    def __init__(
+        self,
+        segmentation_loss: nn.Module,
+        ignore_index: int = 255,
+        edge_weight: float = 0.5,
+        edge_band: int = 5,
+        edge_soft: bool = False,
+        edge_soft_sigma: float = 1.5,
+        edge_dice_weight: float = 0.5,
+        edge_pos_weight: list[float] | tuple[float, float] = (5.0, 20.0),
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        self.segmentation_loss = segmentation_loss
+        self.ignore_index = int(ignore_index)
+        self.edge_weight = float(edge_weight)
+        self.edge_band = int(edge_band)
+        self.edge_soft = bool(edge_soft)
+        self.edge_soft_sigma = float(edge_soft_sigma)
+        self.edge_dice_weight = float(edge_dice_weight)
+        pos_weight_tensor = torch.as_tensor(edge_pos_weight, dtype=torch.float32).flatten()
+        if pos_weight_tensor.numel() == 1:
+            pos_weight_tensor = pos_weight_tensor.repeat(2)
+        self.register_buffer("edge_pos_weight", pos_weight_tensor)
+        self.eps = eps
+
+    def forward(self, logits: Tensor, mask: Tensor, auxiliary: dict[str, Tensor] | None = None) -> Tensor:
+        loss = self.segmentation_loss(logits, mask)
+        if auxiliary is None or "edge_logits" not in auxiliary:
+            return loss
+        edge_logits = auxiliary["edge_logits"]
+        target, valid = masks_to_paper_targets(mask, self.ignore_index)
+        target = target.to(device=edge_logits.device, dtype=edge_logits.dtype)
+        valid = valid.to(device=edge_logits.device, dtype=edge_logits.dtype).expand_as(target)
+        if edge_logits.shape[-2:] != target.shape[-2:]:
+            target = F.interpolate(target, size=edge_logits.shape[-2:], mode="nearest")
+            valid = F.interpolate(valid, size=edge_logits.shape[-2:], mode="nearest")
+        edge_target = lesion_edge_target(target, valid, self.edge_band, self.edge_soft, self.edge_soft_sigma)
+        edge_target = edge_target.to(dtype=edge_logits.dtype)
+        pos_weight = self.edge_pos_weight.to(device=edge_logits.device, dtype=edge_logits.dtype).view(1, -1, 1, 1)
+        bce = F.binary_cross_entropy_with_logits(edge_logits, edge_target, pos_weight=pos_weight, reduction="none")
+        bce = (bce * valid).sum() / valid.sum().clamp_min(1.0)
+        edge_loss = bce
+        if self.edge_dice_weight > 0.0:
+            probs = torch.sigmoid(edge_logits) * valid
+            et = edge_target * valid
+            dims = (0, 2, 3)
+            intersection = (probs * et).sum(dim=dims)
+            denominator = (probs + et).sum(dim=dims).clamp_min(self.eps)
+            dice = (1.0 - (2.0 * intersection + self.eps) / (denominator + self.eps)).mean()
+            edge_loss = bce + self.edge_dice_weight * dice
+        return loss + self.edge_weight * edge_loss
+
+
+class FICLoss(nn.Module):
+    """FIC: Fluorescence Image-formation Consistency (自监督, 无参数)。
+
+    观测到的 FA 高荧光可视为渗漏源经扩散生成的图像形成过程。FIC 把预测的渗漏浓度
+    经一个扩散前向算子后, 要求其在预测病灶邻域内与观测荧光强度空间一致 (加权皮尔逊
+    相关)。仅用原图自监督、无额外可学习参数、对整体曝光尺度/偏移不变; ``weight=0``
+    时完全退化为被包裹的分割损失。适合正则化稀有病灶的源定位, 抑制暗背景假阳性。
+    """
+
+    needs_image = True
+
+    def __init__(
+        self,
+        segmentation_loss: nn.Module,
+        ignore_index: int = 255,
+        weight: float = 0.0,
+        sigma: float = 3.0,
+        pool: int = 4,
+        min_mass: float = 16.0,
+        eps: float = 1e-6,
+    ) -> None:
+        super().__init__()
+        self.segmentation_loss = segmentation_loss
+        self.ignore_index = int(ignore_index)
+        self.weight = float(weight)
+        self.sigma = float(sigma)
+        self.pool = int(pool)
+        self.min_mass = float(min_mass)
+        self.eps = float(eps)
+
+    def _blur(self, x: Tensor, sigma: float) -> Tensor:
+        sigma = max(float(sigma), 1e-3)
+        radius = max(1, int(round(3.0 * sigma)))
+        ksize = 2 * radius + 1
+        coords = torch.arange(ksize, device=x.device, dtype=x.dtype) - radius
+        kernel_1d = torch.exp(-(coords**2) / (2.0 * sigma * sigma))
+        kernel_1d = kernel_1d / kernel_1d.sum()
+        channels = x.shape[1]
+        kernel_x = kernel_1d.view(1, 1, 1, ksize).repeat(channels, 1, 1, 1)
+        kernel_y = kernel_1d.view(1, 1, ksize, 1).repeat(channels, 1, 1, 1)
+        x = F.conv2d(x, kernel_x, padding=(0, radius), groups=channels)
+        x = F.conv2d(x, kernel_y, padding=(radius, 0), groups=channels)
+        return x
+
+    def forward(self, logits: Tensor, mask: Tensor, image: Tensor | None = None) -> Tensor:
+        loss = self.segmentation_loss(logits, mask)
+        if self.weight <= 0.0 or image is None:
+            return loss
+        device_type = logits.device.type
+        with torch.autocast(device_type=device_type, enabled=False):
+            concentration = torch.sigmoid(logits.float()).amax(dim=1, keepdim=True)
+            intensity = image.float().amax(dim=1, keepdim=True)
+            if self.pool > 1:
+                concentration = F.avg_pool2d(concentration, self.pool)
+                intensity = F.avg_pool2d(intensity, self.pool)
+            diffused = self._blur(concentration, self.sigma)  # 图像形成前向: 源 -> 观测浓度
+            weight = diffused.detach()
+            dims = (1, 2, 3)
+            weight_sum = weight.sum(dim=dims).clamp_min(self.eps)
+            mean_d = (weight * diffused).sum(dim=dims) / weight_sum
+            mean_i = (weight * intensity).sum(dim=dims) / weight_sum
+            centered_d = diffused - mean_d.view(-1, 1, 1, 1)
+            centered_i = intensity - mean_i.view(-1, 1, 1, 1)
+            covariance = (weight * centered_d * centered_i).sum(dim=dims) / weight_sum
+            var_d = (weight * centered_d * centered_d).sum(dim=dims) / weight_sum
+            var_i = (weight * centered_i * centered_i).sum(dim=dims) / weight_sum
+            correlation = covariance / torch.sqrt(var_d * var_i + self.eps)
+            valid = (weight.sum(dim=dims) > self.min_mass).float()
+            denominator = valid.sum().clamp_min(1.0)
+            fic = ((1.0 - correlation) * valid).sum() / denominator
+        return loss + self.weight * fic
+
+
+def edge_orientation_consistency(logits: Tensor, image: Tensor, pool: int = 2, eps: float = 1e-8) -> Tensor:
+    """边缘方向一致性 (EOC)：预测边界法向应与原图荧光强度梯度方向对齐。
+
+    渗漏边界本质是荧光强度的跃变面，故预测分割的空间梯度 ∇p 应与图像强度梯度 ∇I
+    (反)平行。返回以 |∇p|·|∇I| 加权的 ``mean(1 - cos²(∇p, ∇I))``；cos² 对同向/反向
+    都取 1，只惩罚方向不一致。无参数、尺度不变。
+    """
+    device_type = logits.device.type
+    with torch.autocast(device_type=device_type, enabled=False):
+        prob = torch.sigmoid(logits.float()).amax(dim=1, keepdim=True)
+        intensity = image.float().amax(dim=1, keepdim=True)
+        if pool > 1:
+            prob = F.avg_pool2d(prob, pool)
+            intensity = F.avg_pool2d(intensity, pool)
+
+        def _grad(field: Tensor) -> tuple[Tensor, Tensor]:
+            padded = F.pad(field, (1, 1, 1, 1), mode="replicate")
+            gx = 0.5 * (padded[:, :, 1:-1, 2:] - padded[:, :, 1:-1, 0:-2])
+            gy = 0.5 * (padded[:, :, 2:, 1:-1] - padded[:, :, 0:-2, 1:-1])
+            return gx, gy
+
+        px, py = _grad(prob)
+        ix, iy = _grad(intensity)
+        dot = px * ix + py * iy
+        pred_sq = px * px + py * py
+        img_sq = ix * ix + iy * iy
+        pred_mag = torch.sqrt(pred_sq + eps)
+        img_mag = torch.sqrt(img_sq + eps)
+        cosine = dot / (pred_mag * img_mag)
+        cos_sq = (cosine * cosine).clamp(0.0, 1.0)
+        weight = (pred_mag * img_mag).detach()
+        return ((1.0 - cos_sq) * weight).sum() / weight.sum().clamp_min(eps)
+
+
+class EOCLoss(nn.Module):
+    """EOC: 边缘方向一致性损失包装 (自监督, 无参数)。
+
+    在被包裹的分割损失上加一项边缘方向一致性正则：约束预测病灶边界的法向与原图
+    荧光强度梯度方向一致，从而把模糊边界"贴"到真实强度跃变处、抑制方向不合理的假
+    边界。``weight=0`` 或无图像时完全退化为原分割损失；无额外可学习参数、零推理开销。
+    """
+
+    needs_image = True
+
+    def __init__(
+        self,
+        segmentation_loss: nn.Module,
+        ignore_index: int = 255,
+        weight: float = 0.0,
+        pool: int = 2,
+        eps: float = 1e-8,
+    ) -> None:
+        super().__init__()
+        self.segmentation_loss = segmentation_loss
+        self.ignore_index = int(ignore_index)
+        self.weight = float(weight)
+        self.pool = int(pool)
+        self.eps = float(eps)
+
+    def forward(self, logits: Tensor, mask: Tensor, image: Tensor | None = None) -> Tensor:
+        loss = self.segmentation_loss(logits, mask)
+        if self.weight <= 0.0 or image is None:
+            return loss
+        return loss + self.weight * edge_orientation_consistency(logits, image, self.pool, self.eps)

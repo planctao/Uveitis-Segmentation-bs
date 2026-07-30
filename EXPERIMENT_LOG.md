@@ -12,6 +12,16 @@
 | 6 | 2026-06-25 | dinov3_mae_f1_20260625_1718 | DINOv3 ViT-B/16 (荧光MAE预训练) | configs/dinov3_vitb16_mae_multilabel.yaml | f1 | 30 | best_mae_val_loss=0.3984 | runs/dinov3_mae_f1_20260625_1718/f1/checkpoints/best.pt | Stage 1 荧光MAE预训练: mask_mode=fluorescence, mask_ratio=0.75, 亮度加权掩码概率[0.3,0.8]; lr=1e-5 cosine; bs=2 grad_accum=2 768x768 AMP | best_epoch=27; train_loss=0.2922; 全backbone解冻适配FA域 |
 | 7 | 2026-06-25 | dinov3_mae_ft_f1_20260625_1718 | DINOv3 ViT-B/16 (荧光MAE+分割微调) | configs/dinov3_vitb16_mae_multilabel.yaml | f1 | 30 | best_macro_dice=0.6818; dice_1=0.6907; dice_2=0.6730 | runs/dinov3_mae_ft_f1_20260625_1718/f1/checkpoints/best.pt | Stage 2 分割微调: 加载MAE-adapted backbone, AsymmetricFocalTverskyBCE损失; lr=1e-4 backbone_lr=1e-5; bs=1 grad_accum=4 768x768 AMP | best_epoch=18; **未超ViT baseline 0.7337 (-5.19pp)**; MAE域适配导致backbone漂移 |
 | 8 | 2026-06-26 | dinov3_vitb16_fpn_f1 | ViT-B/16 + SAM2 FPN | configs/dinov3_vitb16_fpn_multilabel.yaml | f1 | 30 | best_macro_dice=0.6939; dice_1=0.7098; dice_2=0.6779; sweep_macro=0.6984 | runs/dinov3_vitb16_fpn_f1/f1/checkpoints/best.pt | SAM2 FPN Neck适配ViT: 虚拟金字塔(48→24→12→6)+top-down融合+深度监督(3个辅助损失); 不改backbone; bs=1 grad_accum=4 768x768 AMP | best_epoch=24; **未超baseline 0.7337 (-3.98pp)**; 虚拟金字塔非真多尺度 |
+| 9 | 2026-07-23 | rdh_pde_ref_t29_f1 + rdh_iso_5fold | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_multilabel_itksnap.yaml (--head rdh) | f1-f5 | 30 | 5折 sweep macro=0.7857±0.0178; dice_1=0.8112; dice_2=0.7603 | runs/rdh_pde_ref_t29_f1/f1 + runs/rdh_iso_5fold/{f2..f5} | torch2.9 同环境 RDH-PDE 各向同性锚点 5 折; 复现历史 f1=0.7828 | clean val; best per-lesion 阈值 sweep macro; VA-RDH 对照基线 |
+| 10 | 2026-07-23 | va_rdh_iters16_5fold + va_rdh_iters16_f1 | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_va_rdh_iters16.yaml | f1-f5 | 30 | 5折 sweep macro=0.7870±0.0188; dice_1=0.8100; dice_2=0.7641 | runs/va_rdh_iters16_f1/f1 + runs/va_rdh_iters16_5fold/{f2..f5} | 新增 VA-RDH: 结构张量相干增强各向异性扩散(Weickert CED, src/bs/rdh.py)+K=16; 仅 +1 可学习标量; 推理零开销 | Δvs iso: macro +0.13pp / dice_2 +0.38pp(4/5折优) / dice_1 持平; 稀有类小而一致涨点; 184 tests passed |
+| 11 | 2026-07-23 | va_rdh_f1 / va_rdh_{struct4,across,contrast03}_f1 | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_va_rdh.yaml | f1 | 30 | K8=0.7821; K16=0.7872; struct σ4=0.7866; across=0.7843; contrast0.3=0.7776 | runs/va_rdh_*_f1/f1/checkpoints/ | VA-RDH f1 变体消融(择优 K=16); ced_direction/struct尺度/contrast 网格 | K=8 与 baseline 打平, K=16 涨点印证"物理欠表达"诊断; across(外渗)/contrast 次优 |
+| 12 | 2026-07-23 | rdh_fic_f1 / va_rdh_fic_f1 | ConvNeXt-Tiny | itksnap(--head rdh) / va_rdh + --fic-weight 0.1 | f1 | 30 | RDH+FIC=0.7670; VA-RDH+FIC=0.7718 | runs/rdh_fic_f1/f1 + runs/va_rdh_fic_f1/f1 | 新增 FIC 荧光成像自监督一致损失(无参数, src/bs/multilabel.py FICLoss) | 诚实负结果: -1.58pp / -1.03pp; 自监督项把预测拉向高亮非渗漏结构, 小数据过强 |
+| 13 | 2026-07-24 | edge_orientedpdc_f1 | ConvNeXt-Tiny | itksnap(--head edge --edge-pdc-types cpdc,apdc,rpdc --edge-soft) | f1 | 30 | sweep macro=0.7841; dice_1=0.7926; dice_2=0.7756 | runs/edge_orientedpdc_f1/f1/checkpoints/ | 新增 Oriented-PDC: APDC角向+RPDC径向差分卷积并联组(PiDiNet全集) src/bs/edge.py | 边缘Wave2唯一正向且最优; 超baseline+0.42pp, 稀有类dice_2+1.24pp; ≈普通卷积参数量 |
+| 14 | 2026-07-24 | edge_gac_f1 | ConvNeXt-Tiny | itksnap(--head gac --edge-soft) | f1 | 30 | sweep macro=0.7717; dice_1=0.7727; dice_2=0.7707 | runs/edge_gac_f1/f1/checkpoints/ | 新增 GAC 测地主动轮廓边界演化头(边缘停止曲率流+边缘平流) src/bs/edge.py | 诚实负结果 -0.82pp; ep10见顶后dice_1走低; 边界或被吸附到血管等非病灶强边缘 |
+| 15 | 2026-07-24 | edge_eoc_f1 | ConvNeXt-Tiny | itksnap(--head conv --eoc-weight 0.1) | f1 | 30 | sweep macro=0.7760; dice_1=0.7943; dice_2=0.7577 | runs/edge_eoc_f1/f1/checkpoints/ | 新增 EOC 边缘方向一致性损失(无参数, src/bs/multilabel.py) | 诚实负结果 -0.39pp; 轻损稀有类dice_2; 可降权重复验 |
+| 16 | 2026-07-25 | dual_branch_full_f1 | ConvNeXt-Tiny | itksnap(--head dual_branch --edge-pdc-types cpdc,apdc,rpdc) | f1 | 30 | sweep macro=0.7854; dice_1=0.7876; dice_2=0.7832 | runs/dual_branch_full_f1/f1/checkpoints/ | 新增 CSD-DB 源点-轮廓双分支检测头: source/core分支 + Oriented-PDC contour分支 + source-inside一致性; src/bs/dual_branch.py | 正向结果: 超conv+0.55pp; f1训练侧dice_2最高0.7832; 但macro低于VA-RDH K16 0.7872; 202 tests passed |
+| 17 | 2026-07-25 | dual_branch_source_only_f1 / dual_branch_edge_only_f1 / dual_branch_light_consistency_f1 | ConvNeXt-Tiny | itksnap(--head dual_branch variants) | f1 | 30 | source-only=0.7771; edge-only=0.7758; light-consistency=0.7800 | runs/dual_branch_*_f1/f1/checkpoints/ | CSD-DB 消融: 只开source / 只开contour / 降低consistency=0.05 | 单分支均不如full; 说明source+contour联合有效; light consistency仍不如full |
+| 18 | 2026-07-25 | rdh_dual_branch_f1 | ConvNeXt-Tiny | itksnap(--head rdh_dual_branch; VA-RDH K16 + CSD-DB aux) | f1 | 30 | sweep macro=0.7786; dice_1=0.7941; dice_2=0.7632 | runs/rdh_dual_branch_f1/f1/checkpoints/ | 尝试融合 VA-RDH 主物理头 + CSD-DB source/contour辅助检测 + zero-init residual | 诚实负结果: 低于 VA-RDH K16 0.7872 与 CSD-DB 0.7854; 辅助分支可能干扰 RDH 共享表征优化 |
 
 ---
 
@@ -1140,3 +1150,35 @@ python scripts/export_uncertainty_visualizations.py --config configs/dinov3_conv
 - **RDH/S3RD 在 ViT 上不复现增益、反而掉点**(RDH 0.7101 < ViT baseline 0.7350；S3RD 0.6398 且 ep3 见顶)，与 ConvNeXt 上“接 RDH 涨点”相反。
 - **归因**：RDH 物理扩散演化依赖高分辨率多尺度特征(ConvNeXt 192×192)；ViT 48×48 粗 token 上扩散空间精度不足、上采样边界糊化，稀有类 lesion_2 掉最多。
 - **决策**：主线锁定 **ConvNeXt-Tiny**；本对比作为“RDH 增益与特征分辨率强相关”的消融证据，支撑论文选 ConvNeXt 而非 ViT。
+
+---
+
+## 边缘检测创新 Wave 1：Boundary DoU 损失 + Edge-PDC 边缘引导头（2026-07-21, f1 单折）
+
+**动机**：从边缘检测方向提升 ConvNeXt-Tiny 主线。文献调研（CTO IPMI2023 / PiDiNet ICCV2021 / Boundary DoU MICCAI2023 / 软边缘）后，选“低参数 + 强先验 + 训练期监督”的三条路线，规避 WBE(6.44M) 在 ~2k 小数据上的过拟合教训。
+
+**新增代码**（172 tests 全绿；默认开关全 0，旧实验数值零回归）：
+- `src/bs/edge.py`：中心像素差分卷积 CPDC（参数量=普通卷积、对常数区响应恒 0、天然边缘敏感）、`EdgeGuidedHead`（PDC 边缘分支 + 边缘门控增强主特征 + 主分割头；gate 零初始化 → 初始等价普通 conv 头）、`lesion_edge_target`（硬/软边界带监督目标）。
+- `src/bs/multilabel.py`：`AsymmetricFocalTverskyBCE` 新增 Boundary DoU 项（`boundary_dou_weight`，自适应 α）；`EdgeGuidedLoss` 包装类（分割损失 + 边界带 BCE/Dice 辅助监督，可选软边缘）。
+- `src/bs/convnext_seg.py`：`head_type=edge` 接入；`scripts/train_dinov3_multilabel.py`：新增 `--boundary-dou-weight/--edge-*/--seed` CLI 与 build_model/build_loss 接线；`configs/dinov3_convnext_tiny_edge.yaml`；看板 `scripts/monitor_edge_experiments.py`（自动刷新 HTML 仪表盘）。
+
+> ⚠️ 本环境为 torch 2.9（历史为 2.5.1），故**重训同环境 baseline**（0.7800）作公平对照，不与历史 0.7769/0.7710 直接比。
+
+**结果（f1 干净验证集 444, best per-lesion 阈值 sweep macro）**：
+
+| # | 方法 | Run Name | head | 损失附加 | best_epoch | dice_1 | dice_2 | macro | Δ vs baseline |
+|---|------|----------|------|---------|-----------|--------|--------|-------|--------------|
+| 1 | baseline(同环境) | `edge_baseline_f1` | conv | - | 24 | 0.7967 | 0.7633 | 0.7800 | - |
+| 2 | Boundary DoU w=1.0 | `edge_dou_f1` | conv | DoU 1.0 | 7 | 0.7819 | 0.7777 | 0.7798 | -0.02pp |
+| 3 | **Edge-PDC 软边缘** | `edge_pdc_soft_f1` | edge | edge 0.5(soft) | 16 | 0.7994 | 0.7670 | **0.7832** | **+0.32pp** |
+| 4 | Edge-PDC 硬边缘 | `edge_pdc_hard_f1` | edge | edge 0.5(hard) | 16 | 0.7958 | 0.7675 | 0.7817 | +0.17pp |
+
+权重路径：`runs/<run-name>/f1/checkpoints/best.pt`。
+
+**分析**：
+- 排名 **edge-soft 0.7832(+0.32pp) > edge-hard 0.7817(+0.17pp) > baseline 0.7800 > DoU@1.0 0.7798**；涨幅小、处于单折噪声区间，且未收敛前领先亦反映**收敛更快**（edge 峰 ep16 vs baseline ep24）。
+- ✅ **软边缘 > 硬边缘**：印证“FA 渗漏边界弥散、硬边缘 GT 噪声大、宜用软边缘”的假设，可作论文消融结论。
+- ✅ **边界/边缘监督早期抬升稀有类 lesion_2**：DoU 在 ep7 时 dice_2=0.7777（全场最高）；两 edge 头 dice_2≈0.767 均 > baseline 0.7633。
+- ⚠️ **DoU@1.0 调过头**（非方法失败）：val_loss 1.33（约他者 2.4×），ep7 见顶后单调退化——边界项权重过大压过区域项；Wave 2 降到 0.3 复验。
+
+**决策**：edge-soft 暂列最优但涨幅在噪声内 → Wave 2（f1, 2026-07-21）用 seed=43 对照测**噪声地板 + 跨种子稳定性**，并复验 **DoU@0.3** 与 **edge-soft+DoU@0.3** 组合；跨种子仍稳定领先者再铺 **5 折**出 mean±std 定论。

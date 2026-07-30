@@ -55,6 +55,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--num-workers", type=int, default=None)
     parser.add_argument("--threshold", default=None, help="Scalar or two comma-separated thresholds, e.g. 0.5 or 0.5,0.9")
+    parser.add_argument("--threshold-sweep", action="store_true", help="Evaluate all per-lesion threshold pairs and report the best macro Dice.")
+    parser.add_argument(
+        "--thresholds",
+        default=None,
+        help="Comma-separated threshold grid for --threshold-sweep. Defaults to metric.threshold_sweep.thresholds or a standard grid.",
+    )
     parser.add_argument("--disable-tta", action="store_true")
     parser.add_argument("--disable-postprocess", action="store_true")
     parser.add_argument("--disable-intensity-refine", action="store_true")
@@ -77,6 +83,43 @@ def parse_threshold(value: str | None, default: float | list[float]) -> float | 
     if len(parts) == 2:
         return parts
     raise ValueError(f"Expected one or two thresholds, got {value}")
+
+
+def parse_threshold_grid(value: str | None, config: dict[str, Any]) -> list[float]:
+    if value is not None:
+        thresholds = [float(part.strip()) for part in value.split(",") if part.strip()]
+    else:
+        sweep_cfg = config.get("metric", {}).get("threshold_sweep", {}) or {}
+        thresholds = [float(item) for item in sweep_cfg.get("thresholds", [])]
+    if not thresholds:
+        thresholds = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.60, 0.70, 0.80, 0.90]
+    if any(threshold < 0.0 or threshold > 1.0 for threshold in thresholds):
+        raise ValueError("thresholds must be in [0, 1]")
+    return sorted(set(thresholds))
+
+
+def threshold_pairs(thresholds: list[float]) -> list[tuple[float, float]]:
+    return [(threshold_1, threshold_2) for threshold_1 in thresholds for threshold_2 in thresholds]
+
+
+def summarize_threshold_sweep(metrics: dict[tuple[float, float], PaperDice]) -> dict[str, Any]:
+    results = []
+    best: dict[str, Any] | None = None
+    for (threshold_1, threshold_2), metric in metrics.items():
+        values = metric.compute()
+        row = {
+            "threshold": [threshold_1, threshold_2],
+            **values,
+        }
+        results.append(row)
+        if best is None or row["paper_macro_dice"] > best["paper_macro_dice"]:
+            best = row
+    results.sort(key=lambda item: item["paper_macro_dice"], reverse=True)
+    return {
+        "enabled": True,
+        "best": best,
+        "results": results,
+    }
 
 
 def parse_member(value: str) -> tuple[Path, Path]:
@@ -238,14 +281,28 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
     weights = parse_weights(args.weights, len(members))
 
     metric_cfg = base_config.get("metric", {})
+    postprocessor = build_postprocessor(metric_cfg.get("postprocess"))
+    intensity_refiner = build_intensity_refiner(metric_cfg.get("intensity_refine"))
+    fov_masker = build_fov_masker(metric_cfg.get("fov_mask"))
+    threshold_adapter = build_threshold_adapter(metric_cfg.get("adaptive_threshold"))
     metric = PaperDice(
         ignore_index=int(base_config["data"]["ignore_index"]),
         threshold=metric_cfg["threshold"],
-        postprocessor=build_postprocessor(metric_cfg.get("postprocess")),
-        intensity_refiner=build_intensity_refiner(metric_cfg.get("intensity_refine")),
-        fov_masker=build_fov_masker(metric_cfg.get("fov_mask")),
-        threshold_adapter=build_threshold_adapter(metric_cfg.get("adaptive_threshold")),
+        postprocessor=postprocessor,
+        intensity_refiner=intensity_refiner,
+        fov_masker=fov_masker,
+        threshold_adapter=threshold_adapter,
     )
+    sweep_metrics: dict[tuple[float, float], PaperDice] = {}
+    if args.threshold_sweep:
+        for threshold_pair in threshold_pairs(parse_threshold_grid(args.thresholds, base_config)):
+            sweep_metrics[threshold_pair] = PaperDice(
+                ignore_index=int(base_config["data"]["ignore_index"]),
+                threshold=list(threshold_pair),
+                postprocessor=postprocessor,
+                intensity_refiner=intensity_refiner,
+                fov_masker=fov_masker,
+            )
     tta_cfg = metric_cfg.get("tta", {"enabled": False})
 
     with torch.no_grad():
@@ -258,8 +315,10 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                     logits_list.append(predict_with_tta(member.model, images, tta_cfg))
             logits = weighted_ensemble_logits(logits_list, weights, args.average)
             metric.update(logits, masks, images)
+            for sweep_metric in sweep_metrics.values():
+                sweep_metric.update(logits, masks, images)
 
-    return {
+    result = {
         "fold": args.fold,
         "average": args.average,
         "weights": weights,
@@ -280,6 +339,9 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         ],
         **metric.compute(),
     }
+    if sweep_metrics:
+        result["threshold_sweep"] = summarize_threshold_sweep(sweep_metrics)
+    return result
 
 
 def main() -> None:

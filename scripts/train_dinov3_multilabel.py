@@ -19,6 +19,7 @@ import torch
 import yaml
 from PIL import Image
 from torch import nn
+from torch.nn import functional as F
 from torch.utils.data import DataLoader, WeightedRandomSampler
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
@@ -28,16 +29,19 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from bs.convnext_seg import DinoV3ConvNeXtSegmentationModel
+from bs.coleak import CoLeakLoss
 from bs.dataset import RGB_LABEL_COLORS, UveitisSegmentationDataset, decode_mask_array, discover_samples
+from bs.dual_branch import DualBranchLoss
 from bs.ema import ModelEMA
 from bs.fov import apply_fov_mask, build_fov_masker
 from bs.intensity_refine import apply_intensity_refiner, build_intensity_refiner
 from bs.model import DinoV3SegmentationModel, DinoV3FpnSegmentationModel
-from bs.multilabel import AsymmetricFocalTverskyBCE, PaperDice, masks_to_paper_targets
+from bs.multilabel import AsymmetricFocalTverskyBCE, EdgeGuidedLoss, EOCLoss, FICLoss, PaperDice, masks_to_paper_targets
 from bs.paths import project_path
 from bs.postprocess import apply_postprocessor, build_postprocessor
 from bs.seed import set_seed
 from bs.tta import predict_with_tta
+from bs.zab import ZABLoss
 
 
 def parse_args() -> argparse.Namespace:
@@ -45,6 +49,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", default="configs/dinov3_vitb16_multilabel_itksnap.yaml")
     parser.add_argument("--run-name", default=None)
     parser.add_argument("--fold", choices=["f1", "f2", "f3", "f4", "f5"], default=None)
+    parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--epochs", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--grad-accum-steps", type=int, default=None)
@@ -54,6 +59,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--boundary-kernel", type=int, default=None)
     parser.add_argument("--boundary-dice-weight", type=float, default=None)
     parser.add_argument("--boundary-dice-kernel", type=int, default=None)
+    parser.add_argument("--boundary-dou-weight", type=float, default=None)
+    parser.add_argument("--edge-weight", type=float, default=None)
+    parser.add_argument("--edge-band", type=int, default=None)
+    parser.add_argument("--edge-soft", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--edge-soft-sigma", type=float, default=None)
+    parser.add_argument("--edge-dice-weight", type=float, default=None)
+    parser.add_argument("--edge-pos-weight", default=None, help="Comma-separated per-lesion edge pos_weight, e.g. 5.0,20.0")
+    parser.add_argument("--edge-channels", type=int, default=None)
+    parser.add_argument("--fic-weight", type=float, default=None)
+    parser.add_argument("--fic-sigma", type=float, default=None)
+    parser.add_argument("--fic-pool", type=int, default=None)
+    parser.add_argument("--fic-min-mass", type=float, default=None)
     parser.add_argument("--hard-negative-ratio", default=None, help="Scalar or comma-separated per-lesion ratios, e.g. 0.25 or 0.0,0.35")
     parser.add_argument("--hard-negative-min-pixels", type=int, default=None)
     parser.add_argument("--soft-boundary-sigma", type=float, default=None)
@@ -70,7 +87,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--decoder-attention-reduction", type=int, default=None)
     parser.add_argument("--decoder-deep-supervision", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--aux-loss-weight", type=float, default=None)
-    parser.add_argument("--head", choices=["conv", "rdh"], default=None)
+    parser.add_argument("--head", choices=["conv", "rdh", "coleak", "zab", "edge", "gac", "dual_branch", "rdh_dual_branch"], default=None)
+    parser.add_argument("--edge-pdc-types", default=None, help="Comma-separated PDC types, e.g. cpdc,apdc,rpdc")
+    parser.add_argument("--gac-iters", type=int, default=None)
+    parser.add_argument("--gac-dt", type=float, default=None)
+    parser.add_argument("--gac-beta", type=float, default=None)
+    parser.add_argument("--gac-kappa", type=float, default=None)
+    parser.add_argument("--gac-guide-input", choices=["normalized", "imagenet"], default=None)
+    parser.add_argument("--eoc-weight", type=float, default=None)
+    parser.add_argument("--eoc-pool", type=int, default=None)
+    parser.add_argument("--source-weight", type=float, default=None)
+    parser.add_argument("--source-erosion-kernel", type=int, default=None)
+    parser.add_argument("--source-soft-sigma", type=float, default=None)
+    parser.add_argument("--source-dice-weight", type=float, default=None)
+    parser.add_argument("--source-pos-weight", default=None, help="Comma-separated source pos_weight, e.g. 4.0,30.0")
+    parser.add_argument("--source-consistency-weight", type=float, default=None)
     parser.add_argument("--rdh-iters", type=int, default=None)
     parser.add_argument("--rdh-dt", type=float, default=None)
     parser.add_argument("--rdh-reaction", choices=["fisher", "pull"], default=None)
@@ -80,6 +111,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--rdh-directions", type=int, default=None)
     parser.add_argument("--rdh-stride", type=int, default=None)
     parser.add_argument("--rdh-d-inner", type=int, default=None)
+    parser.add_argument("--rdh-stable-constraints", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--rdh-flux-scheme", choices=["center", "edge"], default=None)
+    parser.add_argument("--rdh-guide-input", choices=["normalized", "imagenet"], default=None)
+    parser.add_argument("--rdh-diffusion-mode", choices=["isotropic", "anisotropic"], default=None)
+    parser.add_argument("--rdh-struct-pre-sigma", type=float, default=None)
+    parser.add_argument("--rdh-struct-rho-sigma", type=float, default=None)
+    parser.add_argument("--rdh-ced-alpha", type=float, default=None)
+    parser.add_argument("--rdh-ced-contrast", type=float, default=None)
+    parser.add_argument("--rdh-ced-direction", choices=["along", "across"], default=None)
     parser.add_argument("--ema", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--ema-decay", type=float, default=None)
     parser.add_argument("--ema-start-epoch", type=int, default=None)
@@ -113,6 +153,7 @@ def parse_float_or_list(value: Any) -> float | list[float] | None:
 def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]:
     config = {key: dict(value) if isinstance(value, dict) else value for key, value in config.items()}
     overrides = {
+        ("project", "seed"): args.seed,
         ("train", "epochs"): args.epochs,
         ("train", "batch_size"): args.batch_size,
         ("train", "grad_accum_steps"): args.grad_accum_steps,
@@ -122,6 +163,7 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         ("loss", "boundary_kernel"): args.boundary_kernel,
         ("loss", "boundary_dice_weight"): args.boundary_dice_weight,
         ("loss", "boundary_dice_kernel"): args.boundary_dice_kernel,
+        ("loss", "boundary_dou_weight"): args.boundary_dou_weight,
         ("loss", "hard_negative_ratio"): parse_float_or_list(args.hard_negative_ratio),
         ("loss", "hard_negative_min_pixels"): args.hard_negative_min_pixels,
         ("loss", "soft_boundary_sigma"): args.soft_boundary_sigma,
@@ -184,12 +226,88 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         "directions": args.rdh_directions,
         "stride": args.rdh_stride,
         "d_inner": args.rdh_d_inner,
+        "stable_constraints": args.rdh_stable_constraints,
+        "flux_scheme": args.rdh_flux_scheme,
+        "guide_input": args.rdh_guide_input,
+        "diffusion_mode": args.rdh_diffusion_mode,
+        "struct_pre_sigma": args.rdh_struct_pre_sigma,
+        "struct_rho_sigma": args.rdh_struct_rho_sigma,
+        "ced_alpha": args.rdh_ced_alpha,
+        "ced_contrast": args.rdh_ced_contrast,
+        "ced_direction": args.rdh_ced_direction,
     }
     if any(value is not None for value in rdh_overrides.values()):
         rdh = config["model"].setdefault("rdh", {})
         for key, value in rdh_overrides.items():
             if value is not None:
                 rdh[key] = value
+    edge_loss_overrides = {
+        "weight": args.edge_weight,
+        "band": args.edge_band,
+        "soft": args.edge_soft,
+        "soft_sigma": args.edge_soft_sigma,
+        "dice_weight": args.edge_dice_weight,
+        "pos_weight": parse_float_or_list(args.edge_pos_weight),
+    }
+    if any(value is not None for value in edge_loss_overrides.values()):
+        edge = config["loss"].setdefault("edge", {})
+        for key, value in edge_loss_overrides.items():
+            if value is not None:
+                edge[key] = value
+    fic_overrides = {
+        "weight": args.fic_weight,
+        "sigma": args.fic_sigma,
+        "pool": args.fic_pool,
+        "min_mass": args.fic_min_mass,
+    }
+    if any(value is not None for value in fic_overrides.values()):
+        fic = config["loss"].setdefault("fic", {})
+        for key, value in fic_overrides.items():
+            if value is not None:
+                fic[key] = value
+    if args.edge_channels is not None:
+        config["model"].setdefault("edge", {})["channels"] = args.edge_channels
+    if args.edge_pdc_types is not None:
+        types = [t.strip().lower() for t in args.edge_pdc_types.split(",") if t.strip()]
+        if types:
+            config["model"].setdefault("edge", {})["pdc_types"] = types
+    gac_overrides = {
+        "iters": args.gac_iters,
+        "dt": args.gac_dt,
+        "beta": args.gac_beta,
+        "kappa": args.gac_kappa,
+        "guide_input": args.gac_guide_input,
+    }
+    if any(value is not None for value in gac_overrides.values()):
+        gac = config["model"].setdefault("gac", {})
+        for key, value in gac_overrides.items():
+            if value is not None:
+                gac[key] = value
+    eoc_overrides = {"weight": args.eoc_weight, "pool": args.eoc_pool}
+    if any(value is not None for value in eoc_overrides.values()):
+        eoc = config["loss"].setdefault("eoc", {})
+        for key, value in eoc_overrides.items():
+            if value is not None:
+                eoc[key] = value
+    dual_branch_overrides = {
+        "source_weight": args.source_weight,
+        "source_erosion_kernel": args.source_erosion_kernel,
+        "source_soft_sigma": args.source_soft_sigma,
+        "source_dice_weight": args.source_dice_weight,
+        "source_pos_weight": parse_float_or_list(args.source_pos_weight),
+        "consistency_weight": args.source_consistency_weight,
+        "edge_weight": args.edge_weight,
+        "edge_band": args.edge_band,
+        "edge_soft": args.edge_soft,
+        "edge_soft_sigma": args.edge_soft_sigma,
+        "edge_dice_weight": args.edge_dice_weight,
+        "edge_pos_weight": parse_float_or_list(args.edge_pos_weight),
+    }
+    if any(value is not None for value in dual_branch_overrides.values()):
+        dual_branch = config["loss"].setdefault("dual_branch", {})
+        for key, value in dual_branch_overrides.items():
+            if value is not None:
+                dual_branch[key] = value
     return config
 
 
@@ -315,7 +433,7 @@ def build_loader(config: dict[str, Any], val_fold: str, split: str, logger: logg
     )
 
 
-def build_model(config: dict[str, Any]) -> nn.Module:
+def build_model(config: dict[str, Any], load_pretrained: bool = True) -> nn.Module:
     model_cfg = config["model"]
     train_cfg = config["train"]
     backbone = str(model_cfg["backbone"])
@@ -368,12 +486,19 @@ def build_model(config: dict[str, Any]) -> nn.Module:
             rdh_directions=int(rdh.get("directions", 4)),
             rdh_stride=int(rdh.get("stride", 4)),
             rdh_d_inner=int(rdh.get("d_inner", 64)),
+            rdh_stable_constraints=bool(rdh.get("stable_constraints", False)),
+            rdh_flux_scheme=str(rdh.get("flux_scheme", "center")),
+            rdh_guide_input=str(rdh.get("guide_input", "normalized")),
         )
     if backbone.startswith("dinov3_convnext_"):
         rdh_cfg = model_cfg.get("rdh", {}) or {}
+        coleak_cfg = model_cfg.get("coleak", {}) or {}
+        zab_cfg = model_cfg.get("zab", {}) or {}
+        edge_cfg = model_cfg.get("edge", {}) or {}
+        gac_cfg = model_cfg.get("gac", {}) or {}
         return DinoV3ConvNeXtSegmentationModel(
             dinov3_code_dir=project_path(model_cfg["dinov3_code_dir"]),
-            weights_path=project_path(model_cfg["backbone_weights"]),
+            weights_path=project_path(model_cfg["backbone_weights"]) if load_pretrained else None,
             variant=str(model_cfg["variant"]),
             decoder_channels=int(model_cfg["decoder_channels"]),
             freeze_backbone=bool(train_cfg["freeze_backbone"]),
@@ -381,6 +506,13 @@ def build_model(config: dict[str, Any]) -> nn.Module:
             decoder_attention_reduction=int(model_cfg.get("decoder_attention_reduction", 16)),
             decoder_deep_supervision=bool(model_cfg.get("decoder_deep_supervision", False)),
             head_type=str(model_cfg.get("head", "conv")),
+            edge_channels=int(edge_cfg.get("channels", 0)),
+            edge_pdc_types=edge_cfg.get("pdc_types"),
+            gac_iters=int(gac_cfg.get("iters", 8)),
+            gac_dt=float(gac_cfg.get("dt", 0.1)),
+            gac_beta=float(gac_cfg.get("beta", 0.5)),
+            gac_kappa=float(gac_cfg.get("kappa", 0.1)),
+            gac_guide_input=str(gac_cfg.get("guide_input", "normalized")),
             rdh_iters=int(rdh_cfg.get("iters", 8)),
             rdh_dt=float(rdh_cfg.get("dt", 0.2)),
             rdh_reaction=str(rdh_cfg.get("reaction", "fisher")),
@@ -393,13 +525,34 @@ def build_model(config: dict[str, Any]) -> nn.Module:
             rdh_directions=int(rdh_cfg.get("directions", 4)),
             rdh_stride=int(rdh_cfg.get("stride", 4)),
             rdh_d_inner=int(rdh_cfg.get("d_inner", 64)),
+            rdh_stable_constraints=bool(rdh_cfg.get("stable_constraints", False)),
+            rdh_flux_scheme=str(rdh_cfg.get("flux_scheme", "center")),
+            rdh_guide_input=str(rdh_cfg.get("guide_input", "normalized")),
+            rdh_diffusion_mode=str(rdh_cfg.get("diffusion_mode", "isotropic")),
+            rdh_struct_pre_sigma=float(rdh_cfg.get("struct_pre_sigma", 1.0)),
+            rdh_struct_rho_sigma=float(rdh_cfg.get("struct_rho_sigma", 2.0)),
+            rdh_ced_alpha=float(rdh_cfg.get("ced_alpha", 0.005)),
+            rdh_ced_contrast=float(rdh_cfg.get("ced_contrast", 1.0)),
+            rdh_ced_direction=str(rdh_cfg.get("ced_direction", "along")),
+            coleak_topk_fraction=float(coleak_cfg.get("topk_fraction", 0.05)),
+            coleak_presence_prior=float(coleak_cfg.get("presence_prior", 0.1)),
+            coleak_prior_strength=float(coleak_cfg.get("prior_strength", 0.5)),
+            zab_topk_fraction=float(zab_cfg.get("topk_fraction", 0.05)),
+            zab_presence_prior=float(zab_cfg.get("presence_prior", 0.11)),
+            zab_area_prior=float(zab_cfg.get("area_prior", 0.005)),
+            zab_max_area_fraction=float(zab_cfg.get("max_area_fraction", 0.1)),
+            zab_anatomy_strength=float(zab_cfg.get("anatomy_strength", 0.75)),
+            zab_hierarchy_strength=float(zab_cfg.get("hierarchy_strength", 0.0)),
+            zab_bidirectional_strength=float(zab_cfg.get("bidirectional_strength", 0.0)),
+            zab_calibration_iterations=int(zab_cfg.get("calibration_iterations", 3)),
+            zab_calibration_max_shift=float(zab_cfg.get("calibration_max_shift", 6.0)),
         )
     raise ValueError(f"Unsupported backbone: {backbone}")
 
 
-def build_loss(config: dict[str, Any]) -> AsymmetricFocalTverskyBCE:
+def build_loss(config: dict[str, Any]) -> nn.Module:
     loss_cfg = config["loss"]
-    return AsymmetricFocalTverskyBCE(
+    segmentation_loss = AsymmetricFocalTverskyBCE(
         pos_weight=loss_cfg["pos_weight"],
         bce_weight=float(loss_cfg["bce_weight"]),
         tversky_weight=float(loss_cfg["tversky_weight"]),
@@ -411,6 +564,8 @@ def build_loss(config: dict[str, Any]) -> AsymmetricFocalTverskyBCE:
         boundary_kernel=int(loss_cfg.get("boundary_kernel", 3) or 3),
         boundary_dice_weight=float(loss_cfg.get("boundary_dice_weight", 0.0) or 0.0),
         boundary_dice_kernel=int(loss_cfg.get("boundary_dice_kernel", loss_cfg.get("boundary_kernel", 3)) or 3),
+        boundary_dou_weight=float(loss_cfg.get("boundary_dou_weight", 0.0) or 0.0),
+        boundary_dou_alpha_cap=float(loss_cfg.get("boundary_dou_alpha_cap", 0.8) or 0.8),
         hard_negative_ratio=loss_cfg.get("hard_negative_ratio", 0.0) or 0.0,
         hard_negative_min_pixels=int(loss_cfg.get("hard_negative_min_pixels", 0) or 0),
         soft_boundary_sigma=float(loss_cfg.get("soft_boundary_sigma", 0.0) or 0.0),
@@ -419,6 +574,89 @@ def build_loss(config: dict[str, Any]) -> AsymmetricFocalTverskyBCE:
             float(loss_cfg["soft_boundary_weight"]) if loss_cfg.get("soft_boundary_weight") is not None else 1.0
         ),
     )
+    head_type = str(config["model"].get("head", "conv")).lower()
+    if head_type == "coleak":
+        coleak_loss = loss_cfg.get("coleak", {}) or {}
+        return CoLeakLoss(
+            segmentation_loss=segmentation_loss,
+            ignore_index=int(config["data"]["ignore_index"]),
+            inside_weight=float(coleak_loss.get("inside_weight", 0.25)),
+            outside_weight=float(coleak_loss.get("outside_weight", 0.1)),
+            presence_weight=float(coleak_loss.get("presence_weight", 0.15)),
+            state_pos_weight=float(coleak_loss.get("state_pos_weight", 4.0)),
+            presence_pos_weight=float(coleak_loss.get("presence_pos_weight", 8.0)),
+            hard_negative_ratio=float(coleak_loss.get("hard_negative_ratio", 8.0)),
+            hard_negative_min_pixels=int(coleak_loss.get("hard_negative_min_pixels", 256)),
+        )
+    if head_type == "zab":
+        zab_loss = loss_cfg.get("zab", {}) or {}
+        return ZABLoss(
+            segmentation_loss=segmentation_loss,
+            ignore_index=int(config["data"]["ignore_index"]),
+            presence_weight=float(zab_loss.get("presence_weight", 0.15)),
+            area_weight=float(zab_loss.get("area_weight", 0.1)),
+            mass_weight=float(zab_loss.get("mass_weight", 0.05)),
+            anatomy_weight=float(zab_loss.get("anatomy_weight", 0.1)),
+            hierarchy_weight=float(zab_loss.get("hierarchy_weight", 0.0)),
+            presence_pos_weight=float(zab_loss.get("presence_pos_weight", 8.0)),
+            min_confidence_pixels=int(zab_loss.get("min_confidence_pixels", 64)),
+            anatomy_min_pixels=int(zab_loss.get("anatomy_min_pixels", 64)),
+            anatomy_sigma=float(zab_loss.get("anatomy_sigma", 0.12)),
+            anatomy_max_sigma=float(zab_loss.get("anatomy_max_sigma", 0.25)),
+            mass_scale=float(zab_loss.get("mass_scale", 1e-4)),
+        )
+    if head_type in {"dual_branch", "rdh_dual_branch"}:
+        edge_loss_cfg = loss_cfg.get("edge", {}) or {}
+        db_loss_cfg = loss_cfg.get("dual_branch", {}) or {}
+        return DualBranchLoss(
+            segmentation_loss=segmentation_loss,
+            ignore_index=int(config["data"]["ignore_index"]),
+            edge_weight=float(db_loss_cfg.get("edge_weight", edge_loss_cfg.get("weight", 0.5))),
+            edge_band=int(db_loss_cfg.get("edge_band", edge_loss_cfg.get("band", 5))),
+            edge_soft=bool(db_loss_cfg.get("edge_soft", edge_loss_cfg.get("soft", True))),
+            edge_soft_sigma=float(db_loss_cfg.get("edge_soft_sigma", edge_loss_cfg.get("soft_sigma", 1.5))),
+            edge_dice_weight=float(db_loss_cfg.get("edge_dice_weight", edge_loss_cfg.get("dice_weight", 0.5))),
+            edge_pos_weight=db_loss_cfg.get("edge_pos_weight", edge_loss_cfg.get("pos_weight", (5.0, 20.0))),
+            source_weight=float(db_loss_cfg.get("source_weight", 0.3)),
+            source_erosion_kernel=int(db_loss_cfg.get("source_erosion_kernel", 5)),
+            source_soft_sigma=float(db_loss_cfg.get("source_soft_sigma", 2.0)),
+            source_dice_weight=float(db_loss_cfg.get("source_dice_weight", 0.5)),
+            source_pos_weight=db_loss_cfg.get("source_pos_weight", (4.0, 30.0)),
+            consistency_weight=float(db_loss_cfg.get("consistency_weight", 0.1)),
+        )
+    if head_type in {"edge", "gac"}:
+        edge_loss_cfg = loss_cfg.get("edge", {}) or {}
+        return EdgeGuidedLoss(
+            segmentation_loss=segmentation_loss,
+            ignore_index=int(config["data"]["ignore_index"]),
+            edge_weight=float(edge_loss_cfg.get("weight", 0.5)),
+            edge_band=int(edge_loss_cfg.get("band", 5)),
+            edge_soft=bool(edge_loss_cfg.get("soft", False)),
+            edge_soft_sigma=float(edge_loss_cfg.get("soft_sigma", 1.5)),
+            edge_dice_weight=float(edge_loss_cfg.get("dice_weight", 0.5)),
+            edge_pos_weight=edge_loss_cfg.get("pos_weight", (5.0, 20.0)),
+        )
+    fic_cfg = loss_cfg.get("fic", {}) or {}
+    fic_weight = float(fic_cfg.get("weight", 0.0) or 0.0)
+    if fic_weight > 0.0 and head_type in {"conv", "rdh"}:
+        return FICLoss(
+            segmentation_loss=segmentation_loss,
+            ignore_index=int(config["data"]["ignore_index"]),
+            weight=fic_weight,
+            sigma=float(fic_cfg.get("sigma", 3.0)),
+            pool=int(fic_cfg.get("pool", 4)),
+            min_mass=float(fic_cfg.get("min_mass", 16.0)),
+        )
+    eoc_cfg = loss_cfg.get("eoc", {}) or {}
+    eoc_weight = float(eoc_cfg.get("weight", 0.0) or 0.0)
+    if eoc_weight > 0.0 and head_type in {"conv", "rdh"}:
+        return EOCLoss(
+            segmentation_loss=segmentation_loss,
+            ignore_index=int(config["data"]["ignore_index"]),
+            weight=eoc_weight,
+            pool=int(eoc_cfg.get("pool", 2)),
+        )
+    return segmentation_loss
 
 
 def build_optimizer(model: nn.Module, config: dict[str, Any]) -> torch.optim.Optimizer:
@@ -549,10 +787,16 @@ def build_threshold_sweep(
     )
 
 
+def _criterion_loss(criterion: nn.Module, logits: torch.Tensor, masks: torch.Tensor, images: torch.Tensor) -> torch.Tensor:
+    if getattr(criterion, "needs_image", False):
+        return criterion(logits, masks, images)
+    return criterion(logits, masks)
+
+
 def run_epoch(
     model: nn.Module,
     loader: DataLoader,
-    criterion: AsymmetricFocalTverskyBCE,
+    criterion: nn.Module,
     device: torch.device,
     config: dict[str, Any],
     epoch: int,
@@ -585,6 +829,15 @@ def run_epoch(
         intensity_refiner=intensity_refiner,
     )
     total_loss = 0.0
+    zab_totals = {
+        "presence_prob": 0.0,
+        "target_presence": 0.0,
+        "conditional_area": 0.0,
+        "expected_area": 0.0,
+        "target_area": 0.0,
+        "hierarchy_violation": 0.0,
+    }
+    zab_batches = 0
     start = time.time()
     interval = max(1, int(config["train"]["progress_log_interval"]))
     grad_accum = max(1, int(config["train"].get("grad_accum_steps", 1)))
@@ -601,17 +854,42 @@ def run_epoch(
                 if training:
                     output = model(images)
                     if isinstance(output, tuple):
-                        logits, aux_logits_list = output
-                        loss = criterion(logits, masks)
-                        aux_w = float(config["model"].get("aux_loss_weight", 0.4))
-                        for i, aux_logits in enumerate(aux_logits_list):
-                            loss = loss + (aux_w ** (i + 1)) * criterion(aux_logits, masks)
+                        logits, auxiliary = output
+                        if isinstance(auxiliary, dict):
+                            loss = criterion(logits, masks, auxiliary)
+                            if "expected_area_fraction" in auxiliary:
+                                with torch.no_grad():
+                                    macular = ((masks == 2) | (masks == 3)).flatten(1)
+                                    valid = (masks != int(config["data"]["ignore_index"])).flatten(1)
+                                    target_area = (macular & valid).sum(dim=1).float() / valid.sum(dim=1).clamp_min(1)
+                                    zab_totals["presence_prob"] += float(
+                                        torch.sigmoid(auxiliary["presence_logits"].detach().float()).mean().item()
+                                    )
+                                    zab_totals["target_presence"] += float(macular.any(dim=1).float().mean().item())
+                                    zab_totals["conditional_area"] += float(
+                                        auxiliary["conditional_area_fraction"].detach().float().mean().item()
+                                    )
+                                    zab_totals["expected_area"] += float(
+                                        auxiliary["expected_area_fraction"].detach().float().mean().item()
+                                    )
+                                    zab_totals["target_area"] += float(target_area.mean().item())
+                                    retinal_probability = torch.sigmoid(logits[:, 0].detach().float())
+                                    macular_probability = torch.sigmoid(logits[:, 1].detach().float())
+                                    zab_totals["hierarchy_violation"] += float(
+                                        F.relu(macular_probability - retinal_probability).mean().item()
+                                    )
+                                    zab_batches += 1
+                        else:
+                            loss = criterion(logits, masks)
+                            aux_w = float(config["model"].get("aux_loss_weight", 0.4))
+                            for i, aux_logits in enumerate(auxiliary):
+                                loss = loss + (aux_w ** (i + 1)) * criterion(aux_logits, masks)
                     else:
                         logits = output
-                        loss = criterion(logits, masks)
+                        loss = _criterion_loss(criterion, logits, masks, images)
                 else:
                     logits = predict_with_tta(model, images, metric_cfg.get("tta"))
-                    loss = criterion(logits, masks)
+                    loss = _criterion_loss(criterion, logits, masks, images)
             if training:
                 assert scaler is not None
                 scaler.scale(loss / grad_accum).backward()
@@ -649,6 +927,8 @@ def run_epoch(
             )
 
     result = {"loss": total_loss / max(len(loader), 1), **metrics.compute()}
+    if zab_batches:
+        result.update({f"zab_{key}": value / zab_batches for key, value in zab_totals.items()})
     if threshold_sweep is not None:
         result.update(threshold_sweep.compute())
     for key, value in result.items():
@@ -787,6 +1067,7 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
     best_ema_score = -1.0
     best_ema_epoch = 0
     best_ema_metrics: dict[str, float] = {}
+    selection_metric = str(config.get("metric", {}).get("selection_metric", "paper_macro_dice"))
     epochs = int(config["train"]["epochs"])
     sample_interval = int(config["train"].get("sample_interval", config["train"].get("save_interval", 5)))
     if ema is not None:
@@ -835,13 +1116,15 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
             include_ema=ema is not None,
         )
 
-        score = val_metrics["paper_macro_dice"]
+        if selection_metric not in val_metrics:
+            raise KeyError(f"selection metric {selection_metric!r} is unavailable in validation metrics")
+        score = val_metrics[selection_metric]
         if score > best_score:
             best_score = score
             best_epoch = epoch
             best_metrics = dict(val_metrics)
             save_checkpoint(fold_dir / "checkpoints" / "best.pt", model, optimizer, scaler, epoch, best_score, config)
-            logger.info("new best paper_macro_dice=%.6f", best_score)
+            logger.info("new best %s=%.6f", selection_metric, best_score)
         save_checkpoint(fold_dir / "checkpoints" / "latest.pt", model, optimizer, scaler, epoch, best_score, config)
         if ema is not None and ema_val_metrics is not None:
             ema_score = ema_val_metrics["paper_macro_dice"]
@@ -900,7 +1183,7 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
         )
         if "paper_sweep_best_macro_dice" in val_metrics:
             logger.info(
-                "threshold_sweep epoch=%d shared_thr=%.2f dice_1=%.4f dice_2=%.4f macro=%.4f pred_pixels_1=%.0f pred_pixels_2=%.0f",
+                "threshold_sweep epoch=%d shared_thr=%.3f dice_1=%.4f dice_2=%.4f macro=%.4f pred_pixels_1=%.0f pred_pixels_2=%.0f",
                 epoch,
                 val_metrics["paper_sweep_best_threshold"],
                 val_metrics["paper_sweep_best_dice_1"],
@@ -910,7 +1193,7 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
                 val_metrics["paper_sweep_pred_pixels_2"],
             )
             logger.info(
-                "threshold_sweep_ind epoch=%d thr_1=%.2f thr_2=%.2f dice_1=%.4f dice_2=%.4f macro=%.4f pred_pixels_1=%.0f pred_pixels_2=%.0f",
+                "threshold_sweep_ind epoch=%d thr_1=%.3f thr_2=%.3f dice_1=%.4f dice_2=%.4f macro=%.4f pred_pixels_1=%.0f pred_pixels_2=%.0f",
                 epoch,
                 val_metrics["paper_sweep_ind_threshold_1"],
                 val_metrics["paper_sweep_ind_threshold_2"],
@@ -919,6 +1202,17 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
                 val_metrics["paper_sweep_ind_macro_dice"],
                 val_metrics["paper_sweep_ind_pred_pixels_1"],
                 val_metrics["paper_sweep_ind_pred_pixels_2"],
+            )
+        if "zab_expected_area" in train_metrics:
+            logger.info(
+                "zab_burden epoch=%d presence=%.4f target_presence=%.4f conditional_area=%.6f "
+                "expected_area=%.6f target_area=%.6f",
+                epoch,
+                train_metrics["zab_presence_prob"],
+                train_metrics["zab_target_presence"],
+                train_metrics["zab_conditional_area"],
+                train_metrics["zab_expected_area"],
+                train_metrics["zab_target_area"],
             )
         if ema_val_metrics is not None:
             logger.info(

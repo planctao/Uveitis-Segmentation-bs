@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import sys
 from pathlib import Path
@@ -106,6 +107,7 @@ def build_loader(config: dict[str, Any], fold: str) -> DataLoader:
         image_extensions=data_cfg["image_extensions"],
         mask_extensions=data_cfg["mask_extensions"],
         result_extensions=data_cfg.get("result_extensions", data_cfg["image_extensions"]),
+        exclude_augmented=bool(data_cfg.get("exclude_val_augmented", True)),
     )
     if train_cfg.get("max_val_samples"):
         samples = samples[: int(train_cfg["max_val_samples"])]
@@ -168,6 +170,9 @@ def build_model(config: dict[str, Any]) -> nn.Module:
             wbe_snr_temperature=float(wbe_cfg.get("snr_temperature", 1.0)),
         )
     if backbone.startswith("dinov3_convnext_"):
+        rdh_cfg = model_cfg.get("rdh", {}) or {}
+        coleak_cfg = model_cfg.get("coleak", {}) or {}
+        zab_cfg = model_cfg.get("zab", {}) or {}
         return DinoV3ConvNeXtSegmentationModel(
             dinov3_code_dir=project_path(model_cfg["dinov3_code_dir"]),
             weights_path=project_path(model_cfg["backbone_weights"]),
@@ -177,6 +182,40 @@ def build_model(config: dict[str, Any]) -> nn.Module:
             decoder_attention=str(model_cfg.get("decoder_attention", "none")),
             decoder_attention_reduction=int(model_cfg.get("decoder_attention_reduction", 16)),
             decoder_deep_supervision=bool(model_cfg.get("decoder_deep_supervision", False)),
+            head_type=str(model_cfg.get("head", "conv")),
+            rdh_iters=int(rdh_cfg.get("iters", 8)),
+            rdh_dt=float(rdh_cfg.get("dt", 0.2)),
+            rdh_reaction=str(rdh_cfg.get("reaction", "fisher")),
+            rdh_use_image_conductance=bool(rdh_cfg.get("use_image_conductance", True)),
+            rdh_lambda=float(rdh_cfg.get("lambda", 0.1)),
+            rdh_rho=float(rdh_cfg.get("rho", 1.0)),
+            rdh_kappa=float(rdh_cfg.get("kappa", 0.1)),
+            rdh_dynamics=str(rdh_cfg.get("dynamics", "pde")),
+            rdh_d_state=int(rdh_cfg.get("d_state", 16)),
+            rdh_directions=int(rdh_cfg.get("directions", 4)),
+            rdh_stride=int(rdh_cfg.get("stride", 4)),
+            rdh_d_inner=int(rdh_cfg.get("d_inner", 64)),
+            rdh_stable_constraints=bool(rdh_cfg.get("stable_constraints", False)),
+            rdh_flux_scheme=str(rdh_cfg.get("flux_scheme", "center")),
+            rdh_guide_input=str(rdh_cfg.get("guide_input", "normalized")),
+            rdh_diffusion_mode=str(rdh_cfg.get("diffusion_mode", "isotropic")),
+            rdh_struct_pre_sigma=float(rdh_cfg.get("struct_pre_sigma", 1.0)),
+            rdh_struct_rho_sigma=float(rdh_cfg.get("struct_rho_sigma", 2.0)),
+            rdh_ced_alpha=float(rdh_cfg.get("ced_alpha", 0.005)),
+            rdh_ced_contrast=float(rdh_cfg.get("ced_contrast", 1.0)),
+            rdh_ced_direction=str(rdh_cfg.get("ced_direction", "along")),
+            coleak_topk_fraction=float(coleak_cfg.get("topk_fraction", 0.05)),
+            coleak_presence_prior=float(coleak_cfg.get("presence_prior", 0.1)),
+            coleak_prior_strength=float(coleak_cfg.get("prior_strength", 0.5)),
+            zab_topk_fraction=float(zab_cfg.get("topk_fraction", 0.05)),
+            zab_presence_prior=float(zab_cfg.get("presence_prior", 0.11)),
+            zab_area_prior=float(zab_cfg.get("area_prior", 0.005)),
+            zab_max_area_fraction=float(zab_cfg.get("max_area_fraction", 0.1)),
+            zab_anatomy_strength=float(zab_cfg.get("anatomy_strength", 0.75)),
+            zab_hierarchy_strength=float(zab_cfg.get("hierarchy_strength", 0.0)),
+            zab_bidirectional_strength=float(zab_cfg.get("bidirectional_strength", 0.0)),
+            zab_calibration_iterations=int(zab_cfg.get("calibration_iterations", 3)),
+            zab_calibration_max_shift=float(zab_cfg.get("calibration_max_shift", 6.0)),
         )
     raise ValueError(f"Unsupported backbone: {backbone}")
 
@@ -250,8 +289,18 @@ def load_checkpoint(model: nn.Module, path: Path) -> None:
 def build_eval_context(config: dict[str, Any], checkpoint: Path, fold: str) -> tuple[torch.device, DataLoader, nn.Module]:
     device = torch.device(config["runtime"]["device"] if torch.cuda.is_available() else "cpu")
     loader = build_loader(config, fold)
-    model = build_model(config).to(device)
-    load_checkpoint(model, checkpoint)
+    payload = torch.load(checkpoint, map_location="cpu", weights_only=True)
+    model_config = copy.deepcopy(config)
+    checkpoint_config = payload.get("config") if isinstance(payload, dict) else None
+    if isinstance(checkpoint_config, dict):
+        # Evaluation YAML controls transforms/postprocess; checkpoint controls architecture.
+        model_config["model"] = copy.deepcopy(checkpoint_config["model"])
+        model_config.setdefault("train", {})["freeze_backbone"] = bool(
+            checkpoint_config.get("train", {}).get("freeze_backbone", False)
+        )
+    model = build_model(model_config).to(device)
+    state_dict = payload["model"] if isinstance(payload, dict) and "model" in payload else payload
+    model.load_state_dict(state_dict)
     model.eval()
     return device, loader, model
 

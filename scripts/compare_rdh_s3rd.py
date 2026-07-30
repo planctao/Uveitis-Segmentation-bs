@@ -60,6 +60,9 @@ def build_model(config: dict) -> DinoV3ConvNeXtSegmentationModel:
         rdh_directions=int(rdh.get("directions", 4)),
         rdh_stride=int(rdh.get("stride", 4)),
         rdh_d_inner=int(rdh.get("d_inner", 64)),
+        rdh_stable_constraints=bool(rdh.get("stable_constraints", False)),
+        rdh_flux_scheme=str(rdh.get("flux_scheme", "center")),
+        rdh_guide_input=str(rdh.get("guide_input", "normalized")),
     )
 
 
