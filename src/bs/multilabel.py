@@ -21,6 +21,42 @@ def _float_values(value: float | list[float] | tuple[float, ...], name: str) -> 
     return values
 
 
+def _positive_int_tuple(value: int | list[int] | tuple[int, ...] | str, name: str) -> tuple[int, ...]:
+    if isinstance(value, str):
+        values = [int(part.strip()) for part in value.split(",") if part.strip()]
+    elif isinstance(value, int):
+        values = [value]
+    else:
+        values = [int(item) for item in value]
+    if not values or any(item <= 0 for item in values):
+        raise ValueError(f"{name} must contain positive integers")
+    return tuple(dict.fromkeys(values))
+
+
+_DMT_KERNELS: dict[str, tuple[tuple[float, float, float], tuple[float, float, float], tuple[float, float, float]]] = {
+    "x": ((0.0, 0.0, 0.0), (-0.5, 0.0, 0.5), (0.0, 0.0, 0.0)),
+    "y": ((0.0, -0.5, 0.0), (0.0, 0.0, 0.0), (0.0, 0.5, 0.0)),
+    "diag": ((-0.5, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.5)),
+    "anti": ((0.0, 0.0, -0.5), (0.0, 0.0, 0.0), (0.5, 0.0, 0.0)),
+    "laplace": ((0.0, 1.0, 0.0), (1.0, -4.0, 1.0), (0.0, 1.0, 0.0)),
+}
+
+
+def _dmt_direction_tuple(value: str | list[str] | tuple[str, ...], name: str) -> tuple[str, ...]:
+    if isinstance(value, str):
+        values = [part.strip().lower() for part in value.split(",") if part.strip()]
+    else:
+        values = [str(item).strip().lower() for item in value if str(item).strip()]
+    if not values:
+        raise ValueError(f"{name} must not be empty")
+    if "all" in values:
+        return tuple(_DMT_KERNELS)
+    invalid = [item for item in values if item not in _DMT_KERNELS]
+    if invalid:
+        raise ValueError(f"Unsupported {name}: {invalid}")
+    return tuple(dict.fromkeys(values))
+
+
 def masks_to_paper_targets(mask: Tensor, ignore_index: int = 255) -> tuple[Tensor, Tensor]:
     valid = mask != ignore_index
     lesion_1 = ((mask == 1) | (mask == 3)).float()
@@ -119,9 +155,21 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         soft_boundary_sigma: float = 0.0,
         soft_boundary_band: int = 7,
         soft_boundary_weight: float = 1.0,
+        dmt_dice2_weight: float = 0.0,
+        dmt_dice2_scales: int | list[int] | tuple[int, ...] | str = (1,),
+        dmt_dice2_directions: str | list[str] | tuple[str, ...] = ("x", "y", "diag", "anti", "laplace"),
+        dmt_uncertainty_weight: float = 0.0,
+        dmt_target_boundary_weight: float = 0.0,
+        dmt_close_weight: float = 0.0,
+        vsubr_weight: float = 0.0,
+        vsubr_kernel: int = 5,
+        vsubr_vessel_weight: float = 1.0,
+        vsubr_uncertainty_weight: float = 1.0,
+        vsubr_target_boundary_weight: float = 1.0,
         eps: float = 1e-6,
     ) -> None:
         super().__init__()
+        self.needs_image = float(vsubr_weight) > 0.0
         self.register_buffer("pos_weight", torch.tensor(pos_weight, dtype=torch.float32))
         self.bce_weight = bce_weight
         self.tversky_weight = tversky_weight
@@ -141,6 +189,17 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         self.soft_boundary_sigma = float(soft_boundary_sigma)
         self.soft_boundary_band = int(soft_boundary_band)
         self.soft_boundary_weight = float(soft_boundary_weight)
+        self.dmt_dice2_weight = float(dmt_dice2_weight)
+        self.dmt_dice2_scales = _positive_int_tuple(dmt_dice2_scales, "dmt_dice2_scales")
+        self.dmt_dice2_directions = _dmt_direction_tuple(dmt_dice2_directions, "dmt_dice2_directions")
+        self.dmt_uncertainty_weight = float(dmt_uncertainty_weight)
+        self.dmt_target_boundary_weight = float(dmt_target_boundary_weight)
+        self.dmt_close_weight = float(dmt_close_weight)
+        self.vsubr_weight = float(vsubr_weight)
+        self.vsubr_kernel = int(vsubr_kernel)
+        self.vsubr_vessel_weight = float(vsubr_vessel_weight)
+        self.vsubr_uncertainty_weight = float(vsubr_uncertainty_weight)
+        self.vsubr_target_boundary_weight = float(vsubr_target_boundary_weight)
         self.eps = eps
 
     def _boundary_weight_map(self, target: Tensor, valid: Tensor) -> Tensor:
@@ -226,6 +285,134 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         denominator = (z_sum + y_sum - (1.0 + alpha) * intersect).clamp_min(self.eps)
         return (numerator / denominator).mean()
 
+    def _dmt_response(self, values: Tensor, valid: Tensor, direction: str, scale: int) -> Tensor:
+        channels = values.shape[1]
+        kernel = values.new_tensor(_DMT_KERNELS[direction]).view(1, 1, 3, 3)
+        normalizer = kernel.abs().sum().clamp_min(1.0)
+        kernel = kernel.repeat(channels, 1, 1, 1) / normalizer
+        values = (values * valid).float()
+        kernel = kernel.float()
+        padded = F.pad(values, (scale, scale, scale, scale), mode="replicate")
+        response = F.conv2d(padded, kernel, dilation=int(scale), groups=channels).abs()
+        return response * valid.float()
+
+    def _dmt_edge_map(
+        self,
+        values: Tensor,
+        valid: Tensor,
+        scales: tuple[int, ...] | None = None,
+        directions: tuple[str, ...] | None = None,
+    ) -> Tensor:
+        scales = scales or self.dmt_dice2_scales
+        directions = directions or self.dmt_dice2_directions
+        edge = values.new_zeros(values.shape, dtype=torch.float32)
+        count = 0
+        for scale in scales:
+            for direction in directions:
+                edge = edge + self._dmt_response(values, valid, direction, int(scale))
+                count += 1
+        return edge / max(count, 1)
+
+    def _dmt_dice2_loss(self, probs: Tensor, target: Tensor, valid: Tensor) -> Tensor:
+        if self.dmt_dice2_weight <= 0.0:
+            return probs.new_tensor(0.0)
+        probs_f = probs.float() * valid.float()
+        target_f = target.float() * valid.float()
+        valid_f = valid.float()
+        uncertainty = (4.0 * probs_f * (1.0 - probs_f)).detach()
+        dims = (0, 2, 3)
+        terms = []
+        eps = max(float(self.eps), 1e-4)
+        for scale in self.dmt_dice2_scales:
+            for direction in self.dmt_dice2_directions:
+                pred_edge = self._dmt_response(probs_f, valid_f, direction, scale).clamp(0.0, 1.0)
+                target_edge = self._dmt_response(target_f, valid_f, direction, scale).detach().clamp(0.0, 1.0)
+                weight = valid_f
+                if self.dmt_uncertainty_weight > 0.0:
+                    weight = weight * (1.0 + self.dmt_uncertainty_weight * uncertainty)
+                if self.dmt_target_boundary_weight > 0.0:
+                    weight = weight * (1.0 + self.dmt_target_boundary_weight * target_edge)
+                target_mass = (weight * target_edge.square()).sum(dim=dims)
+                present = target_mass > eps
+                if not bool(present.any()):
+                    continue
+                intersection = (weight * pred_edge * target_edge).sum(dim=dims)
+                denominator = (weight * (pred_edge.square() + target_edge.square())).sum(dim=dims).clamp_min(eps)
+                dice = 1.0 - (2.0 * intersection + eps) / (denominator + eps)
+                terms.append(dice[present])
+        if not terms:
+            return probs.new_tensor(0.0)
+        return torch.cat([term.flatten() for term in terms]).mean()
+
+    def _dmt_boundary_closure(self, pred_edge: Tensor, target_edge: Tensor, valid: Tensor) -> Tensor:
+        channels = pred_edge.shape[1]
+        kernel = pred_edge.new_tensor([[1.0, 1.0, 1.0], [1.0, 0.0, 1.0], [1.0, 1.0, 1.0]])
+        kernel = kernel.view(1, 1, 3, 3).repeat(channels, 1, 1, 1)
+        pred_edge = pred_edge.float() * valid.float()
+        target_edge = target_edge.float().detach().clamp(0.0, 1.0) * valid.float()
+        degree = F.conv2d(pred_edge, kernel, padding=1, groups=channels)
+        gap = F.relu(2.0 - degree).square()
+        numerator = (target_edge * pred_edge * gap).sum()
+        denominator = (target_edge * pred_edge.detach()).sum().clamp_min(1.0)
+        return numerator / denominator
+
+    def _dmt_close_loss(self, probs: Tensor, target: Tensor, valid: Tensor) -> Tensor:
+        if self.dmt_close_weight <= 0.0:
+            return probs.new_tensor(0.0)
+        probs_f = probs.float() * valid.float()
+        target_f = target.float() * valid.float()
+        valid_f = valid.float()
+        pred_edge = self._dmt_edge_map(probs_f, valid_f, scales=(1,))
+        target_edge = self._dmt_edge_map(target_f, valid_f, scales=(1,)).detach()
+        return self._dmt_boundary_closure(pred_edge, target_edge, valid_f)
+
+    def _vsubr_image_prior(self, image: Tensor, size: tuple[int, int]) -> tuple[Tensor, Tensor]:
+        image = image.float()
+        if image.shape[1] == 1:
+            gray = image
+        else:
+            gray = image.mean(dim=1, keepdim=True)
+        if gray.shape[-2:] != size:
+            gray = F.interpolate(gray, size=size, mode="bilinear", align_corners=False)
+        dims = (2, 3)
+        gray_min = gray.amin(dim=dims, keepdim=True)
+        gray_max = gray.amax(dim=dims, keepdim=True)
+        gray = (gray - gray_min) / (gray_max - gray_min).clamp_min(self.eps)
+
+        sobel_x = gray.new_tensor([[-1.0, 0.0, 1.0], [-2.0, 0.0, 2.0], [-1.0, 0.0, 1.0]]).view(1, 1, 3, 3) / 8.0
+        sobel_y = gray.new_tensor([[-1.0, -2.0, -1.0], [0.0, 0.0, 0.0], [1.0, 2.0, 1.0]]).view(1, 1, 3, 3) / 8.0
+        gx = F.conv2d(gray, sobel_x, padding=1)
+        gy = F.conv2d(gray, sobel_y, padding=1)
+        edge = torch.sqrt(gx.square() + gy.square() + self.eps)
+        edge = edge / edge.amax(dim=dims, keepdim=True).clamp_min(self.eps)
+
+        kernel = self.vsubr_kernel if self.vsubr_kernel % 2 == 1 else self.vsubr_kernel + 1
+        kernel = max(3, kernel)
+        jxx = F.avg_pool2d(gx.square(), kernel_size=kernel, stride=1, padding=kernel // 2)
+        jyy = F.avg_pool2d(gy.square(), kernel_size=kernel, stride=1, padding=kernel // 2)
+        jxy = F.avg_pool2d(gx * gy, kernel_size=kernel, stride=1, padding=kernel // 2)
+        anisotropy = torch.sqrt((jxx - jyy).square() + 4.0 * jxy.square() + self.eps) / (jxx + jyy + self.eps)
+        vesselness = (anisotropy * edge).clamp(0.0, 1.0)
+        return edge.detach(), vesselness.detach()
+
+    def _vsubr_loss(self, logits: Tensor, probs: Tensor, target: Tensor, valid: Tensor, image: Tensor | None) -> Tensor:
+        if self.vsubr_weight <= 0.0 or image is None:
+            return logits.new_tensor(0.0)
+        edge, vesselness = self._vsubr_image_prior(image.to(device=logits.device), logits.shape[-2:])
+        edge = edge.to(dtype=logits.dtype)
+        vesselness = vesselness.to(dtype=logits.dtype)
+        target_boundary = self._boundary_band(target, valid, self.vsubr_kernel).detach()
+        uncertainty = (4.0 * probs * (1.0 - probs)).detach().clamp(0.0, 1.0)
+        vessel_suppression = (1.0 - self.vsubr_vessel_weight * vesselness).clamp(0.0, 1.0)
+        focus = target_boundary * valid
+        focus = focus * (1.0 + self.vsubr_uncertainty_weight * uncertainty)
+        focus = focus * (1.0 + self.vsubr_target_boundary_weight * edge)
+        focus = focus * vessel_suppression
+        if not bool((focus > 0.0).any()):
+            return logits.new_tensor(0.0)
+        bce = F.binary_cross_entropy_with_logits(logits, target, reduction="none")
+        return (bce * focus).sum() / focus.sum().clamp_min(1.0)
+
     def _hard_negative_ratios(self, channels: int, device: torch.device, dtype: torch.dtype) -> Tensor:
         ratios = self.hard_negative_ratio.to(device=device, dtype=dtype)
         if ratios.numel() == 1:
@@ -264,7 +451,7 @@ class AsymmetricFocalTverskyBCE(nn.Module):
                 flat_keep[batch_idx, channel_idx, selected] = True
         return flat_keep.view_as(valid).to(dtype=valid.dtype)
 
-    def forward(self, logits: Tensor, mask: Tensor) -> Tensor:
+    def forward(self, logits: Tensor, mask: Tensor, image: Tensor | None = None) -> Tensor:
         target, valid = masks_to_paper_targets(mask, self.ignore_index)
         valid = valid.to(device=logits.device, dtype=logits.dtype).expand_as(logits)
         target = target.to(device=logits.device, dtype=logits.dtype)
@@ -287,11 +474,17 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         focal_tversky = torch.pow(1.0 - tversky, self.gamma).mean()
         boundary_dice = self._boundary_dice_loss(probs, target, valid)
         boundary_dou = self._boundary_dou_loss(probs, target, valid)
+        dmt_dice2 = self._dmt_dice2_loss(probs, target, valid)
+        dmt_close = self._dmt_close_loss(probs, target, valid)
+        vsubr = self._vsubr_loss(logits, probs, target, valid, image)
         return (
             self.bce_weight * bce
             + self.tversky_weight * focal_tversky
             + self.boundary_dice_weight * boundary_dice
             + self.boundary_dou_weight * boundary_dou
+            + self.dmt_dice2_weight * dmt_dice2
+            + self.dmt_close_weight * dmt_close
+            + self.vsubr_weight * vsubr
         )
 
 

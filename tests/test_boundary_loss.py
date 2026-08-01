@@ -152,3 +152,129 @@ def test_boundary_dice_loss_changes_loss_and_stays_finite() -> None:
 
     assert torch.isfinite(loss_value)
     assert not torch.allclose(plain_loss(logits, mask), loss_value)
+
+
+def test_dmt_dice2_weight_zero_matches_default_loss() -> None:
+    logits = torch.randn((2, 2, 12, 12), generator=torch.Generator().manual_seed(31))
+    mask = torch.zeros((2, 12, 12), dtype=torch.long)
+    mask[:, 3:9, 3:9] = 1
+
+    default_loss = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0))
+    dmt_off_loss = AsymmetricFocalTverskyBCE(
+        pos_weight=(1.0, 1.0),
+        dmt_dice2_weight=0.0,
+        dmt_dice2_scales=(1, 2),
+        dmt_close_weight=0.0,
+    )
+
+    assert torch.allclose(default_loss(logits, mask), dmt_off_loss(logits, mask))
+
+
+def test_dmt_dice2_changes_loss_and_backpropagates() -> None:
+    logits = torch.randn((1, 2, 16, 16), generator=torch.Generator().manual_seed(37), requires_grad=True)
+    mask = torch.zeros((1, 16, 16), dtype=torch.long)
+    mask[:, 4:12, 4:12] = 1
+
+    loss_fn = AsymmetricFocalTverskyBCE(
+        pos_weight=(1.0, 1.0),
+        dmt_dice2_weight=0.3,
+        dmt_dice2_scales=(1, 2),
+        dmt_uncertainty_weight=0.5,
+        dmt_target_boundary_weight=1.0,
+        dmt_close_weight=0.05,
+    )
+    value = loss_fn(logits, mask)
+    value.backward()
+
+    assert torch.isfinite(value)
+    assert logits.grad is not None
+    assert torch.isfinite(logits.grad).all()
+
+
+def test_dmt_dice2_prefers_aligned_boundary() -> None:
+    mask = torch.zeros((1, 16, 16), dtype=torch.long)
+    mask[:, 4:12, 4:12] = 1
+    aligned = torch.full((1, 2, 16, 16), -8.0)
+    aligned[:, 0, 4:12, 4:12] = 8.0
+    shifted = torch.full((1, 2, 16, 16), -8.0)
+    shifted[:, 0, 5:13, 5:13] = 8.0
+    loss_fn = AsymmetricFocalTverskyBCE(
+        pos_weight=(1.0, 1.0),
+        bce_weight=0.0,
+        tversky_weight=0.0,
+        dmt_dice2_weight=1.0,
+        dmt_dice2_scales=(1,),
+        dmt_dice2_directions=("x", "y", "diag", "anti"),
+    )
+
+    assert loss_fn(aligned, mask) < loss_fn(shifted, mask)
+
+
+def test_dmt_closure_penalizes_broken_boundary() -> None:
+    loss_fn = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0), dmt_close_weight=1.0)
+    target_edge = torch.zeros((1, 1, 10, 10))
+    target_edge[..., 3, 3:7] = 1.0
+    target_edge[..., 6, 3:7] = 1.0
+    target_edge[..., 3:7, 3] = 1.0
+    target_edge[..., 3:7, 6] = 1.0
+    connected = target_edge.clone()
+    broken = target_edge.clone()
+    broken[..., 3, 4:6] = 0.0
+    valid = torch.ones_like(target_edge)
+
+    connected_loss = loss_fn._dmt_boundary_closure(connected, target_edge, valid)
+    broken_loss = loss_fn._dmt_boundary_closure(broken, target_edge, valid)
+
+    assert broken_loss > connected_loss
+
+
+def test_vsubr_weight_zero_matches_default_loss_with_image() -> None:
+    logits = torch.randn((2, 2, 12, 12), generator=torch.Generator().manual_seed(41))
+    image = torch.randn((2, 3, 12, 12), generator=torch.Generator().manual_seed(43))
+    mask = torch.zeros((2, 12, 12), dtype=torch.long)
+    mask[:, 3:9, 3:9] = 1
+
+    default_loss = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0))
+    vsubr_off_loss = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0), vsubr_weight=0.0)
+
+    assert torch.allclose(default_loss(logits, mask), vsubr_off_loss(logits, mask, image))
+
+
+def test_vsubr_changes_loss_and_backpropagates() -> None:
+    logits = torch.randn((1, 2, 16, 16), generator=torch.Generator().manual_seed(47), requires_grad=True)
+    image = torch.zeros((1, 3, 16, 16))
+    image[:, :, 4:12, 4:12] = 1.0
+    mask = torch.zeros((1, 16, 16), dtype=torch.long)
+    mask[:, 4:12, 4:12] = 1
+
+    plain_loss = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0), vsubr_weight=0.0)
+    vsubr_loss = AsymmetricFocalTverskyBCE(
+        pos_weight=(1.0, 1.0),
+        vsubr_weight=0.2,
+        vsubr_kernel=5,
+        vsubr_vessel_weight=0.5,
+        vsubr_uncertainty_weight=1.0,
+        vsubr_target_boundary_weight=1.0,
+    )
+
+    value = vsubr_loss(logits, mask, image)
+    value.backward()
+
+    assert torch.isfinite(value)
+    assert not torch.allclose(plain_loss(logits.detach(), mask), value.detach())
+    assert logits.grad is not None
+    assert torch.isfinite(logits.grad).all()
+
+
+def test_vsubr_prior_detects_vessel_like_edges() -> None:
+    loss_fn = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0), vsubr_weight=0.1, vsubr_kernel=5)
+    image = torch.zeros((1, 3, 16, 16))
+    image[:, :, :, 7:9] = 1.0
+
+    edge, vesselness = loss_fn._vsubr_image_prior(image, (16, 16))
+
+    assert edge.shape == (1, 1, 16, 16)
+    assert vesselness.shape == (1, 1, 16, 16)
+    assert float(vesselness.min()) >= 0.0
+    assert float(vesselness.max()) <= 1.0
+    assert bool(vesselness[edge > 0.5].max() > 0.1)

@@ -60,6 +60,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--boundary-dice-weight", type=float, default=None)
     parser.add_argument("--boundary-dice-kernel", type=int, default=None)
     parser.add_argument("--boundary-dou-weight", type=float, default=None)
+    parser.add_argument("--dmt-dice2-weight", type=float, default=None)
+    parser.add_argument("--dmt-dice2-scales", default=None, help="Comma-separated DMT scales, e.g. 1,2,4")
+    parser.add_argument("--dmt-close-weight", type=float, default=None)
+    parser.add_argument("--vsubr-weight", type=float, default=None)
+    parser.add_argument("--vsubr-kernel", type=int, default=None)
+    parser.add_argument("--vsubr-vessel-weight", type=float, default=None)
+    parser.add_argument("--vsubr-uncertainty-weight", type=float, default=None)
+    parser.add_argument("--vsubr-target-boundary-weight", type=float, default=None)
     parser.add_argument("--edge-weight", type=float, default=None)
     parser.add_argument("--edge-band", type=int, default=None)
     parser.add_argument("--edge-soft", action=argparse.BooleanOptionalAction, default=None)
@@ -150,6 +158,19 @@ def parse_float_or_list(value: Any) -> float | list[float] | None:
     return value
 
 
+def parse_int_list(value: Any) -> list[int] | None:
+    if value is None:
+        return None
+    if isinstance(value, int):
+        return [value]
+    if isinstance(value, str):
+        values = [int(part.strip()) for part in value.split(",") if part.strip()]
+        if not values:
+            raise ValueError("Expected at least one integer value")
+        return values
+    return [int(item) for item in value]
+
+
 def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]:
     config = {key: dict(value) if isinstance(value, dict) else value for key, value in config.items()}
     overrides = {
@@ -164,6 +185,9 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         ("loss", "boundary_dice_weight"): args.boundary_dice_weight,
         ("loss", "boundary_dice_kernel"): args.boundary_dice_kernel,
         ("loss", "boundary_dou_weight"): args.boundary_dou_weight,
+        ("loss", "dmt_dice2_weight"): args.dmt_dice2_weight,
+        ("loss", "dmt_dice2_scales"): parse_int_list(args.dmt_dice2_scales),
+        ("loss", "dmt_close_weight"): args.dmt_close_weight,
         ("loss", "hard_negative_ratio"): parse_float_or_list(args.hard_negative_ratio),
         ("loss", "hard_negative_min_pixels"): args.hard_negative_min_pixels,
         ("loss", "soft_boundary_sigma"): args.soft_boundary_sigma,
@@ -254,6 +278,18 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         for key, value in edge_loss_overrides.items():
             if value is not None:
                 edge[key] = value
+    vsubr_overrides = {
+        "weight": args.vsubr_weight,
+        "kernel": args.vsubr_kernel,
+        "vessel_weight": args.vsubr_vessel_weight,
+        "uncertainty_weight": args.vsubr_uncertainty_weight,
+        "target_boundary_weight": args.vsubr_target_boundary_weight,
+    }
+    if any(value is not None for value in vsubr_overrides.values()):
+        vsubr = config["loss"].setdefault("vsubr", {})
+        for key, value in vsubr_overrides.items():
+            if value is not None:
+                vsubr[key] = value
     fic_overrides = {
         "weight": args.fic_weight,
         "sigma": args.fic_sigma,
@@ -552,6 +588,7 @@ def build_model(config: dict[str, Any], load_pretrained: bool = True) -> nn.Modu
 
 def build_loss(config: dict[str, Any]) -> nn.Module:
     loss_cfg = config["loss"]
+    vsubr_cfg = loss_cfg.get("vsubr", {}) or {}
     segmentation_loss = AsymmetricFocalTverskyBCE(
         pos_weight=loss_cfg["pos_weight"],
         bce_weight=float(loss_cfg["bce_weight"]),
@@ -573,6 +610,17 @@ def build_loss(config: dict[str, Any]) -> nn.Module:
         soft_boundary_weight=(
             float(loss_cfg["soft_boundary_weight"]) if loss_cfg.get("soft_boundary_weight") is not None else 1.0
         ),
+        dmt_dice2_weight=float(loss_cfg.get("dmt_dice2_weight", 0.0) or 0.0),
+        dmt_dice2_scales=loss_cfg.get("dmt_dice2_scales", (1,)),
+        dmt_dice2_directions=loss_cfg.get("dmt_dice2_directions", ("x", "y", "diag", "anti", "laplace")),
+        dmt_uncertainty_weight=float(loss_cfg.get("dmt_uncertainty_weight", 0.0) or 0.0),
+        dmt_target_boundary_weight=float(loss_cfg.get("dmt_target_boundary_weight", 0.0) or 0.0),
+        dmt_close_weight=float(loss_cfg.get("dmt_close_weight", 0.0) or 0.0),
+        vsubr_weight=float(vsubr_cfg.get("weight", 0.0) or 0.0),
+        vsubr_kernel=int(vsubr_cfg.get("kernel", 5) or 5),
+        vsubr_vessel_weight=float(vsubr_cfg.get("vessel_weight", 1.0) or 1.0),
+        vsubr_uncertainty_weight=float(vsubr_cfg.get("uncertainty_weight", 1.0) or 1.0),
+        vsubr_target_boundary_weight=float(vsubr_cfg.get("target_boundary_weight", 1.0) or 1.0),
     )
     head_type = str(config["model"].get("head", "conv")).lower()
     if head_type == "coleak":
@@ -829,6 +877,7 @@ def run_epoch(
         intensity_refiner=intensity_refiner,
     )
     total_loss = 0.0
+    skipped_batches = 0
     zab_totals = {
         "presence_prob": 0.0,
         "target_presence": 0.0,
@@ -890,14 +939,35 @@ def run_epoch(
                 else:
                     logits = predict_with_tta(model, images, metric_cfg.get("tta"))
                     loss = _criterion_loss(criterion, logits, masks, images)
+            if not bool(torch.isfinite(loss.detach()).all()):
+                skipped_batches += 1
+                logger.error("%s epoch=%d step=%d non-finite loss skipped: %s", prefix, epoch, step, float(loss.detach().cpu()))
+                if training:
+                    assert optimizer is not None
+                    optimizer.zero_grad(set_to_none=True)
+                    continue
+                raise FloatingPointError(f"Non-finite validation loss at epoch={epoch} step={step}")
             if training:
                 assert scaler is not None
                 scaler.scale(loss / grad_accum).backward()
                 if step % grad_accum == 0 or step == len(loader):
                     scaler.unscale_(optimizer)
                     clip = config["train"].get("clip_grad_norm")
+                    grad_norm = None
                     if clip:
-                        torch.nn.utils.clip_grad_norm_(model.parameters(), float(clip))
+                        grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), float(clip))
+                        if not bool(torch.isfinite(grad_norm.detach()).all()):
+                            skipped_batches += 1
+                            logger.error(
+                                "%s epoch=%d step=%d non-finite grad_norm skipped: %s",
+                                prefix,
+                                epoch,
+                                step,
+                                float(grad_norm.detach().cpu()),
+                            )
+                            scaler.update()
+                            optimizer.zero_grad(set_to_none=True)
+                            continue
                     scale_before = scaler.get_scale()
                     scaler.step(optimizer)
                     scaler.update()
@@ -909,7 +979,8 @@ def run_epoch(
         metrics.update(logits, masks, images)
         if threshold_sweep is not None:
             threshold_sweep.update(logits, masks, images)
-        progress.set_postfix(loss=f"{total_loss / step:.4f}")
+        valid_batches = max(step - skipped_batches, 1)
+        progress.set_postfix(loss=f"{total_loss / valid_batches:.4f}")
         if step % interval == 0 or step == len(loader):
             elapsed = time.time() - start
             eta = (len(loader) - step) * elapsed / max(step, 1)
@@ -920,13 +991,17 @@ def run_epoch(
                 step,
                 len(loader),
                 100.0 * step / len(loader),
-                total_loss / step,
+                total_loss / valid_batches,
                 elapsed,
                 eta,
                 format_memory(device),
             )
 
-    result = {"loss": total_loss / max(len(loader), 1), **metrics.compute()}
+    valid_epoch_batches = max(len(loader) - skipped_batches, 1)
+    result = {"loss": total_loss / valid_epoch_batches, **metrics.compute()}
+    if skipped_batches:
+        logger.warning("%s epoch=%d skipped_nonfinite_batches=%d", prefix, epoch, skipped_batches)
+        result["skipped_nonfinite_batches"] = float(skipped_batches)
     if zab_batches:
         result.update({f"zab_{key}": value / zab_batches for key, value in zab_totals.items()})
     if threshold_sweep is not None:
