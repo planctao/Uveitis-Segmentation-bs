@@ -68,6 +68,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--vsubr-vessel-weight", type=float, default=None)
     parser.add_argument("--vsubr-uncertainty-weight", type=float, default=None)
     parser.add_argument("--vsubr-target-boundary-weight", type=float, default=None)
+    parser.add_argument("--clinical-area-weight", type=float, default=None)
+    parser.add_argument("--clinical-area-scale", type=float, default=None)
+    parser.add_argument("--clinical-area-channel-weights", default=None)
     parser.add_argument("--edge-weight", type=float, default=None)
     parser.add_argument("--edge-band", type=int, default=None)
     parser.add_argument("--edge-soft", action=argparse.BooleanOptionalAction, default=None)
@@ -290,6 +293,16 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         for key, value in vsubr_overrides.items():
             if value is not None:
                 vsubr[key] = value
+    clinical_area_overrides = {
+        "weight": args.clinical_area_weight,
+        "scale": args.clinical_area_scale,
+        "channel_weights": parse_float_or_list(args.clinical_area_channel_weights),
+    }
+    if any(value is not None for value in clinical_area_overrides.values()):
+        clinical_area = config["loss"].setdefault("clinical_area", {})
+        for key, value in clinical_area_overrides.items():
+            if value is not None:
+                clinical_area[key] = value
     fic_overrides = {
         "weight": args.fic_weight,
         "sigma": args.fic_sigma,
@@ -589,6 +602,7 @@ def build_model(config: dict[str, Any], load_pretrained: bool = True) -> nn.Modu
 def build_loss(config: dict[str, Any]) -> nn.Module:
     loss_cfg = config["loss"]
     vsubr_cfg = loss_cfg.get("vsubr", {}) or {}
+    clinical_area_cfg = loss_cfg.get("clinical_area", {}) or {}
     segmentation_loss = AsymmetricFocalTverskyBCE(
         pos_weight=loss_cfg["pos_weight"],
         bce_weight=float(loss_cfg["bce_weight"]),
@@ -621,6 +635,9 @@ def build_loss(config: dict[str, Any]) -> nn.Module:
         vsubr_vessel_weight=float(vsubr_cfg.get("vessel_weight", 1.0) or 1.0),
         vsubr_uncertainty_weight=float(vsubr_cfg.get("uncertainty_weight", 1.0) or 1.0),
         vsubr_target_boundary_weight=float(vsubr_cfg.get("target_boundary_weight", 1.0) or 1.0),
+        clinical_area_weight=float(clinical_area_cfg.get("weight", 0.0) or 0.0),
+        clinical_area_scale=float(clinical_area_cfg.get("scale", 1e-4) or 1e-4),
+        clinical_area_channel_weights=clinical_area_cfg.get("channel_weights", (1.0, 1.0)) or (1.0, 1.0),
     )
     head_type = str(config["model"].get("head", "conv")).lower()
     if head_type == "coleak":
@@ -837,7 +854,7 @@ def build_threshold_sweep(
 
 def _criterion_loss(criterion: nn.Module, logits: torch.Tensor, masks: torch.Tensor, images: torch.Tensor) -> torch.Tensor:
     if getattr(criterion, "needs_image", False):
-        return criterion(logits, masks, images)
+        return criterion(logits, masks, image=images)
     return criterion(logits, masks)
 
 
@@ -905,7 +922,10 @@ def run_epoch(
                     if isinstance(output, tuple):
                         logits, auxiliary = output
                         if isinstance(auxiliary, dict):
-                            loss = criterion(logits, masks, auxiliary)
+                            if getattr(criterion, "needs_image", False):
+                                loss = criterion(logits, masks, auxiliary, images)
+                            else:
+                                loss = criterion(logits, masks, auxiliary)
                             if "expected_area_fraction" in auxiliary:
                                 with torch.no_grad():
                                     macular = ((masks == 2) | (masks == 3)).flatten(1)
@@ -998,10 +1018,9 @@ def run_epoch(
             )
 
     valid_epoch_batches = max(len(loader) - skipped_batches, 1)
-    result = {"loss": total_loss / valid_epoch_batches, **metrics.compute()}
+    result = {"loss": total_loss / valid_epoch_batches, "skipped_nonfinite_batches": float(skipped_batches), **metrics.compute()}
     if skipped_batches:
         logger.warning("%s epoch=%d skipped_nonfinite_batches=%d", prefix, epoch, skipped_batches)
-        result["skipped_nonfinite_batches"] = float(skipped_batches)
     if zab_batches:
         result.update({f"zab_{key}": value / zab_batches for key, value in zab_totals.items()})
     if threshold_sweep is not None:

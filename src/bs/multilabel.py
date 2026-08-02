@@ -166,6 +166,9 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         vsubr_vessel_weight: float = 1.0,
         vsubr_uncertainty_weight: float = 1.0,
         vsubr_target_boundary_weight: float = 1.0,
+        clinical_area_weight: float = 0.0,
+        clinical_area_scale: float = 1e-4,
+        clinical_area_channel_weights: float | list[float] | tuple[float, ...] = (1.0, 1.0),
         eps: float = 1e-6,
     ) -> None:
         super().__init__()
@@ -200,6 +203,14 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         self.vsubr_vessel_weight = float(vsubr_vessel_weight)
         self.vsubr_uncertainty_weight = float(vsubr_uncertainty_weight)
         self.vsubr_target_boundary_weight = float(vsubr_target_boundary_weight)
+        self.clinical_area_weight = float(clinical_area_weight)
+        self.clinical_area_scale = float(clinical_area_scale)
+        area_weights = torch.as_tensor(clinical_area_channel_weights, dtype=torch.float32).flatten()
+        if area_weights.numel() == 1:
+            area_weights = area_weights.repeat(2)
+        if area_weights.numel() != 2:
+            raise ValueError(f"clinical_area_channel_weights must be scalar or have 2 values, got {area_weights.numel()}")
+        self.register_buffer("clinical_area_channel_weights", area_weights)
         self.eps = eps
 
     def _boundary_weight_map(self, target: Tensor, valid: Tensor) -> Tensor:
@@ -413,6 +424,19 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         bce = F.binary_cross_entropy_with_logits(logits, target, reduction="none")
         return (bce * focus).sum() / focus.sum().clamp_min(1.0)
 
+    def _clinical_area_loss(self, probs: Tensor, target: Tensor, valid: Tensor) -> Tensor:
+        if self.clinical_area_weight <= 0.0:
+            return probs.new_tensor(0.0)
+        scale = max(float(self.clinical_area_scale), self.eps)
+        valid_pixels = valid[:, :1].flatten(1).sum(dim=1).clamp_min(1.0)
+        pred_fraction = (probs * valid).flatten(2).sum(dim=2) / valid_pixels.unsqueeze(1)
+        target_fraction = (target * valid).flatten(2).sum(dim=2) / valid_pixels.unsqueeze(1)
+        pred_burden = torch.log1p(pred_fraction.float() / scale)
+        target_burden = torch.log1p(target_fraction.float() / scale).detach()
+        loss = F.smooth_l1_loss(pred_burden, target_burden, reduction="none")
+        weights = self.clinical_area_channel_weights.to(device=probs.device, dtype=loss.dtype).view(1, -1)
+        return (loss * weights).sum() / weights.sum().clamp_min(1.0) / max(loss.shape[0], 1)
+
     def _hard_negative_ratios(self, channels: int, device: torch.device, dtype: torch.dtype) -> Tensor:
         ratios = self.hard_negative_ratio.to(device=device, dtype=dtype)
         if ratios.numel() == 1:
@@ -477,6 +501,7 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         dmt_dice2 = self._dmt_dice2_loss(probs, target, valid)
         dmt_close = self._dmt_close_loss(probs, target, valid)
         vsubr = self._vsubr_loss(logits, probs, target, valid, image)
+        clinical_area = self._clinical_area_loss(probs, target, valid)
         return (
             self.bce_weight * bce
             + self.tversky_weight * focal_tversky
@@ -485,6 +510,7 @@ class AsymmetricFocalTverskyBCE(nn.Module):
             + self.dmt_dice2_weight * dmt_dice2
             + self.dmt_close_weight * dmt_close
             + self.vsubr_weight * vsubr
+            + self.clinical_area_weight * clinical_area
         )
 
 
@@ -522,9 +548,21 @@ class EdgeGuidedLoss(nn.Module):
             pos_weight_tensor = pos_weight_tensor.repeat(2)
         self.register_buffer("edge_pos_weight", pos_weight_tensor)
         self.eps = eps
+        self.needs_image = bool(getattr(segmentation_loss, "needs_image", False))
 
-    def forward(self, logits: Tensor, mask: Tensor, auxiliary: dict[str, Tensor] | None = None) -> Tensor:
-        loss = self.segmentation_loss(logits, mask)
+    def _segmentation_loss(self, logits: Tensor, mask: Tensor, image: Tensor | None = None) -> Tensor:
+        if self.needs_image:
+            return self.segmentation_loss(logits, mask, image)
+        return self.segmentation_loss(logits, mask)
+
+    def forward(
+        self,
+        logits: Tensor,
+        mask: Tensor,
+        auxiliary: dict[str, Tensor] | None = None,
+        image: Tensor | None = None,
+    ) -> Tensor:
+        loss = self._segmentation_loss(logits, mask, image)
         if auxiliary is None or "edge_logits" not in auxiliary:
             return loss
         edge_logits = auxiliary["edge_logits"]

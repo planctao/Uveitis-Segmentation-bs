@@ -1,6 +1,6 @@
 import torch
 
-from bs.multilabel import AsymmetricFocalTverskyBCE
+from bs.multilabel import AsymmetricFocalTverskyBCE, masks_to_paper_targets
 
 
 def test_boundary_weight_zero_matches_default_loss() -> None:
@@ -278,3 +278,48 @@ def test_vsubr_prior_detects_vessel_like_edges() -> None:
     assert float(vesselness.min()) >= 0.0
     assert float(vesselness.max()) <= 1.0
     assert bool(vesselness[edge > 0.5].max() > 0.1)
+
+
+def test_clinical_area_weight_zero_matches_default_loss() -> None:
+    logits = torch.randn((2, 2, 12, 12), generator=torch.Generator().manual_seed(53))
+    mask = torch.zeros((2, 12, 12), dtype=torch.long)
+    mask[:, 3:9, 3:9] = 1
+
+    default_loss = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0))
+    area_off_loss = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0), clinical_area_weight=0.0)
+
+    assert torch.allclose(default_loss(logits, mask), area_off_loss(logits, mask))
+
+
+def test_clinical_area_loss_changes_loss_and_backpropagates() -> None:
+    logits = torch.randn((1, 2, 16, 16), generator=torch.Generator().manual_seed(59), requires_grad=True)
+    mask = torch.zeros((1, 16, 16), dtype=torch.long)
+    mask[:, 4:12, 4:12] = 1
+
+    plain_loss = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0), clinical_area_weight=0.0)
+    area_loss = AsymmetricFocalTverskyBCE(
+        pos_weight=(1.0, 1.0),
+        clinical_area_weight=0.1,
+        clinical_area_scale=1e-4,
+        clinical_area_channel_weights=(1.0, 2.0),
+    )
+
+    value = area_loss(logits, mask)
+    value.backward()
+
+    assert torch.isfinite(value)
+    assert not torch.allclose(plain_loss(logits.detach(), mask), value.detach())
+    assert logits.grad is not None
+    assert torch.isfinite(logits.grad).all()
+
+
+def test_clinical_area_loss_prefers_matched_area() -> None:
+    mask = torch.zeros((1, 16, 16), dtype=torch.long)
+    mask[:, 4:12, 4:12] = 1
+    loss_fn = AsymmetricFocalTverskyBCE(pos_weight=(1.0, 1.0), clinical_area_weight=1.0)
+    target, valid = masks_to_paper_targets(mask)
+    valid = valid.expand_as(target)
+    matched = target.float()
+    overgrown = torch.ones_like(matched) * 0.5
+
+    assert loss_fn._clinical_area_loss(matched, target, valid) < loss_fn._clinical_area_loss(overgrown, target, valid)

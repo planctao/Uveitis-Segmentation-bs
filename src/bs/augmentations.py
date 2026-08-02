@@ -163,6 +163,66 @@ class ForegroundResizedCrop(RandomResizedCrop):
         return image, mask
 
 
+class HighFluorescenceResizedCrop(RandomResizedCrop):
+    def _crop_box_around(self, height: int, width: int, center_y: int, center_x: int) -> tuple[int, int, int, int]:
+        scale = _sample_range(self.kwargs.get("scale", [0.65, 0.95]))
+        scale = min(1.0, max(0.05, _scale_around(scale, 1.0, self.strength)))
+        crop_h = max(1, min(height, int(height * scale)))
+        crop_w = max(1, min(width, int(width * scale)))
+        jitter = float(self.kwargs.get("jitter", 0.25)) * self.strength
+        max_jy = int(round(crop_h * max(jitter, 0.0)))
+        max_jx = int(round(crop_w * max(jitter, 0.0)))
+        center_y = int(center_y + random.randint(-max_jy, max_jy)) if max_jy > 0 else int(center_y)
+        center_x = int(center_x + random.randint(-max_jx, max_jx)) if max_jx > 0 else int(center_x)
+        top = min(max(center_y - crop_h // 2, 0), height - crop_h)
+        left = min(max(center_x - crop_w // 2, 0), width - crop_w)
+        return top, left, crop_h, crop_w
+
+    def apply(self, image: Tensor, mask: Tensor) -> tuple[Tensor, Tensor]:
+        height, width = mask.shape
+        raw = denormalize(image)
+        channel_reduce = str(self.kwargs.get("channel_reduce", "max")).lower()
+        if channel_reduce == "green" and raw.shape[0] >= 2:
+            intensity = raw[1]
+        elif channel_reduce == "mean":
+            intensity = raw.mean(dim=0)
+        else:
+            intensity = raw.max(dim=0).values
+        valid = mask != int(self.kwargs.get("ignore_index", 255))
+        intensity = intensity.masked_fill(~valid, -1.0)
+        quantile = min(max(float(self.kwargs.get("quantile", 0.97)), 0.0), 1.0)
+        threshold = torch.quantile(intensity[valid], quantile) if bool(valid.any()) else intensity.new_tensor(1.0)
+        candidates = torch.nonzero((intensity >= threshold) & valid, as_tuple=False)
+        if candidates.numel() == 0:
+            return super().apply(image, mask)
+
+        labels = self.kwargs.get("foreground_labels", [1, 2, 3])
+        foreground = _foreground_mask(mask, labels, int(self.kwargs.get("ignore_index", 255)))
+        total_foreground = int(foreground.sum().item())
+        min_keep = float(self.kwargs.get("min_keep", 0.0))
+        attempts = max(1, int(self.kwargs.get("attempts", 8)))
+        best_box: tuple[int, int, int, int] | None = None
+        best_score = -1.0
+        for _ in range(attempts):
+            center = candidates[random.randrange(candidates.shape[0])]
+            box = self._crop_box_around(height, width, int(center[0].item()), int(center[1].item()))
+            top, left, crop_h, crop_w = box
+            crop_intensity = intensity[top : top + crop_h, left : left + crop_w]
+            score = float(crop_intensity.mean().item())
+            keep = 1.0
+            if total_foreground > 0:
+                keep = float(foreground[top : top + crop_h, left : left + crop_w].sum().item()) / total_foreground
+                score += keep
+            if score > best_score:
+                best_score = score
+                best_box = box
+            if keep >= min_keep:
+                return self._crop_and_resize(image, mask, box)
+        if best_box is None:
+            return image, mask
+        return self._crop_and_resize(image, mask, best_box)
+
+
 class BrightnessContrast(AugmentationBlock):
     def apply(self, image: Tensor, mask: Tensor) -> tuple[Tensor, Tensor]:
         raw = denormalize(image)
@@ -278,6 +338,7 @@ REGISTRY = {
     "affine": RandomAffine,
     "resized_crop": RandomResizedCrop,
     "foreground_resized_crop": ForegroundResizedCrop,
+    "high_fluorescence_resized_crop": HighFluorescenceResizedCrop,
     "brightness_contrast": BrightnessContrast,
     "gamma": Gamma,
     "gaussian_noise": GaussianNoise,

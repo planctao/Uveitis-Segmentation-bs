@@ -203,6 +203,12 @@ class DualBranchLoss(nn.Module):
         self.register_buffer("source_pos_weight", source_pos)
         self.consistency_weight = float(consistency_weight)
         self.eps = float(eps)
+        self.needs_image = bool(getattr(segmentation_loss, "needs_image", False))
+
+    def _segmentation_loss(self, logits: Tensor, mask: Tensor, image: Tensor | None = None) -> Tensor:
+        if self.needs_image:
+            return self.segmentation_loss(logits, mask, image)
+        return self.segmentation_loss(logits, mask)
 
     def _aux_bce_dice(
         self,
@@ -227,8 +233,14 @@ class DualBranchLoss(nn.Module):
         dice = (1.0 - (2.0 * inter + self.eps) / (denom + self.eps)).mean()
         return bce + float(dice_weight) * dice
 
-    def forward(self, logits: Tensor, mask: Tensor, auxiliary: dict[str, Tensor] | None = None) -> Tensor:
-        loss = self.segmentation_loss(logits, mask)
+    def forward(
+        self,
+        logits: Tensor,
+        mask: Tensor,
+        auxiliary: dict[str, Tensor] | None = None,
+        image: Tensor | None = None,
+    ) -> Tensor:
+        loss = self._segmentation_loss(logits, mask, image)
         if auxiliary is None:
             return loss
         target, valid = masks_to_paper_targets(mask, self.ignore_index)
