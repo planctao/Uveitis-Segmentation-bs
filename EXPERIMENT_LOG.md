@@ -41,6 +41,7 @@
 | 35 | 2026-08-02 | vsubr_vw05_f4 | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_vsubr_vw05.yaml | f4 | 30 | fixed ep20 macro=0.7484 dice_1=0.7877 dice_2=0.7092; shared sweep ep20 macro=0.7557 dice_1=0.7980 dice_2=0.7134; ind sweep ep20 macro=0.7581 dice_1=0.7980 dice_2=0.7183 | runs/vsubr_vw05_f4/f4/checkpoints/ | 当前最佳 VS-UBR 设置跨折验证: vsubr weight=0.1, vessel_weight=0.5 | f4 低于 f1-f3 但仍给出可用跨折结果, lesion_2 是主要瓶颈; ep1/2/27/29 有少量 non-finite grad skip |
 | 36 | 2026-08-02 | vsubr_vw05_f5 | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_vsubr_vw05.yaml | f5 | 30 | fixed ep24 macro=0.7855 dice_1=0.8127 dice_2=0.7582; shared sweep ep24 macro=0.7895 dice_1=0.8209 dice_2=0.7580; ind sweep ep24 macro=0.7896 dice_1=0.8209 dice_2=0.7582 | runs/vsubr_vw05_f5/f5/checkpoints/ | 当前最佳 VS-UBR 设置跨折验证: vsubr weight=0.1, vessel_weight=0.5 | f5 稳定正向, ep1/5/10 有少量 non-finite grad skip; 可与 f1-f4 汇总形成 5 折主结果 |
 | 37 | 2026-08-02 | vsubr_vw05_5fold_summary | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_vsubr_vw05.yaml | f1-f5 | 30 | fixed macro=0.7820±0.0202 dice_1=0.8028 dice_2=0.7612; shared sweep macro=0.7869±0.0194 dice_1=0.8104 dice_2=0.7634; ind sweep macro=0.7881±0.0194 dice_1=0.8104 dice_2=0.7657 | runs/vsubr_vw05_f{1..5}/ | VS-UBR 主结果: vsubr weight=0.1 且 vessel_weight=0.5, 基于 f1 消融最优后完成 f1-f5 跨折验证 | 5 折结果支持 moderate vessel suppression 的主叙事; f3 最强, f4 lesion_2 偏低拉低均值; 可作为论文主实验与倒U消融一起呈现 |
+| 38 | 2026-08-10 | dino_sam_refiner_vsubr_vw05_mvp | ConvNeXt-Tiny VS-UBR + DINO-SAM Refiner | configs/dino_sam_refiner.yaml | f1-f5 | 20 | click0 macro=0.7809±0.0193 dice_1=0.7982 dice_2=0.7636; click1 macro=0.7853±0.0195 dice_1=0.8012 dice_2=0.7694; click3 macro=0.7918±0.0200 dice_1=0.8072 dice_2=0.7764; click5 macro=0.7965±0.0201 dice_1=0.8106 dice_2=0.7824 | outputs/interactive_refiner_runs/dino_sam_refiner_vsubr_vw05_mvp/f{1..5}/checkpoints/ | 新增交互式 SAM-DINO 细化系统: 缓存 VS-UBR/DINO 粗预测与 SAM prompt 先验, 用 13通道 refiner 融合 image/coarse masks/click maps/residual maps 做多轮点击细化 | 5折已完成; click 数从0到5稳定提升 +1.56pp macro; f1/f2/f3/f4/f5 click5 macro=0.7887/0.8005/0.8272/0.7653/0.8010; 支持“医生交互驱动粗到细精修系统”叙事 |
 
 ---
 
@@ -733,6 +734,19 @@ python scripts/evaluate_ensemble_postprocess.py \
 
 ---
 
+## SAM 相关实验汇总
+
+| 实验 | Run Name | 范式 | Fold | 关键结果 | 结论 |
+|------|----------|------|------|----------|------|
+| SAM2 MAE 预训练 | mae_sam2_f1_20260625_1404 | SAM2 Hiera-Small encoder + MAE 自监督重建 | f1 | best_mae_val_loss=0.2365; best_epoch=50 | 可完成 FA 域自监督适配, 但仅是分割微调前置阶段 |
+| MAE-SAM2 分割微调 | mae_sam2_ft_f1_20260625_1404 | SAM2 Hiera-Small + MAE encoder + 2通道多标签分割头 | f1 | best_macro_dice=0.6236; dice_1=0.6503; dice_2=0.5969 | 明显弱于 DINOv3 ViT baseline 0.7337 和 ConvNeXt 主线, 说明 SAM2 直接迁移 FA 渗漏分割存在 domain gap |
+| DINOv3 ViT + SAM2 FPN | dinov3_vitb16_fpn_f1 | DINOv3 ViT-B/16 backbone + SAM2-style FPN neck + 深度监督 | f1 | best_macro_dice=0.6939; dice_1=0.7098; dice_2=0.6779; sweep_macro=0.6984 | SAM2 FPN 结构迁移仍未超 ViT baseline, 虚拟金字塔不等于真实多尺度医学特征 |
+| SAM-DINO 交互式细化 | dino_sam_refiner_vsubr_vw05_mvp | VS-UBR/DINO 粗预测 + SAM prompt 先验 + 13通道交互式 refiner | f1-f5 | click0 macro=0.7809±0.0193; click3 macro=0.7918±0.0200; click5 macro=0.7965±0.0201 | 将 SAM 定位为交互粗提示而非最终分割器后, 多轮医生点击能稳定提升细分割结果, 支持“粗分割+交互精修系统”作为毕业设计第二部分 |
+
+> 总结: 直接使用 SAM2/MAE-SAM2 做最终 FA 病灶分割效果不足, 但将 SAM 的 promptable 能力转化为医生交互先验, 再交给 DINO/VS-UBR 细化网络进行医学语义分割, 能在 5 折上获得随点击次数稳定提升的结果。
+
+---
+
 ## SAM2 实验详情
 
 ### 模型版本信息
@@ -791,7 +805,7 @@ python scripts/evaluate_ensemble_postprocess.py \
 |------|----------|-----------|--------------|----------|
 | DINOv3 ConvNeXt-Tiny | ConvNeXt-Tiny | LVD-1689M | - | 0.7710 |
 | DINOv3 ViT-B/16 | ViT-B/16 | LVD-1689M | 0.7337 | - |
-| MAE-SAM2 (本文) | Hiera-Small | SA-1B + MAE | 0.5983 (训练中) | 待完成 |
+| MAE-SAM2 (本文) | Hiera-Small | SA-1B + MAE | 0.6236 | - |
 
 > 结论: SAM2在FA泄漏分割上远不如DINOv3, 验证了"通用foundation model直接迁移不如领域预训练"的判断。SAM2实验作为对比基线, 为面向FA特性的专用创新方案提供动机。
 
