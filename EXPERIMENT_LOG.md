@@ -42,6 +42,21 @@
 | 36 | 2026-08-02 | vsubr_vw05_f5 | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_vsubr_vw05.yaml | f5 | 30 | fixed ep24 macro=0.7855 dice_1=0.8127 dice_2=0.7582; shared sweep ep24 macro=0.7895 dice_1=0.8209 dice_2=0.7580; ind sweep ep24 macro=0.7896 dice_1=0.8209 dice_2=0.7582 | runs/vsubr_vw05_f5/f5/checkpoints/ | 当前最佳 VS-UBR 设置跨折验证: vsubr weight=0.1, vessel_weight=0.5 | f5 稳定正向, ep1/5/10 有少量 non-finite grad skip; 可与 f1-f4 汇总形成 5 折主结果 |
 | 37 | 2026-08-02 | vsubr_vw05_5fold_summary | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_vsubr_vw05.yaml | f1-f5 | 30 | fixed macro=0.7820±0.0202 dice_1=0.8028 dice_2=0.7612; shared sweep macro=0.7869±0.0194 dice_1=0.8104 dice_2=0.7634; ind sweep macro=0.7881±0.0194 dice_1=0.8104 dice_2=0.7657 | runs/vsubr_vw05_f{1..5}/ | VS-UBR 主结果: vsubr weight=0.1 且 vessel_weight=0.5, 基于 f1 消融最优后完成 f1-f5 跨折验证 | 5 折结果支持 moderate vessel suppression 的主叙事; f3 最强, f4 lesion_2 偏低拉低均值; 可作为论文主实验与倒U消融一起呈现 |
 | 38 | 2026-08-10 | dino_sam_refiner_vsubr_vw05_mvp | ConvNeXt-Tiny VS-UBR + DINO-SAM Refiner | configs/dino_sam_refiner.yaml | f1-f5 | 20 | click0 macro=0.7809±0.0193 dice_1=0.7982 dice_2=0.7636; click1 macro=0.7853±0.0195 dice_1=0.8012 dice_2=0.7694; click3 macro=0.7918±0.0200 dice_1=0.8072 dice_2=0.7764; click5 macro=0.7965±0.0201 dice_1=0.8106 dice_2=0.7824 | outputs/interactive_refiner_runs/dino_sam_refiner_vsubr_vw05_mvp/f{1..5}/checkpoints/ | 新增交互式 SAM-DINO 细化系统: 缓存 VS-UBR/DINO 粗预测与 SAM prompt 先验, 用 13通道 refiner 融合 image/coarse masks/click maps/residual maps 做多轮点击细化 | 5折已完成; click 数从0到5稳定提升 +1.56pp macro; f1/f2/f3/f4/f5 click5 macro=0.7887/0.8005/0.8272/0.7653/0.8010; 支持“医生交互驱动粗到细精修系统”叙事 |
+| 39 | 2026-08-10 | convnext_tiny_baseline_tta_f1 | ConvNeXt-Tiny | configs/dinov3_convnext_tiny_baseline_tta_f1.yaml | f1 | 30 | fixed ep24 macro=0.7624 dice_1=0.7736 dice_2=0.7511; shared sweep ep24 macro=0.7827 dice_1=0.8006 dice_2=0.7648; ind sweep ep24 macro=0.7827 dice_1=0.8006 dice_2=0.7648 | runs/convnext_tiny_baseline_tta_f1/f1/checkpoints/ | TTA 消融: 在 ConvNeXt-Tiny baseline 上仅启用验证/推理 flip TTA(h/v/hv, scale=1.0), 不启用 morphology/FOV/intensity 后处理; 训练增强与非TTA baseline 保持一致 | 已完成; latest ep30 sweep=0.7750; 对比非TTA baseline 未观察到稳定涨点 |
+| 40 | 2026-08-10 | rdh_pde_tta_f1 | ConvNeXt-Tiny + RDH-PDE | configs/dinov3_convnext_tiny_rdh_pde_tta_f1.yaml | f1 | 30 | fixed ep24 macro=0.7639 dice_1=0.7700 dice_2=0.7578; shared sweep ep16 macro=0.7865 dice_1=0.7968 dice_2=0.7762; ind sweep ep16 macro=0.7865 dice_1=0.7968 dice_2=0.7762 | runs/rdh_pde_tta_f1/f1/checkpoints/ | TTA 消融: 在 RDH-PDE isotropic 头上仅启用验证/推理 flip TTA(h/v/hv, scale=1.0), 不启用额外后处理 | 已完成; latest ep30 sweep=0.7793; TTA 未明显超过历史 RDH-PDE/VA-RDH f1 最优结果 |
+| 41 | 2026-08-10 | edge_pdc_tta_f1 | ConvNeXt-Tiny + Edge Oriented-PDC | configs/dinov3_convnext_tiny_edge_pdc_tta_f1.yaml | f1 | 30 | fixed ep26 macro=0.7667 dice_1=0.7701 dice_2=0.7633; shared sweep ep23 macro=0.7867 dice_1=0.7976 dice_2=0.7759; ind sweep ep23 macro=0.7867 dice_1=0.7976 dice_2=0.7759 | runs/edge_pdc_tta_f1/f1/checkpoints/ | TTA 消融: 在 Edge-PDC(cpdc/apdc/rpdc) 头上仅启用验证/推理 flip TTA(h/v/hv, scale=1.0), 不启用额外后处理 | 已完成; latest ep30 sweep=0.7849; 与非TTA Edge-PDC f1 结果接近, 暂无明确涨点 |
+
+### 2026-08-10 TTA 有/无对比总结
+
+本组实验只在验证/推理阶段启用 flip TTA（h/v/hv, scale=1.0），不改变训练增强，不叠加 morphology、FOV mask 或 intensity refine 等后处理。对比口径优先使用 f1 的 best threshold sweep macro Dice。
+
+| 模型 | 无 TTA f1 sweep macro | TTA f1 sweep macro | Δ macro | 对比结论 |
+|------|----------------------:|-------------------:|--------:|----------|
+| ConvNeXt-Tiny baseline | 0.7799 | 0.7827 | +0.28pp | 仅轻微提升，latest ep30 回落到 0.7750，收益不稳定 |
+| RDH-PDE isotropic | 0.7828 | 0.7865 | +0.37pp | 有小幅提升，但未超过 VA-RDH K16 f1=0.7872，不能作为主要涨点证据 |
+| Edge Oriented-PDC | 0.7841 | 0.7867 | +0.26pp | 与非 TTA 接近，增益很小，基本属于阈值/训练波动范围 |
+
+> 结论: 单独 flip TTA 在三类模型上均只有 0.26-0.37pp 的小幅提升，且 latest checkpoint 普遍回落，说明 TTA 可作为推理阶段轻量校准或补充消融，但不适合作为论文主创新点。后续若要使用 TTA，建议只在最终模型评估中作为可选 inference trick 报告，并与 morphology/FOV 等后处理分开消融。
 
 ---
 
