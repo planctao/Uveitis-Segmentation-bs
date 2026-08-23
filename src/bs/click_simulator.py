@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
+from typing import Literal
 
 import torch
-import torch.nn.functional as F
 from torch import Tensor
 
 
@@ -14,6 +13,11 @@ class ClickSimulationConfig:
     threshold: float = 0.5
     radius: int = 8
     mode: str = "disk"
+    # ``random`` preserves the original MVP behaviour.  ``farthest`` is a
+    # deterministic, coverage-oriented policy that is closer to the error
+    # click simulators commonly used when benchmarking SAM.
+    strategy: Literal["random", "center", "farthest"] = "random"
+    cumulative: bool = False
 
 
 def _as_bchw(mask: Tensor) -> Tensor:
@@ -53,20 +57,55 @@ def click_points_to_heatmaps(
     return maps.amax(dim=2) if num_points > 0 else torch.zeros(bsz, channels, height, width, device=device)
 
 
-def _sample_points_from_region(region: Tensor, num_points: int) -> Tensor:
+def _sample_points_from_region(
+    region: Tensor,
+    num_points: int,
+    strategy: Literal["random", "center", "farthest"] = "random",
+) -> Tensor:
     if region.ndim != 4:
         raise ValueError(f"Expected region [B,C,H,W], got shape {tuple(region.shape)}")
     bsz, channels, _, _ = region.shape
     points = torch.full((bsz, channels, num_points, 2), -1, dtype=torch.long, device=region.device)
     if num_points <= 0:
         return points
+    if strategy not in {"random", "center", "farthest"}:
+        raise ValueError(f"Unsupported click sampling strategy: {strategy}")
     for b in range(bsz):
         for c in range(channels):
             coords = torch.nonzero(region[b, c], as_tuple=False)
             if coords.numel() == 0:
                 continue
-            choice = torch.randint(coords.shape[0], (num_points,), device=region.device)
-            points[b, c] = coords[choice]
+            if strategy == "random":
+                # Prefer unique clicks.  Sampling with replacement is only
+                # used when the error region has fewer pixels than requested.
+                if coords.shape[0] >= num_points:
+                    choice = torch.randperm(coords.shape[0], device=region.device)[:num_points]
+                else:
+                    choice = torch.randint(coords.shape[0], (num_points,), device=region.device)
+                points[b, c] = coords[choice]
+                continue
+
+            # Start at the pixel closest to the region centroid.  This is
+            # stable across runs and avoids repeatedly clicking tiny border
+            # fragments.  Coordinates are (row, column).
+            centroid = coords.float().mean(dim=0, keepdim=True)
+            first = torch.sum((coords.float() - centroid).square(), dim=1).argmin()
+            selected = [int(first)]
+            if strategy == "farthest" and num_points > 1:
+                # Greedy farthest-point sampling gives spatially separated
+                # clicks and is cheap for the small K used by this project.
+                min_dist = torch.cdist(coords.float(), coords[selected].float()).squeeze(1).square()
+                for _ in range(1, num_points):
+                    if len(selected) >= coords.shape[0]:
+                        selected.append(selected[-1])
+                        continue
+                    next_index = int(min_dist.argmax())
+                    selected.append(next_index)
+                    dist = torch.sum((coords.float() - coords[next_index].float()).square(), dim=1)
+                    min_dist = torch.minimum(min_dist, dist)
+            else:
+                selected.extend([selected[0]] * max(0, num_points - 1))
+            points[b, c] = coords[torch.as_tensor(selected[:num_points], device=region.device)]
     return points
 
 
@@ -74,6 +113,7 @@ def simulate_click_points(
     target: Tensor,
     prediction: Tensor,
     num_clicks: int = 3,
+    strategy: Literal["random", "center", "farthest"] = "random",
 ) -> tuple[Tensor, Tensor]:
     target = _as_bchw(target).bool()
     prediction = _as_bchw(prediction).bool()
@@ -83,9 +123,54 @@ def simulate_click_points(
         raise ValueError("num_clicks must be non-negative")
     positive_region = target & ~prediction
     negative_region = prediction & ~target
-    positive_points = _sample_points_from_region(positive_region, num_clicks)
-    negative_points = _sample_points_from_region(negative_region, num_clicks)
+    positive_points = _sample_points_from_region(positive_region, num_clicks, strategy=strategy)
+    negative_points = _sample_points_from_region(negative_region, num_clicks, strategy=strategy)
     return positive_points, negative_points
+
+
+def simulate_click_sequence(
+    target: Tensor,
+    prediction: Tensor,
+    num_clicks: int,
+    *,
+    strategy: Literal["random", "center", "farthest"] = "farthest",
+) -> tuple[Tensor, Tensor]:
+    """Generate a cumulative multi-round error-click sequence.
+
+    The target is used only by the *oracle click simulator*, as is standard
+    for offline interactive-segmentation evaluation.  After each click the
+    working prediction is corrected at that point, so later clicks address a
+    different residual instead of repeatedly sampling the initial error map.
+    Returned tensors have shape ``[B,C,num_clicks,2]`` and contain ``-1`` for
+    missing positive/negative clicks.
+    """
+    target = _as_bchw(target).bool()
+    working = _as_bchw(prediction).bool().clone()
+    if target.shape != working.shape:
+        raise ValueError(f"target and prediction shapes differ: {tuple(target.shape)} vs {tuple(working.shape)}")
+    if num_clicks < 0:
+        raise ValueError("num_clicks must be non-negative")
+    bsz, channels, _, _ = target.shape
+    positive = torch.full((bsz, channels, num_clicks, 2), -1, dtype=torch.long, device=target.device)
+    negative = torch.full_like(positive, -1)
+    for step in range(num_clicks):
+        pos_step, neg_step = simulate_click_points(
+            target, working, num_clicks=1, strategy=strategy
+        )
+        positive[:, :, step] = pos_step[:, :, 0]
+        negative[:, :, step] = neg_step[:, :, 0]
+        # A click corrects only its clicked pixel.  Do not use the rendering
+        # radius here: the next oracle error should be independent of the
+        # radius used to draw the prompt heatmap.
+        for b in range(bsz):
+            for c in range(channels):
+                py, px = pos_step[b, c, 0].tolist()
+                ny, nx = neg_step[b, c, 0].tolist()
+                if py >= 0 and px >= 0:
+                    working[b, c, py, px] = True
+                if ny >= 0 and nx >= 0:
+                    working[b, c, ny, nx] = False
+    return positive, negative
 
 
 def simulate_click_heatmaps(
@@ -95,11 +180,20 @@ def simulate_click_heatmaps(
     threshold: float = 0.5,
     radius: int = 8,
     mode: str = "disk",
+    strategy: Literal["random", "center", "farthest"] = "random",
+    cumulative: bool = False,
 ) -> tuple[Tensor, Tensor]:
     target = _as_bchw(target).bool()
     probabilities = _as_bchw(probabilities)
     prediction = probabilities >= float(threshold)
-    positive_points, negative_points = simulate_click_points(target, prediction, num_clicks=num_clicks)
+    if cumulative:
+        positive_points, negative_points = simulate_click_sequence(
+            target, prediction, num_clicks=num_clicks, strategy=strategy
+        )
+    else:
+        positive_points, negative_points = simulate_click_points(
+            target, prediction, num_clicks=num_clicks, strategy=strategy
+        )
     height, width = target.shape[-2:]
     positive = click_points_to_heatmaps(positive_points, height, width, radius=radius, mode=mode)
     negative = click_points_to_heatmaps(negative_points, height, width, radius=radius, mode=mode)

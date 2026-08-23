@@ -22,13 +22,13 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from bs.click_simulator import build_pseudo_sam_candidate, build_refiner_features, simulate_click_heatmaps  # noqa: E402
-from bs.interactive_refiner import InteractiveResidualRefiner  # noqa: E402
+from bs.interactive_refiner import InteractiveResidualRefiner, oracle_refine_with_target  # noqa: E402
 from bs.multilabel import AsymmetricFocalTverskyBCE, PaperDice, masks_to_paper_targets  # noqa: E402
 from bs.paths import project_path  # noqa: E402
 
 
 class CachedDinoDataset(Dataset):
-    def __init__(self, manifest_path: Path) -> None:
+    def __init__(self, manifest_path: Path, max_samples: int | None = None) -> None:
         self.rows: list[dict[str, str]] = []
         with manifest_path.open("r", encoding="utf-8", newline="") as f:
             reader = csv.DictReader(f)
@@ -36,6 +36,10 @@ class CachedDinoDataset(Dataset):
                 self.rows.append(row)
         if not self.rows:
             raise RuntimeError(f"No cached samples found in {manifest_path}")
+        if max_samples is not None:
+            self.rows = self.rows[: max(0, int(max_samples))]
+        if not self.rows:
+            raise RuntimeError(f"No samples remain after max_samples={max_samples} in {manifest_path}")
 
     def __len__(self) -> int:
         return len(self.rows)
@@ -43,10 +47,21 @@ class CachedDinoDataset(Dataset):
     def __getitem__(self, index: int) -> dict[str, Any]:
         row = self.rows[index]
         item = torch.load(row["path"], map_location="cpu", weights_only=True)
+        image = item["image"]
+        image_storage = str(item.get("image_storage", row.get("image_storage", "float16")))
+        if image_storage == "uint8" or image.dtype == torch.uint8:
+            # Cache stores compact RGB values; the DINO dataset uses the same
+            # ImageNet normalization after optional appearance preprocessing.
+            mean = torch.tensor([0.485, 0.456, 0.406], dtype=torch.float32).view(3, 1, 1)
+            std = torch.tensor([0.229, 0.224, 0.225], dtype=torch.float32).view(3, 1, 1)
+            image = image.float().div(255.0)
+            image = (image - mean) / std
+        else:
+            image = image.float()
         return {
             "sample_id": item["sample_id"],
             "fold": item["fold"],
-            "image": item["image"].float(),
+            "image": image,
             "mask": item["mask"].long(),
             "dino_logits": item["dino_logits"].float(),
         }
@@ -61,6 +76,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--num-workers", type=int, default=None)
     parser.add_argument("--learning-rate", type=float, default=None)
     parser.add_argument("--device", default=None)
+    parser.add_argument("--max-train-samples", type=int, default=None)
+    parser.add_argument("--max-val-samples", type=int, default=None)
+    parser.add_argument(
+        "--iterative",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Unroll the refiner after every click (true SAM-style interaction).",
+    )
     return parser.parse_args()
 
 
@@ -71,18 +94,33 @@ def load_config(path: str) -> dict[str, Any]:
 
 def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str, Any]:
     config = {key: dict(value) if isinstance(value, dict) else value for key, value in config.items()}
-    if args.epochs is not None:
-        config["train"]["epochs"] = args.epochs
-    if args.batch_size is not None:
-        config["train"]["batch_size"] = args.batch_size
-    if args.num_workers is not None:
-        config["runtime"]["num_workers"] = args.num_workers
-    if args.learning_rate is not None:
-        config["train"]["learning_rate"] = args.learning_rate
-    if args.device is not None:
-        config["runtime"]["device"] = args.device
-    if args.fold is not None:
-        config["train"]["folds_to_run"] = [args.fold]
+    epochs = getattr(args, "epochs", None)
+    batch_size = getattr(args, "batch_size", None)
+    num_workers = getattr(args, "num_workers", None)
+    learning_rate = getattr(args, "learning_rate", None)
+    device = getattr(args, "device", None)
+    max_train_samples = getattr(args, "max_train_samples", None)
+    max_val_samples = getattr(args, "max_val_samples", None)
+    iterative = getattr(args, "iterative", None)
+    fold = getattr(args, "fold", None)
+    if epochs is not None:
+        config["train"]["epochs"] = epochs
+    if batch_size is not None:
+        config["train"]["batch_size"] = batch_size
+    if num_workers is not None:
+        config["runtime"]["num_workers"] = num_workers
+    if learning_rate is not None:
+        config["train"]["learning_rate"] = learning_rate
+    if device is not None:
+        config["runtime"]["device"] = device
+    if max_train_samples is not None:
+        config.setdefault("train", {})["max_train_samples"] = max_train_samples
+    if max_val_samples is not None:
+        config.setdefault("train", {})["max_val_samples"] = max_val_samples
+    if iterative is not None:
+        config.setdefault("clicks", {})["iterative"] = bool(iterative)
+    if fold is not None:
+        config["train"]["folds_to_run"] = [fold]
     return config
 
 
@@ -108,14 +146,18 @@ def seed_everything(seed: int) -> None:
 
 def build_loader(config: dict[str, Any], fold: str, split: str) -> DataLoader:
     manifest = project_path(config["cache"]["root"]) / fold / f"{split}_manifest.csv"
-    dataset = CachedDinoDataset(manifest)
+    limit_key = "max_train_samples" if split == "train" else "max_val_samples"
+    dataset = CachedDinoDataset(manifest, config.get("train", {}).get(limit_key))
     return DataLoader(
         dataset,
         batch_size=int(config["train"]["batch_size"]),
         shuffle=split == "train",
         num_workers=int(config["runtime"].get("num_workers", 4)),
         pin_memory=True,
-        drop_last=split == "train",
+        # Keep the final (and possibly only) batch.  This matters for the
+        # small-fold smoke runs used to validate the pipeline and does not
+        # affect the full five-fold experiment.
+        drop_last=False,
         persistent_workers=int(config["runtime"].get("num_workers", 4)) > 0,
     )
 
@@ -160,6 +202,8 @@ def make_inputs(batch: dict[str, Tensor], config: dict[str, Any], num_clicks: in
         threshold=float(click_cfg.get("threshold", 0.5)),
         radius=int(click_cfg.get("radius", 8)),
         mode=str(click_cfg.get("mode", "disk")),
+        strategy=str(click_cfg.get("strategy", "random")),
+        cumulative=bool(click_cfg.get("cumulative", False)),
     )
     candidate = build_pseudo_sam_candidate(probs, positive, negative, threshold=float(click_cfg.get("threshold", 0.5)))
     features = build_refiner_features(image, dino_logits, candidate, positive, negative)
@@ -210,12 +254,33 @@ def train_epoch(
     for step, batch in enumerate(progress, start=1):
         batch = {k: v.to(device, non_blocking=True) if torch.is_tensor(v) else v for k, v in batch.items()}
         num_clicks = random.choice(click_choices)
-        features, dino_logits, mask = make_inputs(batch, config, num_clicks)
+        dino_logits = batch["dino_logits"]
+        mask = batch["mask"]
         with torch.autocast(device_type=device.type, enabled=bool(config["runtime"].get("amp", True)) and device.type == "cuda"):
-            final_logits = model(features, dino_logits)
+            if bool(config.get("clicks", {}).get("iterative", False)):
+                target, _ = masks_to_paper_targets(
+                    mask, int(config["data"].get("ignore_index", 255))
+                )
+                result = oracle_refine_with_target(
+                    model,
+                    batch["image"],
+                    dino_logits,
+                    target,
+                    num_clicks,
+                    threshold=float(config["clicks"].get("threshold", 0.5)),
+                    radius=int(config["clicks"].get("radius", 8)),
+                    mode=str(config["clicks"].get("mode", "disk")),
+                    strategy=str(config["clicks"].get("strategy", "random")),
+                )
+                final_logits = result.logits
+                features = None
+            else:
+                features, dino_logits, mask = make_inputs(batch, config, num_clicks)
+                final_logits = model(features, dino_logits)
             loss = criterion(final_logits, mask)
             loss = loss + consistency_loss(final_logits, dino_logits, config)
-            loss = loss + click_bce_loss(final_logits, mask, features, config)
+            if features is not None:
+                loss = loss + click_bce_loss(final_logits, mask, features, config)
         optimizer.zero_grad(set_to_none=True)
         scaler.scale(loss).backward()
         if float(config["train"].get("clip_grad_norm", 0.0) or 0.0) > 0.0:
@@ -244,8 +309,27 @@ def validate_clicks(
     total = 0.0
     for batch in tqdm(loader, desc=f"val {num_clicks} clicks", leave=False):
         batch = {k: v.to(device, non_blocking=True) if torch.is_tensor(v) else v for k, v in batch.items()}
-        features, dino_logits, mask = make_inputs(batch, config, num_clicks)
-        final_logits = model(features, dino_logits)
+        mask = batch["mask"]
+        dino_logits = batch["dino_logits"]
+        if bool(config.get("clicks", {}).get("iterative", False)):
+            target, _ = masks_to_paper_targets(
+                mask, int(config["data"].get("ignore_index", 255))
+            )
+            result = oracle_refine_with_target(
+                model,
+                batch["image"],
+                dino_logits,
+                target,
+                num_clicks,
+                threshold=float(config["clicks"].get("threshold", 0.5)),
+                radius=int(config["clicks"].get("radius", 8)),
+                mode=str(config["clicks"].get("mode", "disk")),
+                strategy=str(config["clicks"].get("strategy", "random")),
+            )
+            final_logits = result.logits
+        else:
+            features, dino_logits, mask = make_inputs(batch, config, num_clicks)
+            final_logits = model(features, dino_logits)
         loss = criterion(final_logits, mask)
         total += float(loss.detach().item())
         metrics.update(final_logits.detach().cpu(), mask.detach().cpu())

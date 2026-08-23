@@ -1,6 +1,11 @@
 import torch
 
-from bs.click_simulator import build_pseudo_sam_candidate, build_refiner_features, simulate_click_heatmaps
+from bs.click_simulator import (
+    build_pseudo_sam_candidate,
+    build_refiner_features,
+    simulate_click_heatmaps,
+    simulate_click_sequence,
+)
 
 
 def test_simulate_click_heatmaps_shapes_and_regions():
@@ -28,3 +33,18 @@ def test_build_refiner_features_has_expected_channels():
 
     assert features.shape == (1, 13, 16, 16)
     assert torch.isfinite(features).all()
+
+
+def test_cumulative_click_sequence_moves_to_new_residual_pixels():
+    target = torch.zeros(1, 1, 12, 12)
+    target[:, :, 2:4, 2:4] = 1.0
+    target[:, :, 8:10, 8:10] = 1.0
+    prediction = torch.zeros_like(target)
+
+    positive, negative = simulate_click_sequence(
+        target, prediction, num_clicks=2, strategy="farthest"
+    )
+
+    assert positive.shape == (1, 1, 2, 2)
+    assert negative.eq(-1).all()
+    assert not torch.equal(positive[:, :, 0], positive[:, :, 1])

@@ -1,5 +1,5 @@
 project:
-  name: dino_sam_refiner_vsubr_vw05_compact_full
+  name: dino_sam_refiner_vsubr_vw05_compact_iterative
   seed: 42
 
 runtime:
@@ -33,13 +33,9 @@ clicks:
   threshold: 0.5
   radius: 8
   mode: disk
-  # These three defaults reproduce the original repository MVP: K random
-  # positive/negative points are sampled from the initial DINO error map and
-  # the refiner runs once.  Use --iterative with the strict config documented
-  # below for a closed-loop SAM-style click benchmark.
-  strategy: random
-  cumulative: false
-  iterative: false
+  strategy: farthest
+  cumulative: true
+  iterative: true
   train_clicks: [0, 1, 3, 5]
   eval_clicks: [0, 1, 3, 5]
 

@@ -7,7 +7,7 @@
 ```bash
 cd /root/autodl-tmp/bs
 python scripts/check_environment.py
-python scripts/index_dataset.py
+python scripts/index_dataset.py --config configs/dinov3_convnext_tiny_vsubr_vw05.yaml
 PYTHONPATH=src python -m bs.cli --config configs/default.yaml
 ```
 
@@ -28,6 +28,9 @@ bs/
 ## Notes
 
 - 当前环境已有一张 Tesla V100 32GB，PyTorch 可以使用 CUDA。
-- `dataset/葡萄膜炎_dataset/split_dataorigin` 已存在，默认配置会读取其中的 `img/`、`mask/` 和 `HRNet_Result/`。
+- `dataset/dataset/split_dataorigin` 可由 `split_dataorigin.zip` 解压得到；主线 DINO 配置读取其中的 `img/` 和 `mask_only_itksnap/`。
 - 大文件目录和实验输出已在 `.gitignore` 中忽略，避免误提交数据集、权重和日志。
 
+## DINO + SAM-style 交互细化
+
+多次点击细化实验的完整复现步骤见 [`docs/dino_sam_refiner.md`](docs/dino_sam_refiner.md)。它先缓存 DINOv3 粗分割，再用累计正/负点击提示训练残差细化器，并输出 0/1/3/5-click 的 Dice 曲线。

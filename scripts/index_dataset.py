@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -12,7 +13,10 @@ from bs.data_index import summarize_dataset
 
 
 def main() -> None:
-    config = load_config()
+    parser = argparse.ArgumentParser(description="Count image/mask pairs for a project config.")
+    parser.add_argument("--config", default="configs/default.yaml")
+    args = parser.parse_args()
+    config = load_config(args.config)
     data_cfg = config["data"]
     dataset_root = get_dataset_root(config)
 

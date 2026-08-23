@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import torch
 import torch.nn.functional as F
 from torch import Tensor, nn
@@ -103,3 +105,139 @@ class InteractiveResidualRefiner(nn.Module):
 
 
 ReliabilityAwareRefiner = InteractiveResidualRefiner
+
+
+@dataclass
+class InteractiveRefinementResult:
+    """Outputs from an unrolled click refinement pass.
+
+    ``logits`` is the final prediction and ``history`` contains the result
+    after each click round.  Keeping the history makes it straightforward to
+    export the usual 0/1/3/5-click ablation without running a second model.
+    """
+
+    logits: Tensor
+    history: tuple[Tensor, ...]
+
+
+def refine_with_clicks(
+    model: nn.Module,
+    image: Tensor,
+    dino_logits: Tensor,
+    positive_points: Tensor,
+    negative_points: Tensor,
+    *,
+    threshold: float = 0.5,
+    radius: int = 8,
+    mode: str = "disk",
+) -> InteractiveRefinementResult:
+    """Run a true cumulative multi-round interactive refinement pass.
+
+    ``positive_points`` and ``negative_points`` are user/oracle clicks with
+    shape ``[B,C,K,2]``.  The DINO prediction is refined after every round,
+    while all previous clicks remain active.  This function deliberately does
+    not require ground truth, so the same path can be used for deployment; the
+    offline evaluator can obtain the points from ``simulate_click_sequence``.
+    """
+    from bs.click_simulator import (  # local import avoids an import cycle
+        build_pseudo_sam_candidate,
+        build_refiner_features,
+        click_points_to_heatmaps,
+    )
+
+    if dino_logits.ndim != 4 or image.ndim != 4:
+        raise ValueError("image and dino_logits must be BCHW tensors")
+    if image.shape[0] != dino_logits.shape[0] or image.shape[-2:] != dino_logits.shape[-2:]:
+        raise ValueError("image and dino_logits must have matching batch/spatial dimensions")
+    if positive_points.shape != negative_points.shape:
+        raise ValueError("positive_points and negative_points must have the same shape")
+    if positive_points.ndim != 4 or positive_points.shape[1] != dino_logits.shape[1] or positive_points.shape[-1] != 2:
+        raise ValueError("click points must have shape [B,C,K,2] matching dino channels")
+    if radius <= 0:
+        raise ValueError("radius must be positive")
+    positive_points = positive_points.to(device=dino_logits.device)
+    negative_points = negative_points.to(device=dino_logits.device)
+
+    height, width = dino_logits.shape[-2:]
+    positive = dino_logits.new_zeros(dino_logits.shape)
+    negative = dino_logits.new_zeros(dino_logits.shape)
+    current = dino_logits
+    history: list[Tensor] = []
+    if positive_points.shape[2] == 0:
+        candidate = build_pseudo_sam_candidate(
+            torch.sigmoid(current), positive, negative, threshold=threshold
+        )
+        features = build_refiner_features(image, current, candidate, positive, negative)
+        current = model(features, current)
+        return InteractiveRefinementResult(logits=current, history=(current,))
+    for step in range(positive_points.shape[2]):
+        pos_step = click_points_to_heatmaps(
+            positive_points[:, :, step : step + 1], height, width, radius=radius, mode=mode
+        ).to(dtype=dino_logits.dtype)
+        neg_step = click_points_to_heatmaps(
+            negative_points[:, :, step : step + 1], height, width, radius=radius, mode=mode
+        ).to(dtype=dino_logits.dtype)
+        positive = torch.maximum(positive, pos_step)
+        negative = torch.maximum(negative, neg_step)
+        candidate = build_pseudo_sam_candidate(
+            torch.sigmoid(current), positive, negative, threshold=threshold
+        )
+        features = build_refiner_features(image, current, candidate, positive, negative)
+        current = model(features, current)
+        history.append(current)
+    return InteractiveRefinementResult(logits=current, history=tuple(history))
+
+
+def oracle_refine_with_target(
+    model: nn.Module,
+    image: Tensor,
+    dino_logits: Tensor,
+    target: Tensor,
+    num_clicks: int,
+    *,
+    threshold: float = 0.5,
+    radius: int = 8,
+    mode: str = "disk",
+    strategy: str = "farthest",
+) -> InteractiveRefinementResult:
+    """Offline benchmark helper with adaptive error clicks.
+
+    Unlike :func:`refine_with_clicks`, this function uses the ground truth to
+    choose the next click after observing the previous refiner output.  It is
+    therefore an *oracle simulator* for reporting click-vs-Dice curves, not a
+    deployment path.  At inference time replace it with user-provided points.
+    """
+    from bs.click_simulator import (
+        build_pseudo_sam_candidate,
+        build_refiner_features,
+        click_points_to_heatmaps,
+        simulate_click_points,
+    )
+
+    if target.ndim == 3:
+        target = target.unsqueeze(1)
+    if target.shape != dino_logits.shape:
+        raise ValueError("target and dino_logits must have the same BCHW shape")
+    if num_clicks < 0:
+        raise ValueError("num_clicks must be non-negative")
+    height, width = dino_logits.shape[-2:]
+    positive = dino_logits.new_zeros(dino_logits.shape)
+    negative = dino_logits.new_zeros(dino_logits.shape)
+    current = dino_logits
+    history: list[Tensor] = []
+    for round_idx in range(num_clicks + 1):
+        if round_idx > 0:
+            pos_point, neg_point = simulate_click_points(
+                target, torch.sigmoid(current) >= float(threshold), num_clicks=1, strategy=strategy
+            )
+            pos_map = click_points_to_heatmaps(pos_point, height, width, radius=radius, mode=mode)
+            neg_map = click_points_to_heatmaps(neg_point, height, width, radius=radius, mode=mode)
+            positive = torch.maximum(positive, pos_map.to(dtype=positive.dtype))
+            negative = torch.maximum(negative, neg_map.to(dtype=negative.dtype))
+        candidate = build_pseudo_sam_candidate(
+            torch.sigmoid(current), positive, negative, threshold=threshold
+        )
+        features = build_refiner_features(image, current, candidate, positive, negative)
+        current = model(features, current)
+        history.append(current)
+    return InteractiveRefinementResult(logits=current, history=tuple(history))

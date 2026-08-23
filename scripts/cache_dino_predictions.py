@@ -26,7 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Cache frozen DINOv3 predictions for interactive refiner training.")
     parser.add_argument("--config", default="configs/dinov3_convnext_tiny_vsubr_vw05.yaml")
     parser.add_argument("--checkpoint-template", default="runs/vsubr_vw05_{fold}/{fold}/checkpoints/best.pt")
-    parser.add_argument("--output-root", default="outputs/dino_refiner_cache/vsubr_vw05")
+    parser.add_argument("--output-root", default="outputs/dino_refiner_cache/vsubr_vw05_compact")
     parser.add_argument("--folds", default="f1,f2,f3,f4,f5")
     parser.add_argument("--splits", default="train,val")
     parser.add_argument("--batch-size", type=int, default=4)
@@ -34,6 +34,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-train-samples", type=int, default=None)
     parser.add_argument("--max-val-samples", type=int, default=None)
     parser.add_argument("--device", default="cuda")
+    parser.add_argument(
+        "--image-storage",
+        choices=["uint8", "float16"],
+        default="uint8",
+        help="Store cached images as compact RGB uint8 (default) or normalized float16.",
+    )
     return parser.parse_args()
 
 
@@ -88,10 +94,37 @@ def build_cache_loader(config: dict[str, Any], val_fold: str, split: str, batch_
     )
 
 
-def save_batch(batch: dict[str, Any], logits: torch.Tensor, output_dir: Path, rows: list[dict[str, str]]) -> None:
-    images = batch["image"].detach().cpu().to(torch.float16)
-    masks = batch["mask"].detach().cpu().to(torch.uint8)
-    logits = logits.detach().cpu().to(torch.float16)
+def _clone_for_cache(tensor: torch.Tensor, dtype: torch.dtype) -> torch.Tensor:
+    """Detach a batch slice from its parent storage before serializing it.
+
+    Indexing a batch often returns a view.  ``torch.save`` would otherwise
+    serialize the complete batch backing storage for every sample, which was
+    the source of the multi-dozen-MB-per-sample cache blow-up.
+    """
+    return tensor.detach().to(device="cpu", dtype=dtype).contiguous().clone()
+
+
+def _to_uint8_rgb(images: torch.Tensor) -> torch.Tensor:
+    # UveitisSegmentationDataset returns ImageNet-normalized tensors.  Keep a
+    # compact RGB representation and restore normalization in the refiner
+    # dataset.  This also works when an optional appearance preprocessor was
+    # applied before normalization because its output remains in [0, 1].
+    mean = images.new_tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1)
+    std = images.new_tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1)
+    rgb = ((images.float() * std + mean).clamp(0.0, 1.0) * 255.0).round()
+    return rgb.to(torch.uint8).contiguous().clone()
+
+
+def save_batch(
+    batch: dict[str, Any],
+    logits: torch.Tensor,
+    output_dir: Path,
+    rows: list[dict[str, str]],
+    image_storage: str = "uint8",
+) -> None:
+    images = _to_uint8_rgb(batch["image"].detach().cpu()) if image_storage == "uint8" else _clone_for_cache(batch["image"], torch.float16)
+    masks = _clone_for_cache(batch["mask"], torch.uint8)
+    logits = _clone_for_cache(logits, torch.float16)
     sample_ids = list(batch["sample_id"])
     folds = list(batch["fold"])
     for idx, sample_id in enumerate(sample_ids):
@@ -101,13 +134,23 @@ def save_batch(batch: dict[str, Any], logits: torch.Tensor, output_dir: Path, ro
             {
                 "sample_id": str(sample_id),
                 "fold": str(folds[idx]),
-                "image": images[idx],
-                "mask": masks[idx],
-                "dino_logits": logits[idx],
+                "image_storage": image_storage,
+                # Clone every individual slice as well: even a contiguous
+                # batch tensor can retain the batch storage when indexed.
+                "image": images[idx].contiguous().clone(),
+                "mask": masks[idx].contiguous().clone(),
+                "dino_logits": logits[idx].contiguous().clone(),
             },
             path,
         )
-        rows.append({"sample_id": str(sample_id), "fold": str(folds[idx]), "path": str(path)})
+        rows.append(
+            {
+                "sample_id": str(sample_id),
+                "fold": str(folds[idx]),
+                "path": str(path),
+                "image_storage": image_storage,
+            }
+        )
 
 
 def main() -> None:
@@ -139,10 +182,10 @@ def main() -> None:
                     logits = model(images)
                     if isinstance(logits, tuple):
                         logits = logits[0]
-                    save_batch(batch, logits, split_dir, rows)
+                    save_batch(batch, logits, split_dir, rows, image_storage=args.image_storage)
             manifest = output_root / fold / f"{split}_manifest.csv"
             with manifest.open("w", encoding="utf-8", newline="") as f:
-                writer = csv.DictWriter(f, fieldnames=["sample_id", "fold", "path"])
+                writer = csv.DictWriter(f, fieldnames=["sample_id", "fold", "path", "image_storage"])
                 writer.writeheader()
                 writer.writerows(rows)
             logging.info("wrote %d cached samples to %s", len(rows), split_dir)
