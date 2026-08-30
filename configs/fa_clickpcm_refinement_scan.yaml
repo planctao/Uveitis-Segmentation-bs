@@ -1,0 +1,51 @@
+project:
+  name: fa_clickpcm_refinement_scan_small
+  seed: 42
+
+runtime:
+  device: cuda
+  amp: true
+
+data:
+  ignore_index: 255
+
+cache:
+  root: outputs/dino_refiner_cache/vsubr_vw05_compact
+
+train:
+  folds_to_run: [f1]
+  batch_size: 2
+  epochs: 5
+  max_train_samples: 128
+  max_val_samples: 64
+  learning_rate: 0.0002
+  weight_decay: 0.0001
+  clip_grad_norm: 1.0
+
+model:
+  base_channels: 8
+  dropout: 0.1
+  crop_size: 256
+  max_delta: 2.0
+
+clicks:
+  threshold: 0.5
+  radius: 8
+  strategy: farthest
+  train_clicks: [1, 2, 3]
+
+loss:
+  pos_weight: [3.0, 60.0]
+  bce_weight: 0.5
+  tversky_weight: 1.0
+  tversky_alpha: 0.2
+  tversky_beta: 0.8
+  focal_gamma: 0.75
+  local_weight: 0.5
+  local_gain: 4.0
+
+storage:
+  min_free_gb: 10.0
+
+outputs:
+  root: outputs/interactive_correction_refinement_scan

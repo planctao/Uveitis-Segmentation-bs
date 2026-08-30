@@ -1,0 +1,79 @@
+project:
+  name: dino_sam_refiner_uag_v1
+  seed: 42
+
+runtime:
+  device: cuda
+  amp: true
+  # Keep host-side prefetch modest on the single-GPU workstation.  The
+  # compact cache is large, but samples are loaded one at a time below.
+  num_workers: 2
+
+data:
+  ignore_index: 255
+
+cache:
+  root: outputs/dino_refiner_cache/vsubr_vw05_compact
+
+train:
+  folds_to_run: [f1, f2, f3, f4, f5]
+  # Iterative UAG unrolls retain activations for each click round.  A
+  # micro-batch of one is intentional for the available 21.5-GiB GPU.
+  batch_size: 1
+  epochs: 20
+  learning_rate: 0.0002
+  min_learning_rate: 0.000001
+  weight_decay: 0.0001
+  clip_grad_norm: 1.0
+
+model:
+  # UAG-v1: uncertainty-gated residual refiner with signed soft prompts.
+  type: uncertainty_gated
+  feature_mode: soft_signed
+  in_channels: 17
+  out_channels: 2
+  # Half-width U-Net keeps the full 768x768 iterative path below the GPU
+  # limit while retaining the uncertainty gate and FiLM prompt path.
+  base_channels: 16
+  residual_scale: 1.0
+  dropout: 0.1
+
+clicks:
+  threshold: 0.5
+  radius: 10
+  mode: gaussian
+  strategy: farthest
+  cumulative: true
+  iterative: true
+  # These parameters deliberately expose annotation noise instead of
+  # training only on unrealistically exact oracle clicks.
+  jitter: 2.0
+  dropout: 0.10
+  # Five-click behavior remains in validation; training uses up to three
+  # unrolled rounds to bound activation memory.
+  train_clicks: [0, 1, 3]
+  eval_clicks: [0, 1, 3, 5]
+  stop_priority: null
+
+loss:
+  pos_weight: [3.0, 60.0]
+  bce_weight: 0.5
+  tversky_weight: 1.0
+  tversky_alpha: 0.2
+  tversky_beta: 0.8
+  focal_gamma: 0.75
+  boundary_dice_weight: 0.0
+  boundary_dice_kernel: 5
+  consistency_weight: 0.1
+  consistency_confidence: 0.4
+  click_bce_weight: 0.2
+  click_area_gain: 4.0
+  click_consistency_weight: 0.05
+  click_logit_margin: 2.0
+
+metric:
+  threshold: 0.5
+  select_clicks: 3
+
+outputs:
+  root: outputs/interactive_refiner_runs

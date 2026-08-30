@@ -1,0 +1,90 @@
+project:
+  name: fa_ubir_smoke
+  seed: 42
+
+runtime:
+  device: cpu
+  amp: false
+  num_workers: 0
+
+data:
+  ignore_index: 255
+
+cache:
+  root: outputs/dino_refiner_cache/vsubr_vw05_compact
+
+train:
+  folds_to_run: [f1]
+  batch_size: 1
+  epochs: 1
+  learning_rate: 0.0002
+  min_learning_rate: 0.000001
+  weight_decay: 0.0001
+  clip_grad_norm: 1.0
+  max_train_samples: 2
+  max_val_samples: 2
+
+model:
+  type: boundary_uncertainty
+  in_channels: 19
+  image_channels: 3
+  out_channels: 2
+  base_channels: 4
+  residual_scale: 1.0
+  dropout: 0.0
+  require_click_for_residual: true
+  fa_aware_input: true
+  fa_aware_kernel: 5
+
+uncertainty:
+  entropy_weight: 0.5
+  learned_weight: 0.3
+  boundary_conflict_weight: 0.2
+  loss_weight: 0.2
+
+boundary:
+  kernel: 3
+  soft: false
+  sigma: 1.5
+  loss_weight: 0.2
+  pos_weight: [5.0, 20.0]
+
+clicks:
+  threshold: 0.5
+  radius: 4
+  mode: gaussian
+  strategy: center
+  oracle_strategy: center
+  cumulative: false
+  jitter: 0.0
+  dropout: 0.0
+  min_separation: 8
+  stop_priority: null
+  train_clicks: [0, 1]
+  eval_clicks: [0, 1]
+
+loss:
+  pos_weight: [1.0, 5.0]
+  bce_weight: 0.5
+  tversky_weight: 1.0
+  tversky_alpha: 0.2
+  tversky_beta: 0.8
+  focal_gamma: 0.75
+  click_consistency_weight: 0.05
+  click_logit_margin: 2.0
+
+refiner:
+  roi_size: 0
+
+evaluation:
+  run_policy_during_training: true
+
+storage:
+  min_free_gb: 1.0
+
+metric:
+  select_clicks: 1
+  threshold: 0.5
+
+outputs:
+  root: outputs/interactive_boundary_runs

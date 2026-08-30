@@ -18,6 +18,8 @@ class ClickSimulationConfig:
     # click simulators commonly used when benchmarking SAM.
     strategy: Literal["random", "center", "farthest"] = "random"
     cumulative: bool = False
+    jitter: float = 0.0
+    dropout: float = 0.0
 
 
 def _as_bchw(mask: Tensor) -> Tensor:
@@ -128,6 +130,48 @@ def simulate_click_points(
     return positive_points, negative_points
 
 
+def perturb_click_points(
+    points: Tensor,
+    height: int,
+    width: int,
+    *,
+    jitter: float = 0.0,
+    dropout: float = 0.0,
+) -> Tensor:
+    """Add realistic annotation noise to a click tensor.
+
+    ``-1`` coordinates denote a missing click and are left untouched.  The
+    helper is deliberately independent of the target mask so it can be used
+    both in training-time simulation and in synthetic robustness studies.
+    ``jitter`` is the standard deviation in pixels and ``dropout`` is the
+    probability of dropping an otherwise valid click.
+    """
+    if points.ndim != 4 or points.shape[-1] != 2:
+        raise ValueError(f"Expected points [B,C,K,2], got shape {tuple(points.shape)}")
+    if height <= 0 or width <= 0:
+        raise ValueError("height and width must be positive")
+    if jitter < 0.0:
+        raise ValueError("jitter must be non-negative")
+    if not 0.0 <= dropout <= 1.0:
+        raise ValueError("dropout must be in [0, 1]")
+    result = points.clone()
+    valid = (result[..., 0] >= 0) & (result[..., 1] >= 0)
+    if jitter > 0.0 and bool(valid.any()):
+        noise = torch.randn(
+            (*result.shape[:-1], 2), device=result.device, dtype=torch.float32
+        ) * float(jitter)
+        shifted = result.float() + noise
+        result = torch.round(shifted).to(dtype=points.dtype)
+    if bool(valid.any()):
+        result[..., 0] = result[..., 0].clamp(0, height - 1)
+        result[..., 1] = result[..., 1].clamp(0, width - 1)
+    result[~valid] = -1
+    if dropout > 0.0 and bool(valid.any()):
+        keep = torch.rand(valid.shape, device=result.device) >= float(dropout)
+        result[valid & ~keep] = -1
+    return result
+
+
 def simulate_click_sequence(
     target: Tensor,
     prediction: Tensor,
@@ -182,6 +226,8 @@ def simulate_click_heatmaps(
     mode: str = "disk",
     strategy: Literal["random", "center", "farthest"] = "random",
     cumulative: bool = False,
+    click_jitter: float = 0.0,
+    click_dropout: float = 0.0,
 ) -> tuple[Tensor, Tensor]:
     target = _as_bchw(target).bool()
     probabilities = _as_bchw(probabilities)
@@ -194,6 +240,20 @@ def simulate_click_heatmaps(
         positive_points, negative_points = simulate_click_points(
             target, prediction, num_clicks=num_clicks, strategy=strategy
         )
+    positive_points = perturb_click_points(
+        positive_points,
+        target.shape[-2],
+        target.shape[-1],
+        jitter=click_jitter,
+        dropout=click_dropout,
+    )
+    negative_points = perturb_click_points(
+        negative_points,
+        target.shape[-2],
+        target.shape[-1],
+        jitter=click_jitter,
+        dropout=click_dropout,
+    )
     height, width = target.shape[-2:]
     positive = click_points_to_heatmaps(positive_points, height, width, radius=radius, mode=mode)
     negative = click_points_to_heatmaps(negative_points, height, width, radius=radius, mode=mode)
@@ -230,3 +290,132 @@ def build_refiner_features(
         ],
         dim=1,
     )
+
+
+def build_soft_prompt_features(
+    image: Tensor,
+    dino_logits: Tensor,
+    candidate_mask: Tensor,
+    positive_clicks: Tensor,
+    negative_clicks: Tensor,
+) -> Tensor:
+    """Build prompt features with signed and reliability-aware channels.
+
+    The original 13-channel representation treats positive and negative
+    clicks as independent binary disks.  This representation keeps those
+    channels for compatibility and adds four channels: a per-lesion signed
+    prompt (positive minus negative) and a per-lesion prompt-strength map.
+    The latter is attenuated by prediction uncertainty, so a click near a
+    confident region is not allowed to dominate the whole residual update.
+    """
+    base = build_refiner_features(
+        image, dino_logits, candidate_mask, positive_clicks, negative_clicks
+    )
+    probs = torch.sigmoid(dino_logits)
+    uncertainty = 1.0 - (probs - 0.5).abs() * 2.0
+    signed = positive_clicks.float() - negative_clicks.float()
+    strength = (positive_clicks.float() + negative_clicks.float()).clamp(0.0, 1.0)
+    # Keep the raw signed map (the network needs to know the direction), but
+    # provide a reliability-aware magnitude as a separate cue.
+    reliability = strength * uncertainty.float()
+    return torch.cat([base, signed.float(), reliability], dim=1)
+
+
+def click_priority_scores(probabilities: Tensor) -> tuple[Tensor, Tensor]:
+    """Return deployment-safe positive/negative click priority maps."""
+    probabilities = _as_bchw(probabilities).float()
+    uncertainty = (1.0 - (probabilities - 0.5).abs() * 2.0).clamp(0.0, 1.0)
+    local_mean = torch.nn.functional.avg_pool2d(
+        probabilities, kernel_size=3, stride=1, padding=1
+    )
+    boundary = (probabilities - local_mean).abs()
+    boundary_boost = 0.5 + boundary / (boundary.amax(dim=(-2, -1), keepdim=True) + 1e-6)
+    # Assign a polarity only when the current probability is on that side of
+    # 0.5.  This prevents contradictory prompts at an exactly ambiguous pixel.
+    under_segmented = (0.5 - probabilities).clamp_min(0.0) * 2.0
+    over_segmented = (probabilities - 0.5).clamp_min(0.0) * 2.0
+    pos_score = uncertainty * under_segmented * boundary_boost
+    neg_score = uncertainty * over_segmented * boundary_boost
+    return pos_score, neg_score
+
+
+def should_stop_interaction(
+    probabilities: Tensor,
+    *,
+    min_priority: float = 0.05,
+) -> Tensor:
+    """Return a per-image boolean indicating whether another click is useful."""
+    if min_priority < 0.0:
+        raise ValueError("min_priority must be non-negative")
+    pos_score, neg_score = click_priority_scores(probabilities)
+    priority = torch.maximum(pos_score, neg_score).amax(dim=(-2, -1))
+    # A sample can stop only when every lesion channel has low priority.
+    return (priority < float(min_priority)).all(dim=1)
+
+
+def recommend_click_points(
+    probabilities: Tensor,
+    *,
+    num_clicks: int = 1,
+    existing_positive: Tensor | None = None,
+    existing_negative: Tensor | None = None,
+    min_separation: int = 16,
+) -> tuple[Tensor, Tensor]:
+    """Suggest clicks using only the current prediction and uncertainty.
+
+    This is a deployment-safe policy: it never reads the target mask.  The
+    positive score favours uncertain pixels currently predicted as background
+    (possible under-segmentation), while the negative score favours uncertain
+    foreground pixels (possible over-segmentation).  Greedy non-maximum
+    suppression prevents repeatedly recommending the same boundary fragment.
+    """
+    probabilities = _as_bchw(probabilities).float()
+    if num_clicks < 0:
+        raise ValueError("num_clicks must be non-negative")
+    if min_separation < 0:
+        raise ValueError("min_separation must be non-negative")
+    bsz, channels, height, width = probabilities.shape
+    device = probabilities.device
+    positive = torch.full(
+        (bsz, channels, num_clicks, 2), -1, dtype=torch.long, device=device
+    )
+    negative = torch.full_like(positive, -1)
+    pos_score, neg_score = click_priority_scores(probabilities)
+
+    def suppress(score: Tensor, prior: Tensor | None) -> Tensor:
+        result = score.clone()
+        if prior is not None:
+            prior = _as_bchw(prior).to(device=device)
+            if prior.shape != score.shape:
+                raise ValueError("existing click maps must match probabilities")
+            radius = max(1, int(min_separation))
+            occupied = torch.nn.functional.max_pool2d(
+                prior.float(), kernel_size=2 * radius + 1, stride=1, padding=radius
+            ) > 0
+            result = result.masked_fill(occupied, -1.0)
+        return result
+
+    pos_score = suppress(pos_score, existing_positive)
+    neg_score = suppress(neg_score, existing_negative)
+
+    def select(score: Tensor) -> Tensor:
+        points = torch.full(
+            (bsz, channels, num_clicks, 2), -1, dtype=torch.long, device=device
+        )
+        work = score.clone()
+        radius = max(1, int(min_separation))
+        for b in range(bsz):
+            for c in range(channels):
+                for step in range(num_clicks):
+                    flat_index = int(work[b, c].reshape(-1).argmax())
+                    best = work[b, c].reshape(-1)[flat_index]
+                    if not torch.isfinite(best) or float(best) <= 0.0:
+                        break
+                    y, x = divmod(flat_index, width)
+                    points[b, c, step] = torch.tensor([y, x], device=device)
+                    y0, y1 = max(0, y - radius), min(height, y + radius + 1)
+                    x0, x1 = max(0, x - radius), min(width, x + radius + 1)
+                    work[b, c, y0:y1, x0:x1] = -1.0
+        return points
+
+    return select(pos_score), select(neg_score)

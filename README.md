@@ -34,3 +34,5 @@ bs/
 ## DINO + SAM-style 交互细化
 
 多次点击细化实验的完整复现步骤见 [`docs/dino_sam_refiner.md`](docs/dino_sam_refiner.md)。它先缓存 DINOv3 粗分割，再用累计正/负点击提示训练残差细化器，并输出 0/1/3/5-click 的 Dice 曲线。
+
+现有 MVP 的问题审计和下一阶段可部署创新（不确定性自动找错、软提示、点击噪声鲁棒和点击一致性）见 [`docs/dino_sam_refiner_uag.md`](docs/dino_sam_refiner_uag.md)。对应配置为 `configs/dino_sam_refiner_uag.yaml`，无 GT 的 policy-click 评估入口为 `scripts/evaluate_interactive_policy.py`。
