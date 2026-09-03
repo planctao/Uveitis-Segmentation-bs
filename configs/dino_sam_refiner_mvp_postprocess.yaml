@@ -1,0 +1,40 @@
+# Evaluation-only settings for the legacy MVP refiner.
+#
+# The evaluator keeps the architecture and checkpoint configuration from the
+# MVP run, while this file supplies a small, parameter-free morphology layer
+# after probability thresholding. Training scripts do not consume this file.
+
+project:
+  name: dino_sam_refiner_mvp_postprocess_eval
+  seed: 42
+
+runtime:
+  device: cuda
+  num_workers: 0
+
+data:
+  ignore_index: 255
+
+cache:
+  root: outputs/dino_refiner_cache/vsubr_vw05_compact
+
+train:
+  batch_size: 4
+
+postprocess:
+  enabled: true
+  close_kernel: [3, 3]
+  open_kernel: [0, 0]
+  hysteresis_seed_threshold: [0.0, 0.0]
+  hysteresis_min_seed_pixels: [1, 1]
+  min_component_area: [64, 16]
+  small_component_min_mean_prob: [0.0, 0.0]
+  small_component_min_max_prob: [0.0, 0.0]
+  min_component_mean_prob: [0.0, 0.0]
+  min_component_prob_mass: [0.0, 0.0]
+  max_component_aspect_ratio: [0.0, 0.0]
+  min_component_extent: [0.0, 0.0]
+  max_components: [0, 0]
+  component_score: area
+  fill_holes_max_area: [128, 64]
+  connectivity: 8

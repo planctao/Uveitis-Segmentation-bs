@@ -11,7 +11,7 @@ from torch import Tensor
 class ClickSimulationConfig:
     num_clicks: int = 3
     threshold: float = 0.5
-    radius: int = 8
+    radius: int | list[int] | tuple[int, ...] = 8
     mode: str = "disk"
     # ``random`` preserves the original MVP behaviour.  ``farthest`` is a
     # deterministic, coverage-oriented policy that is closer to the error
@@ -34,15 +34,27 @@ def click_points_to_heatmaps(
     points: Tensor,
     height: int,
     width: int,
-    radius: int = 8,
+    radius: int | list[int] | tuple[int, ...] | Tensor = 8,
     mode: str = "disk",
 ) -> Tensor:
     if points.ndim != 4 or points.shape[-1] != 2:
         raise ValueError(f"Expected points [B,C,K,2], got shape {tuple(points.shape)}")
-    if radius <= 0:
-        raise ValueError("radius must be positive")
     bsz, channels, num_points, _ = points.shape
     device = points.device
+    # A single radius preserves the original MVP behavior.  A two-element
+    # sequence enables lesion-specific prompt footprints (e.g. a wider
+    # correction for the diffuse lesion_1 and a tighter footprint for the
+    # small lesion_2) without adding learnable parameters.
+    radius_values = torch.as_tensor(radius, device=device, dtype=torch.float32).flatten()
+    if radius_values.numel() == 1:
+        radius_values = radius_values.repeat(channels)
+    elif radius_values.numel() != channels:
+        raise ValueError(
+            f"radius must be scalar or have one value per channel ({channels}), got {radius}"
+        )
+    if bool((radius_values <= 0).any()):
+        raise ValueError("radius values must be positive")
+    radius_values = radius_values.view(1, channels, 1, 1, 1)
     yy = torch.arange(height, device=device).view(1, 1, 1, height, 1)
     xx = torch.arange(width, device=device).view(1, 1, 1, 1, width)
     y = points[..., 0].view(bsz, channels, num_points, 1, 1)
@@ -50,10 +62,11 @@ def click_points_to_heatmaps(
     valid = (y >= 0) & (x >= 0)
     dist2 = (yy - y).float().square() + (xx - x).float().square()
     if mode == "gaussian":
-        sigma = max(float(radius) / 2.0, 1.0)
+        sigma = radius_values / 2.0
+        sigma = sigma.clamp_min(1.0)
         maps = torch.exp(-dist2 / (2.0 * sigma * sigma)) * valid.float()
     elif mode == "disk":
-        maps = (dist2 <= float(radius * radius)).float() * valid.float()
+        maps = (dist2 <= radius_values.square()).float() * valid.float()
     else:
         raise ValueError(f"Unsupported click heatmap mode: {mode}")
     return maps.amax(dim=2) if num_points > 0 else torch.zeros(bsz, channels, height, width, device=device)
@@ -222,7 +235,7 @@ def simulate_click_heatmaps(
     probabilities: Tensor,
     num_clicks: int = 3,
     threshold: float = 0.5,
-    radius: int = 8,
+    radius: int | list[int] | tuple[int, ...] | Tensor = 8,
     mode: str = "disk",
     strategy: Literal["random", "center", "farthest"] = "random",
     cumulative: bool = False,

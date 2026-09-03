@@ -38,6 +38,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--num-workers", type=int, default=None)
     parser.add_argument("--device", default=None)
     parser.add_argument("--iterative", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument(
+        "--residual-gate",
+        default=None,
+        choices=["none", "uncertainty", "uncertainty_click", "uncertainty_click_channelwise"],
+    )
+    parser.add_argument("--gate-floor", type=float, default=None)
+    parser.add_argument("--gate-click-gain", type=float, default=None)
+    parser.add_argument("--residual-scale", type=float, default=None)
     parser.add_argument("--output", default=None, help="Optional JSON output path")
     return parser.parse_args()
 
@@ -61,6 +69,18 @@ def main() -> None:
         # above still win for device/batch-size/workers/iterative evaluation.
         checkpoint_config.update({k: v for k, v in config.items() if k not in {"model", "loss"}})
         config = checkpoint_config
+    # These gate switches are parameter-free and can be changed at evaluation
+    # time without retraining the checkpoint.
+    if args.residual_gate is not None:
+        config.setdefault("model", {})["residual_gate"] = args.residual_gate
+    if args.gate_floor is not None:
+        config.setdefault("model", {})["residual_gate_floor"] = float(args.gate_floor)
+    if args.gate_click_gain is not None:
+        config.setdefault("model", {})["residual_gate_click_gain"] = float(args.gate_click_gain)
+    if args.residual_scale is not None:
+        if args.residual_scale < 0.0:
+            raise ValueError("--residual-scale must be non-negative")
+        config.setdefault("model", {})["residual_scale"] = float(args.residual_scale)
     device_name = config.get("runtime", {}).get("device", "cuda")
     device = torch.device(device_name if device_name == "cpu" or torch.cuda.is_available() else "cpu")
     loader = build_loader(config, args.fold, "val")

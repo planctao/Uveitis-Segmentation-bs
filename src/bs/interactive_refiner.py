@@ -60,10 +60,28 @@ class InteractiveResidualRefiner(nn.Module):
         groups: int = 8,
         residual_scale: float = 1.0,
         dropout: float = 0.1,
+        residual_gate: str = "none",
+        residual_gate_floor: float = 0.25,
+        residual_gate_click_gain: float = 0.75,
     ) -> None:
         super().__init__()
         self.out_channels = out_channels
         self.residual_scale = float(residual_scale)
+        self.residual_gate = str(residual_gate).lower()
+        if self.residual_gate not in {
+            "none",
+            "uncertainty",
+            "uncertainty_click",
+            "uncertainty_click_channelwise",
+        }:
+            raise ValueError(
+                "residual_gate must be one of none, uncertainty, "
+                "uncertainty_click, uncertainty_click_channelwise"
+            )
+        self.residual_gate_floor = float(residual_gate_floor)
+        self.residual_gate_click_gain = float(residual_gate_click_gain)
+        if not 0.0 <= self.residual_gate_floor <= 1.0:
+            raise ValueError("residual_gate_floor must be in [0, 1]")
 
         c1 = int(base_channels)
         c2 = c1 * 2
@@ -98,6 +116,30 @@ class InteractiveResidualRefiner(nn.Module):
 
     def forward(self, features: Tensor, dino_logits: Tensor | None = None) -> Tensor:
         delta_logits = self.forward_delta(features)
+        if self.residual_gate != "none":
+            if features.shape[1] < 7:
+                raise ValueError("residual gating requires uncertainty channels in features")
+            channelwise = self.residual_gate == "uncertainty_click_channelwise"
+            if channelwise and self.out_channels != 2:
+                raise ValueError("channelwise residual gating currently expects out_channels=2")
+            uncertainty = features[:, 5:7].float()
+            if not channelwise:
+                uncertainty = uncertainty.amax(dim=1, keepdim=True)
+            uncertainty = uncertainty.clamp(0.0, 1.0)
+            gate = self.residual_gate_floor + (1.0 - self.residual_gate_floor) * uncertainty
+            if self.residual_gate in {"uncertainty_click", "uncertainty_click_channelwise"}:
+                if features.shape[1] < 13:
+                    raise ValueError("uncertainty_click gating requires click channels in features")
+                if channelwise:
+                    # Layout stores positive and negative maps as two
+                    # consecutive 2-channel blocks; collapse polarity while
+                    # preserving the lesion channel.
+                    clicks = torch.maximum(features[:, 9:11], features[:, 11:13]).float()
+                else:
+                    clicks = features[:, 9:13].float().amax(dim=1, keepdim=True)
+                clicks = clicks.clamp(0.0, 1.0)
+                gate = gate + self.residual_gate_click_gain * clicks
+            delta_logits = delta_logits * gate.clamp(0.0, 1.0).to(dtype=delta_logits.dtype)
         if dino_logits is None:
             return delta_logits
         if dino_logits.shape[-2:] != delta_logits.shape[-2:]:
@@ -123,6 +165,9 @@ class UncertaintyGatedResidualRefiner(InteractiveResidualRefiner):
         groups: int = 8,
         residual_scale: float = 1.0,
         dropout: float = 0.1,
+        residual_gate: str = "none",
+        residual_gate_floor: float = 0.25,
+        residual_gate_click_gain: float = 0.75,
     ) -> None:
         super().__init__(
             in_channels=in_channels,
@@ -131,6 +176,9 @@ class UncertaintyGatedResidualRefiner(InteractiveResidualRefiner):
             groups=groups,
             residual_scale=residual_scale,
             dropout=dropout,
+            residual_gate=residual_gate,
+            residual_gate_floor=residual_gate_floor,
+            residual_gate_click_gain=residual_gate_click_gain,
         )
         if in_channels < 17:
             raise ValueError("UncertaintyGatedResidualRefiner expects at least 17 input channels")
@@ -176,6 +224,40 @@ class UncertaintyGatedResidualRefiner(InteractiveResidualRefiner):
 ReliabilityAwareRefiner = InteractiveResidualRefiner
 
 
+def enforce_click_constraints(
+    logits: Tensor,
+    positive_clicks: Tensor | None,
+    negative_clicks: Tensor | None,
+    *,
+    strength: float = 8.0,
+) -> Tensor:
+    """Project logits at explicit click locations to the requested polarity.
+
+    This is a safety projection for interactive use, not a learned module.
+    Only pixels covered by a non-zero prompt map are changed; the surrounding
+    prediction is left untouched.  It therefore guarantees that a clinician's
+    positive/negative point is honored without imposing a global mask edit.
+    """
+    if positive_clicks is None and negative_clicks is None:
+        return logits
+    if positive_clicks is None:
+        positive_clicks = torch.zeros_like(logits)
+    if negative_clicks is None:
+        negative_clicks = torch.zeros_like(logits)
+    if logits.shape != positive_clicks.shape or logits.shape != negative_clicks.shape:
+        raise ValueError("logits and click maps must have matching shapes")
+    strength = float(strength)
+    if strength <= 0.0:
+        raise ValueError("strength must be positive")
+    positive = positive_clicks > 0
+    negative = negative_clicks > 0
+    # Positive and negative maps should not overlap, but if a malformed prompt
+    # does, negative polarity wins because it is the conservative correction.
+    output = torch.where(positive, torch.maximum(logits, logits.new_full((), strength)), logits)
+    output = torch.where(negative, torch.minimum(output, logits.new_full((), -strength)), output)
+    return output
+
+
 @dataclass
 class InteractiveRefinementResult:
     """Outputs from an unrolled click refinement pass.
@@ -197,7 +279,10 @@ def _controlled_residual_update(
     state: Tensor,
     *,
     residual_step_limit: float | None = None,
+    anchor_state: Tensor | None = None,
+    total_residual_limit: float | None = None,
     stop_gradient: bool = False,
+    residual_channel_scale: float | list[float] | tuple[float, ...] | Tensor | None = None,
 ) -> Tensor:
     """Apply one residual update with optional rollout stabilization.
 
@@ -209,6 +294,8 @@ def _controlled_residual_update(
     """
     if residual_step_limit is not None and float(residual_step_limit) < 0.0:
         raise ValueError("residual_step_limit must be non-negative or None")
+    if total_residual_limit is not None and float(total_residual_limit) < 0.0:
+        raise ValueError("total_residual_limit must be non-negative or None")
     model_state = state.detach() if stop_gradient else state
     # Features contain the current logits/probabilities, so detaching only
     # the second model argument would still let gradients leak through the
@@ -221,10 +308,33 @@ def _controlled_residual_update(
             f"got {tuple(proposed.shape)} vs {tuple(model_state.shape)}"
         )
     delta = proposed - model_state
+    if residual_channel_scale is not None:
+        scales = torch.as_tensor(
+            residual_channel_scale, device=delta.device, dtype=delta.dtype
+        ).flatten()
+        if scales.numel() == 1:
+            scales = scales.repeat(delta.shape[1])
+        if scales.numel() != delta.shape[1]:
+            raise ValueError(
+                "residual_channel_scale must be scalar or have one value per "
+                f"output channel ({delta.shape[1]}), got {residual_channel_scale}"
+            )
+        if bool((scales < 0).any()):
+            raise ValueError("residual_channel_scale values must be non-negative")
+        delta = delta * scales.view(1, -1, 1, 1)
     if residual_step_limit is not None and float(residual_step_limit) > 0.0:
         limit = float(residual_step_limit)
         delta = torch.tanh(delta / limit) * limit
-    return model_state + delta
+    updated = model_state + delta
+    if total_residual_limit is not None and float(total_residual_limit) > 0.0:
+        if anchor_state is None:
+            raise ValueError("anchor_state is required when total_residual_limit is set")
+        if anchor_state.shape != updated.shape:
+            raise ValueError("anchor_state and rollout state must have matching shapes")
+        limit = float(total_residual_limit)
+        total_delta = updated - anchor_state
+        updated = anchor_state + torch.tanh(total_delta / limit) * limit
+    return updated
 
 
 def _teacher_force_state(
@@ -257,11 +367,14 @@ def refine_with_clicks(
     negative_points: Tensor,
     *,
     threshold: float = 0.5,
-    radius: int = 8,
+    radius: int | list[int] | tuple[int, ...] | Tensor = 8,
     mode: str = "disk",
     feature_builder: Callable[[Tensor, Tensor, Tensor, Tensor, Tensor], Tensor] | None = None,
     residual_step_limit: float | None = None,
+    total_residual_limit: float | None = None,
     stop_gradient: bool = False,
+    click_constraint_strength: float | None = None,
+    residual_channel_scale: float | list[float] | tuple[float, ...] | Tensor | None = None,
 ) -> InteractiveRefinementResult:
     """Run a true cumulative multi-round interactive refinement pass.
 
@@ -292,8 +405,8 @@ def refine_with_clicks(
         raise ValueError("positive_points and negative_points must have the same shape")
     if positive_points.ndim != 4 or positive_points.shape[1] != dino_logits.shape[1] or positive_points.shape[-1] != 2:
         raise ValueError("click points must have shape [B,C,K,2] matching dino channels")
-    if radius <= 0:
-        raise ValueError("radius must be positive")
+    if torch.as_tensor(radius).numel() == 0 or bool((torch.as_tensor(radius) <= 0).any()):
+        raise ValueError("radius values must be positive")
     positive_points = positive_points.to(device=dino_logits.device)
     negative_points = negative_points.to(device=dino_logits.device)
 
@@ -312,8 +425,15 @@ def refine_with_clicks(
             features,
             current,
             residual_step_limit=residual_step_limit,
+            anchor_state=dino_logits,
+            total_residual_limit=total_residual_limit,
             stop_gradient=stop_gradient,
+            residual_channel_scale=residual_channel_scale,
         )
+        if click_constraint_strength is not None:
+            current = enforce_click_constraints(
+                current, positive, negative, strength=float(click_constraint_strength)
+            )
         return InteractiveRefinementResult(
             logits=current,
             history=(current,),
@@ -338,8 +458,15 @@ def refine_with_clicks(
             features,
             current,
             residual_step_limit=residual_step_limit,
+            anchor_state=dino_logits,
+            total_residual_limit=total_residual_limit,
             stop_gradient=stop_gradient,
+            residual_channel_scale=residual_channel_scale,
         )
+        if click_constraint_strength is not None:
+            current = enforce_click_constraints(
+                current, positive, negative, strength=float(click_constraint_strength)
+            )
         history.append(current)
     return InteractiveRefinementResult(
         logits=current,
@@ -357,16 +484,19 @@ def oracle_refine_with_target(
     num_clicks: int,
     *,
     threshold: float = 0.5,
-    radius: int = 8,
+    radius: int | list[int] | tuple[int, ...] | Tensor = 8,
     mode: str = "disk",
     strategy: str = "farthest",
     feature_builder: Callable[[Tensor, Tensor, Tensor, Tensor, Tensor], Tensor] | None = None,
     click_jitter: float = 0.0,
     click_dropout: float = 0.0,
     residual_step_limit: float | None = None,
+    total_residual_limit: float | None = None,
     stop_gradient: bool = False,
     teacher_forcing_ratio: float = 0.0,
     teacher_forcing_logit_scale: float = 4.0,
+    click_constraint_strength: float | None = None,
+    residual_channel_scale: float | list[float] | tuple[float, ...] | Tensor | None = None,
 ) -> InteractiveRefinementResult:
     """Offline benchmark helper with adaptive error clicks.
 
@@ -425,7 +555,10 @@ def oracle_refine_with_target(
             features,
             current,
             residual_step_limit=residual_step_limit,
+            anchor_state=dino_logits,
+            total_residual_limit=total_residual_limit,
             stop_gradient=stop_gradient,
+            residual_channel_scale=residual_channel_scale,
         )
         # Teacher forcing is applied only between rounds. The final returned
         # prediction always comes from the refiner itself, so validation can
@@ -436,6 +569,10 @@ def oracle_refine_with_target(
                 target,
                 ratio=teacher_forcing_ratio,
                 logit_scale=teacher_forcing_logit_scale,
+            )
+        if click_constraint_strength is not None:
+            current = enforce_click_constraints(
+                current, positive, negative, strength=float(click_constraint_strength)
             )
         history.append(current)
     return InteractiveRefinementResult(
@@ -453,13 +590,16 @@ def policy_refine_with_clicks(
     num_clicks: int,
     *,
     threshold: float = 0.5,
-    radius: int = 8,
+    radius: int | list[int] | tuple[int, ...] | Tensor = 8,
     mode: str = "gaussian",
     min_separation: int = 16,
     stop_priority: float | None = None,
     feature_builder: Callable[[Tensor, Tensor, Tensor, Tensor, Tensor], Tensor] | None = None,
     residual_step_limit: float | None = None,
+    total_residual_limit: float | None = None,
     stop_gradient: bool = False,
+    click_constraint_strength: float | None = None,
+    residual_channel_scale: float | list[float] | tuple[float, ...] | Tensor | None = None,
 ) -> InteractiveRefinementResult:
     """Run a deployment-safe loop with automatic uncertainty-guided clicks.
 
@@ -520,8 +660,15 @@ def policy_refine_with_clicks(
             features,
             current,
             residual_step_limit=residual_step_limit,
+            anchor_state=dino_logits,
+            total_residual_limit=total_residual_limit,
             stop_gradient=stop_gradient,
+            residual_channel_scale=residual_channel_scale,
         )
+        if click_constraint_strength is not None:
+            current = enforce_click_constraints(
+                current, positive, negative, strength=float(click_constraint_strength)
+            )
         history.append(current)
     return InteractiveRefinementResult(
         logits=current,

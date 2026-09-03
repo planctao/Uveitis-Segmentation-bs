@@ -91,6 +91,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-val-samples", type=int, default=None)
     parser.add_argument("--project-name", default=None, help="Override project.name for a reproducible scan run.")
     parser.add_argument("--output-root", default=None, help="Override outputs.root for a scan suite.")
+    parser.add_argument(
+        "--init-checkpoint",
+        default=None,
+        help="Optional model checkpoint used to initialize a new fold before training.",
+    )
     parser.add_argument("--residual-step-limit", type=float, default=None)
     parser.add_argument("--teacher-forcing-ratio", type=float, default=None)
     parser.add_argument(
@@ -118,6 +123,7 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
     max_val_samples = getattr(args, "max_val_samples", None)
     project_name = getattr(args, "project_name", None)
     output_root = getattr(args, "output_root", None)
+    init_checkpoint = getattr(args, "init_checkpoint", None)
     residual_step_limit = getattr(args, "residual_step_limit", None)
     teacher_forcing_ratio = getattr(args, "teacher_forcing_ratio", None)
     iterative = getattr(args, "iterative", None)
@@ -140,6 +146,8 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         config.setdefault("project", {})["name"] = project_name
     if output_root is not None:
         config.setdefault("outputs", {})["root"] = output_root
+    if init_checkpoint is not None:
+        config.setdefault("train", {})["init_checkpoint"] = init_checkpoint
     if residual_step_limit is not None:
         if residual_step_limit < 0.0:
             raise ValueError("--residual-step-limit must be non-negative")
@@ -222,10 +230,15 @@ def build_model(config: dict[str, Any]) -> InteractiveResidualRefiner:
         base_channels=int(model_cfg.get("base_channels", 32)),
         residual_scale=float(model_cfg.get("residual_scale", 1.0)),
         dropout=float(model_cfg.get("dropout", 0.1)),
+        residual_gate=str(model_cfg.get("residual_gate", "none")),
+        residual_gate_floor=float(model_cfg.get("residual_gate_floor", 0.25)),
+        residual_gate_click_gain=float(model_cfg.get("residual_gate_click_gain", 0.75)),
     )
 
 
-def make_inputs(batch: dict[str, Tensor], config: dict[str, Any], num_clicks: int) -> tuple[Tensor, Tensor, Tensor]:
+def make_inputs(
+    batch: dict[str, Tensor], config: dict[str, Any], num_clicks: int, *, return_prompts: bool = False
+) -> tuple[Tensor, Tensor, Tensor] | tuple[Tensor, Tensor, Tensor, Tensor, Tensor]:
     image = batch["image"]
     mask = batch["mask"]
     dino_logits = batch["dino_logits"]
@@ -237,7 +250,7 @@ def make_inputs(batch: dict[str, Tensor], config: dict[str, Any], num_clicks: in
         probs,
         num_clicks=num_clicks,
         threshold=float(click_cfg.get("threshold", 0.5)),
-        radius=int(click_cfg.get("radius", 8)),
+        radius=resolve_click_radius(click_cfg.get("radius", 8)),
         mode=str(click_cfg.get("mode", "disk")),
         strategy=str(click_cfg.get("strategy", "random")),
         cumulative=bool(click_cfg.get("cumulative", False)),
@@ -247,6 +260,8 @@ def make_inputs(batch: dict[str, Tensor], config: dict[str, Any], num_clicks: in
     candidate = build_pseudo_sam_candidate(probs, positive, negative, threshold=float(click_cfg.get("threshold", 0.5)))
     builder = get_feature_builder(config)
     features = builder(image, dino_logits, candidate, positive, negative)
+    if return_prompts:
+        return features, dino_logits, mask, positive, negative
     return features, dino_logits, mask
 
 
@@ -255,6 +270,21 @@ def get_feature_builder(config: dict[str, Any]):
     if mode in {"soft_signed", "uag", "v2"}:
         return build_soft_prompt_features
     return build_refiner_features
+
+
+def resolve_click_radius(value: Any) -> int | list[int]:
+    """Normalize scalar or per-lesion click radius from YAML values."""
+    if isinstance(value, str):
+        values = [int(item.strip()) for item in value.split(",") if item.strip()]
+        if not values:
+            raise ValueError("click radius string must contain at least one integer")
+        return values[0] if len(values) == 1 else values
+    if isinstance(value, (list, tuple)):
+        values = [int(item) for item in value]
+        if not values:
+            raise ValueError("click radius sequence must not be empty")
+        return values[0] if len(values) == 1 else values
+    return int(value)
 
 
 def consistency_loss(final_logits: Tensor, dino_logits: Tensor, config: dict[str, Any]) -> Tensor:
@@ -295,9 +325,12 @@ def rollout_options(config: dict[str, Any], *, training: bool) -> dict[str, Any]
     click_cfg = config.get("clicks", {})
     raw_limit = click_cfg.get("residual_step_limit", None)
     limit = None if raw_limit is None or float(raw_limit) <= 0.0 else float(raw_limit)
+    raw_total_limit = click_cfg.get("total_residual_limit", None)
+    total_limit = None if raw_total_limit is None or float(raw_total_limit) <= 0.0 else float(raw_total_limit)
     ratio_key = "teacher_forcing_ratio" if training else "eval_teacher_forcing_ratio"
     return {
         "residual_step_limit": limit,
+        "total_residual_limit": total_limit,
         "stop_gradient": bool(click_cfg.get("stop_gradient", False)),
         "teacher_forcing_ratio": float(click_cfg.get(ratio_key, 0.0) or 0.0),
         "teacher_forcing_logit_scale": float(click_cfg.get("teacher_forcing_logit_scale", 4.0)),
@@ -336,7 +369,7 @@ def train_epoch(
                     target,
                     num_clicks,
                     threshold=float(config["clicks"].get("threshold", 0.5)),
-                    radius=int(config["clicks"].get("radius", 8)),
+                    radius=resolve_click_radius(config["clicks"].get("radius", 8)),
                     mode=str(config["clicks"].get("mode", "disk")),
                     strategy=str(config["clicks"].get("strategy", "random")),
                     feature_builder=get_feature_builder(config),
@@ -424,7 +457,7 @@ def validate_clicks(
                 target,
                 num_clicks,
                 threshold=float(config["clicks"].get("threshold", 0.5)),
-                radius=int(config["clicks"].get("radius", 8)),
+                radius=resolve_click_radius(config["clicks"].get("radius", 8)),
                 mode=str(config["clicks"].get("mode", "disk")),
                 strategy=str(config["clicks"].get("strategy", "random")),
                 feature_builder=get_feature_builder(config),
@@ -464,6 +497,102 @@ def save_checkpoint(
     if scheduler is not None:
         state["scheduler"] = scheduler.state_dict()
     torch.save(state, path)
+
+
+def load_model_initialization(model: nn.Module, checkpoint_path: str | Path, logger: logging.Logger) -> None:
+    """Load an MVP checkpoint, allowing only input-channel expansion.
+
+    The soft-signed prompt variant adds four parameter-free channels to the
+    original 13-channel MVP input.  Copying the old stem weights and zeroing
+    the new channels makes the expanded model exactly equivalent to MVP at
+    initialization, while keeping all deeper weights and optimizer behavior
+    trainable.  Any other shape mismatch remains an error so experiments do
+    not silently start from a partially unrelated model.
+    """
+    init_path = project_path(str(checkpoint_path))
+    if not init_path.is_file():
+        raise FileNotFoundError(f"initialization checkpoint not found: {init_path}")
+    init_state = torch.load(init_path, map_location="cpu", weights_only=False)
+    source = init_state.get("model", init_state)
+    target = model.state_dict()
+    if not isinstance(source, dict):
+        raise TypeError(f"checkpoint model state must be a mapping, got {type(source)!r}")
+    if set(source) != set(target):
+        missing = sorted(set(target) - set(source))
+        extra = sorted(set(source) - set(target))
+        raise RuntimeError(f"checkpoint keys differ; missing={missing[:5]}, extra={extra[:5]}")
+    copied = 0
+    expanded = 0
+    for key, target_value in target.items():
+        source_value = source[key]
+        if source_value.shape == target_value.shape:
+            target[key].copy_(source_value)
+            copied += 1
+            continue
+        # The only supported expansion is the first convolution's input
+        # channel dimension (13 -> 17 for signed/reliability prompts).
+        if (
+            source_value.ndim == 4
+            and target_value.ndim == 4
+            and source_value.shape[0] == target_value.shape[0]
+            and source_value.shape[2:] == target_value.shape[2:]
+            and source_value.shape[1] < target_value.shape[1]
+            and key.endswith("stem.0.0.weight")
+        ):
+            target[key].zero_()
+            target[key][:, : source_value.shape[1]].copy_(source_value)
+            expanded += 1
+            continue
+        raise RuntimeError(
+            f"unsupported checkpoint shape mismatch for {key}: "
+            f"source={tuple(source_value.shape)} target={tuple(target_value.shape)}"
+        )
+    model.load_state_dict(target, strict=True)
+    logger.info(
+        "initialized model from %s (copied=%d tensors, expanded_input_stem=%d)",
+        init_path,
+        copied,
+        expanded,
+    )
+
+
+def configure_prompt_adapter_only(
+    model: nn.Module,
+    *,
+    original_input_channels: int = 13,
+    train_output_projection: bool = True,
+) -> None:
+    """Freeze an MVP-expanded refiner and train only appended input channels.
+
+    This is useful for a strict incremental ablation: all original MVP
+    parameters remain fixed, while the first convolution and residual output
+    projection learn how the newly appended prompt channels should modulate
+    the frozen decoder.  The gradient mask prevents accidental updates to the
+    original 13 channels.
+    """
+    if not hasattr(model, "stem") or not hasattr(model.stem[0], "__getitem__"):
+        raise ValueError("prompt adapter requires a refiner with a convolutional stem")
+    first_conv = model.stem[0][0]
+    if not isinstance(first_conv, nn.Conv2d) or first_conv.in_channels <= original_input_channels:
+        raise ValueError(
+            "prompt adapter requires a stem Conv2d with appended input channels; "
+            f"got {type(first_conv).__name__} in_channels={getattr(first_conv, 'in_channels', None)}"
+        )
+    for parameter in model.parameters():
+        parameter.requires_grad_(False)
+    first_conv.weight.requires_grad_(True)
+    # The frozen decoder still propagates gradients to the appended stem
+    # channels, so the output projection is optional.  Keeping it frozen is a
+    # useful stricter variant: when all prompt channels are zero (0 clicks),
+    # the initialized model remains exactly equal to the MVP checkpoint.
+    if train_output_projection:
+        if not hasattr(model, "delta_head"):
+            raise ValueError("prompt adapter requires a refiner with delta_head")
+        for parameter in model.delta_head.parameters():
+            parameter.requires_grad_(True)
+    mask = torch.zeros_like(first_conv.weight)
+    mask[:, int(original_input_channels) :] = 1.0
+    first_conv.weight.register_hook(lambda gradient: gradient * mask)
 
 
 def append_metrics(path: Path, row: dict[str, Any]) -> None:
@@ -521,8 +650,24 @@ def train_fold(config: dict[str, Any], fold: str, root_dir: Path) -> dict[str, A
         train_loader = build_loader(config, fold, "train")
         val_loader = build_loader(config, fold, "val")
         model = build_model(config).to(device)
+        init_checkpoint = config.get("train", {}).get("init_checkpoint")
+        if init_checkpoint and not latest_path.is_file():
+            load_model_initialization(model, str(init_checkpoint), logger)
+        if bool(config.get("train", {}).get("prompt_adapter_only", False)):
+            configure_prompt_adapter_only(
+                model,
+                original_input_channels=int(config.get("train", {}).get("original_input_channels", 13)),
+                train_output_projection=bool(
+                    config.get("train", {}).get("prompt_adapter_train_output_projection", True)
+                ),
+            )
+            logger.info("enabled prompt_adapter_only training")
         criterion = build_loss(config).to(device)
-        optimizer = torch.optim.AdamW(model.parameters(), lr=float(config["train"]["learning_rate"]), weight_decay=float(config["train"].get("weight_decay", 1e-4)))
+        optimizer = torch.optim.AdamW(
+            (parameter for parameter in model.parameters() if parameter.requires_grad),
+            lr=float(config["train"]["learning_rate"]),
+            weight_decay=float(config["train"].get("weight_decay", 1e-4)),
+        )
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
             optimizer,
             T_max=max(1, epochs),

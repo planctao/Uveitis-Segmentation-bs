@@ -1,0 +1,22 @@
+# Evaluation-only APQT settings for the legacy MVP refiner.  The evaluator
+# preserves the checkpoint architecture and applies these image-wise
+# thresholds after the residual update.
+project:
+  name: dino_sam_refiner_mvp_apqt_l2_eval
+  seed: 42
+runtime:
+  device: cuda
+  num_workers: 0
+data:
+  ignore_index: 255
+cache:
+  root: outputs/dino_refiner_cache/vsubr_vw05_compact
+train:
+  batch_size: 4
+adaptive_threshold:
+  enabled: true
+  method: quantile
+  quantile: [0.0, 0.999]
+  blend: [0.0, 1.0]
+  min_threshold: [0.0, 0.9]
+  max_threshold: [1.0, 0.999]

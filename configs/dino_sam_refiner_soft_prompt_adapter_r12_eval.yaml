@@ -1,0 +1,51 @@
+# Inference-only calibration for the MVP-initialized soft prompt adapter.
+# The checkpoints were trained with radius=8; radius=12 changes only the
+# parameter-free click footprint during one-shot evaluation.
+project:
+  name: dino_sam_refiner_soft_prompt_adapter_r12_eval
+  seed: 42
+runtime:
+  device: cuda
+  amp: true
+  num_workers: 4
+data:
+  ignore_index: 255
+cache:
+  root: outputs/dino_refiner_cache/vsubr_vw05_compact
+train:
+  folds_to_run: [f1]
+  batch_size: 4
+  epochs: 1
+model:
+  type: legacy
+  feature_mode: soft_signed
+  in_channels: 17
+  out_channels: 2
+  base_channels: 32
+  residual_scale: 1.0
+  dropout: 0.1
+clicks:
+  threshold: 0.5
+  radius: 12
+  mode: disk
+  strategy: random
+  cumulative: false
+  iterative: false
+  train_clicks: [0, 1, 3, 5]
+  eval_clicks: [0, 1, 3, 5]
+loss:
+  pos_weight: [3.0, 60.0]
+  bce_weight: 0.5
+  tversky_weight: 1.0
+  tversky_alpha: 0.2
+  tversky_beta: 0.8
+  focal_gamma: 0.75
+  consistency_weight: 0.1
+  consistency_confidence: 0.4
+  click_bce_weight: 0.2
+  click_area_gain: 4.0
+metric:
+  threshold: 0.5
+  select_clicks: 3
+outputs:
+  root: outputs/interactive_refiner_runs
