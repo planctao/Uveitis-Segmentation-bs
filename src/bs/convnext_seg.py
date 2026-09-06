@@ -10,6 +10,7 @@ from torch import Tensor, nn
 from bs.coleak import CoupledLeakageHead
 from bs.dual_branch import CoreContourDualBranchHead, RdhDualBranchFusionHead
 from bs.edge import EdgeGuidedHead, GeodesicActiveContourHead
+from bs.edge import PDCBank
 from bs.rdh import ReactionDiffusionHead
 from bs.zab import ZABLeakageHead
 
@@ -51,12 +52,248 @@ class ChannelSpatialAttention(nn.Module):
         return x * spatial_gate
 
 
+class EMCADLiteAttention(nn.Module):
+    """A lightweight EMCAD-style multi-scale convolutional attention block.
+
+    EMCAD uses multi-scale convolutional attention in the decoder.  This
+    compact variant keeps the existing FPN and applies three depthwise
+    convolutions (3/5/7 kernels), followed by channel and spatial gates.  A
+    residual scale keeps the initial network close to the original decoder,
+    which is important for the small medical dataset used here.
+    """
+
+    def __init__(self, channels: int, reduction: int = 16) -> None:
+        super().__init__()
+        # The FPN concatenation has 4*decoder_channels (typically 768)
+        # channels.  EMCAD-style attention is normally applied after a
+        # channel bottleneck; doing the depthwise branches at full width is
+        # unnecessarily expensive on a 22GB GPU.
+        inner_channels = max(32, channels // 4)
+        self.in_proj = nn.Sequential(
+            nn.Conv2d(channels, inner_channels, kernel_size=1, bias=False),
+            nn.GroupNorm(8, inner_channels),
+            nn.GELU(),
+        )
+        self.multi_scale = nn.ModuleList(
+            [
+                nn.Conv2d(inner_channels, inner_channels, kernel_size=k, padding=k // 2, groups=inner_channels, bias=False)
+                for k in (3, 5, 7)
+            ]
+        )
+        self.mix = nn.Sequential(
+            nn.Conv2d(inner_channels, inner_channels, kernel_size=1, bias=False),
+            nn.GroupNorm(8, inner_channels),
+            nn.GELU(),
+        )
+        hidden = max(1, inner_channels // max(1, int(reduction)))
+        self.channel_mlp = nn.Sequential(
+            nn.Conv2d(inner_channels, hidden, kernel_size=1, bias=False),
+            nn.GELU(),
+            nn.Conv2d(hidden, inner_channels, kernel_size=1, bias=False),
+        )
+        self.spatial = nn.Conv2d(2, 1, kernel_size=7, padding=3, bias=False)
+        self.out_proj = nn.Conv2d(inner_channels, channels, kernel_size=1, bias=False)
+        self.residual_scale = nn.Parameter(torch.tensor(0.1))
+
+    def forward(self, x: Tensor) -> Tensor:
+        reduced = self.in_proj(x)
+        multi = sum(branch(reduced) for branch in self.multi_scale) / float(len(self.multi_scale))
+        multi = self.mix(multi)
+        pooled = F.adaptive_avg_pool2d(multi, output_size=1)
+        channel_gate = torch.sigmoid(self.channel_mlp(pooled))
+        gated = multi * channel_gate
+        spatial_avg = gated.mean(dim=1, keepdim=True)
+        spatial_max = gated.max(dim=1, keepdim=True).values
+        spatial_gate = torch.sigmoid(self.spatial(torch.cat([spatial_avg, spatial_max], dim=1)))
+        return x + self.residual_scale * self.out_proj(gated * spatial_gate)
+
+
+class DynamicSkipMixture(nn.Module):
+    """TA-MoSC-style dynamic mixture of the four FPN skip tensors."""
+
+    def __init__(self, channels: int, num_scales: int = 4) -> None:
+        super().__init__()
+        self.channels = int(channels)
+        self.num_scales = int(num_scales)
+        hidden = max(8, channels // 8)
+        self.score = nn.Sequential(
+            nn.Conv2d(channels * num_scales, hidden, kernel_size=1, bias=False),
+            nn.GELU(),
+            nn.Conv2d(hidden, num_scales, kernel_size=1, bias=True),
+        )
+        # Start from uniform skip mixing, then learn image-dependent routing.
+        nn.init.zeros_(self.score[-1].weight)
+        nn.init.zeros_(self.score[-1].bias)
+
+    def forward(self, x: Tensor) -> Tensor:
+        chunks = x.split(self.channels, dim=1)
+        pooled = F.adaptive_avg_pool2d(x, output_size=1)
+        weights = torch.softmax(self.score(pooled), dim=1)
+        mixed = sum(chunk * weights[:, idx : idx + 1] for idx, chunk in enumerate(chunks))
+        # Keep the original fused width so the existing decoder neck/head is
+        # unchanged; the routed feature is broadcast as a residual mixture.
+        return x + (mixed.repeat(1, self.num_scales, 1, 1) - x) * 0.25
+
+
+class WaveletBoundaryAttention(nn.Module):
+    """Lightweight WBE/PFESA-style wavelet boundary enhancement.
+
+    The original WBE implementation was written for ViT features and applies a
+    relatively wide block at every intermediate scale.  On this ConvNeXt FPN,
+    the concatenated decoder tensor can have 768 channels, so doing the DWT at
+    full width is wasteful.  This variant projects to a small bottleneck,
+    enhances Haar high-frequency coefficients, and adds the result back through
+    a small residual branch.  The output projection is zero initialized so the
+    model starts exactly at the no-wavelet decoder and learns the boundary
+    correction progressively.
+    """
+
+    def __init__(self, channels: int, bottleneck: int = 96) -> None:
+        super().__init__()
+        inner = max(32, int(bottleneck))
+        self.down = nn.Sequential(
+            nn.Conv2d(channels, inner, kernel_size=1, bias=False),
+            nn.GroupNorm(8, inner),
+            nn.GELU(),
+        )
+        self.high = nn.Sequential(
+            nn.Conv2d(inner, inner, kernel_size=3, padding=1, groups=inner, bias=False),
+            nn.GroupNorm(8, inner),
+            nn.GELU(),
+            nn.Conv2d(inner, inner, kernel_size=1, bias=False),
+            nn.GroupNorm(8, inner),
+            nn.GELU(),
+        )
+        hidden = max(8, inner // 8)
+        self.channel_gate = nn.Sequential(
+            nn.AdaptiveAvgPool2d(1),
+            nn.Conv2d(inner, hidden, kernel_size=1),
+            nn.GELU(),
+            nn.Conv2d(hidden, inner, kernel_size=1),
+            nn.Sigmoid(),
+        )
+        self.fuse = nn.Sequential(
+            nn.Conv2d(inner, inner, kernel_size=3, padding=1, bias=False),
+            nn.GroupNorm(8, inner),
+            nn.GELU(),
+        )
+        self.up = nn.Conv2d(inner, channels, kernel_size=1, bias=False)
+        nn.init.zeros_(self.up.weight)
+        self.residual_scale = nn.Parameter(torch.tensor(0.1))
+
+    @staticmethod
+    def _haar(x: Tensor) -> tuple[Tensor, Tensor, Tensor, Tensor]:
+        h, w = x.shape[-2:]
+        if h % 2 or w % 2:
+            x = F.pad(x, (0, w % 2, 0, h % 2), mode="reflect")
+        x00 = x[:, :, 0::2, 0::2]
+        x01 = x[:, :, 0::2, 1::2]
+        x10 = x[:, :, 1::2, 0::2]
+        x11 = x[:, :, 1::2, 1::2]
+        return (
+            (x00 + x01 + x10 + x11) * 0.25,
+            (x00 - x01 + x10 - x11) * 0.25,
+            (x00 + x01 - x10 - x11) * 0.25,
+            (x00 - x01 - x10 + x11) * 0.25,
+        )
+
+    def forward(self, x: Tensor) -> Tensor:
+        identity = x
+        reduced = self.down(x)
+        ll, lh, hl, hh = self._haar(reduced)
+        # Magnitude is more stable than a signed sum for thin boundaries.
+        hf = torch.sqrt(lh.square() + hl.square() + hh.square() + 1e-6)
+        hf = self.high(hf) * self.channel_gate(hf)
+        enhanced = self.fuse(ll + hf)
+        enhanced = F.interpolate(enhanced, size=identity.shape[-2:], mode="bilinear", align_corners=False)
+        return identity + self.residual_scale * self.up(enhanced)
+
+
+class BoundaryRefinementAttention(nn.Module):
+    """Lightweight boundary-guided refinement (ET-Net/CTO-style).
+
+    A depthwise high-pass response and a learned edge gate reweight the neck
+    feature before VA-RDH.  It is deliberately residual and zero initialized:
+    at initialization this is exactly the original VA-RDH, while training can
+    learn to emphasize uncertain lesion contours without replacing the PDE
+    head or adding a second prediction/loss branch.
+    """
+
+    def __init__(self, channels: int) -> None:
+        super().__init__()
+        self.highpass = nn.Conv2d(channels, channels, kernel_size=3, padding=1, groups=channels, bias=False)
+        self.edge_score = nn.Sequential(
+            nn.Conv2d(channels, max(16, channels // 8), kernel_size=1, bias=False),
+            nn.GroupNorm(8, max(16, channels // 8)),
+            nn.GELU(),
+            nn.Conv2d(max(16, channels // 8), 1, kernel_size=1, bias=True),
+        )
+        self.mix = nn.Conv2d(channels, channels, kernel_size=1, bias=False)
+        self.residual_scale = nn.Parameter(torch.tensor(0.0))
+        # A Laplacian-like initialization gives a useful edge prior while the
+        # learned branch adapts it to the feature statistics.
+        with torch.no_grad():
+            self.highpass.weight.zero_()
+            self.highpass.weight[:, 0, 1, 1] = 1.0
+            self.highpass.weight[:, 0, 0, 1] = -0.25
+            self.highpass.weight[:, 0, 2, 1] = -0.25
+            self.highpass.weight[:, 0, 1, 0] = -0.25
+            self.highpass.weight[:, 0, 1, 2] = -0.25
+
+    def forward(self, x: Tensor) -> Tensor:
+        hp = self.highpass(x)
+        magnitude = hp.abs().mean(dim=1, keepdim=True)
+        learned = self.edge_score(x)
+        gate = torch.sigmoid(learned + magnitude.detach())
+        refined = self.mix(hp * gate)
+        return x + self.residual_scale * refined
+
+
+class OrientedPDCNeckRefinement(nn.Module):
+    """Oriented-PDC feature refinement inserted immediately before VA-RDH.
+
+    CPDC/APDC/RPDC are used as a feature extractor only; unlike the standalone
+    edge head, this branch has no auxiliary edge target.  A zero-initialized
+    projection makes the initial function identical to VA-RDH and lets the
+    oriented boundary cue be learned as a small residual correction.
+    """
+
+    def __init__(self, channels: int, branch_channels: int = 64) -> None:
+        super().__init__()
+        branch_channels = max(16, int(branch_channels))
+        self.bank = PDCBank(channels, branch_channels, ["cpdc", "apdc", "rpdc"])
+        self.project = nn.Sequential(
+            nn.Conv2d(branch_channels, channels, kernel_size=1, bias=False),
+            nn.GroupNorm(8, channels),
+            nn.GELU(),
+        )
+        # Keep the added path dormant at initialization (strict no-op).
+        nn.init.zeros_(self.project[0].weight)
+        self.residual_scale = nn.Parameter(torch.tensor(0.1))
+
+    def forward(self, x: Tensor) -> Tensor:
+        return x + self.residual_scale * self.project(self.bank(x))
+
+
 def build_attention(name: str, channels: int, reduction: int = 16) -> nn.Module:
     normalized = str(name).lower()
     if normalized in {"none", "identity", "off", "false", "0"}:
         return nn.Identity()
     if normalized in {"cbam", "channel_spatial", "channel-spatial"}:
         return ChannelSpatialAttention(channels=channels, reduction=reduction)
+    if normalized in {"emcad", "emcad_lite", "emcad-lite", "multi_scale"}:
+        return EMCADLiteAttention(channels=channels, reduction=reduction)
+    if normalized in {"mosc", "ta-mosc", "dynamic_skip", "dynamic-skip"}:
+        if channels % 4 != 0:
+            raise ValueError("DynamicSkipMixture expects fused channels divisible by 4")
+        return DynamicSkipMixture(channels=channels // 4, num_scales=4)
+    if normalized in {"wbe", "wbe-lite", "wavelet", "wavelet-boundary"}:
+        return WaveletBoundaryAttention(channels=channels, bottleneck=96)
+    if normalized in {"boundary", "boundary-lite", "boundary-refine", "br"}:
+        return BoundaryRefinementAttention(channels=channels)
+    if normalized in {"pdc-neck", "oriented-pdc-neck", "pdc-refine", "oriented-pdc"}:
+        # Applied after the neck, not to the wide FPN concatenation.
+        return nn.Identity()
     raise ValueError(f"Unsupported ConvNeXt decoder attention: {name}")
 
 
@@ -122,12 +359,15 @@ class ConvNeXtFPNDecoder(nn.Module):
         )
         fused_channels = decoder_channels * len(in_channels)
         self.attention = build_attention(attention, channels=fused_channels, reduction=attention_reduction)
+        self.post_neck_refinement: nn.Module = nn.Identity()
         if self.head_type in {"rdh", "coleak", "zab", "edge", "gac", "dual_branch", "rdh_dual_branch"}:
             self.neck = nn.Sequential(
                 ConvNormAct(fused_channels, decoder_channels),
                 ConvNormAct(decoder_channels, decoder_channels),
                 nn.Dropout2d(0.1),
             )
+            if str(attention).lower() in {"pdc-neck", "oriented-pdc-neck", "pdc-refine", "oriented-pdc"}:
+                self.post_neck_refinement = OrientedPDCNeckRefinement(decoder_channels, branch_channels=64)
         if self.head_type == "rdh":
             # 物理演化头：neck 产生特征，再由反应-扩散演化出分割
             self.rdh_head = ReactionDiffusionHead(
@@ -155,7 +395,9 @@ class ConvNeXtFPNDecoder(nn.Module):
                 ced_contrast=rdh_ced_contrast,
                 ced_direction=rdh_ced_direction,
             )
-            self.deep_supervision = False  # RDH 暂不与深监督组合
+            # 保留可选的多尺度辅助监督。主输出仍由 RDH 产生；当
+            # decoder_deep_supervision=true 时，训练阶段额外返回各级 FPN
+            # 辅助 logits，推理阶段接口仍为单个 logits tensor。
         elif self.head_type == "coleak":
             self.coleak_head = CoupledLeakageHead(
                 in_channels=decoder_channels,
@@ -278,12 +520,20 @@ class ConvNeXtFPNDecoder(nn.Module):
         fused = self.attention(fused)
         if self.head_type == "rdh":
             feat = self.neck(fused)
+            feat = self.post_neck_refinement(feat)
             guide = None
             needs_guide = self.rdh_head.use_image_conductance or self.rdh_head.diffusion_mode == "anisotropic"
             if images is not None and needs_guide:
                 guide = F.interpolate(images, size=feat.shape[-2:], mode="bilinear", align_corners=False)
             logits = self.rdh_head(feat, guide)
-            return F.interpolate(logits, size=output_size, mode="bilinear", align_corners=False)
+            logits = F.interpolate(logits, size=output_size, mode="bilinear", align_corners=False)
+            if self.deep_supervision and self.training:
+                aux_logits = [
+                    F.interpolate(head(feature), size=output_size, mode="bilinear", align_corners=False)
+                    for head, feature in zip(self.aux_heads, pyramid[1:])
+                ]
+                return logits, aux_logits
+            return logits
         if self.head_type == "coleak":
             feat = self.neck(fused)
             logits, auxiliary = self.coleak_head(feat, pyramid[-1])

@@ -94,7 +94,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--freeze-backbone", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--variant", choices=["tiny", "small"], default=None)
     parser.add_argument("--weights", default=None)
-    parser.add_argument("--decoder-attention", choices=["none", "cbam"], default=None)
+    parser.add_argument("--decoder-attention", choices=["none", "cbam", "emcad", "emcad-lite", "mosc", "ta-mosc", "wbe", "wbe-lite", "wavelet", "boundary", "boundary-lite", "boundary-refine", "pdc-neck", "oriented-pdc-neck", "pdc-refine", "oriented-pdc"], default=None)
     parser.add_argument("--decoder-attention-reduction", type=int, default=None)
     parser.add_argument("--decoder-deep-supervision", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--aux-loss-weight", type=float, default=None)

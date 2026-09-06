@@ -210,6 +210,11 @@ ViT 各头明细（best sweep macro）：
 | 日期 | Run Name | 方法/改动 | Config | Fold(s) | Val Set | Epochs | Dice-1 | Dice-2 | Macro | 权重路径 | 结论/下一步 |
 |------|----------|-----------|--------|---------|---------|--------|-------:|-------:|------:|----------|-----------|
 | YYYY-MM-DD | `run_name` | 简述新增模块/参数 | `configs/xxx.yaml` | f1/f1-f5 | clean/raw | 30 | 0.0000 | 0.0000 | 0.0000 | `runs/.../checkpoints/best.pt` | 结论与是否进入主线 |
+| 2026-09-06 | `va_rdh_selfreg_f1_30` | VA-RDH K=16 + FPN 多尺度辅助监督（SelfReg-lite） | `configs/dinov3_convnext_tiny_va_rdh_selfreg.yaml` | f1 | clean 444 | 30 | 0.7923 | 0.7495 | 0.7709 | `runs/va_rdh_selfreg_f1_30/f1/checkpoints/best.pt` | best epoch=13，sweep macro=0.7709；较 VA-RDH K16 的 0.7872 低 1.63pp，作为负消融，不进入主线；峰值显存 11.22GB |
+| 2026-09-06 | `va_rdh_cbam_f1_screen` | VA-RDH K=16 + CBAM-lite decoder attention | `configs/dinov3_convnext_tiny_va_rdh_iters16.yaml` + CLI attention | f1 | clean 444 | 5 | 0.7591 | 0.7479 | 0.7535 | `runs/va_rdh_cbam_f1_screen/f1/checkpoints/best.pt` | 5 epoch 筛选；peak VRAM 12.67GB；首轮 8 个非有限梯度 batch；未达筛选标准，不扩展 30 epoch |
+| 2026-09-06 | `va_rdh_wbe_f1_screen` | VA-RDH K=16 + WBE/PFESA-lite Haar boundary attention | `runs/va_rdh_mosc_f1_screen2/config.yaml` + `--decoder-attention wbe` | f1 | clean 444 | 5 | 0.7621 | 0.7536 | 0.7579 | `runs/va_rdh_wbe_f1_screen/f1/checkpoints/best.pt` | 轻量 Haar 高频增强（96-channel bottleneck、zero-init residual）；sweep macro 0.7579，peak VRAM 12.42GB；低于 VA-RDH 0.7872，不扩展 |
+| 2026-09-06 | `va_rdh_boundary_f1_screen` | VA-RDH K=16 + edge-guided boundary refinement | `runs/va_rdh_mosc_f1_screen2/config.yaml` + `--decoder-attention boundary-lite` | f1 | clean 444 | 5 | 0.7491 | 0.7297 | 0.7493 | `runs/va_rdh_boundary_f1_screen/f1/checkpoints/best.pt` | neck 前零初始化边界门控；最佳 sweep ep4=0.7493，peak VRAM 13.36GB；未超过主线 |
+| 2026-09-06 | `va_rdh_pdcneck_f1_screen` | VA-RDH K=16 + Oriented-PDC neck residual | `runs/va_rdh_mosc_f1_screen2/config.yaml` + `--decoder-attention pdc-neck` | f1 | clean 444 | 5 | 0.7559 | 0.7286 | 0.7423 | `runs/va_rdh_pdcneck_f1_screen/f1/checkpoints/best.pt` | CPDC/APDC/RPDC 仅作 neck 特征残差、无边界辅助 loss；最佳 sweep 0.7423，1 个 non-finite batch，peak VRAM 13.31GB；不扩展 |
 
 ## ZAB-LeakNet 新方案（2026-07-20）
 
