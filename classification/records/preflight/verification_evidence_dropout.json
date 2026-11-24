@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "real_input_images": 96,
+  "diagnostics": [
+    {
+      "probability": 0.1,
+      "maximum_eval_probability_difference": 0.0,
+      "dropped_images": 12,
+      "per_group_drop_counts": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "maximum_group_gain": 1.0256410837173462,
+      "actual_images": 96,
+      "private_stream_reproduced": true
+    },
+    {
+      "probability": 0.25,
+      "maximum_eval_probability_difference": 0.0,
+      "dropped_images": 27,
+      "per_group_drop_counts": [
+        8,
+        8,
+        7,
+        4
+      ],
+      "maximum_group_gain": 1.0666667222976685,
+      "actual_images": 96,
+      "private_stream_reproduced": true
+    },
+    {
+      "probability": 0.5,
+      "maximum_eval_probability_difference": 0.0,
+      "dropped_images": 49,
+      "per_group_drop_counts": [
+        15,
+        10,
+        14,
+        10
+      ],
+      "maximum_group_gain": 1.1428571939468384,
+      "actual_images": 96,
+      "private_stream_reproduced": true
+    }
+  ],
+  "checks": [
+    "Allprobabilities originalevalandclassdecisions understrictsameM5state andRNGinitialization;zero-probability originaltrain",
+    "NoaddedglobaltorchRNGdraws; atmostonegroupremoved andthreeormore retained",
+    "Independentactualmask/groupmultiplication andfirstprivatestream restoration",
+    "Expectedgroupprojection mass1; droppedgroupgradientszeroandretainedexactinversekeepgain",
+    "Fullrealtaskfinitebackpropagation andstrictordinaryM5restorationafterupdate"
+  ]
+}

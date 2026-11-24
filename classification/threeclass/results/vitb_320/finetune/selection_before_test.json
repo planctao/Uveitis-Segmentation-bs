@@ -1,0 +1,182 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_rule": "Maximum validation image macro-F1; original validation split; 3 seeds; epoch zero eligible; external tests untouched during adaptation.",
+  "best": {
+    "group": "blocks1_lr3e-06",
+    "mode": "dual",
+    "config": {
+      "arch": "attention",
+      "mode": "dual",
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "aux": 0.4,
+      "consistency": 0.3
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.820855614973262,
+      "balanced_accuracy": 0.8133886837083922,
+      "macro_f1": 0.8210776604128404,
+      "log_loss": 0.5295687317848206,
+      "recall": {
+        "infectious": 0.7872340425531915,
+        "noninfectious": 0.8563218390804598,
+        "normal": 0.7966101694915254
+      },
+      "confusion_matrix": [
+        [
+          111,
+          30,
+          0
+        ],
+        [
+          17,
+          149,
+          8
+        ],
+        [
+          4,
+          8,
+          47
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.8042129774326975,
+      0.8168313504066681,
+      0.8242880102484053
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/finetune/blocks1_lr3e-06/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/finetune/blocks1_lr3e-06/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/finetune/blocks1_lr3e-06/seed_2/model.pt"
+    ],
+    "adapt_blocks": 1,
+    "backbone_lr": 3e-06
+  },
+  "frozen_initialization": {
+    "group": "09_attention_dual_h128",
+    "mode": "dual",
+    "config": {
+      "arch": "attention",
+      "mode": "dual",
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "aux": 0.4,
+      "consistency": 0.3
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.820855614973262,
+      "balanced_accuracy": 0.8148809055022915,
+      "macro_f1": 0.8240541977384082,
+      "log_loss": 0.5048547387123108,
+      "recall": {
+        "infectious": 0.75177304964539,
+        "noninfectious": 0.8793103448275862,
+        "normal": 0.8135593220338984
+      },
+      "confusion_matrix": [
+        [
+          106,
+          35,
+          0
+        ],
+        [
+          14,
+          153,
+          7
+        ],
+        [
+          3,
+          8,
+          48
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.8042129774326975,
+      0.8059456352139279,
+      0.8136768067802551
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/explore/09_attention_dual_h128/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/explore/09_attention_dual_h128/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/explore/09_attention_dual_h128/seed_2/model.pt"
+    ]
+  },
+  "improved_over_frozen": false,
+  "selected": {
+    "fine": {
+      "group": "blocks1_lr3e-06",
+      "mode": "dual",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.820855614973262,
+        "balanced_accuracy": 0.8133886837083922,
+        "macro_f1": 0.8210776604128404,
+        "log_loss": 0.5295687317848206,
+        "recall": {
+          "infectious": 0.7872340425531915,
+          "noninfectious": 0.8563218390804598,
+          "normal": 0.7966101694915254
+        },
+        "confusion_matrix": [
+          [
+            111,
+            30,
+            0
+          ],
+          [
+            17,
+            149,
+            8
+          ],
+          [
+            4,
+            8,
+            47
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8042129774326975,
+        0.8168313504066681,
+        0.8242880102484053
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/finetune/blocks1_lr3e-06/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/finetune/blocks1_lr3e-06/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/finetune/blocks1_lr3e-06/seed_2/model.pt"
+      ],
+      "adapt_blocks": 1,
+      "backbone_lr": 3e-06
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "candidates": [
+    {
+      "candidate_id": "63c585e70306",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "validation_macro_f1": 0.8893107959516184
+    },
+    {
+      "candidate_id": "b9ae533d779d",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "validation_macro_f1": 0.8746727320108939
+    },
+    {
+      "candidate_id": "a9669a36590f",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.06,
+        "fine_contrastive": 0.05
+      },
+      "validation_macro_f1": 0.8998170419492214
+    }
+  ],
+  "new_outer_split_seeds": [
+    20261201,
+    20261211
+  ],
+  "inner_split_rule": "20261224 + repeat_index*10 + fold; 20 percent of outer-fit patient groups",
+  "hypothesis": "The apparent lower-weight-decay CV advantage and label-smoothing advantage may depend on the original patient fold partition.",
+  "evaluation": "All three fixed candidates receive both new 3-fold patient partitions and three seeds per fold. Original 20261125 results are reported separately.",
+  "external_test_policy": "No external predictions or metrics are loaded. This experiment does not promote a model."
+}

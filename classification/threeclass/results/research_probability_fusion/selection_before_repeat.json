@@ -1,0 +1,95 @@
+{
+  "candidate": {
+    "candidate_id": "experts_87e5bf1a91ec",
+    "architecture": "fixed_probability_experts",
+    "donor_feature": "vitb_raw768",
+    "donor_weight": 0.25,
+    "components": [
+      {
+        "feature": "multiscale_vit",
+        "weight": 0.75,
+        "checkpoints": [
+          "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+          "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+          "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+        ],
+        "candidate_id": "63c585e70306"
+      },
+      {
+        "feature": "vitb_raw768",
+        "weight": 0.25,
+        "checkpoints": [
+          "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_0/model.pt",
+          "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_1/model.pt",
+          "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_2/model.pt"
+        ],
+        "candidate_id": "highres_2ee39edbfc09"
+      }
+    ],
+    "val": {
+      "n": 374,
+      "accuracy": 0.8983957219251337,
+      "balanced_accuracy": 0.8910539921768891,
+      "macro_f1": 0.8914689265536723,
+      "log_loss": 0.3016024082140552,
+      "recall": {
+        "infectious": 0.900709219858156,
+        "noninfectious": 0.9080459770114943,
+        "normal": 0.864406779661017
+      },
+      "confusion_matrix": [
+        [
+          127,
+          12,
+          2
+        ],
+        [
+          10,
+          158,
+          6
+        ],
+        [
+          2,
+          6,
+          51
+        ]
+      ]
+    },
+    "new_seed_fits": 0,
+    "external_test_evaluated": false,
+    "cv": {
+      "mean_macro_f1": 0.8098468556395931,
+      "sd_macro_f1": 0.007732160127294449,
+      "mean_accuracy": 0.8066346102995318
+    },
+    "paired_original_oof_versus_milestone5": {
+      "accuracy_difference": -0.0011648223645893685,
+      "macro_f1_difference": 0.0007601964150893981,
+      "accuracy_ci95": [
+        -0.012049651390063925,
+        0.00935749126214267
+      ],
+      "macro_f1_ci95": [
+        -0.010071612578461989,
+        0.011556084266901934
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "development_gate_passed": true,
+    "paired_original_oof_versus_matched_upsampling": {
+      "accuracy_difference": -0.004076878276062845,
+      "macro_f1_difference": -0.002903545802989349,
+      "accuracy_ci95": [
+        -0.013142929402140296,
+        0.0045274476513864625
+      ],
+      "macro_f1_ci95": [
+        -0.011491750717696796,
+        0.005791121926060788
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    }
+  },
+  "policy": "Highest original patient CV among candidates with nondecreasing development validation Macro-F1.",
+  "external_test_evaluated": false
+}

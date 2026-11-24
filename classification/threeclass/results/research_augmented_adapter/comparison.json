@@ -1,0 +1,497 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-24T02:51:09.500731+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "reference_sha256": "d7b25156747ca29c1b752a61f1d711cf74458c98063f2eeb2aa990e0ae2132d8",
+    "backbone_sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c",
+    "preflight_verification": "verification_augmented_adapter.json",
+    "preflight_verification_sha256": "6df51b38970ecc809a44b332785fa95960350944b822a52e5154010939fc5104",
+    "hypothesis": "ControlledtrainingaugmentationmayreduceearlyoverfittingofMLPandnonlinearDINOadapters. Testtwofixednewaugmentationarmsandreuseexactfrozenunaugmentedcontrols;knowntrainingmethod, notclaimednewinvention.",
+    "configuration_plan": [
+      {
+        "name": "head_horizontal_photometric",
+        "blocks": 0,
+        "rank": 16,
+        "adapter_lr": 0.0,
+        "anchor_kl": 0.5,
+        "anchor_feature": 0.0,
+        "augmentation": "horizontal_photometric"
+      },
+      {
+        "name": "last4_rank16_horizontal_photometric",
+        "blocks": 4,
+        "rank": 16,
+        "adapter_lr": 0.0001,
+        "anchor_kl": 0.5,
+        "anchor_feature": 0.0,
+        "augmentation": "horizontal_photometric"
+      }
+    ],
+    "reused_unaugmented_groups": [
+      "runs/nonlinear_backbone_adapter/00_matched_head16",
+      "runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4"
+    ],
+    "reused_unaugmented_models": {
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/seed_0/model.pt": "a89e6172a972e9e8991878ce216299425e5b2063b72fb117256d89e45fdbd27f",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/seed_1/model.pt": "efab55705334e1e91deb1009885fb1634a3a8b90c7f610794fbca46ed0aabf0e",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/seed_2/model.pt": "040026d3af97753ae62856e0ad8209b1037b4d2eae28f4a502830a3d2d764559",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/seed_0/model.pt": "9b009ca0510d99991b96f072258e8c8e47a1c71366a61c1b9f6f8a8bca117e15",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/seed_1/model.pt": "08488edbcc36049825a552301277b8983df4660a2b317e2c588f4c87d4e64c58",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/seed_2/model.pt": "4232bee4548a495321a891ab16c8fda82951510f585459111ed2dc25531acaf0"
+    },
+    "reused_unaugmented_artifacts": {
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/ensemble.json": "a408a8803d2fcc2f4d160f578fe0f48440a82b7db9a24b9f7578ec6098476caa",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/val_ensemble.npz": "7335ec4c725c3334e5511dcdf4d53e132643962fc9379ac11fc38f32847ecfdb",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/ensemble.json": "88c475d14d0914f4a7db8f40046b8ad904b72053e72850f89b0f614501b5d22b",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/val_ensemble.npz": "7335ec4c725c3334e5511dcdf4d53e132643962fc9379ac11fc38f32847ecfdb"
+    },
+    "frozen_sources": {
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_0/model.pt": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_1/model.pt": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_2/model.pt": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_0/model.pt": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_1/model.pt": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_2/model.pt": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_0/model.pt": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_1/model.pt": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_2/model.pt": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07"
+    },
+    "new_formal_seed_fits": 6,
+    "maximum_new_seed_fits_if_cv_triggered": 24,
+    "observed_source_pid": 68647,
+    "observed_finalizer_pid": 70286,
+    "architecture": "Same frozenDINO+originalMLP, plusoptionalzero-outputrank16bottleneckafterlast4blocks. Exactsource/checkpointseeds andoriginal320/448pipeline. Reuseheadnoneandadapterrank16lr1e4none controlsafterfullsourceaudit.",
+    "augmentation": "Onlyfitimages. OnePILviewfeeds320and448. Horizontalflipprobability.5; brightness/contrast±10%,saturation±5%,hue0. OriginalmaxRGB<=10backgroundrestoredbeforeflip. No crop. StatelessCPUviewseed20461124+seed*1000003+epoch*10007+manifestIndex;sharedpersistentworkerepoch,isolatedworkerRNG.",
+    "objective": "OriginalfullM5lossactual16imagebatchplus0.5teacherKL attemperature2; teacherfromonlyexactcurrentfitpatients sourceM5andoriginalfrozenfeatures. Featureanchorweight0. Headlr1e-5, adapterlrpredeclared,allweightdecay.01; cosine6epochs;patience3;epoch0eligible. Withpredeclaredtrainingaugmentation.",
+    "selection": "AmongONLYtwonewaugmentedformalensembles requirevalstrictlybetterthanownunaugmentedliveepoch0and>=0.8893107959516184. HighesteligiblevalidationcandidatefrozenbeforeCV. Ifheadwins, runits9originalpatientCVfits; ifadapterwins, runbothaugmentedheadandadapter18CVfits. OnlyfrozenwinnercanpassfullCV>0.8090823139275858 andval>=M5. Newfitcount6/15/24, reused6nevercountedasnew. Afterauditsandfreeze,requirefreshpatientconfirmationagainstM5/fixedGaussian. Noexternalautomaticscoring.",
+    "audit": "Reuseoriginalfullrealimagemodel/teacher/loss/AMP/deltaaudit. Savefirsttwoactualtrainingtensorsandmetadataineveryepoch andindependentlyreplayColorJitter/PILoperations,pixel-exactatbothresolutions. Verifyallfixedsource/control/codehashes,actualpostepochheadandadapterchanges andallensembles. Evaloriginalunaugmentedimagesonly.",
+    "external_test_policy": "Onlydevelopmentrawcacheimagesandfit-onlyoriginalDINOteacher;externalfeaturesNaN, noexternalimages/predictions/outcomes.",
+    "code_sha256": {
+      "nonlinear_backbone_adapter.py": "eac5dbb89971ccf765c5fb6902727e47283237d77849b0623d775d9af20c2874",
+      "verify_nonlinear_backbone_adapter.py": "0ab2187c85083b119014a62748a0bb79bd17982a75f41a4728c7341ef40eb758",
+      "nonlinear_adapter_experiments.py": "1af6392c53c68edf60d668671574a98ff4d1fee25c720c4c79ee5b4bdc74d765",
+      "norm_adaptation_experiments.py": "734e7975b7e202a1262acc7b303d70f00ae5443a0c76eff44c57f358abcfb2ba",
+      "anchored_lora.py": "94b52efd13a77e14393c84c2c2bbf1e91c2195be1070d33be5d429debdf9d9be",
+      "lora_model.py": "4c32bb1c347dcbfef0ddcd9920d88bf3a0b03c89d07c1d150de70944d0e1ab0d",
+      "lora_seed.py": "7c51807f5d5cf5e6e75144778cde9fdfb3e32d9f6ed297d204f0d9090b02e847",
+      "amp_optimizer.py": "54d3492c99bda9f57a73065afe44b7e0aced807fec21fcbd7d722cc147a948de",
+      "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+      "kernel_residual_experiments.py": "2fa80606d2b3e797047df2c7cdb26701519cbeddad1202bf21a3b2847028f065",
+      "augmentation_adapter_experiments.py": "40b1f1a6346ac032e88d5ddea71af66b7e5eba22311802325fb8aae92e67cd65",
+      "seeded_retinal_augmentation.py": "53845a14076a2828bc33e4f8fd50741b66a428dc1f8d89205734fc4fc8a6bc63",
+      "retinal_training_augmentation.py": "94a64b98b18805efbbafd373a018db87921fe4dd647c818c0ce9fecafe4b1976",
+      "verify_augmented_adapter.py": "859d3ea93208b4db4247a58d23ee3003da0a18adf652833f2df5448255a4c6e2"
+    }
+  },
+  "candidates": [
+    {
+      "group": "head_horizontal_photometric",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.3337645997864154,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.88107753499949,
+        0.8799755836252046,
+        0.874484160821103
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/augmented_adapter/head_horizontal_photometric/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/augmented_adapter/head_horizontal_photometric/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/augmented_adapter/head_horizontal_photometric/seed_2/model.pt"
+      ],
+      "candidate_id": "head_horizontal_photometric",
+      "nonlinear_config": {
+        "name": "head_horizontal_photometric",
+        "blocks": 0,
+        "rank": 16,
+        "adapter_lr": 0.0,
+        "anchor_kl": 0.5,
+        "anchor_feature": 0.0,
+        "augmentation": "horizontal_photometric"
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "last4_rank16_horizontal_photometric",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8867742171707751,
+        "macro_f1": 0.8887939221272555,
+        "log_loss": 0.3323042628176502,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.88107753499949,
+        0.8799755836252046,
+        0.878789824146195
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/augmented_adapter/last4_rank16_horizontal_photometric/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/augmented_adapter/last4_rank16_horizontal_photometric/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/augmented_adapter/last4_rank16_horizontal_photometric/seed_2/model.pt"
+      ],
+      "candidate_id": "last4_rank16_horizontal_photometric",
+      "nonlinear_config": {
+        "name": "last4_rank16_horizontal_photometric",
+        "blocks": 4,
+        "rank": 16,
+        "adapter_lr": 0.0001,
+        "anchor_kl": 0.5,
+        "anchor_feature": 0.0,
+        "augmentation": "horizontal_photometric"
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "reused_unaugmented_controls": [
+    {
+      "group": "00_matched_head16",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.88107753499949,
+        0.8799755836252046,
+        0.8631932009514393
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/00_matched_head16/seed_2/model.pt"
+      ],
+      "candidate_id": "00_matched_head16",
+      "nonlinear_config": {
+        "name": "matched_head16",
+        "blocks": 0,
+        "rank": 16,
+        "adapter_lr": 0.0,
+        "anchor_kl": 0.5,
+        "anchor_feature": 0.0
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "development_gate_passed": false,
+      "source": "runs/nonlinear_backbone_adapter/00_matched_head16",
+      "new_fit": false
+    },
+    {
+      "group": "01_last4_rank16_lr1e4",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.88107753499949,
+        0.8799755836252046,
+        0.8631932009514393
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4/seed_2/model.pt"
+      ],
+      "candidate_id": "01_last4_rank16_lr1e4",
+      "nonlinear_config": {
+        "name": "last4_rank16_lr1e4",
+        "blocks": 4,
+        "rank": 16,
+        "adapter_lr": 0.0001,
+        "anchor_kl": 0.5,
+        "anchor_feature": 0.0
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "development_gate_passed": false,
+      "source": "runs/nonlinear_backbone_adapter/01_last4_rank16_lr1e4",
+      "new_fit": false
+    }
+  ],
+  "reused_models": 6,
+  "new_seed_fits": 6,
+  "requires_fresh_patient_confirmation": false,
+  "external_test_evaluated": false
+}

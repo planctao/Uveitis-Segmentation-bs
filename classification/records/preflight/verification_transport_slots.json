@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Independent per-image scalar NumPy/SciPy thirty-iteration Sinkhorn, weights, summaries and residuals match double precision",
+    "Matched softmax/Sinkhorn parameter counts, numerical query/key/value derivatives, slot and region masses verified",
+    "Permutation invariance, score shifts, partial/all masks, singleton and extreme-score finite forward/backward checked",
+    "All four models preserve exact original common initialization, RNG and initial training/evaluation probabilities",
+    "Actual original task gradients reach readout and then query/key/value; strict complete model restoration exact"
+  ]
+}

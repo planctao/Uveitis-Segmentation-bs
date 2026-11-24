@@ -1,0 +1,44 @@
+{
+  "created_at_utc": "2026-11-24T10:24:03.894252+00:00",
+  "family": "temporal_backbone_mixtures",
+  "status": "completed_confirmation_failed",
+  "scores_evaluated": 3,
+  "hypothesis": "Original developmentCV is highest for EMA.8 halfreplacement (.83932) but validation (.892185) misses retainedM7. Dropout.1 fixedfusion has qualifying originalCV (.836797) and validation (.903769). Predeclare convex combinations of these two completed originaldevelopment sources to test complementary errors; no freshconfirmation or external outcomes used to choose source or weights. Established probabilityensemble, no noveltyclaim.",
+  "source_selection_rule": "EMA source is highest originalCV among six fullyaudited EMA candidates. Dropout source is highest qualifying originalCV among eight fullyaudited dropout candidates. This rule and all threeweights fixed before any newmixture score.",
+  "ema_source": "ema0p8_m7replace0p5",
+  "dropout_source": "backbone_prob0p1_fusion075",
+  "configuration_plan": [
+    {
+      "name": "dropout_weight0p1",
+      "dropout_weight": 0.1
+    },
+    {
+      "name": "dropout_weight0p25",
+      "dropout_weight": 0.25
+    },
+    {
+      "name": "dropout_weight0p5",
+      "dropout_weight": 0.5
+    }
+  ],
+  "predeclared_scores": 3,
+  "planned_new_seed_fits": 0,
+  "reused_source_heads": 60,
+  "formula": "A=.1875rawB+.28125normalB+.28125EMA.8normalB+.25normalL; D=.25rawB+.75dropout.1normalB/L; candidate=(1-a)A+aD, a=.1/.25/.5.",
+  "launch_condition": "Only after backbone_consistency fully audits48actualheads/8scores and nonepasses currentM7 gates. If onepasses, confirmthatwinnerfirst. All60sourcecheckpoints and28sourcepredictionfiles frozen before anymixture score.",
+  "audit": "Reconstruct all60actualsourceheads, stats/maps/selectedepochs and allstop/outer decisions, compare the28sourceensembles to physicalprobabilities; independently expand fivebranchcoefficients and verify all12candidatephases and exactoutercoverage. No newfit.",
+  "selection": "Highest qualifying originalCV strictly>M7 withvalidation>=M7 frozenbeforetwo unusedpatient3fold repeats against EACHM7/M6/M5/fixedGaussian; highermean6foldF1 and pairedpatient95%lowerendpoint>0. All fivebranches refit, EMA from normalB trajectory, before retention.",
+  "external_test_evaluated": false,
+  "protocol": "runs/temporal_backbone_mixtures/protocol.json",
+  "protocol_sha256": "584a052ef532897aececd44120b4b75bc757e0f44f9004c2e6e66a8175e520aa",
+  "pid": 14300,
+  "passing_development_gates": 2,
+  "comparison": "results/research_temporal_backbone_mixtures/comparison.json",
+  "selected_candidate": "dropout_weight0p5",
+  "confirmation_protocol": "runs/temporal_backbone_confirmation/protocol.json",
+  "confirmation_protocol_sha256": "3ffc5f621cba8861c6799ce4a279da300997d737a515a068e17fa3bfce6a770c",
+  "confirmation_pid": 14583,
+  "confirmation": "results/research_temporal_backbone_confirmation/comparison.json",
+  "retained_reference": "M7",
+  "inference_package_created": false
+}

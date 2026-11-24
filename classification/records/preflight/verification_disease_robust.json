@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Independent per-patient/class image masses and per-disease risk moments reproduced without sample_weights",
+    "Every exponent update, within-parent normalization and support shrink reproduced independently across repeated steps",
+    "Patient-image duplication and order invariance; class mass retained; normal singleton factor remains one",
+    "Zero-update arm exactly preserves original complete task loss and finite model gradients; inference architecture unchanged"
+  ]
+}

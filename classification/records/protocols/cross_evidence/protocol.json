@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-11-24T01:12:00.820536+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "M5 concatenates global and pooled regional evidence before a GELU MLP. Evaluate whether low-rank source conjunctions improve generalization beyond an equal-parameter additive branch. This complements previous between-scale interactions and local second-order studies by retaining exact M5 inputs, source projections, attention, objective and common initialization; it does not claim invention of bilinear interactions.",
+  "configuration_plan": [
+    {
+      "name": "additive_rank16",
+      "rank": 16,
+      "product": false
+    },
+    {
+      "name": "product_rank16",
+      "rank": 16,
+      "product": true
+    },
+    {
+      "name": "additive_rank32",
+      "rank": 32,
+      "product": false
+    },
+    {
+      "name": "product_rank32",
+      "rank": 32,
+      "product": true
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "Read the original640dim fusedinput before originalencoder: first256globalprojectionGELU andnext256twoattentionpooledregions. Separate LayerNorm256 andLinear→GELU torank16/32. Combine as elementwiseproduct orsum/sqrt2, then identicalLayerNormrank andzero256readout. Add0.1residual tooriginalencoderGELU beforeDropout. Originalmid/dispersion stillenteroriginalMLP; neitherentersnewbranch. Noadditionaltaskloss.",
+  "controls": "Additive/product exactlysameparametercount withinrank; pairLayerNorm controlsamplitude. Originalcommoninitialization, initialtrain/evalprobabilities andRNGidentical. Allfourfixedarms each3formal+3foldx3seeds, sameM5loss,patientweights,hparams,sampling,fit/stop/outerplans andearlystop.",
+  "verification": "IndependentNumPy/SciPy completebranchformula, numericalsource/normderivatives, extreme/constantinputs,sourceuniformshiftinvariance, auxiliarycoordinatesindependence,exactM5initialidentityandRNG,actualtaskgradients andstrictfullrestoration passed. All48actualheads CPUrestored stop/outerprobabilities,fitstats,diseasemaps andensembles;actualglobal/localresidualindependentlyrebuilt. Retainbranchnorms anddisableddiagnostics.",
+  "selection": "OriginalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes before freshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeaturerows; externalrowsNaN andexplicitinferenceindexguard. Noexternalrawimages,predictionsoroutcomesaccessed.",
+  "code_sha256": {
+    "cross_evidence.py": "ea6870b1a6e5aaf86fc7f76b7c6fee7929aae465af54dfb18e7fe97d9b99bf0c",
+    "verify_cross_evidence.py": "8b85fa8427ccf5ffaca2e3695dbe77a8d5b1e7ca1f6517ef0d5387811dc326b6",
+    "cross_evidence_experiments.py": "dce90f0e72cfbe25ec946a6338d6b54e4455b18b79097fa0ab210c3de30ab668"
+  }
+}

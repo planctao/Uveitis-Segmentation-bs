@@ -1,0 +1,198 @@
+{
+  "created_at_utc": "2026-11-24T08:24:09.637132+00:00",
+  "candidate_id": "milestone7_normal_large_blend025",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "feature": "large_dual",
+  "large_normal_weight": 0.25,
+  "reference_weight": 0.1875,
+  "normal_base_weight": 0.5625,
+  "class_order": [
+    "infectious",
+    "noninfectious",
+    "normal"
+  ],
+  "base_backbone_sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c",
+  "large_pretrained_weights": {
+    "repository": "timm/vit_large_patch16_dinov3_qkvb.lvd1689m",
+    "commit": "3653d393df9fd16a9c1bae8a6c5a514f683b70ce",
+    "bytes": 1212548648,
+    "sha256": "56df97c299afea2ffa1eb90f866e8a290f452e227e732fef32a9eb9e8b52027f",
+    "storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/weights/dinov3_vitl16_lvd1689m.safetensors",
+    "access": "Public ungatedrepository via hf-mirror, exactcommit andcontenthashpinnedbeforedownload.",
+    "hash_source": "Pinnedcommit initial302response x-linked-etag (LFSobjectSHA256); final CDNresponse ETag is not contentSHA256."
+  },
+  "model_sha256": {
+    "reference_seed0": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb",
+    "subspace_seed0": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e",
+    "large_seed0": "07472b45a6bec3d486eceda4000f2a52f5854dffaa4e9541ef09e08307c00cc0",
+    "reference_seed1": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f",
+    "subspace_seed1": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0",
+    "large_seed1": "6d101cd382467a74d2d04dbf7bd15669347c4e2604246e6912f861f4970f1bc6",
+    "reference_seed2": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad",
+    "subspace_seed2": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463",
+    "large_seed2": "d8ab4ef0cdf4704ace93a549d82f0c31b6bbf638b584beffb994c0b6da5833e4"
+  },
+  "source_model_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_0/model.pt": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_0/model.pt": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/validation/seed_0/model.pt": "07472b45a6bec3d486eceda4000f2a52f5854dffaa4e9541ef09e08307c00cc0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_1/model.pt": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_1/model.pt": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/validation/seed_1/model.pt": "6d101cd382467a74d2d04dbf7bd15669347c4e2604246e6912f861f4970f1bc6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_2/model.pt": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_2/model.pt": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/validation/seed_2/model.pt": "d8ab4ef0cdf4704ace93a549d82f0c31b6bbf638b584beffb994c0b6da5833e4"
+  },
+  "development_validation": {
+    "n": 374,
+    "accuracy": 0.8957219251336899,
+    "balanced_accuracy": 0.8900349981278143,
+    "macro_f1": 0.8928552155846959,
+    "log_loss": 0.28946663321096183,
+    "recall": {
+      "infectious": 0.9148936170212766,
+      "noninfectious": 0.8908045977011494,
+      "normal": 0.864406779661017
+    },
+    "confusion_matrix": [
+      [
+        129,
+        12,
+        0
+      ],
+      [
+        13,
+        155,
+        6
+      ],
+      [
+        1,
+        7,
+        51
+      ]
+    ]
+  },
+  "original_patient_cv": {
+    "folds": [
+      {
+        "phase": "fold_0",
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.8356643356643356,
+          "balanced_accuracy": 0.8415060454031927,
+          "macro_f1": 0.8286229665588817,
+          "log_loss": 0.4231106601642578,
+          "recall": {
+            "infectious": 0.782051282051282,
+            "noninfectious": 0.8740458015267175,
+            "normal": 0.868421052631579
+          },
+          "confusion_matrix": [
+            [
+              183,
+              43,
+              8
+            ],
+            [
+              19,
+              229,
+              14
+            ],
+            [
+              1,
+              9,
+              66
+            ]
+          ]
+        }
+      },
+      {
+        "phase": "fold_1",
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.8146853146853147,
+          "balanced_accuracy": 0.8355799706743862,
+          "macro_f1": 0.824127994010492,
+          "log_loss": 0.5087399927598629,
+          "recall": {
+            "infectious": 0.782051282051282,
+            "noninfectious": 0.816793893129771,
+            "normal": 0.9078947368421053
+          },
+          "confusion_matrix": [
+            [
+              183,
+              47,
+              4
+            ],
+            [
+              36,
+              214,
+              12
+            ],
+            [
+              1,
+              6,
+              69
+            ]
+          ]
+        }
+      },
+      {
+        "phase": "fold_2",
+        "metrics": {
+          "n": 573,
+          "accuracy": 0.849912739965096,
+          "balanced_accuracy": 0.873814887222932,
+          "macro_f1": 0.8550464177326248,
+          "log_loss": 0.4265883056448858,
+          "recall": {
+            "infectious": 0.8717948717948718,
+            "noninfectious": 0.8022813688212928,
+            "normal": 0.9473684210526315
+          },
+          "confusion_matrix": [
+            [
+              204,
+              24,
+              6
+            ],
+            [
+              41,
+              211,
+              11
+            ],
+            [
+              0,
+              4,
+              72
+            ]
+          ]
+        }
+      }
+    ],
+    "mean_macro_f1": 0.8359324594339994,
+    "sd_macro_f1": 0.01670505150946518
+  },
+  "selection_record": "results/research_normal_large_blend/selection_before_repeat.json",
+  "selection_record_sha256": "b5431a37b4d35efb239e4e88188181033513d108812cb801a26c43ac3a809c0f",
+  "confirmation_record": "results/research_normal_large_blend_confirmation/comparison.json",
+  "confirmation_record_sha256": "10f7934b2465ce54ce378cc32cd86787ab04d79f37ee6e448c6179cbd7770d7f",
+  "confirmation_verification": "results/research_normal_large_blend_confirmation/verification.json",
+  "confirmation_verification_sha256": "dbd46380a630d0c4586c69ff8189fdc127b10573b636d879e75264dc75b58222",
+  "confirmation_integrity": "results/research_normal_large_blend_confirmation/freeze_integrity_after_confirmation.json",
+  "confirmation_integrity_sha256": "a3495c4b6b92a59d2d2c1a6d343baf08bfc40673b9a534fa91255347cc1fde6f",
+  "code_sha256": {
+    "predict_normal_large_blend_v2.py": "b4db09ecfb2b6106a06d53b62bdbabde38ecd03d9f99b9d076df4b4031ebb778",
+    "verify_normal_large_blend_inference_v2.py": "be4be1018eccdd234a3f5934c709dcb6a9d420b500f74a03bd6bc5b6a80981d9",
+    "package_normal_large_blend_v2.py": "97967333021035e91e56a0ca679956c2fa7ff39f3092ca0c9c29cc106e9741e0",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "predict_frozen_gaussian.py": "c50de8605c78b3141c8ef63799de87714f1f1c00b6362f0b188bd94f2346caad",
+    "lora_model.py": "4c32bb1c347dcbfef0ddcd9920d88bf3a0b03c89d07c1d150de70944d0e1ab0d",
+    "highres_data.py": "adea638d8d2b2cd7d7562f9f3cb2ee59175bb686a64cd1d3aa960f05924ce9a0",
+    "extract_vit.py": "3f4fcac986e83020682d7a90e5ded8d490c8d9caaf248663f8d00b5abbd281b7"
+  },
+  "external_test_evaluated": false,
+  "status": "Development-confirmed candidate pending complete original-image inference verification; preserve M6 frozen reference. No automatic external testing."
+}

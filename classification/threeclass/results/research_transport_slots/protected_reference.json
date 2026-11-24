@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "time_utc": "2026-11-24T01:13:59.623416+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "heads": [
+    {
+      "seed": 0,
+      "sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+      "all374_validation_decisions_reproduced": true
+    },
+    {
+      "seed": 1,
+      "sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+      "all374_validation_decisions_reproduced": true
+    },
+    {
+      "seed": 2,
+      "sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+      "all374_validation_decisions_reproduced": true
+    }
+  ],
+  "val": {
+    "n": 374,
+    "accuracy": 0.893048128342246,
+    "balanced_accuracy": 0.8905082258726389,
+    "macro_f1": 0.8893107959516184,
+    "log_loss": 0.3370578770980031,
+    "recall": {
+      "infectious": 0.8936170212765957,
+      "noninfectious": 0.896551724137931,
+      "normal": 0.8813559322033898
+    },
+    "confusion_matrix": [
+      [
+        126,
+        14,
+        1
+      ],
+      [
+        11,
+        156,
+        7
+      ],
+      [
+        2,
+        5,
+        52
+      ]
+    ]
+  },
+  "external_test_evaluated": false
+}

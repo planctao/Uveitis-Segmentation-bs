@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Every fold plan partitions only the original training set",
+    "Fit, stopping and outer patients and duplicate groups are disjoint",
+    "All 54 actual checkpoints fit normalization and subtype mapping on inner training only",
+    "Every training image has exactly one outer prediction per repeat and candidate",
+    "Saved probabilities reproduce every reported fold accuracy and macro-F1"
+  ],
+  "checked_seed_fits": 54,
+  "folds": [
+    {
+      "candidate": "63c585e70306",
+      "repeat": 20261201,
+      "fold": 0,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "63c585e70306",
+      "repeat": 20261201,
+      "fold": 1,
+      "seed_checkpoints": 3,
+      "outer_images": 572
+    },
+    {
+      "candidate": "63c585e70306",
+      "repeat": 20261201,
+      "fold": 2,
+      "seed_checkpoints": 3,
+      "outer_images": 572
+    },
+    {
+      "candidate": "63c585e70306",
+      "repeat": 20261211,
+      "fold": 0,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "63c585e70306",
+      "repeat": 20261211,
+      "fold": 1,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "63c585e70306",
+      "repeat": 20261211,
+      "fold": 2,
+      "seed_checkpoints": 3,
+      "outer_images": 571
+    },
+    {
+      "candidate": "b9ae533d779d",
+      "repeat": 20261201,
+      "fold": 0,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "b9ae533d779d",
+      "repeat": 20261201,
+      "fold": 1,
+      "seed_checkpoints": 3,
+      "outer_images": 572
+    },
+    {
+      "candidate": "b9ae533d779d",
+      "repeat": 20261201,
+      "fold": 2,
+      "seed_checkpoints": 3,
+      "outer_images": 572
+    },
+    {
+      "candidate": "b9ae533d779d",
+      "repeat": 20261211,
+      "fold": 0,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "b9ae533d779d",
+      "repeat": 20261211,
+      "fold": 1,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "b9ae533d779d",
+      "repeat": 20261211,
+      "fold": 2,
+      "seed_checkpoints": 3,
+      "outer_images": 571
+    },
+    {
+      "candidate": "a9669a36590f",
+      "repeat": 20261201,
+      "fold": 0,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "a9669a36590f",
+      "repeat": 20261201,
+      "fold": 1,
+      "seed_checkpoints": 3,
+      "outer_images": 572
+    },
+    {
+      "candidate": "a9669a36590f",
+      "repeat": 20261201,
+      "fold": 2,
+      "seed_checkpoints": 3,
+      "outer_images": 572
+    },
+    {
+      "candidate": "a9669a36590f",
+      "repeat": 20261211,
+      "fold": 0,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "a9669a36590f",
+      "repeat": 20261211,
+      "fold": 1,
+      "seed_checkpoints": 3,
+      "outer_images": 573
+    },
+    {
+      "candidate": "a9669a36590f",
+      "repeat": 20261211,
+      "fold": 2,
+      "seed_checkpoints": 3,
+      "outer_images": 571
+    }
+  ]
+}

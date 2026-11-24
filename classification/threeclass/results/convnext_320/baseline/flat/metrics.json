@@ -1,0 +1,350 @@
+{
+  "selection": {
+    "group": "00_global_flat_h128",
+    "mode": "flat",
+    "config": {
+      "arch": "global",
+      "mode": "flat",
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.7540106951871658,
+      "balanced_accuracy": 0.752500507769916,
+      "macro_f1": 0.7624944291610958,
+      "log_loss": 0.8066149353981018,
+      "recall": {
+        "infectious": 0.7588652482269503,
+        "noninfectious": 0.7528735632183908,
+        "normal": 0.7457627118644068
+      },
+      "confusion_matrix": [
+        [
+          107,
+          34,
+          0
+        ],
+        [
+          35,
+          131,
+          8
+        ],
+        [
+          3,
+          12,
+          44
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.7496647144475395,
+      0.7537208018834934,
+      0.7665569696566273
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/00_global_flat_h128/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/00_global_flat_h128/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/00_global_flat_h128/seed_2/model.pt"
+    ]
+  },
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "class_order": [
+    "infectious",
+    "noninfectious",
+    "normal"
+  ],
+  "results": {
+    "val": {
+      "image": {
+        "n": 374,
+        "accuracy": 0.7540106951871658,
+        "balanced_accuracy": 0.752500507769916,
+        "macro_f1": 0.7624944291610958,
+        "log_loss": 0.8066149353981018,
+        "recall": {
+          "infectious": 0.7588652482269503,
+          "noninfectious": 0.7528735632183908,
+          "normal": 0.7457627118644068
+        },
+        "confusion_matrix": [
+          [
+            107,
+            34,
+            0
+          ],
+          [
+            35,
+            131,
+            8
+          ],
+          [
+            3,
+            12,
+            44
+          ]
+        ]
+      },
+      "image_accuracy_patient_cluster_ci95": [
+        0.6708221710575047,
+        0.8271962090087952
+      ],
+      "patient": {
+        "n": 66,
+        "accuracy": 0.803030303030303,
+        "balanced_accuracy": 0.8218253968253969,
+        "macro_f1": 0.794074074074074,
+        "log_loss": 0.4084853529930115,
+        "recall": {
+          "infectious": 0.8333333333333334,
+          "noninfectious": 0.775,
+          "normal": 0.8571428571428571
+        },
+        "confusion_matrix": [
+          [
+            10,
+            2,
+            0
+          ],
+          [
+            8,
+            31,
+            1
+          ],
+          [
+            0,
+            2,
+            12
+          ]
+        ],
+        "excluded_mixed_label_groups": 17
+      },
+      "eye": {
+        "n": 124,
+        "accuracy": 0.75,
+        "balanced_accuracy": 0.754045834690996,
+        "macro_f1": 0.7446035357043623,
+        "log_loss": 0.513809323310852,
+        "recall": {
+          "infectious": 0.7777777777777778,
+          "noninfectious": 0.7424242424242424,
+          "normal": 0.7419354838709677
+        },
+        "confusion_matrix": [
+          [
+            21,
+            6,
+            0
+          ],
+          [
+            12,
+            49,
+            5
+          ],
+          [
+            1,
+            7,
+            23
+          ]
+        ],
+        "excluded_mixed_label_groups": 0
+      }
+    },
+    "test_independent": {
+      "image": {
+        "n": 807,
+        "accuracy": 0.7794299876084263,
+        "balanced_accuracy": 0.7668750016899337,
+        "macro_f1": 0.7703435130635121,
+        "log_loss": 0.6984051465988159,
+        "recall": {
+          "infectious": 0.8461538461538461,
+          "noninfectious": 0.7217125382262997,
+          "normal": 0.7327586206896551
+        },
+        "confusion_matrix": [
+          [
+            308,
+            48,
+            8
+          ],
+          [
+            73,
+            236,
+            18
+          ],
+          [
+            2,
+            29,
+            85
+          ]
+        ]
+      },
+      "image_accuracy_patient_cluster_ci95": [
+        0.7159500200230714,
+        0.8383197263370527
+      ],
+      "patient": {
+        "n": 180,
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8368606701940035,
+        "macro_f1": 0.8188749164692303,
+        "log_loss": 0.4048854410648346,
+        "recall": {
+          "infectious": 0.8518518518518519,
+          "noninfectious": 0.8333333333333334,
+          "normal": 0.8253968253968254
+        },
+        "confusion_matrix": [
+          [
+            23,
+            4,
+            0
+          ],
+          [
+            12,
+            75,
+            3
+          ],
+          [
+            0,
+            11,
+            52
+          ]
+        ],
+        "excluded_mixed_label_groups": 18
+      },
+      "eye": {
+        "n": 259,
+        "accuracy": 0.7915057915057915,
+        "balanced_accuracy": 0.810567500415622,
+        "macro_f1": 0.7816589608631045,
+        "log_loss": 0.4851457178592682,
+        "recall": {
+          "infectious": 0.8717948717948718,
+          "noninfectious": 0.7697841726618705,
+          "normal": 0.7901234567901234
+        },
+        "confusion_matrix": [
+          [
+            34,
+            5,
+            0
+          ],
+          [
+            20,
+            107,
+            12
+          ],
+          [
+            0,
+            17,
+            64
+          ]
+        ],
+        "excluded_mixed_label_groups": 0
+      }
+    },
+    "test_ningbo": {
+      "image": {
+        "n": 508,
+        "accuracy": 0.7933070866141733,
+        "balanced_accuracy": 0.7629543985860993,
+        "macro_f1": 0.7671324685599479,
+        "log_loss": 0.6252076029777527,
+        "recall": {
+          "infectious": 0.8134328358208955,
+          "noninfectious": 0.8309859154929577,
+          "normal": 0.6444444444444445
+        },
+        "confusion_matrix": [
+          [
+            109,
+            22,
+            3
+          ],
+          [
+            32,
+            236,
+            16
+          ],
+          [
+            6,
+            26,
+            58
+          ]
+        ]
+      },
+      "image_accuracy_patient_cluster_ci95": [
+        0.7252678571428571,
+        0.8470840697963101
+      ],
+      "patient": {
+        "n": 151,
+        "accuracy": 0.7880794701986755,
+        "balanced_accuracy": 0.7935447203659397,
+        "macro_f1": 0.7913940465664604,
+        "log_loss": 0.6582990288734436,
+        "recall": {
+          "infectious": 0.9032258064516129,
+          "noninfectious": 0.8695652173913043,
+          "normal": 0.6078431372549019
+        },
+        "confusion_matrix": [
+          [
+            28,
+            3,
+            0
+          ],
+          [
+            4,
+            60,
+            5
+          ],
+          [
+            2,
+            18,
+            31
+          ]
+        ],
+        "excluded_mixed_label_groups": 0
+      },
+      "eye": {
+        "n": 192,
+        "accuracy": 0.7864583333333334,
+        "balanced_accuracy": 0.785661250873515,
+        "macro_f1": 0.7753716301335349,
+        "log_loss": 0.5905051827430725,
+        "recall": {
+          "infectious": 0.90625,
+          "noninfectious": 0.839622641509434,
+          "normal": 0.6111111111111112
+        },
+        "confusion_matrix": [
+          [
+            29,
+            3,
+            0
+          ],
+          [
+            6,
+            89,
+            11
+          ],
+          [
+            3,
+            18,
+            33
+          ]
+        ],
+        "excluded_mixed_label_groups": 0
+      }
+    }
+  }
+}

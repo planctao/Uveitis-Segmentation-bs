@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "new_head_seed_fits": 60,
+  "actual_cv_seed_fits_audited": 45,
+  "checks": [
+    "Every trainable arm has complete patient CV with fit-only normalization and mapping audits",
+    "Every original training image covered exactly once per arm in outer predictions",
+    "Saved outer probabilities reconstruct all reported fold macro-F1 values",
+    "All paired-view full-development heads restore and reproduce saved probabilities",
+    "Physical reflection leaves actual trained paired heads invariant",
+    "Mean, bag and shared controls use identical parameter counts; agreement adds two scalars"
+  ],
+  "candidates": [
+    {
+      "candidate": "mirror_293a2f6d65a3",
+      "cv_seeds_audited": 9,
+      "cv_saved_metrics_reconstructed": true
+    },
+    {
+      "candidate": "mirror_1fff54f22c90",
+      "cv_seeds_audited": 9,
+      "cv_saved_metrics_reconstructed": true
+    },
+    {
+      "candidate": "mirror_63cdd6843455",
+      "cv_seeds_audited": 9,
+      "cv_saved_metrics_reconstructed": true
+    },
+    {
+      "candidate": "mirror_5fa5fe0e5029",
+      "cv_seeds_audited": 9,
+      "cv_saved_metrics_reconstructed": true
+    },
+    {
+      "candidate": "mirror_fc983b26fce2",
+      "cv_seeds_audited": 9,
+      "cv_saved_metrics_reconstructed": true
+    }
+  ]
+}

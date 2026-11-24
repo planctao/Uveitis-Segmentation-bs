@@ -1,0 +1,56 @@
+{
+  "created_at_utc": "2026-11-24T01:53:08.225740+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_record": "results/research_appearance_calibration/selection_before_repeat.json",
+  "selection_record_sha256": "df469471de07eb8190ad128191c6deb8053caf1e0f0f102f5f9203543504ac66",
+  "source_protocol": "runs/appearance_calibration/protocol.json",
+  "source_protocol_sha256": "363319b6000791057e06f82e0177cf37b965b85fdc785425b46cc373cd807fff",
+  "source_verification": "results/research_appearance_calibration/verification.json",
+  "source_verification_sha256": "26ecb8172e0005ed93d5906278a2d2b8ea761199bde56a67d5a207fa5ecb06a7",
+  "selected_candidate": "conditioned_rank8",
+  "fixed_candidate_config": {
+    "arch": "attention",
+    "mode": "flat",
+    "hidden": 256,
+    "dropout": 0.6,
+    "lr": 0.002,
+    "wd": 0.1,
+    "epochs": 120,
+    "patience": 18,
+    "taxonomy_only": true,
+    "aux": 0.8,
+    "label_smoothing": 0.03,
+    "fine_contrastive": 0.05,
+    "appearance_rank": 8,
+    "appearance_conditioned": true
+  },
+  "arms": [
+    "reference",
+    "fixed_gaussian",
+    "candidate"
+  ],
+  "outer_split_seeds": [
+    20270901,
+    20270911
+  ],
+  "inner_stop_rule": "20percent outer-fitpatientgroups stratified bymodalcoarse label;20270924+repeat_index*10+fold",
+  "planned_new_seed_fits": 36,
+  "planned_generative_fits": 18,
+  "controls": "FixedM5andfrozenappearancecandidate each3seedsperfold. FixedGaussian rebuiltfromonlynewM5fitpatientembeddings, coarse sharedcovariance shrinkage0.1, sqrt256temperature,0.1blend. Allstylefeatures normalizeonlyfitpatients. Appearance sourcefeature/provenance hashes fixed; noadjustmentsusingconfirmationoutcomes.",
+  "selection_rule": "Frozen original-CVchampion amongdevelopmentgatepassers mustbeatM5andfixedGaussianmeansixfoldMacro-F1 andbothpatientpairedrepeatedOOF95percentinterval lowerbounds>0. If failed,nochangingcandidateorappearanceformula basedonconfirmation.",
+  "verification": "CPUrestoreall36actualheads stopping/outerprobabilities, exact1717traincoverageperrepeat,patient/duplicateisolation,allfitstats/diseasemaps. IndependentlyNumPy/SciPyrebuildallcandidateaffinecalibrations andall18Gaussianpatientmoments;allsourcefeature/model/codehashes preserved.",
+  "external_test_policy": "Onlyoriginaltrainrepartitioned. Originalvalidationandexternalsets excludedfromfitsandscoring. Noexternalrawimages,stylefeaturesorpredictions accessed; externalarrayrowsNaN. Noautomaticexternaltest.",
+  "frozen_validation_checkpoint_sha256": {
+    "0": "191f3288dcefb3bab7a8902df3223ad9c231fa97f5ab107842acd993bc434afd",
+    "1": "57792a16a60b6164abe1dfab4cf18def689b52d298841285c00402c2035440c8",
+    "2": "c26910718fa4693c14841e61cf5b5b60a1ff2a512ba1fd8d6ca82675522ae15e"
+  },
+  "code_sha256": {
+    "appearance_confirmation.py": "83b5e0c736f6e69be98e9b907002a3824c0468d7869079eeba0c36a8b158ea6d",
+    "appearance_calibration.py": "cc6f4d2aa27c4c470eac70a629b490674a3dc0adc1a8d9474f61bf06a178c9c5",
+    "appearance_data.py": "33286fe3d13e451e4c35fb1c72f376c9f64887e068ed9f0d7b3c7c088142a166",
+    "appearance_experiments.py": "b8d491e3bc0e3c0d467db6d59178412758c0109185584726e7a1ffa90adf6b14",
+    "verify_appearance_calibration.py": "f51a47cceebc0b2f4bab4398471e159c5a11687d4348b0aeac67e799e590e43a",
+    "patient_gaussian.py": "9a5685ac8d85794cb0ee53ddb0cc100a58072a5f13c8dc1432559b7cd27c49e1"
+  }
+}

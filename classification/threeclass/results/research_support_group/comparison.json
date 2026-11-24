@@ -1,0 +1,1117 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T22:29:47.585080+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "hypothesis": "The subtype branch has only2-9patients for several disease targets. Preserve everyoriginalfineoutputandcoarseprobabilityexactly, but marginalize scarce sibling diseases together for auxiliary supervision to reduce unnecessary rare-disease discrimination. Compare grouped auxiliary loss with and without grouping fine contrastive positives.",
+    "thresholds": [
+      5,
+      10,
+      20
+    ],
+    "contrastive_positive_modes": [
+      "original_disease",
+      "support_group"
+    ],
+    "fixed_candidates": 6,
+    "planned_new_seed_fits": 72,
+    "grouping_rule": "Using only current fitting patient counts, all diseaseswithpatient_count<thresholdinside the same coarse family share one tailgroup. Supported diseases each keep their own group. A tail with onlyone disease is equivalent to that disease. Normal remains its original singleton. No grouping across coarsefamilies.",
+    "architecture": "All originaldisease logits and parameters unchanged. Coarse probabilities remain sum of fine softmax by original3classmapping. Grouped auxiliary logits are logsumexp original disease logits inside each fittedsupportgroup; targets use the true disease group. Thus initial coarse predictions and every common parameter exactly match originalM5under same seed.",
+    "loss": "CoarseNLL/smoothingandweights unchanged; auxiliaryweight0.8usesgroupedCE. Original_diseasecontrol keeps the prior finecontrastive positive mask; support_grouparm makes positives from distinctpatientswith the same fittedgroup. Samefineprojectionandlosscoefficient0.05.",
+    "protocol_isolation": "Every formal/outer head constructs its own groups exclusively from fitpatients; inner stopping/outer labels never set supportthresholds or group memberships. Disease->familymapping remains the supplied clinicalmapping.",
+    "training": "All6arms receive3formal+9originalCVseeds;exactlyM5hparamsandrandominitialization.",
+    "selection": "HigherM5originalCVwithnoM5validationMacro-F1decrease. EligiblebeststillrequiresnewfixedpatientconfirmationagainstbothM5andfixedGaussianbeforefreezing.",
+    "external_test_policy": "No external scoring,outcomes,predictions or rawimages."
+  },
+  "candidates": [
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "support_group_threshold": 5,
+        "support_group_contrastive": false
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8850267379679144,
+        "balanced_accuracy": 0.8805787333524006,
+        "macro_f1": 0.8809927360774817,
+        "log_loss": 0.333485506925331,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            125,
+            15,
+            1
+          ],
+          [
+            12,
+            155,
+            7
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8766982852392106,
+        0.8867068831962728,
+        0.8750560228821098
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support5_original_disease/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support5_original_disease/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support5_original_disease/validation/seed_2/model.pt"
+      ],
+      "name": "support5_original_disease",
+      "candidate_id": "support5_original_disease",
+      "threshold": 5,
+      "contrastive_positives": "original_disease",
+      "cv": {
+        "mean_macro_f1": 0.7978121182111484,
+        "sd_macro_f1": 0.010961673245148684,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8006993006993007,
+              "balanced_accuracy": 0.8263152743867891,
+              "macro_f1": 0.795704503569672,
+              "log_loss": 0.5048758097929565,
+              "recall": {
+                "infectious": 0.8076923076923077,
+                "noninfectious": 0.7633587786259542,
+                "normal": 0.9078947368421053
+              },
+              "confusion_matrix": [
+                [
+                  189,
+                  36,
+                  9
+                ],
+                [
+                  38,
+                  200,
+                  24
+                ],
+                [
+                  1,
+                  6,
+                  69
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7727272727272727,
+              "balanced_accuracy": 0.8085327578095759,
+              "macro_f1": 0.7880572831228841,
+              "log_loss": 0.6534887826697644,
+              "recall": {
+                "infectious": 0.7051282051282052,
+                "noninfectious": 0.7862595419847328,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  165,
+                  64,
+                  5
+                ],
+                [
+                  40,
+                  206,
+                  16
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8080279232111692,
+              "balanced_accuracy": 0.8452585796492139,
+              "macro_f1": 0.8096745679408889,
+              "log_loss": 0.5259475465073922,
+              "recall": {
+                "infectious": 0.8376068376068376,
+                "noninfectious": 0.7376425855513308,
+                "normal": 0.9605263157894737
+              },
+              "confusion_matrix": [
+                [
+                  196,
+                  27,
+                  11
+                ],
+                [
+                  50,
+                  194,
+                  19
+                ],
+                [
+                  0,
+                  3,
+                  73
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.013977868375072755,
+        "macro_f1_difference": -0.011195305492534335,
+        "accuracy_ci95": [
+          -0.02443729903536973,
+          -0.0034378083246220745
+        ],
+        "macro_f1_ci95": [
+          -0.021238554957619914,
+          -0.001226111632368862
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "support_group_threshold": 5,
+        "support_group_contrastive": true
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8823529411764706,
+        "balanced_accuracy": 0.8782146671585472,
+        "macro_f1": 0.8774733570896641,
+        "log_loss": 0.33409309099945916,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            11,
+            155,
+            8
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8688903115730161,
+        0.8867068831962728,
+        0.8707806004148902
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support5_support_group/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support5_support_group/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support5_support_group/validation/seed_2/model.pt"
+      ],
+      "name": "support5_support_group",
+      "candidate_id": "support5_support_group",
+      "threshold": 5,
+      "contrastive_positives": "support_group",
+      "cv": {
+        "mean_macro_f1": 0.799453434924243,
+        "sd_macro_f1": 0.010532290716100035,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8024475524475524,
+              "balanced_accuracy": 0.8180942013806618,
+              "macro_f1": 0.7961804672712377,
+              "log_loss": 0.48820796638424374,
+              "recall": {
+                "infectious": 0.8034188034188035,
+                "noninfectious": 0.7824427480916031,
+                "normal": 0.868421052631579
+              },
+              "confusion_matrix": [
+                [
+                  188,
+                  37,
+                  9
+                ],
+                [
+                  37,
+                  205,
+                  20
+                ],
+                [
+                  1,
+                  9,
+                  66
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.777972027972028,
+              "balanced_accuracy": 0.8098447985953007,
+              "macro_f1": 0.7909462059302231,
+              "log_loss": 0.6495654874521511,
+              "recall": {
+                "infectious": 0.7222222222222222,
+                "noninfectious": 0.7862595419847328,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  169,
+                  60,
+                  5
+                ],
+                [
+                  40,
+                  206,
+                  16
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8080279232111692,
+              "balanced_accuracy": 0.8416688189551907,
+              "macro_f1": 0.8112336315712682,
+              "log_loss": 0.5342851631132401,
+              "recall": {
+                "infectious": 0.8247863247863247,
+                "noninfectious": 0.752851711026616,
+                "normal": 0.9473684210526315
+              },
+              "confusion_matrix": [
+                [
+                  193,
+                  29,
+                  12
+                ],
+                [
+                  50,
+                  198,
+                  15
+                ],
+                [
+                  0,
+                  4,
+                  72
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.011648223645894018,
+        "macro_f1_difference": -0.009488528120409012,
+        "accuracy_ci95": [
+          -0.022981544941814817,
+          -0.0012062544399049193
+        ],
+        "macro_f1_ci95": [
+          -0.020805964021445498,
+          0.0011675027022425637
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "support_group_threshold": 10,
+        "support_group_contrastive": false
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8983957219251337,
+        "balanced_accuracy": 0.8943396434971599,
+        "macro_f1": 0.8949555463133009,
+        "log_loss": 0.3178226249504777,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.9080459770114943,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            10,
+            158,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8614435203006968,
+        0.8881299835739228,
+        0.8656603869718623
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support10_original_disease/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support10_original_disease/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support10_original_disease/validation/seed_2/model.pt"
+      ],
+      "name": "support10_original_disease",
+      "candidate_id": "support10_original_disease",
+      "threshold": 10,
+      "contrastive_positives": "original_disease",
+      "cv": {
+        "mean_macro_f1": 0.8001943852328773,
+        "sd_macro_f1": 0.005637080127664029,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.798951048951049,
+              "balanced_accuracy": 0.8211681255072175,
+              "macro_f1": 0.7947796332206049,
+              "log_loss": 0.49301230383294103,
+              "recall": {
+                "infectious": 0.7863247863247863,
+                "noninfectious": 0.7824427480916031,
+                "normal": 0.8947368421052632
+              },
+              "confusion_matrix": [
+                [
+                  184,
+                  43,
+                  7
+                ],
+                [
+                  33,
+                  205,
+                  24
+                ],
+                [
+                  1,
+                  7,
+                  68
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7902097902097902,
+              "balanced_accuracy": 0.8201207821537272,
+              "macro_f1": 0.7997733402555304,
+              "log_loss": 0.6413344419264395,
+              "recall": {
+                "infectious": 0.7606837606837606,
+                "noninfectious": 0.7786259541984732,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  178,
+                  51,
+                  5
+                ],
+                [
+                  41,
+                  204,
+                  17
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8080279232111692,
+              "balanced_accuracy": 0.8385502811658504,
+              "macro_f1": 0.8060301822224968,
+              "log_loss": 0.5070489756798496,
+              "recall": {
+                "infectious": 0.8247863247863247,
+                "noninfectious": 0.7566539923954373,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  193,
+                  30,
+                  11
+                ],
+                [
+                  44,
+                  199,
+                  20
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.008736167734420541,
+        "macro_f1_difference": -0.00891271878157296,
+        "accuracy_ci95": [
+          -0.02168660093744943,
+          0.003181888181610709
+        ],
+        "macro_f1_ci95": [
+          -0.021491020927679384,
+          0.0026136632636470933
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "support_group_threshold": 10,
+        "support_group_contrastive": true
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8796791443850267,
+        "balanced_accuracy": 0.8758506009646938,
+        "macro_f1": 0.8766602280579234,
+        "log_loss": 0.31996808875489496,
+        "recall": {
+          "infectious": 0.8723404255319149,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            123,
+            17,
+            1
+          ],
+          [
+            12,
+            155,
+            7
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8563425643831528,
+        0.8920479665836024,
+        0.8766838355402634
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support10_support_group/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support10_support_group/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support10_support_group/validation/seed_2/model.pt"
+      ],
+      "name": "support10_support_group",
+      "candidate_id": "support10_support_group",
+      "threshold": 10,
+      "contrastive_positives": "support_group",
+      "cv": {
+        "mean_macro_f1": 0.8067254899999377,
+        "sd_macro_f1": 0.011072067160610394,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8024475524475524,
+              "balanced_accuracy": 0.826369644670167,
+              "macro_f1": 0.7997270375145867,
+              "log_loss": 0.4915441340270677,
+              "recall": {
+                "infectious": 0.7735042735042735,
+                "noninfectious": 0.7977099236641222,
+                "normal": 0.9078947368421053
+              },
+              "confusion_matrix": [
+                [
+                  181,
+                  45,
+                  8
+                ],
+                [
+                  31,
+                  209,
+                  22
+                ],
+                [
+                  1,
+                  6,
+                  69
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.791958041958042,
+              "balanced_accuracy": 0.8210885731978541,
+              "macro_f1": 0.8009588154058472,
+              "log_loss": 0.6435668082572359,
+              "recall": {
+                "infectious": 0.7521367521367521,
+                "noninfectious": 0.7900763358778626,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  176,
+                  52,
+                  6
+                ],
+                [
+                  39,
+                  207,
+                  16
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8202443280977313,
+              "balanced_accuracy": 0.8478934939311165,
+              "macro_f1": 0.8194906170793792,
+              "log_loss": 0.49619824686472497,
+              "recall": {
+                "infectious": 0.8376068376068376,
+                "noninfectious": 0.7718631178707225,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  196,
+                  28,
+                  10
+                ],
+                [
+                  43,
+                  203,
+                  17
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0029120559114734768,
+        "macro_f1_difference": -0.002289792485582698,
+        "accuracy_ci95": [
+          -0.01413498276732405,
+          0.007029204266127454
+        ],
+        "macro_f1_ci95": [
+          -0.013079473388391081,
+          0.007072391570140575
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "support_group_threshold": 20,
+        "support_group_contrastive": false
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8823529411764706,
+        "balanced_accuracy": 0.8744806584566834,
+        "macro_f1": 0.873770451425974,
+        "log_loss": 0.33432348738037276,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.847457627118644
+        },
+        "confusion_matrix": [
+          [
+            124,
+            15,
+            2
+          ],
+          [
+            10,
+            156,
+            8
+          ],
+          [
+            3,
+            6,
+            50
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8650626942449898,
+        0.8787598986247871,
+        0.8695816647355722
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support20_original_disease/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support20_original_disease/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support20_original_disease/validation/seed_2/model.pt"
+      ],
+      "name": "support20_original_disease",
+      "candidate_id": "support20_original_disease",
+      "threshold": 20,
+      "contrastive_positives": "original_disease",
+      "cv": {
+        "mean_macro_f1": 0.7941252051582808,
+        "sd_macro_f1": 0.012003590602385416,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8024475524475524,
+              "balanced_accuracy": 0.8210556648684412,
+              "macro_f1": 0.7967935444519348,
+              "log_loss": 0.4962253284410497,
+              "recall": {
+                "infectious": 0.7991452991452992,
+                "noninfectious": 0.7824427480916031,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  187,
+                  38,
+                  9
+                ],
+                [
+                  36,
+                  205,
+                  21
+                ],
+                [
+                  1,
+                  8,
+                  67
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7727272727272727,
+              "balanced_accuracy": 0.8030665412143918,
+              "macro_f1": 0.7810119794622565,
+              "log_loss": 0.5825390262950513,
+              "recall": {
+                "infectious": 0.7264957264957265,
+                "noninfectious": 0.7748091603053435,
+                "normal": 0.9078947368421053
+              },
+              "confusion_matrix": [
+                [
+                  170,
+                  58,
+                  6
+                ],
+                [
+                  40,
+                  203,
+                  19
+                ],
+                [
+                  2,
+                  5,
+                  69
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8027923211169284,
+              "balanced_accuracy": 0.8253923864290084,
+              "macro_f1": 0.8045700915606512,
+              "log_loss": 0.5117063891248905,
+              "recall": {
+                "infectious": 0.8247863247863247,
+                "noninfectious": 0.7566539923954373,
+                "normal": 0.8947368421052632
+              },
+              "confusion_matrix": [
+                [
+                  193,
+                  35,
+                  6
+                ],
+                [
+                  46,
+                  199,
+                  18
+                ],
+                [
+                  0,
+                  8,
+                  68
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.015142690739662235,
+        "macro_f1_difference": -0.01478476663652828,
+        "accuracy_ci95": [
+          -0.033458211266521466,
+          0.002416872845454389
+        ],
+        "macro_f1_ci95": [
+          -0.032686577327950904,
+          0.0028222327495844557
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "support_group_threshold": 20,
+        "support_group_contrastive": true
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8796791443850267,
+        "balanced_accuracy": 0.8767473157278795,
+        "macro_f1": 0.8725589099573905,
+        "log_loss": 0.34221046730070065,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            125,
+            14,
+            2
+          ],
+          [
+            12,
+            153,
+            9
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8629806386270142,
+        0.8769761907229136,
+        0.8675663109006804
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support20_support_group/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support20_support_group/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/support_group_taxonomy/support20_support_group/validation/seed_2/model.pt"
+      ],
+      "name": "support20_support_group",
+      "candidate_id": "support20_support_group",
+      "threshold": 20,
+      "contrastive_positives": "support_group",
+      "cv": {
+        "mean_macro_f1": 0.7968141129175889,
+        "sd_macro_f1": 0.01429084750914689,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7832167832167832,
+              "balanced_accuracy": 0.8053861491989253,
+              "macro_f1": 0.7805984529272578,
+              "log_loss": 0.5327222833242033,
+              "recall": {
+                "infectious": 0.7521367521367521,
+                "noninfectious": 0.7824427480916031,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  176,
+                  49,
+                  9
+                ],
+                [
+                  35,
+                  205,
+                  22
+                ],
+                [
+                  1,
+                  8,
+                  67
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7902097902097902,
+              "balanced_accuracy": 0.81905512459952,
+              "macro_f1": 0.8022728674441851,
+              "log_loss": 0.5792524243194942,
+              "recall": {
+                "infectious": 0.7307692307692307,
+                "noninfectious": 0.8053435114503816,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  171,
+                  55,
+                  8
+                ],
+                [
+                  40,
+                  211,
+                  11
+                ],
+                [
+                  2,
+                  4,
+                  70
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8045375218150087,
+              "balanced_accuracy": 0.8236983500641696,
+              "macro_f1": 0.8075710183813234,
+              "log_loss": 0.5381198350141638,
+              "recall": {
+                "infectious": 0.8290598290598291,
+                "noninfectious": 0.7604562737642585,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  194,
+                  34,
+                  6
+                ],
+                [
+                  48,
+                  200,
+                  15
+                ],
+                [
+                  0,
+                  9,
+                  67
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.015142690739662235,
+        "macro_f1_difference": -0.012218513057342673,
+        "accuracy_ci95": [
+          -0.03482492150507679,
+          0.003690093670167424
+        ],
+        "macro_f1_ci95": [
+          -0.031204681347861817,
+          0.005878384327438458
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "new_seed_fits": 72,
+  "external_test_evaluated": false
+}

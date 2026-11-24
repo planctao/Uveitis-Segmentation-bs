@@ -1,0 +1,455 @@
+{
+  "selection": {
+    "primary": "finetune",
+    "linear_probe_val_patient_auroc": 0.949905482041588,
+    "finetune_val_patient_auroc": 0.9555765595463138,
+    "best_epoch": 2,
+    "linear_probe_threshold": 0.5258915424346924,
+    "finetune_threshold": 0.2785935699939728,
+    "threshold_source": "Validation patients only; fixed before any external test metrics"
+  },
+  "finetune": {
+    "test_independent": {
+      "image": {
+        "n": 691,
+        "accuracy": 0.7626628075253257,
+        "balanced_accuracy": 0.7570067547131767,
+        "macro_f1": 0.7574815956171889,
+        "auroc": 0.865363611923245,
+        "average_precision": 0.8476220796626838,
+        "sensitivity": 0.8626373626373627,
+        "specificity": 0.6513761467889908,
+        "confusion_matrix": [
+          [
+            213,
+            114
+          ],
+          [
+            50,
+            314
+          ]
+        ]
+      },
+      "patient": {
+        "n": 135,
+        "accuracy": 0.7925925925925926,
+        "balanced_accuracy": 0.8232323232323232,
+        "macro_f1": 0.7691744015632633,
+        "auroc": 0.9177890011223345,
+        "average_precision": 0.8050778479991535,
+        "sensitivity": 0.8888888888888888,
+        "specificity": 0.7575757575757576,
+        "confusion_matrix": [
+          [
+            75,
+            24
+          ],
+          [
+            4,
+            32
+          ]
+        ]
+      },
+      "patient_ci95": {
+        "accuracy": [
+          0.725925925925926,
+          0.8592592592592593
+        ],
+        "balanced_accuracy": [
+          0.7533333245089214,
+          0.8824557544498383
+        ],
+        "macro_f1": [
+          0.6898947304794869,
+          0.8383753179762578
+        ],
+        "auroc": [
+          0.8665264488318876,
+          0.9596798381405512
+        ],
+        "sensitivity": [
+          0.7692307692307693,
+          0.975015243902439
+        ],
+        "specificity": [
+          0.6761904761904762,
+          0.8437727548543689
+        ]
+      }
+    },
+    "test_ningbo": {
+      "image": {
+        "n": 418,
+        "accuracy": 0.8301435406698564,
+        "balanced_accuracy": 0.8079934832877864,
+        "macro_f1": 0.8061718316298208,
+        "auroc": 0.9035894471305446,
+        "average_precision": 0.842907706207152,
+        "sensitivity": 0.746268656716418,
+        "specificity": 0.8697183098591549,
+        "confusion_matrix": [
+          [
+            247,
+            37
+          ],
+          [
+            34,
+            100
+          ]
+        ]
+      },
+      "patient": {
+        "n": 103,
+        "accuracy": 0.8058252427184466,
+        "balanced_accuracy": 0.8060035842293907,
+        "macro_f1": 0.7836134453781513,
+        "auroc": 0.9198028673835126,
+        "average_precision": 0.8780911617971434,
+        "sensitivity": 0.8064516129032258,
+        "specificity": 0.8055555555555556,
+        "confusion_matrix": [
+          [
+            58,
+            14
+          ],
+          [
+            6,
+            25
+          ]
+        ]
+      },
+      "patient_ci95": {
+        "accuracy": [
+          0.7281553398058253,
+          0.883495145631068
+        ],
+        "balanced_accuracy": [
+          0.7161456614553255,
+          0.886904315501994
+        ],
+        "macro_f1": [
+          0.6912885942182816,
+          0.8651968186851908
+        ],
+        "auroc": [
+          0.8570941272635816,
+          0.9712005319963257
+        ],
+        "sensitivity": [
+          0.6551392572944297,
+          0.9393939393939394
+        ],
+        "specificity": [
+          0.7182625604372505,
+          0.8923333333333333
+        ]
+      }
+    },
+    "train": {
+      "image": {
+        "n": 1449,
+        "accuracy": 0.8088336783988958,
+        "balanced_accuracy": 0.8111390829903322,
+        "macro_f1": 0.8087283679105242,
+        "auroc": 0.8943916913946588,
+        "average_precision": 0.883507196130966,
+        "sensitivity": 0.844213649851632,
+        "specificity": 0.7780645161290323,
+        "confusion_matrix": [
+          [
+            603,
+            172
+          ],
+          [
+            105,
+            569
+          ]
+        ]
+      },
+      "patient": {
+        "n": 275,
+        "accuracy": 0.8290909090909091,
+        "balanced_accuracy": 0.8524754815077396,
+        "macro_f1": 0.8216970850749769,
+        "auroc": 0.9508448540706606,
+        "average_precision": 0.9176761121938345,
+        "sensitivity": 0.9247311827956989,
+        "specificity": 0.7802197802197802,
+        "confusion_matrix": [
+          [
+            142,
+            40
+          ],
+          [
+            7,
+            86
+          ]
+        ]
+      }
+    },
+    "val": {
+      "image": {
+        "n": 355,
+        "accuracy": 0.7971830985915493,
+        "balanced_accuracy": 0.797528154227906,
+        "macro_f1": 0.7969881814715973,
+        "auroc": 0.8715085576127761,
+        "average_precision": 0.864086959800414,
+        "sensitivity": 0.8047337278106509,
+        "specificity": 0.7903225806451613,
+        "confusion_matrix": [
+          [
+            147,
+            39
+          ],
+          [
+            33,
+            136
+          ]
+        ]
+      },
+      "patient": {
+        "n": 69,
+        "accuracy": 0.8840579710144928,
+        "balanced_accuracy": 0.9130434782608696,
+        "macro_f1": 0.8783068783068784,
+        "auroc": 0.9555765595463138,
+        "average_precision": 0.9141196901252306,
+        "sensitivity": 1.0,
+        "specificity": 0.8260869565217391,
+        "confusion_matrix": [
+          [
+            38,
+            8
+          ],
+          [
+            0,
+            23
+          ]
+        ]
+      }
+    }
+  },
+  "linear_probe": {
+    "test_independent": {
+      "image": {
+        "n": 691,
+        "accuracy": 0.7973950795947902,
+        "balanced_accuracy": 0.7955691097892933,
+        "macro_f1": 0.7961961101560656,
+        "auroc": 0.8805407131095204,
+        "average_precision": 0.8935202525143455,
+        "sensitivity": 0.8296703296703297,
+        "specificity": 0.7614678899082569,
+        "confusion_matrix": [
+          [
+            249,
+            78
+          ],
+          [
+            62,
+            302
+          ]
+        ]
+      },
+      "patient": {
+        "n": 135,
+        "accuracy": 0.8888888888888888,
+        "balanced_accuracy": 0.8888888888888888,
+        "macro_f1": 0.8657962754324342,
+        "auroc": 0.9441638608305275,
+        "average_precision": 0.879449449762268,
+        "sensitivity": 0.8888888888888888,
+        "specificity": 0.8888888888888888,
+        "confusion_matrix": [
+          [
+            88,
+            11
+          ],
+          [
+            4,
+            32
+          ]
+        ]
+      },
+      "patient_ci95": {
+        "accuracy": [
+          0.8296296296296296,
+          0.9407407407407408
+        ],
+        "balanced_accuracy": [
+          0.8180773209555302,
+          0.9456905800874206
+        ],
+        "macro_f1": [
+          0.7917480013015405,
+          0.9245763237941523
+        ],
+        "auroc": [
+          0.8984268046768047,
+          0.9795177653730286
+        ],
+        "sensitivity": [
+          0.7692307692307693,
+          0.975015243902439
+        ],
+        "specificity": [
+          0.826530612244898,
+          0.9464520676691729
+        ]
+      }
+    },
+    "test_ningbo": {
+      "image": {
+        "n": 418,
+        "accuracy": 0.8325358851674641,
+        "balanced_accuracy": 0.8117248265713685,
+        "macro_f1": 0.8092667918231122,
+        "auroc": 0.9111309648938407,
+        "average_precision": 0.8206699963636632,
+        "sensitivity": 0.753731343283582,
+        "specificity": 0.8697183098591549,
+        "confusion_matrix": [
+          [
+            247,
+            37
+          ],
+          [
+            33,
+            101
+          ]
+        ]
+      },
+      "patient": {
+        "n": 103,
+        "accuracy": 0.8932038834951457,
+        "balanced_accuracy": 0.8776881720430108,
+        "macro_f1": 0.8742368742368742,
+        "auroc": 0.9466845878136201,
+        "average_precision": 0.9028257936954129,
+        "sensitivity": 0.8387096774193549,
+        "specificity": 0.9166666666666666,
+        "confusion_matrix": [
+          [
+            66,
+            6
+          ],
+          [
+            5,
+            26
+          ]
+        ]
+      },
+      "patient_ci95": {
+        "accuracy": [
+          0.8349514563106796,
+          0.9514563106796117
+        ],
+        "balanced_accuracy": [
+          0.7951942682969555,
+          0.9475236506061687
+        ],
+        "macro_f1": [
+          0.7984263080667604,
+          0.9387072599703957
+        ],
+        "auroc": [
+          0.8893762183235868,
+          0.9865134865134865
+        ],
+        "sensitivity": [
+          0.6922413793103448,
+          0.9629960317460317
+        ],
+        "specificity": [
+          0.8523975409836065,
+          0.972972972972973
+        ]
+      }
+    },
+    "train": {
+      "image": {
+        "n": 1449,
+        "accuracy": 0.8840579710144928,
+        "balanced_accuracy": 0.8823317698860917,
+        "macro_f1": 0.8831886739578574,
+        "auroc": 0.9457892217861587,
+        "average_precision": 0.939584724317944,
+        "sensitivity": 0.857566765578635,
+        "specificity": 0.9070967741935484,
+        "confusion_matrix": [
+          [
+            703,
+            72
+          ],
+          [
+            96,
+            578
+          ]
+        ]
+      },
+      "patient": {
+        "n": 275,
+        "accuracy": 0.9636363636363636,
+        "balanced_accuracy": 0.9567529244948599,
+        "macro_f1": 0.9591648847707294,
+        "auroc": 0.9944464138012525,
+        "average_precision": 0.9901776356293347,
+        "sensitivity": 0.9354838709677419,
+        "specificity": 0.978021978021978,
+        "confusion_matrix": [
+          [
+            178,
+            4
+          ],
+          [
+            6,
+            87
+          ]
+        ]
+      }
+    },
+    "val": {
+      "image": {
+        "n": 355,
+        "accuracy": 0.7774647887323943,
+        "balanced_accuracy": 0.7749252401857861,
+        "macro_f1": 0.7756417948656411,
+        "auroc": 0.8240122160717694,
+        "average_precision": 0.8253127809382288,
+        "sensitivity": 0.7218934911242604,
+        "specificity": 0.8279569892473119,
+        "confusion_matrix": [
+          [
+            154,
+            32
+          ],
+          [
+            47,
+            122
+          ]
+        ]
+      },
+      "patient": {
+        "n": 69,
+        "accuracy": 0.9130434782608695,
+        "balanced_accuracy": 0.9130434782608695,
+        "macro_f1": 0.9041666666666667,
+        "auroc": 0.949905482041588,
+        "average_precision": 0.9258320384206571,
+        "sensitivity": 0.9130434782608695,
+        "specificity": 0.9130434782608695,
+        "confusion_matrix": [
+          [
+            42,
+            4
+          ],
+          [
+            2,
+            21
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "mode": "independent",
+      "rank": 8,
+      "full_task_batch": 256
+    },
+    {
+      "mode": "independent",
+      "rank": 32,
+      "full_task_batch": 256
+    },
+    {
+      "mode": "coupled",
+      "rank": 8,
+      "full_task_batch": 256
+    },
+    {
+      "mode": "coupled",
+      "rank": 32,
+      "full_task_batch": 256
+    }
+  ],
+  "diagnostics": {
+    "independent": {
+      "global": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.585237827787637e-09
+      },
+      "regions": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.687898596562491e-09
+      },
+      "mid": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.265183178337907e-09
+      },
+      "dispersion": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 6.261158924658616e-09
+      }
+    },
+    "coupled": {
+      "joint": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 2.6970028432771187e-09
+      }
+    }
+  },
+  "code_sha256": {
+    "coupled_normal_reference.py": "040c66a3e531b6763d7031e77d39aeb45ddc310abe66e5e66605bed7d59f1b4b",
+    "verify_coupled_normal_reference.py": "5ba9af8a2aeaa6024ce28653321314e4a1672d18a9d19f41be0efff69cb6fe6a"
+  },
+  "checks": [
+    "Fit-only stream RMS scales and independent/coupled PCA recovered with independent patient loops/Gram spectra",
+    "Duplicating normal images leaves patient subspaces unchanged; original MLP initialization and global Torch RNG retained",
+    "Independent NumPy transforms match both actual operators; regional pairwise contrasts preserved before clipping",
+    "Changing middle-stream features changes regional correction only for coupled operator; zero strength recovers M5 exactly",
+    "Rank32 independent image-mean control matches M6 on three nonregional streams and differs on regional tokens",
+    "Four real256-image complete task gradient/update/strict-recovery checks"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "created_at_utc": "2026-11-23T21:46:06.135818+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Class-balanced patient support in the frozen MLP embedding may correct nonlinear local residuals beyond a shared-covariance prototype. Compare residual targets with a direct kernel classifier under the same supports, bandwidth and ridge.",
+  "support": "One equally weighted mean per fitting patient/coarse-label pair, including mixed-label patients only within their own label. Three class masses each1/3.",
+  "kernel": "RBF exp(-squared_distance/(2*bandwidth_multiplier*median_positive_fitting_pair_squared_distance)); median comes only from fitting support centers.",
+  "bandwidth_multipliers": [
+    0.5,
+    1.0
+  ],
+  "ridge_values": [
+    0.01,
+    0.1
+  ],
+  "branch_weights": [
+    0.1,
+    0.25
+  ],
+  "target_modes": [
+    "residual",
+    "direct"
+  ],
+  "target_policy": "Residual target is one_hot(label)-mean source MLP probability for that patient/label; direct target is one_hot(label). Source MLP unchanged and only fitting images supply targets.",
+  "solver": "Minimize sum_s patient_class_weight_s*||kernel_function(center_s)-target_s||^2 + ridge*RKHS_norm_squared, with weights summing to1. Solve in a symmetric sqrt-weighted dual system in float64.",
+  "prediction": "Residual: Euclidean simplex projection of source_probability + branch_weight*kernel_residual. Direct control: mix source_probability with simplex-projected kernel labels. No test/query graph fitting or transduction.",
+  "fixed_candidates": 16,
+  "expected_source_heads": 12,
+  "expected_kernel_systems": 48,
+  "new_backbone_or_mlp_fits": 0,
+  "evaluation": "Validation plus original3outer patient folds, each source/supported residual uses its own inner fitting rows; all configurations receive all folds.",
+  "selection": "Higher originalCV than M5 and validation Macro-F1 no lower than M5; any eligible winner must then pass fixed new patient partitions before freeze or external scoring.",
+  "external_test_policy": "Never load external predictions, outcomes or raw images; never use external results to choose any configuration."
+}

@@ -1,0 +1,35 @@
+{
+  "created_at_utc": "2026-11-24T01:23:24.856462+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Added frozen residual capacity has not reliably improved both development criteria. Evaluate known SAM optimization on the exact original M5 architecture and task: a normalized worst-direction gradient can favor flatter head solutions without adding inference parameters. Preserve paired dropout randomness to isolate the local parameter perturbation. This is an optimizer ablation, not a claim of a new method.",
+  "configuration_plan": [
+    {
+      "name": "rho0_control",
+      "rho": 0.0
+    },
+    {
+      "name": "rho0p01",
+      "rho": 0.01
+    },
+    {
+      "name": "rho0p05",
+      "rho": 0.05
+    },
+    {
+      "name": "rho0p1",
+      "rho": 0.1
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "objective": "On each original256image batch compute originalpatientweighted completeM5loss and untruncatedgradientg. If rho>0 perturb all activeheadparameters by rho*g/(globalL2norm(g)+1e-12), recompute completeoriginalloss with exactlyreplayedCPU/CUDARNG/dropoutmask, backpropagatesecondgradient, restoreeveryparameter with exactcopy ofbeforestate, clipglobalgradientnorm5, oneoriginalAdamWupdate. No extraweightdecay, scheduler,augmentationorloss. LeaveglobalRNGafterfirstpass state; secondpass assertedidentical. rho0 usesonepass andreplicates originalM5.",
+  "controls": "Same model/init/weights/fit-onlynormalization/sampling/earlystop/hparams asM5, each3formal+3foldx3seeds. Fixedrho0/.01/.05/.1. Auditall12rho0headsagainstcorrespondingoriginalM5heldoutprobabilities anddecisions. Noaddedinferenceparameters.",
+  "verification": "Actual256images/completeM5objective verificationpassedforallradii: independentCPUreplayofbothgradients,exactdropoutmask,NumPyperturbation/clip/firstAdamWupdate, exactpre/postrestorationandpairedRNG. Eachactualfitretainsfirst-updatewitnesswithbase/perturbed/restored/aftervectors,rawandclippedgradients,activeflags, RNGstates,masks,globalindicesandweights. Reconstructall48actualwitnesses andallactualselectedstop/outerpredictions onCPU.",
+  "selection": "Onlyrho>0eligible; originalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes beforefreshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeaturerows;externalrowsNaN. Noexternalimages,predictionsoroutcomesaccessed.",
+  "code_sha256": {
+    "sharpness_training.py": "eae781b618e688aa14a43c4967a1c159d0d2be12ff0c85d6fc27a1f466f2171d",
+    "verify_sharpness_training.py": "35eb2b9f46cdf63d18160c4ec54a8d38b84f9dffdeaed77501611145c7feac1a",
+    "sharpness_experiments.py": "e28ba7cdcb3124dc1f0a1d35fe14a85916246830fb5219ec6ae7e31afc6482a4"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "weights_sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c",
+  "development_images": 2091,
+  "shards_checked": 131,
+  "actual_images_recomputed": [
+    {
+      "development_index": 0,
+      "differences": {
+        "regions_block4": {
+          "relative_mae": 0.0004886912065558136,
+          "max_abs_error": 0.00390625
+        },
+        "regions_block8": {
+          "relative_mae": 0.0009730429155752063,
+          "max_abs_error": 0.01953125
+        }
+      }
+    },
+    {
+      "development_index": 352,
+      "differences": {
+        "regions_block4": {
+          "relative_mae": 0.00048073232755996287,
+          "max_abs_error": 0.0039520263671875
+        },
+        "regions_block8": {
+          "relative_mae": 0.0007512139854952693,
+          "max_abs_error": 0.015625
+        }
+      }
+    },
+    {
+      "development_index": 887,
+      "differences": {
+        "regions_block4": {
+          "relative_mae": 0.0004685210296884179,
+          "max_abs_error": 0.00390625
+        },
+        "regions_block8": {
+          "relative_mae": 0.0008287012460641563,
+          "max_abs_error": 0.01171875
+        }
+      }
+    },
+    {
+      "development_index": 1501,
+      "differences": {
+        "regions_block4": {
+          "relative_mae": 0.0004263878508936614,
+          "max_abs_error": 0.00390625
+        },
+        "regions_block8": {
+          "relative_mae": 0.0006893385434523225,
+          "max_abs_error": 0.02099609375
+        }
+      }
+    },
+    {
+      "development_index": 1800,
+      "differences": {
+        "regions_block4": {
+          "relative_mae": 0.0004133469774387777,
+          "max_abs_error": 0.00390625
+        },
+        "regions_block8": {
+          "relative_mae": 0.0007721993024460971,
+          "max_abs_error": 0.0234375
+        }
+      }
+    },
+    {
+      "development_index": 2090,
+      "differences": {
+        "regions_block4": {
+          "relative_mae": 0.00046508462401106954,
+          "max_abs_error": 0.00390625
+        },
+        "regions_block8": {
+          "relative_mae": 0.0008640914456918836,
+          "max_abs_error": 0.015625
+        }
+      }
+    }
+  ],
+  "external_raw_images_read": 0,
+  "checks": [
+    "Pinned B16 weights strictly loaded; every original input reproduces cached M5 feature controls",
+    "All intermediate block4/block8 regions and all shard/bank identities exactly aligned",
+    "Freshly loaded backbone reproduced six actual images at both scales",
+    "Original M5 arrays unchanged; early regions are an extra fit-normalized input only",
+    "Both depth layouts reconstructed with all external rows explicitly NaN"
+  ]
+}

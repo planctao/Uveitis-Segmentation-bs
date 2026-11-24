@@ -1,0 +1,405 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "algorithm_version": 3,
+  "candidates": [
+    {
+      "candidate_id": "00_rank0_blocks0",
+      "lora_config": {
+        "rank": 0,
+        "blocks": 0,
+        "alpha": 0,
+        "adapter_lr": 0.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.887222574552368,
+        "macro_f1": 0.8874347261437568,
+        "log_loss": 0.3317371109912458,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seeds": [
+        {
+          "seed": 0,
+          "selected_epoch": 0,
+          "trained_epochs": 3,
+          "selected_macro_f1": 0.88107753499949,
+          "successful_updates": 314,
+          "amp_skipped_updates": 10,
+          "trainable_adapter_parameters": 0
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 0,
+          "trained_epochs": 3,
+          "selected_macro_f1": 0.8799755836252046,
+          "successful_updates": 312,
+          "amp_skipped_updates": 12,
+          "trainable_adapter_parameters": 0
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 5,
+          "trained_epochs": 6,
+          "selected_macro_f1": 0.8663627380860343,
+          "successful_updates": 637,
+          "amp_skipped_updates": 11,
+          "trainable_adapter_parameters": 0
+        }
+      ]
+    },
+    {
+      "candidate_id": "01_rank4_blocks2",
+      "lora_config": {
+        "rank": 4,
+        "blocks": 2,
+        "alpha": 8,
+        "adapter_lr": 1e-05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8853068657401074,
+        "macro_f1": 0.8867086570876018,
+        "log_loss": 0.3321432457723579,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            13,
+            155,
+            6
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seeds": [
+        {
+          "seed": 0,
+          "selected_epoch": 3,
+          "trained_epochs": 6,
+          "selected_macro_f1": 0.8816074298434274,
+          "successful_updates": 638,
+          "amp_skipped_updates": 10,
+          "trainable_adapter_parameters": 24576
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 0,
+          "trained_epochs": 3,
+          "selected_macro_f1": 0.8799755836252046,
+          "successful_updates": 312,
+          "amp_skipped_updates": 12,
+          "trainable_adapter_parameters": 24576
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 5,
+          "trained_epochs": 6,
+          "selected_macro_f1": 0.8685387876768869,
+          "successful_updates": 637,
+          "amp_skipped_updates": 11,
+          "trainable_adapter_parameters": 24576
+        }
+      ]
+    },
+    {
+      "candidate_id": "02_rank8_blocks4",
+      "lora_config": {
+        "rank": 8,
+        "blocks": 4,
+        "alpha": 16,
+        "adapter_lr": 1e-05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8850267379679144,
+        "balanced_accuracy": 0.8777414394137226,
+        "macro_f1": 0.8790949425773357,
+        "log_loss": 0.32945006210648603,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.847457627118644
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            13,
+            154,
+            7
+          ],
+          [
+            2,
+            7,
+            50
+          ]
+        ]
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seeds": [
+        {
+          "seed": 0,
+          "selected_epoch": 3,
+          "trained_epochs": 6,
+          "selected_macro_f1": 0.8816074298434274,
+          "successful_updates": 638,
+          "amp_skipped_updates": 10,
+          "trainable_adapter_parameters": 98304
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 0,
+          "trained_epochs": 3,
+          "selected_macro_f1": 0.8799755836252046,
+          "successful_updates": 312,
+          "amp_skipped_updates": 12,
+          "trainable_adapter_parameters": 98304
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 2,
+          "trained_epochs": 5,
+          "selected_macro_f1": 0.8683291293261967,
+          "successful_updates": 529,
+          "amp_skipped_updates": 11,
+          "trainable_adapter_parameters": 98304
+        }
+      ]
+    },
+    {
+      "candidate_id": "03_rank8_blocks4",
+      "lora_config": {
+        "rank": 8,
+        "blocks": 4,
+        "alpha": 16,
+        "adapter_lr": 3e-05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8850267379679144,
+        "balanced_accuracy": 0.8777414394137226,
+        "macro_f1": 0.8790949425773357,
+        "log_loss": 0.32930254702510503,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.847457627118644
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            13,
+            154,
+            7
+          ],
+          [
+            2,
+            7,
+            50
+          ]
+        ]
+      },
+      "initial_live_val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33703551565736767,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "seeds": [
+        {
+          "seed": 0,
+          "selected_epoch": 3,
+          "trained_epochs": 6,
+          "selected_macro_f1": 0.8816074298434274,
+          "successful_updates": 638,
+          "amp_skipped_updates": 10,
+          "trainable_adapter_parameters": 98304
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 0,
+          "trained_epochs": 3,
+          "selected_macro_f1": 0.8799755836252046,
+          "successful_updates": 312,
+          "amp_skipped_updates": 12,
+          "trainable_adapter_parameters": 98304
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 2,
+          "trained_epochs": 5,
+          "selected_macro_f1": 0.8683291293261967,
+          "successful_updates": 529,
+          "amp_skipped_updates": 11,
+          "trainable_adapter_parameters": 98304
+        }
+      ]
+    }
+  ],
+  "reference_validation_macro_f1": 0.8893107959516184,
+  "initialization_limit": "Seed before construction and reset training streams afterward; initial states saved and independently checked.",
+  "qualifying_adapters": 0,
+  "external_test_evaluated": false,
+  "implementation": {
+    "algorithm_version": 3,
+    "scheduler_policy": "Advance only after a successful AMP optimizer update.",
+    "initialization_policy": "Seed before adapter construction; save and hash every actual initial adapter.",
+    "code_sha256": {
+      "lora_experiments_seeded.py": "7895214c7fdb2efddab3cf312bdf2d0e8fb5786972ad811e00afa9f113f79e3a",
+      "lora_model.py": "4c32bb1c347dcbfef0ddcd9920d88bf3a0b03c89d07c1d150de70944d0e1ab0d",
+      "amp_optimizer.py": "54d3492c99bda9f57a73065afe44b7e0aced807fec21fcbd7d722cc147a948de",
+      "lora_seed.py": "7c51807f5d5cf5e6e75144778cde9fdfb3e32d9f6ed297d204f0d9090b02e847"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "real_models_constructed": 12,
+  "checks": [
+    "Actual adapter A and B parameters identical despite different preceding random work",
+    "Three formal seeds produce three distinct nonzero A initializations for each adapter shape",
+    "Every B matrix starts at zero",
+    "Training Python, NumPy and Torch RNG streams reset after construction"
+  ],
+  "expected_initializations": [
+    {
+      "rank": 4,
+      "blocks": 2,
+      "seed": 20261124,
+      "initial_adapter_sha256": "45a73d45cbdecb5ccdb1e0ed0c6af7e2731d3c8dee1ac87e1597e630ee9108a5",
+      "repeat_matches": true
+    },
+    {
+      "rank": 4,
+      "blocks": 2,
+      "seed": 20261125,
+      "initial_adapter_sha256": "1ccc96fd6ab72b963b96d819cadb189f3bcc05e9877333d8bb42021e233d4f38",
+      "repeat_matches": true
+    },
+    {
+      "rank": 4,
+      "blocks": 2,
+      "seed": 20261126,
+      "initial_adapter_sha256": "5b7ef45ab713ed7bc8a27e71d08f7f4a92551cd08c0075e77db6e0ae84006aba",
+      "repeat_matches": true
+    },
+    {
+      "rank": 8,
+      "blocks": 4,
+      "seed": 20261124,
+      "initial_adapter_sha256": "284a7992014145a0ece5b3a2f9232335281119ffd3c42d345a813287ae8f5ef3",
+      "repeat_matches": true
+    },
+    {
+      "rank": 8,
+      "blocks": 4,
+      "seed": 20261125,
+      "initial_adapter_sha256": "aa0283e9bf58c96133dff2546ad125008da708974956c5defb48f7f9cb74eef5",
+      "repeat_matches": true
+    },
+    {
+      "rank": 8,
+      "blocks": 4,
+      "seed": 20261126,
+      "initial_adapter_sha256": "bd83fb5af289895e63ee7475e018c0ed72d4b7726d9c6e01676aaa97212875c1",
+      "repeat_matches": true
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "created_at_utc": "2026-11-24T08:38:27.919699+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "current_reference": "results/current_research_reference.json",
+  "outer_split_seeds": [
+    20280721,
+    20280731
+  ],
+  "configuration_plan": [
+    {
+      "name": "global_rank16",
+      "scope": "global",
+      "rank": 16
+    },
+    {
+      "name": "all_rank16",
+      "scope": "all",
+      "rank": 16
+    },
+    {
+      "name": "global_rank32",
+      "scope": "global",
+      "rank": 32
+    },
+    {
+      "name": "all_rank32",
+      "scope": "all",
+      "rank": 32
+    }
+  ],
+  "minimum_cv_macro_f1": 0.8359324594339994,
+  "minimum_validation_macro_f1": 0.8928552155846959,
+  "planned_new_seed_fits": 48,
+  "external_test_policy": "Development rows only; no external outcomes or predictions loaded.",
+  "hypothesis": "Identity-initialized low-rank normal-L residual can complement M7 while preserving the normal-B pathway at initialization. Four rank/scope configurations, each 12 heads, plus four fixed .75 residual/.25 M5 scores.",
+  "fresh_confirmation_gate": "Highest qualifying original CV candidate must then exceed M7, M6, M5 and fixed Gaussian on two unused patient three-fold repeats by mean Macro-F1 and paired patient bootstrap lower endpoint.",
+  "frozen_artifacts": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/selection_before_test.json": "d7b25156747ca29c1b752a61f1d711cf74458c98063f2eeb2aa990e0ae2132d8",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/selection_before_test.json": "a9845b5753da0ea28caf2e7aa8f7aa752a452d7748a9522e3f4abae66e9be3e2",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/current_research_reference.json": "14cd30a233167990838c12b5b9d24417d5ca7216ac96b9a46d2102543ab3ebe6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone7_normal_large_blend/package.json": "eb4263c89ff0ee96d0c111d7de7cf4bbeead8062c1a67f532144ddeda9963c64",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone7_normal_large_blend/selection_development_only.json": "55d5791a007f4a6270e6d26002c770fa121597d3b7635a9a0669d88d3203033f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/features/multiscale_vit.npz": "5d17f7fc785cb554339950dc8739d39bc5ee5aa321936a578c4c886fd18df1b5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/features/multiscale_vit.json": "db8c2031191d77a4bb5594e4e713744aebc5055befddb1fd5384b393f021506a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_normal_large_residual_draft.json": "e01ef94a202cc371711a87773c9fce0f39fb55f423bae388d8a4a9718127cfef",
+    "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/dinov3_large_development.npz": "71ae8299d747391cd48d550d40643826294a98b6f98a89ae0418f0a9fa2d5d45",
+    "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/dinov3_large_development.json": "89d86bc2abde36633e0ad8f271033b199e1738d3a7b310ace46518f51e8fede8",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/dinov3_large/protocol.json": "865dee3cc62f01f125ba6dfe6f3d16f79aa0e944c6016e54039465524168b128"
+  },
+  "code_sha256": {
+    "normal_large_residual.py": "8cdf4627410ece2cfc2150149640322659375f4a22589da2c9242614c6670ef4",
+    "normal_large_residual_experiments.py": "4f1f1c12901664383c9f1e101c253da9ddb4a7a9f9ddcd3ec33ef2fdad67d2ec",
+    "start_normal_large_residual.py": "f44a099fb98a21772e44d2d2a52a10e77e65b58190ba781f218ea79cd0465613",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "dinov3_large_data.py": "0757f789829a3fec367326ba2aec0d5280867c44e987448197c5e0e1a85b14b2",
+    "kernel_residual_experiments.py": "2fa80606d2b3e797047df2c7cdb26701519cbeddad1202bf21a3b2847028f065",
+    "milestone2.py": "5197d7463b2764cadceb39e40e86d6aa9e34e4576824f2d67d1e894b892848e2",
+    "verify_normal_large_residual.py": "435833702d1d0649b9991c6aceb1b15073eca0bc4226a40671d4e843d4df0ae2"
+  }
+}

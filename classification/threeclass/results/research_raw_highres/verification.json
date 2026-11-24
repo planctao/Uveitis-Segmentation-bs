@@ -1,0 +1,247 @@
+{
+  "passed": true,
+  "images": 3406,
+  "shards": 1703,
+  "feature_sha256": {
+    "vitb_raw768": "0bf50a2e07ffd572280c58789a7b1c98ff5490351e94b6c4ebe34f7644d322e6",
+    "vitb_up768": "465e4dff5d931e614dd3d3fa3088135c59c587df1ac36ddec6b5d58393563b19",
+    "multiscale_raw768": "207dd5b55abb3f8e0b7104752072613d0c5560bf31ff36ad01e5766bfcfb97a8",
+    "multiscale_up768": "fb5c0e539b92203fef1c953a350e61dc088b231f1c7dae1c42146f83609b24a7"
+  },
+  "paired_mean_absolute_feature_differences": {
+    "global": 0.08253362774848938,
+    "regions": 0.03147438168525696,
+    "mid": 0.1236552819609642,
+    "dispersion": 0.007562289014458656
+  },
+  "weights_sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c",
+  "checks": [
+    "All final paired values exactly equal immutable indexed extraction shards",
+    "Every manifest row covered in order exactly once",
+    "Triple-view features exactly concatenate original 320+448 and the specified 768 arm",
+    "Raw/up views use identical frozen weights and match image identities",
+    "Original-to-448 identity verification completed for all 3406 inputs"
+  ],
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checked_cv_seed_fits": 36,
+  "checked_development_seed_fits": 12,
+  "actual_models": [
+    {
+      "feature": "vitb_raw768",
+      "fold": 0,
+      "seed": 0,
+      "checkpoint_sha256": "a96be772676994ec575fe3b90b2f0394c0174a924de27ed3d5a1742e1cb38ac9"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 0,
+      "seed": 1,
+      "checkpoint_sha256": "afd815bf692a670fd5e8967fec23b4d5077f1b580cbdeef9dafeee04f31de428"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 0,
+      "seed": 2,
+      "checkpoint_sha256": "123009f6479159b678724db797c7aa7245a908f0c2065e88963f723a5a5d03c9"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 1,
+      "seed": 0,
+      "checkpoint_sha256": "00fc28565b4abba290dc7269a3e3797630d8a35afd7792e8fdc80f19cefa7773"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 1,
+      "seed": 1,
+      "checkpoint_sha256": "83608b1d617124be8432a5a01be6ad86bf99de27864fa9d154bd4d1afc6963ea"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 1,
+      "seed": 2,
+      "checkpoint_sha256": "79c9ccd01fe1a9860d295d605a3e37568b3af934dffd9ed6783f368904fd9ad3"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 2,
+      "seed": 0,
+      "checkpoint_sha256": "e79303b30aaafc03720d7ccbd31658e83dd2e49a83c6e4ad11a289f95b4ef711"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 2,
+      "seed": 1,
+      "checkpoint_sha256": "5367093c7a23c0659112a61487e9d53113a9646c19ba240edb4a756076366c21"
+    },
+    {
+      "feature": "vitb_raw768",
+      "fold": 2,
+      "seed": 2,
+      "checkpoint_sha256": "367b76c763e5b28beb03aee888688a3856043cbfd659473d80b24efff459af89"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 0,
+      "seed": 0,
+      "checkpoint_sha256": "b3f44bb58b6e80e29c5ec7c2e14286150641c7302c5b85e15722162418b9a2c7"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 0,
+      "seed": 1,
+      "checkpoint_sha256": "2aac1ec169781dad7ec62a0f1edd2d67a4f904cd49e31613af58e8571e8b8f7f"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 0,
+      "seed": 2,
+      "checkpoint_sha256": "67ca2e9f409fa848c431a55ce12e1d28baabc24e77a3b71da8d29eb457ce7d4d"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 1,
+      "seed": 0,
+      "checkpoint_sha256": "5fb51d1e61ca63415cf9c66ab08620fb411850ac2ce0de657d59a47c1c954087"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 1,
+      "seed": 1,
+      "checkpoint_sha256": "804facc27a31bb3ec24e65dc5708f14246e186f46f3919f18543c0062ad7321b"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 1,
+      "seed": 2,
+      "checkpoint_sha256": "a26f0957ed1430e319e4027a3f9bbd48b4294b2a8bfc225e0ef2273dbe7dc2f7"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 2,
+      "seed": 0,
+      "checkpoint_sha256": "6c42ec600b88c476d0efb52ddd5244cb75b299873df19fa014a8350b7460e7f7"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 2,
+      "seed": 1,
+      "checkpoint_sha256": "6aa2e2a668501210e976949b16659a39c2189fad73e0cdc92a2665d4d3bd3222"
+    },
+    {
+      "feature": "vitb_up768",
+      "fold": 2,
+      "seed": 2,
+      "checkpoint_sha256": "0b67100d85078b4fc2f70fa8fe9a449901eb965907d9f443ae671567d001c9f6"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 0,
+      "seed": 0,
+      "checkpoint_sha256": "8d4e4494cf147b38af72b73f46d12d799578e17e047383f04b68faee70d32c91"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 0,
+      "seed": 1,
+      "checkpoint_sha256": "97f570f4d27aa71ab4f9914670889fa61c6a317a656baeefce2a755cda06c6d2"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 0,
+      "seed": 2,
+      "checkpoint_sha256": "8cbad5475acf533c51ebe41cced8fb3b9f277f5b8760e4c531aa3b3765ba447f"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 1,
+      "seed": 0,
+      "checkpoint_sha256": "5686e0856367cf7cd09e737dbd78b67e1403d5eb3e693c30f98abc67b8c71135"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 1,
+      "seed": 1,
+      "checkpoint_sha256": "b0b9ca20af02559c327ae2d777902a089ce2918cf37b1896ec75e75b756b55a6"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 1,
+      "seed": 2,
+      "checkpoint_sha256": "c8e8dd615ac09fdb36e46035c48a6375fea3a866ae0cbe78119e2dcb5dfa0054"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 2,
+      "seed": 0,
+      "checkpoint_sha256": "c72f34e90f477f13c7f05c4fdd61d82c19d8d30da87ec365186194b30ab05292"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 2,
+      "seed": 1,
+      "checkpoint_sha256": "a9bebe0db763f1cd6045a301ed46ba0b1f318ce1b6cc5b4c348b740d5ca8043d"
+    },
+    {
+      "feature": "multiscale_raw768",
+      "fold": 2,
+      "seed": 2,
+      "checkpoint_sha256": "518088a390a4ee242dce9eec480d6c74fe6b7e8c8e89ce61e166eeae14eed441"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 0,
+      "seed": 0,
+      "checkpoint_sha256": "31ad97cef4cc5d720d54a0e34511a2fcbe12f953c77d302b54ebf9b552f0e464"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 0,
+      "seed": 1,
+      "checkpoint_sha256": "935e589d1763fb53f4a9accf1b07cca27a01333f13d0b27bfe4ef29bc44143f5"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 0,
+      "seed": 2,
+      "checkpoint_sha256": "45f8765ee82fc4e7b38edc04b11472aae0a7d22ceefdb83e1f23d689938a577c"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 1,
+      "seed": 0,
+      "checkpoint_sha256": "82b06e3289e58f35bb4181c34b16f24fdaa8cf8bcf4f142fabd3fb1674d0ec36"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 1,
+      "seed": 1,
+      "checkpoint_sha256": "35a01a45d526f5080171eb15c5e8b7841e3bc27e3d544a8ebc683d0ee07e878f"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 1,
+      "seed": 2,
+      "checkpoint_sha256": "8657883e8614009c9a190cf349b14a99fc45a16ce95fe19d7a7e9a24300e95cc"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 2,
+      "seed": 0,
+      "checkpoint_sha256": "12d2e689e96b580109c569fe5ceef4ecedd808f9cc88806398ab2091eb0f81c4"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 2,
+      "seed": 1,
+      "checkpoint_sha256": "bf3116ef710e7b4c457ed14e9fe02bacebc772a975d6801340ae99f1fe076a25"
+    },
+    {
+      "feature": "multiscale_up768",
+      "fold": 2,
+      "seed": 2,
+      "checkpoint_sha256": "d2e4a050f10dc82959d599d1ef9417bbb12216b17062b2bf3a0a853e9c351ebe"
+    }
+  ],
+  "full_head_inference_reproduced": true
+}

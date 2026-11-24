@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "actual_batch_size": 256,
+  "configurations": [
+    {
+      "rho": 0.0,
+      "base_loss": 3.1170003414154053,
+      "sharp_loss": 3.1170003414154053,
+      "first_gradient_norm": 2.1580660343170166,
+      "paired_rng_equal": true,
+      "perturbation_norm": 0.0,
+      "max_first_adamw_error": 1.0337885325562013e-08,
+      "max_cpu_gradient_error": 3.725290298461914e-08
+    },
+    {
+      "rho": 0.01,
+      "base_loss": 3.1170003414154053,
+      "sharp_loss": 3.138627767562866,
+      "first_gradient_norm": 2.1580660343170166,
+      "paired_rng_equal": true,
+      "perturbation_norm": 0.010000000560969707,
+      "max_first_adamw_error": 1.13437032267516e-08,
+      "max_cpu_gradient_error": 5.960464477539063e-08
+    },
+    {
+      "rho": 0.05,
+      "base_loss": 3.1170003414154053,
+      "sharp_loss": 3.2261109352111816,
+      "first_gradient_norm": 2.1580660343170166,
+      "paired_rng_equal": true,
+      "perturbation_norm": 0.05000000236043667,
+      "max_first_adamw_error": 1.2944658844826762e-08,
+      "max_cpu_gradient_error": 5.960464477539063e-08
+    },
+    {
+      "rho": 0.1,
+      "base_loss": 3.1170003414154053,
+      "sharp_loss": 3.3377952575683594,
+      "first_gradient_norm": 2.1580660343170166,
+      "paired_rng_equal": true,
+      "perturbation_norm": 0.10000000472087334,
+      "max_first_adamw_error": 1.3382088298596884e-08,
+      "max_cpu_gradient_error": 4.470348358154297e-08
+    }
+  ],
+  "checks": [
+    "All four radii verified on actual original256image loss including disease contrastive targets and patient/class weights",
+    "Every first and second gradient independently replayed on CPU with recorded exact dropout masks",
+    "NumPy L2 perturbation radius, exact pre/post restoration, gradient clipping and first AdamW update reconstructed",
+    "Paired CPU/CUDA RNG states and actual dropout masks identical across passes; zero radius exactly reproduces original AdamW model update"
+  ]
+}

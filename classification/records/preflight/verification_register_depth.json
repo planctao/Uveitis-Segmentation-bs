@@ -1,0 +1,166 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "arm": {
+        "name": "final_control",
+        "kind": "final"
+      },
+      "batch_size": 256,
+      "tokens": 12,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.0442454367876053e-07,
+      "repeated_vs_single_control_error": 1.1920928955078125e-07,
+      "joint_token_permutation_error": 0.0
+    },
+    {
+      "arm": {
+        "name": "middle_control",
+        "kind": "middle"
+      },
+      "batch_size": 256,
+      "tokens": 12,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.6763806343078613e-07,
+      "repeated_vs_single_control_error": 1.1920928955078125e-07,
+      "joint_token_permutation_error": 2.2351741790771484e-08
+    },
+    {
+      "arm": {
+        "name": "raw_depth",
+        "kind": "raw"
+      },
+      "batch_size": 256,
+      "tokens": 12,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.3690441846847534e-07,
+      "repeated_vs_single_control_error": null,
+      "joint_token_permutation_error": 0.0
+    },
+    {
+      "arm": {
+        "name": "depth_differences",
+        "kind": "difference"
+      },
+      "batch_size": 256,
+      "tokens": 12,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 9.313225746154785e-08,
+      "repeated_vs_single_control_error": null,
+      "joint_token_permutation_error": 6.51925802230835e-09
+    }
+  ],
+  "normal_geometry": {
+    "base": {
+      "global": {
+        "maximum_principal_cosine_error": 4.645247853041212e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.04875230511459e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.8208333779922157e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 4.368930994758102e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.733068908497785e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.627038834887799e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    },
+    "early_registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 9.985220317254573e-09,
+      "maximum_center_error": 2.7837021465693113e-08
+    },
+    "middle_registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 8.982998012108112e-09,
+      "maximum_center_error": 2.194565729141118e-08
+    },
+    "final_registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "arm": {
+        "name": "final_control",
+        "kind": "final"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "independent_three_depth_projection_construction_and_query_pool_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "arm": {
+        "name": "middle_control",
+        "kind": "middle"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "independent_three_depth_projection_construction_and_query_pool_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "arm": {
+        "name": "raw_depth",
+        "kind": "raw"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "independent_three_depth_projection_construction_and_query_pool_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "arm": {
+        "name": "depth_differences",
+        "kind": "difference"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "independent_three_depth_projection_construction_and_query_pool_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_depth.py": "db122a4317648479b439b075ae690c12a6ac6b3f7f12bfe1063ee2399164d804",
+    "audit_register_depth.py": "6a7c7fc49a37bbb620116f9d82801d5e9232cc7cd27abcfcd3efb7b3c2f57226",
+    "verify_register_depth.py": "6c553dbb6b51aafcf660ad5fccace138d525bd02e26b55240448a88824359517",
+    "register_depth_data.py": "4feea12f7ccc7c8131956e561d2da1c0d0a0f269f3b9639451e739759160022a"
+  },
+  "checks": [
+    "Four actual256image tasks/allgradients independently restored with trainednonzeroreadout",
+    "OriginalnormalL init/RNG/task/basegradients identical atzero; equalparameters/all12tokens",
+    "Independentthree normalspaces/depthdifferences/querypool; repeatedfinal/middle controls match single-streamlearnedweights",
+    "Jointregisterpermutation, updates/frozenbuffers/strictrestore andfouractualCUDA firsttasks/allgradients"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

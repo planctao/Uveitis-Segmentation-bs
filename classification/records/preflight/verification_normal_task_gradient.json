@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "mode": "image",
+      "strength": 0.5,
+      "full_task_batch": 256,
+      "image_conflict_fraction": 0.671875,
+      "correction_norm": 0.0010855175787582994
+    },
+    {
+      "mode": "image",
+      "strength": 1.0,
+      "full_task_batch": 256,
+      "image_conflict_fraction": 0.671875,
+      "correction_norm": 0.0021710351575165987
+    },
+    {
+      "mode": "batch",
+      "strength": 0.5,
+      "full_task_batch": 256,
+      "image_conflict_fraction": 0.671875,
+      "correction_norm": 0.0
+    },
+    {
+      "mode": "batch",
+      "strength": 1.0,
+      "full_task_batch": 256,
+      "image_conflict_fraction": 0.671875,
+      "correction_norm": 0.0
+    }
+  ],
+  "normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 5.585237827787637e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.7959215427061395e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.6878988186070956e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 5.265183178337907e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 6.2611587026140114e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.917584707162746e-08
+    }
+  },
+  "cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "task_gradient_repair_restored": true,
+    "negative_dot_fraction": 0.0,
+    "maximum_independent_correction_error": 0.0
+  },
+  "code_sha256": {
+    "normal_task_gradient.py": "521cb961a892f45d3887cf74f0243c9b775dd0eb095409e190d4d966aea88f17",
+    "audit_normal_task_gradient.py": "09f72011d5c1da6099e3edd8f535756cc3b881238576c21c9b2f60760740545e",
+    "verify_normal_task_gradient.py": "3e5f31590ac943146603dcbc4c7ad90fd9f80aa9f8b0749d3674ac36def04990"
+  },
+  "checks": [
+    "Original trainable parameters,initialization,RNG,inference and scalar complete-task loss unchanged",
+    "Asymmetric repair independently recovered by NumPy; only ancestors of sharedembedding get correction,head parameter gradients unchanged",
+    "Zero repair restores original normal-reference full task gradients/RNG exactly; synthetic negative/positive cases verify projection identity",
+    "Four real256image full task parameter gradients,updates and strictcheckpoint recovery independently checked",
+    "Exact CUDA first-permutation witness independently recovers complete task,coarse/auxiliary gradients and correction"
+  ]
+}

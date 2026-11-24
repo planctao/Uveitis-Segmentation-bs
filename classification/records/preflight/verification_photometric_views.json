@@ -1,0 +1,149 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "weights_sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c",
+  "development_images": 2091,
+  "shards_checked": 131,
+  "actual_images_recomputed": [
+    {
+      "development_index": 0,
+      "feature_differences": {
+        "global": {
+          "relative_mae": 0.001225723884999752,
+          "max_abs_error": 0.002197265625
+        },
+        "regions": {
+          "relative_mae": 0.0009692860185168684,
+          "max_abs_error": 0.001953125
+        },
+        "mid": {
+          "relative_mae": 0.0007661900599487126,
+          "max_abs_error": 0.0078125
+        },
+        "dispersion": {
+          "relative_mae": 0.0002726632228586823,
+          "max_abs_error": 0.001953125
+        }
+      },
+      "background_pixels_unchanged": 42669
+    },
+    {
+      "development_index": 352,
+      "feature_differences": {
+        "global": {
+          "relative_mae": 0.0008944295695982873,
+          "max_abs_error": 0.001953125
+        },
+        "regions": {
+          "relative_mae": 0.0006854787352494895,
+          "max_abs_error": 0.001220703125
+        },
+        "mid": {
+          "relative_mae": 0.0006484600016847253,
+          "max_abs_error": 0.0078125
+        },
+        "dispersion": {
+          "relative_mae": 0.00018868222832679749,
+          "max_abs_error": 0.0009765625
+        }
+      },
+      "background_pixels_unchanged": 44831
+    },
+    {
+      "development_index": 887,
+      "feature_differences": {
+        "global": {
+          "relative_mae": 0.0010232009226456285,
+          "max_abs_error": 0.0020751953125
+        },
+        "regions": {
+          "relative_mae": 0.0008897524094209075,
+          "max_abs_error": 0.00390625
+        },
+        "mid": {
+          "relative_mae": 0.0006128757377155125,
+          "max_abs_error": 0.0078125
+        },
+        "dispersion": {
+          "relative_mae": 0.00026613849331624806,
+          "max_abs_error": 0.001953125
+        }
+      },
+      "background_pixels_unchanged": 43088
+    },
+    {
+      "development_index": 1501,
+      "feature_differences": {
+        "global": {
+          "relative_mae": 0.00092389399651438,
+          "max_abs_error": 0.001953125
+        },
+        "regions": {
+          "relative_mae": 0.0006699187215417624,
+          "max_abs_error": 0.001953125
+        },
+        "mid": {
+          "relative_mae": 0.0006571910344064236,
+          "max_abs_error": 0.0078125
+        },
+        "dispersion": {
+          "relative_mae": 0.00020310754189267755,
+          "max_abs_error": 0.0009765625
+        }
+      },
+      "background_pixels_unchanged": 44642
+    },
+    {
+      "development_index": 1800,
+      "feature_differences": {
+        "global": {
+          "relative_mae": 0.0009059971198439598,
+          "max_abs_error": 0.002197265625
+        },
+        "regions": {
+          "relative_mae": 0.0007037228788249195,
+          "max_abs_error": 0.001953125
+        },
+        "mid": {
+          "relative_mae": 0.0005284116487018764,
+          "max_abs_error": 0.0078125
+        },
+        "dispersion": {
+          "relative_mae": 0.00018093296966981143,
+          "max_abs_error": 0.0009765625
+        }
+      },
+      "background_pixels_unchanged": 43443
+    },
+    {
+      "development_index": 2090,
+      "feature_differences": {
+        "global": {
+          "relative_mae": 0.0011401402298361063,
+          "max_abs_error": 0.0029296875
+        },
+        "regions": {
+          "relative_mae": 0.0009307761210948229,
+          "max_abs_error": 0.001953125
+        },
+        "mid": {
+          "relative_mae": 0.0006935344426892698,
+          "max_abs_error": 0.0078125
+        },
+        "dispersion": {
+          "relative_mae": 0.00024470718926750124,
+          "max_abs_error": 0.0009765625
+        }
+      },
+      "background_pixels_unchanged": 43479
+    }
+  ],
+  "external_raw_images_read": 0,
+  "checks": [
+    "Pinned B16 weight bytes verified before strict loading; original six-image pipeline control passed",
+    "All CLAHE development feature shards exactly match final bank and row identities",
+    "Freshly reloaded backbone reproduced six actual corrected images at both resolutions",
+    "Low-intensity background pixels untouched; all-black boundary case preserved",
+    "Both predeclared layouts reconstructed; all external rows explicitly NaN"
+  ]
+}

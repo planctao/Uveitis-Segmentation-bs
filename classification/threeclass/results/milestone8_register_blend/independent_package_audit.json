@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-11-24T11:46:32.689398+00:00",
+  "package_sha256": "ff4581345f9a1ccb61d696dbf640a1c452821e6152b14d4aff83b185f4e375af",
+  "selection_sha256": "afa0e12de1d3cfedffaca613d56890f5597199704d19c18daab5a67c1611728c",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "actual_packaged_heads_checked": 9,
+  "validation_images_checked": 374,
+  "validation": {
+    "n": 374,
+    "accuracy": 0.8983957219251337,
+    "balanced_accuracy": 0.8923990643216677,
+    "macro_f1": 0.894785003714643,
+    "log_loss": 0.2870044684977546,
+    "recall": {
+      "infectious": 0.9219858156028369,
+      "noninfectious": 0.8908045977011494,
+      "normal": 0.864406779661017
+    },
+    "confusion_matrix": [
+      [
+        130,
+        11,
+        0
+      ],
+      [
+        13,
+        155,
+        6
+      ],
+      [
+        2,
+        6,
+        51
+      ]
+    ]
+  },
+  "branch_weights": {
+    "reference": 0.1875,
+    "subspace": 0.5625,
+    "token": 0.25
+  },
+  "fits": [
+    {
+      "branch": "reference",
+      "seed": 0,
+      "checkpoint_sha256": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb",
+      "maximum_independent_probability_error": 1.1920928955078125e-06
+    },
+    {
+      "branch": "reference",
+      "seed": 1,
+      "checkpoint_sha256": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f",
+      "maximum_independent_probability_error": 1.6689300537109375e-06
+    },
+    {
+      "branch": "reference",
+      "seed": 2,
+      "checkpoint_sha256": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad",
+      "maximum_independent_probability_error": 9.5367431640625e-07
+    },
+    {
+      "branch": "subspace",
+      "seed": 0,
+      "checkpoint_sha256": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e",
+      "maximum_independent_probability_error": 6.556510925292969e-07
+    },
+    {
+      "branch": "subspace",
+      "seed": 1,
+      "checkpoint_sha256": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0",
+      "maximum_independent_probability_error": 6.556510925292969e-07
+    },
+    {
+      "branch": "subspace",
+      "seed": 2,
+      "checkpoint_sha256": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463",
+      "maximum_independent_probability_error": 8.642673492431641e-07
+    },
+    {
+      "branch": "token",
+      "seed": 0,
+      "checkpoint_sha256": "88908e7720d773ca409cb97dc5867c37a8c7fe1d9d603e84451717ee31cffe0d",
+      "maximum_independent_probability_error": 1.6689300537109375e-06
+    },
+    {
+      "branch": "token",
+      "seed": 1,
+      "checkpoint_sha256": "a52186d034e677dbba0d3f23dd18932b90ea9d3275cd2c54476145129a568e1b",
+      "maximum_independent_probability_error": 1.430511474609375e-06
+    },
+    {
+      "branch": "token",
+      "seed": 2,
+      "checkpoint_sha256": "c7b1a119feef7625fecfa0c95c2bff7df6c6a52b8c6ffe5790cc2a340e2db230",
+      "maximum_independent_probability_error": 1.3113021850585938e-06
+    }
+  ],
+  "maximum_three_branch_validation_error": 1.7881393432617188e-07,
+  "fresh_confirmation_all_four_comparisons_passed": true,
+  "frozen_original_image_and_cli_verifications_checked": true,
+  "source_and_package_bytes_identical": true,
+  "code_sha256": "53a6df6f137af12f4de102063b8f0739f8a06ce3437dc822513da41205164269",
+  "external_test_evaluated": false
+}

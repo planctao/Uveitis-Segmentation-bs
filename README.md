@@ -1,6 +1,9 @@
 # Graduation Design Codebase
 
-本目录是毕业设计代码根目录。后续代码、配置、脚本、实验记录和输出默认都放在这里。
+本目录是毕业设计代码根目录，包含葡萄膜炎病灶分割和图像分类两个任务。
+
+- **分类**：代码与实验记录集中在 [classification/](classification/README.md)，分类日志为 [classification/EXPERIMENT_LOG.md](classification/EXPERIMENT_LOG.md)。
+- **分割**：继续使用原有 configs/、scripts/、src/bs/、tests/；分割日志为根目录 [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md)。
 
 ## Quick Start
 
@@ -16,6 +19,8 @@ PYTHONPATH=src python -m bs.cli --config configs/default.yaml
 ```text
 bs/
   AGENTS.md                  # 给后续 Codex/协作者的项目规则
+  classification/            # 分类代码、独立分类日志与汇总实验记录
+  EXPERIMENT_LOG.md           # 分割实验日志
   configs/default.yaml       # 默认实验配置
   dataset/                   # 已存在的数据集，只读输入
   docs/                      # 环境、结构、实验说明

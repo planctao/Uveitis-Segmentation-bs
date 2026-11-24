@@ -1,0 +1,939 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "candidates": [
+      {
+        "candidate_id": "63c585e70306",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.1,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.03,
+          "fine_contrastive": 0.05
+        },
+        "validation_macro_f1": 0.8893107959516184
+      },
+      {
+        "candidate_id": "b9ae533d779d",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.01,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.03,
+          "fine_contrastive": 0.05
+        },
+        "validation_macro_f1": 0.8746727320108939
+      },
+      {
+        "candidate_id": "a9669a36590f",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.1,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.06,
+          "fine_contrastive": 0.05
+        },
+        "validation_macro_f1": 0.8998170419492214
+      }
+    ],
+    "new_outer_split_seeds": [
+      20261201,
+      20261211
+    ],
+    "inner_split_rule": "20261224 + repeat_index*10 + fold; 20 percent of outer-fit patient groups",
+    "hypothesis": "The apparent lower-weight-decay CV advantage and label-smoothing advantage may depend on the original patient fold partition.",
+    "evaluation": "All three fixed candidates receive both new 3-fold patient partitions and three seeds per fold. Original 20261125 results are reported separately.",
+    "external_test_policy": "No external predictions or metrics are loaded. This experiment does not promote a model."
+  },
+  "candidates": [
+    {
+      "candidate_id": "63c585e70306",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.3370578564759096,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_repeated_cv_mean_macro_f1": 0.7878957148877164,
+      "new_repeated_cv_sd_macro_f1": 0.06526816573474419,
+      "original_selected_cv_macro_f1": 0.8090823139275858,
+      "folds": [
+        {
+          "repeat": 20261201,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7521815008726004,
+            "balanced_accuracy": 0.7688262530167673,
+            "macro_f1": 0.7367771848482197,
+            "log_loss": 0.587497331606752,
+            "recall": {
+              "infectious": 0.7948717948717948,
+              "noninfectious": 0.6958174904942965,
+              "normal": 0.8157894736842105
+            },
+            "confusion_matrix": [
+              [
+                186,
+                37,
+                11
+              ],
+              [
+                45,
+                183,
+                35
+              ],
+              [
+                0,
+                14,
+                62
+              ]
+            ]
+          },
+          "fit_images": 894,
+          "stop_images": 250,
+          "outer_images": 573,
+          "fit_patients": 178,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261201,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.708041958041958,
+            "balanced_accuracy": 0.7688209889897314,
+            "macro_f1": 0.7220485075121665,
+            "log_loss": 0.6893522501255712,
+            "recall": {
+              "infectious": 0.6495726495726496,
+              "noninfectious": 0.683206106870229,
+              "normal": 0.9736842105263158
+            },
+            "confusion_matrix": [
+              [
+                152,
+                70,
+                12
+              ],
+              [
+                55,
+                179,
+                28
+              ],
+              [
+                0,
+                2,
+                74
+              ]
+            ]
+          },
+          "fit_images": 845,
+          "stop_images": 300,
+          "outer_images": 572,
+          "fit_patients": 176,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261201,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8671328671328671,
+            "balanced_accuracy": 0.8705652449123722,
+            "macro_f1": 0.8735461915290242,
+            "log_loss": 0.3553840827905384,
+            "recall": {
+              "infectious": 0.8675213675213675,
+              "noninfectious": 0.8625954198473282,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                203,
+                31,
+                0
+              ],
+              [
+                29,
+                226,
+                7
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          },
+          "fit_images": 934,
+          "stop_images": 211,
+          "outer_images": 572,
+          "fit_patients": 176,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8132635253054101,
+            "balanced_accuracy": 0.8214652438186558,
+            "macro_f1": 0.8268505097031623,
+            "log_loss": 0.51435275263102,
+            "recall": {
+              "infectious": 0.8504273504273504,
+              "noninfectious": 0.7718631178707225,
+              "normal": 0.8421052631578947
+            },
+            "confusion_matrix": [
+              [
+                199,
+                32,
+                3
+              ],
+              [
+                56,
+                203,
+                4
+              ],
+              [
+                2,
+                10,
+                64
+              ]
+            ]
+          },
+          "fit_images": 904,
+          "stop_images": 240,
+          "outer_images": 573,
+          "fit_patients": 177,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 1,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.731239092495637,
+            "balanced_accuracy": 0.7637122159335487,
+            "macro_f1": 0.731788057150423,
+            "log_loss": 0.7910525719327911,
+            "recall": {
+              "infectious": 0.6452991452991453,
+              "noninfectious": 0.7642585551330798,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                151,
+                67,
+                16
+              ],
+              [
+                40,
+                201,
+                22
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          },
+          "fit_images": 948,
+          "stop_images": 196,
+          "outer_images": 573,
+          "fit_patients": 178,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 2,
+          "metrics": {
+            "n": 571,
+            "accuracy": 0.8353765323992994,
+            "balanced_accuracy": 0.8546646604722831,
+            "macro_f1": 0.8363638385833023,
+            "log_loss": 0.4119443071891441,
+            "recall": {
+              "infectious": 0.8076923076923077,
+              "noninfectious": 0.8352490421455939,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                189,
+                43,
+                2
+              ],
+              [
+                24,
+                218,
+                19
+              ],
+              [
+                2,
+                4,
+                70
+              ]
+            ]
+          },
+          "fit_images": 930,
+          "stop_images": 216,
+          "outer_images": 571,
+          "fit_patients": 175,
+          "all_feature_and_patient_audit_passed": true
+        }
+      ]
+    },
+    {
+      "candidate_id": "b9ae533d779d",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8796791443850267,
+        "balanced_accuracy": 0.881378039192929,
+        "macro_f1": 0.8746727320108939,
+        "log_loss": 0.3335354768426765,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.8620689655172413,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            14,
+            150,
+            10
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_repeated_cv_mean_macro_f1": 0.7891129989337853,
+      "new_repeated_cv_sd_macro_f1": 0.0635335737496356,
+      "original_selected_cv_macro_f1": 0.8140547190067652,
+      "folds": [
+        {
+          "repeat": 20261201,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7521815008726004,
+            "balanced_accuracy": 0.7647652694180612,
+            "macro_f1": 0.7363257824402735,
+            "log_loss": 0.5812937931824906,
+            "recall": {
+              "infectious": 0.7692307692307693,
+              "noninfectious": 0.7224334600760456,
+              "normal": 0.8026315789473685
+            },
+            "confusion_matrix": [
+              [
+                180,
+                44,
+                10
+              ],
+              [
+                38,
+                190,
+                35
+              ],
+              [
+                0,
+                15,
+                61
+              ]
+            ]
+          },
+          "fit_images": 894,
+          "stop_images": 250,
+          "outer_images": 573,
+          "fit_patients": 178,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261201,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.7097902097902098,
+            "balanced_accuracy": 0.7705499640011492,
+            "macro_f1": 0.7244771603400432,
+            "log_loss": 0.6779212288479463,
+            "recall": {
+              "infectious": 0.6623931623931624,
+              "noninfectious": 0.6755725190839694,
+              "normal": 0.9736842105263158
+            },
+            "confusion_matrix": [
+              [
+                155,
+                67,
+                12
+              ],
+              [
+                58,
+                177,
+                27
+              ],
+              [
+                0,
+                2,
+                74
+              ]
+            ]
+          },
+          "fit_images": 845,
+          "stop_images": 300,
+          "outer_images": 572,
+          "fit_patients": 176,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261201,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8671328671328671,
+            "balanced_accuracy": 0.8705652449123722,
+            "macro_f1": 0.8735461915290242,
+            "log_loss": 0.3549689588372194,
+            "recall": {
+              "infectious": 0.8675213675213675,
+              "noninfectious": 0.8625954198473282,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                203,
+                31,
+                0
+              ],
+              [
+                29,
+                226,
+                7
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          },
+          "fit_images": 934,
+          "stop_images": 211,
+          "outer_images": 572,
+          "fit_patients": 176,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8132635253054101,
+            "balanced_accuracy": 0.8214652438186558,
+            "macro_f1": 0.8268505097031623,
+            "log_loss": 0.5153112714147616,
+            "recall": {
+              "infectious": 0.8504273504273504,
+              "noninfectious": 0.7718631178707225,
+              "normal": 0.8421052631578947
+            },
+            "confusion_matrix": [
+              [
+                199,
+                32,
+                3
+              ],
+              [
+                56,
+                203,
+                4
+              ],
+              [
+                2,
+                10,
+                64
+              ]
+            ]
+          },
+          "fit_images": 904,
+          "stop_images": 240,
+          "outer_images": 573,
+          "fit_patients": 177,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 1,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7364746945898778,
+            "balanced_accuracy": 0.767671571603931,
+            "macro_f1": 0.7385005010043769,
+            "log_loss": 0.7906178391836437,
+            "recall": {
+              "infectious": 0.6495726495726496,
+              "noninfectious": 0.7718631178707225,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                152,
+                67,
+                15
+              ],
+              [
+                40,
+                203,
+                20
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          },
+          "fit_images": 948,
+          "stop_images": 196,
+          "outer_images": 573,
+          "fit_patients": 178,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 2,
+          "metrics": {
+            "n": 571,
+            "accuracy": 0.8336252189141856,
+            "balanced_accuracy": 0.8532401590477816,
+            "macro_f1": 0.8349778485858318,
+            "log_loss": 0.41221114223873995,
+            "recall": {
+              "infectious": 0.8034188034188035,
+              "noninfectious": 0.8352490421455939,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                188,
+                44,
+                2
+              ],
+              [
+                24,
+                218,
+                19
+              ],
+              [
+                2,
+                4,
+                70
+              ]
+            ]
+          },
+          "fit_images": 930,
+          "stop_images": 216,
+          "outer_images": 571,
+          "fit_patients": 175,
+          "all_feature_and_patient_audit_passed": true
+        }
+      ],
+      "paired_vs_reference": {
+        "accuracy_difference": 0.0008736167734421096,
+        "macro_f1_difference": 0.0012643349790145697,
+        "accuracy_ci95": [
+          -0.0036279167047714557,
+          0.0053163918015542155
+        ],
+        "macro_f1_ci95": [
+          -0.0027399122201125755,
+          0.005276073656261236
+        ],
+        "bootstrap_unit": "Patient split group, jointly resampling all images and both repeated predictions.",
+        "inference_limit": "Exploratory patient resampling; does not include all training-fit uncertainty or adjust for prior model selection."
+      }
+    },
+    {
+      "candidate_id": "a9669a36590f",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.06,
+        "fine_contrastive": 0.05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.9037433155080213,
+        "balanced_accuracy": 0.9041468567315093,
+        "macro_f1": 0.8998170419492214,
+        "log_loss": 0.3354196642038429,
+        "recall": {
+          "infectious": 0.9290780141843972,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.8983050847457628
+        },
+        "confusion_matrix": [
+          [
+            131,
+            9,
+            1
+          ],
+          [
+            13,
+            154,
+            7
+          ],
+          [
+            2,
+            4,
+            53
+          ]
+        ]
+      },
+      "new_repeated_cv_mean_macro_f1": 0.7875343596111137,
+      "new_repeated_cv_sd_macro_f1": 0.05285194553035416,
+      "original_selected_cv_macro_f1": 0.8119939930517638,
+      "folds": [
+        {
+          "repeat": 20261201,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7504363001745201,
+            "balanced_accuracy": 0.7644402881044866,
+            "macro_f1": 0.7358631105619059,
+            "log_loss": 0.578721897760219,
+            "recall": {
+              "infectious": 0.7948717948717948,
+              "noninfectious": 0.6958174904942965,
+              "normal": 0.8026315789473685
+            },
+            "confusion_matrix": [
+              [
+                186,
+                37,
+                11
+              ],
+              [
+                48,
+                183,
+                32
+              ],
+              [
+                0,
+                15,
+                61
+              ]
+            ]
+          },
+          "fit_images": 894,
+          "stop_images": 250,
+          "outer_images": 573,
+          "fit_patients": 178,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261201,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.75,
+            "balanced_accuracy": 0.8013344184497259,
+            "macro_f1": 0.759265579544176,
+            "log_loss": 0.6258888296044973,
+            "recall": {
+              "infectious": 0.7051282051282052,
+              "noninfectious": 0.7251908396946565,
+              "normal": 0.9736842105263158
+            },
+            "confusion_matrix": [
+              [
+                165,
+                58,
+                11
+              ],
+              [
+                47,
+                190,
+                25
+              ],
+              [
+                0,
+                2,
+                74
+              ]
+            ]
+          },
+          "fit_images": 845,
+          "stop_images": 300,
+          "outer_images": 572,
+          "fit_patients": 176,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261201,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8531468531468531,
+            "balanced_accuracy": 0.8540074905080931,
+            "macro_f1": 0.8580648844843223,
+            "log_loss": 0.3649201181957885,
+            "recall": {
+              "infectious": 0.8632478632478633,
+              "noninfectious": 0.8435114503816794,
+              "normal": 0.8552631578947368
+            },
+            "confusion_matrix": [
+              [
+                202,
+                32,
+                0
+              ],
+              [
+                33,
+                221,
+                8
+              ],
+              [
+                0,
+                11,
+                65
+              ]
+            ]
+          },
+          "fit_images": 934,
+          "stop_images": 211,
+          "outer_images": 572,
+          "fit_patients": 176,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7975567190226877,
+            "balanced_accuracy": 0.8223754765679921,
+            "macro_f1": 0.8093473991420076,
+            "log_loss": 0.5299233724842045,
+            "recall": {
+              "infectious": 0.8461538461538461,
+              "noninfectious": 0.7262357414448669,
+              "normal": 0.8947368421052632
+            },
+            "confusion_matrix": [
+              [
+                198,
+                31,
+                5
+              ],
+              [
+                61,
+                191,
+                11
+              ],
+              [
+                1,
+                7,
+                68
+              ]
+            ]
+          },
+          "fit_images": 904,
+          "stop_images": 240,
+          "outer_images": 573,
+          "fit_patients": 177,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 1,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7329842931937173,
+            "balanced_accuracy": 0.7657650145642941,
+            "macro_f1": 0.7314812562244843,
+            "log_loss": 0.7272567836311301,
+            "recall": {
+              "infectious": 0.6666666666666666,
+              "noninfectious": 0.7490494296577946,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                156,
+                63,
+                15
+              ],
+              [
+                40,
+                197,
+                26
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          },
+          "fit_images": 948,
+          "stop_images": 196,
+          "outer_images": 573,
+          "fit_patients": 178,
+          "all_feature_and_patient_audit_passed": true
+        },
+        {
+          "repeat": 20261211,
+          "fold": 2,
+          "metrics": {
+            "n": 571,
+            "accuracy": 0.830122591943958,
+            "balanced_accuracy": 0.8505385184151065,
+            "macro_f1": 0.8311839277097864,
+            "log_loss": 0.4237132465423904,
+            "recall": {
+              "infectious": 0.7991452991452992,
+              "noninfectious": 0.8314176245210728,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                187,
+                45,
+                2
+              ],
+              [
+                24,
+                217,
+                20
+              ],
+              [
+                2,
+                4,
+                70
+              ]
+            ]
+          },
+          "fit_images": 930,
+          "stop_images": 216,
+          "outer_images": 571,
+          "fit_patients": 175,
+          "all_feature_and_patient_audit_passed": true
+        }
+      ],
+      "paired_vs_reference": {
+        "accuracy_difference": 0.0011648223645894795,
+        "macro_f1_difference": 7.907721598854334e-05,
+        "accuracy_ci95": [
+          -0.0071824512520919145,
+          0.009763580188900913
+        ],
+        "macro_f1_ci95": [
+          -0.00805181550820891,
+          0.008633363959210643
+        ],
+        "bootstrap_unit": "Patient split group, jointly resampling all images and both repeated predictions.",
+        "inference_limit": "Exploratory patient resampling; does not include all training-fit uncertainty or adjust for prior model selection."
+      }
+    }
+  ],
+  "completed_new_seed_fits": 54,
+  "external_test_evaluated": false
+}

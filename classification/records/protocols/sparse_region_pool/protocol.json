@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-11-24T00:36:37.758214+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Original M5 region softmax always includes all9regions. Small/dispersed lesions may benefit from known sparse probability maps. Compare parameter-matched sharper/smoother softmax with entmax1.5 and sparsemax; this is an architecture ablation, not a claim of inventing these maps.",
+  "configuration_plan": [
+    {
+      "name": "softmax_temperature0p5",
+      "kind": "softmax",
+      "temperature": 0.5
+    },
+    {
+      "name": "softmax_temperature2",
+      "kind": "softmax",
+      "temperature": 2.0
+    },
+    {
+      "name": "entmax1p5",
+      "kind": "entmax15",
+      "temperature": 1.0
+    },
+    {
+      "name": "sparsemax",
+      "kind": "sparsemax",
+      "temperature": 1.0
+    }
+  ],
+  "architecture": "Only replace normalization of the two original regional query scores. Pool same128dimtokens, same2heads, concatenate unchanged global/mid/dispersion into same MLP/disease head. Entmax1.5 uses p=max(score/2-tau,0)^2; sparsemax uses p=max(score-tau,0), tau ensures unit mass. No new parameters; originalsoftmaxT1exactly restoresM5.",
+  "planned_new_seed_fits": 48,
+  "training": "Original M5 features, image sampling, full losses, patient/class weights, fixed hyperparameters and fit/stop/outer patient plans. Four fixed arms each3formal+3foldx3seed; no search of temperatures or sparsity strength.",
+  "selection": "Original patient CV Macro-F1>0.8090823139275858 and validation>=0.8893107959516184; highest qualifying originalCV freezes before fresh patient confirmation against M5 and fixedGaussian. No automatic external evaluation.",
+  "verification": "Independent scalar-root SciPy probability solution and numerical gradients, shift/permutation invariance, masked/single-valid/allmasked/equal/extreme cases, complete parameter and RNG identity, softmaxT1exact initial fullmodel predictions and gradients passed. Every actual head CPU-recovered and every trained attention probability independently root-solved; support/effective-region/entropy diagnostics retained.",
+  "external_test_policy": "Only2091development images used; explicit external feature rowsNaN and prediction index guard. No external raw image, prediction or score evaluated.",
+  "code_sha256": {
+    "sparse_region_pool.py": "97260c5ce47b060b81152f3e6d5cfb6f8eff3b0906d6b27705085e8c51284420",
+    "verify_sparse_region_pool.py": "c4e440b7d5d102582f83dec545b0036878429a8ff284609cc640147b260ff706",
+    "sparse_region_pool_experiments.py": "cd3b58cde5c59727e8f86dfdbb4c781feead97a4d178294317865c7604e82223"
+  }
+}

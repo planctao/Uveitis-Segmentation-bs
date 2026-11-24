@@ -1,0 +1,34 @@
+{
+  "created_at_utc": "2026-11-23T23:51:23.598057+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "A shared residual bottleneck and L-feature capacity/privileged targets failed the two development gates. Test whether an image-dependent mixture of low-rank residual experts can separate heterogeneous phenotypes while retaining the unchanged M5 initialization and original supervision.",
+  "architecture": "Before original disease classifier and fine projection: z +0.1 sum_k softmax(gate(LayerNorm(h_pre_dropout)))_k U_k GELU(V_k LayerNorm(z)), z=original dropped 256D MLP output. Every U_k initially zero. No new forward RNG. Router uses deterministic hidden context; no disease labels or patient IDs at inference.",
+  "configuration_plan": [
+    {
+      "name": "experts2_rank16",
+      "experts": 2,
+      "rank": 16
+    },
+    {
+      "name": "experts2_rank32",
+      "experts": 2,
+      "rank": 32
+    },
+    {
+      "name": "experts4_rank16",
+      "experts": 4,
+      "rank": 16
+    },
+    {
+      "name": "experts4_rank32",
+      "experts": 4,
+      "rank": 32
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "training": "3 formal seeds + original 3-fold x3-seed patient CV per arm. No new loss or optimizer parameters; original M5 losses, patient weights, stopping, source features and common initialization. The common trainer accepts an explicit model constructor; default M5 construction is unchanged.",
+  "selection": "Original patient CV Macro-F1 must exceed M5 and validation Macro-F1 must not decrease. Freeze any initial qualifier then run fresh fixed patient confirmation against M5 and fixed Gaussian; no external scoring in this study.",
+  "diagnostics": "Independently reconstruct every trained routing weight and residual with NumPy/SciPy, report normalized routing entropy/usage and relative residuals. Branch-off diagnostics are not independently trained controls.",
+  "external_test_policy": "Only original training/validation development data; no external raw images, outcomes or prediction files used."
+}

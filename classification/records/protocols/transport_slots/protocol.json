@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-11-24T01:08:10.954629+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Earlier attention overlap penalties did not satisfy both development gates. Test an architectural region-competition constraint: balanced entropy-regularized transport gives each valid region equal total mass across slots, while every slot has equal total mass. Compare identical-parameter independent regional-softmax summaries. This evaluates known Sinkhorn transport in a residual architecture, without claiming invention of transport.",
+  "configuration_plan": [
+    {
+      "name": "softmax_slots2",
+      "slots": 2,
+      "balanced": false
+    },
+    {
+      "name": "balanced_slots2",
+      "slots": 2,
+      "balanced": true
+    },
+    {
+      "name": "softmax_slots4",
+      "slots": 4,
+      "balanced": false
+    },
+    {
+      "name": "balanced_slots4",
+      "slots": 4,
+      "balanced": true
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "Keep all original M5 arrays, projections, two-head attention, full task loss and original MLP. On GELU(region_proj) apply LayerNorm; learned16dim keys and2/4learned queries produce scores 5tanh(raw/(5sqrt16)). Values are16dimLinearGELU. Ordinary mode normalizes each slot over regions. Balanced mode performs30log-space Sinkhorn iterations with regionmass1/Nvalid andslotmass1/K, then multiplies transport byK. Concatenate slots, zero-readout to256 and0.1residual before originalhiddenDropout. Allmasked fallback allvalid. No region coordinate or class label enters assignments.",
+  "controls": "Softmax andbalanced have exactlymatching parameters withinslotcount. Originalpublicinitialization, initialtrain/evalpredictions andRNG unchanged. Four fixedarms each3formal+3foldx3seeds, sameoriginalfit/stop/outerplans, patientweights,hparams,sampling andearlystoprules.",
+  "verification": "Independent scalar SciPy dualiterations and vectorizedalternatingmarginal normalization agree. Numerical query/key/valuegradients, permutation/shiftinvariance, partial/allmasks,singleton, extremes andexactinitialM5identity passed. All48actualheads CPUrestorestop/outerpredictions; NumPyrebuildeveryassignment,summary,residual. Retainmassdeviation afterfinite30iterations, slotoverlap/entropy andbranchoffdiagnostics.",
+  "selection": "OriginalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes before freshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091development feature rows used, externalrowsNaN andexplicitinferenceindexguard; noexternalimages,predictionsoroutcomesaccessed.",
+  "code_sha256": {
+    "transport_slots.py": "19323cc26f99d7fb4f8eb8c06a9a89c113d974bd3dd71e426f8cbc0a9c519131",
+    "verify_transport_slots.py": "6c6da65dce755d9f81e5cba7a627fb835c25b59dfd32081d68fbc9f5ef2f815b",
+    "transport_slot_experiments.py": "463c31ddc6d9ad057cf6626a79338c3a846834bde8bc5ef8618e2bf7f10e8bcd"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-11-24T05:52:13.416901+00:00",
+  "status": "completed",
+  "family": "normal_group_risk",
+  "hypothesis": "Most development mistakes remain infection versus noninfection. Local normal-atlas input projections did not pass M6. Test using fit-normal feature groups as a training risk constraint instead: within each true coarse class, equalize patient-weighted losses across inferred normal-coordinate groups. These are feature groups, not hospital/site labels. Risk variance regularization is an existing principle; no methodological novelty claim.",
+  "development_evidence": [
+    "results/research_normal_atlas/comparison.json",
+    "results/research_normal_evidence_attention/comparison.json",
+    "runs/normal_subspace/normal_rank32_full/fold_0/predictions.npz",
+    "runs/normal_subspace/normal_rank32_full/fold_1/predictions.npz",
+    "runs/normal_subspace/normal_rank32_full/fold_2/predictions.npz"
+  ],
+  "configuration_plan": [
+    {
+      "name": "groups2_risk0p1",
+      "count": 2,
+      "strength": 0.1
+    },
+    {
+      "name": "groups2_risk0p5",
+      "count": 2,
+      "strength": 0.5
+    },
+    {
+      "name": "groups4_risk0p1",
+      "count": 4,
+      "strength": 0.1
+    },
+    {
+      "name": "groups4_risk0p5",
+      "count": 4,
+      "strength": 0.5
+    }
+  ],
+  "geometry": "Original fit-only standardization and normal-patient PCA32 of four streams. Deterministic farthest-initialized2/4clusters in whitened global normal-patientPCA32coordinates; Lloyd max100 andconvergenceassert. Hard nearest-cluster group for each fitting/queryimage. Groupfitusesonlynormalpatientcenters. Freeze16arm/phasegeometries and16patientplans beforeallMLPfits.",
+  "architecture": "Original full normal-reference attentionMLP and complete task; add lambda .1/.5 times mean across present coarseclasses of population variance of classconditional group smoothed coarseNLLrisk. Group risk is normalized by sum of originalpatient/classbalanced weights within group/class; absent groups excluded,onepresentgroupvariance0. No new trainable parameters,identicalinit/RNG/hparams/patientweights/3seeds. Inference remains deterministic normal-referenceMLP.4arms48actualheads,4fixed.75new/.25M5fusions8scores0fusionfits.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest originalCVpassingcandidate requiringCVstrictly>M6andvalidation>=M6; then unusedpatientpartition confirmationagainstM6/M5/fixedGaussianwithpositivepairedpatient95%lowerbounds.20271101/20271111alreadyused; noautomaticexternaltests.",
+  "audit": "IndependentGramnormalspaces,normalpatientgroupcentroidfixedpoints,normalduplication/nonnormalchangeinvariance. Independentpairwisevariance identity verifies fulltaskloss/gradients,weightscaling/absentgroups. Originalparameters/init/RNGand inference;zeropenalty exactnormal-reference fulltask.4real256imageupdates/restoresandactualCUDAfirstbatchwitnessreplay passed. Independentlyrecoverall48firstbatchsourceinputs,initialparameterhashes,CPU/CUDARNG,completeobjectives,class/grouprisks/masses; allactualstop/outerprobabilities,groupassignments,stats/buffers/bestepoch/patientcoverageand16fusions. Freeze allsourcecode/features/weights.",
+  "preflight": "verification_normal_group_risk.json",
+  "formal_fits_started": "Inspect actual checkpoints",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_group_risk/protocol.json",
+  "protocol_sha256": "0a8f4a239061850fbcdad614b412a5d95c1a8b8162a9d4b12766543519d2bf14",
+  "pid": 86115,
+  "completed_at_utc": "2026-11-24T06:07:43.291782+00:00",
+  "actual_new_seed_fits": 48,
+  "actual_seed_heads_checked": 48,
+  "passing_development_gates": 1,
+  "selected_candidate": "groups2_risk0p1_fusion075",
+  "selected_original_cv": 0.8316800023152359,
+  "selected_validation": 0.8907046081546021,
+  "fresh_confirmation": "results/research_normal_group_risk_confirmation/comparison.json",
+  "fresh_confirmation_gate_passed": false,
+  "decision": "RetainM6: freshpatient intervals crosszero againstM6 andfixedGaussian. No external evaluation."
+}

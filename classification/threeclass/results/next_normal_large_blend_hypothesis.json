@@ -1,0 +1,71 @@
+{
+  "created_at_utc": "2026-11-24T07:34:18.157267+00:00",
+  "status": "completed_confirmation_and_inference_passed",
+  "family": "normal_large_blend",
+  "hypothesis": "Larger normal-referencebackbonesmayprovidecomplementaryevidenceevenwhentheyfailM6individually. Ifcompletedlarge-normalstudyhasnoprimaryeligiblecandidate,retainM6asabasedistributionandtestsmallfixedadditionalnormal-Lcontribution. Keepall4largefeaturearms xpredeclaredweights.1/.25. Existingensembleprinciple,noarchitectureinventionclaim. Currentlargeformalstudyisauditing,onlyrawpartialdevelopmentscoresseen;newmixtureshavenotbeenevaluated.",
+  "configuration_plan": [
+    {
+      "name": "large320_weight0p1",
+      "feature": "large320",
+      "large_weight": 0.1
+    },
+    {
+      "name": "large320_weight0p25",
+      "feature": "large320",
+      "large_weight": 0.25
+    },
+    {
+      "name": "large_dual_weight0p1",
+      "feature": "large_dual",
+      "large_weight": 0.1
+    },
+    {
+      "name": "large_dual_weight0p25",
+      "feature": "large_dual",
+      "large_weight": 0.25
+    },
+    {
+      "name": "base_dual_large_dual_weight0p1",
+      "feature": "base_dual_large_dual",
+      "large_weight": 0.1
+    },
+    {
+      "name": "base_dual_large_dual_weight0p25",
+      "feature": "base_dual_large_dual",
+      "large_weight": 0.25
+    },
+    {
+      "name": "base_dual_large448_weight0p1",
+      "feature": "base_dual_large448",
+      "large_weight": 0.1
+    },
+    {
+      "name": "base_dual_large448_weight0p25",
+      "feature": "base_dual_large448",
+      "large_weight": 0.25
+    }
+  ],
+  "architecture": "p=(1-w)*(.25prawB+.75pnormalB)+w*pnormalLarge. Samepatientouterplans andthree-seedbranchprobabilities. 8fixedscores0newfits,72already-auditedsourceheadsacross4phases protectedalongwith24sourcepredictionarrays. BaselineM6mixturesrestoredseparately. Noextraction/traininginthisinferenceonlystudy.",
+  "new_seed_fits": 0,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "HighestoriginalCVamongstrictly>M6andvalidation>=M6frozenbeforetwo entirelyunusedpatient3foldrepeat confirmations againstM6/M5/fixedGaussian. RetrainrawB,normalB,selectednormalLargewithinnewfit/stop/outerplans(54MLPsand18Gaussian),freezethreebranchweights. Requirehighermean6foldF1andpairedpatientbootstrap95%lowerbound>0againstEACH. Noautomaticexternaltests.",
+  "audit": "Sourcecheckpoints/predictions/parentverificationandcodehashesfrozenbeforeevaluation. Independentreconstructall32phasesfromthreeseparatefloat64components; exactclassesandprobabilitytolerances,metricsandouterpatientcoveragechecked. Only2091developmentrows;noexternalfiles.",
+  "external_test_evaluated": false,
+  "decision": "M7 is the retained development model; all374 validation probabilities and six original/cache image paths verified; preserve historical M6/M5/Gaussian external references. No new external evaluation.",
+  "launch_condition_amendment": {
+    "time_utc": "2026-11-24T08:12:45.714792+00:00",
+    "reason": "The primary normal-B/L candidate passed original development but failed fresh patient confirmation. All eight originally drafted blend configurations and weights remain fixed and unevaluated. Launch only after the complete B/L spatial experiment is independently audited and no candidate passes its original development gates. This broadens the earlier no-primary-development-candidate trigger to primary-confirmation-failed; no blend scores have been observed.",
+    "prior_status": "deferred_for_explicit_spatial_architecture",
+    "prior_decision": "Primarylarge-normalcandidatefailedfreshconfirmation;prioritizepreflightedexplicitB/Lspatialcontrastarchitecture. No blend protocol or score created."
+  },
+  "protocol": "runs/normal_large_blend/protocol.json",
+  "protocol_sha256": "c9b3936674cb7bdadefe79ff12f9f01900017b3ba4a3f08c863dd5dc1eb9a34c",
+  "pid": 3492,
+  "passing_development_gates": 4,
+  "selected_candidate": "large_dual_weight0p25",
+  "result": "results/research_normal_large_blend/comparison.json",
+  "confirmation_record": "results/research_normal_large_blend_confirmation/comparison.json",
+  "package": "results/milestone7_normal_large_blend/package.json"
+}

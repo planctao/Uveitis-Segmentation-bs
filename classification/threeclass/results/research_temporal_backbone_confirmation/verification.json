@@ -1,0 +1,1493 @@
+{
+  "passed": true,
+  "actual_seed_heads_checked": 72,
+  "actual_training_witnesses_checked": 54,
+  "actual_used_source_weight_states_checked": 90,
+  "actual_saved_selected_weight_states_checked": 108,
+  "generative_fits_checked": 18,
+  "fits": [
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "b96212ccd8788e98f164044d8871f5c2b87208555a092d64a45601c55945665f"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "1f93538bd87f46b1a6d0f9020074c00f5f01fb2cb4700aebd5546a20d16c9c30"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "ac6855e2acbf9bff8e7e108634a6a9b95c9338885ebe0794c8e0b2486b45e37b"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_0/raw/model.pt",
+      "checkpoint_sha256": "28761f7d5f21ca92ccd7dbfcfbdf546951c0912fa6ed8619d17ef35286de24c7",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 46,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_0/raw/model.pt",
+          "checkpoint_sha256": "28761f7d5f21ca92ccd7dbfcfbdf546951c0912fa6ed8619d17ef35286de24c7"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 35,
+          "maximum_temporal_weight_expansion_error": 4.071129464100487e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_0/ema0p8/model.pt",
+          "checkpoint_sha256": "bbe67e0b1fc70110df05b4d51cbb880ff90b89a1b88964fcdc3f57e72e95dd25"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 49,
+          "maximum_temporal_weight_expansion_error": 7.280161509748417e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_0/ema0p95/model.pt",
+          "checkpoint_sha256": "9b623a9268a5d6b02e7a9c739b7864348242fb016e1a2edb59fcfdbaa0ba03ca"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_0",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_projection_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "53b401f5caa4d9cfca7b637973b3d20a864d4903305b851dade423ac559cfcc9"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_1/raw/model.pt",
+      "checkpoint_sha256": "49e58881e2f7df9fa783552d48ef894925e19b0d9743932b4c99a9e8b9cc3cb4",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 15,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_1/raw/model.pt",
+          "checkpoint_sha256": "49e58881e2f7df9fa783552d48ef894925e19b0d9743932b4c99a9e8b9cc3cb4"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 13,
+          "maximum_temporal_weight_expansion_error": 3.2040214537065737e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_1/ema0p8/model.pt",
+          "checkpoint_sha256": "8c8a1c808368d3e8d8949b191c8b09464a1dbc65ffa05da694b97b80431800f2"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 32,
+          "maximum_temporal_weight_expansion_error": 6.58814509613137e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_1/ema0p95/model.pt",
+          "checkpoint_sha256": "d8da593af9fc4ce6e89fb6821267306a7b45a28b8616d84aa34c74bfbf52f3ba"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_1",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_projection_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "4b3374f72154d9b9bd7498918aaa46d5d28d678045a24bd0b369d29070332a01"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_2/raw/model.pt",
+      "checkpoint_sha256": "b118861a5348aba4003ae528338e195fec5384414775fafc4511ba0f993e072b",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 6,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_2/raw/model.pt",
+          "checkpoint_sha256": "b118861a5348aba4003ae528338e195fec5384414775fafc4511ba0f993e072b"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 7,
+          "maximum_temporal_weight_expansion_error": 1.9073486318132993e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_2/ema0p8/model.pt",
+          "checkpoint_sha256": "33d69c42017af3f375e4b02eb6f219e7bd0c098988fe3fab0937bdd8ff5c5f8c"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 9,
+          "maximum_temporal_weight_expansion_error": 2.8681848229794582e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_2/ema0p95/model.pt",
+          "checkpoint_sha256": "284c85a200a00cae87bccced0ab539e13d85d64c4b2f464c15e4c3f2b248ee2d"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_2",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.30385160446167e-08,
+        "maximum_independent_projection_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "f372b338216ea5ea20009f0463d593c75d73ddd5fcebcb4756a6137006199996"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "7aae1bca7d3ee24542c78392b3abb928d14489e21b45a5fa166531faf02f100c",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.7285346984863281e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "49e6ad90ee8cc22cac39c85930a550ef8bd9f5a3dfeff4b0e717b365d4b7ddaa"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "c3a35d0d23ae690444cc28be1939addae1c5bf118499d2952ed72d614d5c4aad",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.4975666999816895e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "44e6a97eccc015d0a89f87c26b6d5793c8bd3d6573cbee319914a0fe81bc6ead"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "1d846dd3eb8db836f48e5489e0e4495ef1277d537ee7fd484cc0b7e7b30e8c1b",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.7285346984863281e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "3ca9803ec611a53cd4accf29a8f8562f157c9ac6e509944b4f6ae26e48500f56"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "07b5bd29100c211fa97d046f4ab20b8788cd85204c4701426ca03b874ddaf075",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.8477439880371094e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "d09db66823f0ae73027a138f87362a22238314fe236240456703d1067f662f74"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "8ba867801c1a0778cc93528827d8a05f553b56c6ce53c898d6f16f213c003dca",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.5757977962493896e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "be82c840c6fc19a77d4a0eb383eddefe68c57440145e229a052ade466e8116f5"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "ba63073a16fff1f7af6b0fb6727e810795f20ee7fb69649cb5e2e57d6fc66c8c",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.8477439880371094e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "3c83a5e1dab84b90ad0388e24f13650356b6049b4efd7d53d9db3d7403593817"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "59243d67ae2a6aa55fd963647579f57e22d941b01bd8a3976b3d02b885195771"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "651dba497839d22b7cdc406ccffbcf628150a8fb7b0c9f840906d8e7e70e12cc"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "d0c64a1c2edee079eec261259532e07cf84d0c30c9f9bf7010d6ca4fe825c0a9"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_0/raw/model.pt",
+      "checkpoint_sha256": "77619b602d829a891660cff1a9143df0dfed7c7e6e1b680822c5294f5ad442f0",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 33,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_0/raw/model.pt",
+          "checkpoint_sha256": "77619b602d829a891660cff1a9143df0dfed7c7e6e1b680822c5294f5ad442f0"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 38,
+          "maximum_temporal_weight_expansion_error": 3.678594850953232e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_0/ema0p8/model.pt",
+          "checkpoint_sha256": "703ae994811cf382fb67b790614620d9c5314b8fef803cd3dc696b185d78ed20"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 47,
+          "maximum_temporal_weight_expansion_error": 7.869711929342493e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_0/ema0p95/model.pt",
+          "checkpoint_sha256": "8e00b1c7c9a975e5489b2a86fd8565fbbb84213df5c3d1c6e614bfe92d66a968"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_0",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_projection_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "a0db28d745a0d0027e91cd3a982f2e02d788e17a1129760d82fab65cc6ce4ff7"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_1/raw/model.pt",
+      "checkpoint_sha256": "78ce48e7b691c4cf24d47f039db181e9b706e4a1bbcf9389a921c89a7f975261",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 40,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_1/raw/model.pt",
+          "checkpoint_sha256": "78ce48e7b691c4cf24d47f039db181e9b706e4a1bbcf9389a921c89a7f975261"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 26,
+          "maximum_temporal_weight_expansion_error": 3.663134465203832e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_1/ema0p8/model.pt",
+          "checkpoint_sha256": "8332442a6678df9fc9e4fcf3e4b973c75193af9194e5a98cfd6ee671b8311304"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 31,
+          "maximum_temporal_weight_expansion_error": 5.9205088831504327e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_1/ema0p95/model.pt",
+          "checkpoint_sha256": "284a5ad34c4a4653f30ed70397b6969d4f98a42a89e389e7c441041ca836298a"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_1",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_projection_error": 1.4416873455047607e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "f5c345e8a8fe6fbf7b82068eb9c4093de67a800381a74a5f8ab34b483569d4ef"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_2/raw/model.pt",
+      "checkpoint_sha256": "302270e7b56c18c6e25112b55659783e610e7ff7956329ea14d7be2c9a3863a4",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 38,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_2/raw/model.pt",
+          "checkpoint_sha256": "302270e7b56c18c6e25112b55659783e610e7ff7956329ea14d7be2c9a3863a4"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 55,
+          "maximum_temporal_weight_expansion_error": 3.636886322655464e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_2/ema0p8/model.pt",
+          "checkpoint_sha256": "11ac9cb2106eb20f2b4a14ded93c9f1838011b6a08ad9786f630ca6845c3840a"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 43,
+          "maximum_temporal_weight_expansion_error": 7.842968824389729e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_2/ema0p95/model.pt",
+          "checkpoint_sha256": "d943f73116c9af338824aca1eb43f5efe3519cae3e2666d7ee974405d1ccf10a"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_2",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_projection_error": 1.4416873455047607e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "5e8af4fda7e11d69bac01731d6bbc16bd34d872a3f9a26b2ff731eb4c52a1699"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "68efb570e822394cbe960a44d7f061275326b86ddfdf291927bed9b91cc207d6",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "bd3cfc99c3fae4b5a3aaeb1a6511a98e9074e0b4419cacd413dce149e1801bd4"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "629d34cda2021a0a3050c5d8792d4501bf4da33b3d97381297a37cc123a9f326",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "13e8f2e836cb8d6fd03a9108f00fd4ddea6ff3f7679db959e12e16f15ec9bff0"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "d3a62a7bd427112fb8f3f51e1a2734b0e343a13158aad2ab70164383fb3b01b7",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "7ddc758e0a150a608837caad2fea3ed8c4c543ef2287e58801d5751fdf276923"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "2b1c32064c15f0cdc4e607f0169088f1ef7aa773860e1a368b0d1830da4545ae",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "cd67e29a2a352bda5c2fa84d0cc371e7d02befdba01f657f725f38b6ffb9c6ba"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "a6511054b745242aaa7d8f5ddde13c261df400fc6093222240495bbfeb180181",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "f292f352d412871834fad04dde68bb827548a2ef0531dd1c207ae80a12baa6ce"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "07039c8da5046729257b7d992bfdf0a99f66d4ecabc99a36c8a6afbe01641ed1",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "cdd712672abc7251a7d2da3048fd5dc4e94ada514f5e533b4b6e66d5633c7b81"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "948109a25b5bf0f98fdec0944a885902bccb1af6ad2fa75ad07c311b691ff74c"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "b7685dccce06152e31d3ceedd5bdf0d3f347fdec5a7cf9f48815294edc96be62"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281001/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "8f4093c66d7c47d31ab5430b21fc574867badc06e50caf9f0897613573d0d178"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_0/raw/model.pt",
+      "checkpoint_sha256": "e7bb03a338bf4575c9e9c3b588298d954d50464c19ed742d1f11ababbe0631e9",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 18,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_0/raw/model.pt",
+          "checkpoint_sha256": "e7bb03a338bf4575c9e9c3b588298d954d50464c19ed742d1f11ababbe0631e9"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 27,
+          "maximum_temporal_weight_expansion_error": 3.089812317114138e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_0/ema0p8/model.pt",
+          "checkpoint_sha256": "5131d252880c5c332f2fd0bcdb93bf07d48aafe07d46ce088722ff6afe8bdea8"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 25,
+          "maximum_temporal_weight_expansion_error": 5.0524466527201994e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_0/ema0p95/model.pt",
+          "checkpoint_sha256": "2c4540f7640a2fc042f4855ac97d01963e4ee606306a98eea307b590d562bf94"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_0",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 5.960464477539063e-08,
+        "maximum_independent_projection_error": 1.2516975402832031e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "30ff11cfca13e7feaf39066c62c5ff09e139caad224520da60e85c2e64860ac9"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_1/raw/model.pt",
+      "checkpoint_sha256": "b9fc11468bb6f451c7eb2223fd290a19ce161a92934f9381e4b2c26b39d5c514",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 9,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_1/raw/model.pt",
+          "checkpoint_sha256": "b9fc11468bb6f451c7eb2223fd290a19ce161a92934f9381e4b2c26b39d5c514"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 8,
+          "maximum_temporal_weight_expansion_error": 2.4795532210797333e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_1/ema0p8/model.pt",
+          "checkpoint_sha256": "795b79c4327d3d1f3b879b9472a0d007fae87f67aa46a840be9d60b8ed845df4"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 15,
+          "maximum_temporal_weight_expansion_error": 4.895946542626817e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_1/ema0p95/model.pt",
+          "checkpoint_sha256": "a782b960d01d088db5d67305498c5ccfcd51bdb6343d74edd6b3e4c0d96d67f6"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_1",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_projection_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "a6aa28de37782c414ab9c887292af213643e459ca255b9f20c8a1c1c1d80a8c0"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_2/raw/model.pt",
+      "checkpoint_sha256": "5f1c6f87bdad3f04f9962882e19ad57cf2ada65d4964753d1c4b9c57bc3a7a44",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 25,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_2/raw/model.pt",
+          "checkpoint_sha256": "5f1c6f87bdad3f04f9962882e19ad57cf2ada65d4964753d1c4b9c57bc3a7a44"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 31,
+          "maximum_temporal_weight_expansion_error": 3.832260420111311e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_2/ema0p8/model.pt",
+          "checkpoint_sha256": "b3eef27a8be855c576c46481ed1a0daccd2fce69a708dee84fcf55ee0232f058"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 31,
+          "maximum_temporal_weight_expansion_error": 7.79120554184054e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_2/ema0p95/model.pt",
+          "checkpoint_sha256": "ee35c509cec5179c7f9c77f1e023ee59e1caec45e1ca46a5bb377b89c3287a05"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_2",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 2.9802322387695312e-08,
+        "maximum_independent_projection_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281001/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "a3740e15e156f1640afea1fb5e3000cddb96f46b93a3b2880dbbe1e14bbe78dc"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "6556f64500edce3d19195deba580dbd650a718d6938ad5f51321caa5d64dec73",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "36c51d1ae1404df575b6ff465399fb5b0a6cc5312b9676ea2c18bdbe1bd1de55"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "7350b34aa2d81225ef3a8ddd579a3513d572796de2152df647e5e8a58579885f",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "ca8a863ed98347cb3413914252ce78d36e8da156cbe2baaf418199cc4eb2eb9f"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "186f8816b2d9213c832d8466f209fb87a94b796f270ed240af8410215e6702be",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281001/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "3c70099f1fbc61d0736b9b975515eb87671f854489b1a8055a13c20d5de279ee"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "f86a7451a787d9f7d6667165a5e53a696ba0f83fa753256c3d6a18a093f0ce82",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.9073486328125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "f900b970956ce8f849632f7d3d81c5e22ffa3b1af57ee5f327ac3224edba9641"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "298a7d9c38beb7c1018f902316e1bddba03d574efbbc5c15c2f39ec2eac29bcf",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "c742cc48e97b8d928502882770b1db88afe4e394582e87936d9ee14c23dd5229"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281001,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "b05a43951b63141ae0935462a4c5569523130332381c9723655e66d2820c27c6",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.9073486328125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281001/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "158ec9f3198536c4afadd8068a7c691f42746b028e91da7d9d569d4cb228334b"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "9c8ed514035e193ef7a02c71ed138ff0eb41ac744a9a6476cb837f151747dc89"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "fe44e41e9c9f856f4c89f26632451805ad35d61f02c38feff7cb3a42fc7dc2ec"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "aff572404851477ecbfc4061b20a67546671f7843709c30156cbabf95d53a035"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_0/raw/model.pt",
+      "checkpoint_sha256": "ca147ff6cc2ebbdcf48e972f74ca55fff1602ce2ef36c1413f12c1ffc5b91a86",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 8,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_0/raw/model.pt",
+          "checkpoint_sha256": "ca147ff6cc2ebbdcf48e972f74ca55fff1602ce2ef36c1413f12c1ffc5b91a86"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 26,
+          "maximum_temporal_weight_expansion_error": 3.3348538347466317e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_0/ema0p8/model.pt",
+          "checkpoint_sha256": "cb9720796de638fc4e1af055e8eea28f99b6e2a87caa32f4af6746f479d309f8"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 25,
+          "maximum_temporal_weight_expansion_error": 6.206001762487645e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_0/ema0p95/model.pt",
+          "checkpoint_sha256": "4e1cfa5d459f31680f4e3b0a2240358823ddb2498c9389e8ee9a05ca90911aaa"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_0",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 2.9802322387695312e-08,
+        "maximum_independent_projection_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "ee11407ca04507bc2e7d0dfdff3329a5f94b35194499f3a73de5dd84b5a6ec48"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_1/raw/model.pt",
+      "checkpoint_sha256": "08993ee41649ff55fe5c4e51ebc2c0fbb3e78fec91c56b8480be6cff17401770",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 41,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_1/raw/model.pt",
+          "checkpoint_sha256": "08993ee41649ff55fe5c4e51ebc2c0fbb3e78fec91c56b8480be6cff17401770"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 14,
+          "maximum_temporal_weight_expansion_error": 3.1659049992693866e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_1/ema0p8/model.pt",
+          "checkpoint_sha256": "0a7a61bb59136a39847d44b504ead49456c937f836d29edc8033e46aa9995484"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 15,
+          "maximum_temporal_weight_expansion_error": 6.182349429617595e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_1/ema0p95/model.pt",
+          "checkpoint_sha256": "da7af49fc380bac87d86b62b411bbd69ca085bc8b0492d1f85270b235c13a6e4"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_1",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_projection_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "1a5f4e096f1d167cf4b19e556133884d8eccf4f4afaa1d442c1e352b88de7c7d"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_2/raw/model.pt",
+      "checkpoint_sha256": "ca1c9ab37cc038e8916fc5f262b173c69c7b16ea8cc78fbcf8818b4901fabced",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 27,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_2/raw/model.pt",
+          "checkpoint_sha256": "ca1c9ab37cc038e8916fc5f262b173c69c7b16ea8cc78fbcf8818b4901fabced"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 42,
+          "maximum_temporal_weight_expansion_error": 3.405855150684367e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_2/ema0p8/model.pt",
+          "checkpoint_sha256": "73191223e73f099a9b368c790189a26c98aa16484b06d1e0bc7a1b78c22bf5d5"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 42,
+          "maximum_temporal_weight_expansion_error": 6.564275759068927e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_2/ema0p95/model.pt",
+          "checkpoint_sha256": "192ac644f01961cb5650af8392a3546a96056bb24c93ba897bdc97d939171a20"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_2",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_projection_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "a3b0571678b117568db8c03c1c86d0a74df6659ef8a2613110e0e18945145617"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "56905fefb99d1a85d6291732c6a7d1916eb7e05224ebf33813b30067bff0416b",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.7881393432617188e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "05f8a5445ff47343d6eaf81b829af24db4ae4bc185a72c38cb665ee54f89e3c0"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "24b2ce22f0340e336cbabc635c3debf8d7aa5733e6c1762bf7c14011840c729b",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.4007091522216797e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "e57526e56c74d788e219d4ca95d0e65d05a12ba36bb78dae61a9ab186abde08a"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "8aeeac5d2fd9569be98fc460ac88516e3ddff4b33e0b84c0fd73928221cba133",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "0cd6290e6362b8453b947ec0ff37bf38aa03ab6231aaf11056b1a116294f9087"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "269dbe2c5f634774e7115ebcace503a158fea7a274cf0b3434d85a2c3df8062e",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.9073486328125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "687eec03de0657a48f1632206099e40fd4d120891871e6a94125762614b50000"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "5d2ab9e67d20cd179a7ba342861fd8d4b311e7e0f235ff08acbfbcd00c18745d",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.4901161193847656e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "25cfb712d60c4c1c6d223407043606bbd1cf476435f36b0d5fdc1752855a2491"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "b69b70ab1ba2d7c220c2ebf5bca1b21c74d25971255391ae677f0985eeab3c98",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "d9e481b5ded3b50ff1d0a8cbd88d459de0bffa7b56e3cf98e80c6b29a48f2995"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "97f4ec60b0d3df83392a7b5ac097140b90194839a645b9d03b48ad4db90bea38"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "da7d81a5baac5160c7a210e7adc0a29a11a3bdca095cfd0f5961b186da7a74c4"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "b87a3b0c05bdfade926c23580392d26fc5557922e858828d608d75c16e1572e5"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_0/raw/model.pt",
+      "checkpoint_sha256": "8dc539dae85bca39ea0e393cce90d87502947acf02afe2ea722857d1f54487f7",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 13,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_0/raw/model.pt",
+          "checkpoint_sha256": "8dc539dae85bca39ea0e393cce90d87502947acf02afe2ea722857d1f54487f7"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 12,
+          "maximum_temporal_weight_expansion_error": 2.7338218688832683e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_0/ema0p8/model.pt",
+          "checkpoint_sha256": "3f410f745ab2de51bf94da60b42987ea506731c04d1ed0f2a476b674fa443391"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 23,
+          "maximum_temporal_weight_expansion_error": 6.691983878148733e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_0/ema0p95/model.pt",
+          "checkpoint_sha256": "fbf0203cc6515633ef3652e87dbc4a037175a198fade6ea8797362c9874f4a68"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_0",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 8.847564458847046e-09,
+        "maximum_independent_projection_error": 1.1622905731201172e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "84780d8bb6f6eb94f90e6eb53ef54279661978b790bf302f5d7c0eea26430655"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_1/raw/model.pt",
+      "checkpoint_sha256": "a83d312ef3e4d5d74ff0d193bcb6f7083623b9d203d5ad4f8610197792ed445d",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 8,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_1/raw/model.pt",
+          "checkpoint_sha256": "a83d312ef3e4d5d74ff0d193bcb6f7083623b9d203d5ad4f8610197792ed445d"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 6,
+          "maximum_temporal_weight_expansion_error": 1.1920928966180355e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_1/ema0p8/model.pt",
+          "checkpoint_sha256": "2229932363790808678c6eaf76a48a8ab18ceb8991e5ebdc1ec0ecc21e543961"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 10,
+          "maximum_temporal_weight_expansion_error": 3.112877716704432e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_1/ema0p95/model.pt",
+          "checkpoint_sha256": "1a4343ea46887c68557f4babf8444ca9be7ba8bf3a862134acef7edb7b88d10f"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_1",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_projection_error": 1.1324882507324219e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "1a3550b0855ec64f4d4ca622a0dccb02d4da2a3b3574cafc49b30269248bec94"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_2/raw/model.pt",
+      "checkpoint_sha256": "17536b51cac1cea018129b96fa3c52eddec89e7c488c9b2a671b672848880602",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 12,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_2/raw/model.pt",
+          "checkpoint_sha256": "17536b51cac1cea018129b96fa3c52eddec89e7c488c9b2a671b672848880602"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 12,
+          "maximum_temporal_weight_expansion_error": 3.1668090816339145e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_2/ema0p8/model.pt",
+          "checkpoint_sha256": "f3bbbe3fe28fd82c30983fd64e12a25419fe2350d3b15f85d3c62e9849b03f92"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 17,
+          "maximum_temporal_weight_expansion_error": 5.514646160553749e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_2/ema0p95/model.pt",
+          "checkpoint_sha256": "aa2295cf4e4cf9eb3e5264704b8998d689254d7edf59be813e32518c0f1ab2d0"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_2",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_projection_error": 1.1324882507324219e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "e9507b0918e8ab682ffe7d8b7f489d1688eca6565ed5fea9b6fafeb79d861cd8"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "c5618f5995c7863e8f3dcf433b372ac1b699aef95f2381dd004e256431aa9843",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "de7fd9b29b404819dfd187275992d70ad969317f193c403cc50863816468872c"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "ae80ffaf6dd37f69dc6daaf6b3044aefa3d4c33a633a3ec5f41f6f7c4a3e3294",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6242265701293945e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "09ec79a57331822176fcd25ffee6c5630d8aeed72825b6dbd3fdaa7ce5b7f1f6"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "ec715c4b115f9bd9ee7038cded6392fe8a60e05bee9dc00477276518cb57e205",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 2.1457672119140625e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "83590c74b1c38b1268cf6fb85790c54d106cfdf905a25c0252d3ce7d4d72f3b0"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "e0a11ba3b3a4be6e67421894f15570090a4075ba25b5673ca7a5c003b68a3f70",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.9073486328125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "553dcecb740cda19e16eb7fb578c39eb03276bd0f3ad1ab3a27be3f252167dd2"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "0a6669315e82e0044195d6094e518b471a039e3c81820f5fdafa95655fd7df74",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.6987323760986328e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "7417d3f267303a2e663f3004864545b3846083088cf4488961c0b170fbb0e803"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "b259abd1e8f2b792979db1380814498482a77d759dd59acb5696eddf448255b0",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 2.1457672119140625e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "7e0746d82580f4ba14a355ba5104abd5b3493c1b2bf1dafac87f4374c7187ab4"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "916886916c0f56b1e603e5d2bca6020781f6f0ecbf1c732d8435919cfd36e91e"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "3b21292b719ded023aec63745fb33cb17b1ba56687939b13a85725fbba137072"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/reference/repeat_20281011/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "3e302d2a6c0c3c0c4d09e658f4cbd81c336055bc4e00fafc94c9f721c528c4ae"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_0/raw/model.pt",
+      "checkpoint_sha256": "d672a904bc8ec404f4e7b46cd25fedacafedb6e8640fc2b21ebfe6e2479efd3f",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 7,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_0/raw/model.pt",
+          "checkpoint_sha256": "d672a904bc8ec404f4e7b46cd25fedacafedb6e8640fc2b21ebfe6e2479efd3f"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 11,
+          "maximum_temporal_weight_expansion_error": 2.512550353883647e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_0/ema0p8/model.pt",
+          "checkpoint_sha256": "c46e0208eb27f7dccfd292da6d4a86530f24c98712d7ac1a7eeb7c25ccc6ed43"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 25,
+          "maximum_temporal_weight_expansion_error": 6.574426847372195e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_0/ema0p95/model.pt",
+          "checkpoint_sha256": "da5ca1855b6b309756d59c44730f8ce52fbc7af14748f78a5313ba72f6287abe"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_0",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_projection_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "077fe1c376d5995755b2fd606c03cb665bdaa4764482b90ed5f024bbb5bb9102"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_1/raw/model.pt",
+      "checkpoint_sha256": "825393cc47590e6a1acf22c73cd5fc1fade6acf468356ef3b302ce6d506f8222",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 40,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_1/raw/model.pt",
+          "checkpoint_sha256": "825393cc47590e6a1acf22c73cd5fc1fade6acf468356ef3b302ce6d506f8222"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 34,
+          "maximum_temporal_weight_expansion_error": 3.6958583277124646e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_1/ema0p8/model.pt",
+          "checkpoint_sha256": "bf93a269c060e45833f873549ffbbb4d69b86578d5a44f740a22479107b30c51"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 57,
+          "maximum_temporal_weight_expansion_error": 8.99583133540105e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_1/ema0p95/model.pt",
+          "checkpoint_sha256": "e202669aa051c9133ae040523d660d1fce178c17cf3f520065b53ecb824762c8"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_1",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 7.450580596923828e-09,
+        "maximum_independent_projection_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "b0e02096830f9157d8bb40c77794243e7afaca790606ce62b56569e223f5e968"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_2/raw/model.pt",
+      "checkpoint_sha256": "d2dfac7f57eb118cd7e19eaa465efbb30ab3e476decf68b9aafcf1225e88d37d",
+      "temporal_states": [
+        {
+          "arm": "raw",
+          "selected_epoch": 6,
+          "maximum_temporal_weight_expansion_error": 0.0,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_2/raw/model.pt",
+          "checkpoint_sha256": "d2dfac7f57eb118cd7e19eaa465efbb30ab3e476decf68b9aafcf1225e88d37d"
+        },
+        {
+          "arm": "ema0p8",
+          "selected_epoch": 21,
+          "maximum_temporal_weight_expansion_error": 3.7996858076594364e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_2/ema0p8/model.pt",
+          "checkpoint_sha256": "46f204f7fdba6a8beff6604bdba81ef297a91198f55ce461a8e7f480b78f2c03"
+        },
+        {
+          "arm": "ema0p95",
+          "selected_epoch": 21,
+          "maximum_temporal_weight_expansion_error": 6.327589013865875e-08,
+          "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_2/ema0p95/model.pt",
+          "checkpoint_sha256": "6543eb4f1aced37def493df1cf9a155f6b4f6a26969631d20ecf3339be50e352"
+        }
+      ],
+      "trajectory_folder": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_2",
+      "witness": {
+        "batch_size": 256,
+        "full_objective_and_all_parameter_gradients_restored": true,
+        "maximum_parameter_gradient_error": 9.313225746154785e-09,
+        "maximum_independent_projection_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/subspace/repeat_20281011/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "dac961d6cdf01dc4b9f4e8be4197daf61e5ee44f73c42599e5b9d0061d3ec3ef"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "0be71a5b178db7f9159653667706f0e0af14e65868354ddd7dedda3240e038be",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 2.5779008865356445e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "fc7de6fc1bd56537010a27b70610ccb1d9d05a266a50257d62a604d61e8549d3"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "fc12a0f1e49282edf6c6e24b4835d1fa5600468af49748e581bd126c76608491",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 2.5779008865356445e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "2ca5ac9786a5709d2736f7e362633b3fa8c1cc4e85cd5527373b78b7b3d54461"
+    },
+    {
+      "arm": "large",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "64dcca28cf247952cc78d9e6d4a55c1dafe094ec73eadcc49009334c91cccca3",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/large/repeat_20281011/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "38c93c1084d09c4b67e4b92a6a3b2fd8bde55f9300f8451bc23963592cbf7c2d"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "4e79a681176b53bb916dbcdc6a6879a2587ed2054a5c089edb06263f955ee390",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 2.7194619178771973e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "4a4097be28198495588fdf718c915a02cac7e0ba5b0dd9ab70adc27daea2e3e8"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "1b51f692f0977cec15e8fb317f64952a1e5cab68922dbd6faa811f06cd7287d9",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 2.7194619178771973e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "c5b4af43d876ec190dba6cdefddba2b9aa4a9d2684c377d53d8d747d01f399af"
+    },
+    {
+      "arm": "dropout",
+      "repeat": 20281011,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "4d59d1ce9e326c35458401e671ca4f9b199362a18bd09eb1a9f246b5dc562ca6",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "mask_rng_and_all_stream_shared_masks_restored": true,
+        "maximum_projection_and_mask_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/temporal_backbone_confirmation/sources/dropout/repeat_20281011/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "919cd51f001aa127d42396afdaaff86b24c6078ffbc388812e2dddc5c501881d"
+    }
+  ],
+  "checks": [
+    "All six unused patient plans and all eighteen geometry files (twelve separate and six combined spaces) frozen before72 new fits",
+    "All fit-only statistics, disease maps, selected epochs, normal buffers, stop/outer probabilities independently checked",
+    "All18normalBtrajectory complete tasks/allgradients,18normalL and18dropout actualCUDA fulltasks independently replayed; all54temporal states reconstructed from actualsourcevectors",
+    "All18Gaussian patientmoments independently rebuilt; allnine ensembles and four comparisons restored;72actual optimizer trajectories produce90used and108saved source states, never108fits",
+    "M7 and temporal/backbone fivebranchcandidate arithmetic independently expanded in float64; same patient grouping retained jointly across repeats"
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "arm": "fine7_unmasked",
+      "region_tokens": 49,
+      "full_task_batch": 256,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.95043836426612e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        }
+      }
+    },
+    {
+      "arm": "fine7_masked",
+      "region_tokens": 49,
+      "full_task_batch": 256,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.488837689389015e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        }
+      }
+    },
+    {
+      "arm": "fine7_weighted_masked",
+      "region_tokens": 49,
+      "full_task_batch": 256,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.429744209806131e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        }
+      }
+    },
+    {
+      "arm": "coarse3_weighted_masked",
+      "region_tokens": 9,
+      "full_task_batch": 256,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.527681978811927e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        }
+      }
+    }
+  ],
+  "code_sha256": {
+    "fine_normal_reference.py": "2c0aa647098923f7d0ffcff3d4085e1f438f85cefe6c778536301014d70d036e",
+    "verify_fine_normal_reference.py": "a588432188dd258f19b2f6e91d74d43c2b42a8be22a65b05162f6afe4933507c"
+  },
+  "checks": [
+    "Existing verified3/7grid sourcebank identity; all original global/mid/dispersion arrays preserved exactly",
+    "Fit-normal patient PCA uses image means over valid regions only; independent patient loops/Gram spectra recover every space",
+    "Normal image duplication and invalid-token changes leave geometry unchanged; masked predictions ignore invalid regions",
+    "Original complete parameter/RNG identity,zero-strengthplainMLPidentity and independent NumPy projections verified",
+    "Four real256-image complete task gradient/update and strict recovery checks"
+  ]
+}

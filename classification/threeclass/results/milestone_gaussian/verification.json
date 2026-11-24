@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "source_models": [
+    {
+      "seed": 0,
+      "source_model_sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+      "geometry_sha256": "8a943227cd6c814b81da6b4e95ed8af17b3c1cdc0ca182196590ddada612dde6",
+      "geometry_independently_rebuilt": true
+    },
+    {
+      "seed": 1,
+      "source_model_sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+      "geometry_sha256": "ba75f13ca268a218507cc1a16c10a772a974c1d2014cd357b3bdcbf4bc1cc5ca",
+      "geometry_independently_rebuilt": true
+    },
+    {
+      "seed": 2,
+      "source_model_sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+      "geometry_sha256": "51b79aacbfa8eae268606aac15e0a956193c999f48ad78933a71fc07c4f24c84",
+      "geometry_independently_rebuilt": true
+    }
+  ],
+  "frozen_selection_sha256": "609361344f9b49a14d8eaec87b6a98086c7bd60a0aa7898a56bb05139fb88ec5",
+  "source_predictions_sha256": {
+    "val": "51a2dc6a18d850283fd1641bf669e44d61a11897b44c2a64803c981ef9957c84",
+    "test_independent": "cf41895daa760f470a2bcfa4bb10d6c87d668707ca67be4bbcaa99f955a84983",
+    "test_ningbo": "1e349b8603c2edfc92620bc281410cabea4d230f107706de967ab78512716c2b"
+  },
+  "checks": [
+    "Frozen source hashes equal the protected milestone5 heads",
+    "All frozen geometry independently rebuilt from full original-training patient moments",
+    "All feature normalization fits original training images only",
+    "Full validation metrics reproduce the pre-confirmation candidate exactly",
+    "All saved held-out probabilities finite and reproduce reported scores",
+    "Every validation and held-out prediction independently reproduced from frozen weights on CPU",
+    "Original reference probabilities match published milestone5 row identities",
+    "Patient and eye aggregation excludes and counts mixed-label groups explicitly"
+  ],
+  "external_policy": "No hyperparameter or selected candidate was changed after held-out scoring."
+}

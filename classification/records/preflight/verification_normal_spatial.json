@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "conditioned": false,
+      "strength": 0.5,
+      "batch_size": 256,
+      "maximum_independent_region_error": 1.430511474609375e-06
+    },
+    {
+      "conditioned": false,
+      "strength": 1.0,
+      "batch_size": 256,
+      "maximum_independent_region_error": 1.430511474609375e-06
+    },
+    {
+      "conditioned": true,
+      "strength": 0.5,
+      "batch_size": 256,
+      "maximum_independent_region_error": 1.5497207641601562e-06
+    },
+    {
+      "conditioned": true,
+      "strength": 1.0,
+      "batch_size": 256,
+      "maximum_independent_region_error": 1.430511474609375e-06
+    }
+  ],
+  "normal_spatial_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 5.585237827787637e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.7959215427061395e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.6878988186070956e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 5.265183178337907e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 6.2611587026140114e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.917584707162746e-08
+    },
+    "spatial": {
+      "normal_patients": 111,
+      "ridge": 1.0,
+      "context_rank": 8,
+      "maximum_independent_coefficient_error": 7.440638188915827e-09
+    }
+  },
+  "cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "spatial_input_restored": true,
+    "maximum_input_error": 1.1920928955078125e-06
+  },
+  "code_sha256": {
+    "normal_spatial_reference.py": "0bd92cf9b9ea76a7f4ef33cdf1068781c4ace2d9b05bce5310d3bb6777c9ca3a",
+    "audit_normal_spatial.py": "4ba58af5ce863edf8e2b785cafc3a4f0e7db27f2c483bb98601981a80e69dc3d",
+    "verify_normal_spatial.py": "e50330d903c453f96cb34c4a136cb23eae6b96ec68ba4b164eca919cef7629f7"
+  },
+  "checks": [
+    "Normalpatientmeans andridgeindependentlyrecovered byexplicitloopsandaugmentedleast-squares; zero spatialmeanperchannelverified",
+    "Four256imagefulltask/allparametergradientsagainstindependentNumPytransformplusplainMLP;updatesandstrictrestoresverified",
+    "Originalparameters,initialization,RNGunchanged;zerospatialstrengthoriginalnormalMLPidentity",
+    "Allfixednormal/spatialbuffersunchangedduringoptimizerstep;actualCUDAfirsttrainingtransformedinput/fulltaskwitnessindependentlyrestored"
+  ]
+}

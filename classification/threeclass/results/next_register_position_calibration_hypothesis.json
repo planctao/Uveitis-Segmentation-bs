@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-24T12:31:24.169835+00:00",
+  "family": "register_position_calibration",
+  "status": "running",
+  "scores_evaluated": 0,
+  "hypothesis": "Existing trainingonly diagnostics show finalregister within-image variance0.8108 but between-image tokenmean variance0.0522 after normalPCA; four pretrained register positions have different learned identities. Shared across-token normalization may preserve a large position-dependent nuisance mean. Test patient-balanced position calibration after the exact original normalprojection while keeping learnedTokenQueryResidual fixed. This is standard moment calibration applied to fixed registerpositions, no originality or clinicalcausality claim. Designed before reading current depth outcomes or launching multiquery classifiers.",
+  "architecture_plan": "OriginalnormalL and originalfinalregister own fitnormalPCA32projection unchanged. Arm0 sharedcontrol uses originalprojectedtokens exactly. Arm1 normalpositioncenter: subtract normalpatient positionmean minus normalpatient pooledmean. Arm2 normalpositionstandardize: (tokens-normalpatient positionmean)/max(normalpatientpositionstd,.05)+normalpatientpooledmean. Arm3 allfitpatientpositionstandardize: sameformula using allfitpatients. Clamp newcalibratedtokens(-10,10). Means and secondmoments average perpatient before averagingpatients. Allarms reuse unchanged hiddenquery/key/value32/zeroReadout256 times.1 residual, identicallearnedparameters; newpositionbuffers fitted withinfitpatients only.",
+  "configuration_plan": [
+    {
+      "name": "shared_control",
+      "kind": "none"
+    },
+    {
+      "name": "normal_position_mean",
+      "kind": "normal_mean"
+    },
+    {
+      "name": "normal_position_standardize",
+      "kind": "normal_standardize"
+    },
+    {
+      "name": "all_patient_position_standardize",
+      "kind": "all_standardize"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standalone and fixed .1875rawB+.5625normalB+.25newL. No weightsearch.",
+  "geometry_plan": "All4patientplans/originalL/finalregisternormalspaces and positionmomentbuffers frozen before48fits. Originalsharedcontrolmust exactlyreproduce M8learnedhead outputs and task/init/RNG. Independentlyrecover moments with perpatient centeredsecondpass.",
+  "launch_condition": "Designonly until registermultiquery all48audit and any required freshpatientconfirmation/package/promotion decision terminal; complete-task/allgrad/CUDApreflight and thencurrentreferencegates frozen beforeclassification.",
+  "selection": "OriginalCV strictlyhigher and validation>=thencurrentreference. FreezehighestqualifyingoriginalCV before two unusedpatient3foldrepeatsets; highermeansixfoldF1 and pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian. No automaticexternaltesting.",
+  "external_test_evaluated": false,
+  "motivation_artifact": "results/large_token_diversity_diagnostics.json",
+  "model_preflight": "verification_register_position_calibration.json",
+  "engineering_preflight_refinement": "Before any classificationfit/score, strict intermediatecomparison found calibratedside rounding error1.43e-5 because scale>=.05 can amplify projectionroundoff20x. Recorded sideintermediatetolerance.00014 for standardizationonly; loss/allgradient/probabilitytolerances unchanged. Originalzero residual basegradients checked atol1e-7/rtol1e-5 (observedmax4.04e-8); initialparameters/task/RNG exact. Finalfourcases andallCUDAwitnessespassed.",
+  "protocol": "runs/register_position_calibration/protocol.json",
+  "protocol_sha256": "99dc056b4ad451d41a3dbc99f2766024a73acd45e72c245e32fccb85c2df54c1",
+  "pid": 30177,
+  "retained_reference": "M8"
+}

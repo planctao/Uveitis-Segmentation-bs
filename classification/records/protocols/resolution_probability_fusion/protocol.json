@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-11-23T20:23:43.054402+00:00",
+  "hypothesis": "High-resolution feature concatenation may overfit while independently normalized specialist probabilities retain complementary evidence. Test fixed convex probability experts with no learned gate or extra fit.",
+  "reference": "results/milestone5/selection_before_test.json",
+  "donor_features": [
+    "vitb_raw768",
+    "vitb_up768",
+    "multiscale_raw768",
+    "multiscale_up768"
+  ],
+  "donor_weights": [
+    0.1,
+    0.25,
+    0.5
+  ],
+  "predeclared_comparisons": "Each raw view uses the identical donor weight as its upsampled control. Preserve every combination, including negative results.",
+  "metric_selection": "All 12 fixed combinations use original development validation and independently stopped original patient CV. Passing candidates require improved CV and nondecreasing validation Macro-F1, then new repeated-patient confirmation before external testing.",
+  "source_predictions": "Only development validation and original-training outer patient predictions. No external predictions or metrics loaded.",
+  "training_note": "No new backbone or head fits; each mixture reuses two separately trained three-seed predictor ensembles. These are composite inference candidates, not new training runs."
+}

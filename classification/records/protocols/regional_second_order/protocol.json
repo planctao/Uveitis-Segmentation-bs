@@ -1,0 +1,130 @@
+{
+  "created_at_utc": "2026-11-23T21:30:39.350103+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "hypothesis": "First-order attention pools may discard cross-channel regional co-occurrence. A low-rank second-order residual can supply spatially pooled covariance patterns while preserving the existing global and disease head.",
+  "configuration_plan": [
+    {
+      "name": "diagonal_rank16_aux0.0",
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "diagonal",
+        "covariance_rank": 16,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      }
+    },
+    {
+      "name": "full_rank16_aux0.0",
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "full",
+        "covariance_rank": 16,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      }
+    },
+    {
+      "name": "full_rank32_aux0.0",
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "full",
+        "covariance_rank": 32,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      }
+    },
+    {
+      "name": "full_rank16_aux0.2",
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "full",
+        "covariance_rank": 16,
+        "covariance_aux": 0.2,
+        "covariance_dropout": 0.2
+      }
+    },
+    {
+      "name": "uncentered_rank16_aux0.0",
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "uncentered",
+        "covariance_rank": 16,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      }
+    }
+  ],
+  "controls": "Same frozen DINO320+448 features, ordinary attention, training configuration and all losses as milestone5. Compare diagonal variance versus full covariance, rank16 versus32, extra local disease auxiliary versus none, and covariance versus uncentered second moment.",
+  "architecture": "Project the9aligned regional features, compute masked second moments, use signed-root and L2 normalization, then a zero-initialized disease residual readout with an image-dependent scalar gate initializedsigmoid(-2). Every base parameter initializes identically to the ordinary head.",
+  "initialization_policy": "Additional parameters constructed only after every existing base module; zero readout guarantees exactly unchanged initial predictions.",
+  "new_seed_fits": 60,
+  "seeds_per_arm": 3,
+  "outer_cv": "Every arm receives original3patient folds with separate inner stopping patients and3seeds per fold. All normalization and disease mappings fit inner patients only.",
+  "development_gate": "Require improved original CV and nondecreasing validation macro-F1 versus milestone5; passing models still need newly fixed repeated-patient confirmation.",
+  "external_test_policy": "No external predictions, labels, metrics or images used in this study."
+}

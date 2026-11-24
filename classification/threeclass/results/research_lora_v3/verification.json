@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "algorithm_version": 3,
+  "checked_seed_fits": 12,
+  "fits": [
+    {
+      "group": "00_rank0_blocks0",
+      "seed": 0
+    },
+    {
+      "group": "00_rank0_blocks0",
+      "seed": 1
+    },
+    {
+      "group": "00_rank0_blocks0",
+      "seed": 2
+    },
+    {
+      "group": "01_rank4_blocks2",
+      "seed": 0
+    },
+    {
+      "group": "01_rank4_blocks2",
+      "seed": 1
+    },
+    {
+      "group": "01_rank4_blocks2",
+      "seed": 2
+    },
+    {
+      "group": "02_rank8_blocks4",
+      "seed": 0
+    },
+    {
+      "group": "02_rank8_blocks4",
+      "seed": 1
+    },
+    {
+      "group": "02_rank8_blocks4",
+      "seed": 2
+    },
+    {
+      "group": "03_rank8_blocks4",
+      "seed": 0
+    },
+    {
+      "group": "03_rank8_blocks4",
+      "seed": 1
+    },
+    {
+      "group": "03_rank8_blocks4",
+      "seed": 2
+    }
+  ],
+  "checks": [
+    "All actual optimizer successes and AMP skips reconstruct every epoch update count",
+    "Schedulers advance exactly once per successful optimizer update",
+    "Saved heads and adapters finite, adapter parameter counts correct",
+    "Original checkpoint hashes, fit/stop patient groups and train-only feature statistics match",
+    "Saved per-seed and ensemble probabilities reconstruct reported validation metrics",
+    "Saved actual initial adapters match independently verified seed hashes"
+  ]
+}

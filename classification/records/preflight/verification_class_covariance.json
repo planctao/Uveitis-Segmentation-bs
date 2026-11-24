@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": [
+    "Zero class covariance weight recovers existing shared-covariance probabilities",
+    "Predictions equal independent scipy class log densities including the log determinant",
+    "All class covariance matrices positive definite, even for zero embeddings",
+    "Whole-patient image replication and image permutation preserve predictions",
+    "Translations, rotations and overall scaling preserve predictions",
+    "Degenerate equal-class geometry has finite uniform fallback"
+  ]
+}

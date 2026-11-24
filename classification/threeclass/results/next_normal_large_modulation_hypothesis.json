@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-11-24T10:39:11.611327+00:00",
+  "family": "normal_large_modulation",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "NormalL supplies complementary evidence to normalB, whereas L-only additive residuals, crossattention and alignedregionalproduct branches have not displaced M7. Test imagewise normalL-conditioned modulation of normalB hiddenchannels against sameparameter additivecontrol. Unlike earlier normalcoordinateFiLM, context is the separately normalprojected L backbone, not deleted B coordinates. ExistingFiLM principle; no methodoriginality or guaranteedbenefit claim.",
+  "evidence": [
+    "results/research_normal_large_blend/comparison.json",
+    "results/research_normal_large_residual/comparison.json",
+    "results/research_normal_large_cross_attention/comparison.json",
+    "results/research_normal_large_interaction/comparison.json"
+  ],
+  "architecture": "NormalB1536 attentionMLP with original normalPCA32. Separate normalL2048 PCA32 features global/meanregions/mid/dispersion concatenated8192, LayerNorm->Linear rank16/32->GELU->zeroLinear512. Split scale/shift; film delta=.1*(tanh(scale)*fixedLayerNorm(Bhidden)+tanh(shift)), addcontrol=.1*(tanh(scale)+tanh(shift))/sqrt2. Exactidentity atinit; samelearnedparametercounts, originalB initialization/RNG/task unchanged.",
+  "configuration_plan": [
+    {
+      "name": "add_rank16",
+      "kind": "add",
+      "rank": 16
+    },
+    {
+      "name": "film_rank16",
+      "kind": "film",
+      "rank": 16
+    },
+    {
+      "name": "add_rank32",
+      "kind": "add",
+      "rank": 32
+    },
+    {
+      "name": "film_rank32",
+      "kind": "film",
+      "rank": 32
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachbranch and fixed .75branch+.25rawB; no tuning or extra fits.",
+  "launch_condition": "Only after temporal_backbone_confirmation fullycompletes. If itpasses, firstfinish frozeninferencepackage and updatecurrentreference, thenfreeze then-current gates. If itfails, retainM7. No scoring beforepreflight/freeze.",
+  "selection": "OriginalCV strictlyhigher and validation>=then-currentretainedreference, freezehighestqualifyingCV beforetwounusedpatient3foldrepeats against EACH retainedreference/M7/M6/M5/fixedGaussian asapplicable. HighermeanF1 and pairedpatient95%lowerendpoint>0. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_large_modulation/protocol.json",
+  "protocol_sha256": "f5c2af5edc8485e55d0c13ba6dfe9ddbc9a8aea2575e24e888d3b493d945df5b",
+  "pid": 15817,
+  "retained_reference": "M7",
+  "passing_development_gates": 0,
+  "comparison": "results/research_normal_large_modulation/comparison.json"
+}

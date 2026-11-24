@@ -1,0 +1,49 @@
+{
+  "created_at_utc": "2026-11-24T11:50:24.786216+00:00",
+  "family": "large_token_cross_attention",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "Separate stream pooling compresses each token bag before their interaction; token-to-token correspondences are lost. Test bidirectional crossdepth attention between nine intermediate spatial tokens and four pretrained register tokens before hidden-query pooling. Independent selfattention in each stream is the equalparameter control. Architecture motivated by featuredefinitions and training-only diversitydiagnostics, without reading boundedinteraction classification predictions or scores; no methodological originality claim.",
+  "evidence": [
+    "results/large_token_diversity_diagnostics.json",
+    "results/next_large_token_interaction_hypothesis.json"
+  ],
+  "design_classification_predictions_or_scores_read": false,
+  "architecture_plan": "Keep original normalL2048 attentionMLP/fulltask/init/RNG. Each mid9/register4 stream independently normalized and normalpatientPCA32suppressed; own LayerNorm2048 and linear Q/K rank16/32 plus GELU(linearV) rank16/32. Cross arm: midQ attends registerK/V and registerQ attends midK/V; control eachQ attends its ownK/V. Refinedstream value tanh((ownV+attendedV)/sqrt2). Common originalhidden LayerNorm256->queryrank separately softmaxpools eachstream using ownQ as poolingkeys; concatenate both rankvectors, zeroLinear2rank->256 times.1 residual into originalpre-dropouthidden. All Q/K/V active in botharms, equalparametercounts withinrank; report different cross/self tokenpair counts.",
+  "configuration_plan": [
+    {
+      "name": "self_rank16",
+      "kind": "self",
+      "rank": 16
+    },
+    {
+      "name": "cross_rank16",
+      "kind": "cross",
+      "rank": 16
+    },
+    {
+      "name": "self_rank32",
+      "kind": "self",
+      "rank": 32
+    },
+    {
+      "name": "cross_rank32",
+      "kind": "cross",
+      "rank": 32
+    }
+  ],
+  "geometry_plan": "Use exactly previous originalL/mid/register fittingpatient spaces; independently reconstruct/freeze four L plus eight side spaces and allplans before anyfit. No externaldata.",
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standalone jointL and fixed .1875rawB+.5625normalB+.25jointL. Freeze rawB/normalB sources before fits; preserve original formula even if retainedreference advances.",
+  "launch_condition": "Only after large_token_interaction full48actualtask audit and any selectedcandidate unusedpatientconfirmation/package/promotion decision fullyterminal. Complete actual256image fulltask/allgradient and CUDApreflight before freezing then-current reference gates.",
+  "selection": "Strictlyhigher originalCV and validation>=then-currentretainedreference; freezehighestqualifyingCV before two unusedpatient3foldrepeats against EACH currentreference and all retained references/M8/M7/M6/M5/fixedGaussian asapplicable; highermeanF1 and pairedpatient95%lower>0 versus EACH. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "preflight": "verification_large_token_cross_attention.json",
+  "protocol": "runs/large_token_cross_attention/protocol.json",
+  "protocol_sha256": "d063c8032f2c106105f45afc9a500351c0ef157df2c12bb7d523da88a6185b06",
+  "pid": 23626,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_large_token_cross_attention/comparison.json"
+}

@@ -1,0 +1,46 @@
+{
+  "created_at_utc": "2026-11-24T12:07:22.648733+00:00",
+  "family": "register_depth",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "M8 retains finalregister evidence; current two-stream studies examine spatial/register interaction. An untested axis is the trajectory of the same pretrained register positions across backbone depth. Test whether layer-to-layer changes supply complementary semantic evidence beyond final or middle registers and raw depth pooling. Design uses original feature definitions and frozen M8 architecture, without reading current cross/self attention classification predictions/scores or confirmation outcomes. Existing multidepth pooling/finite differences, no methodological originality claim.",
+  "feature_plan": "Same frozen DINOv3-L/16, 320/448 transforms and2091developmentcaches only. Save fourregisterpositions1:5 from raw block7 output, raw block15 output, finalnormalized output as early/mid4x2048 float32 and final4x2048 float16streams. Verify allhistorical CLS/regions/block15mean/patchstd plusfinalregisters on everyfreshforward; preserve exact historicalfinalregisterbytes after numericalagreement. Freeze allimage/source/code hashes before extraction; 6realimage preflight,262shards and6additionalindependentforwards.",
+  "architecture_plan": "Keep originalnormalL2048 attentionMLP/fulltask/init/RNG. Normalize eachdepth independently and remove own fit-normalpatientPCA32, clamp asoriginal. Construct12tokens: finalcontrol repeatfinal4three times; middlecontrol repeatmid4three times; rawdepth concatenate early4/mid4/final4; differences concatenate early4,(mid-early)/sqrt2,(final-mid)/sqrt2 then clamp(-10,10). Shared LayerNorm2048->key32/value32GELU, originalhidden LayerNorm256->query32, attentionpool and zeroLinear32->256*.1 residual. Four identicalparameter/token-count arms. Controls must match single-streamattention when repeatingidenticaltokens. No newtokenpositional parameters.",
+  "configuration_plan": [
+    {
+      "name": "final_control",
+      "kind": "final"
+    },
+    {
+      "name": "middle_control",
+      "kind": "middle"
+    },
+    {
+      "name": "raw_depth",
+      "kind": "raw"
+    },
+    {
+      "name": "depth_differences",
+      "kind": "difference"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "geometry_plan": "FouroriginalL plus12depthnormalpatientspaces/allpatientplans frozen before48heads; compare finalspace exactly to M8source beforefits. Only fitpatients determine statistics/PCA.",
+  "fixed_fusions": "Eachstandalone newL and fixed .1875rawB+.5625normalB+.25newL,24Bsourceheads frozenbeforefits; preservefixedformula ifreferenceadvances.",
+  "launch_condition": "Featurepreparation may proceed without classification while cross/self attention completes. No classifierfits/scores until currentstudy all48complete-task audit and any selectedcandidate freshpatientconfirmation/package/promotion decision terminal, plus depthmodel complete-task/CUDApreflight and then-currentgates frozen.",
+  "selection": "Strictlyhigher originalCV and validation>=then-currentretainedreference. FreezehighestqualifyingoriginalCV before two unusedpatient3foldrepeats against EACH currentreference/M8/M7/M6/M5/fixedGaussian asapplicable; highermeanF1 and pairedpatient95%lower>0. No automaticexternaltesting.",
+  "external_test_evaluated": false,
+  "feature_precision_refinement": "Initial realimage preflight found rawearly/midregister values exceed float16range. Preserve rawdepthvalues in float32; finalnormalizedcontrol remains exact historicalfloat16. Refinement before extraction/classification, no labelscores used.",
+  "feature_protocol": "runs/register_depth_features/protocol.json",
+  "feature_protocol_sha256": "377ee52f0c942778ea9309098e03d7699e4975cb2257ea0bb6f9d908aaa2f3dd",
+  "feature_extraction_pid": 24504,
+  "feature_bank": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/register_depth_features/features/dinov3_register_depth_development.npz",
+  "feature_bank_verification": "verification_register_depth_bank.json",
+  "protocol": "runs/register_depth/protocol.json",
+  "protocol_sha256": "6d5efb93d09d9da0372106454760fd022d1d67c7998559cfd1f07b856dba86c3",
+  "pid": 27272,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_depth/comparison.json"
+}

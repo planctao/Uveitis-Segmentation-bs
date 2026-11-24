@@ -1,0 +1,38 @@
+{
+  "created_at_utc": "2026-11-23T22:24:44.128342+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Current regional attention scores each region independently before pooling. Small lesions may be defined by contrast to spatial neighbors. Add zero-initialized local residual message passing on the2Dregiongrid before existing attention without changing common M5initialization.",
+  "configuration_plan": [
+    {
+      "name": "grid3_one_step",
+      "feature": "multiscale_vit",
+      "grid": 3,
+      "steps": 1
+    },
+    {
+      "name": "grid3_two_steps",
+      "feature": "multiscale_vit",
+      "grid": 3,
+      "steps": 2
+    },
+    {
+      "name": "grid7_one_step",
+      "feature": "foreground_fine7_unmasked",
+      "grid": 7,
+      "steps": 1
+    },
+    {
+      "name": "grid7_two_steps",
+      "feature": "foreground_fine7_unmasked",
+      "grid": 7,
+      "steps": 2
+    }
+  ],
+  "message": "For each projected128Dregion, concatenate token and(mean of valid four-connected neighbor tokens minus token);128*2->32GELU->128linear, outputlayerzero-initialized. Residual update withfixedscale0.1; same message weights reused fortwosteps. Neighbor averaging is row-normalized and excludes invalidregions if any; isolatedtokens getzerocontrast.",
+  "common_initialization": "Initialize graph only after every existing M5module; every common tensor and initial prediction exactly matches its corresponding plain grid control under the same seed.",
+  "grid_controls": "Grid3compares toM5. Grid7uses exactly fine7_unmaskedregions and its previously fixed control from foreground study; no new backbone extraction.",
+  "training": "SameM5architecture,hparams,seeds,120epochs,patience18. Every arm3formal+9originalouterCVfits,48newheads.",
+  "selection": "Both validation and originalCV must improve/preserve corresponding plain grid control AND satisfy M5validationno-decrease/originalCVincrease. Any later promotion needs fresh fixedpatientconfirmationagainstM5andfixedGaussian.",
+  "external_test_policy": "No external outcomes,predictions or rawimages; no external scoring."
+}

@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-11-23T21:01:49.574257+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selected_candidate": "gaussian_ec8d28dcc6ce",
+  "selection_record_sha256": "7d40b0621739c86f9999defc0a9ab469271de0e1a051ff25acb94d8858f971ff",
+  "outer_split_seeds": [
+    20270101,
+    20270111
+  ],
+  "inner_split_rule": "20270124 + repeat_index*10 + fold;20 percent stratified outer-fit patient groups",
+  "arms": [
+    "milestone5_reference",
+    "reference90_coarse_gaussian10",
+    "reference90_subtype_gaussian10"
+  ],
+  "weight": 0.1,
+  "covariance_shrinkage": 0.1,
+  "temperature": "sqrt(embedding dimension),fixed",
+  "planned_new_mlp_seed_fits": 18,
+  "planned_generative_fits": 36,
+  "control": "Same source MLP head and feature statistics per seed; coarse/subtype prototype geometries use only the same inner fitting patients.",
+  "confirmation_gate": "Retain milestone5 unless the fixed coarse expert improves mean repeated macro-F1 and the patient-cluster paired macro-F1 95 percent interval lower bound exceeds zero. No extra weight or covariance search on these new partitions.",
+  "uncertainty": "Jointly resample every image and both repeated predictions of each patient; exploratory intervals do not include all training-fit uncertainty or prior search multiplicity.",
+  "external_test_policy": "Original training patients only. No external images, predictions or metrics loaded."
+}

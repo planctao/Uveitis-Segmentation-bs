@@ -1,0 +1,45 @@
+{
+  "created_at_utc": "2026-11-24T11:21:09.139167+00:00",
+  "family": "large_token_interaction",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "Training-only geometry shows normalprojected midregion token effective rank6.277vs finalregion5.266, register rank2.956of3 with meanpaircosine-.213vsquadrant2.369. Test whether intermediate spatial and pretrained register evidence can cooperate through bounded multiplicative interaction, versus equalparameter addition. Chosen from featuredefinitions/diversity without classification predictions or scores, confirmation or external outcomes. Existing attention/bilinear principles, no methodological originality claim.",
+  "evidence": "results/large_token_diversity_diagnostics.json",
+  "evidence_classification_predictions_or_scores_read": false,
+  "architecture_plan": "OriginalnormalL2048 patientPCA32 attentionMLP. Separately normalized/projected mid9tokens and register4tokens. Eachstream LayerNorm2048->linear keys/values rank16/32, common LayerNorm256->linear hiddenquery rank; scaled dotsoftmax pool. Apply tanh to eachpooledvalue. Productinteraction u*v versus additioncontrol(u+v)/sqrt2; samezeroLinear rank->256 readout*.1 to originalpre-dropout hidden. Original fulltask/init/RNG preserved; equalparameters withinrank. No extra dropout or backboneforward.",
+  "configuration_plan": [
+    {
+      "name": "add_rank16",
+      "kind": "add",
+      "rank": 16
+    },
+    {
+      "name": "product_rank16",
+      "kind": "product",
+      "rank": 16
+    },
+    {
+      "name": "add_rank32",
+      "kind": "add",
+      "rank": 32
+    },
+    {
+      "name": "product_rank32",
+      "kind": "product",
+      "rank": 32
+    }
+  ],
+  "geometry_plan": "Reconstruct/check originalL and both side normalpatientspaces against frozen single-stream geometry for each originalphase; freeze allnewcopies and splitplans before anyhead. No external data.",
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standalone jointL and fixed M7 with normalL replaced .1875rawB+.5625normalB+.25jointL. No fusionfits. If retained reference changes before launch, preserve this fixed formula and freeze newselectiongates.",
+  "launch_condition": "Onlyafter large_token_evidence fullyaudits and either no developmentpasser or selectedcandidate freshconfirmation/package/promotion decision fullyterminal. Complete model/fulltask/CUDA preflight before freezing then-currentgates. Do not select sources or weights from confirmation/external outcomes.",
+  "selection": "Strictly higher originalCV and validation>=then-currentretainedreference; freezehighestqualifyingCV before two unusedpatient3foldrepeats against EACH retainedreference/M7/M6/M5/fixedGaussian asapplicable; highermeanF1 and pairedpatient95%lower>0. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "protocol": "runs/large_token_interaction/protocol.json",
+  "protocol_sha256": "32a1a902cd597d59dbd4a4614f7540d281c688542bc4b3a7de3d2db98f7b848c",
+  "pid": 22522,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_large_token_interaction/comparison.json"
+}

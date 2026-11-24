@@ -1,0 +1,18 @@
+{
+  "created_at_utc": "2026-11-23T23:14:59.644657+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Legacy finecontrastive loss excludes ownpatient from positives but retains ownpatient images as denominator competitors. Compare removing these competitors and averaging samepatient-disease normalizedembeddings before contrasting, without any predictionarchitecturechange.",
+  "modes": [
+    "exclude_patient",
+    "patient_centroid"
+  ],
+  "coefficient": 0.05,
+  "temperature": 0.15,
+  "planned_new_seed_fits": 24,
+  "loss": "Exclude_patient: imagelevel normalizedfineembeddings; only distinctpatient pairs withknowndiseases in denominator. Patient_centroid: meanofunitimageembeddings inside each batchpatient-diseasegroup thenunitnormalize; onecandidatepergroup, denominator excludes samepatientgroups. In both, equal-disease distinctpatients are positives, anchorlosses mapped back toimages and originalpatient/classweighted mean over eligibleimages. Unknownlabels excluded and absentpositives return differentiablezero.",
+  "control": "OriginalM5legacy loss and frozen sourceweights preserved; only optionalfinecontrastivemode changes. No newparameters or RNGdraws. All classifierparameters/initialpredictions, inputdata, otherlosses, coefficient0.05, temperature0.15, hparams,seeds and stopping unchanged.",
+  "training": "Botharms3formal+9originalpatientCVfits. All24actualheadsaudited independently.",
+  "selection": "HigherM5originalpatientCV and nondecreasingM5validationMacroF1. Eligiblebestmustbe fixed and confirmed onfreshpatientpartitions againstM5andfixedGaussianbeforeanyfreeze.",
+  "external_test_policy": "No external scoring, labels, predictions or rawimages; developmentindicesonly."
+}

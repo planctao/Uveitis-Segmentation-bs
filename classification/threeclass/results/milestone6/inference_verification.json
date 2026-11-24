@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "package_sha256": "81b955917f68ab610358990ff9846c955eec7b1e251cd11fd7e9853978f48403",
+  "validation_images_checked": 374,
+  "validation": {
+    "n": 374,
+    "accuracy": 0.893048128342246,
+    "balanced_accuracy": 0.887222574552368,
+    "macro_f1": 0.8904827120381046,
+    "log_loss": 0.3019489165435911,
+    "recall": {
+      "infectious": 0.900709219858156,
+      "noninfectious": 0.896551724137931,
+      "normal": 0.864406779661017
+    },
+    "confusion_matrix": [
+      [
+        127,
+        14,
+        0
+      ],
+      [
+        12,
+        156,
+        6
+      ],
+      [
+        2,
+        6,
+        51
+      ]
+    ]
+  },
+  "real_image_indices": [
+    639,
+    800,
+    1419,
+    1645,
+    1228,
+    1497
+  ],
+  "real_cache_and_original_images_checked": 6,
+  "maximum_validation_probability_error": 4.76837158203125e-07,
+  "mean_live_vs_cache_probability_error": 6.0709051467711106e-05,
+  "maximum_original_vs_live_probability_error": 0.0,
+  "external_images_or_outcomes_used": false,
+  "code_sha256": {
+    "predict_normal_reference.py": "d023e32768dadcbd67746f0d205f4df672eb5d928ff19b0e4252d6c1a4134dbd",
+    "verify_normal_reference_inference.py": "7027b932a92acb132134dae5b3b6250fbd85ad65d7d84e416079d2e7f0923d8e"
+  },
+  "checks": [
+    "Allsixfrozencheckpointandconfirmationhashesverified; strictnormalandordinaryM5restoration",
+    "Onecommonfit-onlynormalizationandfixed0.75mixturereproduceall374validationdecisions",
+    "Sixactualvalidationcacheimagesandtheirsources matchthefrozencachedfeatureclassifications",
+    "Originalsourcecrop/pad/JPEG preprocessing exactlymatchesexistingcacheinference",
+    "OnefrozenDINObackbonerawfeaturepass sharedbybothbranchensembles; noexternalimages"
+  ]
+}

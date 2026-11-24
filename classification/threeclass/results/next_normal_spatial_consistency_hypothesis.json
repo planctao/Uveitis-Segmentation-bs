@@ -1,0 +1,50 @@
+{
+  "created_at_utc": "2026-11-24T06:59:43.045513+00:00",
+  "status": "completed_no_candidate_passed",
+  "family": "normal_spatial_consistency",
+  "hypothesis": "Normal spatialprediction generalizes across held-normalpatients,but fixedspatialsubtraction failsclassificationgates. Testshared-dropout consistencyunderunpredictednormalpatientspatialvariation,which remains afterfourstreamnormalPCA. Existingaugmentation/consistencyprinciples;nodiseasecausality/globalnoveltyclaim.",
+  "development_evidence": [
+    "results/normal_spatial_diagnostics.json",
+    "results/research_normal_spatial/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "coarse_weight0p1",
+      "level": "coarse",
+      "weight": 0.1
+    },
+    {
+      "name": "coarse_weight1p0",
+      "level": "coarse",
+      "weight": 1.0
+    },
+    {
+      "name": "disease_weight0p1",
+      "level": "disease",
+      "weight": 0.1
+    },
+    {
+      "name": "disease_weight1p0",
+      "level": "disease",
+      "weight": 1.0
+    }
+  ],
+  "geometry": "FitonlynormalpatientPCA32fourstreams andglobal8spatialridge1aspreviousstudy. Bankequalnormalpatientspatialresidualtargetsminusconditionalspatialexpectation;centeroverpatientsandregions. Freeze16armphasegeometry/bankcopiesand16patientplansbeforeallfits;4uniquephaseestimates.",
+  "architecture": "SameoriginalnormalreferenceattentionMLPsharedbetween2trainingviews. Originalcleanviewcarriesunchangedfulltask. Perturbedviewadds.5*(bankpatientA-bankpatientB)/sqrt2toregiontokensafteroriginalnormalprojection,clip[-10,10];distinctdonorsperimagefromindependentNumPyRNG20283224+seed. ReplayidenticalTorchRNGbeforedropoutbothviews;restoreafteroriginalviewsoonlyoriginaldropoutdrawstreamadvances. Add.1/1patientweightedJSatcoarse3ordisease14softmax. Gradientsflowthroughbothviews. Nonewneuralparameters,originalinit/weights/optimizer/task. Evaloriginalnormalreferenceonly.48heads+4fixed.75branch/.25M5fusions,8scores.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "HighestoriginalCVcandidate strictly>M6andvalidation>=M6frozenbeforeunusedpatientconfirmationvsM6/M5/fixedGaussian;requiresstrictlyhighermeanF1andpairedpatient95%lowerbound>0against each. Noautomaticexternaltests. Lastusedrepeats20280201/11;20280301/11onlydraftcode,scanprotocolsforactualuse.",
+  "audit": "Independentpatientspatialbank/ridge,4trained-state256imagefulltasks/fullparametergradients/updates/restoresagainstexplicitNumPyperturbationandsameRNGplainMLPviews;independentJSandzeroweightoriginaltaskexactgradientidentity. Identicaldropoutmasks/advanceverified,evalnormalMLPidentity,allbuffersfrozen. ActualCUDAfirstdonors/pairedinput/fulltask/JSwitnessindependentlyrestored. Formal48heads/stats/diseasemaps/epochs/banks/geometry/allstopouterprobabilities/actualfirsttrainingwitnessesand16fusionphasesindependentlyrestored.",
+  "preflight": "verification_normal_spatial_consistency.json",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_spatial_consistency/protocol.json",
+  "protocol_sha256": "42ce8d1f8857095c614ed9252aad9c34283de795222bca9dea0374152f2c8b95",
+  "pid": 92147,
+  "formal_fits_started": "Inspect actual checkpoints",
+  "decision": "All48actualheads/48firsttrainingwitnesses and16fusionphases independentlyaudited. All8scoresfaildevelopmentgates. Fourfusionclassdecisions andscores equalM6, so nofreshconfirmation; retainM6.",
+  "comparison": "results/research_normal_spatial_consistency/comparison.json",
+  "verification": "results/research_normal_spatial_consistency/verification.json",
+  "actual_new_seed_fits": 48
+}

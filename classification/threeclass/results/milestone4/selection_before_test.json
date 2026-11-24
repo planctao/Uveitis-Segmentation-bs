@@ -1,0 +1,486 @@
+{
+  "time": "2026-11-24T02:42:12.698974+08:00",
+  "rule": "Freeze the maximum completed development outer-CV macro-F1 candidate; require improvement over the last published development CV and nondecreasing development validation macro-F1. No external metric enters this choice.",
+  "selected": {
+    "group": "protected_model",
+    "mode": "flat",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 64,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 1.0
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.8823529411764706,
+      "balanced_accuracy": 0.8782146671585472,
+      "macro_f1": 0.880455192955193,
+      "log_loss": 0.38585195766533587,
+      "recall": {
+        "infectious": 0.8794326241134752,
+        "noninfectious": 0.8908045977011494,
+        "normal": 0.864406779661017
+      },
+      "confusion_matrix": [
+        [
+          124,
+          17,
+          0
+        ],
+        [
+          12,
+          155,
+          7
+        ],
+        [
+          2,
+          6,
+          51
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.8775863473444119,
+      0.8812592206104198,
+      0.8621760955094288
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone4/protected_model/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone4/protected_model/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone4/protected_model/seed_2/model.pt"
+    ],
+    "feature": "multiscale_vit",
+    "candidate_id": "4726000e84fe",
+    "source_candidate_id": "4726000e84fe",
+    "source_cv_summary": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_4726000e84fe/summary.json",
+    "protected_from_pruning": true,
+    "full_fit_refitted": false,
+    "checkpoint_sha256": {
+      "0": "4867aa080bed208c9bec0c88d5d94ed4bb9c3ba3ec9b71e6360e639d6f52e76e",
+      "1": "101c9ba29f513f82bd355a9ce1dbd253d36f4a211032ed99f136486954e3cfe7",
+      "2": "fbf3a500b25a733f33a440b74a5458f34aed880f7351c1e689729b21361b6f30"
+    }
+  },
+  "cv": {
+    "candidate": "continuous_4726000e84fe",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 64,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 1.0
+    },
+    "folds": [
+      {
+        "fold": 0,
+        "inner_train_images": 923,
+        "early_stop_images": 222,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.8111888111888111,
+          "balanced_accuracy": 0.8275692248171156,
+          "macro_f1": 0.8076186007196281,
+          "log_loss": 0.5582850026571285,
+          "recall": {
+            "infectious": 0.8034188034188035,
+            "noninfectious": 0.7977099236641222,
+            "normal": 0.881578947368421
+          },
+          "confusion_matrix": [
+            [
+              188,
+              41,
+              5
+            ],
+            [
+              32,
+              209,
+              21
+            ],
+            [
+              2,
+              7,
+              67
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 1,
+        "inner_train_images": 935,
+        "early_stop_images": 210,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.7744755244755245,
+          "balanced_accuracy": 0.8088916016798701,
+          "macro_f1": 0.7883309197262686,
+          "log_loss": 0.8425414471366003,
+          "recall": {
+            "infectious": 0.6794871794871795,
+            "noninfectious": 0.8129770992366412,
+            "normal": 0.9342105263157895
+          },
+          "confusion_matrix": [
+            [
+              159,
+              66,
+              9
+            ],
+            [
+              37,
+              213,
+              12
+            ],
+            [
+              0,
+              5,
+              71
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 2,
+        "inner_train_images": 902,
+        "early_stop_images": 242,
+        "outer_test_images": 573,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 573,
+          "accuracy": 0.7975567190226877,
+          "balanced_accuracy": 0.8407725547009117,
+          "macro_f1": 0.8047017674188256,
+          "log_loss": 0.8014514966754878,
+          "recall": {
+            "infectious": 0.8376068376068376,
+            "noninfectious": 0.7110266159695817,
+            "normal": 0.9736842105263158
+          },
+          "confusion_matrix": [
+            [
+              196,
+              32,
+              6
+            ],
+            [
+              54,
+              187,
+              22
+            ],
+            [
+              0,
+              2,
+              74
+            ]
+          ]
+        }
+      }
+    ],
+    "mean_macro_f1": 0.8002170959549074,
+    "sd_macro_f1": 0.010396531543253365,
+    "mean_accuracy": 0.7944070182290077,
+    "policy": "3 outer patient-group folds using original training data only; disjoint inner early-stopping patients; thresholds selected only on inner stop patients; 3 seeds per fold."
+  },
+  "eligible": true,
+  "pool_at_selection": {
+    "a2ce46e27fa9": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "global",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7440732996916449,
+      "sd_macro_f1": 0.03194221131137621,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/baseline_01_global_flat_h256/summary.json"
+    },
+    "069f6cadccd5": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_i",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7427074592432131,
+      "sd_macro_f1": 0.025854588974850646,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/baseline_02_global_cascade_i_h128/summary.json"
+    },
+    "5138a2c62b23": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_n",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7551182255054377,
+      "sd_macro_f1": 0.012759994672192819,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/baseline_04_global_cascade_n_h128/summary.json"
+    },
+    "376ce3133b66": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3
+      },
+      "mean_macro_f1": 0.7791840850005441,
+      "sd_macro_f1": 0.028640931592424028,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/explore_09_attention_dual_h128/summary.json"
+    },
+    "245ea43fa253": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3,
+        "contrastive": 0.025
+      },
+      "mean_macro_f1": 0.7833858804538504,
+      "sd_macro_f1": 0.025011143585763174,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_245ea43fa253/summary.json"
+    },
+    "25643b47ae3f": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "memory_hybrid",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3,
+        "memory_topk": 15
+      },
+      "mean_macro_f1": 0.7658062395095571,
+      "sd_macro_f1": 0.027475996232808875,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_memory_748e6db3ac9c/summary.json"
+    },
+    "f83d669f4255": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "memory_attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3,
+        "memory_topk": 5,
+        "memory_gate_evidence": true
+      },
+      "mean_macro_f1": 0.7769996347842595,
+      "sd_macro_f1": 0.037714851524855805,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_memory_attention_e21b46043973/summary.json"
+    },
+    "e4311ff65ce4": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.6,
+        "consistency": 0.3,
+        "subtype_fusion": true,
+        "subtype_consistency": 0.1
+      },
+      "mean_macro_f1": 0.7891625267257102,
+      "sd_macro_f1": 0.02188190143120829,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_subtype_c83653b2f9ea/summary.json"
+    },
+    "63036a4936b6": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "mean_macro_f1": 0.786739657197946,
+      "sd_macro_f1": 0.01761017801043779,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_taxonomy_b693175089a5/summary.json"
+    },
+    "c64a88d4b659": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "mean_macro_f1": 0.7793485448434948,
+      "sd_macro_f1": 0.017151685752810508,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_c64a88d4b659/summary.json"
+    },
+    "8da5f0e8e9a3": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "global",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7318523270575287,
+      "sd_macro_f1": 0.008990030788801257,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/baseline_01_global_flat_h256/summary.json"
+    },
+    "19cf2f66e73e": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_i",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7260932978860085,
+      "sd_macro_f1": 0.019395145976953364,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/baseline_03_global_cascade_i_h256/summary.json"
+    },
+    "2d83c9d6ddce": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_n",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7350824599737185,
+      "sd_macro_f1": 0.0064536626773792245,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/baseline_05_global_cascade_n_h256/summary.json"
+    },
+    "d93689b55569": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "context",
+        "mode": "dual",
+        "hidden": 256,
+        "dropout": 0.4,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7674143140466617,
+      "sd_macro_f1": 0.012973983915230407,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/explore_04_context_dual_h256/summary.json"
+    },
+    "9fb62d66a053": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.4,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "fine_contrastive": 0.01
+      },
+      "mean_macro_f1": 0.7942052142755461,
+      "sd_macro_f1": 0.017031410919505857,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_9fb62d66a053/summary.json"
+    },
+    "4726000e84fe": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "mean_macro_f1": 0.8002170959549074,
+      "sd_macro_f1": 0.010396531543253365,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_4726000e84fe/summary.json"
+    }
+  },
+  "provenance_audit_passed": true,
+  "inference_views": "DINOv3 ViT-B/16 at 320 and 448 for multiscale features; three small-head seeds share both backbone feature passes."
+}

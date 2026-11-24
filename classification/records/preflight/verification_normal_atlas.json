@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "clusters": 2,
+      "temperature": 0.5,
+      "full_task_batch": 256,
+      "geometry": {
+        "normal_patients": 111,
+        "cluster_counts": [
+          11,
+          100
+        ],
+        "maximum_principal_cosine_error": 6.6224500328004865e-09,
+        "mean_max_gate_weight": 0.5910489914302667,
+        "mean_gate_entropy": 0.6714036138207584
+      }
+    },
+    {
+      "clusters": 2,
+      "temperature": 2.0,
+      "full_task_batch": 256,
+      "geometry": {
+        "normal_patients": 111,
+        "cluster_counts": [
+          11,
+          100
+        ],
+        "maximum_principal_cosine_error": 6.298138677252041e-09,
+        "mean_max_gate_weight": 0.5232907447095809,
+        "mean_gate_entropy": 0.6917119527096283
+      }
+    },
+    {
+      "clusters": 4,
+      "temperature": 0.5,
+      "full_task_batch": 256,
+      "geometry": {
+        "normal_patients": 111,
+        "cluster_counts": [
+          2,
+          61,
+          24,
+          24
+        ],
+        "maximum_principal_cosine_error": 6.691321163820874e-09,
+        "mean_max_gate_weight": 0.3970558054803523,
+        "mean_gate_entropy": 1.1993655312082938
+      }
+    },
+    {
+      "clusters": 4,
+      "temperature": 2.0,
+      "full_task_batch": 256,
+      "geometry": {
+        "normal_patients": 111,
+        "cluster_counts": [
+          2,
+          61,
+          24,
+          24
+        ],
+        "maximum_principal_cosine_error": 6.1536202800027695e-09,
+        "mean_max_gate_weight": 0.29498189932773167,
+        "mean_gate_entropy": 1.3630790583963497
+      }
+    }
+  ],
+  "code_sha256": {
+    "normal_atlas.py": "709b8467c541bfc5a094c5c485f3ee349a00484503dfdcf23679e620aa5a5c8c",
+    "verify_normal_atlas.py": "8302854edc512c72a93e77baf550c8113741b81abdf12dabf76052bf89cc7e96"
+  },
+  "checks": [
+    "All geometry uses normal patient centers only; duplicated normal images and changed nonnormal images preserve geometry",
+    "Global gate and each weighted local tangent recovered independently by Gram eigenproblems; clustering fixed-point, responsibility and shrinkage weights audited",
+    "Independent NumPy conditional routing/projections plus plain M5 reproduce input transforms, probabilities and full task parameter gradients",
+    "Original parameter schema/initialization/RNG unchanged; disabled atlas exact full-task loss,gradient and RNG identity",
+    "Four real256image full task gradient/update/strict checkpoint recovery checks and differentiable input routing passed"
+  ]
+}

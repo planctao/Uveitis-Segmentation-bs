@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "training_validation_images": [
+    0,
+    745,
+    785,
+    17,
+    753,
+    788
+  ],
+  "raw_vs_cache_pipeline_max_error": 0.0,
+  "raw_vs_frozen_feature_mean_error": 1.6975845937849954e-05,
+  "raw_vs_frozen_feature_max_error": 0.00011199712753295898,
+  "checks": [
+    "Raw EXIF/crop/pad/JPEG input reproduces the existing cache pipeline exactly",
+    "Live frozen backbone features agree with saved float16 feature probabilities",
+    "All six live image decisions equal their saved-feature decisions",
+    "Reusable validation feature predictions agree with the frozen scored model",
+    "Input identities span all three classes and only training/validation patients"
+  ]
+}

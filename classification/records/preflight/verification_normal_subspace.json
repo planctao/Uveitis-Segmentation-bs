@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "configurations": [
+    {
+      "rank": 32,
+      "strength": 0.0,
+      "real_loss_batch": 256,
+      "maximum_transform_error": 0.0
+    },
+    {
+      "rank": 8,
+      "strength": 0.5,
+      "real_loss_batch": 256,
+      "maximum_transform_error": 5.364418029785156e-07
+    },
+    {
+      "rank": 32,
+      "strength": 0.5,
+      "real_loss_batch": 256,
+      "maximum_transform_error": 8.940696716308594e-07
+    },
+    {
+      "rank": 32,
+      "strength": 1.0,
+      "real_loss_batch": 256,
+      "maximum_transform_error": 1.7881393432617188e-06
+    }
+  ],
+  "independent_gram_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 5.585237827787637e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.7959215427061395e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.6878988186070956e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 5.265183178337907e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 6.2611587026140114e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.917584707162746e-08
+    }
+  },
+  "code_sha256": {
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "verify_normal_subspace.py": "4731f410ab79e0d656f5ad9eee65e9af427b50ffb56015a350a5a439b4102c72"
+  },
+  "checks": [
+    "Onlyfitnormalpatientcentroids,equalpatientcontribution andper-image/regionmeans",
+    "IndependentGram eigenproblem recoversnormalPCAspans,orthonormality,eigenvalues andcenters",
+    "Duplicatingnormalimagesdoesnotchangeequal-patientgeometry",
+    "Zero-strength exactoriginalM5initialization,RNG andpredictions",
+    "IndependentNumPytransforms,projectionJacobian,full256-imageM5task/backward andstrictrecovery",
+    "NormalgeometrybuffersfrozenwhileMLPupdates"
+  ]
+}

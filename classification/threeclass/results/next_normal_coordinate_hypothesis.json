@@ -1,0 +1,111 @@
+{
+  "created_at_utc": "2026-11-24T06:27:44.255008+00:00",
+  "status": "completed_confirmation_failed",
+  "family": "normal_coordinate",
+  "hypothesis": "Train-only equal patient-label class-mean contrasts have 50.2-64.0% of infection-vs-noninfection squared energy in removed normal PCA32 directions. Fixed deletion may discard useful context. Test a small zero-initialized hidden FiLM bypass conditioned on the removed axes; compare identical-capacity zero-context controls. Existing conditioning principle; no claim of global novelty or disease-causal axes.",
+  "development_evidence": [
+    "results/normal_coordinate_diagnostics.json",
+    "results/research_normal_task_gradient_confirmation/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "shift_constant",
+      "mode": "shift",
+      "conditioned": false
+    },
+    {
+      "name": "shift_conditional",
+      "mode": "shift",
+      "conditioned": true
+    },
+    {
+      "name": "affine_constant",
+      "mode": "affine",
+      "conditioned": false
+    },
+    {
+      "name": "affine_conditional",
+      "mode": "affine",
+      "conditioned": true
+    }
+  ],
+  "geometry": "Original fit-only standardization and equal-normal-patient PCA32 for four streams; freeze all16 geometries and16 patientplans before allMLPfits. Coordinate deviations=sqrt eigenvalues clamped at.05.",
+  "architecture": "Original full normal-reference attentionMLP remains the main branch. Before projection, summarize regional coordinates by image mean, project each of four streams onto fitted normalPCA32, divide by fitted normal SD and clip[-5,5], concatenate128coordinates. Linear128->16,GELU,Linear16->512 yields bounded.1*tanh shift and optional bounded.1*tanh multiplicative scale on hidden256 before originaldropout. Readout initiallyzero; adapterinitialized inside fork_rng preserving originalinit/permutation/dropout. Constant controls replace context byzeros but retain identicalparametercount. Sameoriginalrandominit/fulltask/optimizer/seeds;48heads+4fixed.75branch/.25M5fusions,8scores.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest originalCVcandidate strictly>M6 withvalidation>=M6; then unusedpatientrepeatconfirmationagainstM6/M5/fixedGaussian withhighermeanF1andpairedpatient95%lowerbound>0against each. Noautomaticexternaltests. Usedrepeatseeds include20280101/20280111.",
+  "audit": "Fourreal256imagefulltasks withnonzeroadapters and independentfunctionalfullparametergradients/updates/restores;zero-readoutexactbaseline/RNGidentity. IndependentNumPycontext/projection andfunctionaladapter;actualCUDAfirsttrainingtaskwitness. Formal all48stop/outerpredictions,weights/stats/diseasemaps/bestepochs/normalgeometry/fusionsand48initialtrainingwitnessesindependentlyrestored.",
+  "preflight": "verification_normal_coordinate.json",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_coordinate/protocol.json",
+  "protocol_sha256": "74e2cdf9aec9797e617b972d27aa3d73062acdbcf189254195b45062b56141e2",
+  "pid": 88971,
+  "formal_fits_started": "Inspect actual checkpoints",
+  "training_completed_at_utc": "2026-11-24T06:32:55.480961+00:00",
+  "actual_new_seed_fits": 48,
+  "actual_seed_heads_checked": 48,
+  "passing_development_gates": 3,
+  "selected_candidate": "shift_conditional_fusion075",
+  "selected_original_cv": 0.8274775486265518,
+  "selected_validation": 0.8904827120381046,
+  "decision": "M6 retained. Candidate significantly below M6 in paired repeated-patient comparison. No external evaluation.",
+  "fresh_confirmation_protocol": "runs/normal_coordinate_confirmation/protocol.json",
+  "fresh_confirmation_started_at_utc": "2026-11-24T06:34:02.685948+00:00",
+  "confirmation_completed_at_utc": "2026-11-24T06:41:16.437145+00:00",
+  "confirmation": "results/research_normal_coordinate_confirmation/comparison.json",
+  "confirmation_gate_passed": false,
+  "confirmation_mean_macro_f1": {
+    "reference": 0.8052415139334697,
+    "subspace": 0.8196529302325105,
+    "coordinate": 0.8192615993552068,
+    "fixed_gaussian": 0.807349423351945,
+    "m6": 0.8218660353012641,
+    "candidate": 0.8179710346146513
+  },
+  "paired_candidate_vs_controls": {
+    "reference": {
+      "accuracy_difference": 0.012521840419336017,
+      "macro_f1_difference": 0.012938275638040286,
+      "accuracy_ci95": [
+        0.0008829823151507461,
+        0.02439746831034644
+      ],
+      "macro_f1_ci95": [
+        0.002471079151469255,
+        0.02405947808428189
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    },
+    "fixed_gaussian": {
+      "accuracy_difference": 0.011357018054746648,
+      "macro_f1_difference": 0.010799161767946597,
+      "accuracy_ci95": [
+        0.0,
+        0.02375578602451996
+      ],
+      "macro_f1_ci95": [
+        0.000560631792167987,
+        0.02240836936444989
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    },
+    "m6": {
+      "accuracy_difference": -0.004076878276062956,
+      "macro_f1_difference": -0.003918921576929746,
+      "accuracy_ci95": [
+        -0.007546398182362565,
+        -0.0006788092936025141
+      ],
+      "macro_f1_ci95": [
+        -0.007121959898909522,
+        -0.0009082104326345579
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    }
+  }
+}

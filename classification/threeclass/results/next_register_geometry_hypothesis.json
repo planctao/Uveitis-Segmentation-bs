@@ -1,0 +1,34 @@
+{
+  "created_at_utc": "2026-11-24T12:42:51.856929+00:00",
+  "family": "register_geometry",
+  "status": "preflight_passed_waiting_for_position_calibration_decision",
+  "scores_evaluated": 0,
+  "hypothesis": "M8 normal-register PCA fits patientcenters after averaging four distinct pretrainedpositions. This discards normal covariation between positions. Compare existing poolednormalPCA32 with joint8192dimensional patientregisterPCA32 and four independentpositionPCA8spaces (totalrank32), plus no-registerprojection control. Keep original normalL geometry and tokenquery module fixed. Design based on explicit geometrydefinition before reading multiquery or positionclassificationoutcomes; established structurednormalPCA, no originalityclaim.",
+  "architecture_plan": "Same final4register bank and fit-only globalacrosspositions standardization. Fourarms side-only: none (clamprawnormalizedtokens), pooled32originalM8control, joint32 (flatten4x2048, subtract centerednormalpatientPCA32 nuisance, unflatten), position8 (ownnormalpatientPCA8 perregisterposition). All newspaces from normalpatientimageaverages; originalnormalL untouched. Same originalhiddenquery32/keys/values32GELU/zeroReadout256 times.1 residual, identicallearnedparameters.",
+  "configuration_plan": [
+    {
+      "name": "no_register_projection",
+      "kind": "none"
+    },
+    {
+      "name": "pooled32_control",
+      "kind": "pooled"
+    },
+    {
+      "name": "joint_register32",
+      "kind": "joint"
+    },
+    {
+      "name": "position_register8",
+      "kind": "position"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "geometry_plan": "4originalL +4pooledcontrol +4joint +16positionspaces and allpatientplans frozenbefore48fits. Pooledcontrol exacthistoricalM8geometry; independentGram eigenspectra, orthonormality/projectors and patientIDs required. Newquery/controlallgradients/CUDA inputs preflight beforefreeze.",
+  "fixed_fusions": "Standalone and fixed .1875rawB+.5625normalB+.25newL. No weightsearch.",
+  "launch_condition": "No classificationfits/scores until positioncalibration all48audit and any required newpatientconfirmation/package/promotion decision terminal. Freeze thencurrentreferencegates after completepreflight.",
+  "selection": "OriginalCV strictlyhigher and validation>=thencurrentreference; freezehighestqualifyingCV before two unusedpatient3foldrepeatsets. HighermeanF1 and pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian; no automaticexternaltests.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_geometry.json"
+}

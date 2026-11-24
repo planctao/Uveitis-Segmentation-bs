@@ -1,0 +1,1077 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at": "2026-11-23T20:23:43.054402+00:00",
+    "hypothesis": "High-resolution feature concatenation may overfit while independently normalized specialist probabilities retain complementary evidence. Test fixed convex probability experts with no learned gate or extra fit.",
+    "reference": "results/milestone5/selection_before_test.json",
+    "donor_features": [
+      "vitb_raw768",
+      "vitb_up768",
+      "multiscale_raw768",
+      "multiscale_up768"
+    ],
+    "donor_weights": [
+      0.1,
+      0.25,
+      0.5
+    ],
+    "predeclared_comparisons": "Each raw view uses the identical donor weight as its upsampled control. Preserve every combination, including negative results.",
+    "metric_selection": "All 12 fixed combinations use original development validation and independently stopped original patient CV. Passing candidates require improved CV and nondecreasing validation Macro-F1, then new repeated-patient confirmation before external testing.",
+    "source_predictions": "Only development validation and original-training outer patient predictions. No external predictions or metrics loaded.",
+    "training_note": "No new backbone or head fits; each mixture reuses two separately trained three-seed predictor ensembles. These are composite inference candidates, not new training runs."
+  },
+  "candidates": [
+    {
+      "candidate_id": "experts_7a35348ddde9",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "vitb_raw768",
+      "donor_weight": 0.1,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.9,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "vitb_raw768",
+          "weight": 0.1,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_2ee39edbfc09"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8983957219251337,
+        "balanced_accuracy": 0.8947880008787528,
+        "macro_f1": 0.8936019680078334,
+        "log_loss": 0.31604958788930176,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            10,
+            157,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8073557213988952,
+        "sd_macro_f1": 0.00815849327697877,
+        "mean_accuracy": 0.8054670751005829
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.002329644729178848,
+        "macro_f1_difference": -0.0016456874158469192,
+        "accuracy_ci95": [
+          -0.008347659935054647,
+          0.0035067529993742354
+        ],
+        "macro_f1_ci95": [
+          -0.008393416693484316,
+          0.0045226042875253815
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": -0.0017472335468841083,
+        "macro_f1_difference": -0.0003600060851969289,
+        "accuracy_ci95": [
+          -0.007404776006074376,
+          0.003876238007308606
+        ],
+        "macro_f1_ci95": [
+          -0.0051948943331666195,
+          0.004490459239687919
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "experts_87e5bf1a91ec",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "vitb_raw768",
+      "donor_weight": 0.25,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.75,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "vitb_raw768",
+          "weight": 0.25,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_2ee39edbfc09"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8983957219251337,
+        "balanced_accuracy": 0.8910539921768891,
+        "macro_f1": 0.8914689265536723,
+        "log_loss": 0.3016024082140552,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.9080459770114943,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            127,
+            12,
+            2
+          ],
+          [
+            10,
+            158,
+            6
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8098468556395931,
+        "sd_macro_f1": 0.007732160127294449,
+        "mean_accuracy": 0.8066346102995318
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.0011648223645893685,
+        "macro_f1_difference": 0.0007601964150893981,
+        "accuracy_ci95": [
+          -0.012049651390063925,
+          0.00935749126214267
+        ],
+        "macro_f1_ci95": [
+          -0.010071612578461989,
+          0.011556084266901934
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": true,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": -0.004076878276062845,
+        "macro_f1_difference": -0.002903545802989349,
+        "accuracy_ci95": [
+          -0.013142929402140296,
+          0.0045274476513864625
+        ],
+        "macro_f1_ci95": [
+          -0.011491750717696796,
+          0.005791121926060788
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "experts_e9bd7024a1df",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "vitb_raw768",
+      "donor_weight": 0.5,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "vitb_raw768",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_2ee39edbfc09"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8850267379679144,
+        "balanced_accuracy": 0.8838643846726715,
+        "macro_f1": 0.8812692348508967,
+        "log_loss": 0.2907355762914666,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            15,
+            2
+          ],
+          [
+            12,
+            155,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.799064114398308,
+        "sd_macro_f1": 0.014624641138577714,
+        "mean_accuracy": 0.7932333809297161
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.014560279557367495,
+        "macro_f1_difference": -0.009765400334033836,
+        "accuracy_ci95": [
+          -0.030086151411620046,
+          0.0005510105915918726
+        ],
+        "macro_f1_ci95": [
+          -0.02505334941911447,
+          0.004975044882023442
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": -0.013977868375072755,
+        "macro_f1_difference": -0.011794257632112615,
+        "accuracy_ci95": [
+          -0.02694912549856214,
+          -0.0011817049463006897
+        ],
+        "macro_f1_ci95": [
+          -0.02436041374056661,
+          0.00024203682493008932
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "experts_66d5cbf65507",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "vitb_up768",
+      "donor_weight": 0.1,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.9,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "vitb_up768",
+          "weight": 0.1,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_15080a959346"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8957219251336899,
+        "balanced_accuracy": 0.8928722920664923,
+        "macro_f1": 0.8914719649057316,
+        "log_loss": 0.3239239217003634,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8078506878893373,
+        "sd_macro_f1": 0.010813012884380852,
+        "mean_accuracy": 0.8072163438655585
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.0005824111822947398,
+        "macro_f1_difference": -0.0012856813306499904,
+        "accuracy_ci95": [
+          -0.0053939203467658955,
+          0.004295989727182523
+        ],
+        "macro_f1_ci95": [
+          -0.006781118889269674,
+          0.004408579553601308
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "experts_8f35805129bd",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "vitb_up768",
+      "donor_weight": 0.25,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.75,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "vitb_up768",
+          "weight": 0.25,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_15080a959346"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8823529411764706,
+        "balanced_accuracy": 0.8786630245401401,
+        "macro_f1": 0.874696675182063,
+        "log_loss": 0.31949954803164293,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            125,
+            14,
+            2
+          ],
+          [
+            11,
+            154,
+            9
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8129166786433307,
+        "sd_macro_f1": 0.015357667744740382,
+        "mean_accuracy": 0.8107077622784429
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": 0.0029120559114734768,
+        "macro_f1_difference": 0.003663742218078747,
+        "accuracy_ci95": [
+          -0.004942390283934975,
+          0.010544937444438731
+        ],
+        "macro_f1_ci95": [
+          -0.004863471317211923,
+          0.012042970389454994
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "experts_f98a6ae8fc19",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "vitb_up768",
+      "donor_weight": 0.5,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "vitb_up768",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_15080a959346"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8716577540106952,
+        "balanced_accuracy": 0.8738374832297758,
+        "macro_f1": 0.866693751778092,
+        "log_loss": 0.3232958138534188,
+        "recall": {
+          "infectious": 0.8723404255319149,
+          "noninfectious": 0.867816091954023,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            123,
+            16,
+            2
+          ],
+          [
+            13,
+            151,
+            10
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8110560523015375,
+        "sd_macro_f1": 0.01998611610735214,
+        "mean_accuracy": 0.8072082077317679
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.0005824111822947398,
+        "macro_f1_difference": 0.002028857298078779,
+        "accuracy_ci95": [
+          -0.01138147216397939,
+          0.009665404102756547
+        ],
+        "macro_f1_ci95": [
+          -0.01035448564837777,
+          0.014045751083927114
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "experts_95ad55c48808",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "multiscale_raw768",
+      "donor_weight": 0.1,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.9,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "multiscale_raw768",
+          "weight": 0.1,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_b5cce402ab49"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8885925170603782,
+        "macro_f1": 0.8858237547892721,
+        "log_loss": 0.33012388593817177,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            155,
+            8
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8086075497702333,
+        "sd_macro_f1": 0.008353036043192635,
+        "mean_accuracy": 0.8066325762660841
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.0011648223645893685,
+        "macro_f1_difference": -0.0004241260569608496,
+        "accuracy_ci95": [
+          -0.0053606615718587965,
+          0.002941611555864937
+        ],
+        "macro_f1_ci95": [
+          -0.005585675621079042,
+          0.004657639432874308
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": -0.0017472335468841083,
+        "macro_f1_difference": -0.0018907168916802997,
+        "accuracy_ci95": [
+          -0.004943541627863687,
+          0.0006423750021811053
+        ],
+        "macro_f1_ci95": [
+          -0.005239505378317327,
+          0.0010425216688472144
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "experts_b3e2ff60272f",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "multiscale_raw768",
+      "donor_weight": 0.25,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.75,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "multiscale_raw768",
+          "weight": 0.25,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_b5cce402ab49"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8850267379679144,
+        "balanced_accuracy": 0.8810270907339935,
+        "macro_f1": 0.8796658271440454,
+        "log_loss": 0.32274708518957473,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            12,
+            154,
+            8
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8064537487440852,
+        "sd_macro_f1": 0.007558224080195175,
+        "mean_accuracy": 0.8031391238197522
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.004659289458357585,
+        "macro_f1_difference": -0.002641213782882401,
+        "accuracy_ci95": [
+          -0.012182542649902262,
+          0.0023299516203169487
+        ],
+        "macro_f1_ci95": [
+          -0.01101925679995332,
+          0.005339952692163132
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": -0.002329644729178737,
+        "macro_f1_difference": -0.001302210411004645,
+        "accuracy_ci95": [
+          -0.007975827768371977,
+          0.0026275340874519293
+        ],
+        "macro_f1_ci95": [
+          -0.0069396506620074405,
+          0.003778402592670861
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "experts_9bc5b9b08853",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "multiscale_raw768",
+      "donor_weight": 0.5,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "multiscale_raw768",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_b5cce402ab49"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8850267379679144,
+        "balanced_accuracy": 0.8819238054971793,
+        "macro_f1": 0.8781809967094607,
+        "log_loss": 0.3152068354777473,
+        "recall": {
+          "infectious": 0.9078014184397163,
+          "noninfectious": 0.8735632183908046,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            128,
+            11,
+            2
+          ],
+          [
+            14,
+            152,
+            8
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8073951354875405,
+        "sd_macro_f1": 0.008312504331496646,
+        "mean_accuracy": 0.8037239084359502
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.004076878276062845,
+        "macro_f1_difference": -0.0017079819154381948,
+        "accuracy_ci95": [
+          -0.014252047271339894,
+          0.005575620212296934
+        ],
+        "macro_f1_ci95": [
+          -0.011750802727165329,
+          0.008207915552558117
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": 0.0011648223645894795,
+        "macro_f1_difference": 0.0016736442474334368,
+        "accuracy_ci95": [
+          -0.006253988734426693,
+          0.0085374009980254
+        ],
+        "macro_f1_ci95": [
+          -0.005633951134402804,
+          0.008855046068050789
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "experts_d557ea34ec4a",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "multiscale_up768",
+      "donor_weight": 0.1,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.9,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "multiscale_up768",
+          "weight": 0.1,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_4683f0cef529"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8909565832542317,
+        "macro_f1": 0.8879843384463566,
+        "log_loss": 0.3335313214979284,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            11,
+            155,
+            8
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8106000859135011,
+        "sd_macro_f1": 0.010927976010899135,
+        "mean_accuracy": 0.8083798109976121
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": 0.0005824111822947398,
+        "macro_f1_difference": 0.00146659083471945,
+        "accuracy_ci95": [
+          -0.00238109444255028,
+          0.0036101083032490378
+        ],
+        "macro_f1_ci95": [
+          -0.0022977185362387104,
+          0.005450852056118935
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "experts_6686577bbca3",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "multiscale_up768",
+      "donor_weight": 0.25,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.75,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "multiscale_up768",
+          "weight": 0.25,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_4683f0cef529"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.8871251656297107,
+        "macro_f1": 0.881110042959968,
+        "log_loss": 0.3299987213655834,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            127,
+            13,
+            1
+          ],
+          [
+            11,
+            153,
+            10
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8078435548848129,
+        "sd_macro_f1": 0.010524308339887224,
+        "mean_accuracy": 0.8054680921173066
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.002329644729178848,
+        "macro_f1_difference": -0.001339003371877756,
+        "accuracy_ci95": [
+          -0.0076158116602831035,
+          0.00314743326357262
+        ],
+        "macro_f1_ci95": [
+          -0.008200362039606288,
+          0.005266420148154376
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "experts_20321e405fa9",
+      "architecture": "fixed_probability_experts",
+      "donor_feature": "multiscale_up768",
+      "donor_weight": 0.5,
+      "components": [
+        {
+          "feature": "multiscale_vit",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+          ],
+          "candidate_id": "63c585e70306"
+        },
+        {
+          "feature": "multiscale_up768",
+          "weight": 0.5,
+          "checkpoints": [
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_0/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_1/model.pt",
+            "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_2/model.pt"
+          ],
+          "candidate_id": "highres_4683f0cef529"
+        }
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.8743315508021391,
+        "balanced_accuracy": 0.877546621568408,
+        "macro_f1": 0.8665075131219965,
+        "log_loss": 0.32770767985321586,
+        "recall": {
+          "infectious": 0.900709219858156,
+          "noninfectious": 0.8505747126436781,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            127,
+            12,
+            2
+          ],
+          [
+            14,
+            148,
+            12
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "new_seed_fits": 0,
+      "external_test_evaluated": false,
+      "cv": {
+        "mean_macro_f1": 0.8059712329968255,
+        "sd_macro_f1": 0.013452835155600125,
+        "mean_accuracy": 0.8025533221868301
+      },
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.005241700640652325,
+        "macro_f1_difference": -0.0033816261628716315,
+        "accuracy_ci95": [
+          -0.014270264964198467,
+          0.0035892742740721616
+        ],
+        "macro_f1_ci95": [
+          -0.013676038765216534,
+          0.006709930072147457
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "source_prediction_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/val_predictions.npz": "f29098d1f59e95b5bc3d4ad757a5ad3fd8bff71b20223947920dd81b55dfb9a6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/val_predictions.npz": "04e6abab3ae4c8dd4e486401e98610dfe41645a799cc6be6df9aeddb5953178d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/val_predictions.npz": "712e2014171a30c1d910c2288f7245afe411e0df8b9526e4574acf7b34520eda",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_0/val_predictions.npz": "1760d1090f14ff299ced2763c04066fdd4703291462b75e9040461b6f60a64dc",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_1/val_predictions.npz": "3308836f7bbec60914b638b6dc4627faa02936219fafea9bd2690d23f46c9125",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/explore/00_matched_highres/seed_2/val_predictions.npz": "c6b60599fccdf0ab478f4ec54baa84055971cfc09914620bf6820e266df00979",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/outer_predictions.npz": "a848dd14e052ea2171409bdff4b375236ae730189bc61e590278b11be1f00d7e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/candidate_crossvalidation/continuous_highres_2ee39edbfc09/fold_0/outer_predictions.npz": "669a16c4e3927e1ca85dd3d34eb34e62df8c3a9c47d1c468f4e2bf2cb1350631",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/outer_predictions.npz": "4d7cd04d4533468c3f0c9309b495b12872fedc8d0dab9b35ece5e6a696d08ae2",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/candidate_crossvalidation/continuous_highres_2ee39edbfc09/fold_1/outer_predictions.npz": "17e3795ec9ddae89eec3be8d818317f9145800c12210f32c2b17276ea0cfd7f4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/outer_predictions.npz": "bac36516e897a4feadd8a31f91ab8e5370d00cbeac7899a3fa00101eec2ed266",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_raw768/candidate_crossvalidation/continuous_highres_2ee39edbfc09/fold_2/outer_predictions.npz": "0f2f4aa4d56f77776d286f3ef5dce246c23948934d8423a399687a58b5ee95e5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_0/val_predictions.npz": "5d8845d7ccff5ccaa02558066325beb1ab67a3895cd9d54f9ebfbe82bd88583c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_1/val_predictions.npz": "d8132896622fcf865650f618aa0ec76e00febd7a4e8bfd1336878a0d16c04d2c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/explore/00_matched_highres/seed_2/val_predictions.npz": "d4fbb354e149076f37487b707c137c17dd83f9974773d7b29416aabc57d8310f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/candidate_crossvalidation/continuous_highres_15080a959346/fold_0/outer_predictions.npz": "91a9cf7c021b7239f742f42be60d074444312233a7c384600627c70d054ae197",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/candidate_crossvalidation/continuous_highres_15080a959346/fold_1/outer_predictions.npz": "91ee6b5d5d9dde55fbc89e96debc7c684f9f32c87f201fa95685b1a74f220a19",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_up768/candidate_crossvalidation/continuous_highres_15080a959346/fold_2/outer_predictions.npz": "e02370115dd085db4d9618b85516d0ff997d70707eb3a91ce126e37787e6bc96",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_0/val_predictions.npz": "887f30e68bee97b2cce8288de9354d927b938f1704e8187791662a3c3522acd4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_1/val_predictions.npz": "7312dec1d86fb090d44902228070e727ad29739881699826c52b33c508524a3a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/explore/00_matched_highres/seed_2/val_predictions.npz": "d0aeb8211dd986f1ad5784ea95a0e29f1082dcc2facc97c38a09bee53d2efc10",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/candidate_crossvalidation/continuous_highres_b5cce402ab49/fold_0/outer_predictions.npz": "d9db724adf61b36c8da60bcd6d0f1710c0314c1c793c20f9e50cefd5aa3b592b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/candidate_crossvalidation/continuous_highres_b5cce402ab49/fold_1/outer_predictions.npz": "2cc4772c183b17bb671c7936259c14c4fb7fc28e0ce37f2ea17b8cd42e807d7c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_raw768/candidate_crossvalidation/continuous_highres_b5cce402ab49/fold_2/outer_predictions.npz": "401e8f4c554daa27a3253004674accc984f1a2696ffb0b50c9dd0ebb2cea1dec",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_0/val_predictions.npz": "0345b30845614447a8401c6ee08a67e93672b0d93ed4e1123e80583a6c2ef9c4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_1/val_predictions.npz": "3ee8801546671838e7ef2cc3757001bc30f71762ff587a3cebe9690ae4a829f1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/explore/00_matched_highres/seed_2/val_predictions.npz": "32288d1db3875bd30e937c92f67bb2efc34a788b7a01a1941b74f26661a40fd9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/candidate_crossvalidation/continuous_highres_4683f0cef529/fold_0/outer_predictions.npz": "cdbc2d76278c15317f36eae7eafb68777c422df24e23e870d07ae9373cb0f3b0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/candidate_crossvalidation/continuous_highres_4683f0cef529/fold_1/outer_predictions.npz": "2ec1ca24c927e449c640de6ea8c3b50fc1f03538ac7b4bc940da3f8c90edb31e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_up768/candidate_crossvalidation/continuous_highres_4683f0cef529/fold_2/outer_predictions.npz": "77ae3e25437aa4c7db54c01c653d1e246a51345370913ba15c65b957648dbad9"
+  },
+  "completed_composite_candidates": 12,
+  "new_seed_fits": 0,
+  "external_files_read": false,
+  "external_test_evaluated": false,
+  "decision": "Run predeclared repeated-patient confirmation for the strongest eligible candidate.",
+  "inference_limit": "Exploratory patient bootstrap on the original development folds; intervals do not correct prior search or all training-fit uncertainty."
+}

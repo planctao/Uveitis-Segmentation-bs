@@ -1,0 +1,36 @@
+{
+  "created_at_utc": "2026-11-23T21:50:39.154949+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_record_sha256": "4dd6ba6855ec0db41a5db2054d42f640636547c7f22265361ba2886246bc560a",
+  "selected_candidate": "kernel_8b9caaa2c4aa",
+  "selected_configuration": {
+    "mode": "direct",
+    "bandwidth": 0.5,
+    "ridge": 0.01,
+    "weight": 0.25
+  },
+  "outer_split_seeds": [
+    20270301,
+    20270311
+  ],
+  "inner_split_seed_base": 20270324,
+  "arms": [
+    "reference_m5",
+    "kernel_direct",
+    "kernel_residual_control",
+    "gaussian_development_control"
+  ],
+  "source_policy": "18 new M5 heads, each on its own inner fitting/stopping patients. All three branches fitted only to current inner fitting embeddings; no validation or external images enter this confirmation.",
+  "gaussian_control": {
+    "granularity": "coarse",
+    "shrinkage": 0.1,
+    "weight": 0.1
+  },
+  "planned_new_mlp_seed_fits": 18,
+  "planned_kernel_systems": 18,
+  "planned_gaussian_fits": 18,
+  "selection_policy": "No bandwidth, ridge, branch weight or architecture search on these new folds. Direct candidate is fixed before any new-fold training.",
+  "confirmation_gate": "Fixed direct kernel must improve mean six-fold Macro-F1 and have paired patient Macro-F1 CI lower bound>0 against BOTH M5 and the previously development-confirmed coarse Gaussian recipe. Otherwise retain existing frozen models.",
+  "uncertainty": "Resample patient split groups jointly across images, repeats and paired predictions; confidence intervals do not include all fitting or previous selection uncertainty.",
+  "external_test_policy": "No external scores, predictions or raw images. Passing confirmation only permits later frozen-inference review, not automatic external evaluation."
+}

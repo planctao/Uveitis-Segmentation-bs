@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Within-family disease probabilities each sum to1 and reproduce coarse family marginals",
+    "Uniform coarse initialization is exactly1/3forbothbinaryordersandflathead",
+    "Conditional disease loss invariant to arbitrary within-family common logit shifts",
+    "Conditional disease gradients vanish outside the observed family",
+    "Ineligible binary-tree examples give exactly zero second-stage gradient",
+    "Common M5 parameters have identical actual initialization under matched seeds",
+    "Complete supervised/contrastive backward finite with gradients to coarse and fine heads",
+    "Strict serialization restores every factorized arm exactly",
+    "Old M5 predictions preserve original compact disease marginalization"
+  ]
+}

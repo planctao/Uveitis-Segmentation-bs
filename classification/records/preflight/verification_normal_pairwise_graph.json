@@ -1,0 +1,122 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "rank": 16,
+      "kind": "node",
+      "batch_size": 256,
+      "parameters": 997606,
+      "maximum_complete_task_gradient_error": 2.3096799850463867e-07,
+      "maximum_conditional_disease_logodds_error": 9.5367431640625e-07
+    },
+    {
+      "rank": 16,
+      "kind": "edge",
+      "batch_size": 256,
+      "parameters": 997606,
+      "maximum_complete_task_gradient_error": 1.564621925354004e-07,
+      "maximum_conditional_disease_logodds_error": 9.5367431640625e-07
+    },
+    {
+      "rank": 32,
+      "kind": "node",
+      "batch_size": 256,
+      "parameters": 1010038,
+      "maximum_complete_task_gradient_error": 2.682209014892578e-07,
+      "maximum_conditional_disease_logodds_error": 9.5367431640625e-07
+    },
+    {
+      "rank": 32,
+      "kind": "edge",
+      "batch_size": 256,
+      "parameters": 1010038,
+      "maximum_complete_task_gradient_error": 1.6391277313232422e-07,
+      "maximum_conditional_disease_logodds_error": 9.5367431640625e-07
+    }
+  ],
+  "normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 5.585237827787637e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.7959215427061395e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.6878988186070956e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 5.265183178337907e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 6.2611587026140114e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.917584707162746e-08
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "rank": 16,
+      "kind": "node",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "graph_specialists_pair_masks_and_detached_base_odds_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 4.76837158203125e-07
+      }
+    },
+    {
+      "rank": 16,
+      "kind": "edge",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "graph_specialists_pair_masks_and_detached_base_odds_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 4.76837158203125e-07
+      }
+    },
+    {
+      "rank": 32,
+      "kind": "node",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "graph_specialists_pair_masks_and_detached_base_odds_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 4.76837158203125e-07
+      }
+    },
+    {
+      "rank": 32,
+      "kind": "edge",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "graph_specialists_pair_masks_and_detached_base_odds_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 4.76837158203125e-07
+      }
+    }
+  ],
+  "code_sha256": {
+    "normal_pairwise_graph.py": "247f4d845c2b04965c3fea2d4cdbe5e835a18ad51d40f442abddf9cf8c366f41",
+    "audit_normal_pairwise_graph.py": "e31f9ec0f49c301864570ca777ab99b6793b1212f4fc6540c2aa29d46d1909b8",
+    "verify_normal_pairwise_graph.py": "061c435463644d459d7a271f48aa9309edee360e89dd25f1ecd40433ebdbd1fb"
+  },
+  "checks": [
+    "Four trainedstate256image complete objectives/allparametergradients independently recovered",
+    "Zero initialization preserves original probability/basegradients/parameters/RNG; equalparameter node and edge controls",
+    "Graph solution agrees with pseudoinverse, cycle gauge vanishes and shifts sum to zero; withinclass conditional disease odds preserved",
+    "Patientweight scaling, nonzero optimizer updates, frozenbuffers/strictrestore and four actual CUDA firsttasks/allgradients independently recovered"
+  ],
+  "external_test_evaluated": false
+}

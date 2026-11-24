@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "mode": "rademacher",
+      "epsilon": 0.03,
+      "full_task_batch": 256,
+      "witness": {
+        "batch_size": 256,
+        "maximum_independent_coordinate_gradient_error": 6.912159733474255e-11,
+        "fgsm_nontrivial_gradient_sign_match_fraction": 1.0,
+        "full_objective_restored": true
+      }
+    },
+    {
+      "mode": "rademacher",
+      "epsilon": 0.1,
+      "full_task_batch": 256,
+      "witness": {
+        "batch_size": 256,
+        "maximum_independent_coordinate_gradient_error": 6.912159733474255e-11,
+        "fgsm_nontrivial_gradient_sign_match_fraction": 1.0,
+        "full_objective_restored": true
+      }
+    },
+    {
+      "mode": "fgsm",
+      "epsilon": 0.03,
+      "full_task_batch": 256,
+      "witness": {
+        "batch_size": 256,
+        "maximum_independent_coordinate_gradient_error": 6.912159733474255e-11,
+        "fgsm_nontrivial_gradient_sign_match_fraction": 1.0,
+        "full_objective_restored": true
+      }
+    },
+    {
+      "mode": "fgsm",
+      "epsilon": 0.1,
+      "full_task_batch": 256,
+      "witness": {
+        "batch_size": 256,
+        "maximum_independent_coordinate_gradient_error": 6.912159733474255e-11,
+        "fgsm_nontrivial_gradient_sign_match_fraction": 1.0,
+        "full_objective_restored": true
+      }
+    }
+  ],
+  "code_sha256": {
+    "normal_tangent_adversarial.py": "477ef7d71bcba20911ecccf884e8e133cee994b666578aca94add5a3222311d9",
+    "audit_normal_tangent.py": "abcac9bb8d8a5820d63c00613d07d7117c05b2f54731e3b38931480e72eee4aa",
+    "verify_normal_tangent_adversarial.py": "7a8ee3ab17543fc6432b961956fbb400d4afd86850872c713c86b6717b2d4178"
+  },
+  "checks": [
+    "Zeroepsilon recovers original complete task,predictions,parameter gradients and globalCPU/CUDA dropout RNG",
+    "Both complete losses contribute finite gradients; detached bounded rank32 attacks; full256image updates and strict restore",
+    "FGSM signed coordinate direction has positive infinitesimal derivative verified by matched-dropout central finite differences",
+    "Allfour actual first batches independently restored from initial weight hashes, CUDA permutation, fit-only inputs and saved RNG",
+    "Independent NumPy projection plus plainMLP restores all probabilities, complete coarse/fine/contrastive losses and coordinate gradients"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-11-24T09:33:00.996912+00:00",
+  "family": "normal_cross_geometry",
+  "status": "completed_no_candidate_passed",
+  "hypothesis": "M7 confirms complementary independent B/L classifiers, but hidden residual, attention and aligned interactions may still overfit. Existing normal-reference studies independently suppress each representation or concatenate PCA. Test whether normal-patient B/L shared crosscovariance directions allow a common representation while retaining more backbone-specific variation. Compare matched per-backbone independentPCA controls at same ranks. Crosscovariance SVD is an established principle, not a novel causal nuisance identifier.",
+  "development_evidence": [
+    "results/normal_cross_geometry_diagnostics.json",
+    "results/research_normal_large_cross_attention/comparison.json",
+    "results/research_residual_m7_confirmation/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "independent_rank8",
+      "kind": "independent",
+      "rank": 8
+    },
+    {
+      "name": "independent_rank32",
+      "kind": "independent",
+      "rank": 32
+    },
+    {
+      "name": "shared_rank8",
+      "kind": "shared",
+      "rank": 8
+    },
+    {
+      "name": "shared_rank32",
+      "kind": "shared",
+      "rank": 32
+    }
+  ],
+  "geometry": "Originalfit-only standardization. Equal normalpatient centroids perstream (regional mean perimage). Independent controls each fit PCA B1536/L2048. Shared mode SVD of C_BL=A_B.T A_L/(Nnormal-1), using reducedQR and smallcoreSVD; left/right orthonormal directions eachbackbone. Rank8/32. Independently check spectrum via normalpatientGram square-root product, singular equations, centers, orthonormality and duplication invariance. No disease labels other than trainingnormal identification.",
+  "architecture": "Four streams each split B/L, suppress chosen left/right directions centered at normalpatientmeans separately, clip[-10,10], concatenate3584D. Same original attentionMLP256/fulltask/init/RNG/optimizer/patientweights; no added learnedparameters. Fourarms48heads and fixed .75branch+.25M5 probability fusions,8scores.",
+  "planned_new_seed_fits": 48,
+  "planned_candidate_scores": 8,
+  "preflight": "verification_normal_cross_geometry.json",
+  "launch_condition": "Only after all48normal_large_interactionheads and8scores independentlyaudited and nonepasses; only then freeze protocol and then-current retained gates. No scores yet.",
+  "scores_evaluated": 8,
+  "external_test_evaluated": false,
+  "selection": "Strictly exceed then-current retained original patientCV and retain its validation; freeze highestqualifyingCV before two entirelyunusedpatient3fold repeats. Require higher sixfoldmeanF1 and pairedpatient95%lowerendpoint>0 versus EACH of retained reference/M7/M6/M5/fixedGaussian. No automatic external evaluation.",
+  "protocol": "runs/normal_cross_geometry/protocol.json",
+  "protocol_sha256": "050303719dcbea0e3ae03587e6494fc41c241d91045966ce3a05bb7d5f48650c",
+  "pid": 9820,
+  "comparison": "results/research_normal_cross_geometry/comparison.json",
+  "verification": "results/research_normal_cross_geometry/verification.json",
+  "decision": "All48heads/48actualCUDAfulltasks/16normalspaces and8scores fullyaudited. Highest originalCV.8339328567<M7.8359324594, although validation.9100018432; no fresh confirmation. RetainM7; no external test."
+}

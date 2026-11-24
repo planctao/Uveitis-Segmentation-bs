@@ -1,0 +1,44 @@
+{
+  "created_at_utc": "2026-11-24T00:43:11.573607+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "source_feature_storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/foreground_multiscale.npz",
+  "source_feature_sha256": "2f22666f15742792972902627ce03eae6bb51bd6615bfc5ce1310692defd911f",
+  "source_verification": "results/research_foreground_multiscale/verification.json",
+  "source_verification_sha256": "4a48c5a266f98e1f222871315d79b758e23beeae56d067775adb155e39848d88",
+  "hypothesis": "Pure attention and sparse pooling are spatially invariant. Geometric central versus peripheral distribution may provide distinct evidence. Test three concentric summaries while preserving originalM5inputs; use matched repeated-global summary and centered radial contrast controls.",
+  "configuration_plan": [
+    {
+      "name": "global_summary_rank16",
+      "summary": "global",
+      "rank": 16
+    },
+    {
+      "name": "radial3_rank16",
+      "summary": "radial",
+      "rank": 16
+    },
+    {
+      "name": "radial3_rank32",
+      "summary": "radial",
+      "rank": 32
+    },
+    {
+      "name": "radial3_contrast_rank16",
+      "summary": "contrast",
+      "rank": 16
+    }
+  ],
+  "geometry": "Original cached7x7foreground-weighted final-layer regions at320+448concatenation. Grid centers in[-1,1]^2; ring0radius<=0.5(9regions),ring1radius<=1(20regions),ring2outside(20regions). Weight each region by existing two-scale foreground occupancy. Empty ring uses weighted whole-image mean; all-empty uses ordinary region mean. These are geometric rings, not identified anatomical structures. Contrast subtracts weighted whole-image mean. Global control repeats weighted whole-image mean3times, matching input and adapter shape.",
+  "architecture": "Each of3summaries: fit-only feature normalization, shared LayerNorm→rank16/32Linear→GELU; flatten then zero-initialized Linear→256dim;0.1residual added to originalMLPhidden immediately beforeDropout. Original4M5arrays, common parameters, initialtrain/evalpredictions andRNGunchanged. No extra loss.",
+  "planned_new_seed_fits": 48,
+  "training": "Fourfixedarms each3formal+3foldx3seeds. All originalM5losses,patient/classweights,hparams,sampling,patientfit/stop/outerplans and early stopping unchanged.",
+  "selection": "OriginalpatientCVMacro-F1>0.8090823139275858 and originalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes before freshpatient confirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "verification": "Independentweightedglobal/ring/contrast formulas, rotation/reflection invariance, empty/constant cases, originalarray identity, initialM5/RNGidentity, actualtaskgradients and doubleprecisionadapter recovery passed. All48headsCPUrestored withfitstats and actualadapters independently recovered; branch-off/norm diagnostics retained.",
+  "external_test_policy": "Only2091development rows of existing audited sourcebank; every external feature rowNaN. Noexternalrawimage,prediction ormetric accessed.",
+  "code_sha256": {
+    "radial_summary.py": "5c2d122889d490e974c5ccbf2abb88869c9425016c1e2051d3677adafc7431e3",
+    "verify_radial_summary.py": "1cf46c885d1699e38ecebcf34180ceee3950dfc013a34833ada3cf817a18146f",
+    "radial_summary_experiments.py": "d55c53f4a830e193d1fc31d4a3951ce5a4cfdaa9f80732e4db895558cc329c03"
+  }
+}

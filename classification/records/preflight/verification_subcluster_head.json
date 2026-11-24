@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "initialization_diagnostics": [
+    {
+      "components": 2,
+      "initial_probability_max_abs_change": 0.00023871660232543945,
+      "initial_class_decisions_changed_in_checked16": 0
+    },
+    {
+      "components": 4,
+      "initial_probability_max_abs_change": 0.0008143186569213867,
+      "initial_class_decisions_changed_in_checked16": 0
+    }
+  ],
+  "checks": [
+    "Exact symmetric mixture equals logcosh with analytically known patientcounts shrinkage",
+    "Singlecomponent reduces to zero residual; doubleprecision input gradient check passed",
+    "Independent SciPy logmeanexp, zero componentmeans and nonnegative evidence verified",
+    "Shared componentoffsets cancel; componentpermutations preserve evidence",
+    "AllcommonM5tensors initializedidentically; small randomresiduals intentionally break symmetry",
+    "Actualfittingpatientcounts set shrinkage; full loss gives finite nonzero mixturegradients",
+    "Strict full checkpoint restore preserves predictions"
+  ]
+}

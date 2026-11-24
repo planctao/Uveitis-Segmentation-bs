@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "scopes": [
+    {
+      "blocks": 0,
+      "rank": 16,
+      "initial_delta_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "trainable_adapter_parameters": 0,
+      "maximum_independent_adapter_error": 0.0,
+      "real_loss_batch": 16
+    },
+    {
+      "blocks": 4,
+      "rank": 16,
+      "initial_delta_sha256": "61f944b632fed3a80f026fd20e12e208d7a8600e88d4f8a2b96a3ef2620a646e",
+      "trainable_adapter_parameters": 107584,
+      "maximum_independent_adapter_error": 2.7420207922811135e-11,
+      "real_loss_batch": 16
+    },
+    {
+      "blocks": 4,
+      "rank": 64,
+      "initial_delta_sha256": "a865ad23e872347e60e536590328b4a3106c988c2b9076473c38f27e8f7fefb1",
+      "trainable_adapter_parameters": 402688,
+      "maximum_independent_adapter_error": 1.1117477346166658e-10,
+      "real_loss_batch": 16
+    }
+  ],
+  "initialization_hashes": {
+    "blocks0_rank16_seed0": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "blocks4_rank16_seed0": "61f944b632fed3a80f026fd20e12e208d7a8600e88d4f8a2b96a3ef2620a646e",
+    "blocks4_rank64_seed0": "a865ad23e872347e60e536590328b4a3106c988c2b9076473c38f27e8f7fefb1",
+    "blocks0_rank16_seed1": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "blocks0_rank16_seed2": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "blocks4_rank16_seed1": "09b9ba5f29900a9371b0f851d41137667e9a15e83864f48c192cde1df1ea7dff",
+    "blocks4_rank16_seed2": "a3dddda285efbd8d5590ebd0437e2e056f1d4763dafd4d3a09a60a2fd3005edd",
+    "blocks4_rank64_seed1": "7c25a1382d1b94ce9bd5f53cabcefc037e5cb6c51c9472c0579c01d20c0f8d2d",
+    "blocks4_rank64_seed2": "33361f2ac9c697f32e4d06d91978a92641e980a50ce1d7a254afc62a469cdaa9"
+  },
+  "code_sha256": {
+    "nonlinear_backbone_adapter.py": "eac5dbb89971ccf765c5fb6902727e47283237d77849b0623d775d9af20c2874",
+    "verify_nonlinear_backbone_adapter.py": "0ab2187c85083b119014a62748a0bb79bd17982a75f41a4728c7341ef40eb758"
+  },
+  "checks": [
+    "Allthreescopes exactoriginalreal16imageAMPpredictionsatzero initialization",
+    "Onlyrequestedtokenadapterandheadparameters train; frozenpretrainedDINO stays eval",
+    "Real16imagesfullM5task gradients andsuccessfulAMPupdates/scheduler alignment",
+    "Allfouradapteroutputs atbothresolutions independently rebuilt withNumPy/SciPy afteractualupdate",
+    "Selectedheadplusalldeltas strictly restored toidentical realimagepredictions",
+    "Independentdoubleprecisionfinite differences forbothbottleneckranks"
+  ]
+}

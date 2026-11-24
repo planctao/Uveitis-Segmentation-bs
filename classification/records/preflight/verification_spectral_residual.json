@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Patient/coarse-class moments independently reconstructed; retained eigenspace, full spectrum, ridge and sign convention checked",
+    "Duplicating all images from a patient preserves patient/class moment mass",
+    "All four scope/whitening arms retain exact common M5 initial train/eval predictions and RNG",
+    "Actual task gradients reach readout then nonlinear spectral projection; branch formula independently recovered with NumPy/SciPy",
+    "Strict buffer/parameter restoration reproduces complete actual image-feature probabilities"
+  ]
+}

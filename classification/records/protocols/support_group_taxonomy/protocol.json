@@ -1,0 +1,24 @@
+{
+  "created_at_utc": "2026-11-23T22:29:47.585080+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "The subtype branch has only2-9patients for several disease targets. Preserve everyoriginalfineoutputandcoarseprobabilityexactly, but marginalize scarce sibling diseases together for auxiliary supervision to reduce unnecessary rare-disease discrimination. Compare grouped auxiliary loss with and without grouping fine contrastive positives.",
+  "thresholds": [
+    5,
+    10,
+    20
+  ],
+  "contrastive_positive_modes": [
+    "original_disease",
+    "support_group"
+  ],
+  "fixed_candidates": 6,
+  "planned_new_seed_fits": 72,
+  "grouping_rule": "Using only current fitting patient counts, all diseaseswithpatient_count<thresholdinside the same coarse family share one tailgroup. Supported diseases each keep their own group. A tail with onlyone disease is equivalent to that disease. Normal remains its original singleton. No grouping across coarsefamilies.",
+  "architecture": "All originaldisease logits and parameters unchanged. Coarse probabilities remain sum of fine softmax by original3classmapping. Grouped auxiliary logits are logsumexp original disease logits inside each fittedsupportgroup; targets use the true disease group. Thus initial coarse predictions and every common parameter exactly match originalM5under same seed.",
+  "loss": "CoarseNLL/smoothingandweights unchanged; auxiliaryweight0.8usesgroupedCE. Original_diseasecontrol keeps the prior finecontrastive positive mask; support_grouparm makes positives from distinctpatientswith the same fittedgroup. Samefineprojectionandlosscoefficient0.05.",
+  "protocol_isolation": "Every formal/outer head constructs its own groups exclusively from fitpatients; inner stopping/outer labels never set supportthresholds or group memberships. Disease->familymapping remains the supplied clinicalmapping.",
+  "training": "All6arms receive3formal+9originalCVseeds;exactlyM5hparamsandrandominitialization.",
+  "selection": "HigherM5originalCVwithnoM5validationMacro-F1decrease. EligiblebeststillrequiresnewfixedpatientconfirmationagainstbothM5andfixedGaussianbeforefreezing.",
+  "external_test_policy": "No external scoring,outcomes,predictions or rawimages."
+}

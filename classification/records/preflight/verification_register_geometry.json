@@ -1,0 +1,315 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "arm": {
+        "name": "no_register_projection",
+        "kind": "none"
+      },
+      "original_M8_pooled_control_error": null,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.434236764907837e-07,
+      "token_permutation_error": 1.4901161193847656e-08,
+      "hidden_query_attention_change": 0.3382580876350403
+    },
+    {
+      "arm": {
+        "name": "pooled32_control",
+        "kind": "pooled"
+      },
+      "original_M8_pooled_control_error": 0.0,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.043081283569336e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 1.0
+    },
+    {
+      "arm": {
+        "name": "joint_register32",
+        "kind": "joint"
+      },
+      "original_M8_pooled_control_error": null,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.8067657947540283e-07,
+      "token_permutation_error": 5.960464477539063e-08,
+      "hidden_query_attention_change": 0.30688220262527466
+    },
+    {
+      "arm": {
+        "name": "position_register8",
+        "kind": "position"
+      },
+      "original_M8_pooled_control_error": null,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 2.1420419216156006e-07,
+      "token_permutation_error": 4.656612873077393e-10,
+      "hidden_query_attention_change": 0.34881752729415894
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "no_register_projection": {
+      "pooled": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "structured": [
+        {
+          "space": "joint",
+          "rank": 32,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.648457980176545e-09
+        },
+        {
+          "space": "position_0",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.5221436878174472e-09
+        },
+        {
+          "space": "position_1",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.732982811754937e-09
+        },
+        {
+          "space": "position_2",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.192798025963839e-09
+        },
+        {
+          "space": "position_3",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.607442566888608e-09
+        }
+      ]
+    },
+    "pooled32_control": {
+      "pooled": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "structured": [
+        {
+          "space": "joint",
+          "rank": 32,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.648457980176545e-09
+        },
+        {
+          "space": "position_0",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.5221436878174472e-09
+        },
+        {
+          "space": "position_1",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.732982811754937e-09
+        },
+        {
+          "space": "position_2",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.192798025963839e-09
+        },
+        {
+          "space": "position_3",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.607442566888608e-09
+        }
+      ]
+    },
+    "joint_register32": {
+      "pooled": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "structured": [
+        {
+          "space": "joint",
+          "rank": 32,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.648457980176545e-09
+        },
+        {
+          "space": "position_0",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.5221436878174472e-09
+        },
+        {
+          "space": "position_1",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.732982811754937e-09
+        },
+        {
+          "space": "position_2",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.192798025963839e-09
+        },
+        {
+          "space": "position_3",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.607442566888608e-09
+        }
+      ]
+    },
+    "position_register8": {
+      "pooled": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "structured": [
+        {
+          "space": "joint",
+          "rank": 32,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.648457980176545e-09
+        },
+        {
+          "space": "position_0",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.5221436878174472e-09
+        },
+        {
+          "space": "position_1",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.732982811754937e-09
+        },
+        {
+          "space": "position_2",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.192798025963839e-09
+        },
+        {
+          "space": "position_3",
+          "rank": 8,
+          "patients": 111,
+          "maximum_principal_cosine_error": 3.607442566888608e-09
+        }
+      ]
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "arm": {
+        "name": "no_register_projection",
+        "kind": "none"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 9.5367431640625e-07
+      }
+    },
+    {
+      "arm": {
+        "name": "pooled32_control",
+        "kind": "pooled"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "arm": {
+        "name": "joint_register32",
+        "kind": "joint"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.3709068298339844e-06
+      }
+    },
+    {
+      "arm": {
+        "name": "position_register8",
+        "kind": "position"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 4.827976226806641e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_geometry.py": "5f114d6844774479a3a9cce6125da187df6e772f6044b6dd5fefa7cf9d65715f",
+    "audit_register_geometry.py": "db5bad4123cfeb70d4847991cfd8a7c8ea075bcde50feb7d27381c9c27633604",
+    "verify_register_geometry.py": "47c4fb686f770256ce0dbf1d54b8dc3f21c322715bbd4b0011247cfe4a5e2e3e",
+    "large_token_data.py": "f093038f30d9d23c2d0dd63587944d564fbedeaa6478143485b282eface4f461"
+  },
+  "checks": [
+    "Four actual tokenstreams256image complete task/allparametergradients independently reconstructed",
+    "OriginalnormalL initialization/RNG/fulltask/basegradients identical atzeroreadout; equalparameters/allfourregisters; pooledcontrol exactM8learnedidentity",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Jointtoken/structuredbufferpermutation invariance, nonzero hiddenquery connectivity, optimizerupdates/frozenbuffers/strictrestore and fouractualCUDA firsttask/allgradientreplays"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

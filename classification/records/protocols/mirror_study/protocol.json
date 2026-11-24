@@ -1,0 +1,113 @@
+{
+  "created_at": "2026-11-23T20:39:22.790602+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "hypothesis": "Retinal disease class is unchanged by horizontal reflection, while frozen DINO local evidence may change. Compare symmetric prediction averaging, feature averaging, pooled regional bags, and a shared regional head that penalizes disagreement between aligned reflected views.",
+  "reflection": "Mirror the decoded 448 JPEG before resizing to320/448; align the 3x3 reflected regions to original coordinates. Do not re-encode the mirror as JPEG.",
+  "fixed_arms": [
+    {
+      "name": "mean_features",
+      "feature": "multiscale_mirror_mean",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      }
+    },
+    {
+      "name": "pooled_region_bag",
+      "feature": "multiscale_mirror_bag",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      }
+    },
+    {
+      "name": "shared_view_mean",
+      "feature": "multiscale_mirror_pairs",
+      "config": {
+        "arch": "mirror_consensus",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "mirror_agreement": 0.0,
+        "mirror_aux": 0.0,
+        "mirror_consistency": 0.0
+      }
+    },
+    {
+      "name": "agreement_pooling",
+      "feature": "multiscale_mirror_pairs",
+      "config": {
+        "arch": "mirror_consensus",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "mirror_agreement": 1.0,
+        "mirror_aux": 0.0,
+        "mirror_consistency": 0.0
+      }
+    },
+    {
+      "name": "agreement_with_consistency",
+      "feature": "multiscale_mirror_pairs",
+      "config": {
+        "arch": "mirror_consensus",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "mirror_agreement": 1.0,
+        "mirror_aux": 0.3,
+        "mirror_consistency": 0.1
+      }
+    }
+  ],
+  "additional_no_fit_control": "Use each existing milestone5 head and its original statistics on both views, then average probabilities; each outer fold uses its own pre-existing head, never the full-development head.",
+  "normalization": "All normalization fit on the current fitting patients only. The paired bank has an explicit two-view axis; fitting statistics pool that axis, tying normalization across views.",
+  "parameter_control": "Mean and region-bag controls use exactly the original head parameter count. Shared mirror pooling uses the same projections and two regional queries, with at most two extra learned nonnegative disagreement penalties.",
+  "evaluation": "Three seeds for every trainable arm and original patient3fold CV, each with separate inner stopping patients. All promising arms need newly fixed repeated-patient confirmation before external testing.",
+  "planned_new_seed_fits": 60,
+  "external_test_policy": "Frozen label-independent feature extraction allowed across the manifest; training, stopping, comparisons and selection use development patients only. No external metrics or predictions loaded."
+}

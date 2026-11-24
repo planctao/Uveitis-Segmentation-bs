@@ -1,0 +1,74 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "mode": "shift",
+      "conditioned": false,
+      "batch_size": 256,
+      "nonzero_delta_norm": 1.497571587562561,
+      "parameters": 994400
+    },
+    {
+      "mode": "shift",
+      "conditioned": true,
+      "batch_size": 256,
+      "nonzero_delta_norm": 2.8643386363983154,
+      "parameters": 994400
+    },
+    {
+      "mode": "affine",
+      "conditioned": false,
+      "batch_size": 256,
+      "nonzero_delta_norm": 1.4937753677368164,
+      "parameters": 994400
+    },
+    {
+      "mode": "affine",
+      "conditioned": true,
+      "batch_size": 256,
+      "nonzero_delta_norm": 2.857386350631714,
+      "parameters": 994400
+    }
+  ],
+  "normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 5.585237827787637e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.7959215427061395e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.6878988186070956e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 5.265183178337907e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 6.2611587026140114e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.917584707162746e-08
+    }
+  },
+  "cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "coordinate_and_adapter_restored": true,
+    "maximum_independent_forward_error": 1.1920928955078125e-06
+  },
+  "code_sha256": {
+    "normal_coordinate_conditioning.py": "494173027540bbe683ec6dd6284810dddd3cc41ed007da7749157a79b704e965",
+    "audit_normal_coordinate.py": "1917e8fd4578ab932598dc5b32da6b0c013e58d545906210422d89302223bb72",
+    "verify_normal_coordinate.py": "d5e21a7182fa9390b2a27b8f7a362d1c5419646f2d2a1f404404d47dbb71e740"
+  },
+  "checks": [
+    "Four full256image task gradients independently reconstructed with a nonzero functional adapter; all original and new parameter gradients,updates and strictrestores checked",
+    "Zero readout exactly preserves original random initialization,dropoutRNG,predictions and fulltaskloss; originaltrainingparameters unchanged",
+    "IndependentNumPy PCA context,normalprojection and manualaffineadapter restore all intermediateactivations; boundedscales/shifts checked",
+    "Conditional/contextzero controls use identicalparametercount; coordinatechange affectsconditionaladapter only",
+    "ActualCUDA firstpermutation fulltask/context/hidden/probability witness independently restored"
+  ]
+}

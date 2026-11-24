@@ -1,0 +1,38 @@
+{
+  "test_independent": {
+    "versus_milestone5": {
+      "accuracy_difference": 0.007434944237918215,
+      "patient_cluster_bootstrap_ci95": [
+        -0.019232093663911848,
+        0.03989139515455302
+      ],
+      "bootstrap_repetitions": 2000
+    },
+    "versus_fixed_gaussian": {
+      "accuracy_difference": 0.011152416356877323,
+      "patient_cluster_bootstrap_ci95": [
+        -0.01929693968755312,
+        0.04834931119040636
+      ],
+      "bootstrap_repetitions": 2000
+    }
+  },
+  "test_ningbo": {
+    "versus_milestone5": {
+      "accuracy_difference": -0.005905511811023622,
+      "patient_cluster_bootstrap_ci95": [
+        -0.02407463186077644,
+        0.011673379031964798
+      ],
+      "bootstrap_repetitions": 2000
+    },
+    "versus_fixed_gaussian": {
+      "accuracy_difference": -0.007874015748031496,
+      "patient_cluster_bootstrap_ci95": [
+        -0.026825100963032,
+        0.009925144300144274
+      ],
+      "bootstrap_repetitions": 2000
+    }
+  }
+}

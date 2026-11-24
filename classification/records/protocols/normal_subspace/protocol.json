@@ -1,0 +1,58 @@
+{
+  "created_at_utc": "2026-11-24T02:57:56.755999+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "reference_sha256": "d7b25156747ca29c1b752a61f1d711cf74458c98063f2eeb2aa990e0ae2132d8",
+  "preflight_sha256": "f4c19c2078746e33b6e32d2f49146fc334f7268112aaf3ef682d4e4de0cb5577",
+  "source_checkpoints": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_0/model.pt": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_1/model.pt": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_2/model.pt": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_0/model.pt": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_1/model.pt": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_2/model.pt": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_0/model.pt": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_1/model.pt": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_2/model.pt": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07"
+  },
+  "configuration_plan": [
+    {
+      "name": "zero_control",
+      "rank": 32,
+      "strength": 0.0
+    },
+    {
+      "name": "normal_rank8_half",
+      "rank": 8,
+      "strength": 0.5
+    },
+    {
+      "name": "normal_rank32_half",
+      "rank": 32,
+      "strength": 0.5
+    },
+    {
+      "name": "normal_rank32_full",
+      "rank": 32,
+      "strength": 1.0
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "hypothesis": "Normal-patientdominantDINOvariationmayencodecamera/normalretinalvariability. TestwhetherattenuationofitsleadingdirectionspreservesdiseaseevidenceandimprovespatientCV. Anempiricalnuisance-removalhypothesis, notassumingdirectionsaredisease-freeorclaimingmethodnovelty.",
+  "geometry": "Originalfit-onlyper-channelnormalizationandclipping. Onlyfitnormalimages;averageregionswithinimage,imageswithinpatient, thenequallyweightnormalpatientcentroids. CenterandPCAseparatelyforeachoffour1536-Dstreams. B=leading8or32orthonormaldirections. Everytokenx mapped clamp(x-alpha*(x-mu)B B^T,-10,10). StatisticsandPCArefitperphase; nofitonstopping/outerpatients.",
+  "architecture": "OriginalM5attentionMLPafterfixednormal-subspaceprojection; noextratrainableparameters. OriginalfullM5task,hparams,patientweights,seeds/stopplans. Fourfixedarms,each3formal+9originalpatientCVheads. alpha0exactoriginalforward/initRNGcontrol.",
+  "selection": "OriginalpatientCVMacroF1strictly>0.8090823139275858 andvalidation>=0.8893107959516184; freezehighestpassingCVcandidate/modelandgeometryhashes beforefreshpatientconfirmationagainstM5/fixedGaussian. Noautomaticexternalevaluation.",
+  "audit": "Independentnormalpatientcentroidloops andsmallGram eigenproblemrecoverPCAspaces. Allactualgeometrybuffers,fit-onlystats,diseasemaps,selectedepochsandM5schemaschecked. All48actualstop/outerprobabilities independently restoredwithNumPyprojector+plainM5CPUaswellasactualmodel; all12zero-strengthcontrolsmatchoriginalM5decisions. Fullpatientoutercoverageandensembles checked.",
+  "external_test_policy": "Only2091developmentfeatures;externalfeaturearrayssetNaN. Noexternalrawimages,predictions/outcomes.",
+  "code_sha256": {
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "normal_subspace_experiments.py": "62f4a2a89484f38c29cc4a5f8ed91becc8ea989b063aa58a20c8af55d923a3ac",
+    "verify_normal_subspace.py": "4731f410ab79e0d656f5ad9eee65e9af427b50ffb56015a350a5a439b4102c72",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "kernel_residual_experiments.py": "2fa80606d2b3e797047df2c7cdb26701519cbeddad1202bf21a3b2847028f065",
+    "milestone2.py": "5197d7463b2764cadceb39e40e86d6aa9e34e4576824f2d67d1e894b892848e2"
+  }
+}

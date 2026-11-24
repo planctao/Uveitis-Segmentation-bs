@@ -1,0 +1,34 @@
+# Local classification data and generated inference/training artifacts.
+**/features/
+**/feature_shards/
+**/weights/
+**/frozen_package/
+**/runs/
+**/metadata/*
+!**/metadata/counts.csv
+!**/metadata/README.md
+**/__pycache__/
+*.npz
+*.npy
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.safetensors
+*.zip
+*.log
+*.png
+*.jpg
+*.jpeg
+*.nii
+*.nii.gz
+*.xlsx
+*.csv
+!**/counts.csv
+# Archived aggregate legacy run metrics are intentional records.
+!records/legacy_binary/runs/
+!records/legacy_binary/runs/**
+!records/legacy_binary/metadata/
+!records/legacy_binary/metadata/data_summary.json

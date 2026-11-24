@@ -1,0 +1,54 @@
+{
+  "created_at_utc": "2026-11-23T22:14:53.960754+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "The current paired-scale3x3 regional tokens dilute small lesions and mix black padding with retinal evidence. Test7x7multiscale regional attention and foreground-weighted token pooling under matched M5 heads.",
+  "source_feature": "multiscale_vit",
+  "image_policy": "Use only2091original training/validation cached images. No external raw images or scores. Global/mid/dispersion copied exactly from existing feature bank, so only local evidence changes.",
+  "scales": [
+    320,
+    448
+  ],
+  "grids": [
+    3,
+    7
+  ],
+  "backbone": "vit_base_patch16_dinov3_qkvb",
+  "weights": "/root/.cache/torch/hub/checkpoints/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth",
+  "foreground": "From input pixels after fixed resize: maxRGB>20/255 AND green>10/255. Average to DINO patch grid then adaptively average to regional grid. Multi-scale occupancy is mean of the two scales. Valid if mean occupancy>0.2; if all invalid retain greatest occupancy region.",
+  "pooling": "Ordinary features use adaptive average over patch tokens. Weighted features use adaptive_avg(token*patch_foreground_fraction)/adaptive_avg(patch_foreground_fraction), with unweighted fallback when denominator<=1e-6. Shared masks depend only on pixels. Cast tokens tofloat32for pooling and final regions tofloat16.",
+  "configuration_plan": [
+    {
+      "name": "fine7_unmasked",
+      "grid": 7,
+      "pool": "ordinary",
+      "use_region_mask": false
+    },
+    {
+      "name": "fine7_masked",
+      "grid": 7,
+      "pool": "ordinary",
+      "use_region_mask": true
+    },
+    {
+      "name": "fine7_weighted_masked",
+      "grid": 7,
+      "pool": "weighted",
+      "use_region_mask": true
+    },
+    {
+      "name": "coarse3_weighted_masked",
+      "grid": 3,
+      "pool": "weighted",
+      "use_region_mask": true
+    }
+  ],
+  "matched_control": "OriginalM5same global/mid/dispersion,3x3unweighted tokens,no masks. Existing fixed M5 source models and original outer predictions preserved.",
+  "head_config": "Exactly M5attention flat taxonomy hidden256/dropout0.6/lr0.002/wd0.1/aux0.8/smoothing0.03/fine_contrastive0.05;3seeds,120epochs,patience18. Same seed initializes all common parameters.",
+  "planned_seed_fits": 48,
+  "original_cv": "Same3patient outer folds20261125and inner stopping seed20261124+fold. All4arms receive allfolds.",
+  "extraction_integrity": "Strict originalweights conversion, deterministic cached-image transforms, verify live global outputs against referencefloat16cache; save per-batch resumable shards and a final exact-array bank with indices/path/manifest hashes.",
+  "feature_storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/foreground_multiscale.npz",
+  "selection": "Higher originalCV thanM5 and validation Macro-F1 no lower thanM5. Any later promotion requires fresh fixed patient confirmation against M5 and the fixedGaussian reference.",
+  "external_test_policy": "No external raw images, outcomes or predictions; no scoring in this study."
+}

@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-11-24T01:00:31.826524+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Original patient-balanced OOF errors differ across diseases, including low-support subtypes. Evaluate known Group-DRO-style reweighting only within each requested coarse class, retaining equal parent mass. Shrink low-support risk updates to reduce dominance by very few patients. This is a training ablation, not a new inference architecture.",
+  "configuration_plan": [
+    {
+      "name": "eta0_control",
+      "eta": 0.0,
+      "shrink": 0.0
+    },
+    {
+      "name": "eta0p05",
+      "eta": 0.05,
+      "shrink": 0.0
+    },
+    {
+      "name": "eta0p2",
+      "eta": 0.2,
+      "shrink": 0.0
+    },
+    {
+      "name": "eta0p2_shrink10",
+      "eta": 0.2,
+      "shrink": 10.0
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "objective": "Complete original M5 loss with original leaf patient/class weight multiplied by current disease factor. At epochend evaluate only fitimages withoutDropout, compute label-smoothed coarseNLL per disease under original patient/class weights. Withinparent subtract original-massweighted mean; scale bysupport/(support+shrink); add eta times residual to log_factor; clip log_factor to[-ln2,+ln2]; exponentiate and renormalize eachparent to originalmassweighted mean1. Firstepochfactors1. Stopping/outer predictions never affect factors. Normalhasone disease andfactor1.",
+  "controls": "Zeroeta originalM5control repeats exact original model/init/sampling/loss; extra deterministic fit-evaluation consumes no randomdraws. Verify all12controlheads reproduce originalsourceheldout decisions. All4arms use samecomplete task, hparams, splits and stoprule; each3formal+3foldx3seeds.",
+  "audit": "Saveactualfitprobabilities foreveryepoch, allgroup risk/state/factors, support andweights. Independentlyreconstructeveryfactorstep from perpatientclassmasses without sample_weights. CPUrestoreeveryselectedfit/stop/outerprobability, allensembles and originalcontrolsourcecomparison. No inferenceparamsadded.",
+  "selection": "Only eta>0candidate eligible; require originalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestqualifyingCV freezes beforefreshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091development rows accessed. All externalfeature rowsNaN. Noexternalrawimage,predictionoroutcome used.",
+  "code_sha256": {
+    "disease_robust.py": "963d802bce58f8b3e7f5a1b0eb4c57dea2acd3bea3137bdf88c9b8d39a9f6233",
+    "verify_disease_robust.py": "2ed434e31a106cae4b1b04f2b4b2e8549c79c492a5183897453b97e3d43f8ded",
+    "disease_robust_experiments.py": "b856c505839caa1b724a8c3aea3f07dd4ef5f1d3b6b4579a6b849581d9240ae9"
+  }
+}

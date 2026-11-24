@@ -1,0 +1,44 @@
+{
+  "created_at_utc": "2026-11-23T23:19:40.345910+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Task-specific independentbinaryheads may improvehardcascade performance when trained on the stronger frozenM5DINOtaxonomyembedding, compared with directbinaryheads on originalfrozenbackbonefeatures and compared with factorizingfrozenM5probabilities.",
+  "configuration_plan": [
+    {
+      "name": "cascade_i_hidden0",
+      "order": "cascade_i",
+      "hidden": 0
+    },
+    {
+      "name": "cascade_i_hidden64",
+      "order": "cascade_i",
+      "hidden": 64
+    },
+    {
+      "name": "cascade_n_hidden0",
+      "order": "cascade_n",
+      "hidden": 0
+    },
+    {
+      "name": "cascade_n_hidden64",
+      "order": "cascade_n",
+      "hidden": 64
+    }
+  ],
+  "binary_training": {
+    "dropout": 0.6,
+    "lr": 0.002,
+    "wd": 0.1,
+    "epochs": 120,
+    "patience": 18
+  },
+  "architecture": "Two independently trainedbinaryheads over frozen256Dsourceembedding: linear or64GELUdropout. SourceM5heads independentlyfit within originalpatientpartitions; never updated by binaryexpertloss. Embeddings standardized on correspondingfitpatients only.",
+  "conditional_tasks": "cascade_i stage1infectious vs rest, stage2noninfectious vs normal on y!=0; cascade_n stage1abnormal vsnormal, stage2infectious vsnoninfectious on y!=2. Stage2bothfitandstop excludeineligibletrueclasses. Originalpatient-classweighting reconstructed perbinarytask.",
+  "stopping": "Eachbinaryhead independently earlystopped on its eligibleinnerstopping subset macroF1 thenlogloss, threshold0.5. Ensembledgates then use existingfixedgrid thresholds tuned exclusively onallstoppingpatients forendtoendmacroF1; noouter thresholdtuning.",
+  "planned_new_cascade_system_fits": 48,
+  "planned_new_binary_head_fits": 96,
+  "source_neural_head_fits_reused": 12,
+  "controls": "Also derivebinarygates from frozensource3classprobabilities and tunethresholds on samestoppingpatients; retain sourceoriginaldirectclassification. Report default0.5andstoppingtunedhardroutes, stage1/oraclestage2/endtoendmetrics separately.",
+  "selection": "Eligiblearchitecturemust exceedM5originalCVandpreserveM5validationMacroF1; needsfreshpatientconfirmation before anyfreeze/external scoring.",
+  "external_test_policy": "No external scoring, labels, predictions or rawimages; onlydevelopmentindices0..2090. Everyouterheadsourceandexpertsfitwithinitsowntrainingpatients."
+}

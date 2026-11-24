@@ -1,0 +1,46 @@
+{
+  "created_at_utc": "2026-11-24T04:37:07.831382+00:00",
+  "status": "completed",
+  "family": "coupled_normal_reference",
+  "hypothesis": "Independent normal-reference projections can remove regional differences and estimate unrelated nuisance coordinates across evidence streams. Test image-level normal correction shared by all regional tokens, with a matched independent-stream control and a joint normal factor model across all four streams. No claim that every normal variation is nuisance or that PCA itself is novel.",
+  "development_evidence": [
+    "results/research_normal_subspace_fusion/comparison.json",
+    "results/research_scale_normal_geometry/comparison.json",
+    "runs/bayesian_normal_reference/leaderboard.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "independent_mean_rank8",
+      "mode": "independent",
+      "rank": 8
+    },
+    {
+      "name": "independent_mean_rank32",
+      "mode": "independent",
+      "rank": 32
+    },
+    {
+      "name": "coupled_mean_rank8",
+      "mode": "coupled",
+      "rank": 8
+    },
+    {
+      "name": "coupled_mean_rank32",
+      "mode": "coupled",
+      "rank": 32
+    }
+  ],
+  "geometry": "Equal fit-normal patient centroids after original fit-only normalization and within-image region averaging. Independent mode fits each stream PCA. Coupled mode divides each stream by its normal-patient RMS sample standard deviation (floor1e-3), concatenates four streams and estimates joint PCA. Only supported eigenvalues above max(1e-6*largest,1e-12), zero pad to32. All statistics refit per phase and frozen before any head fitting.",
+  "architecture": "Compute normal coordinates once from four image-level stream summaries. Independent mode projects each summary separately; coupled mode shares joint coordinates and backprojects each stream with its RMS scale. For regions apply identical1536D correction to every token, preserving pairwise regional differences before clipping. Other three streams corrected directly. Original complete M5 attentionMLP task/hparams/patientweights unchanged. Four arms48heads; each also scored with fixed75% new/25% M5 probability mixture, eight scores.",
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest candidate with original CV strictly>.8270827413505814 and validation>=.8904827120381046, then previously unused patient partition confirmation against M6/M5/fixedGaussian. No automatic external testing.",
+  "external_test_evaluated": false,
+  "formal_fits_started": 48,
+  "protocol": "runs/coupled_normal_reference/protocol.json",
+  "protocol_sha256": "bed66f03a5a3d83447681b8812c6f85cad35d9ec9db3280a1b8677487c550ea1",
+  "pid": 80994,
+  "formal_fits_completed_and_audited": 48,
+  "passing_development_gates": 0,
+  "comparison": "results/research_coupled_normal_reference/comparison.json"
+}

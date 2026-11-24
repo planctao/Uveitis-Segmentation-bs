@@ -1,0 +1,22 @@
+{
+  "created_at_utc": "2026-11-24T01:43:56.906834+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "scope": "Only1717originaltrainingimages; originalvalidationandexternalimagesexcludedfromthisdiagnostic.",
+  "hypothesis": "Before selecting a nuisance-invariance experiment, inspect whether originaltrainingOOF errors vary with simple appearance descriptors. Descriptors can also reflect lesions and disease; these are not validated image-quality scores or evidence of causal confounding.",
+  "preprocessing": "OriginalM5cacheRGB resized192bilinear. Foreground=maxRGB>10/255; allblackfallbackallpixels. LinearRGB luminance dot[.2126,.7152,.0722]. Laplacian4neighbor ksize1 on3x3-eroded foreground, borderreflect101; log1pvariance.",
+  "descriptor_names": [
+    "foreground_fraction",
+    "luminance_p10",
+    "luminance_p50",
+    "luminance_p90",
+    "luminance_std",
+    "red_mean",
+    "green_mean",
+    "blue_mean",
+    "chroma_mean",
+    "dark_fraction",
+    "bright_fraction",
+    "log_laplacian_variance"
+  ],
+  "analysis": "DescriptiveoriginalM5OOF only. Perclass fourweightedquantilebins underoriginalpatient/classweights. Report weightedaccuracy and withinclasspatient/labelgroup Spearmancorrelation ofmeandescriptorvsmeanimageerror. No hypothesis test, no threshold selection, no model promotion."
+}

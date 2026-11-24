@@ -1,0 +1,60 @@
+{
+  "created_at_utc": "2026-11-24T10:05:07.980320+00:00",
+  "family": "weight_averaging",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 6,
+  "hypothesis": "Stopping-only histories show last10epochF1 ranges.0085-.0482 across12normalBheads. Test whether averaging successive optimizer states stabilizes normalB without adding inference parameters. Two predeclared epochEMA decays.8/.95 startingepoch5; same raw trajectory and raw earlystopduration, same init/permutation/dropout. This is established EMA, no architectural novelty claim.",
+  "evidence": "results/diagnostic_training_trajectory.json",
+  "configuration_plan": [
+    {
+      "name": "ema0p8_branch",
+      "source": "ema0p8",
+      "kind": "branch"
+    },
+    {
+      "name": "ema0p8_m7replace0p5",
+      "source": "ema0p8",
+      "kind": "m7_replace_normalB",
+      "replacement_fraction": 0.5
+    },
+    {
+      "name": "ema0p8_m7replace1p0",
+      "source": "ema0p8",
+      "kind": "m7_replace_normalB",
+      "replacement_fraction": 1.0
+    },
+    {
+      "name": "ema0p95_branch",
+      "source": "ema0p95",
+      "kind": "branch"
+    },
+    {
+      "name": "ema0p95_m7replace0p5",
+      "source": "ema0p95",
+      "kind": "m7_replace_normalB",
+      "replacement_fraction": 0.5
+    },
+    {
+      "name": "ema0p95_m7replace1p0",
+      "source": "ema0p95",
+      "kind": "m7_replace_normalB",
+      "replacement_fraction": 1.0
+    }
+  ],
+  "planned_new_seed_fits": 12,
+  "planned_saved_selected_models": 36,
+  "predeclared_scores": 6,
+  "fixed_formulas": "For eachEMA, branchalone; or M7=.1875rawB+.5625((1-f)normalB+fEMA)+.25normalL with f=.5/1. No extra fits or tuned weights.",
+  "launch_condition": "Only after current backbone_dropout_confirmation fully audits72heads and fails the frozen confirmation gate. If it passes, retain these unscored plans for reassessment against the new reference.",
+  "preflight": "verification_weight_averaging.json",
+  "external_test_evaluated": false,
+  "selection": "Highest qualifying originalCV strictly>M7 and validation>=M7; freeze then two unusedpatient3fold repeats against EACH M7/M6/M5/fixedGaussian, highermeanF1 and jointpairedpatient95%lowerendpoint>0.",
+  "protocol": "runs/weight_averaging/protocol.json",
+  "protocol_sha256": "82cbfd8cecff64110b864594c04c49ea94f6f93e83e2cae33507447eca14017c",
+  "pid": 12642,
+  "passing_development_gates": 0,
+  "comparison": "results/research_weight_averaging/comparison.json",
+  "comparison_sha256": "863017a523d1e410b6313c5a57fdda7c8fff25f7e5fdb7bfc0f88810bfa5490c",
+  "verification_sha256": "8befece22fb9679bc699a6b21b18945a8701292f120ecc25043ed83ac95ab5fe",
+  "decision": "RetainM7; all sixfixedscores fail; no freshconfirmation or external test for this family."
+}

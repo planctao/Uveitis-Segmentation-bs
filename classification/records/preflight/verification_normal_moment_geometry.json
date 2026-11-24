@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "mode": "images",
+      "rank": 8,
+      "real_loss_batch": 256
+    },
+    {
+      "mode": "images",
+      "rank": 32,
+      "real_loss_batch": 256
+    },
+    {
+      "mode": "within_patient",
+      "rank": 8,
+      "real_loss_batch": 256
+    },
+    {
+      "mode": "within_patient",
+      "rank": 32,
+      "real_loss_batch": 256
+    }
+  ],
+  "diagnostics": {
+    "images": {
+      "global": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 5.551594295383211e-09,
+        "weighted_covariance_trace": 796.5061232445823
+      },
+      "regions": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 5.3677873257385045e-09,
+        "weighted_covariance_trace": 360.98579128120315
+      },
+      "mid": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 4.8933864738032185e-09,
+        "weighted_covariance_trace": 1010.978438201914
+      },
+      "dispersion": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 5.622550869333054e-09,
+        "weighted_covariance_trace": 338.88598055370034
+      }
+    },
+    "within_patient": {
+      "global": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 5.041365769287154e-09,
+        "weighted_covariance_trace": 128.3872009308206
+      },
+      "regions": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 5.274920056308474e-09,
+        "weighted_covariance_trace": 62.21723881092129
+      },
+      "mid": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 5.31620591992521e-09,
+        "weighted_covariance_trace": 174.73522069592423
+      },
+      "dispersion": {
+        "effective_rank": 32,
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.302941502056569e-09,
+        "weighted_covariance_trace": 61.70529352391899
+      }
+    }
+  },
+  "code_sha256": {
+    "normal_moment_geometry.py": "22c55f7a2a7b51a5f78f45fed1ba95e3ff1012bee7ade47e18084677ec588878",
+    "verify_normal_moment_geometry.py": "03cbe933f1ba3066a059dd87b1e39fcca4fdd59f46f5d816e967adabebaff1d9"
+  },
+  "checks": [
+    "Onlyfitnormalimages; eachpatientcontributes1/Nandimageswithinpatient1/n",
+    "IndependentpatientloopsandsmallGram eigenproblem recoverbothmomentgeometries",
+    "Duplicatingnormalimagespreservespatient-balancedspacesandspectra",
+    "Degeneratewithin-patientsingletoncasehaszeropaddedbasis; noarbitrarynulldirections",
+    "Allfourmodes/ranks independenttransforms andreal256-imagecompleteM5loss/update/strictrecovery"
+  ]
+}

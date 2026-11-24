@@ -1,0 +1,147 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "independent",
+      "rank": 8,
+      "batch_size": 256,
+      "maximum_projection_error": 1.1920928955078125e-06,
+      "maximum_full_task_gradient_error": 1.9604340195655823e-07,
+      "normal_geometry": {
+        "global": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 2.8735723800465962e-09
+        },
+        "regions": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 3.130451009525359e-09
+        },
+        "mid": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 2.853072222919195e-09
+        },
+        "dispersion": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 3.3397768994802846e-09
+        }
+      },
+      "actual_cuda_full_task_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "separate_projection_restored": true,
+        "maximum_projection_error": 9.5367431640625e-07
+      }
+    },
+    {
+      "kind": "independent",
+      "rank": 32,
+      "batch_size": 256,
+      "maximum_projection_error": 1.6689300537109375e-06,
+      "maximum_full_task_gradient_error": 2.203742042183876e-07,
+      "normal_geometry": {
+        "global": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 5.6878988186070956e-09
+        },
+        "mid": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "normal_patients": 111,
+          "maximum_principal_cosine_error": 6.2611587026140114e-09
+        }
+      },
+      "actual_cuda_full_task_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "separate_projection_restored": true,
+        "maximum_projection_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "kind": "shared",
+      "rank": 8,
+      "batch_size": 256,
+      "maximum_projection_error": 1.1920928955078125e-06,
+      "maximum_full_task_gradient_error": 2.5099143385887146e-07,
+      "normal_geometry": {
+        "global": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.710187164115727e-08
+        },
+        "regions": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.9130984467393544e-08
+        },
+        "mid": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.524273865725189e-08
+        },
+        "dispersion": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.372581944470937e-08
+        }
+      },
+      "actual_cuda_full_task_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "separate_projection_restored": true,
+        "maximum_projection_error": 9.5367431640625e-07
+      }
+    },
+    {
+      "kind": "shared",
+      "rank": 32,
+      "batch_size": 256,
+      "maximum_projection_error": 1.6689300537109375e-06,
+      "maximum_full_task_gradient_error": 2.2631138563156128e-07,
+      "normal_geometry": {
+        "global": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.673261252983168e-08
+        },
+        "regions": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.890342458798113e-08
+        },
+        "mid": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.55523647328855e-08
+        },
+        "dispersion": {
+          "normal_patients": 111,
+          "maximum_relative_singular_equation_residual": 3.445502814312651e-08
+        }
+      },
+      "actual_cuda_full_task_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "separate_projection_restored": true,
+        "maximum_projection_error": 1.3113021850585938e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "normal_cross_geometry.py": "76e8cbc9f37e571718ee1b8beb1fa00c07aec1352dc129db3a027c288c9c0e6b",
+    "audit_normal_cross_geometry.py": "747437ecef4acb9be9b617311f269e938c37075bc006b02b9be723b4d944fe06",
+    "verify_normal_cross_geometry.py": "bf744370982a26d935108860bd10034794f5664aee0163faa2cd025e9344db3a"
+  },
+  "checks": [
+    "Independent normal-patient means, Gram spectra, top shared singular values, both singular equations and orthonormality",
+    "Equal-patient geometry invariant to duplicating normal images; no classifier scores or held-out outcomes used",
+    "All four actual256image full tasks/all parameter gradients independently restored; original initialization and RNG unchanged",
+    "Four actualCUDA first tasks restored; optimizer update, frozen buffers and strict restore verified"
+  ],
+  "classification_scores_evaluated": 0,
+  "external_test_evaluated": false
+}

@@ -1,0 +1,49 @@
+{
+  "created_at_utc": "2026-11-24T04:23:19.424424+00:00",
+  "status": "completed",
+  "family": "bayesian_normal_reference",
+  "hypothesis": "M6 full joint normal PCA remains the confirmed reference. Several deterministic projection alternatives and downstream experts failed the joint gate. Test diversity of normal-reference geometry across seed heads through Bayesian-bootstrap weighting of fit-normal patient centers.",
+  "development_evidence": [
+    "results/research_bounded_normal_projection/comparison.json",
+    "results/research_scale_normal_geometry/comparison.json",
+    "results/research_normal_reference_gaussian/comparison.json",
+    "results/research_dual_reference_cascades/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "shared_stream_weights_alpha0p5",
+      "scope": "shared_stream_weights",
+      "concentration": 0.5
+    },
+    {
+      "name": "shared_stream_weights_alpha2p0",
+      "scope": "shared_stream_weights",
+      "concentration": 2.0
+    },
+    {
+      "name": "independent_stream_weights_alpha0p5",
+      "scope": "independent_stream_weights",
+      "concentration": 0.5
+    },
+    {
+      "name": "independent_stream_weights_alpha2p0",
+      "scope": "independent_stream_weights",
+      "concentration": 2.0
+    }
+  ],
+  "geometry": "Only fit-normal patient centroids after original normalization and within-image region averaging. Draw positive Dirichlet weights on sorted fit-normal patients. Shared mode reuses one weight vector across four streams; independent mode draws four vectors. Compute weighted-center covariance with correction 1/(1-sum(weights^2)); estimate supported leading32 axes. The projection anchor remains the uniform normal patient mean, matching M6. Refit and redraw geometry separately per phase and model seed.",
+  "rng": "Private NumPy RNG seed=20281924+100*phase_index+model_seed, phase_index validation0/fold0=1/fold1=2/fold2=3. Geometry sampling must consume no global Torch/MLP RNG. Freeze exact patient lists, drawn weights and geometry hashes before each actual head fit.",
+  "architecture": "Original normal-suppressed M5 head with seed-dependent fixed geometry. Original full task, hyperparameters and patient weights unchanged. Four architectures48newMLPheads; each additionally scored with fixed .75 new-branch/.25 original M5 mixture, eight scores without extra fusion fits.",
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "audit_before_training": "Uniform-weight control must reproduce original M6 geometry span and predictions; independent weighted patient loops/Gram spectra, private RNG reproducibility, shared/independent weight identities, positive normalized weights, supported rank, full task gradients/update/recovery and strict fit-only provenance. Freeze formal protocol after implementation and preflight.",
+  "selection": "Freeze one highest passing original CV candidate before previously unused patient-partition confirmation against M6/M5/fixed Gaussian. No automatic external scoring.",
+  "external_test_evaluated": false,
+  "formal_fits_started": 48,
+  "protocol": "runs/bayesian_normal_reference/protocol.json",
+  "protocol_sha256": "3ac763098b5c679ca615ec29ad341bd358c228aca9712985732009b73f632359",
+  "pid": 80497,
+  "formal_fits_completed_and_audited": 48,
+  "passing_development_gates": 0,
+  "comparison": "results/research_bayesian_normal_reference/comparison.json"
+}

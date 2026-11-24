@@ -1,0 +1,135 @@
+{
+  "seed": 20261021,
+  "total_images": 6675,
+  "included_images": 2913,
+  "exclusions": {
+    "ambiguous_diagnosis_or_out_of_scope": 3255,
+    "patient_reserved_for_independent_test": 507
+  },
+  "binary_conflict_patients": 0,
+  "patient_overlap_development_independent": 83,
+  "split_counts": [
+    {
+      "split": "test_independent",
+      "label": 0,
+      "images": 327,
+      "patients": 99
+    },
+    {
+      "split": "test_independent",
+      "label": 1,
+      "images": 364,
+      "patients": 36
+    },
+    {
+      "split": "test_ningbo",
+      "label": 0,
+      "images": 284,
+      "patients": 72
+    },
+    {
+      "split": "test_ningbo",
+      "label": 1,
+      "images": 134,
+      "patients": 31
+    },
+    {
+      "split": "train",
+      "label": 0,
+      "images": 775,
+      "patients": 182
+    },
+    {
+      "split": "train",
+      "label": 1,
+      "images": 674,
+      "patients": 93
+    },
+    {
+      "split": "val",
+      "label": 0,
+      "images": 186,
+      "patients": 46
+    },
+    {
+      "split": "val",
+      "label": 1,
+      "images": 169,
+      "patients": 23
+    }
+  ],
+  "patient_disjoint": true,
+  "exact_pixel_disjoint": true,
+  "label_map": {
+    "0": "noninfectious",
+    "1": "infectious"
+  },
+  "disease_mapping": {
+    "arn": [
+      "ARN",
+      1
+    ],
+    "cmvr": [
+      "CMVR",
+      1
+    ],
+    "eales": [
+      "Eales",
+      0
+    ],
+    "mewds": [
+      "MEWDS",
+      0
+    ],
+    "pic": [
+      "PIC",
+      0
+    ],
+    "so": [
+      "SO",
+      0
+    ],
+    "vkh": [
+      "VKH",
+      0
+    ],
+    "白塞": [
+      "Behcet",
+      0
+    ],
+    "bd": [
+      "Behcet",
+      0
+    ],
+    "多灶性脉络膜炎": [
+      "MCP",
+      0
+    ],
+    "匍行性脉络膜炎": [
+      "SC",
+      0
+    ],
+    "眼弓蛔虫病": [
+      "Toxocariasis",
+      1
+    ],
+    "弓蛔虫": [
+      "Toxocariasis",
+      1
+    ],
+    "眼弓形虫病": [
+      "Toxoplasmosis",
+      1
+    ],
+    "弓形虫": [
+      "Toxoplasmosis",
+      1
+    ],
+    "眼内炎": [
+      "Endophthalmitis",
+      1
+    ]
+  },
+  "preprocessing": "Fixed 5% peripheral crop per edge; aspect-preserving padding to 448; JPEG quality 95; model input 320",
+  "split_policy": "Provided independent and Ningbo sources held out; discard overlapping development patients; 80/20 primary-hospital development patient split, stratified by binary class."
+}

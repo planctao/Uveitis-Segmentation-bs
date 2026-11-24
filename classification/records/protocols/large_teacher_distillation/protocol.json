@@ -1,0 +1,36 @@
+{
+  "created_at_utc": "2026-11-23T23:44:45.767400+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "L backbone and B/L concatenations did not improve both development gates. Test whether frozen self-supervised L geometry regularizes the B classifier when used only as a privileged training target.",
+  "teacher_feature_storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/dinov3_large_development.npz",
+  "teacher_weights_sha256": "56df97c299afea2ffa1eb90f866e8a290f452e227e732fef32a9eb9e8b52027f",
+  "architecture": "Unchanged M5 B320+448 regional attention and 256-dimensional compact disease head. Before hidden dropout, a training-only 64-dimensional decoder predicts both standardized L CLS features (cosine) or their interpatient similarity geometry (Gram MSE). Decoder initialization restores common RNG. Export removes decoder and strictly loads original M5 Model.",
+  "teacher_target_policy": "No trained teacher classifier. Frozen label-free L CLS per original fit image only; channel mean/std fitted inside each fit, then clip and per-scale unit normalize. Targets detached. Relation objective excludes every pair from same patient. Neither teacher stopping nor outer targets appear in training loss.",
+  "configuration_plan": [
+    {
+      "name": "feature_w0p05",
+      "mode": "feature",
+      "weight": 0.05
+    },
+    {
+      "name": "feature_w0p2",
+      "mode": "feature",
+      "weight": 0.2
+    },
+    {
+      "name": "relation_w0p05",
+      "mode": "relation",
+      "weight": 0.05
+    },
+    {
+      "name": "relation_w0p2",
+      "mode": "relation",
+      "weight": 0.2
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "training": "Each arm 3 formal seeds + original 3 patient folds x3 seeds; original M5 hyperparameters, patient/class weights, task losses, stopping criterion, random streams and data. Train semantic decoder from scratch with student; no warm start.",
+  "selection": "Require original patient CV Macro-F1 above frozen M5 and validation Macro-F1 no decrease. Freeze any eligible candidate before fresh patient confirmation against M5 and fixed Gaussian; no automatic external evaluation.",
+  "external_test_policy": "No new external image extraction, no external outcome/prediction access for architecture or parameter selection."
+}

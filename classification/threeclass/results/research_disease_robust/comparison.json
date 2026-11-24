@@ -1,0 +1,726 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-24T01:00:31.826524+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "hypothesis": "Original patient-balanced OOF errors differ across diseases, including low-support subtypes. Evaluate known Group-DRO-style reweighting only within each requested coarse class, retaining equal parent mass. Shrink low-support risk updates to reduce dominance by very few patients. This is a training ablation, not a new inference architecture.",
+    "configuration_plan": [
+      {
+        "name": "eta0_control",
+        "eta": 0.0,
+        "shrink": 0.0
+      },
+      {
+        "name": "eta0p05",
+        "eta": 0.05,
+        "shrink": 0.0
+      },
+      {
+        "name": "eta0p2",
+        "eta": 0.2,
+        "shrink": 0.0
+      },
+      {
+        "name": "eta0p2_shrink10",
+        "eta": 0.2,
+        "shrink": 10.0
+      }
+    ],
+    "planned_new_seed_fits": 48,
+    "objective": "Complete original M5 loss with original leaf patient/class weight multiplied by current disease factor. At epochend evaluate only fitimages withoutDropout, compute label-smoothed coarseNLL per disease under original patient/class weights. Withinparent subtract original-massweighted mean; scale bysupport/(support+shrink); add eta times residual to log_factor; clip log_factor to[-ln2,+ln2]; exponentiate and renormalize eachparent to originalmassweighted mean1. Firstepochfactors1. Stopping/outer predictions never affect factors. Normalhasone disease andfactor1.",
+    "controls": "Zeroeta originalM5control repeats exact original model/init/sampling/loss; extra deterministic fit-evaluation consumes no randomdraws. Verify all12controlheads reproduce originalsourceheldout decisions. All4arms use samecomplete task, hparams, splits and stoprule; each3formal+3foldx3seeds.",
+    "audit": "Saveactualfitprobabilities foreveryepoch, allgroup risk/state/factors, support andweights. Independentlyreconstructeveryfactorstep from perpatientclassmasses without sample_weights. CPUrestoreeveryselectedfit/stop/outerprobability, allensembles and originalcontrolsourcecomparison. No inferenceparamsadded.",
+    "selection": "Only eta>0candidate eligible; require originalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestqualifyingCV freezes beforefreshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+    "external_test_policy": "Only2091development rows accessed. All externalfeature rowsNaN. Noexternalrawimage,predictionoroutcome used.",
+    "code_sha256": {
+      "disease_robust.py": "963d802bce58f8b3e7f5a1b0eb4c57dea2acd3bea3137bdf88c9b8d39a9f6233",
+      "verify_disease_robust.py": "2ed434e31a106cae4b1b04f2b4b2e8549c79c492a5183897453b97e3d43f8ded",
+      "disease_robust_experiments.py": "b856c505839caa1b724a8c3aea3f07dd4ef5f1d3b6b4579a6b849581d9240ae9"
+    }
+  },
+  "candidates": [
+    {
+      "name": "eta0_control",
+      "candidate_id": "eta0_control",
+      "robust_configuration": {
+        "name": "eta0_control",
+        "eta": 0.0,
+        "shrink": 0.0
+      },
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "dro_eta": 0.0,
+        "dro_support_shrink": 0.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.3370578770980031,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8090823139275858,
+        "sd_macro_f1": 0.014851078598857077,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8024475524475524,
+              "balanced_accuracy": 0.8213601384553574,
+              "macro_f1": 0.7950319507661269,
+              "log_loss": 0.5101939416360366,
+              "recall": {
+                "infectious": 0.8076923076923077,
+                "noninfectious": 0.7748091603053435,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  189,
+                  36,
+                  9
+                ],
+                [
+                  36,
+                  203,
+                  23
+                ],
+                [
+                  1,
+                  8,
+                  67
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7972027972027972,
+              "balanced_accuracy": 0.8281713041656794,
+              "macro_f1": 0.8075930955398637,
+              "log_loss": 0.621427090779842,
+              "recall": {
+                "infectious": 0.7564102564102564,
+                "noninfectious": 0.7938931297709924,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  177,
+                  51,
+                  6
+                ],
+                [
+                  39,
+                  208,
+                  15
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8237347294938918,
+              "balanced_accuracy": 0.8537039602678985,
+              "macro_f1": 0.8246218954767669,
+              "log_loss": 0.5053124825313642,
+              "recall": {
+                "infectious": 0.8418803418803419,
+                "noninfectious": 0.7718631178707225,
+                "normal": 0.9473684210526315
+              },
+              "confusion_matrix": [
+                [
+                  197,
+                  26,
+                  11
+                ],
+                [
+                  45,
+                  203,
+                  15
+                ],
+                [
+                  0,
+                  4,
+                  72
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0,
+        "macro_f1_difference": 0.0,
+        "accuracy_ci95": [
+          0.0,
+          0.0
+        ],
+        "macro_f1_ci95": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "name": "eta0p05",
+      "candidate_id": "eta0p05",
+      "robust_configuration": {
+        "name": "eta0p05",
+        "eta": 0.05,
+        "shrink": 0.0
+      },
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "dro_eta": 0.05,
+        "dro_support_shrink": 0.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8796791443850267,
+        "balanced_accuracy": 0.8800329670481504,
+        "macro_f1": 0.8772304324028463,
+        "log_loss": 0.33614129814616706,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            13,
+            153,
+            8
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8042203200418486,
+        "sd_macro_f1": 0.014394415646109293,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8006993006993007,
+              "balanced_accuracy": 0.8230493373120935,
+              "macro_f1": 0.7960122229840576,
+              "log_loss": 0.501603980811258,
+              "recall": {
+                "infectious": 0.8034188034188035,
+                "noninfectious": 0.7709923664122137,
+                "normal": 0.8947368421052632
+              },
+              "confusion_matrix": [
+                [
+                  188,
+                  37,
+                  9
+                ],
+                [
+                  38,
+                  202,
+                  22
+                ],
+                [
+                  1,
+                  7,
+                  68
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7832167832167832,
+              "balanced_accuracy": 0.8201934666378218,
+              "macro_f1": 0.7958075974691236,
+              "log_loss": 0.5974516800725806,
+              "recall": {
+                "infectious": 0.7307692307692307,
+                "noninfectious": 0.7824427480916031,
+                "normal": 0.9473684210526315
+              },
+              "confusion_matrix": [
+                [
+                  171,
+                  58,
+                  5
+                ],
+                [
+                  39,
+                  205,
+                  18
+                ],
+                [
+                  0,
+                  4,
+                  72
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8167539267015707,
+              "balanced_accuracy": 0.8452015653836747,
+              "macro_f1": 0.8208411396723649,
+              "log_loss": 0.5054821184343661,
+              "recall": {
+                "infectious": 0.8333333333333334,
+                "noninfectious": 0.7680608365019012,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  195,
+                  29,
+                  10
+                ],
+                [
+                  48,
+                  202,
+                  13
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.007571345369831062,
+        "macro_f1_difference": -0.0047814129528999105,
+        "accuracy_ci95": [
+          -0.020237431874282064,
+          0.004994200666110231
+        ],
+        "macro_f1_ci95": [
+          -0.016391061947509614,
+          0.006399293841278482
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "name": "eta0p2",
+      "candidate_id": "eta0p2",
+      "robust_configuration": {
+        "name": "eta0p2",
+        "eta": 0.2,
+        "shrink": 0.0
+      },
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "dro_eta": 0.2,
+        "dro_support_shrink": 0.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8850267379679144,
+        "balanced_accuracy": 0.8832688776419579,
+        "macro_f1": 0.8768988265020933,
+        "log_loss": 0.3404481765537044,
+        "recall": {
+          "infectious": 0.9290780141843972,
+          "noninfectious": 0.8563218390804598,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            131,
+            9,
+            1
+          ],
+          [
+            15,
+            149,
+            10
+          ],
+          [
+            3,
+            5,
+            51
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7954375281986764,
+        "sd_macro_f1": 0.019023444248496665,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8024475524475524,
+              "balanced_accuracy": 0.824473838736595,
+              "macro_f1": 0.7965093567462999,
+              "log_loss": 0.504715943014618,
+              "recall": {
+                "infectious": 0.8076923076923077,
+                "noninfectious": 0.7709923664122137,
+                "normal": 0.8947368421052632
+              },
+              "confusion_matrix": [
+                [
+                  189,
+                  36,
+                  9
+                ],
+                [
+                  37,
+                  202,
+                  23
+                ],
+                [
+                  1,
+                  7,
+                  68
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.763986013986014,
+              "balanced_accuracy": 0.8048284245552225,
+              "macro_f1": 0.7759008292371461,
+              "log_loss": 0.6217144846540235,
+              "recall": {
+                "infectious": 0.6923076923076923,
+                "noninfectious": 0.7748091603053435,
+                "normal": 0.9473684210526315
+              },
+              "confusion_matrix": [
+                [
+                  162,
+                  64,
+                  8
+                ],
+                [
+                  40,
+                  203,
+                  19
+                ],
+                [
+                  0,
+                  4,
+                  72
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8097731239092496,
+              "balanced_accuracy": 0.8370133191025726,
+              "macro_f1": 0.813902398612583,
+              "log_loss": 0.5275004796200978,
+              "recall": {
+                "infectious": 0.8333333333333334,
+                "noninfectious": 0.7566539923954373,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  195,
+                  29,
+                  10
+                ],
+                [
+                  51,
+                  199,
+                  13
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.015725101921956863,
+        "macro_f1_difference": -0.013403926792422749,
+        "accuracy_ci95": [
+          -0.029153806361371618,
+          -0.003349158825602319
+        ],
+        "macro_f1_ci95": [
+          -0.026227262951235474,
+          -0.0016499586871457613
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "name": "eta0p2_shrink10",
+      "candidate_id": "eta0p2_shrink10",
+      "robust_configuration": {
+        "name": "eta0p2_shrink10",
+        "eta": 0.2,
+        "shrink": 10.0
+      },
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "dro_eta": 0.2,
+        "dro_support_shrink": 10.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.8889185951560822,
+        "macro_f1": 0.8811021359632504,
+        "log_loss": 0.33151712977900744,
+        "recall": {
+          "infectious": 0.9290780141843972,
+          "noninfectious": 0.8563218390804598,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            131,
+            9,
+            1
+          ],
+          [
+            15,
+            149,
+            10
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8047727061558753,
+        "sd_macro_f1": 0.007694719314350154,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8059440559440559,
+              "balanced_accuracy": 0.8271706047921396,
+              "macro_f1": 0.8010441637633691,
+              "log_loss": 0.49852110724160986,
+              "recall": {
+                "infectious": 0.811965811965812,
+                "noninfectious": 0.7748091603053435,
+                "normal": 0.8947368421052632
+              },
+              "confusion_matrix": [
+                [
+                  190,
+                  35,
+                  9
+                ],
+                [
+                  38,
+                  203,
+                  21
+                ],
+                [
+                  1,
+                  7,
+                  68
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7902097902097902,
+              "balanced_accuracy": 0.8224732984676737,
+              "macro_f1": 0.7996525529630252,
+              "log_loss": 0.6443737868644351,
+              "recall": {
+                "infectious": 0.7393162393162394,
+                "noninfectious": 0.7938931297709924,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  173,
+                  53,
+                  8
+                ],
+                [
+                  39,
+                  208,
+                  15
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8115183246073299,
+              "balanced_accuracy": 0.8412422097132923,
+              "macro_f1": 0.8136214017412312,
+              "log_loss": 0.5274951930800493,
+              "recall": {
+                "infectious": 0.8290598290598291,
+                "noninfectious": 0.7604562737642585,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  194,
+                  30,
+                  10
+                ],
+                [
+                  47,
+                  200,
+                  16
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.005241700640652325,
+        "macro_f1_difference": -0.0041522813163116234,
+        "accuracy_ci95": [
+          -0.014510682113756532,
+          0.003881353593906822
+        ],
+        "macro_f1_ci95": [
+          -0.01400811336252577,
+          0.005152508775818267
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "new_seed_fits": 48,
+  "external_test_evaluated": false
+}

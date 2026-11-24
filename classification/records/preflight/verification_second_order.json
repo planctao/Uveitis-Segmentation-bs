@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "configurations": [
+    {
+      "mode": "diagonal",
+      "rank": 16,
+      "neutral_initialization_and_gradients_passed": true
+    },
+    {
+      "mode": "full",
+      "rank": 16,
+      "neutral_initialization_and_gradients_passed": true
+    },
+    {
+      "mode": "full",
+      "rank": 32,
+      "neutral_initialization_and_gradients_passed": true
+    },
+    {
+      "mode": "uncentered",
+      "rank": 16,
+      "neutral_initialization_and_gradients_passed": true
+    }
+  ],
+  "protected_head_probability_max_error": 8.940696716308594e-07,
+  "checks": [
+    "Every shared base parameter initializes exactly as the unchanged original head",
+    "Zero residual makes all initial class probabilities exactly equal to baseline",
+    "Region order permutation leaves second-order descriptors unchanged",
+    "Masked regions have no effect; all-invalid masks have a finite fallback",
+    "Exactly zero inputs have finite descriptors and gradients",
+    "Residual readout learns on step1 and projection receives gradients by step2",
+    "Full covariance distinguishes equal-variance patterns that diagonal control cannot distinguish",
+    "Strict restoration is exact and old protected heads still reproduce their predictions"
+  ]
+}

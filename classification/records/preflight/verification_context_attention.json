@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Zero queries produce exactly zero score residual",
+    "Query gradients start on step1 and key gradients on step2; all gradients finite",
+    "Independent NumPy dotproduct/sqrt16/tanh algebra matches module",
+    "Region permutation equivariance, bounded residual and dependence on image context",
+    "Masked tokens cannot change valid attention; strict save/restore",
+    "Common full-model tensors and initial class decisions match M5 for both contexts",
+    "Complete model loss trains both branches and restores strictly",
+    "All3protected M5hashes unchanged and all374validationdecisions reproduced"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "candidate": {
+    "candidate_id": "gaussian_ec8d28dcc6ce",
+    "granularity": "coarse",
+    "shrinkage": 0.1,
+    "weight": 0.1,
+    "val": {
+      "n": 374,
+      "accuracy": 0.893048128342246,
+      "balanced_accuracy": 0.890059868491046,
+      "macro_f1": 0.8906667248201784,
+      "log_loss": 0.33545401350776255,
+      "recall": {
+        "infectious": 0.8865248226950354,
+        "noninfectious": 0.9022988505747126,
+        "normal": 0.8813559322033898
+      },
+      "confusion_matrix": [
+        [
+          125,
+          15,
+          1
+        ],
+        [
+          11,
+          157,
+          6
+        ],
+        [
+          2,
+          5,
+          52
+        ]
+      ]
+    },
+    "cv": {
+      "mean_macro_f1": 0.8126184009750671,
+      "sd_macro_f1": 0.009624298784746611,
+      "mean_accuracy": 0.8095463291798369
+    },
+    "paired_original_oof_vs_reference": {
+      "accuracy_difference": 0.0017472335468841083,
+      "macro_f1_difference": 0.0035109484654807233,
+      "accuracy_ci95": [
+        -0.002937893339644704,
+        0.006417923723268536
+      ],
+      "macro_f1_ci95": [
+        -0.0020229711114985393,
+        0.008811338967566668
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "development_gate_passed": true
+  },
+  "selection_policy": "Highest original development CV among candidates with nondecreasing validation macro-F1.",
+  "external_test_evaluated": false
+}

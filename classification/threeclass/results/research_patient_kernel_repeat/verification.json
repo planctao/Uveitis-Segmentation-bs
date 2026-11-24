@@ -1,0 +1,125 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "new_mlp_fits_checked": 18,
+  "kernel_systems_checked": 18,
+  "gaussian_fits_checked": 18,
+  "source_heads": [
+    {
+      "repeat": 20270301,
+      "fold": 0,
+      "seed": 0,
+      "source_sha256": "0c947949d088103b428e7cbc1244b87146fa1f7ba13aced40b7b8996e0686b26"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 0,
+      "seed": 1,
+      "source_sha256": "7893cb3896b361f83d904ef31ec5c5d7087248666c3bdcb945cb418803e46892"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 0,
+      "seed": 2,
+      "source_sha256": "0fb9705eb348bb994a6938ccb3bd601ad726304fdb0a9abc6fdc7a22dfbd281f"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 1,
+      "seed": 0,
+      "source_sha256": "87e577551d1b95853fb124d3037b5c127467c27008622e5d8b516c256424d00a"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 1,
+      "seed": 1,
+      "source_sha256": "db8ec7935c103777dba52879cfd99db31197c9fd71c48d44552f2d182f9c07b1"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 1,
+      "seed": 2,
+      "source_sha256": "8cc3b255d672521c89f7fe9b06ac077d83c3321f5f27509c68ba9f8350e442d0"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 2,
+      "seed": 0,
+      "source_sha256": "c201cc6cda8c667d162fb7838684d94a1a766abd927f26729f1da7d58c1224fd"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 2,
+      "seed": 1,
+      "source_sha256": "5f6882195622d3c0b9776a72cf111cc4682f583827138bb8208b37f27048f0e1"
+    },
+    {
+      "repeat": 20270301,
+      "fold": 2,
+      "seed": 2,
+      "source_sha256": "4c73980b7fc53c5b3db6a4e0945c8592ba99bff63e11c13b06fbf3accbeb362f"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 0,
+      "seed": 0,
+      "source_sha256": "5947bb807e4d1a2eda5031f2faccc8109c9748119421a96150c10305bb99a168"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 0,
+      "seed": 1,
+      "source_sha256": "8b5698c2215ce8432686ce87e543323a704befef6baf11f72f10b4ddf950cc86"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 0,
+      "seed": 2,
+      "source_sha256": "4afb6c06b20003193bb88aae3d32c245e0f95660543925bcf564f2579d758569"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 1,
+      "seed": 0,
+      "source_sha256": "810890be825d873fd0d5abd448d5fbb2101d07aaf0e5191a8501088f1fd23138"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 1,
+      "seed": 1,
+      "source_sha256": "e9e367b0d87441179ea45311058ac397316912d7149c527e54ad108903cf5711"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 1,
+      "seed": 2,
+      "source_sha256": "b6c8f1d625fb069437289ee45d21984d93690cf88978fda2382d41bc3a766619"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 2,
+      "seed": 0,
+      "source_sha256": "49b122dadf4c8c8e0c106db0729bfdab3f58153be81e51dfd44198af0b876175"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 2,
+      "seed": 1,
+      "source_sha256": "6ae544e9897fd00fcfb78b1ff86d822b4feb16e62ca80323f289d7ba293cbecf"
+    },
+    {
+      "repeat": 20270311,
+      "fold": 2,
+      "seed": 2,
+      "source_sha256": "abfae539146fb2146fb88abb12a343a31dde4c0ac42601bf73636d43b4efaad5"
+    }
+  ],
+  "checks": [
+    "Every split partitions original training patients only",
+    "All18 source heads and fit-only normalization audited and complete source probabilities reproduced on CPU",
+    "Patient centers and nonsymmetric kernel solutions independently reconstructed",
+    "Direct/residual probabilities reconstructed using simplex face enumeration",
+    "All Gaussian means and covariances independently rebuilt from patient moments",
+    "All4arm outer decisions, probabilities, metrics and repeat coverage reconstructed"
+  ]
+}

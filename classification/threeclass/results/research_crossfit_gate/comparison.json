@@ -1,0 +1,1127 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T22:09:05.659474+00:00",
+    "status": "predeclared_not_launched",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "hypothesis": "The fixed10%coarse Gaussian mix improved development confirmation; class covariances and signed residuals did not meet both gates. A compact uncertainty-conditioned mixture may preserve MLP confidence while admitting Gaussian evidence on unfamiliar support patterns. Train its gate only with patient-held-out predictions inside each source fitting set.",
+    "source_partition_protocol": "runs/crossfit_kernel_residual/protocol.json",
+    "source_partition_protocol_sha256": "caf62ad067d9e7faeed56f5642bd32aea5bedd350dea0aa3de97fa3351314b93",
+    "new_backbone_or_mlp_fits": 0,
+    "reuse": "Reuse all36existing inner crossfit MLP teachers; for each teacher fit the fixed coarse Gaussian(shrinkage0.1,temperature sqrt256) on its own fitting patients, then produce base and Gaussian probabilities for its heldout patients only. The teacher stopping rows do not enter statistics.",
+    "gate_features": [
+      "MLP_entropy/log3",
+      "Gaussian_entropy/log3",
+      "MLP_top1_minus_top2",
+      "Gaussian_top1_minus_top2",
+      "Jensen_Shannon/log2",
+      "argmax_agreement"
+    ],
+    "gate": "g=cap*sigmoid(logit(0.1/cap)+offset+standardized_features@coefficients); coefficients and offset initialize0, so initial mixture exactly10%Gaussian.",
+    "feature_statistics": "Standardize gate inputs on all OOFteacher heldout predictions covering only the full source fitting patients. Use std floor0.05.",
+    "objective": "Patient/class weighted mean NLL of(1-g)*MLP_probability+g*Gaussian_probability plus ridge*(mean(coefficients^2)+offset^2); full batch CPU float64, Adam lr0.02,400steps, select minimum penalized TRAINING objective, no early stop on outer or validation.",
+    "gate_caps": [
+      0.25,
+      0.5
+    ],
+    "ridge_values": [
+      0.1,
+      1.0
+    ],
+    "fixed_candidates": 4,
+    "source_gate_fits": 48,
+    "fixed_controls": [
+      "M5",
+      "fixed10%coarseGaussian"
+    ],
+    "evaluation": "Every candidate receives original validation and all3original outer patient folds. Each gate uses only its own parent source fitting patients. At evaluation use the full source MLP and its own train-only Gaussian statistics, with its crossfit-fitted gate frozen.",
+    "limitation": "Crossfit teachers train on fewer patients, so gate transfer from teachers to full-source confidence is imperfect; explicit outerCV and new confirmation required.",
+    "selection": "OriginalCV above BOTH M5 and fixed10%Gaussian, and validation Macro-F1 no lower than BOTH. Any qualifying winner then needs fixed NEW patient partitions against both references before freeze.",
+    "external_test_policy": "Never load external outcomes, predictions or raw images; no external scoring."
+  },
+  "arms": [
+    {
+      "candidate_id": "reference_m5",
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.3370578770980031,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8090823139275858,
+        "sd_macro_f1": 0.014851078598857077
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0,
+        "macro_f1_difference": 0.0,
+        "accuracy_ci95": [
+          0.0,
+          0.0
+        ],
+        "macro_f1_ci95": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "fixed_gaussian10",
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.890059868491046,
+        "macro_f1": 0.8906667248201784,
+        "log_loss": 0.33545402960677206,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            125,
+            15,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8126184009750671,
+        "sd_macro_f1": 0.009624298784746611
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0017472335468841083,
+        "macro_f1_difference": 0.0035109484654807233,
+        "accuracy_ci95": [
+          -0.002937893339644704,
+          0.006417923723268536
+        ],
+        "macro_f1_ci95": [
+          -0.0020229711114985393,
+          0.008811338967566668
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "gate_0.25_0.1",
+      "cap": 0.25,
+      "ridge": 0.1,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.885331736103339,
+        "macro_f1": 0.8863203294668005,
+        "log_loss": 0.33628296558917,
+        "recall": {
+          "infectious": 0.8723404255319149,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            123,
+            17,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8107893753842665,
+        "sd_macro_f1": 0.01011420129335226
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0005824111822947398,
+        "macro_f1_difference": 0.0016890639826335763,
+        "accuracy_ci95": [
+          -0.005158398243504702,
+          0.00369055035633839
+        ],
+        "macro_f1_ci95": [
+          -0.004183166724172907,
+          0.007070224799036399
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "gate_0.25_1.0",
+      "cap": 0.25,
+      "ridge": 1.0,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8876958022971926,
+        "macro_f1": 0.8884959058946987,
+        "log_loss": 0.33558724031136894,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8121640640534582,
+        "sd_macro_f1": 0.009065772655902943
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0011648223645893685,
+        "macro_f1_difference": 0.0030519939761852743,
+        "accuracy_ci95": [
+          -0.003652246992873387,
+          0.005848468000988327
+        ],
+        "macro_f1_ci95": [
+          -0.0026524700492859543,
+          0.008378924261488752
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "gate_0.5_0.1",
+      "cap": 0.5,
+      "ridge": 0.1,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.885331736103339,
+        "macro_f1": 0.8863203294668005,
+        "log_loss": 0.33811205928764765,
+        "recall": {
+          "infectious": 0.8723404255319149,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            123,
+            17,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8108868993140015,
+        "sd_macro_f1": 0.010219369244060255
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0017472335468841083,
+        "macro_f1_difference": 0.001745532500707636,
+        "accuracy_ci95": [
+          -0.006816001313136921,
+          0.0031922174255661507
+        ],
+        "macro_f1_ci95": [
+          -0.0044628770063157245,
+          0.007359557836172496
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "candidate_id": "gate_0.5_1.0",
+      "cap": 0.5,
+      "ridge": 1.0,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8876958022971926,
+        "macro_f1": 0.8884959058946987,
+        "log_loss": 0.33574724010753226,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8121640640534582,
+        "sd_macro_f1": 0.009065772655902943
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0011648223645893685,
+        "macro_f1_difference": 0.0030519939761852743,
+        "accuracy_ci95": [
+          -0.003652246992873387,
+          0.005848468000988327
+        ],
+        "macro_f1_ci95": [
+          -0.0026524700492859543,
+          0.008378924261488752
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    }
+  ],
+  "gate_diagnostics": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 301,
+      "coefficient_l2_norm": 0.30134038602408775,
+      "offset": 0.03853958645444454,
+      "mean_evaluation_weight": 0.10329161288771362,
+      "weight_quantiles": [
+        0.07681069218161919,
+        0.07803404036751249,
+        0.09091312942672743,
+        0.15161418480054897,
+        0.21460122615388552
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 318,
+      "coefficient_l2_norm": 0.04658201731589171,
+      "offset": 0.004485226373041216,
+      "mean_evaluation_weight": 0.10041025419564048,
+      "weight_quantiles": [
+        0.09587694887535343,
+        0.09613867778150563,
+        0.09845818256361688,
+        0.10849417190608937,
+        0.1217522230573887
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 297,
+      "coefficient_l2_norm": 0.4440089671969222,
+      "offset": 0.05315030701000763,
+      "mean_evaluation_weight": 0.11620446246772509,
+      "weight_quantiles": [
+        0.05712230799480851,
+        0.059242285026743696,
+        0.08206722351514614,
+        0.2417846932820818,
+        0.43240672274422404
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 311,
+      "coefficient_l2_norm": 0.06789345329831466,
+      "offset": 0.006202484565969732,
+      "mean_evaluation_weight": 0.10106556603874674,
+      "weight_quantiles": [
+        0.09198964465786114,
+        0.09248448853566117,
+        0.09700797125637041,
+        0.11788664981629847,
+        0.14784111749255602
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 295,
+      "coefficient_l2_norm": 0.1448987428801499,
+      "offset": 0.02509432380221267,
+      "mean_evaluation_weight": 0.10404495647262353,
+      "weight_quantiles": [
+        0.09170031498424946,
+        0.09573382693025644,
+        0.10252733310254006,
+        0.11443080923391782,
+        0.13674984603556645
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 334,
+      "coefficient_l2_norm": 0.01578315817364271,
+      "offset": 0.0026181847760568633,
+      "mean_evaluation_weight": 0.10042183109846003,
+      "weight_quantiles": [
+        0.0990584644045675,
+        0.09951029605989681,
+        0.10025952328309508,
+        0.10152642769635449,
+        0.10405548610246605
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 385,
+      "coefficient_l2_norm": 0.20750959549080406,
+      "offset": 0.034549974298654834,
+      "mean_evaluation_weight": 0.10830443547662937,
+      "weight_quantiles": [
+        0.08297953749547435,
+        0.09060941743134535,
+        0.10483959429578246,
+        0.13133772736050237,
+        0.18542510936373618
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 296,
+      "coefficient_l2_norm": 0.021268249390733317,
+      "offset": 0.0035090707803100093,
+      "mean_evaluation_weight": 0.1007622116429891,
+      "weight_quantiles": [
+        0.09828947500805786,
+        0.09913281602598517,
+        0.10045569514252456,
+        0.10279087335912862,
+        0.1074682547888044
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 302,
+      "coefficient_l2_norm": 0.20475612601797294,
+      "offset": 0.028317136860083334,
+      "mean_evaluation_weight": 0.09437771802727328,
+      "weight_quantiles": [
+        0.08262596961365999,
+        0.08283885450938559,
+        0.08750953736082401,
+        0.11757106856217041,
+        0.15840939139826943
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 294,
+      "coefficient_l2_norm": 0.024408979480746117,
+      "offset": 0.003088333527134429,
+      "mean_evaluation_weight": 0.09929898445044151,
+      "weight_quantiles": [
+        0.09782018231470295,
+        0.09785173912605646,
+        0.09845547496365009,
+        0.10205482625634212,
+        0.10711971237707088
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 297,
+      "coefficient_l2_norm": 0.27081600425041585,
+      "offset": 0.03911758810989689,
+      "mean_evaluation_weight": 0.09232737885618329,
+      "weight_quantiles": [
+        0.06980209998350545,
+        0.0703562780857834,
+        0.07850136103168218,
+        0.1339459282997712,
+        0.2306726040068374
+      ]
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 349,
+      "coefficient_l2_norm": 0.03278622202250123,
+      "offset": 0.004154175849262612,
+      "mean_evaluation_weight": 0.09878475725233847,
+      "weight_quantiles": [
+        0.09609689752276394,
+        0.09615731985323166,
+        0.0972379447270606,
+        0.10370746678766123,
+        0.11326230676222976
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 327,
+      "coefficient_l2_norm": 0.44312132488399275,
+      "offset": 0.012875469618066288,
+      "mean_evaluation_weight": 0.16192118738000366,
+      "weight_quantiles": [
+        0.06432137341821281,
+        0.0956330881799724,
+        0.1784468540271894,
+        0.20495713061803386,
+        0.20691007587177676
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 304,
+      "coefficient_l2_norm": 0.08631201060169152,
+      "offset": 0.0031710197512473857,
+      "mean_evaluation_weight": 0.1128755272182667,
+      "weight_quantiles": [
+        0.09194963282171888,
+        0.09851627809222392,
+        0.11578080170171824,
+        0.12314691815992479,
+        0.12380518168013739
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 301,
+      "coefficient_l2_norm": 0.5665270342764259,
+      "offset": 0.0201483307072737,
+      "mean_evaluation_weight": 0.25548816828694587,
+      "weight_quantiles": [
+        0.0468879010977357,
+        0.090896958425059,
+        0.29069599196347173,
+        0.37651039880928217,
+        0.3830074124973897
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 317,
+      "coefficient_l2_norm": 0.11904095763170114,
+      "offset": 0.004534681461282249,
+      "mean_evaluation_weight": 0.12624043823287004,
+      "weight_quantiles": [
+        0.08567820988029773,
+        0.09724642083388474,
+        0.1315469860555133,
+        0.14802667939249675,
+        0.14955414001327824
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 345,
+      "coefficient_l2_norm": 0.4096022717947514,
+      "offset": 0.03821124317829734,
+      "mean_evaluation_weight": 0.12577355620786015,
+      "weight_quantiles": [
+        0.05583853429072594,
+        0.07925318528351441,
+        0.1342585945577447,
+        0.16016772910674915,
+        0.1623881050378884
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 288,
+      "coefficient_l2_norm": 0.05713307868398582,
+      "offset": 0.004756418256547684,
+      "mean_evaluation_weight": 0.10359881662146245,
+      "weight_quantiles": [
+        0.09291793821427745,
+        0.09635694478583195,
+        0.10496802125375831,
+        0.10883151152074239,
+        0.10917864340812011
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 318,
+      "coefficient_l2_norm": 0.546989430176201,
+      "offset": 0.05711205181411744,
+      "mean_evaluation_weight": 0.16198741336309883,
+      "weight_quantiles": [
+        0.037346460157698755,
+        0.0654538424191331,
+        0.17335667191339937,
+        0.2433260524074973,
+        0.2498841104076685
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 282,
+      "coefficient_l2_norm": 0.07678765180813239,
+      "offset": 0.006535039980192291,
+      "mean_evaluation_weight": 0.10679274789132094,
+      "weight_quantiles": [
+        0.08774374895179284,
+        0.09353029263063135,
+        0.10917393088616227,
+        0.11661230896967406,
+        0.11729496255042117
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 309,
+      "coefficient_l2_norm": 0.42955357280712914,
+      "offset": 0.049786259254178976,
+      "mean_evaluation_weight": 0.15335132801754212,
+      "weight_quantiles": [
+        0.04761649961400256,
+        0.07955996475810503,
+        0.1700958681996272,
+        0.20128323547309915,
+        0.20359886606779792
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 309,
+      "coefficient_l2_norm": 0.07666167732719448,
+      "offset": 0.007310628693341499,
+      "mean_evaluation_weight": 0.11067909995709586,
+      "weight_quantiles": [
+        0.08882171278954219,
+        0.0963817543824214,
+        0.11330555581976524,
+        0.12081038976827178,
+        0.12149405436340002
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 311,
+      "coefficient_l2_norm": 0.5871154393521641,
+      "offset": 0.06256766140941945,
+      "mean_evaluation_weight": 0.24748869911740443,
+      "weight_quantiles": [
+        0.026495361751408535,
+        0.06594555150764587,
+        0.2808663077340834,
+        0.3822424717790507,
+        0.38957645911779687
+      ]
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 288,
+      "coefficient_l2_norm": 0.10682803707498738,
+      "offset": 0.009939200182340149,
+      "mean_evaluation_weight": 0.12206554983191653,
+      "weight_quantiles": [
+        0.08025795254548465,
+        0.0934391816710602,
+        0.12674113185633507,
+        0.14337365037183997,
+        0.1449498136234797
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 314,
+      "coefficient_l2_norm": 0.3283533813367046,
+      "offset": 0.060557697888204115,
+      "mean_evaluation_weight": 0.0971085788178494,
+      "weight_quantiles": [
+        0.06704400690201297,
+        0.08356801394364399,
+        0.09408323689797679,
+        0.11421158363360574,
+        0.15432140154273344
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 368,
+      "coefficient_l2_norm": 0.0406101903582446,
+      "offset": 0.0068116316367672495,
+      "mean_evaluation_weight": 0.09953174224643888,
+      "weight_quantiles": [
+        0.0961019752287007,
+        0.09785147024593083,
+        0.09906070895831752,
+        0.10195605220478689,
+        0.1069430219330183
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 333,
+      "coefficient_l2_norm": 0.49344588110583687,
+      "offset": 0.08456410585473112,
+      "mean_evaluation_weight": 0.09603252977043426,
+      "weight_quantiles": [
+        0.04591416832641533,
+        0.06993503852886589,
+        0.08666285161543345,
+        0.13414347849780117,
+        0.23770056659473893
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 311,
+      "coefficient_l2_norm": 0.05594097450672503,
+      "offset": 0.00921028236953659,
+      "mean_evaluation_weight": 0.09915016359803355,
+      "weight_quantiles": [
+        0.09305639936427398,
+        0.0960780955126241,
+        0.09823587220225849,
+        0.10372472965595418,
+        0.1132121572120443
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 353,
+      "coefficient_l2_norm": 0.1855584746880715,
+      "offset": 0.051969144991956824,
+      "mean_evaluation_weight": 0.11489210728747572,
+      "weight_quantiles": [
+        0.09731620924293376,
+        0.10501100192690639,
+        0.11487004310823884,
+        0.1244950344821469,
+        0.13040136176836709
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 329,
+      "coefficient_l2_norm": 0.02081869321768976,
+      "offset": 0.005257501856651082,
+      "mean_evaluation_weight": 0.10158643745970874,
+      "weight_quantiles": [
+        0.09952632285834097,
+        0.10060130139242075,
+        0.1015696893602662,
+        0.10257196133059766,
+        0.10310516419108158
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 297,
+      "coefficient_l2_norm": 0.2905277527373613,
+      "offset": 0.07378356335926586,
+      "mean_evaluation_weight": 0.13415887905021912,
+      "weight_quantiles": [
+        0.09034043556447718,
+        0.10765110713643476,
+        0.1335368592822755,
+        0.15996042672930727,
+        0.17875626260370625
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 326,
+      "coefficient_l2_norm": 0.028030153401562327,
+      "offset": 0.007073080180062334,
+      "mean_evaluation_weight": 0.10288604116100597,
+      "weight_quantiles": [
+        0.09926455417005797,
+        0.10104089859201155,
+        0.1028462485274158,
+        0.10472160039758009,
+        0.10576173323345549
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 305,
+      "coefficient_l2_norm": 0.2209763171546952,
+      "offset": 0.03328009686497007,
+      "mean_evaluation_weight": 0.09958967700579557,
+      "weight_quantiles": [
+        0.05366753529681683,
+        0.07718453096752848,
+        0.10442076269846313,
+        0.11477331668110151,
+        0.12202236019945906
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 315,
+      "coefficient_l2_norm": 0.025723320098152848,
+      "offset": 0.0034000705063921425,
+      "mean_evaluation_weight": 0.09990489785846796,
+      "weight_quantiles": [
+        0.0936688390768845,
+        0.09701394751126204,
+        0.10055533841090274,
+        0.10180326461343629,
+        0.10227354025304469
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 314,
+      "coefficient_l2_norm": 0.32594420632653104,
+      "offset": 0.04820792619491031,
+      "mean_evaluation_weight": 0.1006115328548519,
+      "weight_quantiles": [
+        0.03233823750425695,
+        0.06002768131908519,
+        0.10810051419835287,
+        0.12884519124473265,
+        0.15259102338690253
+      ]
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 387,
+      "coefficient_l2_norm": 0.03423605943072039,
+      "offset": 0.0046079425195107975,
+      "mean_evaluation_weight": 0.09985149276974681,
+      "weight_quantiles": [
+        0.08919686739034444,
+        0.09483971296477194,
+        0.10095655485582632,
+        0.10316707062084703,
+        0.10420402659545512
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 317,
+      "coefficient_l2_norm": 0.36439587619692343,
+      "offset": 0.01779005397188314,
+      "mean_evaluation_weight": 0.12805850827083684,
+      "weight_quantiles": [
+        0.07452554837332144,
+        0.10786158938480471,
+        0.12872204705992135,
+        0.1380410524800362,
+        0.2327132989385427
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 304,
+      "coefficient_l2_norm": 0.07489176254723973,
+      "offset": 0.003225029872871356,
+      "mean_evaluation_weight": 0.1034861681963744,
+      "weight_quantiles": [
+        0.09470158436455552,
+        0.10018579193949266,
+        0.10254773490799607,
+        0.10697040354545337,
+        0.13959222385860656
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 334,
+      "coefficient_l2_norm": 0.46922023770594895,
+      "offset": 0.023018447728207696,
+      "mean_evaluation_weight": 0.16298788651464458,
+      "weight_quantiles": [
+        0.06533103977086592,
+        0.11983159039835088,
+        0.15871324277361867,
+        0.19438844729504495,
+        0.4674844260841019
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 323,
+      "coefficient_l2_norm": 0.10599134718735001,
+      "offset": 0.004528049044916171,
+      "mean_evaluation_weight": 0.10663100027365233,
+      "weight_quantiles": [
+        0.09050328014999465,
+        0.10032891226664094,
+        0.10420446584090236,
+        0.114231076149942,
+        0.19222314166124582
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 323,
+      "coefficient_l2_norm": 0.2895083068211854,
+      "offset": 0.025060889419911754,
+      "mean_evaluation_weight": 0.0987759365502765,
+      "weight_quantiles": [
+        0.08367023106092038,
+        0.09227524072571147,
+        0.09548720936761262,
+        0.1092913474031802,
+        0.1591702173075128
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 359,
+      "coefficient_l2_norm": 0.03705010849212224,
+      "offset": 0.0029329339055479183,
+      "mean_evaluation_weight": 0.09968603915671483,
+      "weight_quantiles": [
+        0.0978521903324408,
+        0.09891419302050582,
+        0.09922807335079206,
+        0.1011220711516989,
+        0.10746447884384658
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 307,
+      "coefficient_l2_norm": 0.41342999461658664,
+      "offset": 0.03694274107369021,
+      "mean_evaluation_weight": 0.09524197812272421,
+      "weight_quantiles": [
+        0.07308527625924129,
+        0.08207385526111385,
+        0.08420074021935063,
+        0.12136590346921698,
+        0.2585059424045735
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 386,
+      "coefficient_l2_norm": 0.050999241028145535,
+      "offset": 0.004020033750035344,
+      "mean_evaluation_weight": 0.09934771800738255,
+      "weight_quantiles": [
+        0.09611222557975062,
+        0.09792630166499844,
+        0.09840658520827518,
+        0.1021185338634501,
+        0.11437265993603496
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "candidate": "gate_0.25_0.1",
+      "selected_step": 305,
+      "coefficient_l2_norm": 0.3521505077056245,
+      "offset": 0.04978374227062509,
+      "mean_evaluation_weight": 0.12209377645631563,
+      "weight_quantiles": [
+        0.05623415772571788,
+        0.09612698094659097,
+        0.12673419171284003,
+        0.13758072478706038,
+        0.2093064886074172
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "candidate": "gate_0.25_1.0",
+      "selected_step": 332,
+      "coefficient_l2_norm": 0.043508633491460225,
+      "offset": 0.005539028906665017,
+      "mean_evaluation_weight": 0.10257666978082873,
+      "weight_quantiles": [
+        0.09395894785878416,
+        0.09957075080451838,
+        0.10306272383585662,
+        0.104261293032259,
+        0.11621508477334627
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "candidate": "gate_0.5_0.1",
+      "selected_step": 330,
+      "coefficient_l2_norm": 0.48371560356543525,
+      "offset": 0.07230533091680738,
+      "mean_evaluation_weight": 0.15304239986115398,
+      "weight_quantiles": [
+        0.036168254512196116,
+        0.09591182614679532,
+        0.1607375512425193,
+        0.1870589433057554,
+        0.4109475762566481
+      ]
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "candidate": "gate_0.5_1.0",
+      "selected_step": 269,
+      "coefficient_l2_norm": 0.05880352200026853,
+      "offset": 0.0075369674820321185,
+      "mean_evaluation_weight": 0.10476451247354669,
+      "weight_quantiles": [
+        0.08947255723847479,
+        0.09929478869926632,
+        0.1056119422187149,
+        0.10773026357098703,
+        0.1323470846159318
+      ]
+    }
+  ],
+  "small_gate_fits": 48,
+  "new_backbone_or_mlp_fits": 0,
+  "passing_development_gates": 0,
+  "external_test_evaluated": false
+}

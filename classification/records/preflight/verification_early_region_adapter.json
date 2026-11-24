@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Independent double precision LayerNorm/GELU/gated residual formula reconstructed",
+    "Joint spatial-region permutation equivariance and numerical gate derivative checked",
+    "Zero readouts preserve original M5 train/eval probabilities, contrastive outputs and RNG exactly",
+    "Task loss reaches residual readout, intermediate projection and final-conditioned gate",
+    "Both full classifiers strictly restore trained checkpoints"
+  ]
+}

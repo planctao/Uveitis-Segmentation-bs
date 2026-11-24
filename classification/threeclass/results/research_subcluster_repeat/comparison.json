@@ -1,0 +1,682 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T22:58:50.727697+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "selection_record": "results/research_subcluster_taxonomy/selection_before_repeat.json",
+    "selection_record_sha256": "d8252e868e6f9f152345604e5127ceb0a00d5f85355fe4d355ca5afdf44f566f",
+    "selected_candidate": "components4_penalty0.001",
+    "outer_split_seeds": [
+      20270501,
+      20270511
+    ],
+    "inner_split_rule": "20percent of outerfit patient groups; seed20270524+repeatindex*10+fold, modalcoarselabelstratified.",
+    "arms": [
+      "reference",
+      "fixed_gaussian",
+      "candidate"
+    ],
+    "planned_new_seed_fits": 36,
+    "planned_generative_fits": 18,
+    "controls": "TrainM5andthefixedcandidateonidenticalinnerpartitionswith3seeds. FixedGaussianuseseachM5hidden256embedding, coarsepatientbalancedevidence, covariance shrinkage0.1, temperature sqrt256 and 10percent mixture; exactlypreviousfrozenrecipe.",
+    "confirmation_gate": "Candidate sixfoldmeanMacroF1must exceed both controls, and jointlyrepeatedpatientbootstrap95percentinterval for pooledMacroF1difference must have lowerbound>0 versus BOTHcontrols. No retuning from these outcomes.",
+    "protocol_isolation": "Onlyoriginal1717trainingimages used; originalvalidation and externalsets excluded. Candidate fixed after all48sourceheadsaudited; no newconfigurationselectioninsideconfirmation.",
+    "external_test_policy": "No external scoring, labels, predictions or rawimages; positiveconfirmationrequiresseparatefrozeninference review before any external scoring."
+  },
+  "arms": [
+    {
+      "arm": "reference",
+      "folds": [
+        {
+          "repeat": 20270501,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8289703315881326,
+            "balanced_accuracy": 0.8504837945502345,
+            "macro_f1": 0.8219712476842661,
+            "log_loss": 0.42173554651073886,
+            "recall": {
+              "infectious": 0.8205128205128205,
+              "noninfectious": 0.8098859315589354,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                192,
+                32,
+                10
+              ],
+              [
+                30,
+                213,
+                20
+              ],
+              [
+                2,
+                4,
+                70
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270501,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.6818181818181818,
+            "balanced_accuracy": 0.7277888807619624,
+            "macro_f1": 0.6902368936738893,
+            "log_loss": 0.8319673001339749,
+            "recall": {
+              "infectious": 0.6452991452991453,
+              "noninfectious": 0.6564885496183206,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                151,
+                64,
+                19
+              ],
+              [
+                67,
+                172,
+                23
+              ],
+              [
+                2,
+                7,
+                67
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270501,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8234265734265734,
+            "balanced_accuracy": 0.8395887775156559,
+            "macro_f1": 0.8271036344948332,
+            "log_loss": 0.4552605840517232,
+            "recall": {
+              "infectious": 0.8034188034188035,
+              "noninfectious": 0.8206106870229007,
+              "normal": 0.8947368421052632
+            },
+            "confusion_matrix": [
+              [
+                188,
+                42,
+                4
+              ],
+              [
+                33,
+                215,
+                14
+              ],
+              [
+                2,
+                6,
+                68
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7993019197207679,
+            "balanced_accuracy": 0.8189536228859824,
+            "macro_f1": 0.8058664955663554,
+            "log_loss": 0.4931588829730623,
+            "recall": {
+              "infectious": 0.8034188034188035,
+              "noninfectious": 0.7718631178707225,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                188,
+                42,
+                4
+              ],
+              [
+                45,
+                203,
+                15
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.743006993006993,
+            "balanced_accuracy": 0.7880388810481217,
+            "macro_f1": 0.7479945564088711,
+            "log_loss": 0.7974511848884386,
+            "recall": {
+              "infectious": 0.6495726495726496,
+              "noninfectious": 0.767175572519084,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                152,
+                67,
+                15
+              ],
+              [
+                38,
+                201,
+                23
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8216783216783217,
+            "balanced_accuracy": 0.8258617117596628,
+            "macro_f1": 0.8213716762122463,
+            "log_loss": 0.48099888347679476,
+            "recall": {
+              "infectious": 0.8034188034188035,
+              "noninfectious": 0.8320610687022901,
+              "normal": 0.8421052631578947
+            },
+            "confusion_matrix": [
+              [
+                188,
+                39,
+                7
+              ],
+              [
+                35,
+                218,
+                9
+              ],
+              [
+                1,
+                11,
+                64
+              ]
+            ]
+          }
+        }
+      ],
+      "mean_macro_f1": 0.7857574173400769,
+      "sd_macro_f1": 0.05521576903476534,
+      "mean_accuracy": 0.783033720206495
+    },
+    {
+      "arm": "fixed_gaussian",
+      "folds": [
+        {
+          "repeat": 20270501,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8359511343804538,
+            "balanced_accuracy": 0.8555535030419961,
+            "macro_f1": 0.8302707439992295,
+            "log_loss": 0.4232259706677135,
+            "recall": {
+              "infectious": 0.8205128205128205,
+              "noninfectious": 0.8250950570342205,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                192,
+                33,
+                9
+              ],
+              [
+                28,
+                217,
+                18
+              ],
+              [
+                2,
+                4,
+                70
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270501,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.6800699300699301,
+            "balanced_accuracy": 0.7232506790562235,
+            "macro_f1": 0.6900341001049006,
+            "log_loss": 0.7753810424517135,
+            "recall": {
+              "infectious": 0.6410256410256411,
+              "noninfectious": 0.6603053435114504,
+              "normal": 0.868421052631579
+            },
+            "confusion_matrix": [
+              [
+                150,
+                68,
+                16
+              ],
+              [
+                66,
+                173,
+                23
+              ],
+              [
+                2,
+                8,
+                66
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270501,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8269230769230769,
+            "balanced_accuracy": 0.8422855435712004,
+            "macro_f1": 0.8298322649696344,
+            "log_loss": 0.44699538671414235,
+            "recall": {
+              "infectious": 0.8076923076923077,
+              "noninfectious": 0.8244274809160306,
+              "normal": 0.8947368421052632
+            },
+            "confusion_matrix": [
+              [
+                189,
+                41,
+                4
+              ],
+              [
+                32,
+                216,
+                14
+              ],
+              [
+                2,
+                6,
+                68
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8010471204188482,
+            "balanced_accuracy": 0.8202210500089228,
+            "macro_f1": 0.807224078087216,
+            "log_loss": 0.4801334888294677,
+            "recall": {
+              "infectious": 0.8034188034188035,
+              "noninfectious": 0.7756653992395437,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                188,
+                42,
+                4
+              ],
+              [
+                44,
+                204,
+                15
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.7465034965034965,
+            "balanced_accuracy": 0.7905834103102082,
+            "macro_f1": 0.7523508380982699,
+            "log_loss": 0.7659931342835049,
+            "recall": {
+              "infectious": 0.6495726495726496,
+              "noninfectious": 0.7748091603053435,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                152,
+                67,
+                15
+              ],
+              [
+                38,
+                203,
+                21
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8269230769230769,
+            "balanced_accuracy": 0.8301352160331671,
+            "macro_f1": 0.8292920740878061,
+            "log_loss": 0.4689360863745374,
+            "recall": {
+              "infectious": 0.8162393162393162,
+              "noninfectious": 0.8320610687022901,
+              "normal": 0.8421052631578947
+            },
+            "confusion_matrix": [
+              [
+                191,
+                39,
+                4
+              ],
+              [
+                35,
+                218,
+                9
+              ],
+              [
+                1,
+                11,
+                64
+              ]
+            ]
+          }
+        }
+      ],
+      "mean_macro_f1": 0.7898340165578427,
+      "sd_macro_f1": 0.0573748260784468,
+      "mean_accuracy": 0.7862363058698136
+    },
+    {
+      "arm": "candidate",
+      "folds": [
+        {
+          "repeat": 20270501,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8254799301919721,
+            "balanced_accuracy": 0.8473206430981096,
+            "macro_f1": 0.8157264407264407,
+            "log_loss": 0.4363074448814276,
+            "recall": {
+              "infectious": 0.8034188034188035,
+              "noninfectious": 0.8174904942965779,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                188,
+                35,
+                11
+              ],
+              [
+                25,
+                215,
+                23
+              ],
+              [
+                1,
+                5,
+                70
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270501,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.6940559440559441,
+            "balanced_accuracy": 0.7354768388315996,
+            "macro_f1": 0.7110009522543739,
+            "log_loss": 0.730440694953209,
+            "recall": {
+              "infectious": 0.6111111111111112,
+              "noninfectious": 0.7137404580152672,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                143,
+                80,
+                11
+              ],
+              [
+                57,
+                187,
+                18
+              ],
+              [
+                1,
+                8,
+                67
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270501,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8251748251748252,
+            "balanced_accuracy": 0.8378995786589197,
+            "macro_f1": 0.8272765207871066,
+            "log_loss": 0.4682326366746496,
+            "recall": {
+              "infectious": 0.8076923076923077,
+              "noninfectious": 0.8244274809160306,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                189,
+                43,
+                2
+              ],
+              [
+                30,
+                216,
+                16
+              ],
+              [
+                0,
+                9,
+                67
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 0,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8045375218150087,
+            "balanced_accuracy": 0.8361725012215308,
+            "macro_f1": 0.8136968052514318,
+            "log_loss": 0.48428672063936967,
+            "recall": {
+              "infectious": 0.8290598290598291,
+              "noninfectious": 0.7452471482889734,
+              "normal": 0.9342105263157895
+            },
+            "confusion_matrix": [
+              [
+                194,
+                37,
+                3
+              ],
+              [
+                49,
+                196,
+                18
+              ],
+              [
+                0,
+                5,
+                71
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 1,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.7552447552447552,
+            "balanced_accuracy": 0.7978581542261735,
+            "macro_f1": 0.7606906104509584,
+            "log_loss": 0.7817090832458877,
+            "recall": {
+              "infectious": 0.6752136752136753,
+              "noninfectious": 0.7709923664122137,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                158,
+                61,
+                15
+              ],
+              [
+                40,
+                202,
+                20
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          }
+        },
+        {
+          "repeat": 20270511,
+          "fold": 2,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8321678321678322,
+            "balanced_accuracy": 0.8341042467197549,
+            "macro_f1": 0.8371899445583657,
+            "log_loss": 0.4780039352983313,
+            "recall": {
+              "infectious": 0.8205128205128205,
+              "noninfectious": 0.8396946564885496,
+              "normal": 0.8421052631578947
+            },
+            "confusion_matrix": [
+              [
+                192,
+                39,
+                3
+              ],
+              [
+                35,
+                220,
+                7
+              ],
+              [
+                1,
+                11,
+                64
+              ]
+            ]
+          }
+        }
+      ],
+      "mean_macro_f1": 0.7942635456714463,
+      "sd_macro_f1": 0.048642864083618086,
+      "mean_accuracy": 0.7894434681083896
+    }
+  ],
+  "paired_candidate_vs_controls": {
+    "reference": {
+      "accuracy_difference": 0.006406523005241693,
+      "macro_f1_difference": 0.008631152425349953,
+      "accuracy_ci95": [
+        -0.0016026155327342694,
+        0.014962243286941047
+      ],
+      "macro_f1_ci95": [
+        0.0005973223694913211,
+        0.017239143623306162
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    },
+    "fixed_gaussian": {
+      "accuracy_difference": 0.0032032615026208466,
+      "macro_f1_difference": 0.004480623666232919,
+      "accuracy_ci95": [
+        -0.0051853585345529975,
+        0.011815806628067294
+      ],
+      "macro_f1_ci95": [
+        -0.0037741308322288697,
+        0.0131042530217101
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    }
+  },
+  "confirmation_gate_passed": false,
+  "new_seed_fits": 36,
+  "generative_fits": 18,
+  "external_test_evaluated": false,
+  "inference_limit": "Patient resampling does not include all model-fitting uncertainty or adjust for prior development selection.",
+  "decision": "Candidate failed fresh patient confirmation; preserve both frozen reference models."
+}

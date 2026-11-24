@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-24T00:55:22.226755+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Coordinate standardization does not remove correlations in DINO channels. Fit-patient principal directions and mild whitening may condition a compact nonlinear evidence branch better. Retain every original M5 feature and compare unwhitened projected residuals at the same scope and parameter count.",
+  "configuration_plan": [
+    {
+      "name": "global64_unwhitened",
+      "scope": "global",
+      "alpha": 0.0
+    },
+    {
+      "name": "global64_halfwhite",
+      "scope": "global",
+      "alpha": 0.5
+    },
+    {
+      "name": "both64_unwhitened",
+      "scope": "both",
+      "alpha": 0.0
+    },
+    {
+      "name": "both64_halfwhite",
+      "scope": "both",
+      "alpha": 0.5
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "geometry": "For eachfit/stop/outerplan, apply originalM5fit-onlystandardization and clip10. Weightedmean/covariance from currentfitonly with sample_weights coarsepatient/classbalance. Regional9tokens split imageweight equally. Retain64leadingeigenvectors with deterministic largest-absolute-loading sign, ridge0.05trace(cov)/dimension. Gain=(eigenvalue+ridge)^(-alpha/2), alpha0or0.5. No held-out values in geometry. Save full spectrum and hash geometry artifacts.",
+  "architecture": "Global standardizedfeature→center→fixed64PCA/gain→32dimLinearGELU→zero-initialized256dimreadout;0.1residual added before originalglobalprojectionGELU. Bothscope additionally local64PCA/gain→16dimGELU→zero128dimreadout before originalregionprojectionGELU. OriginalM5arrays,commonparameters,initialtrain/evalpredictions andRNGidentical. No newtaskloss.",
+  "training": "Fourfixedarms each3formal+3foldx3seeds with originalM5losses,patientweights,hparams,sampling andearlystoprules. Geometrysharedacrossseeds withinfitplanonly.",
+  "selection": "OriginalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes before freshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "verification": "Independentpatientmoments, fullSciPyspectrum, orthogonality/eigenvectorresiduals,sign/ridge,patientduplicationinvariance,exactinitialM5/RNGidentity andactualtaskgradientschecked. Everyactualfitgeometryverified before andaftertraining; all48headsCPUrestored with everybuffer/gain/fitstatchecked and actualnonlinearresiduals independently rebuilt.",
+  "external_test_policy": "Only2091developmentfeature rows used; everyexternalrowNaN and explicitinferenceindexguard. Noexternalrawimage,prediction,scoreaccess.",
+  "code_sha256": {
+    "spectral_residual.py": "5e76c88d912d7b63f574450aa5a147703ce6cc2e04d586fb26f0aea538c5e0b2",
+    "verify_spectral_residual.py": "f7acea4bf594187259fa85020e6e8579009d3f11e94a36743c0107bc4d921965",
+    "spectral_residual_experiments.py": "7235077a22585aea41a2ce83c852da617af68ce323e930bfd262dcdfdee694ce"
+  }
+}

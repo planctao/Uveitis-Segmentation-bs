@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protected_reference_probability_max_error": 8.940696716308594e-07,
+  "checks": [
+    "Positive rescaling of embeddings or prototypes leaves cosine scores invariant",
+    "Permuting multiple centers within a disease leaves predictions invariant",
+    "Margins change only known positive subtype logits and lower them",
+    "Arc margin remains finite at endpoint and near-endpoint cosine values",
+    "Unknown subtype labels do not receive margin corrections",
+    "Full model has finite losses and gradients including scale and prototypes",
+    "Strict restoration reproduces all predictions",
+    "Prediction is independent of configured training margin and never requires labels",
+    "Existing protected milestone5 head still reproduces its validation predictions"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "level": "coarse",
+      "strength": 0.1,
+      "batch_size": 256,
+      "trained_state_penalty": 6.428189180951449e-07
+    },
+    {
+      "level": "coarse",
+      "strength": 1.0,
+      "batch_size": 256,
+      "trained_state_penalty": 6.428189180951449e-07
+    },
+    {
+      "level": "disease",
+      "strength": 0.1,
+      "batch_size": 256,
+      "trained_state_penalty": 2.4618475436000153e-06
+    },
+    {
+      "level": "disease",
+      "strength": 1.0,
+      "batch_size": 256,
+      "trained_state_penalty": 2.4618475436000153e-06
+    }
+  ],
+  "normal_spatial_bank_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 5.585237827787637e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.7959215427061395e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.6878988186070956e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 5.265183178337907e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 6.2611587026140114e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.917584707162746e-08
+    },
+    "spatial": {
+      "normal_patients": 111,
+      "ridge": 1.0,
+      "context_rank": 8,
+      "maximum_independent_coefficient_error": 7.440638188915827e-09
+    },
+    "bank": {
+      "normal_patients": 111,
+      "maximum_independent_bank_error": 5.955434723148301e-08,
+      "mean_square": 0.05879870983881932
+    }
+  },
+  "cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "donors_and_spatial_view_restored": true,
+    "paired_dropout_and_penalty_restored": true,
+    "numpy_js_error": 4.5236883247416235e-09
+  },
+  "code_sha256": {
+    "normal_spatial_consistency.py": "279886334cf8b1bcf30c1fc433d4179e36f9ce98ed473b082ef7da15b642cb1f",
+    "audit_normal_spatial_consistency.py": "11fa254b63612b9870b77b4cd7d32d25348fbfef9f2a60cb05bae7328e012b83",
+    "verify_normal_spatial_consistency.py": "86218ce4b4cd3b3561fba07d6f82220191a192013e5b8e6535f658ab2e0721a8"
+  },
+  "checks": [
+    "Originalparameters/init/RNG/inferenceexact;fourtrained-state256imagecomplete-task/pairedJSfullparametergradientsindependentlyrestored",
+    "SameRNGmasksindependentlyreplayed;onlyoriginaldrawstreamadvances;zeroconsistencyoriginalfulltaskgradientsidentical",
+    "Explicitpatientbank/augmentedridgeindependentrecovery,donorindices/NumPyJSandzerospatialviewJSchecked",
+    "Optimizerupdatesandstrictrestores,allnormal/bankbuffersfrozen;actualCUDAfirsttrainingpairedinput/task/JSwitnessindependentlyrestored"
+  ]
+}

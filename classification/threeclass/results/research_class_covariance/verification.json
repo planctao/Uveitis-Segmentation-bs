@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "source_heads_checked": 12,
+  "heteroscedastic_models_checked": 24,
+  "candidates_checked": 4,
+  "checks": [
+    "All12 sources strictly restore on CPU and train-only normalization/patient isolation audited",
+    "Patient-balanced class means and full covariance matrices independently reconstructed",
+    "Every actual shared endpoint reproduces original coarse Gaussian evidence",
+    "All24 class probabilities match independent scipy log densities including determinant terms",
+    "All ensemble metrics, class decisions and outer coverage reconstructed"
+  ]
+}

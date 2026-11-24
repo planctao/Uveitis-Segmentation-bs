@@ -1,0 +1,108 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "rank": 16,
+      "kind": "add",
+      "batch_size": 256,
+      "parameters": 1064848,
+      "maximum_complete_task_gradient_error": 1.7695128917694092e-07,
+      "joint_region_permutation_error": 2.980232238769531e-07,
+      "large_only_region_permutation_delta_change": 1.862645149230957e-09
+    },
+    {
+      "rank": 16,
+      "kind": "product",
+      "batch_size": 256,
+      "parameters": 1064848,
+      "maximum_complete_task_gradient_error": 2.7194619178771973e-07,
+      "joint_region_permutation_error": 2.384185791015625e-07,
+      "large_only_region_permutation_delta_change": 0.004968190565705299
+    },
+    {
+      "rank": 32,
+      "kind": "add",
+      "batch_size": 256,
+      "parameters": 1138640,
+      "maximum_complete_task_gradient_error": 2.682209014892578e-07,
+      "joint_region_permutation_error": 1.7881393432617188e-07,
+      "large_only_region_permutation_delta_change": 7.450580596923828e-09
+    },
+    {
+      "rank": 32,
+      "kind": "product",
+      "batch_size": 256,
+      "parameters": 1138640,
+      "maximum_complete_task_gradient_error": 1.9185245037078857e-07,
+      "joint_region_permutation_error": 2.384185791015625e-07,
+      "large_only_region_permutation_delta_change": 0.009189926087856293
+    }
+  ],
+  "normal_geometries": {
+    "base": {
+      "global": {
+        "maximum_principal_cosine_error": 5.585237827787637e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.7959215427061395e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.6878988186070956e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.9757623365433972e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 5.265183178337907e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.9596440671327855e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 6.2611587026140114e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.917584707162746e-08
+      }
+    },
+    "large": {
+      "global": {
+        "maximum_principal_cosine_error": 4.645247853041212e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.04875230511459e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.8208333779922157e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 4.368930994758102e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.733068908497785e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.627038834887799e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    }
+  },
+  "actual_cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "initial_parameter_hashes_restored": true,
+    "zero_initial_delta": true,
+    "both_normal_projections_and_aligned_interaction_restored": true,
+    "maximum_independent_forward_error": 2.205371856689453e-06
+  },
+  "code_sha256": {
+    "normal_large_interaction.py": "68671c21b01ad6ae81733f5a38882df4091d23ea867a8adaf0505932c2e971a9",
+    "audit_normal_large_interaction.py": "83e7402a4984c9bea9efca989c0b37bcd4d0d21a44f0a48e68734f1e339ec31c",
+    "verify_normal_large_interaction.py": "18e76e515dc6cda77f1f85cf1a84c9363c58881ac61308d92fd0ef297f677f48"
+  },
+  "checks": [
+    "Four actual256image trained-state full-task/all-parameter gradients recovered by independent NumPy projections and functional factorized interaction",
+    "Zero-init exactly restores original normalB task/base gradients and RNG; add/product parameter counts equal",
+    "Joint region permutation invariant; only product residual responds to large-only regional permutation; optimizer updates/frozen buffers/strict restore verified",
+    "ActualCUDA firstbatch input/order/labels/weights/RNG/initialparameterhashes/B-L codes/interactions/residual/fulltask independently recovered"
+  ],
+  "external_test_evaluated": false
+}

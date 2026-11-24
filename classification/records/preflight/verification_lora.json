@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": [
+    "Zero low-rank residual preserves the pretrained linear operator",
+    "Dynamic 320/448 feature recipe agrees with fixed frozen cache",
+    "Only low-rank attention parameters receive backbone gradients",
+    "All gradients finite and saved deltas restore predictions exactly"
+  ],
+  "cache_mean_probability_difference": 1.3033549294050317e-05,
+  "cache_max_probability_difference": 5.7220458984375e-05,
+  "raw_feature_max_difference": {
+    "global": 0.0029296875,
+    "regions": 0.00390625,
+    "mid": 0.0078125,
+    "dispersion": 0.0009765625
+  },
+  "trainable_adapter_parameters": 24576
+}

@@ -1,0 +1,263 @@
+{
+  "candidate": {
+    "group": "validation",
+    "mode": "flat",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 256,
+      "dropout": 0.6,
+      "lr": 0.002,
+      "wd": 0.1,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 0.8,
+      "label_smoothing": 0.03,
+      "fine_contrastive": 0.05,
+      "normal_large_feature": "base_dual_large_dual",
+      "cross_geometry_kind": "independent",
+      "cross_geometry_rank": 32,
+      "backbone_drop_kind": "backbone",
+      "backbone_drop_probability": 0.1
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.9037433155080213,
+      "balanced_accuracy": 0.895333767183003,
+      "macro_f1": 0.9037687146844314,
+      "log_loss": 0.27664354478534975,
+      "recall": {
+        "infectious": 0.9078014184397163,
+        "noninfectious": 0.9137931034482759,
+        "normal": 0.864406779661017
+      },
+      "confusion_matrix": [
+        [
+          128,
+          13,
+          0
+        ],
+        [
+          12,
+          159,
+          3
+        ],
+        [
+          1,
+          7,
+          51
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.9016260718846926,
+      0.9095787226597901,
+      0.8929175612102442
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/backbone_prob0p1/validation/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/backbone_prob0p1/validation/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/backbone_prob0p1/validation/seed_2/model.pt"
+    ],
+    "name": "backbone_prob0p1_fusion075",
+    "candidate_id": "backbone_prob0p1_fusion075",
+    "dropout_configuration": {
+      "name": "backbone_prob0p1",
+      "kind": "backbone",
+      "probability": 0.1
+    },
+    "cv": {
+      "folds": [
+        {
+          "phase": "fold_0",
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8444055944055944,
+            "balanced_accuracy": 0.8591875477170777,
+            "macro_f1": 0.8375403808996603,
+            "log_loss": 0.4250581003461822,
+            "recall": {
+              "infectious": 0.8376068376068376,
+              "noninfectious": 0.8320610687022901,
+              "normal": 0.9078947368421053
+            },
+            "confusion_matrix": [
+              [
+                196,
+                30,
+                8
+              ],
+              [
+                27,
+                218,
+                17
+              ],
+              [
+                1,
+                6,
+                69
+              ]
+            ]
+          }
+        },
+        {
+          "phase": "fold_1",
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8146853146853147,
+            "balanced_accuracy": 0.8416551344434028,
+            "macro_f1": 0.8296808992827581,
+            "log_loss": 0.5251153745602063,
+            "recall": {
+              "infectious": 0.7777777777777778,
+              "noninfectious": 0.8129770992366412,
+              "normal": 0.9342105263157895
+            },
+            "confusion_matrix": [
+              [
+                182,
+                49,
+                3
+              ],
+              [
+                38,
+                213,
+                11
+              ],
+              [
+                0,
+                5,
+                71
+              ]
+            ]
+          }
+        },
+        {
+          "phase": "fold_2",
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8411867364746946,
+            "balanced_accuracy": 0.8542182289430639,
+            "macro_f1": 0.8431687324191279,
+            "log_loss": 0.42179698059705,
+            "recall": {
+              "infectious": 0.8504273504273504,
+              "noninfectious": 0.8174904942965779,
+              "normal": 0.8947368421052632
+            },
+            "confusion_matrix": [
+              [
+                199,
+                27,
+                8
+              ],
+              [
+                40,
+                215,
+                8
+              ],
+              [
+                1,
+                7,
+                68
+              ]
+            ]
+          }
+        }
+      ],
+      "mean_macro_f1": 0.8367966708671822,
+      "sd_macro_f1": 0.0067746025077450416
+    },
+    "development_gate_passed": true,
+    "source_dropout_arm": "backbone_prob0p1"
+  },
+  "requires_fresh_patient_confirmation": true,
+  "geometry_and_plans_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p1/validation/geometry.npz": "c2bec8408c0084448de9900f0ab8fc01c246f18156599357fa1834db100e58a1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p1/fold_0/geometry.npz": "5bb36b731cf1c62711f6d4fd2820b13cfffdd001d4f6d92a558fc3f878785da0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p1/fold_1/geometry.npz": "f5fe53798781dc2d84fcd014c11f3302f37c68e77b449d6e60aaac7857b83547",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p1/fold_2/geometry.npz": "88b3480e7d72826230036ac3e2343442e6453e8ca113b6948d1894052803adb9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p25/validation/geometry.npz": "c2bec8408c0084448de9900f0ab8fc01c246f18156599357fa1834db100e58a1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p25/fold_0/geometry.npz": "5bb36b731cf1c62711f6d4fd2820b13cfffdd001d4f6d92a558fc3f878785da0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p25/fold_1/geometry.npz": "f5fe53798781dc2d84fcd014c11f3302f37c68e77b449d6e60aaac7857b83547",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/channel_prob0p25/fold_2/geometry.npz": "88b3480e7d72826230036ac3e2343442e6453e8ca113b6948d1894052803adb9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p1/validation/geometry.npz": "c2bec8408c0084448de9900f0ab8fc01c246f18156599357fa1834db100e58a1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p1/fold_0/geometry.npz": "5bb36b731cf1c62711f6d4fd2820b13cfffdd001d4f6d92a558fc3f878785da0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p1/fold_1/geometry.npz": "f5fe53798781dc2d84fcd014c11f3302f37c68e77b449d6e60aaac7857b83547",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p1/fold_2/geometry.npz": "88b3480e7d72826230036ac3e2343442e6453e8ca113b6948d1894052803adb9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p25/validation/geometry.npz": "c2bec8408c0084448de9900f0ab8fc01c246f18156599357fa1834db100e58a1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p25/fold_0/geometry.npz": "5bb36b731cf1c62711f6d4fd2820b13cfffdd001d4f6d92a558fc3f878785da0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p25/fold_1/geometry.npz": "f5fe53798781dc2d84fcd014c11f3302f37c68e77b449d6e60aaac7857b83547",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/geometry/backbone_prob0p25/fold_2/geometry.npz": "88b3480e7d72826230036ac3e2343442e6453e8ca113b6948d1894052803adb9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p1/validation.json": "758035426a0034a6b8fb96e819bb87370bbee7803b52af73e65418cc8852c075",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p1/fold_0.json": "549aedf1440f64c93d76eaa63050f85091c11fa0487d3d1fc13a080375c7d3c6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p1/fold_1.json": "4574cb5606f1fbb6366f432a1a9036c7127dbadc730ad90177e1d0904609f874",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p1/fold_2.json": "0a5e04ed5819594c4ff783cf5993ec24c5ec18215aa1e6c4168358e2aa344b32",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p25/validation.json": "fc82dc73a3b2b8eb16932cd3ebe39ab0390d981aa3c768e452f80a1cd675847b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p25/fold_0.json": "be40c8b556d7429163cc17f6873ab7e866d1bfb7d1c49ae418310938ae412d07",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p25/fold_1.json": "c08eb5c7fbd920d1fc263e95a0c16ee9b96259c9340aa310ed20efa2c02dc998",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/channel_prob0p25/fold_2.json": "419174ee9ba3bcbffcc72d3d3f0ac82ddee6c7b8dc51b6ead5bec335caf9a3f1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p1/validation.json": "cfcedcb2c6e877cf1435bcb9a0c979be283327b94deb0080aa564184c37598eb",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p1/fold_0.json": "02f98bee2916d5a6ae4e69d44a88d948c8320c984abfa035d494530483720ba2",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p1/fold_1.json": "b14abe69d71909e0519cd35669e8c33eaf67f626ed70fb5a0d745fdabb3173d6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p1/fold_2.json": "fb442be72718046584cb8740acc4079c6b9e4d0d6d779b68a8ad8023f35ce46b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p25/validation.json": "5ead70cb45993baad4b58708016d3bc83ecda2ff0c5ff602b10ebe89060e6d59",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p25/fold_0.json": "b1952ee4d89089e7a4619d68d8ac632152db9c93b310187e944c5956cee60874",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p25/fold_1.json": "42432494e0ddefd0c6f0f09a12374629cb5dc7538269612c9e1701325506a023",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/split_plans/backbone_prob0p25/fold_2.json": "474f6738a67fd475af72022c013bdb178877a4f7a479556308351287ab5b65a6"
+  },
+  "checkpoint_sha256": {
+    "channel_prob0p1/validation/seed_0": "7eba4129e3edb5732d758e8e038a91082e5d487ae29e383f9fee5f6cbf71b00f",
+    "channel_prob0p1/validation/seed_1": "9688c593a897e6ef7caa540dff2299469d4e61cb9afc9ab8c0d6b7a6ead7b679",
+    "channel_prob0p1/validation/seed_2": "7932d0314a283076ea185569050ffdcd7e33dd30407f1abd447b7023d2c684a5",
+    "channel_prob0p1/fold_0/seed_0": "6fa949c0752d94264443b0c33d53a3e9d4df82fea179d23c1ff74b49beb8fc04",
+    "channel_prob0p1/fold_0/seed_1": "0404209408f9a5fdb9cc6776f6a421a71f204e84ddf73d59e19d2aff0d259058",
+    "channel_prob0p1/fold_0/seed_2": "647786657c6771e98f2671c8e5b6c3503c3fbf6aaedc12e596d35acdb351f40e",
+    "channel_prob0p1/fold_1/seed_0": "b06722a50377baa05649203923a3c04288cd3cd2e92bd3828177d3f614d555b7",
+    "channel_prob0p1/fold_1/seed_1": "cc472a100c5c2dd066821dc7bb5c2c11952d46a35d49afa1f226401df2031437",
+    "channel_prob0p1/fold_1/seed_2": "11a8ce4bb8f061fe28b091296c2df0bdc514d55627b8b922f31bd41fdd096cf9",
+    "channel_prob0p1/fold_2/seed_0": "560171a5c57bda3d05d74b9f33bfa0ad28a1b96eabdd983f446e65dfa8f3734e",
+    "channel_prob0p1/fold_2/seed_1": "ac57c562e8e866a8e11241f6a6662b87fb339f6957d8f577b2cb0ad0481837ff",
+    "channel_prob0p1/fold_2/seed_2": "5eeadd41f48e7403fd5641d6c31f252e05211925ae07052770aa27b737647ec2",
+    "channel_prob0p25/validation/seed_0": "98811c0483a26e3bca22c2192dbc57277aadc9c3d7034424293e887eab4c5c55",
+    "channel_prob0p25/validation/seed_1": "4efaca553605dfa07c597a73f60964c0b34f66e9526a23f022d8b154e1b14746",
+    "channel_prob0p25/validation/seed_2": "d0b77660a28b09337ed7b56bf6a3f8c977fdd9dc5a6cdc159d3788d624501f8d",
+    "channel_prob0p25/fold_0/seed_0": "45dd883cbe47a6fb399d1320225e6189fc8308465f2ecff704cea8565c90ca21",
+    "channel_prob0p25/fold_0/seed_1": "21e082ca41274af7f947da57b4aed5770bc4a90057d88205772806357a8f2fbd",
+    "channel_prob0p25/fold_0/seed_2": "376ee81d9d4cf69dbc4a3d464b4e63e01872a03fb75673b7fc81eb7b1d2ba8f4",
+    "channel_prob0p25/fold_1/seed_0": "d4b9ee3a45d3457e6b5da3be57870b1ee6168b8ef4202245334e978175ee35f9",
+    "channel_prob0p25/fold_1/seed_1": "e15a911c0c2e1606fcbd751aa00235d4ef74badb2af0421b6330fd0ab369d3aa",
+    "channel_prob0p25/fold_1/seed_2": "85db6b2e9105f3c8d73e7b03ccd24ba6e3a8197ae49637bb1e4e39cc90233955",
+    "channel_prob0p25/fold_2/seed_0": "8c45dc0f23d89af2c157dec6df7bbb9c69128de240994e952e8fb1423a4f173f",
+    "channel_prob0p25/fold_2/seed_1": "129bce9af08eaca0f602a6c324d5bf2bd06a3a0fda1532dd25bd3b13e5977d9b",
+    "channel_prob0p25/fold_2/seed_2": "4052e6454da1294b7de4237536be2d5415a4ff23c00d4dbf5bb6fee7716d9015",
+    "backbone_prob0p1/validation/seed_0": "f682d77e7bbee4da4878ca47e5eed58874c8df17a5c521a7cfcd7f390aadd31e",
+    "backbone_prob0p1/validation/seed_1": "cfca9e1b9d1d941a88ec543e947eca8298513a44e6da08c5bb9b2e8fe24d222f",
+    "backbone_prob0p1/validation/seed_2": "ad7b7ebbf489610772e0eaf6ea96c899866a4a586090f1c1989b1071934051a8",
+    "backbone_prob0p1/fold_0/seed_0": "c7ebee973a73ae01658539875f19be541b0fe83c88040b695b1877ef89feff12",
+    "backbone_prob0p1/fold_0/seed_1": "22bed6d6118d99cfbdcbb28b2bd674ab3b083d9aa4fb67d3f3101881d4c956ab",
+    "backbone_prob0p1/fold_0/seed_2": "ef351b4577054fd97aebc385e6217fd60a572689e5ee4326824a43e848f763fe",
+    "backbone_prob0p1/fold_1/seed_0": "dc554ea49913a2708ed069b985bcf01128823b10fe289233402180620d3cfd85",
+    "backbone_prob0p1/fold_1/seed_1": "74fc0efea74fd911ede54ea8b974004ad6279c96177ebe61e29bc44723fd8127",
+    "backbone_prob0p1/fold_1/seed_2": "112ed75639556d47f6239c5478ba9e3a7dfed13c68f97e2d2190ba3b78fb08a3",
+    "backbone_prob0p1/fold_2/seed_0": "522782fce695edb50ca49977eb5487cb9d890edaa63ae6399f2efae1405e81fc",
+    "backbone_prob0p1/fold_2/seed_1": "b93be06ee1d49b8f0f16d5e40945584bc48cb2feabf099bab84829691f546872",
+    "backbone_prob0p1/fold_2/seed_2": "641cfe429560c024efbadb1c174b3e1dba646558d05e672c6c492150774b3e08",
+    "backbone_prob0p25/validation/seed_0": "e3158202cad082a25bfb550159e0883a5b5e940f80565a930b33f142decd29db",
+    "backbone_prob0p25/validation/seed_1": "901b7a75adcf3c46c2620bde6eef517248731a21ba1577a6df4706c445d4f29c",
+    "backbone_prob0p25/validation/seed_2": "218490c05fa64477cfc7189a6d574e18248cbb90acc7bdd27692dd8c429bf960",
+    "backbone_prob0p25/fold_0/seed_0": "8803c91d07ba238a9acbed834e2f881b31500e59125933a92a8f021e837f5f2a",
+    "backbone_prob0p25/fold_0/seed_1": "c2510df914b1751d65c0f519da886bf2aefadf274f0d281bef5025572d6877f7",
+    "backbone_prob0p25/fold_0/seed_2": "01b99c353351f03e11166999056b2fa0ee53ea3ea1a2051a1de5462d932ebb0e",
+    "backbone_prob0p25/fold_1/seed_0": "02833d665fc8fb6113708c9a06aaebd5a5299a793534749c5e450b9dfe62f213",
+    "backbone_prob0p25/fold_1/seed_1": "adc0ef8e9c5a50402e97a3a1e447927fb73b6cb394458c592fc98df433c62cf6",
+    "backbone_prob0p25/fold_1/seed_2": "e96cd7a405560b04ac2a19e05f338ccc4b77599cb1f60406ec332094d5fb2c0e",
+    "backbone_prob0p25/fold_2/seed_0": "193babec7ef7abf1c0cd96916bc80ed58147873bd1e2894fe62ebded48432020",
+    "backbone_prob0p25/fold_2/seed_1": "251899887a8b6ddae864c1c0b80154ca1ae6393b224236389fb4b3fd531e169b",
+    "backbone_prob0p25/fold_2/seed_2": "9925d8b7f5d8181c8df7e8a5923157e202c721cd3d33a4a1b3d507145d5e4e3e"
+  },
+  "external_test_evaluated": false
+}

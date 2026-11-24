@@ -1,0 +1,55 @@
+{
+  "created_at_utc": "2026-11-24T07:15:06.211777+00:00",
+  "status": "completed_confirmation_failed",
+  "family": "normal_spatial_contrast",
+  "hypothesis": "The retained normal-reference attention is nearly uniform on training patients (normalized entropy.985-.994); replacing all9regions by their image mean hardly changes decisions. Spatial-consistency losses around the original pooling were ineffective. Test an explicit centered spatial-contrast residual pathway with D4 symmetry pooling, compared with matched parameter-capacity means. Diagnostic does not establish held-patient predictive value. Existing group-invariant MLP principles; no global novelty or clinical lesion-localization claim.",
+  "development_evidence": [
+    "results/normal_branch_diagnostics.json",
+    "results/research_normal_spatial_consistency/comparison.json",
+    "results/research_regional_relation/comparison.json",
+    "results/research_second_order/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "mean_rank16",
+      "kind": "mean",
+      "rank": 16
+    },
+    {
+      "name": "d4_rank16",
+      "kind": "d4",
+      "rank": 16
+    },
+    {
+      "name": "mean_rank32",
+      "kind": "mean",
+      "rank": 32
+    },
+    {
+      "name": "d4_rank32",
+      "kind": "d4",
+      "rank": 32
+    }
+  ],
+  "geometry": "Unchanged fit-only standardization and equal normal-patient PCA32fourstreams. All16arm/phasegeometrycopies and16patientplans frozen before fitting;4uniquephaseestimates. No spatial ridge/bank or external patients.",
+  "architecture": "Same original normal-reference attentionMLP. From GELU(original region projection128), subtract within-image9tokenmean, LayerNorm128, Linear128->r GELU. D4 arm applies all8rotations/reflections of3x3grid, flatten9r, shared Linear9r->r GELU, average8views. Capacitymatched mean arm repeats mean of9projectedtokenvalues9times, same Linear9r->r GELU once. Both Linear r->256 zeroinitializedreadout and.1residual before originalhiddenDropout. Rank16/32 gives4arms48heads. No extra loss/dropout/randomdraws. Originalinit/task/weights/hparams retained. Each also fixed.75branch/.25M5fusion gives8scores.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "results/research_normal_spatial_contrast/selection_before_repeat.json",
+  "audit": "Independent Gramnormalspaces andNumPyprojection, independentfunctionalD4gridtransforms/branch andallparametergradientof4actual256imagefulltasks attrainedstate/nonzeroreadout. Initialidentity/basegradients/RNGexact,matchedcapacity,mean arbitrarypermutationinvariance,D4symmetry,andnonD4sensitivity tested. Updates/restores/frozenbuffers,actualCUDAfirstfulltaskwitness. Formalall48heads/stats/maps/epochs/normalbuffers/permutations/stopouterprobabilities/fulltaskwitnesses and16fusionphases independently restored;trainedD4symmetry andnonzeroreadout checked.",
+  "preflight": "verification_normal_spatial_contrast.json",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_spatial_contrast/protocol.json",
+  "protocol_sha256": "6f08bd93ea5fa4cecb684959f14dcfb19e0b9257a48e3f5b5d3debd92e4b1d9a",
+  "pid": 93394,
+  "formal_fits_started": "Inspect actual checkpoints",
+  "actual_new_seed_fits": 48,
+  "development_gate_passers": 1,
+  "selected_candidate": "d4_rank16_fusion075",
+  "confirmation_protocol": "runs/normal_spatial_contrast_confirmation/protocol.json",
+  "confirmation_pid": 93879,
+  "decision": "All48developmentheads/48witnesses and54freshconfirmationheads/18witnesses/18Gaussianfits independentlyaudited. Candidate6foldmeanF1.8135388246>M6.8117975801,butpairedpatientF1CIvsM6[-.0025666853,.0063737731] includeszero. Failsconfirmation;retainM6. Noexternaltest.",
+  "confirmation_results": "results/research_normal_spatial_contrast_confirmation/comparison.json"
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": [
+    "Weighted pooling equals explicit foreground-token averages",
+    "Changing background tokens cannot change a nonempty weighted region",
+    "Uniform foreground recovers ordinary pooling, including20to7adaptive windows",
+    "Empty regions fall back exactly to ordinary means",
+    "Empty image masks retain exactly one highest-occupancy region",
+    "Pixel thresholds produce expected black/white foreground fractions",
+    "All synthetic gradients finite"
+  ]
+}

@@ -1,0 +1,2076 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T23:19:40.345910+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "hypothesis": "Task-specific independentbinaryheads may improvehardcascade performance when trained on the stronger frozenM5DINOtaxonomyembedding, compared with directbinaryheads on originalfrozenbackbonefeatures and compared with factorizingfrozenM5probabilities.",
+    "configuration_plan": [
+      {
+        "name": "cascade_i_hidden0",
+        "order": "cascade_i",
+        "hidden": 0
+      },
+      {
+        "name": "cascade_i_hidden64",
+        "order": "cascade_i",
+        "hidden": 64
+      },
+      {
+        "name": "cascade_n_hidden0",
+        "order": "cascade_n",
+        "hidden": 0
+      },
+      {
+        "name": "cascade_n_hidden64",
+        "order": "cascade_n",
+        "hidden": 64
+      }
+    ],
+    "binary_training": {
+      "dropout": 0.6,
+      "lr": 0.002,
+      "wd": 0.1,
+      "epochs": 120,
+      "patience": 18
+    },
+    "architecture": "Two independently trainedbinaryheads over frozen256Dsourceembedding: linear or64GELUdropout. SourceM5heads independentlyfit within originalpatientpartitions; never updated by binaryexpertloss. Embeddings standardized on correspondingfitpatients only.",
+    "conditional_tasks": "cascade_i stage1infectious vs rest, stage2noninfectious vs normal on y!=0; cascade_n stage1abnormal vsnormal, stage2infectious vsnoninfectious on y!=2. Stage2bothfitandstop excludeineligibletrueclasses. Originalpatient-classweighting reconstructed perbinarytask.",
+    "stopping": "Eachbinaryhead independently earlystopped on its eligibleinnerstopping subset macroF1 thenlogloss, threshold0.5. Ensembledgates then use existingfixedgrid thresholds tuned exclusively onallstoppingpatients forendtoendmacroF1; noouter thresholdtuning.",
+    "planned_new_cascade_system_fits": 48,
+    "planned_new_binary_head_fits": 96,
+    "source_neural_head_fits_reused": 12,
+    "controls": "Also derivebinarygates from frozensource3classprobabilities and tunethresholds on samestoppingpatients; retain sourceoriginaldirectclassification. Report default0.5andstoppingtunedhardroutes, stage1/oraclestage2/endtoendmetrics separately.",
+    "selection": "Eligiblearchitecturemust exceedM5originalCVandpreserveM5validationMacroF1; needsfreshpatientconfirmation before anyfreeze/external scoring.",
+    "external_test_policy": "No external scoring, labels, predictions or rawimages; onlydevelopmentindices0..2090. Everyouterheadsourceandexpertsfitwithinitsowntrainingpatients."
+  },
+  "candidates": [
+    {
+      "name": "cascade_i_hidden0",
+      "candidate_id": "cascade_i_hidden0",
+      "order": "cascade_i",
+      "hidden": 0,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8422459893048129,
+        "balanced_accuracy": 0.8408130950752536,
+        "macro_f1": 0.8432371963870992,
+        "log_loss": 0.4303798884060045,
+        "recall": {
+          "infectious": 0.8014184397163121,
+          "noninfectious": 0.8735632183908046,
+          "normal": 0.847457627118644
+        },
+        "confusion_matrix": [
+          [
+            113,
+            28,
+            0
+          ],
+          [
+            13,
+            152,
+            9
+          ],
+          [
+            2,
+            7,
+            50
+          ]
+        ]
+      },
+      "validation_stage_metrics": {
+        "thresholds": [
+          0.6000000000000001,
+          0.4
+        ],
+        "images": 374,
+        "stage1_accuracy": 0.8850267379679144,
+        "oracle_stage2_images": 233,
+        "oracle_stage2_accuracy": 0.9141630901287554,
+        "end_to_end": {
+          "n": 374,
+          "accuracy": 0.8422459893048129,
+          "balanced_accuracy": 0.8408130950752536,
+          "macro_f1": 0.8432371963870992,
+          "log_loss": 0.4303798884060045,
+          "recall": {
+            "infectious": 0.8014184397163121,
+            "noninfectious": 0.8735632183908046,
+            "normal": 0.847457627118644
+          },
+          "confusion_matrix": [
+            [
+              113,
+              28,
+              0
+            ],
+            [
+              13,
+              152,
+              9
+            ],
+            [
+              2,
+              7,
+              50
+            ]
+          ]
+        },
+        "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+        "default05": {
+          "thresholds": [
+            0.5,
+            0.5
+          ],
+          "images": 374,
+          "stage1_accuracy": 0.8770053475935828,
+          "oracle_stage2_images": 233,
+          "oracle_stage2_accuracy": 0.8969957081545065,
+          "end_to_end": {
+            "n": 374,
+            "accuracy": 0.8262032085561497,
+            "balanced_accuracy": 0.828274977789384,
+            "macro_f1": 0.8233676529294393,
+            "log_loss": 0.4303798884060045,
+            "recall": {
+              "infectious": 0.8439716312056738,
+              "noninfectious": 0.8103448275862069,
+              "normal": 0.8305084745762712
+            },
+            "confusion_matrix": [
+              [
+                119,
+                21,
+                1
+              ],
+              [
+                21,
+                141,
+                12
+              ],
+              [
+                3,
+                7,
+                49
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      },
+      "cv": {
+        "mean_macro_f1": 0.7872750368851241,
+        "sd_macro_f1": 0.02207938808736811,
+        "mean_accuracy": 0.7856627084375775,
+        "mean_stage1_accuracy": 0.8363426858191256,
+        "mean_stage2_oracle_accuracy": 0.865013701977623,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "thresholds": [
+              0.6500000000000001,
+              0.5
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.8636363636363636,
+            "oracle_stage2_images": 338,
+            "oracle_stage2_accuracy": 0.8431952662721893,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.7867132867132867,
+              "balanced_accuracy": 0.807930678461012,
+              "macro_f1": 0.7728142839852022,
+              "log_loss": 0.5290293658253126,
+              "recall": {
+                "infectious": 0.7521367521367521,
+                "noninfectious": 0.7900763358778626,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  176,
+                  49,
+                  9
+                ],
+                [
+                  19,
+                  207,
+                  36
+                ],
+                [
+                  1,
+                  8,
+                  67
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.8741258741258742,
+              "oracle_stage2_images": 338,
+              "oracle_stage2_accuracy": 0.8431952662721893,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.8041958041958042,
+                "balanced_accuracy": 0.8235458238471498,
+                "macro_f1": 0.7899944852210038,
+                "log_loss": 0.5290293658253126,
+                "recall": {
+                  "infectious": 0.8333333333333334,
+                  "noninfectious": 0.7557251908396947,
+                  "normal": 0.881578947368421
+                },
+                "confusion_matrix": [
+                  [
+                    195,
+                    31,
+                    8
+                  ],
+                  [
+                    32,
+                    198,
+                    32
+                  ],
+                  [
+                    1,
+                    8,
+                    67
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_1",
+            "thresholds": [
+              0.7500000000000002,
+              0.4
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.8094405594405595,
+            "oracle_stage2_images": 338,
+            "oracle_stage2_accuracy": 0.8757396449704142,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.7674825174825175,
+              "balanced_accuracy": 0.8005366060810014,
+              "macro_f1": 0.7763212348414559,
+              "log_loss": 0.7513812464830514,
+              "recall": {
+                "infectious": 0.6752136752136753,
+                "noninfectious": 0.8053435114503816,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  158,
+                  68,
+                  8
+                ],
+                [
+                  33,
+                  211,
+                  18
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.8409090909090909,
+              "oracle_stage2_images": 338,
+              "oracle_stage2_accuracy": 0.8402366863905325,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.7832167832167832,
+                "balanced_accuracy": 0.8195155550519151,
+                "macro_f1": 0.782128797226629,
+                "log_loss": 0.7513812464830514,
+                "recall": {
+                  "infectious": 0.7991452991452992,
+                  "noninfectious": 0.7251908396946565,
+                  "normal": 0.9342105263157895
+                },
+                "confusion_matrix": [
+                  [
+                    187,
+                    39,
+                    8
+                  ],
+                  [
+                    44,
+                    190,
+                    28
+                  ],
+                  [
+                    0,
+                    5,
+                    71
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_2",
+            "thresholds": [
+              0.7000000000000002,
+              0.4
+            ],
+            "images": 573,
+            "stage1_accuracy": 0.8359511343804538,
+            "oracle_stage2_images": 339,
+            "oracle_stage2_accuracy": 0.8761061946902655,
+            "end_to_end": {
+              "n": 573,
+              "accuracy": 0.8027923211169284,
+              "balanced_accuracy": 0.8285109242183486,
+              "macro_f1": 0.8126895918287141,
+              "log_loss": 0.7131685736670653,
+              "recall": {
+                "infectious": 0.8247863247863247,
+                "noninfectious": 0.752851711026616,
+                "normal": 0.9078947368421053
+              },
+              "confusion_matrix": [
+                [
+                  193,
+                  35,
+                  6
+                ],
+                [
+                  53,
+                  198,
+                  12
+                ],
+                [
+                  0,
+                  7,
+                  69
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 573,
+              "stage1_accuracy": 0.8272251308900523,
+              "oracle_stage2_images": 339,
+              "oracle_stage2_accuracy": 0.8230088495575221,
+              "end_to_end": {
+                "n": 573,
+                "accuracy": 0.7801047120418848,
+                "balanced_accuracy": 0.81313389173105,
+                "macro_f1": 0.7805109188975649,
+                "log_loss": 0.7131685736670653,
+                "recall": {
+                  "infectious": 0.8547008547008547,
+                  "noninfectious": 0.6768060836501901,
+                  "normal": 0.9078947368421053
+                },
+                "confusion_matrix": [
+                  [
+                    200,
+                    23,
+                    11
+                  ],
+                  [
+                    65,
+                    178,
+                    20
+                  ],
+                  [
+                    0,
+                    7,
+                    69
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          }
+        ]
+      },
+      "source_cascade_control_folds": [
+        {
+          "phase": "fold_0",
+          "thresholds": [
+            0.55,
+            0.45000000000000007
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.8513986013986014,
+          "oracle_stage2_images": 338,
+          "oracle_stage2_accuracy": 0.8816568047337278,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.791958041958042,
+            "balanced_accuracy": 0.8117474723541417,
+            "macro_f1": 0.785938693062573,
+            "log_loss": 0.5101939345107369,
+            "recall": {
+              "infectious": 0.7521367521367521,
+              "noninfectious": 0.8015267175572519,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                176,
+                51,
+                7
+              ],
+              [
+                26,
+                210,
+                26
+              ],
+              [
+                1,
+                8,
+                67
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_1",
+          "thresholds": [
+            0.45000000000000007,
+            0.45000000000000007
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.8321678321678322,
+          "oracle_stage2_images": 338,
+          "oracle_stage2_accuracy": 0.9260355029585798,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.8006993006993007,
+            "balanced_accuracy": 0.8276021331465285,
+            "macro_f1": 0.8134297675027632,
+            "log_loss": 0.6214271634776943,
+            "recall": {
+              "infectious": 0.7564102564102564,
+              "noninfectious": 0.8053435114503816,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                177,
+                52,
+                5
+              ],
+              [
+                39,
+                211,
+                12
+              ],
+              [
+                0,
+                6,
+                70
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_2",
+          "thresholds": [
+            0.55,
+            0.5
+          ],
+          "images": 573,
+          "stage1_accuracy": 0.8603839441535777,
+          "oracle_stage2_images": 339,
+          "oracle_stage2_accuracy": 0.9203539823008849,
+          "end_to_end": {
+            "n": 573,
+            "accuracy": 0.8272251308900523,
+            "balanced_accuracy": 0.8554534430059745,
+            "macro_f1": 0.8262819055392,
+            "log_loss": 0.5053125250376731,
+            "recall": {
+              "infectious": 0.8205128205128205,
+              "noninfectious": 0.7984790874524715,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                192,
+                30,
+                12
+              ],
+              [
+                38,
+                210,
+                15
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      ],
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.022131624927198557,
+        "macro_f1_difference": -0.022625718859219157,
+        "accuracy_ci95": [
+          -0.039622535045552035,
+          -0.004741377805612505
+        ],
+        "macro_f1_ci95": [
+          -0.04026198465410163,
+          -0.006166355115597405
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "name": "cascade_i_hidden64",
+      "candidate_id": "cascade_i_hidden64",
+      "order": "cascade_i",
+      "hidden": 64,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8609625668449198,
+        "balanced_accuracy": 0.8527308349671779,
+        "macro_f1": 0.8637278582930756,
+        "log_loss": 0.4833183162992022,
+        "recall": {
+          "infectious": 0.8368794326241135,
+          "noninfectious": 0.8908045977011494,
+          "normal": 0.8305084745762712
+        },
+        "confusion_matrix": [
+          [
+            118,
+            23,
+            0
+          ],
+          [
+            15,
+            155,
+            4
+          ],
+          [
+            2,
+            8,
+            49
+          ]
+        ]
+      },
+      "validation_stage_metrics": {
+        "thresholds": [
+          0.6000000000000001,
+          0.2
+        ],
+        "images": 374,
+        "stage1_accuracy": 0.893048128342246,
+        "oracle_stage2_images": 233,
+        "oracle_stage2_accuracy": 0.9399141630901288,
+        "end_to_end": {
+          "n": 374,
+          "accuracy": 0.8609625668449198,
+          "balanced_accuracy": 0.8527308349671779,
+          "macro_f1": 0.8637278582930756,
+          "log_loss": 0.4833183162992022,
+          "recall": {
+            "infectious": 0.8368794326241135,
+            "noninfectious": 0.8908045977011494,
+            "normal": 0.8305084745762712
+          },
+          "confusion_matrix": [
+            [
+              118,
+              23,
+              0
+            ],
+            [
+              15,
+              155,
+              4
+            ],
+            [
+              2,
+              8,
+              49
+            ]
+          ]
+        },
+        "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+        "default05": {
+          "thresholds": [
+            0.5,
+            0.5
+          ],
+          "images": 374,
+          "stage1_accuracy": 0.8850267379679144,
+          "oracle_stage2_images": 233,
+          "oracle_stage2_accuracy": 0.9184549356223176,
+          "end_to_end": {
+            "n": 374,
+            "accuracy": 0.839572192513369,
+            "balanced_accuracy": 0.8420358879341432,
+            "macro_f1": 0.8372373734732634,
+            "log_loss": 0.4833183162992022,
+            "recall": {
+              "infectious": 0.851063829787234,
+              "noninfectious": 0.8275862068965517,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                120,
+                20,
+                1
+              ],
+              [
+                19,
+                144,
+                11
+              ],
+              [
+                3,
+                6,
+                50
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      },
+      "cv": {
+        "mean_macro_f1": 0.7951523711683975,
+        "sd_macro_f1": 0.014578915218988658,
+        "mean_accuracy": 0.7944029501621125,
+        "mean_stage1_accuracy": 0.8421681576131839,
+        "mean_stage2_oracle_accuracy": 0.9004701145613331,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "thresholds": [
+              0.7000000000000002,
+              0.4
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.8601398601398601,
+            "oracle_stage2_images": 338,
+            "oracle_stage2_accuracy": 0.8727810650887574,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.7937062937062938,
+              "balanced_accuracy": 0.8033741625545563,
+              "macro_f1": 0.7810113135032374,
+              "log_loss": 0.5742491630320735,
+              "recall": {
+                "infectious": 0.7435897435897436,
+                "noninfectious": 0.8244274809160306,
+                "normal": 0.8421052631578947
+              },
+              "confusion_matrix": [
+                [
+                  174,
+                  52,
+                  8
+                ],
+                [
+                  19,
+                  216,
+                  27
+                ],
+                [
+                  1,
+                  11,
+                  64
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.8863636363636364,
+              "oracle_stage2_images": 338,
+              "oracle_stage2_accuracy": 0.8609467455621301,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.8164335664335665,
+                "balanced_accuracy": 0.8296424495701314,
+                "macro_f1": 0.7990644590146269,
+                "log_loss": 0.5742491630320735,
+                "recall": {
+                  "infectious": 0.8418803418803419,
+                  "noninfectious": 0.7786259541984732,
+                  "normal": 0.868421052631579
+                },
+                "confusion_matrix": [
+                  [
+                    197,
+                    29,
+                    8
+                  ],
+                  [
+                    27,
+                    204,
+                    31
+                  ],
+                  [
+                    1,
+                    9,
+                    66
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_1",
+            "thresholds": [
+              0.6500000000000001,
+              0.35000000000000003
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.8269230769230769,
+            "oracle_stage2_images": 338,
+            "oracle_stage2_accuracy": 0.9053254437869822,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.784965034965035,
+              "balanced_accuracy": 0.8152383307063902,
+              "macro_f1": 0.7943129293913342,
+              "log_loss": 0.865182411731448,
+              "recall": {
+                "infectious": 0.7307692307692307,
+                "noninfectious": 0.7938931297709924,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  171,
+                  58,
+                  5
+                ],
+                [
+                  36,
+                  208,
+                  18
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.8426573426573427,
+              "oracle_stage2_images": 338,
+              "oracle_stage2_accuracy": 0.8668639053254438,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.7902097902097902,
+                "balanced_accuracy": 0.8277183138573254,
+                "macro_f1": 0.7917205624814118,
+                "log_loss": 0.865182411731448,
+                "recall": {
+                  "infectious": 0.7991452991452992,
+                  "noninfectious": 0.7366412213740458,
+                  "normal": 0.9473684210526315
+                },
+                "confusion_matrix": [
+                  [
+                    187,
+                    40,
+                    7
+                  ],
+                  [
+                    43,
+                    193,
+                    26
+                  ],
+                  [
+                    0,
+                    4,
+                    72
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_2",
+            "thresholds": [
+              0.8,
+              0.35000000000000003
+            ],
+            "images": 573,
+            "stage1_accuracy": 0.8394415357766143,
+            "oracle_stage2_images": 339,
+            "oracle_stage2_accuracy": 0.9233038348082596,
+            "end_to_end": {
+              "n": 573,
+              "accuracy": 0.8045375218150087,
+              "balanced_accuracy": 0.8260315163457048,
+              "macro_f1": 0.8101328706106209,
+              "log_loss": 0.8784896348221346,
+              "recall": {
+                "infectious": 0.8076923076923077,
+                "noninfectious": 0.7756653992395437,
+                "normal": 0.8947368421052632
+              },
+              "confusion_matrix": [
+                [
+                  189,
+                  37,
+                  8
+                ],
+                [
+                  47,
+                  204,
+                  12
+                ],
+                [
+                  0,
+                  8,
+                  68
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 573,
+              "stage1_accuracy": 0.8289703315881326,
+              "oracle_stage2_images": 339,
+              "oracle_stage2_accuracy": 0.887905604719764,
+              "end_to_end": {
+                "n": 573,
+                "accuracy": 0.7905759162303665,
+                "balanced_accuracy": 0.8236999179564718,
+                "macro_f1": 0.7954157733994168,
+                "log_loss": 0.8784896348221346,
+                "recall": {
+                  "infectious": 0.8504273504273504,
+                  "noninfectious": 0.6996197718631179,
+                  "normal": 0.9210526315789473
+                },
+                "confusion_matrix": [
+                  [
+                    199,
+                    25,
+                    10
+                  ],
+                  [
+                    63,
+                    184,
+                    16
+                  ],
+                  [
+                    0,
+                    6,
+                    70
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          }
+        ]
+      },
+      "source_cascade_control_folds": [
+        {
+          "phase": "fold_0",
+          "thresholds": [
+            0.55,
+            0.45000000000000007
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.8513986013986014,
+          "oracle_stage2_images": 338,
+          "oracle_stage2_accuracy": 0.8816568047337278,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.791958041958042,
+            "balanced_accuracy": 0.8117474723541417,
+            "macro_f1": 0.785938693062573,
+            "log_loss": 0.5101939345107369,
+            "recall": {
+              "infectious": 0.7521367521367521,
+              "noninfectious": 0.8015267175572519,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                176,
+                51,
+                7
+              ],
+              [
+                26,
+                210,
+                26
+              ],
+              [
+                1,
+                8,
+                67
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_1",
+          "thresholds": [
+            0.45000000000000007,
+            0.45000000000000007
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.8321678321678322,
+          "oracle_stage2_images": 338,
+          "oracle_stage2_accuracy": 0.9260355029585798,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.8006993006993007,
+            "balanced_accuracy": 0.8276021331465285,
+            "macro_f1": 0.8134297675027632,
+            "log_loss": 0.6214271634776943,
+            "recall": {
+              "infectious": 0.7564102564102564,
+              "noninfectious": 0.8053435114503816,
+              "normal": 0.9210526315789473
+            },
+            "confusion_matrix": [
+              [
+                177,
+                52,
+                5
+              ],
+              [
+                39,
+                211,
+                12
+              ],
+              [
+                0,
+                6,
+                70
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_2",
+          "thresholds": [
+            0.55,
+            0.5
+          ],
+          "images": 573,
+          "stage1_accuracy": 0.8603839441535777,
+          "oracle_stage2_images": 339,
+          "oracle_stage2_accuracy": 0.9203539823008849,
+          "end_to_end": {
+            "n": 573,
+            "accuracy": 0.8272251308900523,
+            "balanced_accuracy": 0.8554534430059745,
+            "macro_f1": 0.8262819055392,
+            "log_loss": 0.5053125250376731,
+            "recall": {
+              "infectious": 0.8205128205128205,
+              "noninfectious": 0.7984790874524715,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                192,
+                30,
+                12
+              ],
+              [
+                38,
+                210,
+                15
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      ],
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.013395457192778126,
+        "macro_f1_difference": -0.014187646890412964,
+        "accuracy_ci95": [
+          -0.030909492549723253,
+          0.004215633579802091
+        ],
+        "macro_f1_ci95": [
+          -0.032216692023383786,
+          0.0022988398781507314
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "name": "cascade_n_hidden0",
+      "candidate_id": "cascade_n_hidden0",
+      "order": "cascade_n",
+      "hidden": 0,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8368983957219251,
+        "balanced_accuracy": 0.8457947669992386,
+        "macro_f1": 0.8363232323232324,
+        "log_loss": 0.5572822158924069,
+        "recall": {
+          "infectious": 0.8226950354609929,
+          "noninfectious": 0.8333333333333334,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            116,
+            24,
+            1
+          ],
+          [
+            16,
+            145,
+            13
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "validation_stage_metrics": {
+        "thresholds": [
+          0.30000000000000004,
+          0.45000000000000007
+        ],
+        "images": 374,
+        "stage1_accuracy": 0.9438502673796791,
+        "oracle_stage2_images": 315,
+        "oracle_stage2_accuracy": 0.873015873015873,
+        "end_to_end": {
+          "n": 374,
+          "accuracy": 0.8368983957219251,
+          "balanced_accuracy": 0.8457947669992386,
+          "macro_f1": 0.8363232323232324,
+          "log_loss": 0.5572822158924069,
+          "recall": {
+            "infectious": 0.8226950354609929,
+            "noninfectious": 0.8333333333333334,
+            "normal": 0.8813559322033898
+          },
+          "confusion_matrix": [
+            [
+              116,
+              24,
+              1
+            ],
+            [
+              16,
+              145,
+              13
+            ],
+            [
+              2,
+              5,
+              52
+            ]
+          ]
+        },
+        "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+        "default05": {
+          "thresholds": [
+            0.5,
+            0.5
+          ],
+          "images": 374,
+          "stage1_accuracy": 0.9278074866310161,
+          "oracle_stage2_images": 315,
+          "oracle_stage2_accuracy": 0.8603174603174604,
+          "end_to_end": {
+            "n": 374,
+            "accuracy": 0.8128342245989305,
+            "balanced_accuracy": 0.8287005373380145,
+            "macro_f1": 0.8095022656928855,
+            "log_loss": 0.5572822158924069,
+            "recall": {
+              "infectious": 0.7659574468085106,
+              "noninfectious": 0.8218390804597702,
+              "normal": 0.8983050847457628
+            },
+            "confusion_matrix": [
+              [
+                108,
+                28,
+                5
+              ],
+              [
+                15,
+                143,
+                16
+              ],
+              [
+                2,
+                4,
+                53
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      },
+      "cv": {
+        "mean_macro_f1": 0.7762005082115183,
+        "sd_macro_f1": 0.011861632073662224,
+        "mean_accuracy": 0.7757681527315036,
+        "mean_stage1_accuracy": 0.9289471436068295,
+        "mean_stage2_oracle_accuracy": 0.8059053244196361,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "thresholds": [
+              0.2,
+              0.7000000000000002
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.916083916083916,
+            "oracle_stage2_images": 496,
+            "oracle_stage2_accuracy": 0.8185483870967742,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.7692307692307693,
+              "balanced_accuracy": 0.7976295128766001,
+              "macro_f1": 0.762673325659922,
+              "log_loss": 0.8554705155482957,
+              "recall": {
+                "infectious": 0.6452991452991453,
+                "noninfectious": 0.8396946564885496,
+                "normal": 0.9078947368421053
+              },
+              "confusion_matrix": [
+                [
+                  151,
+                  74,
+                  9
+                ],
+                [
+                  10,
+                  220,
+                  32
+                ],
+                [
+                  0,
+                  7,
+                  69
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.8811188811188811,
+              "oracle_stage2_images": 496,
+              "oracle_stage2_accuracy": 0.8286290322580645,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.763986013986014,
+                "balanced_accuracy": 0.8004278655142456,
+                "macro_f1": 0.7485356523818062,
+                "log_loss": 0.8554705155482957,
+                "recall": {
+                  "infectious": 0.7435897435897436,
+                  "noninfectious": 0.7366412213740458,
+                  "normal": 0.9210526315789473
+                },
+                "confusion_matrix": [
+                  [
+                    174,
+                    47,
+                    13
+                  ],
+                  [
+                    20,
+                    193,
+                    49
+                  ],
+                  [
+                    1,
+                    5,
+                    70
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_1",
+            "thresholds": [
+              0.2,
+              0.6500000000000001
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.9440559440559441,
+            "oracle_stage2_images": 496,
+            "oracle_stage2_accuracy": 0.7862903225806451,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.7762237762237763,
+              "balanced_accuracy": 0.8224664306424049,
+              "macro_f1": 0.7848241571780276,
+              "log_loss": 0.8697413738468711,
+              "recall": {
+                "infectious": 0.6752136752136753,
+                "noninfectious": 0.8053435114503816,
+                "normal": 0.9868421052631579
+              },
+              "confusion_matrix": [
+                [
+                  158,
+                  66,
+                  10
+                ],
+                [
+                  30,
+                  211,
+                  21
+                ],
+                [
+                  0,
+                  1,
+                  75
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.8706293706293706,
+              "oracle_stage2_images": 496,
+              "oracle_stage2_accuracy": 0.8024193548387096,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.7325174825174825,
+                "balanced_accuracy": 0.7932478403551123,
+                "macro_f1": 0.722492129715976,
+                "log_loss": 0.8697413738468711,
+                "recall": {
+                  "infectious": 0.7478632478632479,
+                  "noninfectious": 0.6450381679389313,
+                  "normal": 0.9868421052631579
+                },
+                "confusion_matrix": [
+                  [
+                    175,
+                    42,
+                    17
+                  ],
+                  [
+                    37,
+                    169,
+                    56
+                  ],
+                  [
+                    0,
+                    1,
+                    75
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_2",
+            "thresholds": [
+              0.2,
+              0.45000000000000007
+            ],
+            "images": 573,
+            "stage1_accuracy": 0.9267015706806283,
+            "oracle_stage2_images": 497,
+            "oracle_stage2_accuracy": 0.8128772635814889,
+            "end_to_end": {
+              "n": 573,
+              "accuracy": 0.7818499127399651,
+              "balanced_accuracy": 0.8290515619913258,
+              "macro_f1": 0.7811040417966053,
+              "log_loss": 0.9470334786803665,
+              "recall": {
+                "infectious": 0.8290598290598291,
+                "noninfectious": 0.6844106463878327,
+                "normal": 0.9736842105263158
+              },
+              "confusion_matrix": [
+                [
+                  194,
+                  27,
+                  13
+                ],
+                [
+                  56,
+                  180,
+                  27
+                ],
+                [
+                  0,
+                  2,
+                  74
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 573,
+              "stage1_accuracy": 0.8830715532286213,
+              "oracle_stage2_images": 497,
+              "oracle_stage2_accuracy": 0.8108651911468813,
+              "end_to_end": {
+                "n": 573,
+                "accuracy": 0.7469458987783595,
+                "balanced_accuracy": 0.8093117979049538,
+                "macro_f1": 0.7369032097489062,
+                "log_loss": 0.9470334786803665,
+                "recall": {
+                  "infectious": 0.811965811965812,
+                  "noninfectious": 0.6159695817490495,
+                  "normal": 1.0
+                },
+                "confusion_matrix": [
+                  [
+                    190,
+                    25,
+                    19
+                  ],
+                  [
+                    53,
+                    162,
+                    48
+                  ],
+                  [
+                    0,
+                    0,
+                    76
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          }
+        ]
+      },
+      "source_cascade_control_folds": [
+        {
+          "phase": "fold_0",
+          "thresholds": [
+            0.35000000000000003,
+            0.6000000000000001
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.9475524475524476,
+          "oracle_stage2_images": 496,
+          "oracle_stage2_accuracy": 0.8185483870967742,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.7972027972027972,
+            "balanced_accuracy": 0.8063754021970172,
+            "macro_f1": 0.8002606043850381,
+            "log_loss": 0.5101939322994321,
+            "recall": {
+              "infectious": 0.7564102564102564,
+              "noninfectious": 0.8206106870229007,
+              "normal": 0.8421052631578947
+            },
+            "confusion_matrix": [
+              [
+                177,
+                54,
+                3
+              ],
+              [
+                32,
+                215,
+                15
+              ],
+              [
+                1,
+                11,
+                64
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_1",
+          "thresholds": [
+            0.30000000000000004,
+            0.6000000000000001
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.972027972027972,
+          "oracle_stage2_images": 496,
+          "oracle_stage2_accuracy": 0.7782258064516129,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.7832167832167832,
+            "balanced_accuracy": 0.8029503605035947,
+            "macro_f1": 0.8069575530123719,
+            "log_loss": 0.621427103048658,
+            "recall": {
+              "infectious": 0.6837606837606838,
+              "noninfectious": 0.8435114503816794,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                160,
+                73,
+                1
+              ],
+              [
+                35,
+                221,
+                6
+              ],
+              [
+                2,
+                7,
+                67
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_2",
+          "thresholds": [
+            0.55,
+            0.55
+          ],
+          "images": 573,
+          "stage1_accuracy": 0.9476439790575916,
+          "oracle_stage2_images": 497,
+          "oracle_stage2_accuracy": 0.8410462776659959,
+          "end_to_end": {
+            "n": 573,
+            "accuracy": 0.8219895287958116,
+            "balanced_accuracy": 0.8522794588433972,
+            "macro_f1": 0.8232838234941804,
+            "log_loss": 0.5053124059388108,
+            "recall": {
+              "infectious": 0.8376068376068376,
+              "noninfectious": 0.7718631178707225,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                196,
+                28,
+                10
+              ],
+              [
+                44,
+                203,
+                16
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      ],
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.032032615026208466,
+        "macro_f1_difference": -0.032130897221966936,
+        "accuracy_ci95": [
+          -0.05712830898739583,
+          -0.004977532899072114
+        ],
+        "macro_f1_ci95": [
+          -0.05464532799180793,
+          -0.009591765240250873
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "name": "cascade_n_hidden64",
+      "candidate_id": "cascade_n_hidden64",
+      "order": "cascade_n",
+      "hidden": 64,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8636363636363636,
+        "balanced_accuracy": 0.8607694890383873,
+        "macro_f1": 0.8647389246908647,
+        "log_loss": 0.4541523554401358,
+        "recall": {
+          "infectious": 0.8156028368794326,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            115,
+            25,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "validation_stage_metrics": {
+        "thresholds": [
+          0.4,
+          0.55
+        ],
+        "images": 374,
+        "stage1_accuracy": 0.9598930481283422,
+        "oracle_stage2_images": 315,
+        "oracle_stage2_accuracy": 0.8857142857142857,
+        "end_to_end": {
+          "n": 374,
+          "accuracy": 0.8636363636363636,
+          "balanced_accuracy": 0.8607694890383873,
+          "macro_f1": 0.8647389246908647,
+          "log_loss": 0.4541523554401358,
+          "recall": {
+            "infectious": 0.8156028368794326,
+            "noninfectious": 0.9022988505747126,
+            "normal": 0.864406779661017
+          },
+          "confusion_matrix": [
+            [
+              115,
+              25,
+              1
+            ],
+            [
+              11,
+              157,
+              6
+            ],
+            [
+              2,
+              6,
+              51
+            ]
+          ]
+        },
+        "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+        "default05": {
+          "thresholds": [
+            0.5,
+            0.5
+          ],
+          "images": 374,
+          "stage1_accuracy": 0.946524064171123,
+          "oracle_stage2_images": 315,
+          "oracle_stage2_accuracy": 0.8825396825396825,
+          "end_to_end": {
+            "n": 374,
+            "accuracy": 0.8475935828877005,
+            "balanced_accuracy": 0.85017195092801,
+            "macro_f1": 0.8453258378941438,
+            "log_loss": 0.4541523554401358,
+            "recall": {
+              "infectious": 0.8297872340425532,
+              "noninfectious": 0.8563218390804598,
+              "normal": 0.864406779661017
+            },
+            "confusion_matrix": [
+              [
+                117,
+                22,
+                2
+              ],
+              [
+                15,
+                149,
+                10
+              ],
+              [
+                2,
+                6,
+                51
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      },
+      "cv": {
+        "mean_macro_f1": 0.7884741062320719,
+        "sd_macro_f1": 0.01244514378620293,
+        "mean_accuracy": 0.7827581086743391,
+        "mean_stage1_accuracy": 0.9434996359080129,
+        "mean_stage2_oracle_accuracy": 0.8039000129811126,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "thresholds": [
+              0.5,
+              0.55
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.9230769230769231,
+            "oracle_stage2_images": 496,
+            "oracle_stage2_accuracy": 0.8467741935483871,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.8006993006993007,
+              "balanced_accuracy": 0.8182610323028161,
+              "macro_f1": 0.7911209426617173,
+              "log_loss": 0.6359077546767438,
+              "recall": {
+                "infectious": 0.7564102564102564,
+                "noninfectious": 0.816793893129771,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  177,
+                  49,
+                  8
+                ],
+                [
+                  21,
+                  214,
+                  27
+                ],
+                [
+                  1,
+                  8,
+                  67
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.9230769230769231,
+              "oracle_stage2_images": 496,
+              "oracle_stage2_accuracy": 0.8528225806451613,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.8059440559440559,
+                "balanced_accuracy": 0.8228390101632369,
+                "macro_f1": 0.7953884554089621,
+                "log_loss": 0.6359077546767438,
+                "recall": {
+                  "infectious": 0.7777777777777778,
+                  "noninfectious": 0.8091603053435115,
+                  "normal": 0.881578947368421
+                },
+                "confusion_matrix": [
+                  [
+                    182,
+                    44,
+                    8
+                  ],
+                  [
+                    23,
+                    212,
+                    27
+                  ],
+                  [
+                    1,
+                    8,
+                    67
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_1",
+            "thresholds": [
+              0.25,
+              0.8
+            ],
+            "images": 572,
+            "stage1_accuracy": 0.9527972027972028,
+            "oracle_stage2_images": 496,
+            "oracle_stage2_accuracy": 0.7681451612903226,
+            "end_to_end": {
+              "n": 572,
+              "accuracy": 0.7604895104895105,
+              "balanced_accuracy": 0.7937729428287885,
+              "macro_f1": 0.7749184643214001,
+              "log_loss": 0.892419270261673,
+              "recall": {
+                "infectious": 0.6282051282051282,
+                "noninfectious": 0.8320610687022901,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  147,
+                  82,
+                  5
+                ],
+                [
+                  28,
+                  218,
+                  16
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 572,
+              "stage1_accuracy": 0.9230769230769231,
+              "oracle_stage2_images": 496,
+              "oracle_stage2_accuracy": 0.8004032258064516,
+              "end_to_end": {
+                "n": 572,
+                "accuracy": 0.7744755244755245,
+                "balanced_accuracy": 0.8147455642433545,
+                "macro_f1": 0.7731408441491698,
+                "log_loss": 0.892419270261673,
+                "recall": {
+                  "infectious": 0.7564102564102564,
+                  "noninfectious": 0.7404580152671756,
+                  "normal": 0.9473684210526315
+                },
+                "confusion_matrix": [
+                  [
+                    177,
+                    46,
+                    11
+                  ],
+                  [
+                    39,
+                    194,
+                    29
+                  ],
+                  [
+                    0,
+                    4,
+                    72
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          },
+          {
+            "phase": "fold_2",
+            "thresholds": [
+              0.30000000000000004,
+              0.4
+            ],
+            "images": 573,
+            "stage1_accuracy": 0.9546247818499127,
+            "oracle_stage2_images": 497,
+            "oracle_stage2_accuracy": 0.7967806841046278,
+            "end_to_end": {
+              "n": 573,
+              "accuracy": 0.787085514834206,
+              "balanced_accuracy": 0.8245977501030533,
+              "macro_f1": 0.7993829117130983,
+              "log_loss": 0.6309868119459012,
+              "recall": {
+                "infectious": 0.8589743589743589,
+                "noninfectious": 0.6806083650190115,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  201,
+                  26,
+                  7
+                ],
+                [
+                  70,
+                  179,
+                  14
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            },
+            "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors.",
+            "default05": {
+              "thresholds": [
+                0.5,
+                0.5
+              ],
+              "images": 573,
+              "stage1_accuracy": 0.93717277486911,
+              "oracle_stage2_images": 497,
+              "oracle_stage2_accuracy": 0.7987927565392354,
+              "end_to_end": {
+                "n": 573,
+                "accuracy": 0.7783595113438045,
+                "balanced_accuracy": 0.8168469457743021,
+                "macro_f1": 0.7824465286160894,
+                "log_loss": 0.6309868119459012,
+                "recall": {
+                  "infectious": 0.8205128205128205,
+                  "noninfectious": 0.6958174904942965,
+                  "normal": 0.9342105263157895
+                },
+                "confusion_matrix": [
+                  [
+                    192,
+                    33,
+                    9
+                  ],
+                  [
+                    58,
+                    183,
+                    22
+                  ],
+                  [
+                    0,
+                    5,
+                    71
+                  ]
+                ]
+              },
+              "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+            }
+          }
+        ]
+      },
+      "source_cascade_control_folds": [
+        {
+          "phase": "fold_0",
+          "thresholds": [
+            0.35000000000000003,
+            0.6000000000000001
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.9475524475524476,
+          "oracle_stage2_images": 496,
+          "oracle_stage2_accuracy": 0.8185483870967742,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.7972027972027972,
+            "balanced_accuracy": 0.8063754021970172,
+            "macro_f1": 0.8002606043850381,
+            "log_loss": 0.5101939322994321,
+            "recall": {
+              "infectious": 0.7564102564102564,
+              "noninfectious": 0.8206106870229007,
+              "normal": 0.8421052631578947
+            },
+            "confusion_matrix": [
+              [
+                177,
+                54,
+                3
+              ],
+              [
+                32,
+                215,
+                15
+              ],
+              [
+                1,
+                11,
+                64
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_1",
+          "thresholds": [
+            0.30000000000000004,
+            0.6000000000000001
+          ],
+          "images": 572,
+          "stage1_accuracy": 0.972027972027972,
+          "oracle_stage2_images": 496,
+          "oracle_stage2_accuracy": 0.7782258064516129,
+          "end_to_end": {
+            "n": 572,
+            "accuracy": 0.7832167832167832,
+            "balanced_accuracy": 0.8029503605035947,
+            "macro_f1": 0.8069575530123719,
+            "log_loss": 0.621427103048658,
+            "recall": {
+              "infectious": 0.6837606837606838,
+              "noninfectious": 0.8435114503816794,
+              "normal": 0.881578947368421
+            },
+            "confusion_matrix": [
+              [
+                160,
+                73,
+                1
+              ],
+              [
+                35,
+                221,
+                6
+              ],
+              [
+                2,
+                7,
+                67
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        },
+        {
+          "phase": "fold_2",
+          "thresholds": [
+            0.55,
+            0.55
+          ],
+          "images": 573,
+          "stage1_accuracy": 0.9476439790575916,
+          "oracle_stage2_images": 497,
+          "oracle_stage2_accuracy": 0.8410462776659959,
+          "end_to_end": {
+            "n": 573,
+            "accuracy": 0.8219895287958116,
+            "balanced_accuracy": 0.8522794588433972,
+            "macro_f1": 0.8232838234941804,
+            "log_loss": 0.5053124059388108,
+            "recall": {
+              "infectious": 0.8376068376068376,
+              "noninfectious": 0.7718631178707225,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                196,
+                28,
+                10
+              ],
+              [
+                44,
+                203,
+                16
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          },
+          "policy": "Average each scalar gate across seeds, route with stopping-only thresholds. Oracle stage2 uses the true eligible subset; end-to-end includes routing errors."
+        }
+      ],
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.025043680838672144,
+        "macro_f1_difference": -0.02002897052826169,
+        "accuracy_ci95": [
+          -0.04824350921273026,
+          -0.0016141377665174412
+        ],
+        "macro_f1_ci95": [
+          -0.03988667553399405,
+          -0.0004990835399231283
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "new_binary_head_fits": 96,
+  "new_cascade_system_fits": 48,
+  "external_test_evaluated": false
+}

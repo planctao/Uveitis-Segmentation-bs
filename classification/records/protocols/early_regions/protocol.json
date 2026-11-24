@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-11-24T00:11:44.868212+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "L capacity, latent residual experts, paired-dropout consistency and fixed photometric views did not pass both development gates. M5 only uses block8 global patch mean, losing its spatial arrangement. Test whether block4/block8 local spatial evidence can complement final-layer regions without changing initial M5 predictions.",
+  "pretrained_weights": {
+    "storage": "/root/.cache/torch/hub/checkpoints/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth",
+    "sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c"
+  },
+  "feature_storage": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/features/early_regions_development.npz",
+  "extraction": "Original unchanged cached448images, ImageNet normalization, DINOv3-B16 eval AMPfloat16 at320/448. After block4(index3) or block8(index7), dropprefix tokens and adaptive3x3pool ordinary patch regions. Concatenate two scales in original order. Every extraction batch also reproduces original finalCLS/regions/block8mean/patchstd as an input control. All shards and six actual images re-forwarded with freshly loaded model before formal fits.",
+  "architecture": "At original final region linear projection (before GELU): add0.1 sigmoid(Linear(LayerNorm(final_projection))) * U GELU(V LayerNorm(early_regions)). U starts zero, gate weight starts zero/bias-2. Per-region early feature normalization uses only fit rows. Shared original parameters, predictions and RNG exactly preserved at initialization; no new task loss.",
+  "configuration_plan": [
+    {
+      "name": "block4_rank16",
+      "feature": "block4",
+      "config_updates": {
+        "early_region_rank": 16
+      }
+    },
+    {
+      "name": "block4_rank32",
+      "feature": "block4",
+      "config_updates": {
+        "early_region_rank": 32
+      }
+    },
+    {
+      "name": "block8_rank16",
+      "feature": "block8",
+      "config_updates": {
+        "early_region_rank": 16
+      }
+    },
+    {
+      "name": "block8_rank32",
+      "feature": "block8",
+      "config_updates": {
+        "early_region_rank": 32
+      }
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "training": "Each fixed depth/rank3formal+3foldx3seed heads. Original M5 task losses,hparams,patientweights,fit/stop/outer split and stopping; original four input arrays unchanged. Supplemented region projection enters original attention, disease marginalization and fine contrastive projection.",
+  "selection": "Original patient CV Macro-F1 above M5 and original validation Macro-F1 no decrease. Freeze any qualifier before fresh patient confirmation versus M5 and fixed Gaussian; no automatic external evaluation.",
+  "verification": "Independent NumPy/SciPy adapter formula, region permutation equivariance, numerical gate derivative, exact initial full train/eval/RNG identity and task gradient/restoration verified. Every actual trained adapter/gate will be reconstructed in double precision during CPU prediction recovery.",
+  "external_test_policy": "Only2091original development images extracted. External input rows explicitly NaN. No external raw image, outcome or prediction read for selection."
+}

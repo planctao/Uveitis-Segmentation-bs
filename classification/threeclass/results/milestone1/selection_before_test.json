@@ -1,0 +1,235 @@
+{
+  "time": "2026-11-24T01:30:10.477106+08:00",
+  "rule": "Select maximum mean outer-CV macro-F1 among predeclared baseline and exploration finalists; tie-break by development validation macro-F1. No external metric enters this rule.",
+  "winner": {
+    "feature": "vitb_320",
+    "cv": {
+      "candidate": "explore_09_attention_dual_h128",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3
+      },
+      "folds": [
+        {
+          "fold": 0,
+          "inner_train_images": 923,
+          "early_stop_images": 222,
+          "outer_test_images": 572,
+          "thresholds_from_inner_stop_only": null,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8059440559440559,
+            "balanced_accuracy": 0.7948157076320997,
+            "macro_f1": 0.79307203030198,
+            "log_loss": 0.8163757920265198,
+            "recall": {
+              "infectious": 0.7777777777777778,
+              "noninfectious": 0.8435114503816794,
+              "normal": 0.7631578947368421
+            },
+            "confusion_matrix": [
+              [
+                182,
+                47,
+                5
+              ],
+              [
+                25,
+                221,
+                16
+              ],
+              [
+                3,
+                15,
+                58
+              ]
+            ]
+          }
+        },
+        {
+          "fold": 1,
+          "inner_train_images": 935,
+          "early_stop_images": 210,
+          "outer_test_images": 572,
+          "thresholds_from_inner_stop_only": null,
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.7395104895104895,
+            "balanced_accuracy": 0.7521570694531724,
+            "macro_f1": 0.7462469075847312,
+            "log_loss": 0.9138492941856384,
+            "recall": {
+              "infectious": 0.6752136752136753,
+              "noninfectious": 0.7786259541984732,
+              "normal": 0.8026315789473685
+            },
+            "confusion_matrix": [
+              [
+                158,
+                72,
+                4
+              ],
+              [
+                41,
+                204,
+                17
+              ],
+              [
+                3,
+                12,
+                61
+              ]
+            ]
+          }
+        },
+        {
+          "fold": 2,
+          "inner_train_images": 902,
+          "early_stop_images": 242,
+          "outer_test_images": 573,
+          "thresholds_from_inner_stop_only": null,
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.7888307155322862,
+            "balanced_accuracy": 0.8185285815363863,
+            "macro_f1": 0.7982333171149212,
+            "log_loss": 0.9980276226997375,
+            "recall": {
+              "infectious": 0.8290598290598291,
+              "noninfectious": 0.7186311787072244,
+              "normal": 0.9078947368421053
+            },
+            "confusion_matrix": [
+              [
+                194,
+                33,
+                7
+              ],
+              [
+                60,
+                189,
+                14
+              ],
+              [
+                0,
+                7,
+                69
+              ]
+            ]
+          }
+        }
+      ],
+      "mean_macro_f1": 0.7791840850005441,
+      "sd_macro_f1": 0.028640931592424028,
+      "mean_accuracy": 0.7780950869956106,
+      "policy": "3 outer patient-group folds using original training data only; disjoint inner early-stopping patients; thresholds selected only on inner stop patients; 3 seeds per fold."
+    },
+    "group": {
+      "group": "09_attention_dual_h128",
+      "mode": "dual",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.820855614973262,
+        "balanced_accuracy": 0.8148809055022915,
+        "macro_f1": 0.8240541977384082,
+        "log_loss": 0.5048547387123108,
+        "recall": {
+          "infectious": 0.75177304964539,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.8135593220338984
+        },
+        "confusion_matrix": [
+          [
+            106,
+            35,
+            0
+          ],
+          [
+            14,
+            153,
+            7
+          ],
+          [
+            3,
+            8,
+            48
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8042129774326975,
+        0.8059456352139279,
+        0.8136768067802551
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/explore/09_attention_dual_h128/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/explore/09_attention_dual_h128/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/explore/09_attention_dual_h128/seed_2/model.pt"
+      ]
+    }
+  },
+  "candidates": [
+    {
+      "feature": "vitb_320",
+      "candidate": "explore_09_attention_dual_h128",
+      "cv_macro_f1": 0.7791840850005441
+    },
+    {
+      "feature": "vitb_320",
+      "candidate": "baseline_04_global_cascade_n_h128",
+      "cv_macro_f1": 0.7551182255054377
+    },
+    {
+      "feature": "vitb_320",
+      "candidate": "baseline_01_global_flat_h256",
+      "cv_macro_f1": 0.7440732996916449
+    },
+    {
+      "feature": "vitb_320",
+      "candidate": "baseline_02_global_cascade_i_h128",
+      "cv_macro_f1": 0.7427074592432131
+    },
+    {
+      "feature": "fusion_320",
+      "candidate": "explore_04_context_dual_h256",
+      "cv_macro_f1": 0.7674143140466617
+    },
+    {
+      "feature": "fusion_320",
+      "candidate": "baseline_05_global_cascade_n_h256",
+      "cv_macro_f1": 0.7350824599737185
+    },
+    {
+      "feature": "fusion_320",
+      "candidate": "baseline_01_global_flat_h256",
+      "cv_macro_f1": 0.7318523270575287
+    },
+    {
+      "feature": "fusion_320",
+      "candidate": "baseline_03_global_cascade_i_h256",
+      "cv_macro_f1": 0.7260932978860085
+    }
+  ]
+}

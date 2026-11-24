@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "channel",
+      "weight": 0.05,
+      "batch_size": 256,
+      "cuda_task": {
+        "batch_size": 256,
+        "complete_objective_and_all_parameter_gradients_restored": true,
+        "complementary_masks_and_shared_dropout_restored": true,
+        "maximum_parameter_gradient_error": 1.862645149230957e-08,
+        "maximum_independent_projection_error": 1.5497207641601562e-06
+      },
+      "source_full_probability_and_next_rng_exact": true,
+      "unmasked_inference_exact_after_update": true
+    },
+    {
+      "kind": "channel",
+      "weight": 0.2,
+      "batch_size": 256,
+      "cuda_task": {
+        "batch_size": 256,
+        "complete_objective_and_all_parameter_gradients_restored": true,
+        "complementary_masks_and_shared_dropout_restored": true,
+        "maximum_parameter_gradient_error": 1.862645149230957e-08,
+        "maximum_independent_projection_error": 1.5497207641601562e-06
+      },
+      "source_full_probability_and_next_rng_exact": true,
+      "unmasked_inference_exact_after_update": true
+    },
+    {
+      "kind": "backbone",
+      "weight": 0.05,
+      "batch_size": 256,
+      "cuda_task": {
+        "batch_size": 256,
+        "complete_objective_and_all_parameter_gradients_restored": true,
+        "complementary_masks_and_shared_dropout_restored": true,
+        "maximum_parameter_gradient_error": 1.862645149230957e-08,
+        "maximum_independent_projection_error": 1.5497207641601562e-06
+      },
+      "source_full_probability_and_next_rng_exact": true,
+      "unmasked_inference_exact_after_update": true
+    },
+    {
+      "kind": "backbone",
+      "weight": 0.2,
+      "batch_size": 256,
+      "cuda_task": {
+        "batch_size": 256,
+        "complete_objective_and_all_parameter_gradients_restored": true,
+        "complementary_masks_and_shared_dropout_restored": true,
+        "maximum_parameter_gradient_error": 1.862645149230957e-08,
+        "maximum_independent_projection_error": 1.5497207641601562e-06
+      },
+      "source_full_probability_and_next_rng_exact": true,
+      "unmasked_inference_exact_after_update": true
+    }
+  ],
+  "formal_seed_fits": 0,
+  "development_or_external_scores_evaluated": 0,
+  "code_sha256": {
+    "backbone_consistency.py": "6ca801625fe3651a33c9b6358054cda4bfaad14116681e43daf939b0cae70284",
+    "audit_backbone_consistency.py": "5362e225b8d2d76616040b6f4a50517ee7351688359508eb3da623c40160c3e7",
+    "verify_backbone_consistency.py": "c3dc8d6c71066c1ad8e0590aa2f5b8db876fe8db55d1e69673ea8596a9a91ad9"
+  },
+  "checks": [
+    "Four actualCUDA 256image complete objectives/allparametergradients independently reconstructed",
+    "Complementary masks average exactly to fullfeature; masks tied across streams/tokens",
+    "Full teacher detached; all student views replay identical dropout, source fullprobability and nextRNG exact",
+    "Zero consistencyweight is exact original task; no inferenceparameters added and postupdate restoration exact"
+  ]
+}

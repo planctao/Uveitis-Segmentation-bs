@@ -1,0 +1,61 @@
+{
+  "created_at_utc": "2026-11-24T05:04:57.999724+00:00",
+  "status": "completed",
+  "family": "fine_normal_reference",
+  "hypothesis": "Increasing regional density and foreground pooling previously failed with raw M5. Test whether the later successful fit-normal reference projection enables these local architectures. Fine-grained retinal features and normal nuisance suppression may interact; compare all four previously declared foreground controls without retuning the head or masks.",
+  "development_evidence": [
+    "results/research_foreground_multiscale/comparison.json",
+    "results/research_normal_subspace_fusion/comparison.json",
+    "results/research_normal_tangent_adversarial/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "fine7_unmasked",
+      "grid": 7,
+      "pool": "ordinary",
+      "use_region_mask": false
+    },
+    {
+      "name": "fine7_masked",
+      "grid": 7,
+      "pool": "ordinary",
+      "use_region_mask": true
+    },
+    {
+      "name": "fine7_weighted_masked",
+      "grid": 7,
+      "pool": "weighted",
+      "use_region_mask": true
+    },
+    {
+      "name": "coarse3_weighted_masked",
+      "grid": 3,
+      "pool": "weighted",
+      "use_region_mask": true
+    }
+  ],
+  "source_feature_storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/foreground_multiscale.npz",
+  "geometry": "Use original per-fit normalization, including valid-region-only region channel statistics for masked arms. For normal-patient PCA, first average only valid regions within each image, then equally average images within each normal patient; other streams retain original centroid construction. Estimate32 directions per stream. Unmasked arm averages all49regions. All geometry/splitplans frozen before fitting.",
+  "architecture": "Same original M5attentionMLP on full normal-reference projections, with49ordinaryunmasked/49ordinarymasked/49foregroundweightedmasked/9foregroundweightedmasked regional tokens. Masks and source features are already frozen and pixel-derived. Keep region_mask unchanged through normal transform. Identical trainable parameter shapes, initialization, full task,patientweights,hparams and3seeds. Four arms48newheads; each also scored with fixed.75new/.25M5 mixture, eight scores and0fusionfits.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest passing original CV with validation>=M6 and CVstrictly>M6, then unused patient-partition confirmation against M6/M5/fixedGaussian. Seeds20271101/20271111 are used. No automatic external tests.",
+  "audit": "Sourcebank indices/path/digest and unchanged global/mid/dispersion. Independent patientloops/Gram spectra, duplicated-normal invariance, invalid-token invariance for fit geometry and prediction, zero-strengthplainMLP and original RNG/parameteridentity. Four real256image fulltask updates/strictrecoveries passed. Restore all48stop/outer probabilities and16fixedfusionphases onCPU; audit valid-only normalization, everyactualgeometrybuffer, bestepoch, fullpatientcoverage and freezehashes.",
+  "formal_fits_started": "Inspect actual checkpoints",
+  "external_test_evaluated": false,
+  "protocol": "runs/fine_normal_reference/protocol.json",
+  "protocol_sha256": "26af9bac55e69b06b41957c8cce1c0a26aa22abc9823ebad5a374b12f34ebbad",
+  "pid": 83368,
+  "completed_at_utc": "2026-11-24T05:35:26.143562+00:00",
+  "actual_new_seed_fits": 48,
+  "actual_seed_heads_checked": 48,
+  "passing_development_gates": 0,
+  "best_original_cv": {
+    "name": "fine7_weighted_masked_fusion075",
+    "cv": 0.8233194189702712,
+    "validation": 0.8883629985305018
+  },
+  "decision": "Retain M6; no passing candidate; no external evaluation."
+}

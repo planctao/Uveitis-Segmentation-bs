@@ -1,0 +1,52 @@
+{
+  "created_at_utc": "2026-11-24T08:02:14.789639+00:00",
+  "status": "completed_no_candidate_passed",
+  "family": "large_spatial_contrast",
+  "hypothesis": "Normal-referenceB/Lglobalcapacitypassesoriginaldevelopmentgates,butneedsfreshconfirmation. B-onlyexplicitD4centeredspatialcontrastslightlyimprovedfreshmeanF1withoutsignificantM6advantage. Ifnormal-B/Lfailsconfirmation,testwhetherexplicitspatialcontrastlearnedfromcomplementaryB/Lregionsgeneralizesbetterthansimpleattention. Same4matchedcapacityrank16/32mean/D4armsaspriorstudy,fulltaskandzeroreadoutinitfixed. Noassertionofclinicalcausality/localization/globalmethodologicalnovelty.",
+  "development_evidence": [
+    "results/research_normal_large_reference/comparison.json",
+    "results/research_normal_spatial_contrast_confirmation/comparison.json",
+    "results/normal_branch_diagnostics.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "mean_rank16",
+      "kind": "mean",
+      "rank": 16
+    },
+    {
+      "name": "d4_rank16",
+      "kind": "d4",
+      "rank": 16
+    },
+    {
+      "name": "mean_rank32",
+      "kind": "mean",
+      "rank": 32
+    },
+    {
+      "name": "d4_rank32",
+      "kind": "d4",
+      "rank": 32
+    }
+  ],
+  "geometry": "Fit-onlyoriginalstandardization of3584dimB320/448+L320/448cachedfourstreams. EqualnormalpatientPCA32independentlyperstream,fullsuppression. All16arm/phasegeometryandpatientplansfrozenbeforeallfits. No new imageextraction ornormalspaceretuning.",
+  "architecture": "SameoriginalMLPparametersfor3584dimevidenceasnormal-B/L. GELUregionprojection128,subtractwithinimage9tokenmean,LayerNorm128,Linear128->r GELU. D4branchall8spatialrotations/reflectionsofsame3x3featuregrid,sharedLinear9r->r GELU,average8. Matchedcapacitymeancontrolrepeatsprojectedregionalmean9times,sameLinear9r->r. ZeroinitializedLinearr->256,.1residualbeforeoriginalhiddendropout. Rank16/32×mean/D4=4arms48heads. Originalfulltask/hparams/weights/init/RNG retained. Scorebranchandfixed.75branch/.25M5=8scores.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "LaunchonlyiffrozenprimarynormalB/LfreshconfirmationfailsandM6remainsretained. HighestoriginalCVamongstrictly>M6andVal>=M6frozenbeforetwo unusedpatient3foldconfirmationsvsM6/M5/fixedGaussian;strictlyhighermeanF1andpairedpatientbootstrap95%lowerbound>0vseach. Noautomaticexternaltesting.",
+  "audit": "4actualB/Ltrainedstate256imagefulltask/allparametergradientsindependentfunctionalD4+NumPynormalprojection,zero-initexactbasegradients/RNG,matchedcapacity,D4invariance/commonshiftinvariance/meanpermutationcontrol andnonD4sensitivitytested. ActualCUDAfulltaskwitness passed. Formalall48heads/stats/maps/epochs/geometries/permutations/stopouterprobabilities/actualfirsttaskwitnessesand16fusionphasesindependentlyrestore;trainedsymmetryandnonzeroreadoutverified.",
+  "preflight": "verification_large_spatial_contrast.json",
+  "external_test_evaluated": false,
+  "protocol": "runs/large_spatial_contrast/protocol.json",
+  "protocol_sha256": "b275763cea16a7b254b2245dc86744da63201acf9af0db696a4d3e76b2becf78",
+  "pid": 2587,
+  "formal_fits_started": "Inspect actual checkpoints",
+  "result": "results/research_large_spatial_contrast/comparison.json",
+  "verification": "results/research_large_spatial_contrast/verification.json",
+  "passing_development_gates": 0,
+  "retained_model": "M6",
+  "decision": "All48 heads and16fusion phases audited; all8 scores fail the frozen development gate. No fresh confirmation or external test launched."
+}

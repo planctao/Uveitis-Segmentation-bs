@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "initialization_diagnostics": [
+    {
+      "components": 2,
+      "initial_probability_max_abs_change": 0.00060281902551651,
+      "initial_class_decisions_changed_in_checked16": 0,
+      "new_parameters": 1570
+    },
+    {
+      "components": 4,
+      "initial_probability_max_abs_change": 0.0011417567729949951,
+      "initial_class_decisions_changed_in_checked16": 0,
+      "new_parameters": 3140
+    }
+  ],
+  "checks": [
+    "Independent SciPy prior-softmax and logmixture formula; rare disease priors closer to uniform",
+    "Same-family diseases use exactly shared componentvalues; componentpermutation invariant",
+    "Doubleprecision numericalgradientcheck and singlecomponentzeroresidual",
+    "Common model tensors initializedidentically; small initial predictionchanges explicitly measured",
+    "Full loss uses exactly declared penalty; finite nonzero dictionary and diseaseprior gradients",
+    "Strict saved/restored full model probabilities match"
+  ]
+}

@@ -1,0 +1,443 @@
+{
+  "selection": {
+    "group": "02_global_cascade_i_h128",
+    "mode": "cascade_i",
+    "config": {
+      "arch": "global",
+      "mode": "cascade_i",
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18
+    },
+    "seeds": 3,
+    "thresholds": [
+      0.55,
+      0.5
+    ],
+    "val": {
+      "n": 374,
+      "accuracy": 0.7620320855614974,
+      "balanced_accuracy": 0.7655685019613045,
+      "macro_f1": 0.7630241362081556,
+      "log_loss": 0.588834285736084,
+      "recall": {
+        "infectious": 0.8156028368794326,
+        "noninfectious": 0.7183908045977011,
+        "normal": 0.7627118644067796
+      },
+      "confusion_matrix": [
+        [
+          115,
+          26,
+          0
+        ],
+        [
+          35,
+          125,
+          14
+        ],
+        [
+          3,
+          11,
+          45
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.7391513302131227,
+      0.7495933382886814,
+      0.7442473716074653
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_2/model.pt"
+    ]
+  },
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "class_order": [
+    "infectious",
+    "noninfectious",
+    "normal"
+  ],
+  "results": {
+    "val": {
+      "image": {
+        "n": 374,
+        "accuracy": 0.7620320855614974,
+        "balanced_accuracy": 0.7655685019613045,
+        "macro_f1": 0.7630241362081556,
+        "log_loss": 0.588834285736084,
+        "recall": {
+          "infectious": 0.8156028368794326,
+          "noninfectious": 0.7183908045977011,
+          "normal": 0.7627118644067796
+        },
+        "confusion_matrix": [
+          [
+            115,
+            26,
+            0
+          ],
+          [
+            35,
+            125,
+            14
+          ],
+          [
+            3,
+            11,
+            45
+          ]
+        ],
+        "stage1_n": 374,
+        "stage1_accuracy": 0.8288770053475936,
+        "stage1_auroc": 0.9077709798191946,
+        "stage2_oracle_n": 233,
+        "stage2_oracle_accuracy": 0.871244635193133,
+        "stage2_actually_routed_n": 221,
+        "stage2_accuracy_among_all_actually_routed": 0.7692307692307693,
+        "wrong_stage1_routing_n": 64,
+        "end_to_end_correct_n": 285,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "image_accuracy_patient_cluster_ci95": [
+        0.6911247163855184,
+        0.8218200430543532
+      ],
+      "patient": {
+        "n": 66,
+        "accuracy": 0.8181818181818182,
+        "balanced_accuracy": 0.8496031746031746,
+        "macro_f1": 0.8080149114631873,
+        "log_loss": 0.49669814109802246,
+        "recall": {
+          "infectious": 0.9166666666666666,
+          "noninfectious": 0.775,
+          "normal": 0.8571428571428571
+        },
+        "confusion_matrix": [
+          [
+            11,
+            1,
+            0
+          ],
+          [
+            6,
+            31,
+            3
+          ],
+          [
+            0,
+            2,
+            12
+          ]
+        ],
+        "excluded_mixed_label_groups": 17,
+        "stage1_n": 66,
+        "stage1_accuracy": 0.8939393939393939,
+        "stage1_auroc": 0.9753086419753085,
+        "stage2_oracle_n": 54,
+        "stage2_oracle_accuracy": 0.9074074074074074,
+        "stage2_actually_routed_n": 49,
+        "stage2_accuracy_among_all_actually_routed": 0.8775510204081632,
+        "wrong_stage1_routing_n": 7,
+        "end_to_end_correct_n": 54,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "eye": {
+        "n": 124,
+        "accuracy": 0.7580645161290323,
+        "balanced_accuracy": 0.7850910539082582,
+        "macro_f1": 0.757246436223709,
+        "log_loss": 0.5306676030158997,
+        "recall": {
+          "infectious": 0.8518518518518519,
+          "noninfectious": 0.696969696969697,
+          "normal": 0.8064516129032258
+        },
+        "confusion_matrix": [
+          [
+            23,
+            4,
+            0
+          ],
+          [
+            12,
+            46,
+            8
+          ],
+          [
+            1,
+            5,
+            25
+          ]
+        ],
+        "excluded_mixed_label_groups": 0,
+        "stage1_n": 124,
+        "stage1_accuracy": 0.8629032258064516,
+        "stage1_auroc": 0.9621993127147767,
+        "stage2_oracle_n": 97,
+        "stage2_oracle_accuracy": 0.8556701030927835,
+        "stage2_actually_routed_n": 88,
+        "stage2_accuracy_among_all_actually_routed": 0.8068181818181818,
+        "wrong_stage1_routing_n": 17,
+        "end_to_end_correct_n": 94,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      }
+    },
+    "test_independent": {
+      "image": {
+        "n": 807,
+        "accuracy": 0.79182156133829,
+        "balanced_accuracy": 0.790969689735903,
+        "macro_f1": 0.7849393237401755,
+        "log_loss": 0.5439906120300293,
+        "recall": {
+          "infectious": 0.8708791208791209,
+          "noninfectious": 0.7003058103975535,
+          "normal": 0.8017241379310345
+        },
+        "confusion_matrix": [
+          [
+            317,
+            40,
+            7
+          ],
+          [
+            74,
+            229,
+            24
+          ],
+          [
+            2,
+            21,
+            93
+          ]
+        ],
+        "stage1_n": 807,
+        "stage1_accuracy": 0.8475836431226765,
+        "stage1_auroc": 0.9217250018604419,
+        "stage2_oracle_n": 443,
+        "stage2_oracle_accuracy": 0.8939051918735892,
+        "stage2_actually_routed_n": 414,
+        "stage2_accuracy_among_all_actually_routed": 0.7777777777777778,
+        "wrong_stage1_routing_n": 123,
+        "end_to_end_correct_n": 639,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "image_accuracy_patient_cluster_ci95": [
+        0.728121875,
+        0.8488130743978208
+      ],
+      "patient": {
+        "n": 180,
+        "accuracy": 0.8388888888888889,
+        "balanced_accuracy": 0.83668430335097,
+        "macro_f1": 0.8249262939151892,
+        "log_loss": 0.40039223432540894,
+        "recall": {
+          "infectious": 0.8148148148148148,
+          "noninfectious": 0.8222222222222222,
+          "normal": 0.873015873015873
+        },
+        "confusion_matrix": [
+          [
+            22,
+            5,
+            0
+          ],
+          [
+            9,
+            74,
+            7
+          ],
+          [
+            0,
+            8,
+            55
+          ]
+        ],
+        "excluded_mixed_label_groups": 18,
+        "stage1_n": 180,
+        "stage1_accuracy": 0.9222222222222223,
+        "stage1_auroc": 0.9699830549503752,
+        "stage2_oracle_n": 153,
+        "stage2_oracle_accuracy": 0.9019607843137255,
+        "stage2_actually_routed_n": 149,
+        "stage2_accuracy_among_all_actually_routed": 0.8657718120805369,
+        "wrong_stage1_routing_n": 14,
+        "end_to_end_correct_n": 151,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "eye": {
+        "n": 259,
+        "accuracy": 0.7876447876447876,
+        "balanced_accuracy": 0.8088890710793187,
+        "macro_f1": 0.7779412881199338,
+        "log_loss": 0.45590633153915405,
+        "recall": {
+          "infectious": 0.8461538461538461,
+          "noninfectious": 0.7410071942446043,
+          "normal": 0.8395061728395061
+        },
+        "confusion_matrix": [
+          [
+            33,
+            6,
+            0
+          ],
+          [
+            19,
+            103,
+            17
+          ],
+          [
+            0,
+            13,
+            68
+          ]
+        ],
+        "excluded_mixed_label_groups": 0,
+        "stage1_n": 259,
+        "stage1_accuracy": 0.9034749034749034,
+        "stage1_auroc": 0.9646853146853147,
+        "stage2_oracle_n": 220,
+        "stage2_oracle_accuracy": 0.8636363636363636,
+        "stage2_actually_routed_n": 207,
+        "stage2_accuracy_among_all_actually_routed": 0.8260869565217391,
+        "wrong_stage1_routing_n": 25,
+        "end_to_end_correct_n": 204,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      }
+    },
+    "test_ningbo": {
+      "image": {
+        "n": 508,
+        "accuracy": 0.7834645669291339,
+        "balanced_accuracy": 0.7556742889620754,
+        "macro_f1": 0.7633575592538371,
+        "log_loss": 0.48561975359916687,
+        "recall": {
+          "infectious": 0.7910447761194029,
+          "noninfectious": 0.8204225352112676,
+          "normal": 0.6555555555555556
+        },
+        "confusion_matrix": [
+          [
+            106,
+            26,
+            2
+          ],
+          [
+            38,
+            233,
+            13
+          ],
+          [
+            3,
+            28,
+            59
+          ]
+        ],
+        "stage1_n": 508,
+        "stage1_accuracy": 0.8641732283464567,
+        "stage1_auroc": 0.9492178146699657,
+        "stage2_oracle_n": 374,
+        "stage2_oracle_accuracy": 0.8877005347593583,
+        "stage2_actually_routed_n": 361,
+        "stage2_accuracy_among_all_actually_routed": 0.8088642659279779,
+        "wrong_stage1_routing_n": 69,
+        "end_to_end_correct_n": 398,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "image_accuracy_patient_cluster_ci95": [
+        0.715854827433954,
+        0.8391882427008734
+      ],
+      "patient": {
+        "n": 151,
+        "accuracy": 0.7483443708609272,
+        "balanced_accuracy": 0.7594441236054964,
+        "macro_f1": 0.7500653594771242,
+        "log_loss": 0.530097246170044,
+        "recall": {
+          "infectious": 0.9032258064516129,
+          "noninfectious": 0.8260869565217391,
+          "normal": 0.5490196078431373
+        },
+        "confusion_matrix": [
+          [
+            28,
+            3,
+            0
+          ],
+          [
+            7,
+            57,
+            5
+          ],
+          [
+            2,
+            21,
+            28
+          ]
+        ],
+        "excluded_mixed_label_groups": 0,
+        "stage1_n": 151,
+        "stage1_accuracy": 0.9205298013245033,
+        "stage1_auroc": 0.9860215053763441,
+        "stage2_oracle_n": 120,
+        "stage2_oracle_accuracy": 0.7833333333333333,
+        "stage2_actually_routed_n": 114,
+        "stage2_accuracy_among_all_actually_routed": 0.7456140350877193,
+        "wrong_stage1_routing_n": 12,
+        "end_to_end_correct_n": 113,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "eye": {
+        "n": 192,
+        "accuracy": 0.7708333333333334,
+        "balanced_accuracy": 0.7671427323549965,
+        "macro_f1": 0.7556067925633143,
+        "log_loss": 0.4968903958797455,
+        "recall": {
+          "infectious": 0.90625,
+          "noninfectious": 0.839622641509434,
+          "normal": 0.5555555555555556
+        },
+        "confusion_matrix": [
+          [
+            29,
+            3,
+            0
+          ],
+          [
+            9,
+            89,
+            8
+          ],
+          [
+            2,
+            22,
+            30
+          ]
+        ],
+        "excluded_mixed_label_groups": 0,
+        "stage1_n": 192,
+        "stage1_accuracy": 0.9270833333333334,
+        "stage1_auroc": 0.9867187500000001,
+        "stage2_oracle_n": 160,
+        "stage2_oracle_accuracy": 0.8125,
+        "stage2_actually_routed_n": 152,
+        "stage2_accuracy_among_all_actually_routed": 0.7828947368421053,
+        "wrong_stage1_routing_n": 14,
+        "end_to_end_correct_n": 148,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      }
+    }
+  }
+}

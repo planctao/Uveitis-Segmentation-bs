@@ -1,0 +1,23 @@
+{
+  "created_at_utc": "2026-11-23T22:58:50.727697+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_record": "results/research_subcluster_taxonomy/selection_before_repeat.json",
+  "selection_record_sha256": "d8252e868e6f9f152345604e5127ceb0a00d5f85355fe4d355ca5afdf44f566f",
+  "selected_candidate": "components4_penalty0.001",
+  "outer_split_seeds": [
+    20270501,
+    20270511
+  ],
+  "inner_split_rule": "20percent of outerfit patient groups; seed20270524+repeatindex*10+fold, modalcoarselabelstratified.",
+  "arms": [
+    "reference",
+    "fixed_gaussian",
+    "candidate"
+  ],
+  "planned_new_seed_fits": 36,
+  "planned_generative_fits": 18,
+  "controls": "TrainM5andthefixedcandidateonidenticalinnerpartitionswith3seeds. FixedGaussianuseseachM5hidden256embedding, coarsepatientbalancedevidence, covariance shrinkage0.1, temperature sqrt256 and 10percent mixture; exactlypreviousfrozenrecipe.",
+  "confirmation_gate": "Candidate sixfoldmeanMacroF1must exceed both controls, and jointlyrepeatedpatientbootstrap95percentinterval for pooledMacroF1difference must have lowerbound>0 versus BOTHcontrols. No retuning from these outcomes.",
+  "protocol_isolation": "Onlyoriginal1717trainingimages used; originalvalidation and externalsets excluded. Candidate fixed after all48sourceheadsaudited; no newconfigurationselectioninsideconfirmation.",
+  "external_test_policy": "No external scoring, labels, predictions or rawimages; positiveconfirmationrequiresseparatefrozeninference review before any external scoring."
+}

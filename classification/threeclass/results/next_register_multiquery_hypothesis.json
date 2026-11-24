@@ -1,0 +1,44 @@
+{
+  "created_at_utc": "2026-11-24T12:24:07.859115+00:00",
+  "family": "register_multiquery",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "M8 compresses four finalregister tokens using one hiddenconditioned query. Several attention modes may preserve complementary globalsemantic evidence. Compare three hiddenconditioned queries against their tiedmean-query equalparameter control. Motivated by singlequery architecture, before reading any current registerdepth classification scores or predictions; standard multiquery attention, no methodological originality claim. Queryslots are latent, not asserted clinicalclass identities.",
+  "architecture_plan": "Keep original normalL2048 attentionMLP/fulltask/init/RNG, originalfinal4register bank and own normalpatientPCA32. Shared LayerNorm2048->key/value rank16 or32; LayerNorm256->linear3rank reshaped into3queries. Multiquery arm uses own3queries; tiedcontrol averages these3 and broadcasts the mean to allslots (allparameters active). Eachquery softmaxpools fourregistervalues afterGELU. Concatenate3rank pools ->zeroLinear256 times.1 residual into originalpredropouthidden. Exactsame parameters withinrank; rank32tiedcontrol must reproduce M8singlequery using expanded trainedweights/readout dividedby3.",
+  "configuration_plan": [
+    {
+      "name": "tied_rank16",
+      "kind": "tied",
+      "rank": 16
+    },
+    {
+      "name": "multi_rank16",
+      "kind": "multi",
+      "rank": 16
+    },
+    {
+      "name": "tied_rank32",
+      "kind": "tied",
+      "rank": 32
+    },
+    {
+      "name": "multi_rank32",
+      "kind": "multi",
+      "rank": 32
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "geometry_plan": "FouroriginalL plusfourfinalregisterspaces/allpatientplans frozen before48fits; exactmatch to frozenM8source geometry. Fit-only statistics/PCA.",
+  "fixed_fusions": "Eachstandalone newL and fixed .1875rawB+.5625normalB+.25newL,24Bsourceheads frozenbeforefits; no adaptiveweightsearch.",
+  "launch_condition": "No classificationfits or scores until current registerdepth all48audits and any required newpatientconfirmation/package/promotion decision terminal; fulltask/allgradient/CUDApreflight and then-currentgates frozen beforelaunch.",
+  "selection": "OriginalCV strictlygreater and validation >=then-currentreference. HighestqualifyingCV frozen before two unusedpatient3fold repeats; require higher sixfoldmeanF1 AND pairedpatient95%lower>0 vs EACH currentreference/M8/M7/M6/M5/fixedGaussian. No automaticexternaltests.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_multiquery.json",
+  "protocol": "runs/register_multiquery/protocol.json",
+  "protocol_sha256": "4ed5f9f6c32bf83277e3491b1710d63771b0eb3346ae9791364db6b373240630",
+  "pid": 29292,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_multiquery/comparison.json"
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "strict_loading": true,
+  "pretrained_source": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth",
+  "weights_sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+  "checks": [
+    "Official checkpoint converted with timm and loaded strictly",
+    "Evaluation output for one image independent of another batch image",
+    "Fixed patient manifest and unchanged preprocessing"
+  ],
+  "batch_independence_cosine": 1.0
+}

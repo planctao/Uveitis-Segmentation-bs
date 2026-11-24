@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "mlp_seed_fits_checked": 18,
+  "generative_fits_checked": 36,
+  "actual_source_heads": [
+    {
+      "repeat": 20270101,
+      "fold": 0,
+      "seed": 0
+    },
+    {
+      "repeat": 20270101,
+      "fold": 0,
+      "seed": 1
+    },
+    {
+      "repeat": 20270101,
+      "fold": 0,
+      "seed": 2
+    },
+    {
+      "repeat": 20270101,
+      "fold": 1,
+      "seed": 0
+    },
+    {
+      "repeat": 20270101,
+      "fold": 1,
+      "seed": 1
+    },
+    {
+      "repeat": 20270101,
+      "fold": 1,
+      "seed": 2
+    },
+    {
+      "repeat": 20270101,
+      "fold": 2,
+      "seed": 0
+    },
+    {
+      "repeat": 20270101,
+      "fold": 2,
+      "seed": 1
+    },
+    {
+      "repeat": 20270101,
+      "fold": 2,
+      "seed": 2
+    },
+    {
+      "repeat": 20270111,
+      "fold": 0,
+      "seed": 0
+    },
+    {
+      "repeat": 20270111,
+      "fold": 0,
+      "seed": 1
+    },
+    {
+      "repeat": 20270111,
+      "fold": 0,
+      "seed": 2
+    },
+    {
+      "repeat": 20270111,
+      "fold": 1,
+      "seed": 0
+    },
+    {
+      "repeat": 20270111,
+      "fold": 1,
+      "seed": 1
+    },
+    {
+      "repeat": 20270111,
+      "fold": 1,
+      "seed": 2
+    },
+    {
+      "repeat": 20270111,
+      "fold": 2,
+      "seed": 0
+    },
+    {
+      "repeat": 20270111,
+      "fold": 2,
+      "seed": 1
+    },
+    {
+      "repeat": 20270111,
+      "fold": 2,
+      "seed": 2
+    }
+  ],
+  "checks": [
+    "Only original training patients in every outer/stop/fit plan",
+    "Each source head normalization and subtype mapping fit only inner training patients",
+    "All36 prototype means and covariance matrices independently reconstructed from per-patient moments",
+    "All fixed mixtures and fold metrics reconstructed from saved source probabilities",
+    "Exactly one outer prediction per training image in each repeat"
+  ]
+}

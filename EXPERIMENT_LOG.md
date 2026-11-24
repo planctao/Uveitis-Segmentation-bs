@@ -1,4 +1,6 @@
-# 实验记录
+# 分割实验记录
+
+> 本文件只记录病灶分割实验；图像分类实验单独记录在 [classification/EXPERIMENT_LOG.md](classification/EXPERIMENT_LOG.md)。
 
 > 本文件记录每次训练实验的关键信息，用于权重版本管理。权重存储在 `runs/` 下但不纳入 git。
 

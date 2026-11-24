@@ -1,0 +1,143 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "scope": "shared_stream_weights",
+      "alpha": 0.5,
+      "full_task_batch": 256
+    },
+    {
+      "scope": "shared_stream_weights",
+      "alpha": 2.0,
+      "full_task_batch": 256
+    },
+    {
+      "scope": "independent_stream_weights",
+      "alpha": 0.5,
+      "full_task_batch": 256
+    },
+    {
+      "scope": "independent_stream_weights",
+      "alpha": 2.0,
+      "full_task_batch": 256
+    }
+  ],
+  "diagnostics": {
+    "shared_stream_weights0.5": {
+      "global": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.71996294773669e-09,
+        "effective_weighted_patients": 40.85949397987302
+      },
+      "regions": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 6.991666356981341e-09,
+        "effective_weighted_patients": 40.85949397987302
+      },
+      "mid": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.722909479644045e-09,
+        "effective_weighted_patients": 40.85949397987302
+      },
+      "dispersion": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 6.150440379215638e-09,
+        "effective_weighted_patients": 40.85949397987302
+      }
+    },
+    "shared_stream_weights2.0": {
+      "global": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.499614763593286e-09,
+        "effective_weighted_patients": 71.51997706471332
+      },
+      "regions": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 6.270152397291895e-09,
+        "effective_weighted_patients": 71.51997706471332
+      },
+      "mid": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.2131443606384664e-09,
+        "effective_weighted_patients": 71.51997706471332
+      },
+      "dispersion": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.778336475970036e-09,
+        "effective_weighted_patients": 71.51997706471332
+      }
+    },
+    "independent_stream_weights0.5": {
+      "global": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.71996294773669e-09,
+        "effective_weighted_patients": 40.85949397987302
+      },
+      "regions": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.6200286646657105e-09,
+        "effective_weighted_patients": 31.258509953620454
+      },
+      "mid": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.4667167459498955e-09,
+        "effective_weighted_patients": 40.79577678543015
+      },
+      "dispersion": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 6.097820470785109e-09,
+        "effective_weighted_patients": 36.9192328598621
+      }
+    },
+    "independent_stream_weights2.0": {
+      "global": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 5.499614763593286e-09,
+        "effective_weighted_patients": 71.51997706471332
+      },
+      "regions": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 6.083554215940978e-09,
+        "effective_weighted_patients": 72.79800839918778
+      },
+      "mid": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 4.5915682367336785e-09,
+        "effective_weighted_patients": 78.10563477863482
+      },
+      "dispersion": {
+        "patients": 111,
+        "effective_rank": 32,
+        "maximum_principal_cosine_error": 6.200520097365825e-09,
+        "effective_weighted_patients": 68.98996342820642
+      }
+    }
+  },
+  "code_sha256": {
+    "bayesian_normal_reference.py": "8c4395bfc65bb2ab57d4921b2a3217263437e97a8717e251dc4c611d06ad2597",
+    "verify_bayesian_normal_reference.py": "804b806d90c385f7f7b14d73e35c872d2271eca6076ae094dd41b37573a26052"
+  },
+  "checks": [
+    "Uniform-weight control reproduces original normal-reference geometry and actual source predictions",
+    "Independent weighted patient loops/Gram eigenproblem reconstruct all supported weighted subspaces",
+    "Positive normalized shared/independent Dirichlet weights reproduce exactly from private phase/seed RNG",
+    "Normal image duplication leaves patient weights/subspace unchanged; geometry does not shift MLP initialization RNG",
+    "Four actual 256-image complete task gradient/update/independent-transform/strict-recovery checks"
+  ]
+}

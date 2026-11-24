@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Symmetric KL matches independent double precision NumPy formula and identity/symmetry",
+    "Both stochastic views exactly match two ordinary M5 forwards including RNG state",
+    "Zero penalty exactly equals mean of two full task losses",
+    "Each coarse/disease penalty matches weighted independent loss decomposition",
+    "Both views and student parameters receive finite nonzero task gradients",
+    "Evaluation uses exactly one deterministic M5 forward; strict plain M5 restoration after optimization"
+  ]
+}

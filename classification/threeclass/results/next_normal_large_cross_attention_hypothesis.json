@@ -1,0 +1,53 @@
+{
+  "created_at_utc": "2026-11-24T09:01:37.777167+00:00",
+  "family": "normal_large_cross_attention",
+  "status": "completed_no_candidate_passed",
+  "hypothesis": "M7 fixed probability fusion established complementary B/L evidence. Simple L global/all-mean residual improved original CV to.83791 but lost required validation. Test whether normalB hidden queries can select complementary normalL regions through a small residual instead of averagingLregions. Equalparameter mean control isolates query-dependent pooling; no causal/localization/globalmethodologicalnovelty claim.",
+  "development_evidence": [
+    "results/research_normal_large_blend_confirmation/comparison.json",
+    "results/research_normal_large_residual/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "mean_rank16",
+      "kind": "mean",
+      "rank": 16
+    },
+    {
+      "name": "attention_rank16",
+      "kind": "attention",
+      "rank": 16
+    },
+    {
+      "name": "mean_rank32",
+      "kind": "mean",
+      "rank": 32
+    },
+    {
+      "name": "attention_rank32",
+      "kind": "attention",
+      "rank": 32
+    }
+  ],
+  "architecture": "Original1536DnormalBattentionMLP retained. Separate fit-normalpatientPCA32 in B/Lstreams. L2048Dglobal/regions/mid/dispersion share LayerNorm/value projection to rank16/32; normalB hiddenLayerNorm256/query projection attends toLregionalkeys by dotproduct/sqrt(rank). Meancontrol multiplies scoresbyzero but has identical modules/parametercount. ConcatenateLglobal/pooledregion/mid/dispersion,zero-initLinear4rank->256,.1hiddenresidual before originaldropout. Fulltask/init/RNG/hparams fixed.",
+  "planned_new_seed_fits": 48,
+  "planned_candidate_scores": 8,
+  "preflight": "verification_normal_large_cross_attention.json",
+  "preflight_passed": true,
+  "actual_cuda_full_task_witness_passed": true,
+  "minimum_cv_macro_f1": 0.8359324594339994,
+  "minimum_validation_macro_f1": 0.8928552155846959,
+  "new_candidate_confirmation_comparators": [
+    "M7",
+    "M6",
+    "M5",
+    "fixed_gaussian"
+  ],
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_large_cross_attention/protocol.json",
+  "protocol_sha256": "62200b8811b57589f28b5c6a3e833c69d7c95cd4e1f75dfb08ef05cea4f15632",
+  "pid": 6963,
+  "scores_evaluated": 8,
+  "comparison": "results/research_normal_large_cross_attention/comparison.json",
+  "verification": "results/research_normal_large_cross_attention/verification.json"
+}

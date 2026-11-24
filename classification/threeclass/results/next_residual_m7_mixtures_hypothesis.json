@@ -1,0 +1,71 @@
+{
+  "created_at_utc": "2026-11-24T09:07:00.285551+00:00",
+  "family": "residual_m7_mixtures",
+  "status": "completed_confirmation_failed",
+  "hypothesis": "The allstream rank32 normalL residual improves original patientCV to.83791 but loses validation; standalone fixedM5fusion also fails. M7 demonstrated complementarity of independent normalB/L heads. If all completed crossattention development scores fail, test whether small fixed contributions of any of the four already-audited residual branches preserve M7 validation while improving patientCV. Keep allfour originalresidual arms×predeclaredweights.1/.25. This is an established fixed probability ensemble, not architecture invention.",
+  "development_evidence": [
+    "results/research_normal_large_residual/comparison.json",
+    "results/research_normal_large_blend_confirmation/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "global_rank16_weight0p1",
+      "residual_arm": "global_rank16",
+      "weight": 0.1
+    },
+    {
+      "name": "global_rank16_weight0p25",
+      "residual_arm": "global_rank16",
+      "weight": 0.25
+    },
+    {
+      "name": "all_rank16_weight0p1",
+      "residual_arm": "all_rank16",
+      "weight": 0.1
+    },
+    {
+      "name": "all_rank16_weight0p25",
+      "residual_arm": "all_rank16",
+      "weight": 0.25
+    },
+    {
+      "name": "global_rank32_weight0p1",
+      "residual_arm": "global_rank32",
+      "weight": 0.1
+    },
+    {
+      "name": "global_rank32_weight0p25",
+      "residual_arm": "global_rank32",
+      "weight": 0.25
+    },
+    {
+      "name": "all_rank32_weight0p1",
+      "residual_arm": "all_rank32",
+      "weight": 0.1
+    },
+    {
+      "name": "all_rank32_weight0p25",
+      "residual_arm": "all_rank32",
+      "weight": 0.25
+    }
+  ],
+  "formula": "p=(1-w)*(.1875rawB+.5625normalB+.25normalL)+w*residualBranch",
+  "source_heads_reused": 84,
+  "new_seed_fits": 0,
+  "predeclared_scores": 8,
+  "launch_condition": "Only after all48crossattentionheads and8scores independentlyaudited and none passesM7developmentgate; no scores or protocol created yet.",
+  "minimum_cv_macro_f1": 0.8359324594339994,
+  "minimum_validation_macro_f1": 0.8928552155846959,
+  "selection": "Highest qualifyingoriginalCV frozenbefore twoentirelyunusedpatient3fold repeats,4branches×6folds×3seeds=72MLPs+18Gaussian. FixedM7=.1875rawB+.5625normalB+.25normalL reconstructed within sameplans. Requirehigher6foldmeanF1 and pairedpatient95%lowerendpoint>0 versusEACHofM7/M6/M5/fixedGaussian.",
+  "external_test_evaluated": false,
+  "protocol_created": true,
+  "scores_evaluated": 8,
+  "protocol": "runs/residual_m7_mixtures/protocol.json",
+  "protocol_sha256": "102f5b3cfe8694da5a0631208051e03041ce3918c148b4901c3a73581a0aff9e",
+  "pid": 7768,
+  "comparison": "results/research_residual_m7_mixtures/comparison.json",
+  "verification": "results/research_residual_m7_mixtures/verification.json",
+  "confirmation_protocol": "runs/residual_m7_confirmation/protocol.json",
+  "confirmation_results": "results/research_residual_m7_confirmation/comparison.json",
+  "decision": "72heads/36CUDAfulltasks/18Gaussianfits independently audited. Candidate6foldF1.8270573<M7.8272719; patientpairedF1CIvsM7[-.0029231,.0019303] crosses0. RetainM7; no external test."
+}

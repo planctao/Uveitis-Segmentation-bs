@@ -1,0 +1,110 @@
+{
+  "created_at_utc": "2026-11-24T06:07:43.292318+00:00",
+  "status": "completed_confirmation_failed",
+  "family": "normal_task_gradient",
+  "hypothesis": "On three fit-only samples from the trained normal-reference model,69.9-72.7% of image embeddings had opposing coarse-versus-auxiliary gradient dot products, while batchcosine remainedpositive. Test asymmetric projection at the shared post-dropout representation: protect requested threeclass task from conflicting disease/contrastive updates. Gradient projection is an existing principle; no global novelty claim.",
+  "development_evidence": [
+    "results/normal_reference_task_gradient_diagnostics.json",
+    "results/research_normal_group_risk_confirmation/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "image_strength0p5",
+      "mode": "image",
+      "strength": 0.5
+    },
+    {
+      "name": "image_strength1p0",
+      "mode": "image",
+      "strength": 1.0
+    },
+    {
+      "name": "batch_strength0p5",
+      "mode": "batch",
+      "strength": 0.5
+    },
+    {
+      "name": "batch_strength1p0",
+      "mode": "batch",
+      "strength": 1.0
+    }
+  ],
+  "geometry": "Original fit-only standardization and equal fit-normal patientPCA32for4streams. Freeze16arm/phase copies of normalgeometry and16patientplans beforeallformalMLPfits.",
+  "architecture": "Sameoriginalnormal-reference attentionMLP,initializedfromscratch withoriginalseeds andsamefulltask/hparams/weights. Obtain gradientsc and a of fullbatchsmoothedcoarseNLL and remaining disease+contrastive task withrespecttosharedpostdropoutembedding. For eachimage row or wholebatch,delta=-strength*min(dot(c,a),0)/max(norm(c)^2,1e-20)*c. Add a zero-valued detached linear surrogate to injectdelta onlyupstreamofsharedembedding; decoder/fineprojection parametergradients unchanged. Scalarfulltaskloss andinferenceunchanged.4arms48actualheads+4fixed.75new/.25M5fusions8scores0fusionfits.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest originalCVpassingcandidate withCVstrictly>M6andvalidation>=M6; then unusedpatientpartition confirmationagainstM6/M5/fixedGaussian withpositivepairedpatient95%lowerbounds.20271201/20271211nowused; noautomaticexternaltests.",
+  "audit": "Independentfulltask/NumPygradientprojection checks including trained-source nonzero imagecorrections; outputhead parametergradients unchanged,zero-strength exactfulltask/RNG/gradientidentity andunchangedscalarobjective/inference.4real256imageupdates/restores;syntheticnegative batch/image projectionidentities; exactCUDA first-training-witness replay. Formalfitsstillstartfromoriginalrandominit. Independentlyrecoverall48initialtask/coarse/auxiliarygradients/corrections,normalspaces,patientstats/diseasemaps/bestepochs/coverage,allstop/outerprobabilitiesand16fusions. Firstbatch correctionsmayzero wheninitialtaskgradientsalign.",
+  "preflight": "verification_normal_task_gradient.json",
+  "formal_fits_started": "Inspect actual checkpoints",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_task_gradient/protocol.json",
+  "protocol_sha256": "86c7d3c8f99c13ec2baa7fd45569b6d981dab53e19a289225495cee801a41045",
+  "pid": 87391,
+  "training_completed_at_utc": "2026-11-24T06:16:31.340756+00:00",
+  "actual_new_seed_fits": 48,
+  "actual_seed_heads_checked": 48,
+  "passing_development_gates": 2,
+  "selected_candidate": "batch_strength1p0_fusion075",
+  "selected_original_cv": 0.8283662852472798,
+  "selected_validation": 0.8904827120381046,
+  "fresh_confirmation_protocol": "runs/normal_task_gradient_confirmation/protocol.json",
+  "decision": "M6 retained. Candidate six-fold class predictions equal M6; no additional classification improvement. No external evaluation.",
+  "confirmation_completed_at_utc": "2026-11-24T06:24:05.443317+00:00",
+  "confirmation": "results/research_normal_task_gradient_confirmation/comparison.json",
+  "confirmation_gate_passed": false,
+  "confirmation_mean_macro_f1": {
+    "reference": 0.7827370608638575,
+    "subspace": 0.8006190033527583,
+    "gradient": 0.8006190033527583,
+    "fixed_gaussian": 0.784189410604102,
+    "m6": 0.8041696648597871,
+    "candidate": 0.8041696648597871
+  },
+  "paired_candidate_vs_controls": {
+    "reference": {
+      "accuracy_difference": 0.01980198019801982,
+      "macro_f1_difference": 0.02276305435736825,
+      "accuracy_ci95": [
+        0.002583861277373767,
+        0.036749048668886765
+      ],
+      "macro_f1_ci95": [
+        0.006090648432201718,
+        0.04021154051592806
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    },
+    "fixed_gaussian": {
+      "accuracy_difference": 0.01863715783343045,
+      "macro_f1_difference": 0.020946644576819717,
+      "accuracy_ci95": [
+        0.001427362036176125,
+        0.03534533781976378
+      ],
+      "macro_f1_ci95": [
+        0.004783965851123529,
+        0.03778889019096933
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    },
+    "m6": {
+      "accuracy_difference": 0.0,
+      "macro_f1_difference": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.0
+      ],
+      "macro_f1_ci95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    }
+  }
+}

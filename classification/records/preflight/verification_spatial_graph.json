@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Exact four-connected neighbor averaging with correct image boundaries",
+    "Masked neighbors cannot change valid messages and isolated regions get zero neighbor difference",
+    "Neighbor differences equivariant to90degreegridrotations",
+    "Every one/two-step graph initially exactly preserves tokens and common full-model predictions",
+    "Outgoing layer gets first-step gradient and incoming layer gets second-step gradient",
+    "Full invalid masks preserve original tokens without NaNs",
+    "Strict saved/restored graph outputs identical"
+  ]
+}

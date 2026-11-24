@@ -1,0 +1,51 @@
+{
+  "created_at_utc": "2026-11-24T06:51:13.041751+00:00",
+  "status": "completed_no_candidate_passed",
+  "family": "normal_spatial",
+  "hypothesis": "Five held-normal-patient folds within training show global8-coordinate spatial ridge predictor reduces unseenpatient 3x3 normalspatialpattern MSE by23.41%againstconstantnormalmean (.06833vs.08922); zero-reference MSE.46888. Test fixed normal spatial expectation subtraction on regionaltokens to expose deviations. Existing conditionalnormalreference/ridge principles; no globalnovelty or anatomicalgroundtruth claim.",
+  "development_evidence": [
+    "results/normal_spatial_diagnostics.json",
+    "results/research_normal_decorrelation/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "mean_strength0p5",
+      "conditioned": false,
+      "strength": 0.5
+    },
+    {
+      "name": "mean_strength1p0",
+      "conditioned": false,
+      "strength": 1.0
+    },
+    {
+      "name": "conditional_strength0p5",
+      "conditioned": true,
+      "strength": 0.5
+    },
+    {
+      "name": "conditional_strength1p0",
+      "conditioned": true,
+      "strength": 1.0
+    }
+  ],
+  "geometry": "Originalfit-onlystandardizationandnormalpatientPCA32fourstreams. Afteroriginalnormalregionsuppression,withinimagezero-meancentered3x3regionsareaveragedtoequalnormalpatienttargets. Inputglobal8normalPCAcoordinateswhitened/clip[-5,5]. Fitintercept+ridge1perstandardizedcoordinate onmeanpatienterror. Freeze16armphasegeometrycopiesand16patientplansbeforeanyMLP;4uniquephaseestimatescopiedacross4arms.",
+  "architecture": "OriginalnormalreferenceattentionMLPmainpath. Predictnormal3x3featurepatternfromfixedspatialmeanorconditionalglobal8ridgeregression,centerpatternacross9regions,subtractstrength.5/1fromprojectedregiontokensandclip[-10,10]. Otherstreamsretainoriginalnormaltransform. Nolearnedneuralparametersadded; mainMLPinit/fulltask/weights/optimizer/seedsunchanged.48actualheads+4fixed.75branch/.25M5fusions,8scores.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest originalCVcandidate strictly>M6withvalidation>=M6;unusedpatientconfirmationvsM6/M5/fixedGaussianrequiresstrictlyhighermeanF1andpairedpatient95%lowerbound>0against each. Noautomaticexternaltests.20280201/11used;scanallprotocolsbeforedeclaringunusedseeds.",
+  "audit": "NormalPCAGramindependentrecovery,explicitpatientspatialmeansandaugmentedleast-squaresridgecoefficientverification;4real256imagefulltaskallparametergradientsupdatesrestoresagainstNumPyspatialtransformplusplainMLP;zerostrengthnormalMLPidentity;regionmeankeepsfixedbeforeclip;allnormal/spatialbuffersfreeze;actualCUDAfirsttraininginput/fulltaskwitness. Formal48stats/diseasemaps/epochs/inputwitnesses/stopouterprobabilities/normalspatialbuffersand16fusionsindependentlyrestored.",
+  "preflight": "verification_normal_spatial.json",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_spatial/protocol.json",
+  "protocol_sha256": "cd6402ad10763b3d7d69340e786fad6bcef3af71916607106f715aebba201e96",
+  "pid": 91205,
+  "formal_fits_started": "Inspect actual checkpoints",
+  "training_completed_at_utc": "2026-11-24T06:59:43.045215+00:00",
+  "actual_new_seed_fits": 48,
+  "actual_seed_heads_checked": 48,
+  "passing_development_gates": 0,
+  "decision": "Spatialpredictiondiagnosticimprovementdidnottranslateintoclassificationimprovement.M6retained;noexternaltest."
+}

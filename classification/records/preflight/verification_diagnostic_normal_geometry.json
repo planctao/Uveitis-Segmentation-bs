@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "protection": "coarse",
+      "rank": 8,
+      "real_loss_batch": 256
+    },
+    {
+      "protection": "coarse",
+      "rank": 32,
+      "real_loss_batch": 256
+    },
+    {
+      "protection": "disease",
+      "rank": 8,
+      "real_loss_batch": 256
+    },
+    {
+      "protection": "disease",
+      "rank": 32,
+      "real_loss_batch": 256
+    }
+  ],
+  "diagnostics": {
+    "coarse": {
+      "global": {
+        "normal_patients": 111,
+        "protected_rank": 2,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 2.4888207985403893e-09
+      },
+      "regions": {
+        "normal_patients": 111,
+        "protected_rank": 2,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 2.3938360772801648e-09
+      },
+      "mid": {
+        "normal_patients": 111,
+        "protected_rank": 2,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 2.091016458073691e-09
+      },
+      "dispersion": {
+        "normal_patients": 111,
+        "protected_rank": 2,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 2.112665616017459e-09
+      }
+    },
+    "disease": {
+      "global": {
+        "normal_patients": 111,
+        "protected_rank": 13,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 3.5795800694231328e-09
+      },
+      "regions": {
+        "normal_patients": 111,
+        "protected_rank": 13,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 3.1341607406153854e-09
+      },
+      "mid": {
+        "normal_patients": 111,
+        "protected_rank": 13,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 2.996268642918576e-09
+      },
+      "dispersion": {
+        "normal_patients": 111,
+        "protected_rank": 13,
+        "effective_suppression_rank": 32,
+        "maximum_protected_overlap": 4.213723711534584e-09
+      }
+    }
+  },
+  "code_sha256": {
+    "diagnostic_normal_geometry.py": "a4d58f7cef6b2e74f443044be43f1ebbc20a1a83378f1b0a952d628ef8efb2a0",
+    "verify_diagnostic_normal_geometry.py": "06751140092cee7f27d6a87d6071f6410bd7edb51696876573b32c7963171473"
+  },
+  "checks": [
+    "Fit-only equal-patient normal and diagnostic means; no holdout geometry",
+    "Independent patient loops, Gram eigendecomposition and least-squares residualization agree",
+    "Unclipped suppression preserves coarse/disease contrast coordinates; clipping still follows M5",
+    "Duplicated patient images do not change geometry; constant normals yield zero supported rank",
+    "Four actual full-task 256-image gradient/update/strict-recovery checks"
+  ]
+}

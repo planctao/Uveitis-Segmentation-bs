@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "rank": 16,
+      "kind": "add",
+      "batch_size": 256,
+      "parameters": 1139808,
+      "maximum_complete_task_gradient_error": 1.3783574104309082e-07,
+      "joint_region_permutation_error": 1.7881393432617188e-07,
+      "hidden_modulation_delta_change": 0.0
+    },
+    {
+      "rank": 16,
+      "kind": "film",
+      "batch_size": 256,
+      "parameters": 1139808,
+      "maximum_complete_task_gradient_error": 2.7939677238464355e-07,
+      "joint_region_permutation_error": 2.384185791015625e-07,
+      "hidden_modulation_delta_change": 0.019485916942358017
+    },
+    {
+      "rank": 32,
+      "kind": "add",
+      "batch_size": 256,
+      "parameters": 1279088,
+      "maximum_complete_task_gradient_error": 1.2479722499847412e-07,
+      "joint_region_permutation_error": 1.1920928955078125e-07,
+      "hidden_modulation_delta_change": 0.0
+    },
+    {
+      "rank": 32,
+      "kind": "film",
+      "batch_size": 256,
+      "parameters": 1279088,
+      "maximum_complete_task_gradient_error": 1.4156103134155273e-07,
+      "joint_region_permutation_error": 2.384185791015625e-07,
+      "hidden_modulation_delta_change": 0.016125652939081192
+    }
+  ],
+  "normal_geometries": {
+    "base": {
+      "global": {
+        "maximum_principal_cosine_error": 5.585237827787637e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.7959215427061395e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.6878988186070956e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.9757623365433972e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 5.265183178337907e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.9596440671327855e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 6.2611587026140114e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.917584707162746e-08
+      }
+    },
+    "large": {
+      "global": {
+        "maximum_principal_cosine_error": 4.645247853041212e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.04875230511459e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.8208333779922157e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 4.368930994758102e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.733068908497785e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.627038834887799e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "rank": 16,
+      "kind": "add",
+      "witness": {
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "zero_initial_delta": true,
+        "both_normal_spaces_and_large_hidden_modulation_restored": true,
+        "maximum_independent_forward_error": 2.6226043701171875e-06
+      }
+    },
+    {
+      "rank": 16,
+      "kind": "film",
+      "witness": {
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "zero_initial_delta": true,
+        "both_normal_spaces_and_large_hidden_modulation_restored": true,
+        "maximum_independent_forward_error": 2.6226043701171875e-06
+      }
+    },
+    {
+      "rank": 32,
+      "kind": "add",
+      "witness": {
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "zero_initial_delta": true,
+        "both_normal_spaces_and_large_hidden_modulation_restored": true,
+        "maximum_independent_forward_error": 2.6226043701171875e-06
+      }
+    },
+    {
+      "rank": 32,
+      "kind": "film",
+      "witness": {
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "zero_initial_delta": true,
+        "both_normal_spaces_and_large_hidden_modulation_restored": true,
+        "maximum_independent_forward_error": 2.6226043701171875e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "normal_large_modulation.py": "df99051a57e38dd58472cff5e2a03f1251e0982f514a01aab79a427cce0e188b",
+    "audit_normal_large_modulation.py": "4902061ed5ac909d3aafad79ca47bbb610da63dd3056c50eb1f7d458bc910912",
+    "verify_normal_large_modulation.py": "90739b6526fa74988e1f21423299e6d2ccad06961acb0124e94de86ebc6c83f0"
+  },
+  "checks": [
+    "Four actual256image trained-state full-task/all-parameter gradients recovered by independent NumPy normal projections and functional hiddenmodulation",
+    "Zero-init exactly restores original normalB task/base gradients and RNG; equal parameter counts across add/FiLM controls",
+    "Joint regional permutation invariance; hiddencontext sensitivity only forFiLM and boundedtanhgates; optimizer update/frozenbuffers/strictrestore",
+    "AllfouractualCUDA firsttasks inputs/order/labels/weights/RNG/initialparameterhashes/modulation/fulltask and allparametergradients independently recovered"
+  ],
+  "external_test_evaluated": false
+}

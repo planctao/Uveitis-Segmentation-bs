@@ -1,0 +1,154 @@
+{
+  "created_at_utc": "2026-11-24T05:09:21.608091+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "reference_sha256": "d7b25156747ca29c1b752a61f1d711cf74458c98063f2eeb2aa990e0ae2132d8",
+  "preflight_sha256": "b9a146285a8fa16577ff82564cb7f5154aac007826dc38664faa8dece0c895b5",
+  "source_checkpoints": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_0/model.pt": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_1/model.pt": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_2/model.pt": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_0/model.pt": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_1/model.pt": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_2/model.pt": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_0/model.pt": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_1/model.pt": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_2/model.pt": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07"
+  },
+  "frozen_parent_artifacts": {
+    "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/foreground_multiscale.npz": "2f22666f15742792972902627ce03eae6bb51bd6615bfc5ce1310692defd911f",
+    "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/foreground_multiscale.json": "b08bb7ff8835b023174485f95a6a71ce13f6647acae69dcbaf3500feabdd4dbc",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fine_normal_reference/source_feature_integrity_before_training.json": "b441fc3894f4506fc6649e3cee13e249103c46df592e28d66a2648327dfe8fe1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/package.json": "81b955917f68ab610358990ff9846c955eec7b1e251cd11fd7e9853978f48403",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_foreground_multiscale/comparison.json": "708b50be6a746331cedb61249bf7eb8990889217872464b37c6899ece452ec72",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_foreground_multiscale/verification.json": "4a48c5a266f98e1f222871315d79b758e23beeae56d067775adb155e39848d88",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_foreground_features.json": "355d080f595f2969ff7174c7089aa437c034616295886c2a239a6478882ccc92",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/foreground_multiscale/protocol.json": "74cc7b56c2eec0f374af6338a34f7390cb7fef19aa0dcba2fe97da189a089474",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_normal_tangent_adversarial/comparison.json": "e09110d1eae0b35b47009dca78e615988d2b8cf6f768f17ff24aae4eaaec115d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_normal_tangent_adversarial/verification.json": "94ea5725dd37321dbe4191fb44c5a46e1efe7d03b1ff9dc213daf59f57ea5e18",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_normal_tangent_adversarial/freeze_integrity_after_training.json": "627b60934ea925e8ef0e277a3e1fafece519dfa5252f222fdd3a205f61a5b83f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/predictions.npz": "633633bc936d1d9730b2ef7868adc2518824f8cdb28d47059be85e24f9dcdbee",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/predictions.npz": "40e9a0f496ae6f1b8f6fdc791ed825aa97b97268455cdcba87d08527f7668643",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/predictions.npz": "05fd8a34648bf5eb6db6313e9933fd57ef84508efedb068ceb42a1958cca9ec9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/predictions.npz": "c6c036ed5c08e4562271608dfbd1ee9b798f65162697b7bad6f641a690057bd5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/frozen_package/seed_0/reference.pt": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/frozen_package/seed_0/subspace.pt": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/frozen_package/seed_1/reference.pt": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/frozen_package/seed_1/subspace.pt": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/frozen_package/seed_2/reference.pt": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/frozen_package/seed_2/subspace.pt": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/evaluate.py": "9ceb6afaa9e2d9afe99a737d438d32870dcbc016250fd305330150864f670fae",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/evaluate_normal_reference.py": "21ffe933115d4f56500d2aeaad5c5291e0503a42f490e8b7d140a639ba59cfe1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/extract_vit.py": "3f4fcac986e83020682d7a90e5ded8d490c8d9caaf248663f8d00b5abbd281b7",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/highres_data.py": "adea638d8d2b2cd7d7562f9f3cb2ee59175bb686a64cd1d3aa960f05924ce9a0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/lora_model.py": "4c32bb1c347dcbfef0ddcd9920d88bf3a0b03c89d07c1d150de70944d0e1ab0d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/predict_frozen_gaussian.py": "c50de8605c78b3141c8ef63799de87714f1f1c00b6362f0b188bd94f2346caad",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/predict_normal_reference.py": "d023e32768dadcbd67746f0d205f4df672eb5d928ff19b0e4252d6c1a4134dbd",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/reproduction_code/verify_normal_reference_inference.py": "7027b932a92acb132134dae5b3b6250fbd85ad65d7d84e416079d2e7f0923d8e"
+  },
+  "prior_hypothesis_sha256": "919806cf8e210c473c5059083289a6fd14e12153baebf15d5cd9ca598146e6b5",
+  "prior_hypothesis": {
+    "created_at_utc": "2026-11-24T05:04:57.999724+00:00",
+    "status": "preflight_passed_not_started",
+    "family": "fine_normal_reference",
+    "hypothesis": "Increasing regional density and foreground pooling previously failed with raw M5. Test whether the later successful fit-normal reference projection enables these local architectures. Fine-grained retinal features and normal nuisance suppression may interact; compare all four previously declared foreground controls without retuning the head or masks.",
+    "development_evidence": [
+      "results/research_foreground_multiscale/comparison.json",
+      "results/research_normal_subspace_fusion/comparison.json",
+      "results/research_normal_tangent_adversarial/comparison.json"
+    ],
+    "configuration_plan": [
+      {
+        "name": "fine7_unmasked",
+        "grid": 7,
+        "pool": "ordinary",
+        "use_region_mask": false
+      },
+      {
+        "name": "fine7_masked",
+        "grid": 7,
+        "pool": "ordinary",
+        "use_region_mask": true
+      },
+      {
+        "name": "fine7_weighted_masked",
+        "grid": 7,
+        "pool": "weighted",
+        "use_region_mask": true
+      },
+      {
+        "name": "coarse3_weighted_masked",
+        "grid": 3,
+        "pool": "weighted",
+        "use_region_mask": true
+      }
+    ],
+    "source_feature_storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/foreground_multiscale.npz",
+    "geometry": "Use original per-fit normalization, including valid-region-only region channel statistics for masked arms. For normal-patient PCA, first average only valid regions within each image, then equally average images within each normal patient; other streams retain original centroid construction. Estimate32 directions per stream. Unmasked arm averages all49regions. All geometry/splitplans frozen before fitting.",
+    "architecture": "Same original M5attentionMLP on full normal-reference projections, with49ordinaryunmasked/49ordinarymasked/49foregroundweightedmasked/9foregroundweightedmasked regional tokens. Masks and source features are already frozen and pixel-derived. Keep region_mask unchanged through normal transform. Identical trainable parameter shapes, initialization, full task,patientweights,hparams and3seeds. Four arms48newheads; each also scored with fixed.75new/.25M5 mixture, eight scores and0fusionfits.",
+    "planned_new_seed_fits": 48,
+    "predeclared_candidate_scores": 8,
+    "minimum_cv_macro_f1": 0.8270827413505814,
+    "minimum_validation_macro_f1": 0.8904827120381046,
+    "selection": "Freeze highest passing original CV with validation>=M6 and CVstrictly>M6, then unused patient-partition confirmation against M6/M5/fixedGaussian. Seeds20271101/20271111 are used. No automatic external tests.",
+    "audit": "Sourcebank indices/path/digest and unchanged global/mid/dispersion. Independent patientloops/Gram spectra, duplicated-normal invariance, invalid-token invariance for fit geometry and prediction, zero-strengthplainMLP and original RNG/parameteridentity. Four real256image fulltask updates/strictrecoveries passed. Restore all48stop/outer probabilities and16fixedfusionphases onCPU; audit valid-only normalization, everyactualgeometrybuffer, bestepoch, fullpatientcoverage and freezehashes.",
+    "formal_fits_started": 0,
+    "external_test_evaluated": false
+  },
+  "configuration_plan": [
+    {
+      "name": "fine7_unmasked",
+      "grid": 7,
+      "pool": "ordinary",
+      "use_region_mask": false
+    },
+    {
+      "name": "fine7_masked",
+      "grid": 7,
+      "pool": "ordinary",
+      "use_region_mask": true
+    },
+    {
+      "name": "fine7_weighted_masked",
+      "grid": 7,
+      "pool": "weighted",
+      "use_region_mask": true
+    },
+    {
+      "name": "coarse3_weighted_masked",
+      "grid": 3,
+      "pool": "weighted",
+      "use_region_mask": true
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "fixed_fusion_weight": 0.75,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "hypothesis": "Increasing regional density and foreground pooling previously failed with raw M5. Test whether the later successful fit-normal reference projection enables these local architectures. Fine-grained retinal features and normal nuisance suppression may interact; compare all four previously declared foreground controls without retuning the head or masks.",
+  "geometry": "Use original per-fit normalization, including valid-region-only region channel statistics for masked arms. For normal-patient PCA, first average only valid regions within each image, then equally average images within each normal patient; other streams retain original centroid construction. Estimate32 directions per stream. Unmasked arm averages all49regions. All geometry/splitplans frozen before fitting.",
+  "architecture": "Same original M5attentionMLP on full normal-reference projections, with49ordinaryunmasked/49ordinarymasked/49foregroundweightedmasked/9foregroundweightedmasked regional tokens. Masks and source features are already frozen and pixel-derived. Keep region_mask unchanged through normal transform. Identical trainable parameter shapes, initialization, full task,patientweights,hparams and3seeds. Four arms48newheads; each also scored with fixed.75new/.25M5 mixture, eight scores and0fusionfits.",
+  "geometry_freeze": "Freeze16arm/phase geometries and16patient plans before all head fitting; masked region channel statistics and normal patient summaries exclude invalid tokens. Same original parameter schemas and initialization.",
+  "selection": "Freeze highest passing original CV with validation>=M6 and CVstrictly>M6, then unused patient-partition confirmation against M6/M5/fixedGaussian. Seeds20271101/20271111 are used. No automatic external tests.",
+  "audit": "Sourcebank indices/path/digest and unchanged global/mid/dispersion. Independent patientloops/Gram spectra, duplicated-normal invariance, invalid-token invariance for fit geometry and prediction, zero-strengthplainMLP and original RNG/parameteridentity. Four real256image fulltask updates/strictrecoveries passed. Restore all48stop/outer probabilities and16fixedfusionphases onCPU; audit valid-only normalization, everyactualgeometrybuffer, bestepoch, fullpatientcoverage and freezehashes.",
+  "source_features": "Every sourcebank array value hash/shape/dtype verified against original audited metadata before freezing full file fingerprint. No raw-image extraction or external scoring.",
+  "external_test_policy": "Only2091development rows; external feature arrays NaN before fitting. No external outcomes/predictions loaded for selection.",
+  "code_sha256": {
+    "fine_normal_reference.py": "2c0aa647098923f7d0ffcff3d4085e1f438f85cefe6c778536301014d70d036e",
+    "fine_normal_experiments.py": "63e974676b9844f6965e0e0bef0014f7b9e6378b509c8c4bbaddc82e6debc726",
+    "verify_fine_normal_reference.py": "a588432188dd258f19b2f6e91d74d43c2b42a8be22a65b05162f6afe4933507c",
+    "start_fine_normal_reference.py": "dfc9be02cf83a426e0296ff366293713ccbf5124499c67c1b98e1d2dd1b55797",
+    "foreground_data.py": "e59f0a0b1ccbff6e714991772568fd5238f965e79f91f5c01c3afc81062857be",
+    "foreground_pool.py": "914ca0043bfd725e0093307c23cc37d1679bd635121f1a08e864c5debc51a0e6",
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "kernel_residual_experiments.py": "2fa80606d2b3e797047df2c7cdb26701519cbeddad1202bf21a3b2847028f065",
+    "milestone2.py": "5197d7463b2764cadceb39e40e86d6aa9e34e4576824f2d67d1e894b892848e2"
+  }
+}

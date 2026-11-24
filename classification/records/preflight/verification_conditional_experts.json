@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "Both clinicalbinary tasklabels and stage2eligibility masks exactly match userrequest",
+    "Source3classprobabilities reconstruct exactly through both normalizedbinaryfactorizations",
+    "Hardroute decisions independently checked with explicitconditionals; ineligible stage2weightszero",
+    "Embeddingnormalization fits training only and is unchanged by stoppingfeatures",
+    "Linear/MLPbinaryheads strictly restore predictions",
+    "All8syntheticorder/stage/architecturefits complete with finite parameters and exact eligiblecoverage"
+  ],
+  "synthetic_smoke_fits": 8,
+  "formal_experiment_fits": 0
+}

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "old_frozen_head_probability_max_error": 8.940696716308594e-07,
+  "checks": [
+    "Swapping view order leaves fused predictions unchanged",
+    "Swapping views plus canonical horizontal region permutation leaves predictions unchanged",
+    "Duplicated views have identical branch probabilities and zero disagreement",
+    "Duplicated-view mirror head equals the original attention head with identical copied parameters",
+    "Finite loss and gradients, including learned agreement penalties",
+    "Strict new-head serialization reproduces predictions",
+    "Existing frozen milestone5 head still strictly restores and reproduces validation probabilities",
+    "Image reflection is an exact involution"
+  ]
+}

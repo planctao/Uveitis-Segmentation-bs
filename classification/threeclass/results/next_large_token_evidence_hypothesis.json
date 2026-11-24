@@ -1,0 +1,53 @@
+{
+  "created_at_utc": "2026-11-24T11:03:21.026379+00:00",
+  "family": "large_token_evidence",
+  "status": "completed_confirmed_and_promoted",
+  "scores_evaluated": 8,
+  "hypothesis": "Existing DINO-L features preserve block15 only as a global mean and discard the four pretrained register tokens. Test complementary intermediate spatial evidence and pretrained register evidence through query pooling, with late9region and late4quadrant matched controls. Architecture design uses original feature definitions and development studies only; no confirmation or external outcomes used. Existing crossdepth/specialtoken pooling principles, no claim of methodological originality.",
+  "feature_plan": "Frozen identical DINOv3-L/16 pretrainedweights, exactexisting448cache and320/448 transforms. All2091developmentimages only. Preserve mid(block15)3x3patchregions, final3x3patchregions(control), four final registertokens, final2x2patchquadrants(control), each concatenated across scales2048D. Allfeaturearrays/checkpoint/code/imagehashes frozen; compare oldlegacyfeatures plus independently recompute pooling/prefixslices on6actualimages beforefull extraction. No class scoring in featurepreparation.",
+  "architecture_plan": "Original normalL2048 patientPCA32 attentionMLP. New token stream separately normalized and normalpatientPCA32projected, LayerNorm2048->keys32/values32, hidden256->query32, scaled dotattention and zeroLinear32->256 readout*.1 added to pre-dropout originalLhidden. Originaltask/init/RNG preserved atzero. Sameparameters for allfour tokenstreams; token counts9vs9 and4vs4.",
+  "configuration_plan": [
+    {
+      "name": "mid_regions",
+      "tokens": 9
+    },
+    {
+      "name": "late_regions_control",
+      "tokens": 9
+    },
+    {
+      "name": "registers",
+      "tokens": 4
+    },
+    {
+      "name": "quadrants_control",
+      "tokens": 4
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standalone newL branch and M7 with only normalL replaced: .1875rawB+.5625normalB+.25newL. No fusionfits.",
+  "launch_condition": "Feature extraction may run without labelscores while pairwise study completes. No classifierfits/scores before fullfeatureaudit, model/taskpreflight and previouscandidate confirmationdecision terminal. Freeze then-currentretainedgates beforeclassification.",
+  "selection": "Strictly higher originalCV and validation>=retainedreference; freezehighestqualifyingCV before two unusedpatient3fold repeats against EACH retainedreference/M7/M6/M5/fixedGaussian asapplicable, requiringhighermeanF1 and pairedpatient95%lower>0. No automaticexternaltesting.",
+  "external_test_evaluated": false,
+  "feature_protocol": "runs/large_token_features/protocol.json",
+  "feature_protocol_sha256": "017d9305787209f1ccd66559279ebaffab3c99814edc1de2b69a5cf25fa8a07f",
+  "feature_extraction_pid": 17294,
+  "feature_bank": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/large_token_features/features/dinov3_large_token_development.npz",
+  "feature_bank_verification": "verification_large_token_feature_bank.json",
+  "model_preflight": "verification_large_token_evidence.json",
+  "architecture_details": "Each separately normalized normalpatientPCA32 tokenstream uses LayerNorm2048, linear key32 and GELU(linear value32); originalpre-dropout Lhidden uses LayerNorm256->linear query32. Dotproduct/sqrt32 softmaxpooling then zeroLinear32->256 times.1. Existing Ltask/init/RNG preserved; all4streams useidentical parametercounts.",
+  "protocol": "runs/large_token_evidence/protocol.json",
+  "protocol_sha256": "e5fa07b686f38e3c1a3e14157e2d7fb3f1e4cd7a3b09c90c4f5ef299d6e5b296",
+  "pid": 19894,
+  "retained_reference": "results/research_reference_m8.json",
+  "passing_development_gates": 1,
+  "comparison": "results/research_large_token_evidence/comparison.json",
+  "selected_candidate": "registers_m7replace",
+  "confirmation_protocol": "runs/large_token_confirmation/protocol.json",
+  "confirmation_protocol_sha256": "4a6a5b6c3e4b7ee022d32af46ce4896d873d089427d60397b27dc4b75652b31b",
+  "confirmation_pid": 21016,
+  "confirmation_result": "results/research_large_token_confirmation/comparison.json",
+  "confirmation": "results/research_large_token_confirmation/comparison.json",
+  "package": "results/milestone8_register_blend/package.json"
+}

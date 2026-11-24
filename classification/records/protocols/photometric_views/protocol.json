@@ -1,0 +1,58 @@
+{
+  "created_at_utc": "2026-11-24T00:02:54.791680+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "More head capacity, privileged L targets and paired dropout did not pass both development gates. Test a deterministic luminance view to expose retinal local contrast under varying illumination, retaining original color input as a fusion control.",
+  "pretrained_weights": {
+    "storage": "/root/.cache/torch/hub/checkpoints/dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth",
+    "sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c"
+  },
+  "feature_storage": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/features/photometric_development.npz",
+  "transformation": "Original decoded 448-cache RGB -> OpenCV8bit LAB -> CLAHE on L only, clipLimit2.0, tileGrid8x8 -> RGB. Restore all original pixels whose maxRGB<=10. No learned image/dataset statistics; no geometric alteration. Apply before existing320/448 Resize and ImageNet normalization. Source images unchanged.",
+  "extraction": "Strict original DINOv3-B16 weights, frozen eval AMPfloat16, only2091developmentimages. Same finalCLS,3x3regions,block7midpatchmean and patchstd. Six unchanged images reproduce M5 pipeline; every shard audited and six corrected actual images re-forwarded with a fresh model before fitting.",
+  "configuration_plan": [
+    {
+      "name": "clahe_only",
+      "feature": "clahe_dual"
+    },
+    {
+      "name": "original_clahe_concat",
+      "feature": "original_clahe"
+    },
+    {
+      "name": "shared_mean_views",
+      "feature": "original_clahe",
+      "config_updates": {
+        "arch": "scale_consensus",
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0,
+        "scale_dropout": 0.0,
+        "scale_probability_blend": 0.0,
+        "learn_scale_gate": false
+      }
+    },
+    {
+      "name": "shared_gated_views",
+      "feature": "original_clahe",
+      "config_updates": {
+        "arch": "scale_consensus",
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0,
+        "scale_dropout": 0.0,
+        "scale_probability_blend": 0.0,
+        "learn_scale_gate": true
+      }
+    }
+  ],
+  "fusion": "Each photometric view contains its own320+448 channels. Concatenation uses original M5 attention. Shared controls independently encode the two1536-channel photometric views with tied M5-style projections, then average or use an image-dependent reliability softmax. No new view auxiliary or consistency losses.",
+  "planned_new_seed_fits": 48,
+  "training": "Each fixed configuration3formal+3foldx3seed heads, original M5 task losses,hparams,patientweights and stopping. Feature normalization fit inside each fit; external rows NaN.",
+  "selection": "Patient CV Macro-F1 above M5 and original validation Macro-F1 no decrease; freeze any qualifier before fresh patient confirmation versus M5 and fixed Gaussian. No automatic external evaluation.",
+  "external_test_policy": "No new external image extraction, predictions or outcomes; no external sources used to choose illumination transform or fusion.",
+  "input_implementation_checks": {
+    "deterministic": true,
+    "all_black_preserved": true,
+    "source_array_unchanged": true,
+    "background_restored": true
+  }
+}

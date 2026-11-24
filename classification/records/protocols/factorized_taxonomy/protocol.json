@@ -1,0 +1,35 @@
+{
+  "created_at_utc": "2026-11-23T22:21:28.843927+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Compact subtype marginalization couples three-class family evidence to within-family disease competition. Explicitly factor P(disease|image)=P(family|image)*P(disease|family,image), retaining disease supervision while isolating the coarse decision. Compare flat coarse and both user-requested conditional orders.",
+  "configuration_plan": [
+    {
+      "name": "factorized_flat_conditional",
+      "order": "flat",
+      "conditional_aux": true
+    },
+    {
+      "name": "factorized_infectious_first",
+      "order": "cascade_i",
+      "conditional_aux": true
+    },
+    {
+      "name": "factorized_normal_first",
+      "order": "cascade_n",
+      "conditional_aux": true
+    },
+    {
+      "name": "factorized_flat_global_aux_control",
+      "order": "flat",
+      "conditional_aux": false
+    }
+  ],
+  "head": "Keep all M5regionalpooling,encoder,fineprojectionandfinelinearparameters. Add a zero-weight separate coarse head after all common modules. Flat head has3outputs,bias0. Each binary tree has2scalar logits with biases(-log2,0)forinfectionfirstand(log2,0)fornormalfirst, so everyarm startswith equal1/3coarseprobabilities.",
+  "loss": "Same patient-weighted coarse smoothed NLL and finecontrastive asM5. Conditional arms normalize fine logits only within truefamily, and use NLLoftrue disease under that conditional distribution withaux0.8. Control keeps global14disease CEwithaux0.8. Threeclass predictions come only from separate coarsehead.",
+  "binary_trees": "P(infection),P(noninfection|notinfection)orP(abnormal),P(infection|abnormal); train via composed3class NLL jointly. Soft factor probabilities are primary during architecture development. Also save both hardroute predictions with thresholds selected onlyfromeachinnerstoppingensemble for user-requested two-stage diagnostics; these do not select architecture.",
+  "training": "ExactlyM5hidden256/dropout0.6/lr0.002/wd0.1/label_smoothing0.03/fine_contrastive0.05/120epochs/patience18;3seeds allarms, alloriginal3outerpatientfolds.",
+  "planned_new_seed_fits": 48,
+  "selection": "Only soft3class Macro-F1 selects architectures: originalCVhigherthanM5andvalidationnolowerthanM5. Anyeligiblecandidate needs newfixedpatientconfirmationagainstbothM5andfixedGaussian. Hardroute metrics aredevelopmentdiagnosticsonly.",
+  "external_test_policy": "No external scoring, predictions, outcomes or raw images."
+}

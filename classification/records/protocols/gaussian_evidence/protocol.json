@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-11-23T20:56:35.095802+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "hypothesis": "Frozen MLP boundaries may miss patient-balanced class/subtype geometry. Fit shared-covariance prototype evidence in the existing MLP embedding, then test fixed mixtures with the unchanged original classifier.",
+  "reference": "results/milestone5/selection_before_test.json",
+  "granularities": [
+    "coarse",
+    "subtype"
+  ],
+  "covariance_shrinkages": [
+    0.1,
+    0.5
+  ],
+  "gaussian_probability_weights": [
+    0.1,
+    0.25,
+    1.0
+  ],
+  "fixed_candidates": 12,
+  "fitting": "For each original development/outer-CV source head, obtain embeddings using its own train-only feature statistics. Fit all prototype means and pooled covariance only on that head fitting patients; no stopping or outer embeddings enter these statistics. Each patient has equal mass within each target; prototype targets receive equal covariance mass.",
+  "priors": "Equal probability for the three requested parent classes; within a parent, subtype prior proportional to fitting-patient support.",
+  "temperature": "Fixed likelihood temperature sqrt(embedding dimension), no validation temperature search.",
+  "parameter_control": "The MLP and backbone are unchanged; weight0 must exactly reproduce the original classifier. Compare coarse and subtype geometry at identical shrinkage and probability weights.",
+  "counting": "48 small generative fits: 4 geometry configurations times12 existing source heads. No new backbone or MLP training.12 composite prediction candidates.",
+  "evaluation": "Three-seed mean for all candidates, original patient3fold CV with original separate internal stopping patients. Passing validation/CV candidates require a newly fixed repeated-patient confirmation before external evaluation.",
+  "external_test_policy": "No external predictions, metrics or labels loaded."
+}

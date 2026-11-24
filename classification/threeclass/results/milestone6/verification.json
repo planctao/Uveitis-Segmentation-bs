@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "time_utc": "2026-11-24T03:20:31.014004+00:00",
+  "selection_sha256": "a9845b5753da0ea28caf2e7aa8f7aa752a452d7748a9522e3f4abae66e9be3e2",
+  "package_sha256": "81b955917f68ab610358990ff9846c955eec7b1e251cd11fd7e9853978f48403",
+  "all_image_predictions_cpu_restored": true,
+  "maximum_cpu_probability_errors": {
+    "val": 4.76837158203125e-07,
+    "test_independent": 2.980232238769531e-07,
+    "test_ningbo": 4.172325134277344e-07
+  },
+  "checks": [
+    "Developmentandfreshpatientgatesandinferencereview passedbeforeexternalfreeze",
+    "Allsiximmutablemodelcheckpoints,normalizationandfixed0.75mixture verified",
+    "Everyvalidationandexternalscore independentlyrecoveredonCPU; classdecisionsandCSVsidentical",
+    "Manifestrows/confusionmatrices,patient/eyeaggregationandpairedpatientaccuracycomparisonschecked",
+    "Finalselection,modelpackageandevaluationcodeunchanged; noexternalparameterselection"
+  ]
+}

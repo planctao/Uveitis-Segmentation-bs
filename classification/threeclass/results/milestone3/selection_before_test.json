@@ -1,0 +1,214 @@
+{
+  "time": "2026-11-24T02:37:18.101159+08:00",
+  "selected": {
+    "group": "multiscale_vit_9fb62d66a053",
+    "mode": "flat",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 64,
+      "dropout": 0.4,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "fine_contrastive": 0.01
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.8796791443850267,
+      "balanced_accuracy": 0.8683825835609662,
+      "macro_f1": 0.874604779885324,
+      "log_loss": 0.41385764968069755,
+      "recall": {
+        "infectious": 0.8723404255319149,
+        "noninfectious": 0.9022988505747126,
+        "normal": 0.8305084745762712
+      },
+      "confusion_matrix": [
+        [
+          123,
+          18,
+          0
+        ],
+        [
+          10,
+          157,
+          7
+        ],
+        [
+          1,
+          9,
+          49
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.8548211952741033,
+      0.869008825668863,
+      0.8642208961144627
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/development_round3/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/development_round3/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/development_round3/seed_2/model.pt"
+    ],
+    "feature": "multiscale_vit",
+    "candidate_id": "9fb62d66a053",
+    "round": 203,
+    "proposal_iteration": 349781,
+    "round_policy_version": 2,
+    "hypothesis": "Change fine_contrastive around a leading validation configuration",
+    "group_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053",
+    "time": "2026-11-24T02:30:59.145141+08:00",
+    "source_checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053/seed_2/model.pt"
+    ],
+    "snapshot_time": "2026-11-24T02:33:01.043088+08:00",
+    "checkpoint_sha256": {
+      "0": "2138ce8557857314361660277c8f757d24378319782c1534df91a44f397c9c4f",
+      "1": "6f0eef5faa50b9b8916024ef4884adb23e39d90af7f6dca1e1477d47585d2265",
+      "2": "c6479b9f74a7ce1a9a43bb7fc42e7ee3f112b0e89d4be6f4cd79e1bb9885a5e8"
+    }
+  },
+  "cv": {
+    "candidate": "continuous_9fb62d66a053",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 64,
+      "dropout": 0.4,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "fine_contrastive": 0.01
+    },
+    "folds": [
+      {
+        "fold": 0,
+        "inner_train_images": 923,
+        "early_stop_images": 222,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.7954545454545454,
+          "balanced_accuracy": 0.803207331632402,
+          "macro_f1": 0.7909034931999743,
+          "log_loss": 0.6083554612131111,
+          "recall": {
+            "infectious": 0.7905982905982906,
+            "noninfectious": 0.7900763358778626,
+            "normal": 0.8289473684210527
+          },
+          "confusion_matrix": [
+            [
+              185,
+              44,
+              5
+            ],
+            [
+              36,
+              207,
+              19
+            ],
+            [
+              2,
+              11,
+              63
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 1,
+        "inner_train_images": 935,
+        "early_stop_images": 210,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.7657342657342657,
+          "balanced_accuracy": 0.8057962155993493,
+          "macro_f1": 0.7790664072655987,
+          "log_loss": 0.8952721696457876,
+          "recall": {
+            "infectious": 0.6837606837606838,
+            "noninfectious": 0.7862595419847328,
+            "normal": 0.9473684210526315
+          },
+          "confusion_matrix": [
+            [
+              160,
+              66,
+              8
+            ],
+            [
+              39,
+              206,
+              17
+            ],
+            [
+              0,
+              4,
+              72
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 2,
+        "inner_train_images": 902,
+        "early_stop_images": 242,
+        "outer_test_images": 573,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 573,
+          "accuracy": 0.806282722513089,
+          "balanced_accuracy": 0.847109690315614,
+          "macro_f1": 0.8126457423610652,
+          "log_loss": 0.8178225995274128,
+          "recall": {
+            "infectious": 0.8376068376068376,
+            "noninfectious": 0.7300380228136882,
+            "normal": 0.9736842105263158
+          },
+          "confusion_matrix": [
+            [
+              196,
+              30,
+              8
+            ],
+            [
+              52,
+              192,
+              19
+            ],
+            [
+              0,
+              2,
+              74
+            ]
+          ]
+        }
+      }
+    ],
+    "mean_macro_f1": 0.7942052142755461,
+    "sd_macro_f1": 0.017031410919505857,
+    "mean_accuracy": 0.7891571779006333,
+    "policy": "3 outer patient-group folds using original training data only; disjoint inner early-stopping patients; thresholds selected only on inner stop patients; 3 seeds per fold."
+  },
+  "prior_best_development_cv_macro_f1": 0.8002170959549074,
+  "eligible": false,
+  "rule": "Maximum completed development CV macro-F1 plus nondecreasing development validation macro-F1, frozen before this candidate external evaluation; external results never select the model.",
+  "architecture": "Shared frozen DINOv3 ViT-B/16 at 320 and 448; aligned regional features; compact subtype head with probability marginalization to three classes",
+  "resolved_subtype_auxiliary_weight": 0.6,
+  "provenance_audit_passed": true
+}

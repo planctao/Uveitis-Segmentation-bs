@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-23T22:09:05.659474+00:00",
+  "status": "predeclared_not_launched",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "The fixed10%coarse Gaussian mix improved development confirmation; class covariances and signed residuals did not meet both gates. A compact uncertainty-conditioned mixture may preserve MLP confidence while admitting Gaussian evidence on unfamiliar support patterns. Train its gate only with patient-held-out predictions inside each source fitting set.",
+  "source_partition_protocol": "runs/crossfit_kernel_residual/protocol.json",
+  "source_partition_protocol_sha256": "caf62ad067d9e7faeed56f5642bd32aea5bedd350dea0aa3de97fa3351314b93",
+  "new_backbone_or_mlp_fits": 0,
+  "reuse": "Reuse all36existing inner crossfit MLP teachers; for each teacher fit the fixed coarse Gaussian(shrinkage0.1,temperature sqrt256) on its own fitting patients, then produce base and Gaussian probabilities for its heldout patients only. The teacher stopping rows do not enter statistics.",
+  "gate_features": [
+    "MLP_entropy/log3",
+    "Gaussian_entropy/log3",
+    "MLP_top1_minus_top2",
+    "Gaussian_top1_minus_top2",
+    "Jensen_Shannon/log2",
+    "argmax_agreement"
+  ],
+  "gate": "g=cap*sigmoid(logit(0.1/cap)+offset+standardized_features@coefficients); coefficients and offset initialize0, so initial mixture exactly10%Gaussian.",
+  "feature_statistics": "Standardize gate inputs on all OOFteacher heldout predictions covering only the full source fitting patients. Use std floor0.05.",
+  "objective": "Patient/class weighted mean NLL of(1-g)*MLP_probability+g*Gaussian_probability plus ridge*(mean(coefficients^2)+offset^2); full batch CPU float64, Adam lr0.02,400steps, select minimum penalized TRAINING objective, no early stop on outer or validation.",
+  "gate_caps": [
+    0.25,
+    0.5
+  ],
+  "ridge_values": [
+    0.1,
+    1.0
+  ],
+  "fixed_candidates": 4,
+  "source_gate_fits": 48,
+  "fixed_controls": [
+    "M5",
+    "fixed10%coarseGaussian"
+  ],
+  "evaluation": "Every candidate receives original validation and all3original outer patient folds. Each gate uses only its own parent source fitting patients. At evaluation use the full source MLP and its own train-only Gaussian statistics, with its crossfit-fitted gate frozen.",
+  "limitation": "Crossfit teachers train on fewer patients, so gate transfer from teachers to full-source confidence is imperfect; explicit outerCV and new confirmation required.",
+  "selection": "OriginalCV above BOTH M5 and fixed10%Gaussian, and validation Macro-F1 no lower than BOTH. Any qualifying winner then needs fixed NEW patient partitions against both references before freeze.",
+  "external_test_policy": "Never load external outcomes, predictions or raw images; no external scoring."
+}

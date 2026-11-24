@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-11-23T20:27:03.450177+00:00",
+  "selected_candidate": "experts_87e5bf1a91ec",
+  "selection_record_sha256": "258ab8805a0f0171c0c1b088e93424533a0c833d1920672f302474779f21df0c",
+  "arms": [
+    "milestone5_reference",
+    "reference75_raw768_25",
+    "reference75_up768_25"
+  ],
+  "donor_weight": 0.25,
+  "source_features": [
+    "multiscale_vit",
+    "vitb_raw768",
+    "vitb_up768"
+  ],
+  "outer_split_seeds": [
+    20261221,
+    20261231
+  ],
+  "inner_split_rule": "20261224 + repeat_index*10 + fold; stratified 20 percent outer-fit patient groups",
+  "seeds_per_source": 3,
+  "planned_new_seed_fits": 54,
+  "evaluation": "Original training patients only. Fixed convex weights selected before these new outer outcomes. No new weight search on these folds.",
+  "confirmation_gate": "Keep milestone5 unless the fixed raw expert mixture improves mean repeated macro-F1 and its exploratory patient-cluster paired macro-F1 95 percent interval lower bound exceeds zero. Compare raw/up at the identical fixed weight; make no raw-detail attribution without paired evidence.",
+  "uncertainty": "Patient bootstrap jointly resamples all images and both repeated predictions, not independent repeated images. It does not cover all fit uncertainty or prior search multiplicity.",
+  "external_test_policy": "No external images, predictions or metrics loaded.",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02"
+}

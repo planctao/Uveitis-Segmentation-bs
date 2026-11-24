@@ -1,0 +1,36 @@
+{
+  "created_at_utc": "2026-11-24T02:36:46.892824+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Conditionalevidencegaincapacity didnotimprovepatientCV. Testknownstructuredfeaturegroupdropoutwithoutaddinginferenceparameters, toreduceoverrelianceononeoriginalDINOevidencestream. Atleast3offourstreams remainonanytrainingimage.",
+  "configuration_plan": [
+    {
+      "name": "probability0_control",
+      "probability": 0.0
+    },
+    {
+      "name": "probability0p1",
+      "probability": 0.1
+    },
+    {
+      "name": "probability0p25",
+      "probability": 0.25
+    },
+    {
+      "name": "probability0p5",
+      "probability": 0.5
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "Trainonlyat640DpooledfusedinputtooriginalMLP. Drawoneof4groupsuniformly perimage,thenremoveitwithprobabilityp. GroupsCLS256,regions256,mid64,dispersion64. Everyremaininggroup multipliedby1/(1-p/4), givingeachgroupexpectedgain1. Atmostonegroupremoved. InferenceidentitywithoriginalM5stateandparameters.",
+  "controls": "Zeropexactoriginalforward/task/RNG; allarms identicaloriginalcommonweights/RNGstream andfullM5loss,hparams,weights,patientplans,earlystop. PrivateNumPymaskgenerator20281124+seed consumesnoglobaltorchdraws, sooriginalDropout/permutationstreamnotshifted. Fourfixedarms each3formal+3foldx3seedheads.",
+  "audit": "Preflightrealinputloss/backwardandstrictordinaryM5recovery; atmostonegroupdrop, expectedmass1, exactgroupgradients andprivateRNG. Every36nonzeromodelsavesactualfirst640Dsource/mask/output, independentscalar/groupformulareconstruction andprivatefirstmaskreproduction. All48actualfitstats/schema/diseasemaps/stop/outerprobabilitiesandensemblesCPUrestore; all12zero-pcontrolsmatchoriginalM5heldoutdecisions.",
+  "selection": "OriginalpatientCVMacroF1>0.8090823139275858 andvalidation>=0.8893107959516184;highestpassingCV freeze beforefreshpatientconfirmationagainstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeaturerows;externalarraysNaN. Noexternalimages/predictions/outcomes.",
+  "code_sha256": {
+    "evidence_dropout.py": "e43e85ed8b095af94810fa3d4452d555dc495270f8276ae5cc7a95360263ceed",
+    "verify_evidence_dropout.py": "886f29e3d7a58a6ce43382d4be9a6ae9ba570de88df6def851cb78283e377c62",
+    "evidence_dropout_experiments.py": "192f5aa6878bd064cf8028d4bc75b70d2173dee9f6529dbe03a46711ef833998",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc"
+  }
+}

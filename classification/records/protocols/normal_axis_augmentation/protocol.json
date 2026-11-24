@@ -1,0 +1,75 @@
+{
+  "created_at_utc": "2026-11-24T03:49:18.674915+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "reference_sha256": "d7b25156747ca29c1b752a61f1d711cf74458c98063f2eeb2aa990e0ae2132d8",
+  "preflight_sha256": "5bdf8580ec8223ad8b9a4b22ca6288a54d974ee9a55cb25d713c676fb06ba152",
+  "source_checkpoints": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_0/model.pt": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_1/model.pt": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_2/model.pt": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_0/model.pt": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_1/model.pt": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_2/model.pt": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_0/model.pt": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_1/model.pt": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_2/model.pt": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07"
+  },
+  "frozen_parent_artifacts": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/package.json": "81b955917f68ab610358990ff9846c955eec7b1e251cd11fd7e9853978f48403",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_diagnostic_normal_projection/comparison.json": "b6d9b45a1bbe835f5d6db78e91dd79f327d12dbe30961aca317d68417f8a4819",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_diagnostic_normal_projection/verification.json": "277253f8a42dce6f0ac4fa1caebbca3c3166ddd336c6f9f8d80ae793a0b3e384",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_diagnostic_normal_projection/freeze_integrity_after_training.json": "4f0e2e3659a5cf47ccf33accf63feb1a1fdcee6d63a2726c49c013a6b6c71655",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/predictions.npz": "633633bc936d1d9730b2ef7868adc2518824f8cdb28d47059be85e24f9dcdbee",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/predictions.npz": "40e9a0f496ae6f1b8f6fdc791ed825aa97b97268455cdcba87d08527f7668643",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/predictions.npz": "05fd8a34648bf5eb6db6313e9933fd57ef84508efedb068ceb42a1958cca9ec9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/predictions.npz": "c6c036ed5c08e4562271608dfbd1ee9b798f65162697b7bad6f641a690057bd5"
+  },
+  "configuration_plan": [
+    {
+      "name": "coherent_scale10",
+      "mode": "coherent",
+      "scale": 0.1
+    },
+    {
+      "name": "coherent_scale30",
+      "mode": "coherent",
+      "scale": 0.3
+    },
+    {
+      "name": "gaussian_scale10",
+      "mode": "gaussian",
+      "scale": 0.1
+    },
+    {
+      "name": "gaussian_scale30",
+      "mode": "gaussian",
+      "scale": 0.3
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "fixed_fusion_weight": 0.75,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "hypothesis": "Normal-centroid nuisance suppression improved patient development CV, but alternative moments and safeguarded diagnostic projections failed. Test whether exposure to small normal-subspace perturbations during training teaches robust diagnostic evidence. Compare coherent normal-patient donor differences to independent Gaussian draws with matched marginal sample covariance.",
+  "geometry": "Fit-only original normalization and equal-patient normal centroid PCA32, unchanged from the successful normal branch. Project normal patient centers into these axes. Refit geometry independently for every phase; no stopping or outer patients in donor banks.",
+  "architecture": "Base normal-suppressed M5 input, then train-only additive rank32 nuisance perturbation and clipping. Coherent mode draws distinct uniform normal patient donors a,b and uses (coordinates[a]-coordinates[b])/sqrt(2), sharing donors across all four streams and the image perturbation across region tokens. Gaussian mode independently draws each stream with deviation sqrt(sample eigenvalue). Fixed scales .1/.3. Four new architectures, 48 actual heads; fixed .75 new branch / .25 M5 fusion scores add no fits. Evaluation uses only the deterministic normal-suppressed network.",
+  "selection": "Original CV strictly > .8270827413505814 and validation >= .8904827120381046; freeze highest passing CV candidate before previously unused patient partitions against M6, M5 and fixed Gaussian. No automatic external evaluation.",
+  "audit": "Full preflight real-task loss/update/recovery; exact coherent-pair sample covariance checked. All 48 actual first-training-batch witnesses independently reconstruct fit-only inputs, private RNG donor/Gaussian draws and outputs. Check every geometry/bank/deviation, source schema, fit statistics, disease map, selected epoch and stop/outer probability on CPU, and all fixed mixtures. Verify frozen hashes before and after training.",
+  "external_test_policy": "Only 2091 development rows; external feature arrays set to NaN before fitting. No external outcomes, raw images or prediction files loaded for research selection.",
+  "code_sha256": {
+    "normal_axis_augmentation.py": "a3c46a751d5c65007c20f5a565175f3f8eaffae5013b88407dc613163ea3006a",
+    "normal_axis_experiments.py": "ec2676f9414efe746df663f181c3a5a41fa64b552ef35a753e54f0139f8288dd",
+    "verify_normal_axis_augmentation.py": "0cf34d1095c9b529057396dc233399ffd60a6a16213bb55056dbfb5fa147b419",
+    "start_normal_axis_augmentation.py": "d664b5d0d04e574430e070a9b5b61f88291ee347b97bde61154c1dc5090c09fa",
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "verify_normal_subspace.py": "4731f410ab79e0d656f5ad9eee65e9af427b50ffb56015a350a5a439b4102c72",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "kernel_residual_experiments.py": "2fa80606d2b3e797047df2c7cdb26701519cbeddad1202bf21a3b2847028f065",
+    "milestone2.py": "5197d7463b2764cadceb39e40e86d6aa9e34e4576824f2d67d1e894b892848e2"
+  }
+}

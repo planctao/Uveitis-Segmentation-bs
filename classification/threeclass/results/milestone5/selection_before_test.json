@@ -1,0 +1,1030 @@
+{
+  "time": "2026-11-23T19:19:04.385957+00:00",
+  "rule": "Maximum completed development outer-CV macro-F1 at this cutoff; require improvement over milestone4 and nondecreasing full development validation macro-F1. No external metric participates.",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selected": {
+    "group": "protected_model",
+    "mode": "flat",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 256,
+      "dropout": 0.6,
+      "lr": 0.002,
+      "wd": 0.1,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 0.8,
+      "label_smoothing": 0.03,
+      "fine_contrastive": 0.05
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.893048128342246,
+      "balanced_accuracy": 0.8905082258726389,
+      "macro_f1": 0.8893107959516184,
+      "log_loss": 0.3370578564759096,
+      "recall": {
+        "infectious": 0.8936170212765957,
+        "noninfectious": 0.896551724137931,
+        "normal": 0.8813559322033898
+      },
+      "confusion_matrix": [
+        [
+          126,
+          14,
+          1
+        ],
+        [
+          11,
+          156,
+          7
+        ],
+        [
+          2,
+          5,
+          52
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.88107753499949,
+      0.8799755836252046,
+      0.8631932009514393
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt"
+    ],
+    "feature": "multiscale_vit",
+    "candidate_id": "63c585e70306",
+    "source_candidate_id": "63c585e70306",
+    "source_cv_summary": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/summary.json",
+    "protected_from_pruning": true,
+    "full_fit_refitted": false,
+    "checkpoint_sha256": {
+      "0": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+      "1": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+      "2": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176"
+    }
+  },
+  "cv": {
+    "candidate": "continuous_63c585e70306",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 256,
+      "dropout": 0.6,
+      "lr": 0.002,
+      "wd": 0.1,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 0.8,
+      "label_smoothing": 0.03,
+      "fine_contrastive": 0.05
+    },
+    "folds": [
+      {
+        "fold": 0,
+        "inner_train_images": 923,
+        "early_stop_images": 222,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.8024475524475524,
+          "balanced_accuracy": 0.8213601384553574,
+          "macro_f1": 0.7950319507661269,
+          "log_loss": 0.5101939212507335,
+          "recall": {
+            "infectious": 0.8076923076923077,
+            "noninfectious": 0.7748091603053435,
+            "normal": 0.881578947368421
+          },
+          "confusion_matrix": [
+            [
+              189,
+              36,
+              9
+            ],
+            [
+              36,
+              203,
+              23
+            ],
+            [
+              1,
+              8,
+              67
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 1,
+        "inner_train_images": 935,
+        "early_stop_images": 210,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.7972027972027972,
+          "balanced_accuracy": 0.8281713041656794,
+          "macro_f1": 0.8075930955398637,
+          "log_loss": 0.6214270794112285,
+          "recall": {
+            "infectious": 0.7564102564102564,
+            "noninfectious": 0.7938931297709924,
+            "normal": 0.9342105263157895
+          },
+          "confusion_matrix": [
+            [
+              177,
+              51,
+              6
+            ],
+            [
+              39,
+              208,
+              15
+            ],
+            [
+              0,
+              5,
+              71
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 2,
+        "inner_train_images": 902,
+        "early_stop_images": 242,
+        "outer_test_images": 573,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 573,
+          "accuracy": 0.8237347294938918,
+          "balanced_accuracy": 0.8537039602678985,
+          "macro_f1": 0.8246218954767669,
+          "log_loss": 0.5053124657073693,
+          "recall": {
+            "infectious": 0.8418803418803419,
+            "noninfectious": 0.7718631178707225,
+            "normal": 0.9473684210526315
+          },
+          "confusion_matrix": [
+            [
+              197,
+              26,
+              11
+            ],
+            [
+              45,
+              203,
+              15
+            ],
+            [
+              0,
+              4,
+              72
+            ]
+          ]
+        }
+      }
+    ],
+    "mean_macro_f1": 0.8090823139275858,
+    "sd_macro_f1": 0.014851078598857077,
+    "mean_accuracy": 0.8077950263814139,
+    "policy": "3 outer patient-group folds using original training data only; disjoint inner early-stopping patients; thresholds selected only on inner stop patients; 3 seeds per fold."
+  },
+  "eligible": true,
+  "reference_candidate": "4726000e84fe",
+  "reference_cv_macro_f1": 0.8002170959549074,
+  "reference_validation_macro_f1": 0.880455192955193,
+  "pool_at_selection": {
+    "a2ce46e27fa9": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "global",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7440732996916449,
+      "sd_macro_f1": 0.03194221131137621,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/baseline_01_global_flat_h256/summary.json"
+    },
+    "069f6cadccd5": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_i",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7427074592432131,
+      "sd_macro_f1": 0.025854588974850646,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/baseline_02_global_cascade_i_h128/summary.json"
+    },
+    "5138a2c62b23": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_n",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7551182255054377,
+      "sd_macro_f1": 0.012759994672192819,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/baseline_04_global_cascade_n_h128/summary.json"
+    },
+    "376ce3133b66": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3
+      },
+      "mean_macro_f1": 0.7791840850005441,
+      "sd_macro_f1": 0.028640931592424028,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/crossvalidation/explore_09_attention_dual_h128/summary.json"
+    },
+    "245ea43fa253": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3,
+        "contrastive": 0.025
+      },
+      "mean_macro_f1": 0.7833858804538504,
+      "sd_macro_f1": 0.025011143585763174,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_245ea43fa253/summary.json"
+    },
+    "25643b47ae3f": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "memory_hybrid",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3,
+        "memory_topk": 15
+      },
+      "mean_macro_f1": 0.7658062395095571,
+      "sd_macro_f1": 0.027475996232808875,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_memory_748e6db3ac9c/summary.json"
+    },
+    "f83d669f4255": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "memory_attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3,
+        "memory_topk": 5,
+        "memory_gate_evidence": true
+      },
+      "mean_macro_f1": 0.7769996347842595,
+      "sd_macro_f1": 0.037714851524855805,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_memory_attention_e21b46043973/summary.json"
+    },
+    "e4311ff65ce4": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.6,
+        "consistency": 0.3,
+        "subtype_fusion": true,
+        "subtype_consistency": 0.1
+      },
+      "mean_macro_f1": 0.7891625267257102,
+      "sd_macro_f1": 0.02188190143120829,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_subtype_c83653b2f9ea/summary.json"
+    },
+    "63036a4936b6": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "mean_macro_f1": 0.786739657197946,
+      "sd_macro_f1": 0.01761017801043779,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_taxonomy_b693175089a5/summary.json"
+    },
+    "c64a88d4b659": {
+      "feature": "vitb_320",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "mean_macro_f1": 0.7793485448434948,
+      "sd_macro_f1": 0.017151685752810508,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/candidate_crossvalidation/continuous_c64a88d4b659/summary.json"
+    },
+    "8da5f0e8e9a3": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "global",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7318523270575287,
+      "sd_macro_f1": 0.008990030788801257,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/baseline_01_global_flat_h256/summary.json"
+    },
+    "19cf2f66e73e": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_i",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7260932978860085,
+      "sd_macro_f1": 0.019395145976953364,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/baseline_03_global_cascade_i_h256/summary.json"
+    },
+    "2d83c9d6ddce": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_n",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7350824599737185,
+      "sd_macro_f1": 0.0064536626773792245,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/baseline_05_global_cascade_n_h256/summary.json"
+    },
+    "d93689b55569": {
+      "feature": "fusion_320",
+      "config": {
+        "arch": "context",
+        "mode": "dual",
+        "hidden": 256,
+        "dropout": 0.4,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "mean_macro_f1": 0.7674143140466617,
+      "sd_macro_f1": 0.012973983915230407,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/fusion_320/crossvalidation/explore_04_context_dual_h256/summary.json"
+    },
+    "9fb62d66a053": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.4,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "fine_contrastive": 0.01
+      },
+      "mean_macro_f1": 0.7942052142755461,
+      "sd_macro_f1": 0.017031410919505857,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_9fb62d66a053/summary.json"
+    },
+    "4726000e84fe": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "mean_macro_f1": 0.8002170959549074,
+      "sd_macro_f1": 0.010396531543253365,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_4726000e84fe/summary.json"
+    },
+    "a63e5bcde831": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "label_smoothing": 0.03
+      },
+      "mean_macro_f1": 0.7896392300821087,
+      "sd_macro_f1": 0.01755846428008682,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_a63e5bcde831/summary.json"
+    },
+    "2ef3ecfe8585": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.37,
+        "lr": 0.0024437533,
+        "wd": 0.00054654487,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.6,
+        "contrastive": 0.025
+      },
+      "mean_macro_f1": 0.7949007564882212,
+      "sd_macro_f1": 0.014545411592225022,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_2ef3ecfe8585/summary.json"
+    },
+    "d8ce4bda0a28": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 1.0,
+        "support_prior": "uniform",
+        "support_shrink": 0.0,
+        "residual_penalty": 0.0
+      },
+      "mean_macro_f1": 0.7999213575565283,
+      "sd_macro_f1": 0.018893773693535072,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_bb004dd4f0a6/summary.json"
+    },
+    "699f184e9806": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 1.0,
+        "support_prior": "support",
+        "support_shrink": 0.0,
+        "residual_penalty": 0.0
+      },
+      "mean_macro_f1": 0.7951410962027792,
+      "sd_macro_f1": 0.010393232837212916,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_a31c951b4f9e/summary.json"
+    },
+    "06d8f3f7c39c": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 1.0,
+        "support_prior": "support",
+        "support_shrink": 10.0,
+        "residual_penalty": 0.001
+      },
+      "mean_macro_f1": 0.7934801042783567,
+      "sd_macro_f1": 0.015376039273577117,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_1a6b5eee6995/summary.json"
+    },
+    "d44245eef062": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_consensus",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "learn_scale_gate": false,
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0
+      },
+      "mean_macro_f1": 0.7991421682958579,
+      "sd_macro_f1": 0.01360552845246922,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_scale_e548833a5e86/summary.json"
+    },
+    "f8a1c045466f": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 1.0,
+        "support_prior": "support",
+        "support_shrink": 30.0,
+        "residual_penalty": 0.001
+      },
+      "mean_macro_f1": 0.7853210820397901,
+      "sd_macro_f1": 0.020948251527623647,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_24ae069d210c/summary.json"
+    },
+    "2d910313590b": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_consensus",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0
+      },
+      "mean_macro_f1": 0.7893436322547891,
+      "sd_macro_f1": 0.01742402173643409,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_scale_8cb08f6707ce/summary.json"
+    },
+    "f61171832c7b": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 1.0,
+        "support_prior": "uniform",
+        "support_shrink": 10.0,
+        "residual_penalty": 0.001
+      },
+      "mean_macro_f1": 0.7953991189600901,
+      "sd_macro_f1": 0.01834517312606796,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_6bd2d4a9b2ad/summary.json"
+    },
+    "12228f21db40": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_consensus",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "scale_aux": 0.3,
+        "scale_consistency": 0.0
+      },
+      "mean_macro_f1": 0.7975361760110072,
+      "sd_macro_f1": 0.009247292652933883,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_scale_18f96dfbf99c/summary.json"
+    },
+    "90e533a10cfc": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 1.0,
+        "support_prior": "support",
+        "support_shrink": 10.0,
+        "residual_penalty": 0.01
+      },
+      "mean_macro_f1": 0.7934801042783567,
+      "sd_macro_f1": 0.015376039273577117,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_15dfaf006182/summary.json"
+    },
+    "e2b4f7729df4": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.0012540374,
+        "wd": 0.062822435,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03
+      },
+      "mean_macro_f1": 0.8008111361781634,
+      "sd_macro_f1": 0.0062820169087022424,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_e2b4f7729df4/summary.json"
+    },
+    "f4ee7a034e2e": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_consensus",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "scale_aux": 0.3,
+        "scale_consistency": 0.05
+      },
+      "mean_macro_f1": 0.7975361760110072,
+      "sd_macro_f1": 0.009247292652933883,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_scale_65cb339bc964/summary.json"
+    },
+    "75b09bf6209a": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 0.6,
+        "support_prior": "support",
+        "support_shrink": 10.0,
+        "residual_penalty": 0.001
+      },
+      "mean_macro_f1": 0.7910821580018657,
+      "sd_macro_f1": 0.020344250264689112,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_9818c0c9cfe9/summary.json"
+    },
+    "6b7530c7e2f4": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_consensus",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "scale_aux": 0.3,
+        "scale_consistency": 0.05,
+        "scale_dropout": 0.15
+      },
+      "mean_macro_f1": 0.796022396930468,
+      "sd_macro_f1": 0.012955910243679737,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_scale_84cb6fdee74a/summary.json"
+    },
+    "dadfa98fb73b": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "taxonomy_residual": true,
+        "aux": 1.0,
+        "support_prior": "support",
+        "support_shrink": 10.0,
+        "residual_penalty": 0.001,
+        "fine_contrastive": 0.01
+      },
+      "mean_macro_f1": 0.7861043681036991,
+      "sd_macro_f1": 0.015495294768854313,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_support_7bb7c4b86a7a/summary.json"
+    },
+    "070fc686908c": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_consensus",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "scale_aux": 0.3,
+        "scale_consistency": 0.1,
+        "scale_probability_blend": 0.5
+      },
+      "mean_macro_f1": 0.7925224986913472,
+      "sd_macro_f1": 0.017706689330813374,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_scale_0f7bfcb680d9/summary.json"
+    },
+    "209a67d0891c": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_consensus",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "scale_aux": 0.1,
+        "scale_consistency": 0.05
+      },
+      "mean_macro_f1": 0.7878130016095582,
+      "sd_macro_f1": 0.007974915744071345,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_scale_efe69cc5ee61/summary.json"
+    },
+    "fc32b92a0dbb": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_interaction",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "learn_scale_gate": false,
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0,
+        "interaction_rank": 64,
+        "interaction_kind": "difference"
+      },
+      "mean_macro_f1": 0.7953823705849014,
+      "sd_macro_f1": 0.020025933747617,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_interaction_daa995827d1c/summary.json"
+    },
+    "ac4138fd521b": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_interaction",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "learn_scale_gate": false,
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0,
+        "interaction_rank": 64,
+        "interaction_kind": "product"
+      },
+      "mean_macro_f1": 0.7993840212884691,
+      "sd_macro_f1": 0.017949216940145108,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_interaction_d792e31441fb/summary.json"
+    },
+    "860da89180ac": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_interaction",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "learn_scale_gate": false,
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0,
+        "interaction_rank": 64,
+        "interaction_kind": "both"
+      },
+      "mean_macro_f1": 0.7966237215867151,
+      "sd_macro_f1": 0.011166944661170368,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_interaction_a9ed3160a70f/summary.json"
+    },
+    "2ceb5fecbbab": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_interaction",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "learn_scale_gate": true,
+        "scale_aux": 0.0,
+        "scale_consistency": 0.0,
+        "interaction_rank": 64,
+        "interaction_kind": "both"
+      },
+      "mean_macro_f1": 0.7907946357909977,
+      "sd_macro_f1": 0.015272657013904845,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_interaction_66951e601dbc/summary.json"
+    },
+    "60c3ff66f8a6": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_interaction",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "learn_scale_gate": true,
+        "scale_aux": 0.3,
+        "scale_consistency": 0.05,
+        "interaction_rank": 64,
+        "interaction_kind": "both"
+      },
+      "mean_macro_f1": 0.8001250086348007,
+      "sd_macro_f1": 0.012737433711602162,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_interaction_cdf28178218a/summary.json"
+    },
+    "63c585e70306": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "mean_macro_f1": 0.8090823139275858,
+      "sd_macro_f1": 0.014851078598857077,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/summary.json"
+    },
+    "01f661371e23": {
+      "feature": "multiscale_vit",
+      "config": {
+        "arch": "scale_interaction",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0,
+        "learn_scale_gate": true,
+        "scale_aux": 0.3,
+        "scale_consistency": 0.05,
+        "interaction_rank": 64,
+        "interaction_kind": "both",
+        "interaction_dropout": 0.2
+      },
+      "mean_macro_f1": 0.7908506862916568,
+      "sd_macro_f1": 0.012874103284941346,
+      "source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_interaction_04496ed2490a/summary.json"
+    }
+  },
+  "provenance_audit_passed": true,
+  "external_evaluation_at_freeze": false
+}

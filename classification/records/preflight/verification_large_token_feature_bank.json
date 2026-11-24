@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol_sha256": "017d9305787209f1ccd66559279ebaffab3c99814edc1de2b69a5cf25fa8a07f",
+  "feature_storage": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/large_token_features/features/dinov3_large_token_development.npz",
+  "feature_bank_sha256": "1e0a431c0c344cdd5026825272593ad0e87b645f599c53bd5c2e3db1a99f4929",
+  "metadata_sha256": "d71a288256f9960e4af5eab3940ee53bb8eaa5c33f827f14226f844f79d1e264",
+  "development_images_checked": 2091,
+  "shards_checked": 262,
+  "actual_images_independently_recomputed": [
+    {
+      "development_index": 137,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.00103759765625,
+        "registers": 0.0078125,
+        "quadrants_control": 0.0009765625
+      }
+    },
+    {
+      "development_index": 459,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.0009765625,
+        "registers": 0.015625,
+        "quadrants_control": 0.0009765625
+      }
+    },
+    {
+      "development_index": 999,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.017578125,
+        "late_regions_control": 0.001708984375,
+        "registers": 0.0234375,
+        "quadrants_control": 0.001708984375
+      }
+    },
+    {
+      "development_index": 1456,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.001953125,
+        "registers": 0.00244140625,
+        "quadrants_control": 0.0009765625
+      }
+    },
+    {
+      "development_index": 1789,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.001953125,
+        "registers": 0.015625,
+        "quadrants_control": 0.00150299072265625
+      }
+    },
+    {
+      "development_index": 2057,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.0015869140625,
+        "registers": 0.01953125,
+        "quadrants_control": 0.00146484375
+      }
+    }
+  ],
+  "token_counts": {
+    "mid_regions": 9,
+    "late_regions_control": 9,
+    "registers": 4,
+    "quadrants_control": 4
+  },
+  "legacy_late_regions_exact_match": true,
+  "all_cache_image_hashes_unchanged": true,
+  "checks": [
+    "Allbankarrays/all262shards and proofbytes independentlyfingerprinted; exactrowcoverage and all2091cachehashes checked",
+    "Originallegacy streams checked duringeveryforward; final3x3regioncontrol exactlyequals originalfrozenbank",
+    "Six additionaldevelopmentimages forwarded with directfinal/intermediatehooks and independent NumPy pooling/prefixslicing",
+    "All frozenweights/sourcefeatures/code/preflight hashes intact; no classificationfits/scores or externalimages/outcomes"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

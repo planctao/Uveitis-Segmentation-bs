@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-11-24T05:19:53.111158+00:00",
+  "status": "completed",
+  "family": "normal_evidence_attention",
+  "hypothesis": "Full normal-reference projection improved patient CV, while finer foreground features and normal-axis adversarial training did not establish a successor. Test a different operation: use patient-balanced normal residual energy to guide learned local attention. This is statistical feature deviation, not a lesion label or localization claim.",
+  "development_evidence": [
+    "results/research_normal_subspace_fusion/comparison.json",
+    "results/research_normal_tangent_adversarial/comparison.json",
+    "results/research_fine_normal_reference/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "pooled_strength0p5",
+      "scope": "pooled",
+      "strength": 0.5
+    },
+    {
+      "name": "pooled_strength2p0",
+      "scope": "pooled",
+      "strength": 2.0
+    },
+    {
+      "name": "position_strength0p5",
+      "scope": "position",
+      "strength": 0.5
+    },
+    {
+      "name": "position_strength2p0",
+      "scope": "position",
+      "strength": 2.0
+    }
+  ],
+  "geometry": "Original fit-only standardization and normal-patient PCA32 for each stream. Apply full projection first. Estimate regional first and centered second moments using equal normal-patient weights, equal images within patient and equal tokens for pooled scope; position scope keeps9location references. Variance floor.05^2. Freeze all16arm/phase geometries and16patient plans before fitting.",
+  "architecture": "Keep identical attentionMLP trainable parameters,initialization,full task,weights,hparams and3seeds. Calculate per-token RMS of standardized projected regional residuals; bias=strength*tanh(log(RMS+1e-6)),centered over9tokens. Add the same scalar prior to both learned attention heads. Pooled/position references and strength.5/2 produce4arms48actualheads; score each alone and fixed.75new/.25M5,8candidates0fusionfits.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest originalCV passing candidate withCVstrictly>M6 andvalidation>=M6. Require unusedpatientpartition confirmation againstM6/M5/fixedGaussian withpositivepairedpatient95%lowerbounds.20271101/20271111alreadyused. Noautomaticexternaltests.",
+  "audit": "IndependentGram normalspaces and centeredsecondpass patientmoments; normalduplication/nonnormalinvariance; originalparameter/RNGidentity; zero prior exact fulltask/loss/gradient/RNG identity.4real256image independentfulltaskgradients/updates/restores passed. Restore all48actual stop/outer probabilities through actual model and independentNumPyprojection/energies/biases+plainM5, everyactualattention,normalization,buffer,bestepoch,patientcoverage,and16fixedfusionphases. Freeze allsourceweights/code/features.",
+  "preflight": "verification_normal_evidence_attention.json",
+  "formal_fits_started": "Inspect actual checkpoints",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_evidence_attention/protocol.json",
+  "protocol_sha256": "d83f5d41be275c9f9cae15c4b760e7090c7cb34db1d5fb628b0e9dcc74a6d7c9",
+  "pid": 84676,
+  "completed_at_utc": "2026-11-24T05:42:04.225030+00:00",
+  "actual_new_seed_fits": 48,
+  "actual_seed_heads_checked": 48,
+  "passing_development_gates": 0,
+  "best_original_cv": {
+    "name": "pooled_strength0p5",
+    "cv": 0.8283157353489754,
+    "validation": 0.8842686682907915
+  },
+  "decision": "Retain M6; highestCV candidate failed validation gate. No external evaluation."
+}

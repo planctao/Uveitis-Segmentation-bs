@@ -1,0 +1,52 @@
+{
+  "created_at_utc": "2026-11-24T04:49:52.145452+00:00",
+  "status": "completed",
+  "family": "normal_tangent_adversarial",
+  "hypothesis": "Random normal-axis augmentation can improve selected original CV yet its fixed M6 mixture did not reliably improve fresh-partition M6. Test structured worst-case rather than stochastic normal-direction robustness. This uses known adversarial feature training; do not claim PCA or FGSM invention or assume every normal direction is acquisition noise.",
+  "development_evidence": [
+    "results/research_normal_axis_augmentation/comparison.json",
+    "results/research_axis_reference_mixtures/comparison.json",
+    "results/research_axis_mixture_confirmation/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "rademacher_epsilon0p03",
+      "mode": "rademacher",
+      "epsilon": 0.03
+    },
+    {
+      "name": "rademacher_epsilon0p1",
+      "mode": "rademacher",
+      "epsilon": 0.1
+    },
+    {
+      "name": "fgsm_epsilon0p03",
+      "mode": "fgsm",
+      "epsilon": 0.03
+    },
+    {
+      "name": "fgsm_epsilon0p1",
+      "mode": "fgsm",
+      "epsilon": 0.1
+    }
+  ],
+  "geometry": "Unchanged fit-only normalization and equal normal-patient centroid PCA32 for all four streams. Base input is deterministic full normal-reference projection. Axis amplitude uses sqrt(sample eigenvalue). Refit geometry independently per patient phase; freeze before head fitting.",
+  "architecture": "Original attentionMLP full M5 objective. For every training batch compute clean objective and an additional full objective at post-projection rank32 coordinate perturbations. Rademacher controls use private independent random signs. FGSM uses sign of the full clean-objective gradient with respect to zero normal coordinates, detached before second pass. Perturbation per image/stream is epsilon*sqrt(normal eigenvalue)*sign, uniformly shared across regional tokens. Loss=.5clean+.5perturbed. No perturbation or attack at stopping/outer inference. Keep original optimizer,patientweights,head initialization and early stopping.",
+  "rng": "Private NumPy signs RNG20282124+model_seed; both modes draw identical sign arrays, FGSM uses detached gradient sign. Save CPU/CUDA states immediately before clean forward and replay the perturbed forward in fork_rng with exactly the same dropout masks; only clean forward advances the global RNG. No additional parameters or initialization RNG draws.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "fixed_fusions": "Also evaluate only predeclared .25 originalM5+.75newbranch mixtures, no extra fusion fits. Do not tune weights using confirmation or external outcomes.",
+  "preflight_required": "Independent coordinate/sign and objective reconstruction; zero epsilon clean original loss/predictions; infinitesimal FGSM directional derivative nonnegative with controlled dropout; correct axis bounds and uniform region shift; no gradient through detached adversarial direction; gradients through both full losses; real256-image updates, strict recovery, private RNG and fit-only witnesses. Record actual first training batch and perturbation witnesses.",
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Highest passing original CV candidate freezes before unused patient-partition confirmation against M6/M5/fixedGaussian; confirmation seeds20271101/20271111 are now used and cannot be called fresh again. No automatic external scoring.",
+  "formal_fits_started": 48,
+  "external_test_evaluated": false,
+  "witness": "First actual training batch: raw global vectors for all256 samples, first8allstreams, complete labels/weights, clean/perturbed probabilities and losses, all128coordinate gradients/directions/attacks, initial parameter SHA256 and clean CPU/CUDA RNG. Independently reconstruct CUDA first randperm from original model seed, initial weights, NumPy projection, full losses and gradients with plain M5 and saved dropout RNG.",
+  "protocol": "runs/normal_tangent_adversarial/protocol.json",
+  "protocol_sha256": "05b3f84e696ded0b476023440d4f99762c728332467daf3bb05739f3d0ee8f59",
+  "pid": 82600,
+  "formal_fits_completed_and_audited": 48,
+  "passing_development_gates": 0,
+  "comparison": "results/research_normal_tangent_adversarial/comparison.json"
+}

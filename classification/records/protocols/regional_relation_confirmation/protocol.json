@@ -1,0 +1,49 @@
+{
+  "created_at_utc": "2026-11-24T00:33:55.161720+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_record": "results/research_regional_relation/selection_before_repeat.json",
+  "selection_record_sha256": "c1e6027bd9895189790f7af8c2a5b6f3a6e41a663a05eff0736341030f10aa3f",
+  "source_protocol": "runs/regional_relation/protocol.json",
+  "source_protocol_sha256": "11b1ddffd1b19b1d1a03a81ca030678dc017d6c8cfb04dc37e596cb4badb5ed7",
+  "source_verification": "results/research_regional_relation/verification.json",
+  "source_verification_sha256": "8f3d34346098faee97744b2a406b1a291d43510973d6e96c5b67b7e15f23f840",
+  "selected_candidate": "uniform_rank16",
+  "fixed_candidate_config": {
+    "arch": "attention",
+    "mode": "flat",
+    "hidden": 256,
+    "dropout": 0.6,
+    "lr": 0.002,
+    "wd": 0.1,
+    "epochs": 120,
+    "patience": 18,
+    "taxonomy_only": true,
+    "aux": 0.8,
+    "label_smoothing": 0.03,
+    "fine_contrastive": 0.05,
+    "relation_rank": 16,
+    "relation_kind": "uniform",
+    "relation_position": false
+  },
+  "arms": [
+    "reference",
+    "fixed_gaussian",
+    "candidate"
+  ],
+  "outer_split_seeds": [
+    20270701,
+    20270711
+  ],
+  "inner_stop_rule": "20percent of outer-fit patient split groups, stratified by modal coarse label; seed20270724+repeat_index*10+fold",
+  "planned_new_seed_fits": 36,
+  "planned_generative_fits": 18,
+  "controls": "Refit fixed M5 and frozen candidate on each matched partition with3seeds. Fixed Gaussian fits only those new M5 fitting embeddings: coarse patient-balanced shared covariance, shrinkage0.1, sqrt256likelihood temperature,10percent probability blend. No search on confirmation partitions.",
+  "selection_rule": "Freeze only original-CV champion among development-gate passers, prior to any fresh split fit. Candidate must beat M5 and fixed Gaussian mean6foldMacro-F1 and patient-paired pooled repeated Macro-F1 CI95 lower bounds must be positive for both. Retain all results if failed; no selection of the second original candidate after seeing these outcomes.",
+  "verification": "Reconstruct all fit/stop/outer patient/duplicate partitions, fit-only stats, every stopping/outer probability and ensemble onCPU. Independently reconstruct every trained candidate relation and all18Gaussian moments from fitting patients. Assert1717trainimages exactly once in each repeat. Keep original source selection/protocol/verification byte hashes.",
+  "external_test_policy": "Only original training split is re-partitioned; original validation and external test are excluded from all confirmation fits and scoring. Explicit external feature rowsNaN. No external evaluation.",
+  "candidate_formal_checkpoint_sha256": {
+    "0": "2656d477be98e1fa8a4c1961413ea94a04a085fa19f9f51dd4403b5e58e565b2",
+    "1": "5b0e7647f0e898197bd72cd3f7f1b3d22c38671fab095449fff33635da08ab72",
+    "2": "f6cdb8dbca99d0c6e2ee327c01050597f7712c531b1fa81c5b2cde27a2c7e0a0"
+  }
+}

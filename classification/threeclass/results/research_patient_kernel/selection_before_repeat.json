@@ -1,0 +1,57 @@
+{
+  "candidate": {
+    "candidate_id": "kernel_8b9caaa2c4aa",
+    "mode": "direct",
+    "bandwidth": 0.5,
+    "ridge": 0.01,
+    "weight": 0.25,
+    "val": {
+      "n": 374,
+      "accuracy": 0.893048128342246,
+      "balanced_accuracy": 0.889611511109453,
+      "macro_f1": 0.8906156424621677,
+      "log_loss": 0.3389965209957566,
+      "recall": {
+        "infectious": 0.8794326241134752,
+        "noninfectious": 0.9080459770114943,
+        "normal": 0.8813559322033898
+      },
+      "confusion_matrix": [
+        [
+          124,
+          16,
+          1
+        ],
+        [
+          10,
+          158,
+          6
+        ],
+        [
+          2,
+          5,
+          52
+        ]
+      ]
+    },
+    "cv": {
+      "mean_macro_f1": 0.810817255069773,
+      "sd_macro_f1": 0.011047394087157252
+    },
+    "paired_original_oof_vs_reference": {
+      "accuracy_difference": -0.0005824111822947398,
+      "macro_f1_difference": 0.001654549067717337,
+      "accuracy_ci95": [
+        -0.006117918239845005,
+        0.004889523360214346
+      ],
+      "macro_f1_ci95": [
+        -0.003752540941935356,
+        0.006889258405870668
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "development_gate_passed": true
+  },
+  "external_test_evaluated": false
+}

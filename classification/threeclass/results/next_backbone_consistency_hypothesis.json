@@ -1,0 +1,46 @@
+{
+  "created_at_utc": "2026-11-24T10:14:40.665871+00:00",
+  "family": "backbone_consistency",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "Original development studies show whole-backbone omission controls outperform channel omission but have not displaced M7. Test a sharedMLP full/B-only/L-only training graph: supervised fullview plus detached fullcoarse probability consistency on two complementary views. Matched complementrandomchannel controls isolate backbone structure. Known consistencyregularization; no novelty or causal claim.",
+  "evidence": "results/research_backbone_dropout/comparison.json",
+  "configuration_plan": [
+    {
+      "name": "channel_weight0p05",
+      "kind": "channel",
+      "weight": 0.05
+    },
+    {
+      "name": "channel_weight0p2",
+      "kind": "channel",
+      "weight": 0.2
+    },
+    {
+      "name": "backbone_weight0p05",
+      "kind": "backbone",
+      "weight": 0.05
+    },
+    {
+      "name": "backbone_weight0p2",
+      "kind": "backbone",
+      "weight": 0.2
+    }
+  ],
+  "architecture": "NormalB/L separate PCA32 then shared3584DattentionMLP. Two complementary gain0/2 masks average exactly tofullfeatures and are shared across streams/tokens. Eachauxview replays the original fullviewdropout under fork_rng, preserving nextsourceRNG. Teacher detach prevents KL teachergradient. Eval ordinary unmaskedMLP, no extraparameters.",
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachbranch and fixed .75branch+.25rawB; no extra fits.",
+  "launch_condition": "Only after weight_averaging fullyaudits12trajectories/36weights and no candidatepassesretainedM7 gates. If onepasses, confirmthatwinnerfirst. Freeze protocol before scoring.",
+  "selection": "CV strictly>M7 and validation>=M7;highestqualifyingCV frozenbeforetwo unusedpatient3foldrepeat confirmations against EACHM7/M6/M5/fixedGaussian, highermeanF1 and pairedpatient95%lowerendpoint>0.",
+  "external_test_evaluated": false,
+  "preflight": "verification_backbone_consistency.json",
+  "protocol": "runs/backbone_consistency/protocol.json",
+  "protocol_sha256": "e8260022e4f7d2e510856c3f27a4f4dda8e1feaaf0df767e6c9dc3b4a87f23b8",
+  "pid": 13379,
+  "passing_development_gates": 0,
+  "comparison": "results/research_backbone_consistency/comparison.json",
+  "comparison_sha256": "5d170eb2d0db416d4b5b930b2403fd10c9f00324764db3813c3fa0b4153a7d1d",
+  "verification_sha256": "9c76503bba82eb5780467dc02e7fad0d81b8c59e6a1897ef2bd9ed6e871c5aa5",
+  "decision": "RetainM7 and advance predeclared temporal/backbone mixtures; no external scoring."
+}

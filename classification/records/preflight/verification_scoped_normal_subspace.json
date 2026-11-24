@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "scope": "global_regions",
+      "projected_keys": [
+        "global",
+        "regions"
+      ],
+      "real_loss_batch": 256,
+      "parameters": 983632
+    },
+    {
+      "scope": "global",
+      "projected_keys": [
+        "global"
+      ],
+      "real_loss_batch": 256,
+      "parameters": 983632
+    },
+    {
+      "scope": "regions",
+      "projected_keys": [
+        "regions"
+      ],
+      "real_loss_batch": 256,
+      "parameters": 983632
+    },
+    {
+      "scope": "mid_dispersion",
+      "projected_keys": [
+        "mid",
+        "dispersion"
+      ],
+      "real_loss_batch": 256,
+      "parameters": 983632
+    }
+  ],
+  "code_sha256": {
+    "scoped_normal_subspace.py": "9e9425185520aec48685bff24a7f80c559ed08d36fb7ebe1c05ff8cb62a09ab1",
+    "verify_scoped_normal_subspace.py": "d74e15f4c653f93cabc1d5d80e51efcd40bd5873a25bb5cfb0ef15c3b2f0493f"
+  },
+  "checks": [
+    "Fourpredeclaredscopes affectexactlytheirrequestedstreams; otherinputtensors identical",
+    "IndependentNumPyprojectionmatchesallactualselectiveoutputs",
+    "Eachscopeusesreal256-imagefullM5task/backward andsuccessfulMLPupdate",
+    "Allnormalgeometrybuffersremainfrozen; strictcheckpointrestoration matchespredictions"
+  ]
+}

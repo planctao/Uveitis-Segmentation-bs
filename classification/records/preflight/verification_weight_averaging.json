@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "preflight_optimizer_trajectories_not_formal_fits": 1,
+  "training_only_images": 256,
+  "cases": [
+    {
+      "arm": "raw",
+      "selected_epoch": 7,
+      "maximum_temporal_weight_expansion_error": 0.0,
+      "maximum_probability_restore_error": 4.172325134277344e-07
+    },
+    {
+      "arm": "ema0p8",
+      "selected_epoch": 7,
+      "maximum_temporal_weight_expansion_error": 1.6689300524896922e-08,
+      "maximum_probability_restore_error": 4.172325134277344e-07
+    },
+    {
+      "arm": "ema0p95",
+      "selected_epoch": 7,
+      "maximum_temporal_weight_expansion_error": 1.4677643794813733e-08,
+      "maximum_probability_restore_error": 4.172325134277344e-07
+    }
+  ],
+  "actual_cuda_complete_task": {
+    "batch_size": 256,
+    "full_objective_and_all_parameter_gradients_restored": true,
+    "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+    "maximum_independent_projection_error": 1.1622905731201172e-06
+  },
+  "code_sha256": {
+    "weight_averaging.py": "b1fafb281ad4a7659560e294d2fe85fb4eaafb7d0ec73365ad4a536d4163e75e",
+    "trajectory_train.py": "70b7736d557b68673814e2eb17ae7004f834dc4dda914451e84ec0e2228170c2",
+    "audit_weight_averaging.py": "e473305c6bdfd6975b0a40f220e838070286b741ee7679fd1468a21e906da7bb",
+    "verify_weight_averaging.py": "9156dec218fe96774cf128d84fe225dbaee56b3382fd2209d6d9a7a2c8b9de55"
+  },
+  "checks": [
+    "Full256-image actual training objective and all parameter gradients independently replayed",
+    "All seven source epoch vectors retained; selected EMA weights recovered by explicit scalar temporal weights",
+    "Extra evaluation consumes neither CPU nor CUDA RNG; normal geometry buffers remain exact",
+    "All three selected checkpoints strictly restore and match independently projected ordinary MLP probabilities",
+    "Preflight uses training images only and produces no candidate validation or outer scores"
+  ]
+}

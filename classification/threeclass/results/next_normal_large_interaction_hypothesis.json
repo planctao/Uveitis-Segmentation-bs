@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-11-24T09:23:02.994201+00:00",
+  "family": "normal_large_interaction",
+  "status": "completed_no_candidate_passed",
+  "hypothesis": "Direct normalL residual and B-query attention did not pass M7 gates. Small residual/M7 mixtures passed development and await patient confirmation. Test a different structural hypothesis: matching spatial B/L low-rank codes by elementwise products may express complementary cross-backbone co-occurrence that unary additive evidence cannot. Use identical-parameter additive controls; this uses established factorized bilinear pooling and is not a global methodological novelty claim.",
+  "development_evidence": [
+    "results/research_normal_large_residual/comparison.json",
+    "results/research_normal_large_cross_attention/comparison.json",
+    "results/research_residual_m7_mixtures/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "add_rank16",
+      "kind": "add",
+      "rank": 16
+    },
+    {
+      "name": "product_rank16",
+      "kind": "product",
+      "rank": 16
+    },
+    {
+      "name": "add_rank32",
+      "kind": "add",
+      "rank": 32
+    },
+    {
+      "name": "product_rank32",
+      "kind": "product",
+      "rank": 32
+    }
+  ],
+  "architecture": "Unchanged original normalB attention/MLP. Separate fit-normal-patient B/L PCA32. B1536/L2048 each share LayerNorm+Linear->rank16/32+tanh across four streams. Pair same-position codes by product, or sum/sqrt2 with identical modules. Average9 regional pairs before shared LayerNorm(rank); normalize global/mid/dispersion codes similarly. Concatenate4rank,zero-init Linear->256,.1residual before original hidden dropout. The matched additive regional mean is invariant to independent L regional permutation; the product is sensitive to B/L pair alignment. Joint permutation invariance retained.",
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each branch also fixed .75branch+.25M5; no new fits for fusion.",
+  "launch_condition": "Only after residual_m7_confirmation fully audited; read then-current retained development reference and freeze its gates. No scores yet.",
+  "preflight": "verification_normal_large_interaction.json",
+  "scores_evaluated": 8,
+  "external_test_evaluated": false,
+  "selection": "Highest originalCV candidate strictly beating current retained originalCV and retaining its validation, then freeze before two unused patient3fold repeats. Require higher sixfoldmeanF1 and joint pairedpatient95%lowerendpoint>0 versus EACH retained model and M7/M6/M5/fixedGaussian. No automatic external scoring.",
+  "protocol": "runs/normal_large_interaction/protocol.json",
+  "protocol_sha256": "4fa84d0ee16241ffc6f39ecb686168c52be36a8a6419157da4b18713796e8866",
+  "pid": 9054,
+  "comparison": "results/research_normal_large_interaction/comparison.json",
+  "verification": "results/research_normal_large_interaction/verification.json",
+  "decision": "All48heads/48actualCUDAfulltasks audited;8scores all failM7gates. ProductrawCV exceeds additive at both ranks but no overall retainedmodel improvement; no fresh confirmation. RetainM7."
+}

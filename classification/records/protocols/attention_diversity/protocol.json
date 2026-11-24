@@ -1,0 +1,33 @@
+{
+  "created_at_utc": "2026-11-23T22:45:06.422634+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Protected M5validation attention headcosines average0.92-0.99. Fixed development diagnostics motivate a soft excessoverlap constraint to encourage complementary regional evidence while retaining all original classifier parameters and predictions.",
+  "configuration_plan": [
+    {
+      "name": "margin0.8_weight0.1",
+      "margin": 0.8,
+      "weight": 0.1
+    },
+    {
+      "name": "margin0.8_weight0.5",
+      "margin": 0.8,
+      "weight": 0.5
+    },
+    {
+      "name": "margin0.9_weight0.1",
+      "margin": 0.9,
+      "weight": 0.1
+    },
+    {
+      "name": "margin0.9_weight0.5",
+      "margin": 0.9,
+      "weight": 0.5
+    }
+  ],
+  "loss": "Perimage mean over unordered attentionheadpairs of relu(cosine(attention_h,attention_k)-margin)^2; multiply by existing patient/class leafweights and coefficient; average and add to unchanged M5loss. No newparameters, no randomdraws, no modelprobabilitychange. Ordinary attentionclassifier independently trained for each arm.",
+  "planned_new_seed_fits": 48,
+  "training": "All4arms3formal+9originalpatientCVfits; sameM5data,hparams,seeds,stopping and groupplans.",
+  "selection": "HigheroriginalpatientCVandno validationMacroF1decrease vsM5; eligiblebestrequiresfresh fixedpatientconfirmationagainstM5andfixedGaussian.",
+  "external_test_policy": "No external scoring, labels, predictions or rawimages; developmentindices0..2090only."
+}

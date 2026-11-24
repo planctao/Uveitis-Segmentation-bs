@@ -1,0 +1,362 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "hypothesis": "The fixed 448-pixel cache may discard useful fine image information; test genuine 768-pixel inputs from original images against upsampling the existing cache to the same size.",
+    "development_evidence": "48 of 48 sampled training originals exceed 768 pixels; typical original size 2600x2048, while all sampled caches are 448x448.",
+    "arms": [
+      "original-to-768 single view",
+      "cache448-upsample-to768 single view",
+      "existing320+448 plus original-to768",
+      "existing320+448 plus cache448-upsample-to768"
+    ],
+    "matched_controls": "Identical fixed 5 percent crop, aspect padding, JPEG quality95/subsampling0, DINOv3-B weights, input size, class head configuration and seeds. The high-resolution source differs.",
+    "head_configuration": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 256,
+      "dropout": 0.6,
+      "lr": 0.002,
+      "wd": 0.1,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 0.8,
+      "label_smoothing": 0.03,
+      "fine_contrastive": 0.05
+    },
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "evaluation": "All four configurations receive three seeds and three outer patient folds, with separate inner early-stopping patients. Passing candidates need repeated-patient confirmation before any external evaluation.",
+    "external_test_policy": "Feature extraction is frozen and label-independent; no external outcomes are evaluated by this pipeline."
+  },
+  "reference": {
+    "candidate_id": "63c585e70306",
+    "val_macro_f1": 0.8893107959516184,
+    "cv_macro_f1": 0.8090823139275858
+  },
+  "candidates": [
+    {
+      "feature": "vitb_raw768",
+      "candidate_id": "highres_2ee39edbfc09",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8770053475935828,
+        "balanced_accuracy": 0.8846885608764316,
+        "macro_f1": 0.8757594334750362,
+        "log_loss": 0.3058809122453487,
+        "recall": {
+          "infectious": 0.8652482269503546,
+          "noninfectious": 0.8735632183908046,
+          "normal": 0.9152542372881356
+        },
+        "confusion_matrix": [
+          [
+            122,
+            16,
+            3
+          ],
+          [
+            14,
+            152,
+            8
+          ],
+          [
+            1,
+            4,
+            54
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7753768880638301,
+        "sd_macro_f1": 0.01686570063100552,
+        "mean_accuracy": 0.7716838135686303
+      },
+      "parameters_per_seed": 590416,
+      "checkpoint_sha256": [
+        "e50221dcbdf7ab9caea24f32dcca804a1a72e1832f08a4a44b7857a9e022539b",
+        "9669eeb4d7d59900a753ce9a93587723131cba86a6d073949ae6282b3d5be137",
+        "6e56e8de463052e82875b063f11fa58d927de2c29a8a5947eba628c9f7c75043"
+      ],
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.03610949330227142,
+        "macro_f1_difference": -0.03321677125139466,
+        "accuracy_ci95": [
+          -0.05983501024078341,
+          -0.013026839147569741
+        ],
+        "macro_f1_ci95": [
+          -0.05684849498148893,
+          -0.010719434131451464
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": -0.006988934187536433,
+        "macro_f1_difference": -0.008560203221725793,
+        "accuracy_ci95": [
+          -0.026711497605576374,
+          0.012751938584647446
+        ],
+        "macro_f1_ci95": [
+          -0.0310913028802714,
+          0.013793431758315116
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "feature": "vitb_up768",
+      "candidate_id": "highres_15080a959346",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8689839572192514,
+        "balanced_accuracy": 0.8747590683561933,
+        "macro_f1": 0.8690573826975728,
+        "log_loss": 0.36532438738935247,
+        "recall": {
+          "infectious": 0.8581560283687943,
+          "noninfectious": 0.867816091954023,
+          "normal": 0.8983050847457628
+        },
+        "confusion_matrix": [
+          [
+            121,
+            18,
+            2
+          ],
+          [
+            15,
+            151,
+            8
+          ],
+          [
+            1,
+            5,
+            53
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7841745641937927,
+        "sd_macro_f1": 0.032243037823155594,
+        "mean_accuracy": 0.7786646163609515
+      },
+      "parameters_per_seed": 590416,
+      "checkpoint_sha256": [
+        "36e113ae2b30bd5905789bc73fd6ee5c84f01c2e8e1ad99db3ae8c2269a3f3a5",
+        "9b86ecf6f7acc1be8f94b3d3e047da5481cf8acf951363e4f8334b209842349d",
+        "a1d887a7eefa96bd7d4ecae89b9848d106157fa40a427490649f6a49347d3bfe"
+      ],
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.02912055911473499,
+        "macro_f1_difference": -0.02465656802966887,
+        "accuracy_ci95": [
+          -0.048837243929803195,
+          -0.009857023220557232
+        ],
+        "macro_f1_ci95": [
+          -0.04474370864578342,
+          -0.004610546691487607
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "feature": "multiscale_raw768",
+      "candidate_id": "highres_b5cce402ab49",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8796791443850267,
+        "balanced_accuracy": 0.8818263965745219,
+        "macro_f1": 0.873414885851645,
+        "log_loss": 0.31288242383016046,
+        "recall": {
+          "infectious": 0.9078014184397163,
+          "noninfectious": 0.8563218390804598,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            128,
+            11,
+            2
+          ],
+          [
+            15,
+            149,
+            10
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7959712306408587,
+        "sd_macro_f1": 0.013387337923757897,
+        "mean_accuracy": 0.7903247130995822
+      },
+      "parameters_per_seed": 1376848,
+      "checkpoint_sha256": [
+        "9322e004458a45b0a4bedd893980534eacea6e72a2f70753efe887ee07187e3f",
+        "aa50e255ebda30d6b53ac374be61878c4943f66dff7e94aa0ed7f624d6b45ca2",
+        "f793e664287fc7afe5c3395f5a0a903c24bb10c4b15cecd7995aa5b018dc1d31"
+      ],
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.01747233546884097,
+        "macro_f1_difference": -0.012922606744265597,
+        "accuracy_ci95": [
+          -0.03171992708982672,
+          -0.004333010100841804
+        ],
+        "macro_f1_ci95": [
+          -0.026664058404819016,
+          0.00029300823282804367
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_versus_matched_upsampling": {
+        "accuracy_difference": -0.00990099009900991,
+        "macro_f1_difference": -0.007336518593141994,
+        "accuracy_ci95": [
+          -0.022515432301018302,
+          0.001482875540726308
+        ],
+        "macro_f1_ci95": [
+          -0.02033923199335515,
+          0.004627379321166328
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "feature": "multiscale_up768",
+      "candidate_id": "highres_4683f0cef529",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8823529411764706,
+        "balanced_accuracy": 0.888372828851832,
+        "macro_f1": 0.874762380001901,
+        "log_loss": 0.33579487353996523,
+        "recall": {
+          "infectious": 0.9219858156028369,
+          "noninfectious": 0.8448275862068966,
+          "normal": 0.8983050847457628
+        },
+        "confusion_matrix": [
+          [
+            130,
+            9,
+            2
+          ],
+          [
+            15,
+            147,
+            12
+          ],
+          [
+            2,
+            4,
+            53
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8037332533926159,
+        "sd_macro_f1": 0.014517820796072596,
+        "mean_accuracy": 0.8002233368725514
+      },
+      "parameters_per_seed": 1376848,
+      "checkpoint_sha256": [
+        "554b64a23a33dae70dca5c8131f7325c07dceb0a75cde9cbe7d69b95b48c1785",
+        "d14721bbea398996a4717f11b0d96cc3779c24df5548dc667f063a100c33614e",
+        "4619a6f85aaa3b01b1c5856e3e2bbeca6724267ac50a44573f2e70c228eae47c"
+      ],
+      "paired_original_oof_versus_milestone5": {
+        "accuracy_difference": -0.007571345369831062,
+        "macro_f1_difference": -0.005586088151123603,
+        "accuracy_ci95": [
+          -0.019741205322122455,
+          0.004630984907624264
+        ],
+        "macro_f1_ci95": [
+          -0.01897541971698113,
+          0.008304687562173634
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "external_files_read": false,
+  "external_test_evaluated": false,
+  "decision": "Passing candidates require new repeated-patient confirmation before freezing or external evaluation.",
+  "inference_limit": "Exploratory patient OOF resampling; not adjusted for prior search or full training-fit uncertainty.",
+  "code_sha256": {
+    "highres_data.py": "adea638d8d2b2cd7d7562f9f3cb2ee59175bb686a64cd1d3aa960f05924ce9a0",
+    "extract_raw_highres.py": "e67b742fa2855c3c50b5f3fe972551071550acd3c8341f86a2e796fb42464187",
+    "highres_experiments.py": "a2e832939744e431ac939debbbb653879019a1442a617a4df4d34edaa9a6b569",
+    "analyze_raw_highres.py": "269ee41baf2b55780976b71888e7dff8f015e5940bc94a99047137bbcf01772a"
+  }
+}

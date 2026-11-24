@@ -1,0 +1,135 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "rank": 16,
+      "scope": "global",
+      "batch_size": 256,
+      "parameters": 1135456,
+      "maximum_complete_task_gradient_error": 1.1548399925231934e-07,
+      "large_side_probability_change": 0.00015723705291748047,
+      "large_mid_probability_change": 0.0
+    },
+    {
+      "rank": 16,
+      "scope": "all",
+      "batch_size": 256,
+      "parameters": 1135456,
+      "maximum_complete_task_gradient_error": 2.384185791015625e-07,
+      "large_side_probability_change": 0.0002751946449279785,
+      "large_mid_probability_change": 0.0001996159553527832
+    },
+    {
+      "rank": 32,
+      "scope": "global",
+      "batch_size": 256,
+      "parameters": 1270640,
+      "maximum_complete_task_gradient_error": 1.3783574104309082e-07,
+      "large_side_probability_change": 0.0003390461206436157,
+      "large_mid_probability_change": 0.0
+    },
+    {
+      "rank": 32,
+      "scope": "all",
+      "batch_size": 256,
+      "parameters": 1270640,
+      "maximum_complete_task_gradient_error": 1.341104507446289e-07,
+      "large_side_probability_change": 0.0006163120269775391,
+      "large_mid_probability_change": 0.00030168890953063965
+    }
+  ],
+  "normal_geometries": {
+    "base": {
+      "global": {
+        "maximum_principal_cosine_error": 5.585237827787637e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.7959215427061395e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.6878988186070956e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.9757623365433972e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 5.265183178337907e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.9596440671327855e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 6.2611587026140114e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.917584707162746e-08
+      }
+    },
+    "large": {
+      "global": {
+        "maximum_principal_cosine_error": 4.645247853041212e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.04875230511459e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.8208333779922157e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 4.368930994758102e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.733068908497785e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.627038834887799e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    }
+  },
+  "code_sha256": {
+    "normal_large_residual.py": "8cdf4627410ece2cfc2150149640322659375f4a22589da2c9242614c6670ef4",
+    "verify_normal_large_residual.py": "435833702d1d0649b9991c6aceb1b15073eca0bc4226a40671d4e843d4df0ae2"
+  },
+  "status": "completed_no_candidate_passed",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_large_residual/protocol.json",
+  "protocol_sha256": "1825e872ca13363275be43b31856008cd66570550c23ba372e6e86d8904f28b3",
+  "pid": 6231,
+  "formal_protocol_created": true,
+  "formal_fits_completed": 48,
+  "formal_fits_fully_audited": 48,
+  "audit_recovery_protocol": "runs/normal_large_residual/audit_recovery_protocol_v2.json",
+  "audit_recovery_protocol_sha256": "905ae572d9754308c37311dcc23e2782d65550688742d32510b77ea8b2859f6b",
+  "passing_development_gates": 0,
+  "retained_development_model": "M7",
+  "result": "results/research_normal_large_residual/comparison.json",
+  "verification": "results/research_normal_large_residual/verification.json",
+  "family": "normal_large_residual",
+  "hypothesis": "Identity-initialized low-rank normal-L residual can complement M7 while preserving the normal-B pathway at initialization. Four rank/scope configurations, each 12 heads, plus four fixed .75 residual/.25 M5 scores.",
+  "configuration_plan": [
+    {
+      "name": "global_rank16",
+      "scope": "global",
+      "rank": 16
+    },
+    {
+      "name": "all_rank16",
+      "scope": "all",
+      "rank": 16
+    },
+    {
+      "name": "global_rank32",
+      "scope": "global",
+      "rank": 32
+    },
+    {
+      "name": "all_rank32",
+      "scope": "all",
+      "rank": 32
+    }
+  ],
+  "minimum_cv_macro_f1": 0.8359324594339994,
+  "minimum_validation_macro_f1": 0.8928552155846959,
+  "planned_new_seed_fits": 48,
+  "architecture": "Original normalB MLP plus separately normal-suppressed L global/allstream lowrank residual; rank16/32,zero-initreadout,.1beforehidden dropout.",
+  "decision": "All48 actual heads and48 firsttask witnesses audited; all8 branch/fusion scores fail M7 development gates; no fresh confirmation or external test launched."
+}

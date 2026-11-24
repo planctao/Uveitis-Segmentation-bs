@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "shape": "hard",
+      "factor": 1.0,
+      "full_task_batch": 256
+    },
+    {
+      "shape": "hard",
+      "factor": 2.0,
+      "full_task_batch": 256
+    },
+    {
+      "shape": "smooth",
+      "factor": 1.0,
+      "full_task_batch": 256
+    },
+    {
+      "shape": "smooth",
+      "factor": 2.0,
+      "full_task_batch": 256
+    }
+  ],
+  "code_sha256": {
+    "bounded_normal_projection.py": "be2c7b3549fa0060e595fca656eb48e6cdf1683238f16872676e755be6b4797c",
+    "verify_bounded_normal_projection.py": "a25339e50102851388c555bb7093fd004ec01b939be60a3b89ded86eda0fb0c6"
+  },
+  "checks": [
+    "Fit-only equal-patient normal PCA defines coordinate deviations and bounds",
+    "Independent NumPy transforms agree for all four shapes/scales and four evidence streams",
+    "Zero bounds are exact identity; large bounds recover full normal PCA suppression",
+    "Axis-level removal is bounded and residual monotone; large coordinates are retained without a disease interpretation",
+    "Four real 256-image complete task gradient/update/strict-recovery checks"
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "scope": "pooled",
+      "strength": 0.5,
+      "full_task_batch": 256,
+      "mean_bias_sd": 0.03951980173587799,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.687898596562491e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        },
+        "evidence": {
+          "scope": "pooled",
+          "minimum_scale": 0.3052851344949333,
+          "maximum_scale": 1.1559430425520272
+        }
+      }
+    },
+    {
+      "scope": "pooled",
+      "strength": 2.0,
+      "full_task_batch": 256,
+      "mean_bias_sd": 0.15807920694351196,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.687898596562491e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        },
+        "evidence": {
+          "scope": "pooled",
+          "minimum_scale": 0.3052851344949333,
+          "maximum_scale": 1.1559430425520272
+        }
+      }
+    },
+    {
+      "scope": "position",
+      "strength": 0.5,
+      "full_task_batch": 256,
+      "mean_bias_sd": 0.02890634723007679,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.687898596562491e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        },
+        "evidence": {
+          "scope": "position",
+          "minimum_scale": 0.05,
+          "maximum_scale": 0.9758536477180614
+        }
+      }
+    },
+    {
+      "scope": "position",
+      "strength": 2.0,
+      "full_task_batch": 256,
+      "mean_bias_sd": 0.11562538892030716,
+      "geometry": {
+        "global": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.585237827787637e-09
+        },
+        "regions": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.687898596562491e-09
+        },
+        "mid": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 5.265183178337907e-09
+        },
+        "dispersion": {
+          "patients": 111,
+          "maximum_principal_cosine_error": 6.261158924658616e-09
+        },
+        "evidence": {
+          "scope": "position",
+          "minimum_scale": 0.05,
+          "maximum_scale": 0.9758536477180614
+        }
+      }
+    }
+  ],
+  "code_sha256": {
+    "normal_evidence_attention.py": "fdc3c39341bb2b36ce74ae621ad53a0911f7bf2a0a7bacb6e2d4f56215bed04c",
+    "verify_normal_evidence_attention.py": "ddb0200cc58ca2ae7aa7ff1c9f2aef2fe2a952d9278b79c2d1772be794252587"
+  },
+  "checks": [
+    "Fit-only normal patient PCA independently recovered by Gram eigensystems",
+    "Patient-balanced regional moments independently recovered by centered second pass; normal duplication/non-normal changes leave geometry unchanged",
+    "Same original trainable parameter schema, initialization and RNG; zero prior exactly restores complete task loss/gradients/RNG",
+    "Independent NumPy projection, energies, biases and ordinary MLP reproduce predictions; consistent token permutation preserves probabilities",
+    "Four real256image full tasks with independent losses/parameter gradients, updates and strict checkpoint recovery"
+  ]
+}

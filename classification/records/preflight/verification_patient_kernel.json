@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": [
+    "Class support weights give exactly one third mass to each coarse class",
+    "Symmetric weighted solution equals the independent nonsymmetric dual solution",
+    "RBF fitting Gram matrix positive semidefinite",
+    "Row order and whole-patient image replication do not affect predictions",
+    "Translations, rotations and overall embedding scaling preserve predictions",
+    "Zero correction weight exactly restores source probabilities",
+    "Perfect-source targets have exactly zero residual and large ridge suppresses correction",
+    "Signed residuals conserve total mass before a valid Euclidean simplex projection",
+    "Mixed-label patients retain separate support rows for their observed classes"
+  ]
+}

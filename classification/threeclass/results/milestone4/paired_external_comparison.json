@@ -1,0 +1,38 @@
+{
+  "test_independent": {
+    "versus_direct_mlp": {
+      "accuracy_difference": 0.04956629491945477,
+      "patient_cluster_bootstrap_ci95": [
+        0.015443519171025598,
+        0.09027865687833186
+      ],
+      "bootstrap_repetitions": 2000
+    },
+    "versus_second_primary": {
+      "accuracy_difference": 0.012391573729863693,
+      "patient_cluster_bootstrap_ci95": [
+        -0.008000642054574639,
+        0.0345783698560326
+      ],
+      "bootstrap_repetitions": 2000
+    }
+  },
+  "test_ningbo": {
+    "versus_direct_mlp": {
+      "accuracy_difference": 0.03740157480314961,
+      "patient_cluster_bootstrap_ci95": [
+        0.0,
+        0.0773395031429032
+      ],
+      "bootstrap_repetitions": 2000
+    },
+    "versus_second_primary": {
+      "accuracy_difference": 0.025590551181102362,
+      "patient_cluster_bootstrap_ci95": [
+        0.0017328039566038354,
+        0.05242189617782596
+      ],
+      "bootstrap_repetitions": 2000
+    }
+  }
+}

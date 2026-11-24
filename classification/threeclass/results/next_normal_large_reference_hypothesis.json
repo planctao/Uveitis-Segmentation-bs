@@ -1,0 +1,50 @@
+{
+  "created_at_utc": "2026-11-24T07:25:44.850974+00:00",
+  "status": "completed_confirmation_failed",
+  "family": "normal_large_reference",
+  "hypothesis": "LargerDINOv3-L andB/LconcatenatedbackbonesfailedwithplainMLP,whilefit-normalpatientreferenceimprovedBbackbonepatientgeneralization. Testtheinteractionofexistingnormalreferenceandlargercachedbackboneswithoutchangingheadhparams. Training-onlylargegeometryshows77-83%normalpatientglobalvarianceintop32directions,butalso50-59%infection/noninfectionmeancontrastthere;neithermetricleadsaperformanceorcausalclaim. Keepall4previouslargefeaturearms. No globalmethodologicalnoveltyclaim.",
+  "development_evidence": [
+    "results/research_dinov3_large/comparison.json",
+    "results/research_normal_subspace/comparison.json",
+    "results/large_normal_diagnostics.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "large320",
+      "feature": "large320"
+    },
+    {
+      "name": "large_dual",
+      "feature": "large_dual"
+    },
+    {
+      "name": "base_dual_large_dual",
+      "feature": "base_dual_large_dual"
+    },
+    {
+      "name": "base_dual_large448",
+      "feature": "base_dual_large448"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "geometry": "Originalfit-onlystandardizationineachcachedfeaturearm. Equalnormalpatientcenters,regionalmeanwithinimage;fitfourPCA32spaces independentlyin1024/2048/3584/2560dimensions. Fullorthogonalsuppressionx-(x-center)BBtclipped[-10,10]. All16arm/phasegeometriesandpatientplansfrozenbeforefits. No projectionlearning/newneuralparams.",
+  "architecture": "UsealreadyfrozenDINOv3-L320,L320+448,B320+448plusL320+448,andB320+448plusL448featurecaches. SameattentionMLP256/drop.6/lr.002/wd.1/fine14marginalization/fulltask/patientweights/3seedsaseachpreviousrawfeaturecontrol. NormalprojectionperstreamthenordinaryMLP. 48actualheads. Eachbranchalsoscoredasfixed.75new/.25ordinarybaseM5mixture,8scores,0fusionfits. RawLcontrolheadsarecomparisonreferencesonly,notcountedasnewfits.",
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "results/research_normal_large_reference/selection_before_repeat.json",
+  "audit": "All4actualcachedfeaturearms,independentGramnormalspaces,4trained-state256imagefulltasks/allparametergradients/updates/restores and4actualCUDAfulltaskwitnessesverified. Noextraheadparameter/init/RNGchange. Formalall48heads/stats/partitions/maps/epochs/normalbuffers/stopouterprobabilitiesandactualfirsttaskwitnessesindependentlyrestore;M5fusion16phasesindependent. Cacheprotocol/contentSHAfrozen;externalrowsNaN.",
+  "preflight": "verification_normal_large_reference.json",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_large_reference/protocol.json",
+  "protocol_sha256": "b6df2a7e311c1bca40e701ded3b77b021b6e2b5c685c847a9bfc687b90942b5a",
+  "pid": 94474,
+  "formal_fits_started": "Inspect actual checkpoints",
+  "actual_new_seed_fits": 48,
+  "development_gate_passers": 1,
+  "selected_candidate": "base_dual_large_dual_fusion075",
+  "confirmation_protocol": "runs/normal_large_reference_confirmation/protocol.json",
+  "confirmation_pid": 95029,
+  "decision": "48developmentheads/48witnesses and54freshpatientheads/18witnesses/18Gaussianfits/12normalspaces fullyaudited. Candidate6foldF1.8226211914>M6.8126942667,butpairedpatientCIvsM6[-.0018385816,.0245477403]includeszero. Failsconfirmation;retainM6. Noexternaltests, noM7packagecreated.",
+  "confirmation_results": "results/research_normal_large_reference_confirmation/comparison.json"
+}

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Only low-support sibling diseases merge; every group belongs to exactly one coarse family",
+    "Grouped logsumexp logits equal sums of original fine probabilities",
+    "Singleton groups recover original auxiliary crossentropy",
+    "Unknown disease targets ignored consistently",
+    "Every original parameter, initial coarse prediction and restored M5prediction exactly unchanged",
+    "Both original-disease and grouped-positive contrastive losses have finite full backward",
+    "Strict serialized restore exactly reproduces grouped-model probabilities"
+  ]
+}

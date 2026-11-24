@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "level": "coarse",
+      "consistency": 0.0,
+      "full_task_batch": 256,
+      "shared_parameter_count": 983632
+    },
+    {
+      "level": "coarse",
+      "consistency": 0.1,
+      "full_task_batch": 256,
+      "shared_parameter_count": 983632
+    },
+    {
+      "level": "disease",
+      "consistency": 0.1,
+      "full_task_batch": 256,
+      "shared_parameter_count": 983632
+    },
+    {
+      "level": "disease",
+      "consistency": 0.5,
+      "full_task_batch": 256,
+      "shared_parameter_count": 983632
+    }
+  ],
+  "code_sha256": {
+    "shared_normal_head.py": "f398a82e0cb1820850dbe076fb57264ed106ef1f5ba55bef31c1deb31ca6824e",
+    "verify_shared_normal_head.py": "d475e213de58e681cb43384bd095cf05869a36233e6ea65ab53df96094b7fa17"
+  },
+  "checks": [
+    "One original M5 parameter set is used by both raw and normal-reference forward paths",
+    "Independent plain-MLP/NumPy projection reconstructs both view probabilities and fixed .25/.75 mixture",
+    "Complete original coarse, disease and patient-contrastive losses are applied separately to each view",
+    "NumPy coarse/disease symmetric KL verifies all four declared objectives",
+    "Both supervised views contribute finite nonzero gradients; actual 256-image full-task update and strict recovery"
+  ]
+}

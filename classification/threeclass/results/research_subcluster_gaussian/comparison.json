@@ -1,0 +1,227 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T23:02:48.103344+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "selection_record": "results/research_subcluster_taxonomy/selection_before_repeat.json",
+    "selection_record_sha256": "d8252e868e6f9f152345604e5127ceb0a00d5f85355fe4d355ca5afdf44f566f",
+    "source_candidate": "components4_penalty0.001",
+    "hypothesis": "Within-disease mixture improved fresh-patientperformance againstM5, but not convincingly beyond fixedGaussian. Coarse patientbalanced statisticalevidence may complement learnedwithin-disease morphology. Test its fixed validatedrecipe on the mixturehead hiddenrepresentation.",
+    "fixed_recipe": "Onecandidateonly: 90percent chosenmixturehead+10percent coarseGaussian fitted on thathead fit-only256Dhiddenembedding. Covariance shrinkage0.1, temperature16; allsettings inherited unchanged from the earlier frozenGaussianrecipe.",
+    "generative_fits": 12,
+    "new_neural_seed_fits": 0,
+    "evaluation": "Originalvalidation and original3patientouterfolds;12sourceheads reused. All sourcehashes checked against completedstudy. Independent patientmoments and SciPydensities check every fit.",
+    "selection": "OriginalCVmust exceed the fixedGaussiancontrol and validationMacroF1must not decrease relative to thatcontrol. Eligiblecandidate requires newfixedpatientpartitions, includingbothcontrols, before anyfrozeninferencereview.",
+    "external_test_policy": "No external scoring, labels, predictions or rawimages; developmentindicesonly. No searchovermixtureweight."
+  },
+  "candidate": {
+    "candidate_id": "subcluster4_coarse_gaussian10",
+    "source_candidate": "components4_penalty0.001",
+    "val": {
+      "n": 374,
+      "accuracy": 0.8983957219251337,
+      "balanced_accuracy": 0.8932957790848536,
+      "macro_f1": 0.8919367628109822,
+      "log_loss": 0.3326751445334918,
+      "recall": {
+        "infectious": 0.9361702127659575,
+        "noninfectious": 0.8793103448275862,
+        "normal": 0.864406779661017
+      },
+      "confusion_matrix": [
+        [
+          132,
+          9,
+          0
+        ],
+        [
+          13,
+          153,
+          8
+        ],
+        [
+          2,
+          6,
+          51
+        ]
+      ]
+    },
+    "cv": {
+      "mean_macro_f1": 0.8108681226633777,
+      "sd_macro_f1": 0.0036605683149792544,
+      "folds": [
+        {
+          "n": 572,
+          "accuracy": 0.8146853146853147,
+          "balanced_accuracy": 0.8366456282285933,
+          "macro_f1": 0.808592293720887,
+          "log_loss": 0.49150998511120014,
+          "recall": {
+            "infectious": 0.811965811965812,
+            "noninfectious": 0.7900763358778626,
+            "normal": 0.9078947368421053
+          },
+          "confusion_matrix": [
+            [
+              190,
+              36,
+              8
+            ],
+            [
+              32,
+              207,
+              23
+            ],
+            [
+              1,
+              6,
+              69
+            ]
+          ]
+        },
+        {
+          "n": 572,
+          "accuracy": 0.791958041958042,
+          "balanced_accuracy": 0.8232888527183424,
+          "macro_f1": 0.808921363350084,
+          "log_loss": 0.6191032881690707,
+          "recall": {
+            "infectious": 0.7264957264957265,
+            "noninfectious": 0.8091603053435115,
+            "normal": 0.9342105263157895
+          },
+          "confusion_matrix": [
+            [
+              170,
+              59,
+              5
+            ],
+            [
+              39,
+              212,
+              11
+            ],
+            [
+              0,
+              5,
+              71
+            ]
+          ]
+        },
+        {
+          "n": 573,
+          "accuracy": 0.8097731239092496,
+          "balanced_accuracy": 0.8368562448010116,
+          "macro_f1": 0.8150907109191619,
+          "log_loss": 0.5111816707102416,
+          "recall": {
+            "infectious": 0.8290598290598291,
+            "noninfectious": 0.7604562737642585,
+            "normal": 0.9210526315789473
+          },
+          "confusion_matrix": [
+            [
+              194,
+              33,
+              7
+            ],
+            [
+              48,
+              200,
+              15
+            ],
+            [
+              0,
+              6,
+              70
+            ]
+          ]
+        }
+      ]
+    },
+    "paired_original_oof_vs_gaussian": {
+      "accuracy_difference": -0.004076878276062956,
+      "macro_f1_difference": -0.0018607557103954564,
+      "accuracy_ci95": [
+        -0.012978971810751593,
+        0.0038012073380135434
+      ],
+      "macro_f1_ci95": [
+        -0.010359660051036692,
+        0.005731891203409853
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "paired_original_oof_vs_subcluster": {
+      "accuracy_difference": 0.0005824111822946287,
+      "macro_f1_difference": 0.0014739083877127745,
+      "accuracy_ci95": [
+        -0.00405404013002357,
+        0.0053410205697242644
+      ],
+      "macro_f1_ci95": [
+        -0.003469537074724713,
+        0.0068693203491838675
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "development_gate_passed": false
+  },
+  "fixed_gaussian_control": {
+    "candidate_id": "gaussian_ec8d28dcc6ce",
+    "granularity": "coarse",
+    "shrinkage": 0.1,
+    "weight": 0.1,
+    "val": {
+      "n": 374,
+      "accuracy": 0.893048128342246,
+      "balanced_accuracy": 0.890059868491046,
+      "macro_f1": 0.8906667248201784,
+      "log_loss": 0.33545401350776255,
+      "recall": {
+        "infectious": 0.8865248226950354,
+        "noninfectious": 0.9022988505747126,
+        "normal": 0.8813559322033898
+      },
+      "confusion_matrix": [
+        [
+          125,
+          15,
+          1
+        ],
+        [
+          11,
+          157,
+          6
+        ],
+        [
+          2,
+          5,
+          52
+        ]
+      ]
+    },
+    "cv": {
+      "mean_macro_f1": 0.8126184009750671,
+      "sd_macro_f1": 0.009624298784746611,
+      "mean_accuracy": 0.8095463291798369
+    },
+    "paired_original_oof_vs_reference": {
+      "accuracy_difference": 0.0017472335468841083,
+      "macro_f1_difference": 0.0035109484654807233,
+      "accuracy_ci95": [
+        -0.002937893339644704,
+        0.006417923723268536
+      ],
+      "macro_f1_ci95": [
+        -0.0020229711114985393,
+        0.008811338967566668
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "development_gate_passed": true
+  },
+  "new_neural_seed_fits": 0,
+  "generative_fits": 12,
+  "external_test_evaluated": false
+}

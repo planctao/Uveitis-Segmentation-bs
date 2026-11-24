@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-11-23T21:37:23.354901+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "hypothesis": "Prior LoRA adaptation used4images per contrastive-loss calculation despite gradient accumulation16. Increase the actual loss microbatch to16 at the same effective optimizer batch16, and test whether preserving source class evidence and normalized global features prevents adaptation drift.",
+  "configuration_plan": [
+    {
+      "name": "matched_head16",
+      "rank": 0,
+      "blocks": 0,
+      "alpha": 0,
+      "adapter_lr": 0.0,
+      "anchor_kl": 0.0,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "adapter16_unanchored",
+      "rank": 8,
+      "blocks": 4,
+      "alpha": 16,
+      "adapter_lr": 1e-05,
+      "anchor_kl": 0.0,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "adapter16_probability_anchor",
+      "rank": 8,
+      "blocks": 4,
+      "alpha": 16,
+      "adapter_lr": 1e-05,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "adapter16_probability_feature_anchor",
+      "rank": 8,
+      "blocks": 4,
+      "alpha": 16,
+      "adapter_lr": 1e-05,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.05
+    }
+  ],
+  "algorithm_version": 4,
+  "microbatch": 16,
+  "gradient_accumulation": 1,
+  "effective_optimizer_batch": 16,
+  "epochs": 6,
+  "patience": 3,
+  "head_lr": 0.0001,
+  "weight_decay": 0.01,
+  "teacher_temperature": 2.0,
+  "teacher_policy": "Use only the current source head fitted on the same inner training patients and its own train-only frozen feature statistics. Teacher probabilities/features are prepared only for fitting images, detached and never optimized. Stop/outer patients do not enter teacher targets.",
+  "initialization": "Identical v3 seeded construction and reset training RNG after construction. Initial adapters saved and hashed against independent seed verification. Epoch0 eligible.",
+  "controls": "All4arms use16actual images per loss; head-only and unanchored adapter controls separate the effect of actual loss batch from the two anchoring terms. No data augmentation.",
+  "formal_seeds_per_configuration": 3,
+  "planned_formal_seed_fits": 12,
+  "selection": "If a3seed adapted ensemble improves its own live epoch0 and does not lower frozen milestone5 validation macro-F1, choose the strongest qualifying adapter and run original3outer patient folds for it and the matched head-only control. Each fold uses its own inner-fit source head and teacher. Any later promotion still needs new repeated-patient confirmation.",
+  "external_test_policy": "No external outcomes, predictions or images loaded. No external scoring in the runner."
+}

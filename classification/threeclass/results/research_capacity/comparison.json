@@ -1,0 +1,365 @@
+{
+  "predeclared_candidates": 6,
+  "completed_seed_fits": 72,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference_candidate": "63c585e70306",
+  "reference_cv_macro_f1": 0.8090823139275858,
+  "backbone_metadata": {
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "weights_sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+    "size": 322,
+    "batch": 8,
+    "mid_block": 15,
+    "timm": "1.0.22",
+    "backbone": "DINOv2 ViT-L/14",
+    "pretrained_source": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth",
+    "weights": "/root/autodl-tmp/uveitis_threeclass_20261124/weights/dinov2_vitl14_pretrain.pth",
+    "strict_loading": true,
+    "converter": "timm.models.vision_transformer.checkpoint_filter_fn",
+    "torch": "2.5.1+cu124",
+    "seconds": 48.09606719017029,
+    "shapes": {
+      "global": [
+        3406,
+        1024
+      ],
+      "regions": [
+        3406,
+        9,
+        1024
+      ],
+      "mid": [
+        3406,
+        1024
+      ],
+      "dispersion": [
+        3406,
+        1024
+      ],
+      "path": [
+        3406
+      ],
+      "manifest_sha256": []
+    }
+  },
+  "candidates": [
+    {
+      "feature": "dinov2_vitl_322",
+      "candidate_id": "capacity_8de300ec4403",
+      "config": {
+        "arch": "global",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8021390374331551,
+        "balanced_accuracy": 0.8131213273036519,
+        "macro_f1": 0.8190908358744003,
+        "log_loss": 0.5590775499883759,
+        "recall": {
+          "infectious": 0.7588652482269503,
+          "noninfectious": 0.8160919540229885,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            107,
+            34,
+            0
+          ],
+          [
+            27,
+            142,
+            5
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.709617277778687,
+        "sd_macro_f1": 0.00827987115005592,
+        "mean_accuracy": 0.7169530585760953
+      },
+      "head_parameters": 263171,
+      "all_feature_provenance_audit_passed": true,
+      "eligible_for_external_evaluation": false
+    },
+    {
+      "feature": "dinov2_vitl_322",
+      "candidate_id": "capacity_0e0149de2222",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8716577540106952,
+        "balanced_accuracy": 0.8617387423609989,
+        "macro_f1": 0.8695766342504357,
+        "log_loss": 0.38477953416356286,
+        "recall": {
+          "infectious": 0.8581560283687943,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8305084745762712
+        },
+        "confusion_matrix": [
+          [
+            121,
+            20,
+            0
+          ],
+          [
+            12,
+            156,
+            6
+          ],
+          [
+            1,
+            9,
+            49
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7666016903948544,
+        "sd_macro_f1": 0.009377918306284852,
+        "mean_accuracy": 0.7646989427094139
+      },
+      "head_parameters": 575120,
+      "all_feature_provenance_audit_passed": true,
+      "eligible_for_external_evaluation": false
+    },
+    {
+      "feature": "dinov2_vitl_322",
+      "candidate_id": "capacity_fd1b661c7e12",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8556149732620321,
+        "balanced_accuracy": 0.8559190773647916,
+        "macro_f1": 0.8591166955271721,
+        "log_loss": 0.39675054438369395,
+        "recall": {
+          "infectious": 0.8297872340425532,
+          "noninfectious": 0.8735632183908046,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            117,
+            24,
+            0
+          ],
+          [
+            15,
+            152,
+            7
+          ],
+          [
+            1,
+            7,
+            51
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7538926279702586,
+        "sd_macro_f1": 0.020708629940536134,
+        "mean_accuracy": 0.7512997473730457
+      },
+      "head_parameters": 617040,
+      "all_feature_provenance_audit_passed": true,
+      "eligible_for_external_evaluation": false
+    },
+    {
+      "feature": "dinov2_vitl_322",
+      "candidate_id": "capacity_0b049387a6bf",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8235294117647058,
+        "balanced_accuracy": 0.8203834733672952,
+        "macro_f1": 0.8292095259614425,
+        "log_loss": 0.6508624485379493,
+        "recall": {
+          "infectious": 0.8085106382978723,
+          "noninfectious": 0.8390804597701149,
+          "normal": 0.8135593220338984
+        },
+        "confusion_matrix": [
+          [
+            114,
+            27,
+            0
+          ],
+          [
+            22,
+            146,
+            6
+          ],
+          [
+            1,
+            10,
+            48
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7590201887783065,
+        "sd_macro_f1": 0.01646935687782866,
+        "mean_accuracy": 0.7582947883995005
+      },
+      "head_parameters": 618330,
+      "all_feature_provenance_audit_passed": true,
+      "eligible_for_external_evaluation": false
+    },
+    {
+      "feature": "dinov2l_dinov3b",
+      "candidate_id": "capacity_bcc1b35a22c5",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8716577540106952,
+        "balanced_accuracy": 0.8729407684665901,
+        "macro_f1": 0.8754160033635037,
+        "log_loss": 0.40777412370125166,
+        "recall": {
+          "infectious": 0.8581560283687943,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            121,
+            20,
+            0
+          ],
+          [
+            15,
+            153,
+            6
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.782597149324625,
+        "sd_macro_f1": 0.025669830428498266,
+        "mean_accuracy": 0.7786717354780182
+      },
+      "head_parameters": 968336,
+      "all_feature_provenance_audit_passed": true,
+      "eligible_for_external_evaluation": false
+    },
+    {
+      "feature": "dinov2l_dinov3b",
+      "candidate_id": "capacity_98e7c507dadd",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.45,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      },
+      "val": {
+        "n": 374,
+        "accuracy": 0.8743315508021391,
+        "balanced_accuracy": 0.8720191833401727,
+        "macro_f1": 0.8753121615484051,
+        "log_loss": 0.46065136393799794,
+        "recall": {
+          "infectious": 0.8723404255319149,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            123,
+            18,
+            0
+          ],
+          [
+            15,
+            153,
+            6
+          ],
+          [
+            3,
+            5,
+            51
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.7775127876747844,
+        "sd_macro_f1": 0.020082161439583128,
+        "mean_accuracy": 0.776345818230635
+      },
+      "head_parameters": 1010256,
+      "all_feature_provenance_audit_passed": true,
+      "eligible_for_external_evaluation": false
+    }
+  ],
+  "external_test_evaluated": false,
+  "decision": "Larger DINOv2 and concatenated DINOv2/DINOv3 features did not pass the development gate; keep the frozen multiscale DINOv3 model."
+}

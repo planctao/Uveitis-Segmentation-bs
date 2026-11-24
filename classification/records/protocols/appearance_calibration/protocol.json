@@ -1,0 +1,46 @@
+{
+  "created_at_utc": "2026-11-24T01:49:01.258359+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Training-only originalM5OOF errors show descriptive within-class associations with imageappearance descriptors. These may also reflect disease information, not causal imaging nuisance. Test known FiLM-style conditional hidden calibration using those descriptors, with identical-parameter constant-input controls, preserving all original DINO evidence.",
+  "configuration_plan": [
+    {
+      "name": "constant_rank8",
+      "rank": 8,
+      "conditioned": false
+    },
+    {
+      "name": "conditioned_rank8",
+      "rank": 8,
+      "conditioned": true
+    },
+    {
+      "name": "constant_rank16",
+      "rank": 16,
+      "conditioned": false
+    },
+    {
+      "name": "conditioned_rank16",
+      "rank": 16,
+      "conditioned": true
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "OriginalM5allfourfeatures andnetwork intact. Extract12fixedappearance descriptors fromoriginalcacheRGB192bilinear: foreground, luminancep10/p50/p90/std, RGBmeans,chroma,dark/brightfractions,logLaplacianvariance. Everyfit separately normalizesstyle usingoriginalstdmin.05 andclip10. Style12→rank8/16LinearGELU→zero512readout; splitgamma=.1tanh(scale),beta=.1shift; delta=gamma*originalhiddenGELU+beta, addbeforeoriginalDropout. Constantcontrol useszero12vector insidecalibration atsameparameters. Noextrataskloss.",
+  "controls": "Constant/conditioned exactlysameparameters at eachrank. Originalcommoninit/RNG,initialtrain/evalprobabilities,M5featurestatistics,fullobjective,sampling,fit/stop/outerplans andhparamsunchanged. Allfourfixedarms3formal+3foldx3seeds.",
+  "feature_provenance": "runs/appearance_calibration/feature_provenance.json",
+  "feature_provenance_sha256": "38cda761be3f0f46783bae503728d942f9a9dc75144e09080cb8a2eba7a5d94d",
+  "development_descriptors_sha256": "517edf01b9d2422290e9e1d3a4cb318be056d9ec66be6798cc3239369403ba24",
+  "diagnostic_source": "results/research_image_style_diagnostics/diagnostics.json",
+  "diagnostic_source_sha256": "89a7a0c786bbac0b776086a413f9112151a9483124858422369e4918ec481e05",
+  "verification": "1717traindescriptorcache reusedexactly;374validationdescriptorssamefixedformula;all2091rowsalignedwithcachehashesandsixrecomputations. Twelveimage-descriptorformulasindependentlyverifiedon8actualtrainingimages includingNumPyLaplacianstencil. ActualmodelindependentNumPy/SciPyconditionalformula,numericalgradient,constantindependence,boundedgamma,originalstats,exactM5init/RNG,realgradientsandstrictrestorationpassed. All48actualheads CPUrestoreeveryfitstat/stop/outerprobabilityandensemble; NumPyrebuildeveryaffinecalibration.",
+  "selection": "OriginalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes beforefreshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentimages read forstyles. Noexternalrawimages/descriptors/predictionsoroutcomes. Externalfeature rowsNaN andexplicitinferenceindexguard.",
+  "code_sha256": {
+    "appearance_calibration.py": "cc6f4d2aa27c4c470eac70a629b490674a3dc0adc1a8d9474f61bf06a178c9c5",
+    "appearance_data.py": "33286fe3d13e451e4c35fb1c72f376c9f64887e068ed9f0d7b3c7c088142a166",
+    "verify_appearance_calibration.py": "f51a47cceebc0b2f4bab4398471e159c5a11687d4348b0aeac67e799e590e43a",
+    "appearance_experiments.py": "b8d491e3bc0e3c0d467db6d59178412758c0109185584726e7a1ffa90adf6b14",
+    "image_style_diagnostics.py": "ef6c3cf29dd04cadc9f1cc58754831a9563ec2f49dbc5a4fbc7f26d57ff55933"
+  }
+}

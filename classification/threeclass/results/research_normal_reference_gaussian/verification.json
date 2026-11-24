@@ -1,0 +1,473 @@
+{
+  "passed": true,
+  "actual_seed_heads_checked": 0,
+  "reused_source_heads_checked": 24,
+  "generative_models_checked": 48,
+  "sources": [
+    {
+      "arm": "raw",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_0/model.pt",
+      "checkpoint_sha256": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb"
+    },
+    {
+      "arm": "normal",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_0/model.pt",
+      "checkpoint_sha256": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e"
+    },
+    {
+      "arm": "raw",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_1/model.pt",
+      "checkpoint_sha256": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f"
+    },
+    {
+      "arm": "normal",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_1/model.pt",
+      "checkpoint_sha256": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0"
+    },
+    {
+      "arm": "raw",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_2/model.pt",
+      "checkpoint_sha256": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad"
+    },
+    {
+      "arm": "normal",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_2/model.pt",
+      "checkpoint_sha256": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "d88244e9531a4655ae5875f1272aefd22f54ff53995d84f810cc7e1135a513e5"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "069024b449b9c6854193bfa5bdade86a172f5e7f41eaa7a2cc87efc1e30400cf"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "666e5f037ec2d0d3a9b66c7c532db4a3094ba99ef648ac2d510eb5641ccb2733"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "5e590d0d5a4497c9d76a67862654972a7ed5c7072a21d3f4976d95e5b8b3c0fc"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "f0104ecdbec7e01c63be873d752661b15894687b6061e3d6aed459a112c74efe"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "136a4335107a7cc456374b60c9d60a312a9d83ba7f9beb9884b8cb99f652a0b3"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "a9fb3bb0925b42b0385816cb181872f3d619167a7a8d845fd63692ed73aa8f54"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "b0e40a5f6fce2eecedb58fe7e443a9ba83ef20c1f043b925bc04a92da9bb6454"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9ed0f89422d82e67dbc576957d1d7a8f5ed80812e27fd38c9ee23509ead42c3b"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "e660541eeeb5cbb705590b0f1bfb8f42cc40b2965a707c87d7be8f959e44501d"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "f7895a90c2ab390ed64a2977511cb8677b49617ba1fed30c0d33b301592836bd"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "29f1bca70e7d266e3320fc260871f2191aa9cd82922016eafbef75a4ba24d6d5"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "c8f49d4702a1a67d26b2b2afa7d0771affdfbb7a36883da37d560af6c35d7f77"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "b3132e295a018cad9923ba7348680ede91793e380bfbd3dcb3e4afd80e896f28"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "dda695a36c462b1cc907fb0c48286a1c8e1f8a58d792553bfac180a06080a55f"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "8841bab05304629b71ddf2b33c0eabda66d1a8da0d36a2fdabe307b75d780fd0"
+    },
+    {
+      "arm": "raw",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "6aa8e8b77db8fbaae1ecd5e6941650339961cf0baaa8a2074cabee593a17ea73"
+    },
+    {
+      "arm": "normal",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "a0eba0367ff8f7260e55b936e1d998a749688492cb75f0c2a8b3bcfcca6c0341"
+    }
+  ],
+  "models": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "name": "coarse_shrink10",
+      "model_sha256": "1fdab4f8709545563c9405add841a9a1fe0f2133ee2f701af03456d7e0736379"
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "name": "coarse_shrink30",
+      "model_sha256": "5fb12344301ca74f0b46ee56789327471133a08c2ae8cc2b45803ebbbbf1511a"
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "name": "subtype_shrink10",
+      "model_sha256": "211a5f963f2cd7b1c99d24dffb206d8cfe8cf917a1aeaa91aa59f08931842270"
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "name": "subtype_shrink30",
+      "model_sha256": "423307d820d2865786b52ece94fa4cc2f0ba4f7585ced8aa22cb2311ec27dab4"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "name": "coarse_shrink10",
+      "model_sha256": "f515b25bfefbe6e25c44e6a24547723a5ab006501ae7d8685c93b75c6f385712"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "name": "coarse_shrink30",
+      "model_sha256": "fc0630197d0b519df0bccaef24389bffe9f891b98bb2ec57064c4b9c4da687b0"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "name": "subtype_shrink10",
+      "model_sha256": "2e1fcb7a87b5cbd7627212249d7805cf122af4cf9c355bd6d73ace2e685b8945"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "name": "subtype_shrink30",
+      "model_sha256": "a174ce98e7ffacac0d39aeb165fecbc6ba656c9f0c43d0356deafb6a9affa994"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "name": "coarse_shrink10",
+      "model_sha256": "efbda300faa08816a861d2686a118ed0ea04554b83619a071d9f36f90acef219"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "name": "coarse_shrink30",
+      "model_sha256": "7b7eef8817c688e6f87b8f8b6c836ea36f291ecca285cd50777a88def686efea"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "name": "subtype_shrink10",
+      "model_sha256": "3be308dfa5b6e4ea3fb61815ea21961d2ff557bce284f55617afc8c609b81dbf"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "name": "subtype_shrink30",
+      "model_sha256": "c46892c724281c8a8a2a22b98152fae725f24a04c0b5e9aaa94f27dc2fdfa45d"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "name": "coarse_shrink10",
+      "model_sha256": "ee6c128beb67694d21193bf26edc7a2ca636b06cca6372d812a66aebedc80932"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "name": "coarse_shrink30",
+      "model_sha256": "40ce0952ab460f05b34561a511cc46f445770bcbfec1b3f57886c598f4f6037a"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "name": "subtype_shrink10",
+      "model_sha256": "bc1669e984ce8e4ca269b1c31ca4641e12eb6d50181210d76766ebdc2d4804fb"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "name": "subtype_shrink30",
+      "model_sha256": "71c294ac7ba1bfaaae39b873f757248cd3cba0ab9da9382791ca74222624821c"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "name": "coarse_shrink10",
+      "model_sha256": "492cf98e316ca861b32543340193752c86643ed9d1917f7a5ce0e0e763db5b7c"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "name": "coarse_shrink30",
+      "model_sha256": "58da0cc1c147e00984f5e432a09e79c7fb37efe4193249718d4267460af34f50"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "name": "subtype_shrink10",
+      "model_sha256": "bb497dbb05def96afdbaddf60b45dd8e5c3fa28cc9fa4d541c476928db984ba0"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "name": "subtype_shrink30",
+      "model_sha256": "c1dacf81ded87362460a0c564908c67569854a88cdd91c96d3e1aef42281bc3d"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "name": "coarse_shrink10",
+      "model_sha256": "ea2a3c9b082f0d02c2826cd58ca5d49862b94c250f8f7b707b6cc8e7ca73a88d"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "name": "coarse_shrink30",
+      "model_sha256": "0f114c8c11ffd932fffd606def28d9a1a37f7d5bda0e40a8d13d07148fc771bb"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "name": "subtype_shrink10",
+      "model_sha256": "1883900f7528435b6c22acc7cc888b6b7eb5f853063cb799cce87493eb84e49f"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "name": "subtype_shrink30",
+      "model_sha256": "0ef1053fdd3ab14e0b833371463082878dfee604d1fe646f3d4f3148cbc3afcc"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "name": "coarse_shrink10",
+      "model_sha256": "ba5c55fb28a55782dc80e7580c77cc9e284edb86d5fd8620baf4422705249c2a"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "name": "coarse_shrink30",
+      "model_sha256": "c66c74e5e22cc7e84c3424675f1be69d40de4a157c284a8173f3386682836833"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "name": "subtype_shrink10",
+      "model_sha256": "e88022b9efb650a44b7d01f40cf8a2be20250b61289fab65a6e7f09692a7397d"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "name": "subtype_shrink30",
+      "model_sha256": "8b042305425caa76f03c72f178a5d0d0b789578a9c97171236544d7676da5eb9"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "name": "coarse_shrink10",
+      "model_sha256": "1cf0854e2c8547b6790321e8d53ca60a33147dd88edb341a2ea4999c471594d2"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "name": "coarse_shrink30",
+      "model_sha256": "6363a1d249d88b44e738c28974499904af916c936c0a1d70d30cee4e254bf966"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "name": "subtype_shrink10",
+      "model_sha256": "c723df4378822f74f5ff4131fe73bad680793b2e88532a61036e89271e5bfb6d"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "name": "subtype_shrink30",
+      "model_sha256": "ae80b3aaee30aa264f6796c4817b641ddcd4caee0e83aa1ae4f29a0e14f4b30b"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "name": "coarse_shrink10",
+      "model_sha256": "4cda98d382db46baa4a201d7b5d267bd5a9b1540dffb50640815693a8bfd0c6a"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "name": "coarse_shrink30",
+      "model_sha256": "b90e252113df75b93b4e2539661366326dc627da97b98c4417fbfdf7b4693ea9"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "name": "subtype_shrink10",
+      "model_sha256": "b703a474d43984621d95f34d595e45eb7b37e81aca9adde91d11cea5ea393dc4"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "name": "subtype_shrink30",
+      "model_sha256": "47250016fe6679e11d3d23cfbaa1a9feb05f26d33ab116147b15677043d8def4"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "name": "coarse_shrink10",
+      "model_sha256": "b54b56835e038c4995ca3caf48beeb48ea3f34a6f5c3b799a11990c4bb6ea8eb"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "name": "coarse_shrink30",
+      "model_sha256": "cb60550c5193f7fe6cd7a88d4e98b14e5a8aac4a1ee6820871fe30897e28f81a"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "name": "subtype_shrink10",
+      "model_sha256": "e5f294d90bac7e5214eccc484a07a88afd708dfb8d92e2285e05dcb756f9eac7"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "name": "subtype_shrink30",
+      "model_sha256": "aa87acd4a56d2385b10b1029b4b708c2b2815604bbb8e00873aa80b166c471d9"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "name": "coarse_shrink10",
+      "model_sha256": "54d2a9980c8bdcae00bab10ec1c73882be7612d1a8c75f128840ebc1f89331a5"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "name": "coarse_shrink30",
+      "model_sha256": "afa20f2f96b9a20eb1dd41368306c2bedda4da7f2f8a052ab831c2857e9ed896"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "name": "subtype_shrink10",
+      "model_sha256": "1d6c11bd2bb3270220e5a1c04cfd4cd8d4a61b16f2c5fdbd394e47c93bf79c47"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "name": "subtype_shrink30",
+      "model_sha256": "58dbf69ac22dc29d0dbb1b2a4c04b9cfb1c6188bf63e33eab6de1e89cf1ebffb"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "name": "coarse_shrink10",
+      "model_sha256": "3381986b30f35e2b09c3e3d5115608805ac59e3da005484165ba0d4507b1588e"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "name": "coarse_shrink30",
+      "model_sha256": "0006502c41f355f4c519fb41e69019492377631ac4bfad125d1a0ee85a697fe9"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "name": "subtype_shrink10",
+      "model_sha256": "089763ebd71433cb5b72f3b2a7f6cf5f10abf2e241fbbf43979556d4c3576a6f"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "name": "subtype_shrink30",
+      "model_sha256": "c0151d5de362b00675fba044a4d254d83140c2367536f0eea492eb535cf76476"
+    }
+  ],
+  "checks": [
+    "All actual source fit/stop/outer embeddings and probabilities independently restored with NumPy projector plus plain M5",
+    "All normal geometry buffers and original M6 development predictions restored",
+    "All Gaussian means, patient covariance and priors independently rebuilt; direct covariance quadratic scoring matches all stop/outer probabilities",
+    "All four fixed .225 raw/.675 normal/.1 normal-Gaussian mixtures independently reconstructed",
+    "Complete development patient coverage and all metrics checked; no external outcomes loaded"
+  ]
+}

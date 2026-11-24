@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "sampled_training_images": 16,
+  "checks": [
+    "Every sampled raw image reproduces the fixed 448 pre-JPEG pixel hash",
+    "At size 448 both branches reproduce exactly the same decoded JPEG tensor",
+    "Both size-768 branches have identical shape, normalization and JPEG quality",
+    "Original 768 rendering differs from merely upsampling the 448 cache"
+  ],
+  "original_dimensions": [
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      3900,
+      3072
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ],
+    [
+      2600,
+      2048
+    ]
+  ],
+  "mean_normalized_pixel_differences": [
+    0.012584233656525612,
+    0.013643104583024979,
+    0.01203338336199522,
+    0.01969357393682003,
+    0.017670007422566414,
+    0.013703348115086555,
+    0.014251328073441982,
+    0.014223120175302029,
+    0.014641598798334599,
+    0.013114355504512787,
+    0.014500773511826992,
+    0.0180149395018816,
+    0.012010079808533192,
+    0.01272348128259182,
+    0.017975565046072006,
+    0.016552450135350227
+  ]
+}

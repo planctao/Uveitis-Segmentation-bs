@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "real_input_images": 96,
+  "diagnostics": [
+    {
+      "rank": 16,
+      "geometry": "euclidean",
+      "parameters": 984897,
+      "max_norm": 0.705139476799399,
+      "mean_distance_squared": 1.4324680215464944
+    },
+    {
+      "rank": 16,
+      "geometry": "poincare",
+      "parameters": 984897,
+      "max_norm": 0.608104884521728,
+      "mean_distance_squared": 1.4896080377212517
+    },
+    {
+      "rank": 32,
+      "geometry": "euclidean",
+      "parameters": 989233,
+      "max_norm": 0.8600809791117172,
+      "mean_distance_squared": 1.9413135641405388
+    },
+    {
+      "rank": 32,
+      "geometry": "poincare",
+      "parameters": 989233,
+      "max_norm": 0.6971934378086777,
+      "mean_distance_squared": 2.0846639495200807
+    }
+  ],
+  "checks": [
+    "MatchedEuclidean/Poincareparameters andinitialweights; originalcommonweights/RNG preserved",
+    "IndependentNumPyLayerNorm,boundedtangents,exponentialmap and arcosh-distance logits",
+    "ActualcompleteM5task finite gradients throughprototypes,projection andoriginalpool; strictrestorationafterupdate",
+    "Doubleprecisionfinite differences, smoothorigin/coincidentdistances andsmalltangentEuclideanlimit",
+    "Extremebounded-tangentforward/backward finite; coarseprobabilitiesoriginaldiseasemarginalization"
+  ]
+}

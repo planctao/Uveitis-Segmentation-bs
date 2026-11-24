@@ -1,0 +1,29 @@
+{
+  "created_at_utc": "2026-11-23T21:55:21.426671+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "In-sample mean patient residual norms were0.007-0.011 and corrections changed no decisions. Obtain honest residual targets from patient-held-out MLP predictions inside each existing source fitting partition, then learn corrections in the unchanged full-source embedding.",
+  "outer_policy": "Original validation and original3outer patient folds only; never use source stopping or outer patients in any residual teacher fit/target.",
+  "inner_crossfit_folds": 3,
+  "inner_crossfit_seed_base": 20270401,
+  "teacher_stopping_seed_base": 20270424,
+  "crossfit_source_policy": "For each of4source partitions and3source seeds, fit3new MLPs on patient-disjoint2/3teacher-fitting partitions, with a further20%inner stopping split. Teacher architecture/configuration and seed match its M5 source; the heldout third supplies residual probabilities only. Each actual fitting patient receives exactly one honest prediction.",
+  "planned_new_teacher_mlp_fits": 36,
+  "fixed_bandwidth": 0.5,
+  "fixed_ridge": 0.01,
+  "crossfit_residual_weights": [
+    0.1,
+    0.25
+  ],
+  "arms": [
+    "reference_m5",
+    "in_sample_residual_control25",
+    "direct_kernel_control25",
+    "crossfit_residual10",
+    "crossfit_residual25"
+  ],
+  "support": "Patient/coarse-label means in the unchanged full-source MLP embedding; class masses1/3. Source and query probabilities remain from full source. Only residual training targets use crossfit probabilities.",
+  "teacher_limit": "Crossfit teachers see fewer patients than the full source, so residuals also include training-size/model variation; this is an experimental control, not an unbiased estimate of the full-source generalization error.",
+  "selection": "All arms get all original folds. Only crossfit residual candidates with higher originalCV than M5 and validation Macro-F1 no lower than M5 can qualify; strongest would require new fixed patient partitions against both prior development references.",
+  "external_test_policy": "No external scoring, predictions or raw images; no parameter search using external outcomes."
+}

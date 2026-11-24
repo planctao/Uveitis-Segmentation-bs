@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "mode": "separate",
+      "rank_per_scale": 16,
+      "total_suppression_rank": 32,
+      "full_task_batch": 256
+    },
+    {
+      "mode": "separate",
+      "rank_per_scale": 32,
+      "total_suppression_rank": 64,
+      "full_task_batch": 256
+    },
+    {
+      "mode": "tied",
+      "rank_per_scale": 16,
+      "total_suppression_rank": 32,
+      "full_task_batch": 256
+    },
+    {
+      "mode": "tied",
+      "rank_per_scale": 32,
+      "total_suppression_rank": 64,
+      "full_task_batch": 256
+    }
+  ],
+  "diagnostics": {
+    "separate": {
+      "global": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.045150907103448e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.698152559854066e-09
+        }
+      ],
+      "regions": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 8.535875450910169e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.94637222689687e-09
+        }
+      ],
+      "mid": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.56712514871083e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 8.107994942108121e-09
+        }
+      ],
+      "dispersion": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 8.50674974905985e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 8.370070858632062e-09
+        }
+      ]
+    },
+    "tied": {
+      "global": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.83846154650547e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.83846154650547e-09
+        }
+      ],
+      "regions": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.759602294044043e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.759602294044043e-09
+        }
+      ],
+      "mid": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.189145279085096e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 7.189145279085096e-09
+        }
+      ],
+      "dispersion": [
+        {
+          "scale": 0,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 8.285114816430905e-09
+        },
+        {
+          "scale": 1,
+          "effective_rank": 32,
+          "maximum_principal_cosine_error": 8.285114816430905e-09
+        }
+      ]
+    }
+  },
+  "code_sha256": {
+    "scale_normal_geometry.py": "375dc8d2d2d90f9ac3e3d47a64bfa18c68f61f6e6c38fb9af87edbc5f8a34463",
+    "verify_scale_normal_geometry.py": "0d795bc073efe4518f6c35e5d8db759c2813401683deeccb3dd2b1da4dba79e1"
+  },
+  "checks": [
+    "Actual fit-feature channel halves exactly match aligned 320 and 448 banks",
+    "Equal-normal-patient centers and separate/tied covariance spans recovered by independent Gram eigendecomposition",
+    "Duplicated normal images preserve geometry; constant centers yield zero supported rank",
+    "Independent per-scale NumPy transforms match all four architectures",
+    "Zero-strength identity preserves exact original initialization RNG and predictions",
+    "Four real 256-image complete task gradient/update/strict-recovery checks"
+  ]
+}

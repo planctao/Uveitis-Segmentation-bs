@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "actual_images": [
+    0,
+    3,
+    4,
+    5,
+    9,
+    10,
+    745,
+    748,
+    749,
+    750,
+    751,
+    752,
+    785,
+    789,
+    790,
+    791
+  ],
+  "actual_loss_batch": 16,
+  "checks": [
+    "All three trainability scopes reproduce pretrained/frozen teacher image predictions at initialization",
+    "Exact final/per-block LayerNorm affine parameter names and counts checked; all QKV/MLP/token/other backbone parameters frozen",
+    "Actual16image AMP task+fit-teacherKL backward reaches only prescribed backbone affine parameters; successful update advances scheduler once",
+    "Norm/head-only serialization restores exact actual-image probabilities; per-scope initialization fingerprints retained"
+  ],
+  "scopes": [
+    {
+      "norm_blocks": 0,
+      "final_norm": false,
+      "trainable_backbone_parameters": 0,
+      "initial_norm_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "initial_teacher_probability_mae": 5.678540765075013e-05,
+      "peak_training_allocated_gib": 0.6948838233947754
+    },
+    {
+      "norm_blocks": 0,
+      "final_norm": true,
+      "trainable_backbone_parameters": 1536,
+      "initial_norm_sha256": "76f2c3f9bc2105bdcc6cb1b6c83442c5f50e47e6f54d4cc21c000150d8d02adc",
+      "initial_teacher_probability_mae": 5.678540765075013e-05,
+      "peak_training_allocated_gib": 1.3687033653259277
+    },
+    {
+      "norm_blocks": 4,
+      "final_norm": true,
+      "trainable_backbone_parameters": 13824,
+      "initial_norm_sha256": "0c889b1339a6ced982729059b22b7fe9103160f2042b50671cf6d56ffeefd0fd",
+      "initial_teacher_probability_mae": 5.678540765075013e-05,
+      "peak_training_allocated_gib": 3.2365198135375977
+    }
+  ]
+}

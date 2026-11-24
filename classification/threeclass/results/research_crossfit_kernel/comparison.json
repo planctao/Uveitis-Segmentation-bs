@@ -1,0 +1,697 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T21:55:21.426671+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "hypothesis": "In-sample mean patient residual norms were0.007-0.011 and corrections changed no decisions. Obtain honest residual targets from patient-held-out MLP predictions inside each existing source fitting partition, then learn corrections in the unchanged full-source embedding.",
+    "outer_policy": "Original validation and original3outer patient folds only; never use source stopping or outer patients in any residual teacher fit/target.",
+    "inner_crossfit_folds": 3,
+    "inner_crossfit_seed_base": 20270401,
+    "teacher_stopping_seed_base": 20270424,
+    "crossfit_source_policy": "For each of4source partitions and3source seeds, fit3new MLPs on patient-disjoint2/3teacher-fitting partitions, with a further20%inner stopping split. Teacher architecture/configuration and seed match its M5 source; the heldout third supplies residual probabilities only. Each actual fitting patient receives exactly one honest prediction.",
+    "planned_new_teacher_mlp_fits": 36,
+    "fixed_bandwidth": 0.5,
+    "fixed_ridge": 0.01,
+    "crossfit_residual_weights": [
+      0.1,
+      0.25
+    ],
+    "arms": [
+      "reference_m5",
+      "in_sample_residual_control25",
+      "direct_kernel_control25",
+      "crossfit_residual10",
+      "crossfit_residual25"
+    ],
+    "support": "Patient/coarse-label means in the unchanged full-source MLP embedding; class masses1/3. Source and query probabilities remain from full source. Only residual training targets use crossfit probabilities.",
+    "teacher_limit": "Crossfit teachers see fewer patients than the full source, so residuals also include training-size/model variation; this is an experimental control, not an unbiased estimate of the full-source generalization error.",
+    "selection": "All arms get all original folds. Only crossfit residual candidates with higher originalCV than M5 and validation Macro-F1 no lower than M5 can qualify; strongest would require new fixed patient partitions against both prior development references.",
+    "external_test_policy": "No external scoring, predictions or raw images; no parameter search using external outcomes."
+  },
+  "arms": [
+    {
+      "arm": "reference_m5",
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.3370578770980031,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8090823139275858,
+        "sd_macro_f1": 0.014851078598857077
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0,
+        "macro_f1_difference": 0.0,
+        "accuracy_ci95": [
+          0.0,
+          0.0
+        ],
+        "macro_f1_ci95": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "arm": "in_sample_residual_control25",
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.33626074196883765,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8090823139275858,
+        "sd_macro_f1": 0.014851078598857077
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0,
+        "macro_f1_difference": 0.0,
+        "accuracy_ci95": [
+          0.0,
+          0.0
+        ],
+        "macro_f1_ci95": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "arm": "direct_kernel_control25",
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.889611511109453,
+        "macro_f1": 0.8906156424621677,
+        "log_loss": 0.3389965209957566,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.9080459770114943,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            10,
+            158,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.810817255069773,
+        "sd_macro_f1": 0.011047394087157252
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0005824111822947398,
+        "macro_f1_difference": 0.001654549067717337,
+        "accuracy_ci95": [
+          -0.006117918239845005,
+          0.004889523360214346
+        ],
+        "macro_f1_ci95": [
+          -0.003752540941935356,
+          0.006889258405870668
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "arm": "crossfit_residual10",
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8905082258726389,
+        "macro_f1": 0.8893107959516184,
+        "log_loss": 0.3442837995604433,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.808939037393931,
+        "sd_macro_f1": 0.010781222656473327
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0011648223645893685,
+        "macro_f1_difference": -0.00018347279968966568,
+        "accuracy_ci95": [
+          -0.004087971755095824,
+          0.0016432755770837452
+        ],
+        "macro_f1_ci95": [
+          -0.004138890349893768,
+          0.003489433657414014
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    },
+    {
+      "arm": "crossfit_residual25",
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8881441596787853,
+        "macro_f1": 0.8871451663102518,
+        "log_loss": 0.3883734772363962,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            125,
+            15,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.810739832900477,
+        "sd_macro_f1": 0.01279251441153277
+      },
+      "development_gate_passed": false,
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0005824111822947398,
+        "macro_f1_difference": 0.0016521761590138073,
+        "accuracy_ci95": [
+          -0.00431151866877017,
+          0.0032092920571064848
+        ],
+        "macro_f1_ci95": [
+          -0.003239440528526355,
+          0.006267954789158058
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      }
+    }
+  ],
+  "source_diagnostics": [
+    {
+      "source_checkpoint_sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+      "mean_in_sample_residual_norm": 0.008411646024352059,
+      "mean_crossfit_residual_norm": 0.3313529178661019,
+      "crossfit_teacher_metrics": {
+        "n": 1717,
+        "accuracy": 0.7804309842748981,
+        "balanced_accuracy": 0.8060528402098656,
+        "macro_f1": 0.7775377175030957,
+        "log_loss": 0.6303613949579776,
+        "recall": {
+          "infectious": 0.7692307692307693,
+          "noninfectious": 0.758576874205845,
+          "normal": 0.8903508771929824
+        },
+        "confusion_matrix": [
+          [
+            540,
+            137,
+            25
+          ],
+          [
+            115,
+            597,
+            75
+          ],
+          [
+            2,
+            23,
+            203
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+      "mean_in_sample_residual_norm": 0.007989184607351462,
+      "mean_crossfit_residual_norm": 0.3273463844382765,
+      "crossfit_teacher_metrics": {
+        "n": 1717,
+        "accuracy": 0.7827606290040768,
+        "balanced_accuracy": 0.8056701596626695,
+        "macro_f1": 0.7803770001693294,
+        "log_loss": 0.6165974869719721,
+        "recall": {
+          "infectious": 0.7692307692307693,
+          "noninfectious": 0.7662007623888183,
+          "normal": 0.881578947368421
+        },
+        "confusion_matrix": [
+          [
+            540,
+            135,
+            27
+          ],
+          [
+            118,
+            603,
+            66
+          ],
+          [
+            2,
+            25,
+            201
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+      "mean_in_sample_residual_norm": 0.008117956638540891,
+      "mean_crossfit_residual_norm": 0.3308165151421084,
+      "crossfit_teacher_metrics": {
+        "n": 1717,
+        "accuracy": 0.7763541059988351,
+        "balanced_accuracy": 0.8064724836777267,
+        "macro_f1": 0.7804240523847655,
+        "log_loss": 0.6472493092134131,
+        "recall": {
+          "infectious": 0.7478632478632479,
+          "noninfectious": 0.7636594663278272,
+          "normal": 0.9078947368421053
+        },
+        "confusion_matrix": [
+          [
+            525,
+            154,
+            23
+          ],
+          [
+            123,
+            601,
+            63
+          ],
+          [
+            2,
+            19,
+            207
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+      "mean_in_sample_residual_norm": 0.006934809962187379,
+      "mean_crossfit_residual_norm": 0.5251011597796357,
+      "crossfit_teacher_metrics": {
+        "n": 923,
+        "accuracy": 0.6933911159263272,
+        "balanced_accuracy": 0.7425454867925767,
+        "macro_f1": 0.6974732777220827,
+        "log_loss": 0.8873098902006251,
+        "recall": {
+          "infectious": 0.7158469945355191,
+          "noninfectious": 0.6166281755196305,
+          "normal": 0.8951612903225806
+        },
+        "confusion_matrix": [
+          [
+            262,
+            83,
+            21
+          ],
+          [
+            110,
+            267,
+            56
+          ],
+          [
+            0,
+            13,
+            111
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+      "mean_in_sample_residual_norm": 0.006599454296030177,
+      "mean_crossfit_residual_norm": 0.4564991026051887,
+      "crossfit_teacher_metrics": {
+        "n": 923,
+        "accuracy": 0.71397616468039,
+        "balanced_accuracy": 0.748089487540552,
+        "macro_f1": 0.7161900675309815,
+        "log_loss": 0.9322061362902061,
+        "recall": {
+          "infectious": 0.6885245901639344,
+          "noninfectious": 0.6928406466512702,
+          "normal": 0.8629032258064516
+        },
+        "confusion_matrix": [
+          [
+            252,
+            90,
+            24
+          ],
+          [
+            93,
+            300,
+            40
+          ],
+          [
+            0,
+            17,
+            107
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+      "mean_in_sample_residual_norm": 0.008040061211047228,
+      "mean_crossfit_residual_norm": 0.4606320283781883,
+      "crossfit_teacher_metrics": {
+        "n": 923,
+        "accuracy": 0.6782231852654388,
+        "balanced_accuracy": 0.7266083674719207,
+        "macro_f1": 0.6849458587180851,
+        "log_loss": 0.9130528075288492,
+        "recall": {
+          "infectious": 0.6530054644808743,
+          "noninfectious": 0.6397228637413395,
+          "normal": 0.8870967741935484
+        },
+        "confusion_matrix": [
+          [
+            239,
+            103,
+            24
+          ],
+          [
+            105,
+            277,
+            51
+          ],
+          [
+            2,
+            12,
+            110
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+      "mean_in_sample_residual_norm": 0.007861730109166517,
+      "mean_crossfit_residual_norm": 0.37782967926651667,
+      "crossfit_teacher_metrics": {
+        "n": 935,
+        "accuracy": 0.7561497326203208,
+        "balanced_accuracy": 0.8031029290030881,
+        "macro_f1": 0.7517390181850594,
+        "log_loss": 0.6938846101694753,
+        "recall": {
+          "infectious": 0.827027027027027,
+          "noninfectious": 0.6478555304740407,
+          "normal": 0.9344262295081968
+        },
+        "confusion_matrix": [
+          [
+            306,
+            50,
+            14
+          ],
+          [
+            95,
+            287,
+            61
+          ],
+          [
+            1,
+            7,
+            114
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+      "mean_in_sample_residual_norm": 0.017801780655079095,
+      "mean_crossfit_residual_norm": 0.40933695010079973,
+      "crossfit_teacher_metrics": {
+        "n": 935,
+        "accuracy": 0.7508021390374332,
+        "balanced_accuracy": 0.7808301436914099,
+        "macro_f1": 0.7482107588622157,
+        "log_loss": 0.6787050902900946,
+        "recall": {
+          "infectious": 0.7783783783783784,
+          "noninfectious": 0.6952595936794582,
+          "normal": 0.8688524590163934
+        },
+        "confusion_matrix": [
+          [
+            288,
+            67,
+            15
+          ],
+          [
+            90,
+            308,
+            45
+          ],
+          [
+            1,
+            15,
+            106
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+      "mean_in_sample_residual_norm": 0.00792673705493521,
+      "mean_crossfit_residual_norm": 0.38480714878181904,
+      "crossfit_teacher_metrics": {
+        "n": 935,
+        "accuracy": 0.7475935828877005,
+        "balanced_accuracy": 0.7910453990977989,
+        "macro_f1": 0.7468169152808951,
+        "log_loss": 0.6718399443267385,
+        "recall": {
+          "infectious": 0.7891891891891892,
+          "noninfectious": 0.6659142212189616,
+          "normal": 0.9180327868852459
+        },
+        "confusion_matrix": [
+          [
+            292,
+            61,
+            17
+          ],
+          [
+            97,
+            295,
+            51
+          ],
+          [
+            0,
+            10,
+            112
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+      "mean_in_sample_residual_norm": 0.006286061709697588,
+      "mean_crossfit_residual_norm": 0.48076486162230053,
+      "crossfit_teacher_metrics": {
+        "n": 902,
+        "accuracy": 0.6995565410199557,
+        "balanced_accuracy": 0.7147472361573106,
+        "macro_f1": 0.6872945945433765,
+        "log_loss": 0.6976217805962937,
+        "recall": {
+          "infectious": 0.6910112359550562,
+          "noninfectious": 0.6885245901639344,
+          "normal": 0.7647058823529411
+        },
+        "confusion_matrix": [
+          [
+            246,
+            95,
+            15
+          ],
+          [
+            71,
+            294,
+            62
+          ],
+          [
+            0,
+            28,
+            91
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+      "mean_in_sample_residual_norm": 0.007207633859961238,
+      "mean_crossfit_residual_norm": 0.4583281536336628,
+      "crossfit_teacher_metrics": {
+        "n": 902,
+        "accuracy": 0.6906873614190687,
+        "balanced_accuracy": 0.712702247964944,
+        "macro_f1": 0.6749346813813886,
+        "log_loss": 0.7937001087954724,
+        "recall": {
+          "infectious": 0.7303370786516854,
+          "noninfectious": 0.6346604215456675,
+          "normal": 0.773109243697479
+        },
+        "confusion_matrix": [
+          [
+            260,
+            72,
+            24
+          ],
+          [
+            87,
+            271,
+            69
+          ],
+          [
+            1,
+            26,
+            92
+          ]
+        ]
+      }
+    },
+    {
+      "source_checkpoint_sha256": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07",
+      "mean_in_sample_residual_norm": 0.008621280578760741,
+      "mean_crossfit_residual_norm": 0.42939941327532144,
+      "crossfit_teacher_metrics": {
+        "n": 902,
+        "accuracy": 0.7028824833702882,
+        "balanced_accuracy": 0.7228427012728097,
+        "macro_f1": 0.6857451006792065,
+        "log_loss": 0.8032811697602256,
+        "recall": {
+          "infectious": 0.7219101123595506,
+          "noninfectious": 0.6651053864168618,
+          "normal": 0.7815126050420168
+        },
+        "confusion_matrix": [
+          [
+            257,
+            81,
+            18
+          ],
+          [
+            66,
+            284,
+            77
+          ],
+          [
+            0,
+            26,
+            93
+          ]
+        ]
+      }
+    }
+  ],
+  "new_teacher_mlp_fits": 36,
+  "passing_development_gates": 0,
+  "external_test_evaluated": false
+}

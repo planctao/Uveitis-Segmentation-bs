@@ -1,0 +1,160 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "feature": "large320",
+      "dimension": 1024,
+      "batch_size": 256,
+      "maximum_full_task_gradient_error": 1.1175870895385742e-07
+    },
+    {
+      "feature": "large_dual",
+      "dimension": 2048,
+      "batch_size": 256,
+      "maximum_full_task_gradient_error": 1.043081283569336e-07
+    },
+    {
+      "feature": "base_dual_large_dual",
+      "dimension": 3584,
+      "batch_size": 256,
+      "maximum_full_task_gradient_error": 4.76837158203125e-07
+    },
+    {
+      "feature": "base_dual_large448",
+      "dimension": 2560,
+      "batch_size": 256,
+      "maximum_full_task_gradient_error": 1.6391277313232422e-07
+    }
+  ],
+  "normal_geometry": {
+    "large320": {
+      "global": {
+        "maximum_principal_cosine_error": 7.814644265025095e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.287674809117959e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 8.185681910077847e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.8208333779922157e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 6.633655735832633e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 4.4370470408949814e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 7.821049474721065e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    },
+    "large_dual": {
+      "global": {
+        "maximum_principal_cosine_error": 4.645247853041212e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.04875230511459e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.8208333779922157e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 4.368930994758102e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.733068908497785e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.627038834887799e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    },
+    "base_dual_large_dual": {
+      "global": {
+        "maximum_principal_cosine_error": 3.536082315847011e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 4.401173647750056e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.9757623365433972e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 3.3752636241501932e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.9596440671327855e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.437490679938151e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    },
+    "base_dual_large448": {
+      "global": {
+        "maximum_principal_cosine_error": 4.925793994914329e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 4.6337135239937766e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.9757623365433972e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 3.937007164722672e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.9596440671327855e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.191292506978584e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.917584707162746e-08
+      }
+    }
+  },
+  "cuda_full_task_witnesses": [
+    {
+      "batch_size": 256,
+      "feature": "large320",
+      "full_task_restored": true,
+      "normal_projection_restored": true,
+      "maximum_projection_error": 1.3113021850585938e-06
+    },
+    {
+      "batch_size": 256,
+      "feature": "large_dual",
+      "full_task_restored": true,
+      "normal_projection_restored": true,
+      "maximum_projection_error": 1.5497207641601562e-06
+    },
+    {
+      "batch_size": 256,
+      "feature": "base_dual_large_dual",
+      "full_task_restored": true,
+      "normal_projection_restored": true,
+      "maximum_projection_error": 1.3113021850585938e-06
+    },
+    {
+      "batch_size": 256,
+      "feature": "base_dual_large448",
+      "full_task_restored": true,
+      "normal_projection_restored": true,
+      "maximum_projection_error": 1.3113021850585938e-06
+    }
+  ],
+  "code_sha256": {
+    "normal_large_reference.py": "83cd5d19f16b5c9225eca32396869d5cd24ed436cfa654ddde032f8bdac7bb72",
+    "audit_normal_large.py": "4a51527d68bcb84ae3e76a021490ffeecc7fee330b571231d09d95bac0fcdc3d",
+    "verify_normal_large_reference.py": "1e37f1246606c8a76f6a7ffbb7730f12ddc47576e74d947ea7de74c682c55b81"
+  },
+  "checks": [
+    "All4actualcachedfeaturearms,fit-onlynormalization/equalnormalpatientGramPCA independentlyrecovered",
+    "Noextra trainableparameter/init/RNGchange,fourtrainedoriginalMLP256imagefulltasksandallparametergradientsindependentNumPyprojection/plainMLPrecovered",
+    "Updatesandstrictrestores,frozengeometry,4actualCUDAfirstbatchfulltask/inputprojectionwitnesses;externalrowsNaN"
+  ]
+}

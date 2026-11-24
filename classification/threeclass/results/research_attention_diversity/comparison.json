@@ -1,0 +1,776 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T22:45:06.422634+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "hypothesis": "Protected M5validation attention headcosines average0.92-0.99. Fixed development diagnostics motivate a soft excessoverlap constraint to encourage complementary regional evidence while retaining all original classifier parameters and predictions.",
+    "configuration_plan": [
+      {
+        "name": "margin0.8_weight0.1",
+        "margin": 0.8,
+        "weight": 0.1
+      },
+      {
+        "name": "margin0.8_weight0.5",
+        "margin": 0.8,
+        "weight": 0.5
+      },
+      {
+        "name": "margin0.9_weight0.1",
+        "margin": 0.9,
+        "weight": 0.1
+      },
+      {
+        "name": "margin0.9_weight0.5",
+        "margin": 0.9,
+        "weight": 0.5
+      }
+    ],
+    "loss": "Perimage mean over unordered attentionheadpairs of relu(cosine(attention_h,attention_k)-margin)^2; multiply by existing patient/class leafweights and coefficient; average and add to unchanged M5loss. No newparameters, no randomdraws, no modelprobabilitychange. Ordinary attentionclassifier independently trained for each arm.",
+    "planned_new_seed_fits": 48,
+    "training": "All4arms3formal+9originalpatientCVfits; sameM5data,hparams,seeds,stopping and groupplans.",
+    "selection": "HigheroriginalpatientCVandno validationMacroF1decrease vsM5; eligiblebestrequiresfresh fixedpatientconfirmationagainstM5andfixedGaussian.",
+    "external_test_policy": "No external scoring, labels, predictions or rawimages; developmentindices0..2090only."
+  },
+  "candidates": [
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "attention_diversity_weight": 0.1,
+        "attention_diversity_margin": 0.8
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.887100295266479,
+        "macro_f1": 0.8852019598332799,
+        "log_loss": 0.3259500158674739,
+        "recall": {
+          "infectious": 0.9290780141843972,
+          "noninfectious": 0.867816091954023,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            131,
+            9,
+            1
+          ],
+          [
+            16,
+            151,
+            7
+          ],
+          [
+            3,
+            5,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8731716235982447,
+        0.8839384321744298,
+        0.8839841819080574
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.8_weight0.1/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.8_weight0.1/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.8_weight0.1/validation/seed_2/model.pt"
+      ],
+      "name": "margin0.8_weight0.1",
+      "candidate_id": "margin0.8_weight0.1",
+      "diversity_configuration": {
+        "name": "margin0.8_weight0.1",
+        "margin": 0.8,
+        "weight": 0.1
+      },
+      "cv": {
+        "mean_macro_f1": 0.7996418614556755,
+        "sd_macro_f1": 0.01144751400661581,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7972027972027972,
+              "balanced_accuracy": 0.8167821605949368,
+              "macro_f1": 0.7908833200100719,
+              "log_loss": 0.501966320466015,
+              "recall": {
+                "infectious": 0.7863247863247863,
+                "noninfectious": 0.7824427480916031,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  184,
+                  41,
+                  9
+                ],
+                [
+                  34,
+                  205,
+                  23
+                ],
+                [
+                  1,
+                  8,
+                  67
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7867132867132867,
+              "balanced_accuracy": 0.8166628321308916,
+              "macro_f1": 0.7954472450354775,
+              "log_loss": 0.6367412762566228,
+              "recall": {
+                "infectious": 0.7350427350427351,
+                "noninfectious": 0.7938931297709924,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  172,
+                  54,
+                  8
+                ],
+                [
+                  39,
+                  208,
+                  15
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.806282722513089,
+              "balanced_accuracy": 0.837911151249154,
+              "macro_f1": 0.8125950193214772,
+              "log_loss": 0.5356146400010552,
+              "recall": {
+                "infectious": 0.8418803418803419,
+                "noninfectious": 0.7376425855513308,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  197,
+                  27,
+                  10
+                ],
+                [
+                  56,
+                  194,
+                  13
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.011065812463599278,
+        "macro_f1_difference": -0.00936836763989135,
+        "accuracy_ci95": [
+          -0.020685904140632885,
+          -0.0018147725044823431
+        ],
+        "macro_f1_ci95": [
+          -0.017908637233841344,
+          -0.0010049172747366342
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "attention_diversity_weight": 0.5,
+        "attention_diversity_margin": 0.8
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8890160040787395,
+        "macro_f1": 0.8835182412895022,
+        "log_loss": 0.33061566878803395,
+        "recall": {
+          "infectious": 0.9290780141843972,
+          "noninfectious": 0.8735632183908046,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            131,
+            9,
+            1
+          ],
+          [
+            12,
+            152,
+            10
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8858237547892721,
+        0.8936784358341198,
+        0.8581913335476726
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.8_weight0.5/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.8_weight0.5/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.8_weight0.5/validation/seed_2/model.pt"
+      ],
+      "name": "margin0.8_weight0.5",
+      "candidate_id": "margin0.8_weight0.5",
+      "diversity_configuration": {
+        "name": "margin0.8_weight0.5",
+        "margin": 0.8,
+        "weight": 0.5
+      },
+      "cv": {
+        "mean_macro_f1": 0.7954577128850456,
+        "sd_macro_f1": 0.010581779516332808,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8059440559440559,
+              "balanced_accuracy": 0.826713894411765,
+              "macro_f1": 0.8001457347071382,
+              "log_loss": 0.49994019568291354,
+              "recall": {
+                "infectious": 0.7991452991452992,
+                "noninfectious": 0.7862595419847328,
+                "normal": 0.8947368421052632
+              },
+              "confusion_matrix": [
+                [
+                  187,
+                  38,
+                  9
+                ],
+                [
+                  34,
+                  206,
+                  22
+                ],
+                [
+                  1,
+                  7,
+                  68
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.7709790209790209,
+              "balanced_accuracy": 0.8046035032776696,
+              "macro_f1": 0.7833417576291432,
+              "log_loss": 0.6514120657024252,
+              "recall": {
+                "infectious": 0.717948717948718,
+                "noninfectious": 0.7748091603053435,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  168,
+                  61,
+                  5
+                ],
+                [
+                  41,
+                  203,
+                  18
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8010471204188482,
+              "balanced_accuracy": 0.8305191091863096,
+              "macro_f1": 0.8028856463188557,
+              "log_loss": 0.5258932457015365,
+              "recall": {
+                "infectious": 0.8290598290598291,
+                "noninfectious": 0.7414448669201521,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  194,
+                  29,
+                  11
+                ],
+                [
+                  52,
+                  195,
+                  16
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.015142690739662235,
+        "macro_f1_difference": -0.013524037077971007,
+        "accuracy_ci95": [
+          -0.025894811835203556,
+          -0.004951406456496117
+        ],
+        "macro_f1_ci95": [
+          -0.02464558108790519,
+          -0.0030697554315379165
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "attention_diversity_weight": 0.1,
+        "attention_diversity_margin": 0.9
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.8838395143094399,
+        "macro_f1": 0.8805167204383674,
+        "log_loss": 0.3200514939731884,
+        "recall": {
+          "infectious": 0.9078014184397163,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            128,
+            12,
+            1
+          ],
+          [
+            12,
+            153,
+            9
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8808967394906938,
+        0.8771875117592645,
+        0.8670535020804028
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.9_weight0.1/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.9_weight0.1/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.9_weight0.1/validation/seed_2/model.pt"
+      ],
+      "name": "margin0.9_weight0.1",
+      "candidate_id": "margin0.9_weight0.1",
+      "diversity_configuration": {
+        "name": "margin0.9_weight0.1",
+        "margin": 0.9,
+        "weight": 0.1
+      },
+      "cv": {
+        "mean_macro_f1": 0.8097882880670392,
+        "sd_macro_f1": 0.010192703073371745,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.8059440559440559,
+              "balanced_accuracy": 0.8305887786602933,
+              "macro_f1": 0.7998301813673607,
+              "log_loss": 0.5078444724372023,
+              "recall": {
+                "infectious": 0.8205128205128205,
+                "noninfectious": 0.7633587786259542,
+                "normal": 0.9078947368421053
+              },
+              "confusion_matrix": [
+                [
+                  192,
+                  33,
+                  9
+                ],
+                [
+                  38,
+                  200,
+                  24
+                ],
+                [
+                  1,
+                  6,
+                  69
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.798951048951049,
+              "balanced_accuracy": 0.8327095058714183,
+              "macro_f1": 0.8093342686987671,
+              "log_loss": 0.6406239426854224,
+              "recall": {
+                "infectious": 0.7606837606837606,
+                "noninfectious": 0.7900763358778626,
+                "normal": 0.9473684210526315
+              },
+              "confusion_matrix": [
+                [
+                  178,
+                  50,
+                  6
+                ],
+                [
+                  39,
+                  207,
+                  16
+                ],
+                [
+                  0,
+                  4,
+                  72
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8150087260034904,
+              "balanced_accuracy": 0.840972674772955,
+              "macro_f1": 0.8202004141349898,
+              "log_loss": 0.5171950921215799,
+              "recall": {
+                "infectious": 0.8376068376068376,
+                "noninfectious": 0.7642585551330798,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  196,
+                  29,
+                  9
+                ],
+                [
+                  50,
+                  201,
+                  12
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0011648223645893685,
+        "macro_f1_difference": 0.0006169436290484054,
+        "accuracy_ci95": [
+          -0.010778703320522798,
+          0.00865592507627325
+        ],
+        "macro_f1_ci95": [
+          -0.009107378422314122,
+          0.010698406074617958
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "group": "validation",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "attention_diversity_weight": 0.5,
+        "attention_diversity_margin": 0.9
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.893048128342246,
+        "balanced_accuracy": 0.8881192893155538,
+        "macro_f1": 0.8859182840822988,
+        "log_loss": 0.32247500702902177,
+        "recall": {
+          "infectious": 0.9148936170212766,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            129,
+            11,
+            1
+          ],
+          [
+            12,
+            154,
+            8
+          ],
+          [
+            3,
+            5,
+            51
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8827862813457051,
+        0.8819502529437035,
+        0.8781309436743062
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.9_weight0.5/validation/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.9_weight0.5/validation/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/attention_diversity/margin0.9_weight0.5/validation/seed_2/model.pt"
+      ],
+      "name": "margin0.9_weight0.5",
+      "candidate_id": "margin0.9_weight0.5",
+      "diversity_configuration": {
+        "name": "margin0.9_weight0.5",
+        "margin": 0.9,
+        "weight": 0.5
+      },
+      "cv": {
+        "mean_macro_f1": 0.8030147380187755,
+        "sd_macro_f1": 0.00868177948509258,
+        "folds": [
+          {
+            "phase": "fold_0",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.798951048951049,
+              "balanced_accuracy": 0.8186633723998128,
+              "macro_f1": 0.7941138526638906,
+              "log_loss": 0.5012496041230737,
+              "recall": {
+                "infectious": 0.8034188034188035,
+                "noninfectious": 0.7709923664122137,
+                "normal": 0.881578947368421
+              },
+              "confusion_matrix": [
+                [
+                  188,
+                  38,
+                  8
+                ],
+                [
+                  38,
+                  202,
+                  22
+                ],
+                [
+                  1,
+                  8,
+                  67
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_1",
+            "metrics": {
+              "n": 572,
+              "accuracy": 0.791958041958042,
+              "balanced_accuracy": 0.8238977998921752,
+              "macro_f1": 0.8034709379704726,
+              "log_loss": 0.6504569862216473,
+              "recall": {
+                "infectious": 0.7435897435897436,
+                "noninfectious": 0.7938931297709924,
+                "normal": 0.9342105263157895
+              },
+              "confusion_matrix": [
+                [
+                  174,
+                  55,
+                  5
+                ],
+                [
+                  38,
+                  208,
+                  16
+                ],
+                [
+                  0,
+                  5,
+                  71
+                ]
+              ]
+            }
+          },
+          {
+            "phase": "fold_2",
+            "metrics": {
+              "n": 573,
+              "accuracy": 0.8080279232111692,
+              "balanced_accuracy": 0.8359029662811932,
+              "macro_f1": 0.8114594234219634,
+              "log_loss": 0.5312509143570323,
+              "recall": {
+                "infectious": 0.8376068376068376,
+                "noninfectious": 0.7490494296577946,
+                "normal": 0.9210526315789473
+              },
+              "confusion_matrix": [
+                [
+                  196,
+                  28,
+                  10
+                ],
+                [
+                  52,
+                  197,
+                  14
+                ],
+                [
+                  0,
+                  6,
+                  70
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.008153756552125802,
+        "macro_f1_difference": -0.005979423694197461,
+        "accuracy_ci95": [
+          -0.01675526644812613,
+          0.0
+        ],
+        "macro_f1_ci95": [
+          -0.014798492946523484,
+          0.002321808653288391
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "new_seed_fits": 48,
+  "external_test_evaluated": false
+}

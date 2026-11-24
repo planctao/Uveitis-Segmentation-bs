@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Double-precision independent NumPy/SciPy complete source norms, GELU, additive/product pair norm and residual match",
+    "Selected numerical global/local/norm derivatives, constant/extreme inputs, source shift invariance and unused auxiliary coordinates verified",
+    "Additive/product have identical parameter counts within rank16/32; all common M5 initialization, RNG and initial train/eval probabilities exact",
+    "Original task gradients reach readout then both source projections; complete strict model restoration exact"
+  ]
+}

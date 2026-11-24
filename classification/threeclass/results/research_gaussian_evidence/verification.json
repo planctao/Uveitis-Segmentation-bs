@@ -1,0 +1,259 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "generative_models_checked": 48,
+  "source_heads_checked": 12,
+  "composite_candidates_checked": 12,
+  "checks": [
+    "Patient and duplicate groups disjoint for all fitted/stopping/outer sources",
+    "Source heads strictly restore and sampled embeddings reproduce their declared caches",
+    "Every feature statistic uses only the fitting patients",
+    "Prototype means independently rebuilt from equally weighted per-patient means",
+    "Shared covariance independently rebuilt by averaging within-patient residual second moments",
+    "Every hierarchy prior and covariance factor reconstructed",
+    "All pure evidence and mixed probabilities reproduce exactly",
+    "Every candidate covers original training images exactly once and all reported metrics reconstruct"
+  ],
+  "models": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "geometry": "subtype_0.5"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "geometry": "coarse_0.1"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "geometry": "coarse_0.5"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "geometry": "subtype_0.1"
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "geometry": "subtype_0.5"
+    }
+  ]
+}

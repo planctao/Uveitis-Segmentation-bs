@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol_sha256": "377ee52f0c942778ea9309098e03d7699e4975cb2257ea0bb6f9d908aaa2f3dd",
+  "feature_storage": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/register_depth_features/features/dinov3_register_depth_development.npz",
+  "feature_bank_sha256": "ae48c71a98d9b271c8ec26f0748a567921cd45ec32e79e30ff14a15da391c634",
+  "metadata_sha256": "13494cea930c432ad577845759a9b791b841aac68b7ec7b9b68e75adab3fdcde",
+  "development_images_checked": 2091,
+  "shards_checked": 262,
+  "actual_images_independently_recomputed": [
+    {
+      "development_index": 137,
+      "independent_pooling_and_prefix_max_errors": {
+        "early_registers": 114.421875,
+        "middle_registers": 114.390625,
+        "final_registers": 0.0078125
+      }
+    },
+    {
+      "development_index": 459,
+      "independent_pooling_and_prefix_max_errors": {
+        "early_registers": 114.421875,
+        "middle_registers": 114.359375,
+        "final_registers": 0.015625
+      }
+    },
+    {
+      "development_index": 999,
+      "independent_pooling_and_prefix_max_errors": {
+        "early_registers": 114.40625,
+        "middle_registers": 114.359375,
+        "final_registers": 0.0234375
+      }
+    },
+    {
+      "development_index": 1456,
+      "independent_pooling_and_prefix_max_errors": {
+        "early_registers": 6.3623046875,
+        "middle_registers": 6.3603515625,
+        "final_registers": 0.00244140625
+      }
+    },
+    {
+      "development_index": 1789,
+      "independent_pooling_and_prefix_max_errors": {
+        "early_registers": 114.421875,
+        "middle_registers": 114.328125,
+        "final_registers": 0.015625
+      }
+    },
+    {
+      "development_index": 2057,
+      "independent_pooling_and_prefix_max_errors": {
+        "early_registers": 114.421875,
+        "middle_registers": 114.359375,
+        "final_registers": 0.01953125
+      }
+    }
+  ],
+  "token_counts": {
+    "early_registers": 4,
+    "middle_registers": 4,
+    "final_registers": 4
+  },
+  "legacy_final_registers_exact_match": true,
+  "all_cache_image_hashes_unchanged": true,
+  "checks": [
+    "Allbankarrays/all262shards and proofbytes independentlyfingerprinted; exactrowcoverage and all2091cachehashes checked",
+    "Originallegacy streams andfinalregisters checked duringeveryforward; finalregistercontrol exactlyequals originalfrozenbank",
+    "Sixadditionaldevelopmentimages forwarded with rawblock7/rawblock15/finalnorm hooks and independentregisterpositionindexing",
+    "All frozenweights/sourcefeatures/code/preflight hashes intact; no classificationfits/scores or externalimages/outcomes"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

@@ -1,0 +1,977 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T21:30:39.350103+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "hypothesis": "First-order attention pools may discard cross-channel regional co-occurrence. A low-rank second-order residual can supply spatially pooled covariance patterns while preserving the existing global and disease head.",
+    "configuration_plan": [
+      {
+        "name": "diagonal_rank16_aux0.0",
+        "feature": "multiscale_vit",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.1,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.03,
+          "fine_contrastive": 0.05,
+          "taxonomy_second_order": true,
+          "covariance_mode": "diagonal",
+          "covariance_rank": 16,
+          "covariance_aux": 0.0,
+          "covariance_dropout": 0.2
+        }
+      },
+      {
+        "name": "full_rank16_aux0.0",
+        "feature": "multiscale_vit",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.1,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.03,
+          "fine_contrastive": 0.05,
+          "taxonomy_second_order": true,
+          "covariance_mode": "full",
+          "covariance_rank": 16,
+          "covariance_aux": 0.0,
+          "covariance_dropout": 0.2
+        }
+      },
+      {
+        "name": "full_rank32_aux0.0",
+        "feature": "multiscale_vit",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.1,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.03,
+          "fine_contrastive": 0.05,
+          "taxonomy_second_order": true,
+          "covariance_mode": "full",
+          "covariance_rank": 32,
+          "covariance_aux": 0.0,
+          "covariance_dropout": 0.2
+        }
+      },
+      {
+        "name": "full_rank16_aux0.2",
+        "feature": "multiscale_vit",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.1,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.03,
+          "fine_contrastive": 0.05,
+          "taxonomy_second_order": true,
+          "covariance_mode": "full",
+          "covariance_rank": 16,
+          "covariance_aux": 0.2,
+          "covariance_dropout": 0.2
+        }
+      },
+      {
+        "name": "uncentered_rank16_aux0.0",
+        "feature": "multiscale_vit",
+        "config": {
+          "arch": "attention",
+          "mode": "flat",
+          "hidden": 256,
+          "dropout": 0.6,
+          "lr": 0.002,
+          "wd": 0.1,
+          "epochs": 120,
+          "patience": 18,
+          "taxonomy_only": true,
+          "aux": 0.8,
+          "label_smoothing": 0.03,
+          "fine_contrastive": 0.05,
+          "taxonomy_second_order": true,
+          "covariance_mode": "uncentered",
+          "covariance_rank": 16,
+          "covariance_aux": 0.0,
+          "covariance_dropout": 0.2
+        }
+      }
+    ],
+    "controls": "Same frozen DINO320+448 features, ordinary attention, training configuration and all losses as milestone5. Compare diagonal variance versus full covariance, rank16 versus32, extra local disease auxiliary versus none, and covariance versus uncentered second moment.",
+    "architecture": "Project the9aligned regional features, compute masked second moments, use signed-root and L2 normalization, then a zero-initialized disease residual readout with an image-dependent scalar gate initializedsigmoid(-2). Every base parameter initializes identically to the ordinary head.",
+    "initialization_policy": "Additional parameters constructed only after every existing base module; zero readout guarantees exactly unchanged initial predictions.",
+    "new_seed_fits": 60,
+    "seeds_per_arm": 3,
+    "outer_cv": "Every arm receives original3patient folds with separate inner stopping patients and3seeds per fold. All normalization and disease mappings fit inner patients only.",
+    "development_gate": "Require improved original CV and nondecreasing validation macro-F1 versus milestone5; passing models still need newly fixed repeated-patient confirmation.",
+    "external_test_policy": "No external predictions, labels, metrics or images used in this study."
+  },
+  "candidates": [
+    {
+      "group": "00_diagonal_rank16_aux0.0",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "diagonal",
+        "covariance_rank": 16,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8743315508021391,
+        "balanced_accuracy": 0.8762015494236293,
+        "macro_f1": 0.871845140275845,
+        "log_loss": 0.3314148718737571,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.867816091954023,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            14,
+            151,
+            9
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8697061443109545,
+        0.8836149332134823,
+        0.8799260984257326
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/00_diagonal_rank16_aux0.0/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/00_diagonal_rank16_aux0.0/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/00_diagonal_rank16_aux0.0/seed_2/model.pt"
+      ],
+      "feature": "multiscale_vit",
+      "name": "diagonal_rank16_aux0.0",
+      "ablation_index": 0,
+      "candidate_id": "second_order_e5924578efa1",
+      "cv": {
+        "mean_macro_f1": 0.8034240292625374,
+        "sd_macro_f1": 0.007453874775107534,
+        "mean_accuracy": 0.8008091385054735
+      },
+      "cv_directory": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_second_order_e5924578efa1",
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.006988934187536433,
+        "macro_f1_difference": -0.00530394355024022,
+        "accuracy_ci95": [
+          -0.019275538084086042,
+          0.006205400355671604
+        ],
+        "macro_f1_ci95": [
+          -0.017825174710643044,
+          0.0078104773099798505
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "actual_branch_diagnostics": [
+        {
+          "seed": 0,
+          "selected_epoch": 38,
+          "head_parameters": 1008703,
+          "branch_parameters": 25071,
+          "mean_gate": 0.10004536062479019,
+          "mean_absolute_residual_logits": 0.07389193773269653,
+          "readout_weight_norm": 0.3415774405002594,
+          "region_permutation_probability_max_error": 3.5762786865234375e-07,
+          "residual_removed_changed_decisions": 0
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 40,
+          "head_parameters": 1008703,
+          "branch_parameters": 25071,
+          "mean_gate": 0.1761966496706009,
+          "mean_absolute_residual_logits": 0.08137627691030502,
+          "readout_weight_norm": 0.4353128671646118,
+          "region_permutation_probability_max_error": 2.384185791015625e-07,
+          "residual_removed_changed_decisions": 0
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 32,
+          "head_parameters": 1008703,
+          "branch_parameters": 25071,
+          "mean_gate": 0.1585151106119156,
+          "mean_absolute_residual_logits": 0.07065164297819138,
+          "readout_weight_norm": 0.3022540807723999,
+          "region_permutation_probability_max_error": 3.129243850708008e-07,
+          "residual_removed_changed_decisions": 0
+        }
+      ],
+      "residual_removed_validation": {
+        "n": 374,
+        "accuracy": 0.8743315508021391,
+        "balanced_accuracy": 0.8762015494236293,
+        "macro_f1": 0.871845140275845,
+        "log_loss": 0.3321292668095524,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.867816091954023,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            14,
+            151,
+            9
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "residual_removed_changed_ensemble_decisions": 0,
+      "head_parameters_per_seed": 1008703
+    },
+    {
+      "group": "01_full_rank16_aux0.0",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "full",
+        "covariance_rank": 16,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8770053475935828,
+        "balanced_accuracy": 0.8785656156174827,
+        "macro_f1": 0.8740054058253642,
+        "log_loss": 0.33114758219230866,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.867816091954023,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            125,
+            15,
+            1
+          ],
+          [
+            14,
+            151,
+            9
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8697061443109545,
+        0.8814754481155864,
+        0.8798971982029132
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/01_full_rank16_aux0.0/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/01_full_rank16_aux0.0/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/01_full_rank16_aux0.0/seed_2/model.pt"
+      ],
+      "feature": "multiscale_vit",
+      "name": "full_rank16_aux0.0",
+      "ablation_index": 1,
+      "candidate_id": "second_order_0e8307fc0bbf",
+      "cv": {
+        "mean_macro_f1": 0.8050427042027906,
+        "sd_macro_f1": 0.00712121857513464,
+        "mean_accuracy": 0.8019746396709747
+      },
+      "cv_directory": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_second_order_0e8307fc0bbf",
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0058241118229469535,
+        "macro_f1_difference": -0.0036780356323888874,
+        "accuracy_ci95": [
+          -0.01829718919800305,
+          0.0070999615433090775
+        ],
+        "macro_f1_ci95": [
+          -0.016157954867615447,
+          0.00945211226598495
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "actual_branch_diagnostics": [
+        {
+          "seed": 0,
+          "selected_epoch": 38,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.06134467199444771,
+          "mean_absolute_residual_logits": 0.14657466113567352,
+          "readout_weight_norm": 0.8988270163536072,
+          "region_permutation_probability_max_error": 2.384185791015625e-07,
+          "residual_removed_changed_decisions": 0
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 40,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.1323082596063614,
+          "mean_absolute_residual_logits": 0.20114384591579437,
+          "readout_weight_norm": 1.1136912107467651,
+          "region_permutation_probability_max_error": 3.2782554626464844e-07,
+          "residual_removed_changed_decisions": 3
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 32,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.05989307165145874,
+          "mean_absolute_residual_logits": 0.1437843143939972,
+          "readout_weight_norm": 0.8418026566505432,
+          "region_permutation_probability_max_error": 3.5762786865234375e-07,
+          "residual_removed_changed_decisions": 0
+        }
+      ],
+      "residual_removed_validation": {
+        "n": 374,
+        "accuracy": 0.8770053475935828,
+        "balanced_accuracy": 0.8785656156174827,
+        "macro_f1": 0.8740054058253642,
+        "log_loss": 0.3329309543152753,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.867816091954023,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            125,
+            15,
+            1
+          ],
+          [
+            14,
+            151,
+            9
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "residual_removed_changed_ensemble_decisions": 0,
+      "head_parameters_per_seed": 1010383
+    },
+    {
+      "group": "02_full_rank32_aux0.0",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "full",
+        "covariance_rank": 32,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8823529411764706,
+        "balanced_accuracy": 0.8771708027462407,
+        "macro_f1": 0.8746875373526034,
+        "log_loss": 0.33786906954831547,
+        "recall": {
+          "infectious": 0.9219858156028369,
+          "noninfectious": 0.8620689655172413,
+          "normal": 0.847457627118644
+        },
+        "confusion_matrix": [
+          [
+            130,
+            11,
+            0
+          ],
+          [
+            14,
+            150,
+            10
+          ],
+          [
+            1,
+            8,
+            50
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8537047231712681,
+        0.8809588029577364,
+        0.8798619094362468
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/02_full_rank32_aux0.0/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/02_full_rank32_aux0.0/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/02_full_rank32_aux0.0/seed_2/model.pt"
+      ],
+      "feature": "multiscale_vit",
+      "name": "full_rank32_aux0.0",
+      "ablation_index": 2,
+      "candidate_id": "second_order_b584a33a0042",
+      "cv": {
+        "mean_macro_f1": 0.8040557028278386,
+        "sd_macro_f1": 0.004154058122859764,
+        "mean_accuracy": 0.8019756566876985
+      },
+      "cv_directory": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_second_order_b584a33a0042",
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0058241118229469535,
+        "macro_f1_difference": -0.004739288172829537,
+        "accuracy_ci95": [
+          -0.018630689217480144,
+          0.006879391129979878
+        ],
+        "macro_f1_ci95": [
+          -0.01759417240510682,
+          0.00801688927487519
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "actual_branch_diagnostics": [
+        {
+          "seed": 0,
+          "selected_epoch": 10,
+          "head_parameters": 1040447,
+          "branch_parameters": 56815,
+          "mean_gate": 0.043023549020290375,
+          "mean_absolute_residual_logits": 0.16616998612880707,
+          "readout_weight_norm": 1.3558067083358765,
+          "region_permutation_probability_max_error": 3.5762786865234375e-07,
+          "residual_removed_changed_decisions": 0
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 38,
+          "head_parameters": 1040447,
+          "branch_parameters": 56815,
+          "mean_gate": 0.08192794024944305,
+          "mean_absolute_residual_logits": 0.3513406217098236,
+          "readout_weight_norm": 2.004321575164795,
+          "region_permutation_probability_max_error": 2.980232238769531e-07,
+          "residual_removed_changed_decisions": 5
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 50,
+          "head_parameters": 1040447,
+          "branch_parameters": 56815,
+          "mean_gate": 0.10454992949962616,
+          "mean_absolute_residual_logits": 0.40219029784202576,
+          "readout_weight_norm": 2.112272262573242,
+          "region_permutation_probability_max_error": 2.384185791015625e-07,
+          "residual_removed_changed_decisions": 2
+        }
+      ],
+      "residual_removed_validation": {
+        "n": 374,
+        "accuracy": 0.8796791443850267,
+        "balanced_accuracy": 0.8752550939339803,
+        "macro_f1": 0.8725348362137609,
+        "log_loss": 0.34090149855672014,
+        "recall": {
+          "infectious": 0.9219858156028369,
+          "noninfectious": 0.8563218390804598,
+          "normal": 0.847457627118644
+        },
+        "confusion_matrix": [
+          [
+            130,
+            11,
+            0
+          ],
+          [
+            15,
+            149,
+            10
+          ],
+          [
+            1,
+            8,
+            50
+          ]
+        ]
+      },
+      "residual_removed_changed_ensemble_decisions": 1,
+      "head_parameters_per_seed": 1040447
+    },
+    {
+      "group": "03_full_rank16_aux0.2",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "full",
+        "covariance_rank": 16,
+        "covariance_aux": 0.2,
+        "covariance_dropout": 0.2
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.8866768082481178,
+        "macro_f1": 0.8825958033157951,
+        "log_loss": 0.3367151463438706,
+        "recall": {
+          "infectious": 0.8936170212765957,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            126,
+            14,
+            1
+          ],
+          [
+            11,
+            154,
+            9
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8665444259274255,
+        0.8876405472812104,
+        0.8830725918204
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/03_full_rank16_aux0.2/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/03_full_rank16_aux0.2/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/03_full_rank16_aux0.2/seed_2/model.pt"
+      ],
+      "feature": "multiscale_vit",
+      "name": "full_rank16_aux0.2",
+      "ablation_index": 3,
+      "candidate_id": "second_order_cea1991a7493",
+      "cv": {
+        "mean_macro_f1": 0.8017998147417069,
+        "sd_macro_f1": 0.013192892673982414,
+        "mean_accuracy": 0.7961471338434688
+      },
+      "cv_directory": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_second_order_cea1991a7493",
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.011648223645894018,
+        "macro_f1_difference": -0.006884689559504054,
+        "accuracy_ci95": [
+          -0.027599868207123263,
+          0.004101194607107149
+        ],
+        "macro_f1_ci95": [
+          -0.021625834082302835,
+          0.00758321695378409
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "actual_branch_diagnostics": [
+        {
+          "seed": 0,
+          "selected_epoch": 34,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.11573150753974915,
+          "mean_absolute_residual_logits": 1.0873297452926636,
+          "readout_weight_norm": 10.245311737060547,
+          "region_permutation_probability_max_error": 2.384185791015625e-07,
+          "residual_removed_changed_decisions": 4
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 39,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.13888846337795258,
+          "mean_absolute_residual_logits": 1.172075629234314,
+          "readout_weight_norm": 11.63444995880127,
+          "region_permutation_probability_max_error": 3.5762786865234375e-07,
+          "residual_removed_changed_decisions": 2
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 49,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.17789365351200104,
+          "mean_absolute_residual_logits": 1.1939280033111572,
+          "readout_weight_norm": 13.721449851989746,
+          "region_permutation_probability_max_error": 2.682209014892578e-07,
+          "residual_removed_changed_decisions": 6
+        }
+      ],
+      "residual_removed_validation": {
+        "n": 374,
+        "accuracy": 0.8796791443850267,
+        "balanced_accuracy": 0.8762989583462867,
+        "macro_f1": 0.8755740218569955,
+        "log_loss": 0.3422989455292676,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.8850574712643678,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            12,
+            154,
+            8
+          ],
+          [
+            1,
+            7,
+            51
+          ]
+        ]
+      },
+      "residual_removed_changed_ensemble_decisions": 5,
+      "head_parameters_per_seed": 1010383
+    },
+    {
+      "group": "04_uncentered_rank16_aux0.0",
+      "mode": "flat",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.6,
+        "lr": 0.002,
+        "wd": 0.1,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 0.8,
+        "label_smoothing": 0.03,
+        "fine_contrastive": 0.05,
+        "taxonomy_second_order": true,
+        "covariance_mode": "uncentered",
+        "covariance_rank": 16,
+        "covariance_aux": 0.0,
+        "covariance_dropout": 0.2
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8823529411764706,
+        "balanced_accuracy": 0.8823970332420038,
+        "macro_f1": 0.8782906082430806,
+        "log_loss": 0.3367204046648183,
+        "recall": {
+          "infectious": 0.8865248226950354,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            125,
+            15,
+            1
+          ],
+          [
+            12,
+            153,
+            9
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.8675429583079571,
+        0.8814754481155864,
+        0.8833686122458486
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/04_uncentered_rank16_aux0.0/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/04_uncentered_rank16_aux0.0/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/regional_second_order/04_uncentered_rank16_aux0.0/seed_2/model.pt"
+      ],
+      "feature": "multiscale_vit",
+      "name": "uncentered_rank16_aux0.0",
+      "ablation_index": 4,
+      "candidate_id": "second_order_71be5895c76e",
+      "cv": {
+        "mean_macro_f1": 0.8046830583218454,
+        "sd_macro_f1": 0.008424968853081673,
+        "mean_accuracy": 0.8019736226542508
+      },
+      "cv_directory": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_second_order_71be5895c76e",
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0058241118229469535,
+        "macro_f1_difference": -0.004020136547064124,
+        "accuracy_ci95": [
+          -0.01824137315517334,
+          0.007192014855102954
+        ],
+        "macro_f1_ci95": [
+          -0.016672700496395968,
+          0.008929991100433528
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false,
+      "actual_branch_diagnostics": [
+        {
+          "seed": 0,
+          "selected_epoch": 38,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.08911528438329697,
+          "mean_absolute_residual_logits": 0.11479290574789047,
+          "readout_weight_norm": 0.9419923424720764,
+          "region_permutation_probability_max_error": 4.172325134277344e-07,
+          "residual_removed_changed_decisions": 0
+        },
+        {
+          "seed": 1,
+          "selected_epoch": 40,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.80862957239151,
+          "mean_absolute_residual_logits": 0.15845976769924164,
+          "readout_weight_norm": 1.4543397426605225,
+          "region_permutation_probability_max_error": 4.76837158203125e-07,
+          "residual_removed_changed_decisions": 9
+        },
+        {
+          "seed": 2,
+          "selected_epoch": 50,
+          "head_parameters": 1010383,
+          "branch_parameters": 26751,
+          "mean_gate": 0.2981911599636078,
+          "mean_absolute_residual_logits": 0.19654452800750732,
+          "readout_weight_norm": 1.594141960144043,
+          "region_permutation_probability_max_error": 2.384185791015625e-07,
+          "residual_removed_changed_decisions": 3
+        }
+      ],
+      "residual_removed_validation": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8894892318235641,
+        "macro_f1": 0.8847540241367505,
+        "log_loss": 0.3411613766313625,
+        "recall": {
+          "infectious": 0.9078014184397163,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            128,
+            12,
+            1
+          ],
+          [
+            12,
+            153,
+            9
+          ],
+          [
+            1,
+            6,
+            52
+          ]
+        ]
+      },
+      "residual_removed_changed_ensemble_decisions": 3,
+      "head_parameters_per_seed": 1010383
+    }
+  ],
+  "new_seed_fits": 60,
+  "reference": {
+    "candidate_id": "63c585e70306",
+    "val_macro_f1": 0.8893107959516184,
+    "cv_macro_f1": 0.8090823139275858
+  },
+  "external_test_evaluated": false,
+  "external_files_read": false,
+  "decision": "No second-order head passed both development gates; preserve frozen models and all negative results.",
+  "code_sha256": {
+    "second_order_head.py": "d362baefd745b4dbb19c3c1f8dd900c301ce5c321f8cee4bdeff0c3f7d501ab2",
+    "experiment.py": "73a97532f2b4a4c5ab3a7063bbf86a79cda220cf4594231331b34041220d8290",
+    "second_order_experiments.py": "156ee172a40484b0f4ad5c5e4e03278831e70191e6887abdc79a9e21ac7c1c13",
+    "verify_second_order.py": "4a282a0a4a9627af7a265c61bf6fa37b96057af2734650a14902504980932fca",
+    "crossvalidate.py": "513ddc5dc4bea26f69b282c1152a7fdd7350fe70c40d1306fe22adc5b1401ddc",
+    "audit_candidate_cv.py": "8b0196a282dc06910ece9bfc73645d58031053b8aef9a95cbaa4bf99482e8826"
+  },
+  "within_family_paired_oof": {
+    "full_minus_diagonal": {
+      "accuracy_difference": 0.0011648223645894795,
+      "macro_f1_difference": 0.0016259079178513325,
+      "accuracy_ci95": [
+        -0.0006998761834177663,
+        0.003444971473815891
+      ],
+      "macro_f1_ci95": [
+        -0.0004557546494148135,
+        0.004055089072770969
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "full_minus_uncentered": {
+      "accuracy_difference": 0.0,
+      "macro_f1_difference": 0.0003421009146752363,
+      "accuracy_ci95": [
+        -0.0017525938423184867,
+        0.0016439032825586533
+      ],
+      "macro_f1_ci95": [
+        -0.0013132957737339967,
+        0.002221604179903835
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "rank32_minus_rank16": {
+      "accuracy_difference": 0.0,
+      "macro_f1_difference": -0.0010612525404406492,
+      "accuracy_ci95": [
+        -0.004075275033636022,
+        0.004258523057786833
+      ],
+      "macro_f1_ci95": [
+        -0.0051475602922712695,
+        0.0028475337078651933
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "auxiliary_minus_none": {
+      "accuracy_difference": -0.0058241118229470645,
+      "macro_f1_difference": -0.003206653927115166,
+      "accuracy_ci95": [
+        -0.012345679012345623,
+        0.0005726091756335084
+      ],
+      "macro_f1_ci95": [
+        -0.008677644087973233,
+        0.0026098986279210583
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    }
+  },
+  "inference_limit": "All original-fold paired intervals are exploratory and do not adjust prior model search or full training-fit uncertainty. Removing a branch inside a jointly trained head is a diagnostic, not a substitute for the predeclared matched baseline."
+}

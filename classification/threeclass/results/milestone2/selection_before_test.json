@@ -1,0 +1,299 @@
+{
+  "time": "2026-11-24T02:10:03.588804+08:00",
+  "rule": "Promote only if development validation macro-F1 is at least the first primary and mean outer-CV macro-F1 exceeds every previously completed finalist; no external result enters selection.",
+  "selected": {
+    "group": "08_attention_dual",
+    "mode": "dual",
+    "config": {
+      "arch": "attention",
+      "mode": "dual",
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "aux": 0.6,
+      "consistency": 0.3,
+      "subtype_fusion": true,
+      "subtype_consistency": 0.1
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.839572192513369,
+      "balanced_accuracy": 0.8303855044469591,
+      "macro_f1": 0.8366878015526823,
+      "log_loss": 0.4718482792377472,
+      "recall": {
+        "infectious": 0.8439716312056738,
+        "noninfectious": 0.8505747126436781,
+        "normal": 0.7966101694915254
+      },
+      "confusion_matrix": [
+        [
+          119,
+          22,
+          0
+        ],
+        [
+          18,
+          148,
+          8
+        ],
+        [
+          3,
+          9,
+          47
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.8263943334118773,
+      0.8408078193973779,
+      0.8390264063673941
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/subtype_hierarchy/08_attention_dual/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/subtype_hierarchy/08_attention_dual/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/vitb_320/subtype_hierarchy/08_attention_dual/seed_2/model.pt"
+    ],
+    "feature": "vitb_320",
+    "candidate_id": "subtype_c83653b2f9ea",
+    "ablation_index": 8
+  },
+  "cv": {
+    "candidate": "continuous_subtype_c83653b2f9ea",
+    "config": {
+      "arch": "attention",
+      "mode": "dual",
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18,
+      "aux": 0.6,
+      "consistency": 0.3,
+      "subtype_fusion": true,
+      "subtype_consistency": 0.1
+    },
+    "folds": [
+      {
+        "fold": 0,
+        "inner_train_images": 923,
+        "early_stop_images": 222,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.798951048951049,
+          "balanced_accuracy": 0.8051429137206557,
+          "macro_f1": 0.7889191112918805,
+          "log_loss": 0.6668847799301147,
+          "recall": {
+            "infectious": 0.7735042735042735,
+            "noninfectious": 0.8129770992366412,
+            "normal": 0.8289473684210527
+          },
+          "confusion_matrix": [
+            [
+              181,
+              47,
+              6
+            ],
+            [
+              26,
+              213,
+              23
+            ],
+            [
+              1,
+              12,
+              63
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 1,
+        "inner_train_images": 935,
+        "early_stop_images": 210,
+        "outer_test_images": 572,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 572,
+          "accuracy": 0.7552447552447552,
+          "balanced_accuracy": 0.7919352272506149,
+          "macro_f1": 0.7674033484473083,
+          "log_loss": 1.146230936050415,
+          "recall": {
+            "infectious": 0.6837606837606838,
+            "noninfectious": 0.7709923664122137,
+            "normal": 0.9210526315789473
+          },
+          "confusion_matrix": [
+            [
+              160,
+              69,
+              5
+            ],
+            [
+              39,
+              202,
+              21
+            ],
+            [
+              1,
+              5,
+              70
+            ]
+          ]
+        }
+      },
+      {
+        "fold": 2,
+        "inner_train_images": 902,
+        "early_stop_images": 242,
+        "outer_test_images": 573,
+        "thresholds_from_inner_stop_only": null,
+        "metrics": {
+          "n": 573,
+          "accuracy": 0.8027923211169284,
+          "balanced_accuracy": 0.8257065350321304,
+          "macro_f1": 0.8111651204379416,
+          "log_loss": 0.8917181491851807,
+          "recall": {
+            "infectious": 0.8333333333333334,
+            "noninfectious": 0.7490494296577946,
+            "normal": 0.8947368421052632
+          },
+          "confusion_matrix": [
+            [
+              195,
+              34,
+              5
+            ],
+            [
+              53,
+              197,
+              13
+            ],
+            [
+              0,
+              8,
+              68
+            ]
+          ]
+        }
+      }
+    ],
+    "mean_macro_f1": 0.7891625267257102,
+    "sd_macro_f1": 0.02188190143120829,
+    "mean_accuracy": 0.7856627084375775,
+    "policy": "3 outer patient-group folds using original training data only; disjoint inner early-stopping patients; thresholds selected only on inner stop patients; 3 seeds per fold."
+  },
+  "prior_best_mean_cv_macro_f1": 0.7833858804538504,
+  "eligible": true,
+  "subtype_contribution": {
+    "full": {
+      "n": 374,
+      "accuracy": 0.839572192513369,
+      "balanced_accuracy": 0.8303855044469591,
+      "macro_f1": 0.8366878015526823,
+      "log_loss": 0.4718482792377472,
+      "recall": {
+        "infectious": 0.8439716312056738,
+        "noninfectious": 0.8505747126436781,
+        "normal": 0.7966101694915254
+      },
+      "confusion_matrix": [
+        [
+          119,
+          22,
+          0
+        ],
+        [
+          18,
+          148,
+          8
+        ],
+        [
+          3,
+          9,
+          47
+        ]
+      ]
+    },
+    "validation_only": true,
+    "selection": "08_attention_dual",
+    "with_subtype_branch_removed": {
+      "n": 374,
+      "accuracy": 0.8101604278074866,
+      "balanced_accuracy": 0.8094598571612138,
+      "macro_f1": 0.8120427507445266,
+      "log_loss": 0.4975535273551941,
+      "recall": {
+        "infectious": 0.7872340425531915,
+        "noninfectious": 0.8275862068965517,
+        "normal": 0.8135593220338984
+      },
+      "confusion_matrix": [
+        [
+          111,
+          30,
+          0
+        ],
+        [
+          20,
+          144,
+          10
+        ],
+        [
+          4,
+          7,
+          48
+        ]
+      ]
+    },
+    "subtype_branch_only": {
+      "n": 374,
+      "accuracy": 0.839572192513369,
+      "balanced_accuracy": 0.8303855044469591,
+      "macro_f1": 0.8366878015526823,
+      "log_loss": 0.47196730971336365,
+      "recall": {
+        "infectious": 0.8439716312056738,
+        "noninfectious": 0.8505747126436781,
+        "normal": 0.7966101694915254
+      },
+      "confusion_matrix": [
+        [
+          119,
+          22,
+          0
+        ],
+        [
+          18,
+          148,
+          8
+        ],
+        [
+          3,
+          9,
+          47
+        ]
+      ]
+    },
+    "mean_mixture_weights": [
+      0.010655916295945644,
+      0.0002415119088254869,
+      0.00036045559681952,
+      0.9887433052062988
+    ],
+    "note": "Branch removal is a diagnostic of jointly trained weights; separately trained controls are in the ablation leaderboard."
+  },
+  "provenance_audit_passed": true,
+  "next_hypothesis_before_external_evaluation": "The subtype branch carries almost all decision weight; test a compact subtype-marginal classifier without unused hierarchy branches."
+}

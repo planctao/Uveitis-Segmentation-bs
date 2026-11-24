@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "weights_sha256": "56df97c299afea2ffa1eb90f866e8a290f452e227e732fef32a9eb9e8b52027f",
+  "development_images_checked": 2091,
+  "shards_checked": 262,
+  "actual_images_recomputed": [
+    {
+      "development_index": 0,
+      "max_abs_feature_difference": {
+        "global": 0.00146484375,
+        "regions": 0.0009765625,
+        "mid": 0.015625,
+        "dispersion": 0.000244140625
+      }
+    },
+    {
+      "development_index": 352,
+      "max_abs_feature_difference": {
+        "global": 0.002197265625,
+        "regions": 0.0009765625,
+        "mid": 0.0078125,
+        "dispersion": 0.00048828125
+      }
+    },
+    {
+      "development_index": 887,
+      "max_abs_feature_difference": {
+        "global": 0.00244140625,
+        "regions": 0.00244140625,
+        "mid": 0.015625,
+        "dispersion": 0.00048828125
+      }
+    },
+    {
+      "development_index": 1501,
+      "max_abs_feature_difference": {
+        "global": 0.002197265625,
+        "regions": 0.0009765625,
+        "mid": 0.00439453125,
+        "dispersion": 0.0009765625
+      }
+    },
+    {
+      "development_index": 1800,
+      "max_abs_feature_difference": {
+        "global": 0.001953125,
+        "regions": 0.001953125,
+        "mid": 0.015625,
+        "dispersion": 0.000244140625
+      }
+    },
+    {
+      "development_index": 2090,
+      "max_abs_feature_difference": {
+        "global": 0.002105712890625,
+        "regions": 0.001953125,
+        "mid": 0.015625,
+        "dispersion": 0.0009765625
+      }
+    }
+  ],
+  "checks": [
+    "PinnedpublicweightcontentSHA256 and strict1024D24blockstate verified",
+    "Allbankarrayfingerprints and every262shard matched exactly to2091developmentrows",
+    "All4predeclaredfeaturelayouts independently reconstructed; allexternalrowsNaN",
+    "Sixactualdevelopmentimages atboth320/448 independently reloadedandforwarded through frozenbackbone",
+    "CLS/3x3region/block15mid/patchstdfeatures match savedAMPfloat16within statednumericaltolerances"
+  ]
+}

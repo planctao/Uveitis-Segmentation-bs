@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-24T02:03:13.693673+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Test known manifoldmixup at original640Dpooled representation, excluding samepatient partners. Compare unconstrained, samecoarseclass andsamedisease interpolation to determine whether conserving diagnosis semantics improvesgeneralization. Trainingablation, not claim of originalmethod.",
+  "configuration_plan": [
+    {
+      "name": "original_control",
+      "pair_mode": "any",
+      "strength": 0.0
+    },
+    {
+      "name": "any_patient",
+      "pair_mode": "any",
+      "strength": 0.5
+    },
+    {
+      "name": "same_coarse",
+      "pair_mode": "coarse",
+      "strength": 0.5
+    },
+    {
+      "name": "same_disease",
+      "pair_mode": "disease",
+      "strength": 0.5
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "objective": "L=originalFullM5Loss+0.5*(mixedSemanticLoss-originalSemanticLoss). Originalfinecontrastive remainsunchanged. Semantics are leafsmoothing.03NLL+0.8diseaseCE. Eachanchor choosesuniformeligiblepatient thenuniformeligibleimage withinbatch; always excludes ownpatient, and optionalcoarse/diseaseconstraint. lambda~Beta(.4,.4)fromprivateNumPystream20271124+seed. Noeligiblepartner =>self,lambda1. Mix640Dpreencoder; originalLinearGELU reused andexact originaldropoutmask reused. Mixedloss mean(lambda*w_i*semantic(target_i)+(1-lambda)*w_j*semantic(target_j)). Bothendpoints differentiated. NoextraindependentDropoutdraws.",
+  "controls": "Noextra parameters or inference modules. Zero-strength exactly originaltask/init/forward/RNG. Originalfullbaseforward identical ineacharm, RNGunaffected by privatepartnerdraws or dropoutmask capture. Original complete objective, lr/wd, fit/stop/outerplans andearlystop retained; fourarms each3formal+3foldx3seeds.",
+  "audit": "Actualfirststep witness ineach36nonzerofits:normalizedglobalinput,640Dsource,mask,pairs/coefficients,patient/targets/weights,encoder/readoutweights,mixedlatent/logits/losses. IndependentNumPy/SciPy formulas; actualinputrows recovered fromfit-onlyfeatures;originalinitializedmodel andcompleteoriginaltaskCPUreplayed withactualmask; localpair/coefficientstreamreproduced. All48actualheads CPUrestorefitstats/schema/stop/outerprobsandensembles. All12controls match originalM5sourceheldoutdecisions.",
+  "selection": "Nonzeroarm mustoriginalpatientCVMacroF1>0.8090823139275858 andvalidation>=0.8893107959516184. HighestpassingCV freezes beforefreshpatientconfirmationagainstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeature rows; externalfeatures NaN. Noexternalrawimageoroutcomeaccess.",
+  "code_sha256": {
+    "patient_vicinal.py": "b86e73803e8ebd35c537d0ad6c581810893be8c574c2a92dd09b1b280346b83c",
+    "verify_patient_vicinal.py": "478313f29d1f4474f86697d5ea37e5b5280f6193fc753b58a8221e22136b4234",
+    "vicinal_experiments.py": "438d6e6d615cb9b30b221e0f30d7b0f85d249ade82b1a4b1f8aba28d2fc8d2a0",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc"
+  }
+}

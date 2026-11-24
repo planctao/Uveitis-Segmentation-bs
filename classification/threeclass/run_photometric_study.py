@@ -1,0 +1,29 @@
+"""Extract/audit development views, then fit the four predeclared controls."""
+import fcntl
+import os
+import subprocess
+import sys
+import traceback
+from experiment import ROOT, dump
+
+OUT = ROOT / 'runs/photometric_views'
+
+
+def main():
+    with (OUT / 'pipeline.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        (OUT / 'pipeline.pid').write_text(str(os.getpid()))
+        for script in ['extract_photometric_views.py', 'photometric_experiments.py']:
+            dump(OUT / 'pipeline_state.json', {'status': 'running', 'pid': os.getpid(),
+                 'step': script, 'external_test_evaluated': False})
+            try:
+                subprocess.run([sys.executable, '-u', str(ROOT / script)], cwd=ROOT, check=True)
+            except BaseException:
+                dump(OUT / 'pipeline_state.json', {'status': 'failed', 'pid': os.getpid(),
+                     'step': script, 'error': traceback.format_exc()})
+                raise
+        dump(OUT / 'pipeline_state.json', {'status': 'completed', 'pid': os.getpid(), 'external_test_evaluated': False})
+
+
+if __name__ == '__main__':
+    main()

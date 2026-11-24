@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "rank": 16,
+      "scope": "global",
+      "batch_size": 256,
+      "parameters": 1135456,
+      "maximum_complete_task_gradient_error": 1.1548399925231934e-07,
+      "large_side_probability_change": 0.00015723705291748047,
+      "large_mid_probability_change": 0.0
+    },
+    {
+      "rank": 16,
+      "scope": "all",
+      "batch_size": 256,
+      "parameters": 1135456,
+      "maximum_complete_task_gradient_error": 2.384185791015625e-07,
+      "large_side_probability_change": 0.0002751946449279785,
+      "large_mid_probability_change": 0.0001996159553527832
+    },
+    {
+      "rank": 32,
+      "scope": "global",
+      "batch_size": 256,
+      "parameters": 1270640,
+      "maximum_complete_task_gradient_error": 1.3783574104309082e-07,
+      "large_side_probability_change": 0.0003390461206436157,
+      "large_mid_probability_change": 0.0
+    },
+    {
+      "rank": 32,
+      "scope": "all",
+      "batch_size": 256,
+      "parameters": 1270640,
+      "maximum_complete_task_gradient_error": 1.341104507446289e-07,
+      "large_side_probability_change": 0.0006163120269775391,
+      "large_mid_probability_change": 0.00030168890953063965
+    }
+  ],
+  "normal_geometries": {
+    "base": {
+      "global": {
+        "maximum_principal_cosine_error": 5.585237827787637e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.7959215427061395e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.6878988186070956e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.9757623365433972e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 5.265183178337907e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.9596440671327855e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 6.2611587026140114e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.917584707162746e-08
+      }
+    },
+    "large": {
+      "global": {
+        "maximum_principal_cosine_error": 4.645247853041212e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.8786497891816225e-08
+      },
+      "regions": {
+        "maximum_principal_cosine_error": 5.04875230511459e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.8208333779922157e-08
+      },
+      "mid": {
+        "maximum_principal_cosine_error": 4.368930994758102e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 5.733068908497785e-08
+      },
+      "dispersion": {
+        "maximum_principal_cosine_error": 5.627038834887799e-09,
+        "normal_patients": 111,
+        "maximum_center_error": 2.934225462603024e-08
+      }
+    }
+  },
+  "code_sha256": {
+    "normal_large_residual.py": "8cdf4627410ece2cfc2150149640322659375f4a22589da2c9242614c6670ef4",
+    "verify_normal_large_residual.py": "435833702d1d0649b9991c6aceb1b15073eca0bc4226a40671d4e843d4df0ae2"
+  },
+  "status": "CPU preflight only; no formal protocol or training fits; actual CUDA witness audit required before launch",
+  "external_test_evaluated": false
+}

@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "mode": "coherent",
+      "scale": 0.1,
+      "full_task_batch": 256,
+      "witness_sha256": "ac62a30a20c1dd2005555a533c91eef86b0096e6404e2a293f49d50f2004cfa5"
+    },
+    {
+      "mode": "coherent",
+      "scale": 0.3,
+      "full_task_batch": 256,
+      "witness_sha256": "080a4dd05db872b5bc7351b1609ac31240f1dc639080c9be1908cac7024b79a4"
+    },
+    {
+      "mode": "gaussian",
+      "scale": 0.1,
+      "full_task_batch": 256,
+      "witness_sha256": "30d73d96e2298d56f1aa23bf7b1633bd0ddd48ffa0137824b30e74b8f2fd8271"
+    },
+    {
+      "mode": "gaussian",
+      "scale": 0.3,
+      "full_task_batch": 256,
+      "witness_sha256": "a7ea400334ca7f4e1a58687c48b3fbcfa9b63c95285df3b11fb647117345c9f3"
+    }
+  ],
+  "normal_patients": 111,
+  "code_sha256": {
+    "normal_axis_augmentation.py": "a3c46a751d5c65007c20f5a565175f3f8eaffae5013b88407dc613163ea3006a",
+    "verify_normal_axis_augmentation.py": "0cf34d1095c9b529057396dc233399ffd60a6a16213bb55056dbfb5fa147b419"
+  },
+  "checks": [
+    "Only fit-normal equal-patient centroids define rank32 coordinates and sample covariance",
+    "Distinct donor differences reproduce normal sample covariance including cross-stream correlations",
+    "Four actual 256-image full-loss gradient/update checks and independent first-batch perturbation reconstruction",
+    "Region tokens share one image perturbation; coherent donors shared across all four streams",
+    "Evaluation strictly matches the ordinary normal-suppressed network and consumes no augmentation RNG"
+  ]
+}

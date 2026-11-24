@@ -1,0 +1,76 @@
+{
+  "time": "2026-11-23T21:09:20.443338+00:00",
+  "candidate_id": "milestone_gaussian_coarse10",
+  "feature": "multiscale_vit",
+  "class_order": [
+    "infectious",
+    "noninfectious",
+    "normal"
+  ],
+  "source_candidate_id": "63c585e70306",
+  "source_cv_macro_f1": 0.8090823139275858,
+  "confirmation": {
+    "comparison": "results/research_gaussian_repeat/comparison.json",
+    "verification": "results/research_gaussian_repeat/verification.json",
+    "confirmation_gate_passed": true
+  },
+  "recipe": {
+    "original_probability_weight": 0.9,
+    "coarse_gaussian_probability_weight": 0.1,
+    "covariance_shrinkage": 0.1,
+    "temperature": "sqrt(embedding_dimension)",
+    "prototype_fit_patients_only": true,
+    "source_models": [
+      {
+        "seed": 0,
+        "source_model": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_0/source_model.pt",
+        "geometry": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_0/geometry.npz",
+        "source_model_sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+        "geometry_sha256": "8a943227cd6c814b81da6b4e95ed8af17b3c1cdc0ca182196590ddada612dde6",
+        "fit_images": 1717,
+        "fit_patients": 332,
+        "fit_statistics_source": "results/milestone5/protected_model",
+        "geometry_granularity": "coarse",
+        "geometry_shrinkage": 0.1
+      },
+      {
+        "seed": 1,
+        "source_model": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_1/source_model.pt",
+        "geometry": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_1/geometry.npz",
+        "source_model_sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+        "geometry_sha256": "ba75f13ca268a218507cc1a16c10a772a974c1d2014cd357b3bdcbf4bc1cc5ca",
+        "fit_images": 1717,
+        "fit_patients": 332,
+        "fit_statistics_source": "results/milestone5/protected_model",
+        "geometry_granularity": "coarse",
+        "geometry_shrinkage": 0.1
+      },
+      {
+        "seed": 2,
+        "source_model": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_2/source_model.pt",
+        "geometry": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_2/geometry.npz",
+        "source_model_sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+        "geometry_sha256": "51b79aacbfa8eae268606aac15e0a956193c999f48ad78933a71fc07c4f24c84",
+        "fit_images": 1717,
+        "fit_patients": 332,
+        "fit_statistics_source": "results/milestone5/protected_model",
+        "geometry_granularity": "coarse",
+        "geometry_shrinkage": 0.1
+      }
+    ]
+  },
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "source_model_sha256": {
+    "0": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+    "1": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+    "2": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176"
+  },
+  "geometry_sha256": {
+    "0": "8a943227cd6c814b81da6b4e95ed8af17b3c1cdc0ca182196590ddada612dde6",
+    "1": "ba75f13ca268a218507cc1a16c10a772a974c1d2014cd357b3bdcbf4bc1cc5ca",
+    "2": "51b79aacbfa8eae268606aac15e0a956193c999f48ad78933a71fc07c4f24c84"
+  },
+  "external_evaluation_at_freeze": false,
+  "selection_policy": "Fixed before held-out scoring after original and repeated patient confirmation. No external metric participates.",
+  "external_test_policy": "Held-out predictions are generated only after this file is complete and hashes are recorded."
+}

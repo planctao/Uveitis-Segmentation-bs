@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Independent double precision NumPy LayerNorm/GELU/softmax mixture reconstructed",
+    "Expert/channel permutation invariance and numerical routing derivative verified",
+    "Zero readouts preserve exact initial embeddings, probabilities, contrastive embeddings and RNG",
+    "Pre-dropout router exactly invariant to hidden dropout draws",
+    "All actual expert readouts, bottlenecks and gate receive finite task gradients",
+    "All four full classifiers strictly restore trained checkpoints"
+  ]
+}

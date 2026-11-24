@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-24T02:13:21.098326+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Test known squeeze/excitation-style conditionalcalibration acrossfourevidencegroups ratherthanbetweenresolutions: globalCLS, pooledregions, intermediatepatchmean andpatchdispersion. Boundedmultiplicativegains retainall originalevidence; matchedconstantgains isolateinputdependence. Not claimedmethodinvention.",
+  "configuration_plan": [
+    {
+      "name": "constant_rank8",
+      "rank": 8,
+      "conditioned": false
+    },
+    {
+      "name": "conditioned_rank8",
+      "rank": 8,
+      "conditioned": true
+    },
+    {
+      "name": "constant_rank32",
+      "rank": 32,
+      "conditioned": false
+    },
+    {
+      "name": "conditioned_rank32",
+      "rank": 32,
+      "conditioned": true
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "Original640Dpooledfusedvector f ->LayerNorm640->Linear640torank8/32->GELU->zeroLinear rankto4;gain=1+0.5tanh(logits). Repeatfour gains over originalgroups256,256,64,64. MultiplybeforeoriginalMLPencoder; allgainsin[.5,1.5]. Constantcontrols usezerocontextatidenticalparameters. LayerNormonlyusedinsidegate;originalf alwaysretained.",
+  "controls": "Exactoriginalcommoninitialweights,zero-unitgaininitialtrain/evalpredictions andRNGstream. NoaddedDropout,lossorsamplingchanges. Fourfixedarms each3formal+3foldx3seedheads, originalM5alltasklosses/weights/hparams/earlystopandpatientplans. Constant/conditioned sameparametersateachrank.",
+  "audit": "Preflight independentNumPy/SciPyLayerNorm/GELU/tanh/groupmultiplication,finite differencegradients,inputdependence/constantinvariance,actualtaskstepandstrictrestoration. All48actualheads CPUrestorefitstats/maps/stop/outerprobs; independentlyrebuildallactualgates andgroups; boundedgains,actualinputdependence,branch-offdiagnosticsandfullensembles.",
+  "selection": "OriginalpatientCVMacroF1>0.8090823139275858 andvalidation>=0.8893107959516184;highestpassingCV freezesbeforefreshpatientconfirmationagainstM5/fixedGaussian;noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeaturerows;externalarraysNaN. Noexternalimages/predictions/outcomes.",
+  "code_sha256": {
+    "evidence_gating.py": "f608d4773c8d043a996f03ff703f33758ff57c8fed3e8ab494af713d1b185de1",
+    "verify_evidence_gating.py": "c2b77e686c686e8c1398c6d7dda8725632daddc0f85a9d8881f41b13e57817a1",
+    "evidence_gating_experiments.py": "91aa28286a08b3b7b22f050829624cbcbc414df6fa1c2344fbcecffeac09877b",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc"
+  }
+}

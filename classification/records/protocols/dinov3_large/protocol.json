@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-23T23:26:22.258528+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Larger DINOv3featurecapacity may helpafter manyfixedB16headvariantsfailfreshpatientconfirmation. Compare DINOv3-L16with thesamepretrainingfamily and pairedresolutions, then fixedB/Lfeaturefusions.",
+  "pretrained_weights": {
+    "repository": "timm/vit_large_patch16_dinov3_qkvb.lvd1689m",
+    "commit": "3653d393df9fd16a9c1bae8a6c5a514f683b70ce",
+    "bytes": 1212548648,
+    "sha256": "56df97c299afea2ffa1eb90f866e8a290f452e227e732fef32a9eb9e8b52027f",
+    "storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/weights/dinov3_vitl16_lvd1689m.safetensors",
+    "access": "Public ungatedrepository via hf-mirror, exactcommit andcontenthashpinnedbeforedownload.",
+    "hash_source": "Pinnedcommit initial302response x-linked-etag (LFSobjectSHA256); final CDNresponse ETag is not contentSHA256."
+  },
+  "extraction": "Strictlyloadtimmconvertedstate in vit_large_patch16_dinov3_qkvb. Frozenmodel, eval, AMPfloat16. Original2091developmentcacheimagesonly, paired320/448. FinalCLSglobal, ordinary3x3patchmeans, block15patchmean(mid after16of24blocks), finalpatchstd. Samepreprocessing and featuresemantics asM5 exceptlargerbackbone.",
+  "feature_storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/dinov3_large_development.npz",
+  "external_feature_policy": "Loaderrequiresmanifestdevelopmentindices0..2090; builds externalrows as NaN. Externalrawimagesneverread.",
+  "configuration_plan": [
+    {
+      "name": "large320",
+      "feature": "large320"
+    },
+    {
+      "name": "large_dual",
+      "feature": "large_dual"
+    },
+    {
+      "name": "base_dual_large_dual",
+      "feature": "base_dual_large_dual"
+    },
+    {
+      "name": "base_dual_large448",
+      "feature": "base_dual_large448"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "training": "All4fixedfeatures3formal+9originalpatientCVheads. UnchangedM5attentionhead andhidden256, originaldiseaseprobabilitymarginalization, hparams,seeds,patientweights,losses,stopping and grouping. Feature normalization fitted independently inside eachfit. No model-specific hparamsearch.",
+  "selection": "OriginalpatientCVexceedsM5andvalidationMacroF1nodecrease; anyqualifiedcandidate still requires freshfixedpatientconfirmation againstM5andfixedGaussian.",
+  "external_test_policy": "No external scoring, labels, predictions or rawimages. Feature/evaluationchoices cannotdependon externaloutcomes."
+}

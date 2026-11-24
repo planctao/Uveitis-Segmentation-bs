@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Identical attention has exact squared excess overlap; disjoint attention has zero penalty",
+    "Doubleprecision numerical gradient check with3heads passed",
+    "Independent NumPy pairwise cosine geometry and region permutation invariance",
+    "No newparameters or randomdraws; allcommon tensors and predictions unchanged",
+    "Full patientweighted loss difference equals declared regularizer; finite nonzero attentiongategradients",
+    "Original protected checkpoint loads strictly with diversity enabled"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checked_seed_fits": 12,
+  "formal_seed_fits": 12,
+  "fits": [
+    {
+      "group": "00_matched_head16",
+      "seed": 0,
+      "phase": "validation"
+    },
+    {
+      "group": "00_matched_head16",
+      "seed": 1,
+      "phase": "validation"
+    },
+    {
+      "group": "00_matched_head16",
+      "seed": 2,
+      "phase": "validation"
+    },
+    {
+      "group": "01_adapter16_unanchored",
+      "seed": 0,
+      "phase": "validation"
+    },
+    {
+      "group": "01_adapter16_unanchored",
+      "seed": 1,
+      "phase": "validation"
+    },
+    {
+      "group": "01_adapter16_unanchored",
+      "seed": 2,
+      "phase": "validation"
+    },
+    {
+      "group": "02_adapter16_probability_anchor",
+      "seed": 0,
+      "phase": "validation"
+    },
+    {
+      "group": "02_adapter16_probability_anchor",
+      "seed": 1,
+      "phase": "validation"
+    },
+    {
+      "group": "02_adapter16_probability_anchor",
+      "seed": 2,
+      "phase": "validation"
+    },
+    {
+      "group": "03_adapter16_probability_feature_anchor",
+      "seed": 0,
+      "phase": "validation"
+    },
+    {
+      "group": "03_adapter16_probability_feature_anchor",
+      "seed": 1,
+      "phase": "validation"
+    },
+    {
+      "group": "03_adapter16_probability_feature_anchor",
+      "seed": 2,
+      "phase": "validation"
+    }
+  ],
+  "checks": [
+    "Every teacher independently rebuilt on CPU from the exact fitting rows and frozen source head",
+    "Source hashes, fit-only normalization, patient and duplicate isolation verified",
+    "Actual initialization matches independent v3 seed fingerprints",
+    "All successful updates and AMP skips reconstruct actual16image loss batches",
+    "Schedulers advance only on real optimizer updates and losses decompose into declared components",
+    "All selected formal and conditional CV stopping probabilities independently reproduced from live images",
+    "Conditional CV sources and all outer predictions reconstructed when eligible",
+    "Ensemble metrics, epoch selection and adapter eligibility independently reconstructed"
+  ]
+}

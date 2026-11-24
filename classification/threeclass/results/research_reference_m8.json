@@ -1,0 +1,66 @@
+{
+  "created_at_utc": "2026-11-24T11:46:48.920193+00:00",
+  "retained_development_model": "M8",
+  "candidate_id": "milestone8_register_blend",
+  "package": "results/milestone8_register_blend/package.json",
+  "package_sha256": "ff4581345f9a1ccb61d696dbf640a1c452821e6152b14d4aff83b185f4e375af",
+  "selection": "results/milestone8_register_blend/selection_development_only.json",
+  "selection_sha256": "afa0e12de1d3cfedffaca613d56890f5597199704d19c18daab5a67c1611728c",
+  "inference_verification": "results/milestone8_register_blend/inference_verification.json",
+  "inference_verification_sha256": "b76bc5f5e469c67436dd2a0d0a120f78160f14158d76debd4d50f40f6283c7f9",
+  "independent_package_audit": "results/milestone8_register_blend/independent_package_audit.json",
+  "independent_package_audit_sha256": "4f4d04e3f7910ce6cb64591436c3f7be386ebca7f547ef68b807f6b005a734da",
+  "cli_verification_sha256": "64c900d355511c63042102ed698c64475b2b3ccc68a21e4fcfa488e0f11f3c17",
+  "image_feature_verification_sha256": "6e8c54308f30d170a477c744f647f745ae5bcbda7ae0c7b60bb7797045187dc7",
+  "cli_recovery_protocol_sha256": "9b3ffe7fb93a7b8b069e448e3c72198147f0efecc59326b3ced27bc3f4d2aa3f",
+  "original_cv_macro_f1": 0.8390087766590693,
+  "validation_macro_f1": 0.894785003714643,
+  "validation_accuracy": 0.8983957219251337,
+  "fresh_sixfold_macro_f1": 0.8288867728884862,
+  "fresh_sixfold_accuracy": 0.8220968240601748,
+  "paired_f1_ci95_vs_m7": [
+    0.0004541574515602165,
+    0.005579049803128904
+  ],
+  "paired_f1_ci95_vs_controls": {
+    "m7": [
+      0.0004541574515602165,
+      0.005579049803128904
+    ],
+    "m6": [
+      0.007985664620731872,
+      0.02270457608710223
+    ],
+    "reference": [
+      0.026449445581242667,
+      0.05408304327445426
+    ],
+    "fixed_gaussian": [
+      0.023967217818297644,
+      0.051106630676208485
+    ]
+  },
+  "branch_weights": {
+    "reference": 0.1875,
+    "subspace": 0.5625,
+    "token": 0.25
+  },
+  "previous_reference": "results/current_research_reference.json",
+  "previous_reference_sha256": "14cd30a233167990838c12b5b9d24417d5ca7216ac96b9a46d2102543ab3ebe6",
+  "next_candidate_gate": {
+    "original_cv_strictly_greater_than": 0.8390087766590693,
+    "validation_at_least": 0.894785003714643,
+    "fresh_patient_comparators": [
+      "M8",
+      "M7",
+      "M6",
+      "M5",
+      "fixed_gaussian"
+    ],
+    "fresh_confirmation": "Freeze highest qualifying original CV, then two unusedpatient3fold repeats; higher sixfoldmeanF1 and pairedpatient95%lower>0 versus EACH comparator."
+  },
+  "external_test_evaluated": false,
+  "historical_external_reference": "Preserve all frozen M7/M6/M5/Gaussian records; no external results feed continued research selection.",
+  "inference_command": "python predict_register_blend.py --image /absolute/path/image.jpg",
+  "goal_status": "active"
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Independent NumPy candidateconstruction and eligible-only logsumexp match bothlosses",
+    "Doubleprecision numericalgradient checks pass for both modes",
+    "Image permutation invariance, unknownlabels excluded, absentpositives give differentiablezero",
+    "Repeatingallimages preserves patientcentroidloss",
+    "OriginalM5loss exactly reconstructed and inferenceparameters/predictions unchanged",
+    "Complete classifierloss uses declared contrastive term and gives finite nonzero projectiongradients"
+  ]
+}

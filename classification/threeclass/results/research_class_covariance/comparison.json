@@ -1,0 +1,650 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol": {
+    "created_at_utc": "2026-11-23T22:04:14.962643+00:00",
+    "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "reference": "results/milestone5/selection_before_test.json",
+    "hypothesis": "One shared covariance assumes the same within-class variability in infectious, noninfectious and normal groups. Add cautiously shrunk class-specific covariance evidence in the unchanged MLP embedding.",
+    "shared_shrinkage": 0.1,
+    "class_covariance_weights": [
+      0.1,
+      0.25
+    ],
+    "evidence_probability_weights": [
+      0.1,
+      0.25
+    ],
+    "fixed_candidates": 4,
+    "source_heads": 12,
+    "heteroscedastic_fits": 24,
+    "normalization": "The covariance for classc is(1-rho)*regularized_shared +rho*((1-shrinkage)*class_covariance +(shrinkage+1e-5)*shared_variance*I). Means/covariances are equally weighted per patient within class, class priors1/3.",
+    "likelihood": "(-0.5*squared_Mahalanobis -0.5*(class_logdet-shared_logdet))/sqrt(embedding_dimension)+log(1/3). Includes the class log determinant.",
+    "control": "At class_covariance_weight0 exactly recovers existing coarse shared-covariance geometry and probabilities; both source MLP and existing shared branch are fixed controls.",
+    "evaluation": "All4configurations receive validation and all original3outer patient folds; each covariance uses only source fitting patients. No test/query adaptation.",
+    "selection": "Must exceed M5 originalCV and preserve M5 validation Macro-F1. Any later promotion requires new fixed patient confirmation against both M5 and existing development-confirmed Gaussian recipe.",
+    "external_test_policy": "No external outcomes, predictions or raw images; no external scoring."
+  },
+  "candidates": [
+    {
+      "candidate_id": "classcov_0.1_0.1",
+      "class_weight": 0.1,
+      "weight": 0.1,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8876958022971926,
+        "macro_f1": 0.8884959058946987,
+        "log_loss": 0.3354715699438007,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8126184009750671,
+        "sd_macro_f1": 0.009624298784746611
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0017472335468841083,
+        "macro_f1_difference": 0.0035109484654807233,
+        "accuracy_ci95": [
+          -0.002937893339644704,
+          0.006417923723268536
+        ],
+        "macro_f1_ci95": [
+          -0.0020229711114985393,
+          0.008811338967566668
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "classcov_0.1_0.25",
+      "class_weight": 0.1,
+      "weight": 0.25,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.8820460847830683,
+        "macro_f1": 0.8844665387759525,
+        "log_loss": 0.3378994145559386,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.864406779661017
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            6,
+            51
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8134297798612581,
+        "sd_macro_f1": 0.014289677804963888
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0005824111822947398,
+        "macro_f1_difference": 0.004256068150049308,
+        "accuracy_ci95": [
+          -0.0070882040446201555,
+          0.005367830742220302
+        ],
+        "macro_f1_ci95": [
+          -0.002929062447925487,
+          0.010490735146162031
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "classcov_0.25_0.1",
+      "class_weight": 0.25,
+      "weight": 0.1,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8877005347593583,
+        "balanced_accuracy": 0.8857800934849319,
+        "macro_f1": 0.884974933218691,
+        "log_loss": 0.33550332999649024,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.896551724137931,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            11,
+            156,
+            7
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8122583263709129,
+        "sd_macro_f1": 0.009178899195538827
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": 0.0017472335468841083,
+        "macro_f1_difference": 0.003144261447382557,
+        "accuracy_ci95": [
+          -0.002937893339644704,
+          0.006417923723268536
+        ],
+        "macro_f1_ci95": [
+          -0.002321893171241862,
+          0.008321158673040636
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    },
+    {
+      "candidate_id": "classcov_0.25_0.25",
+      "class_weight": 0.25,
+      "weight": 0.25,
+      "val": {
+        "n": 374,
+        "accuracy": 0.8903743315508021,
+        "balanced_accuracy": 0.8876958022971926,
+        "macro_f1": 0.8884959058946987,
+        "log_loss": 0.33747006529083784,
+        "recall": {
+          "infectious": 0.8794326241134752,
+          "noninfectious": 0.9022988505747126,
+          "normal": 0.8813559322033898
+        },
+        "confusion_matrix": [
+          [
+            124,
+            16,
+            1
+          ],
+          [
+            11,
+            157,
+            6
+          ],
+          [
+            2,
+            5,
+            52
+          ]
+        ]
+      },
+      "cv": {
+        "mean_macro_f1": 0.8128056440664958,
+        "sd_macro_f1": 0.011786229275310296
+      },
+      "paired_original_oof_vs_reference": {
+        "accuracy_difference": -0.0005824111822947398,
+        "macro_f1_difference": 0.0036284963129937786,
+        "accuracy_ci95": [
+          -0.007457646566897122,
+          0.00594148159835904
+        ],
+        "macro_f1_ci95": [
+          -0.003648717828624792,
+          0.010418069704818508
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "development_gate_passed": false
+    }
+  ],
+  "geometry_diagnostics": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+      "logdet_contrast": [
+        1.7120467588656538,
+        1.7785859401283233,
+        -4.885265975721381
+      ],
+      "relative_class_trace": [
+        1.0286125092059901,
+        1.0366248573963839,
+        0.9347626375575286
+      ],
+      "density_max_probability_error": 3.240507528978753e-08
+    },
+    {
+      "phase": "validation",
+      "seed": 0,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+      "logdet_contrast": [
+        2.494432997813419,
+        2.8436716355498675,
+        -13.796388487734134
+      ],
+      "relative_class_trace": [
+        1.071531270729317,
+        1.0915621412053012,
+        0.8369065916081629
+      ],
+      "density_max_probability_error": 2.990534841984527e-08
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+      "logdet_contrast": [
+        2.6004923755252776,
+        1.1934095957204818,
+        -5.086447606517481
+      ],
+      "relative_class_trace": [
+        1.0427622390554045,
+        1.0215178870172559,
+        0.9357198781780797
+      ],
+      "density_max_probability_error": 3.057809605522266e-08
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+      "logdet_contrast": [
+        4.781592500135218,
+        1.5450944787140202,
+        -14.164464870283439
+      ],
+      "relative_class_trace": [
+        1.106905595302942,
+        1.0537947152075704,
+        0.83929969310963
+      ],
+      "density_max_probability_error": 3.1536622313588225e-08
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+      "logdet_contrast": [
+        1.5465008319897606,
+        1.7309060375016543,
+        -4.565954383277699
+      ],
+      "relative_class_trace": [
+        1.043236617364586,
+        1.024105228765392,
+        0.9326581578498829
+      ],
+      "density_max_probability_error": 3.027305484071263e-08
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+      "logdet_contrast": [
+        2.210034758946506,
+        2.8546730247569485,
+        -12.876398802497192
+      ],
+      "relative_class_trace": [
+        1.1080915412247299,
+        1.0602630697267454,
+        0.831645392437973
+      ],
+      "density_max_probability_error": 3.0602414269331746e-08
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+      "logdet_contrast": [
+        1.8133184316041593,
+        1.7598799963415104,
+        -5.097319680726002
+      ],
+      "relative_class_trace": [
+        1.0485299247888815,
+        1.01531753697945,
+        0.9361525457937455
+      ],
+      "density_max_probability_error": 3.5004961373985566e-08
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+      "logdet_contrast": [
+        2.617838811473348,
+        2.593813422689209,
+        -14.431282303980197
+      ],
+      "relative_class_trace": [
+        1.1213248078172207,
+        1.0382938382936417,
+        0.8403813603293805
+      ],
+      "density_max_probability_error": 3.127681535985971e-08
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+      "logdet_contrast": [
+        1.967289224199476,
+        1.1958045784711544,
+        -4.604043719788024
+      ],
+      "relative_class_trace": [
+        1.0425547334317284,
+        1.0201242308566474,
+        0.9373210450026233
+      ],
+      "density_max_probability_error": 3.378155943867256e-08
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+      "logdet_contrast": [
+        3.078711514507802,
+        1.3206175407251521,
+        -13.114266106817013
+      ],
+      "relative_class_trace": [
+        1.1063868284743816,
+        1.050310572036679,
+        0.8433026074016184
+      ],
+      "density_max_probability_error": 3.2651989667620285e-08
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+      "logdet_contrast": [
+        1.423983391156753,
+        1.888194554374877,
+        -4.853974639041212
+      ],
+      "relative_class_trace": [
+        1.0380001131039072,
+        1.0249597263953198,
+        0.9370401678679492
+      ],
+      "density_max_probability_error": 3.2562327945129255e-08
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+      "logdet_contrast": [
+        1.640327769106534,
+        2.886460278161394,
+        -13.849002060799535
+      ],
+      "relative_class_trace": [
+        1.0950002787118727,
+        1.062399311940405,
+        0.8426004156219778
+      ],
+      "density_max_probability_error": 3.2514724579435494e-08
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+      "logdet_contrast": [
+        1.7709938346566787,
+        1.6780774734570514,
+        -4.926630280910501
+      ],
+      "relative_class_trace": [
+        1.0569787166245186,
+        1.0091425438267487,
+        0.9338787130427831
+      ],
+      "density_max_probability_error": 3.176007723482144e-08
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+      "logdet_contrast": [
+        2.554753489592315,
+        2.4654753968884506,
+        -13.955694642770425
+      ],
+      "relative_class_trace": [
+        1.1424468061249902,
+        1.0228563741305658,
+        0.8346967971706519
+      ],
+      "density_max_probability_error": 3.147319749263744e-08
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+      "logdet_contrast": [
+        2.194671937348346,
+        0.6283565806257911,
+        -4.138081794680204
+      ],
+      "relative_class_trace": [
+        1.0593372563945749,
+        0.9971105178976232,
+        0.9435522064085495
+      ],
+      "density_max_probability_error": 3.680845239717456e-08
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+      "logdet_contrast": [
+        3.7616575244031196,
+        0.10067763523920803,
+        -11.817181276565407
+      ],
+      "relative_class_trace": [
+        1.1483431515904117,
+        0.992776305348032,
+        0.8588805266253481
+      ],
+      "density_max_probability_error": 3.452076591248243e-08
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+      "logdet_contrast": [
+        1.2307102143710154,
+        1.7021860979805297,
+        -4.382764202924761
+      ],
+      "relative_class_trace": [
+        1.0478446810463697,
+        1.018427351265706,
+        0.9337279402915449
+      ],
+      "density_max_probability_error": 3.358824496313417e-08
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+      "logdet_contrast": [
+        1.236886004794826,
+        2.546249946682792,
+        -12.552414770269195
+      ],
+      "relative_class_trace": [
+        1.1196117176688651,
+        1.0460683932172061,
+        0.8343198657818028
+      ],
+      "density_max_probability_error": 3.4003587057185314e-08
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+      "logdet_contrast": [
+        1.445517259638109,
+        1.4790295514691252,
+        -4.4321243820247105
+      ],
+      "relative_class_trace": [
+        1.0338337415707235,
+        1.0270065682200702,
+        0.9391597185596228
+      ],
+      "density_max_probability_error": 3.947981896956776e-08
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+      "logdet_contrast": [
+        1.7193968589247675,
+        1.9178596676787834,
+        -12.750924532324689
+      ],
+      "relative_class_trace": [
+        1.0845843383496718,
+        1.0675164049730395,
+        0.8478992808219206
+      ],
+      "density_max_probability_error": 3.5915879048609156e-08
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+      "logdet_contrast": [
+        1.6039273735553365,
+        1.4439564866649448,
+        -4.559987198695808
+      ],
+      "relative_class_trace": [
+        1.0335674608465548,
+        1.0308934044130853,
+        0.935539162558313
+      ],
+      "density_max_probability_error": 3.44512885996906e-08
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+      "logdet_contrast": [
+        2.099226661175294,
+        1.8254896785783785,
+        -13.063795952919463
+      ],
+      "relative_class_trace": [
+        1.0839186368318123,
+        1.0772334957481389,
+        0.838847891111208
+      ],
+      "density_max_probability_error": 3.181120045159247e-08
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "class_weight": 0.1,
+      "source_checkpoint_sha256": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07",
+      "logdet_contrast": [
+        0.9064685229656675,
+        1.859448922778256,
+        -4.225999792011976
+      ],
+      "relative_class_trace": [
+        1.0441916168473073,
+        1.0229732505209639,
+        0.9328351540713878
+      ],
+      "density_max_probability_error": 3.6810198666969995e-08
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "class_weight": 0.25,
+      "source_checkpoint_sha256": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07",
+      "logdet_contrast": [
+        0.4469596792647508,
+        2.9068021267551103,
+        -12.176484548853296
+      ],
+      "relative_class_trace": [
+        1.1104790303382477,
+        1.0574331145223888,
+        0.8320878733984487
+      ],
+      "density_max_probability_error": 3.6269188763426996e-08
+    }
+  ],
+  "heteroscedastic_fits": 24,
+  "new_mlp_seed_fits": 0,
+  "external_test_evaluated": false
+}

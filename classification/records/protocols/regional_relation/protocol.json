@@ -1,0 +1,43 @@
+{
+  "created_at_utc": "2026-11-24T00:29:15.433639+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Previous fixed-neighbor regional residuals and independent queries did not pass gates. Test whether content-dependent exchange among all nonself regions captures spatially disconnected but related lesions. Compare uniform nonlocal exchange to isolate the content-routing effect and relative position to isolate spatial information.",
+  "configuration_plan": [
+    {
+      "name": "uniform_rank16",
+      "kind": "uniform",
+      "rank": 16,
+      "position": false
+    },
+    {
+      "name": "content_rank16",
+      "kind": "content",
+      "rank": 16,
+      "position": false
+    },
+    {
+      "name": "content_rank32",
+      "kind": "content",
+      "rank": 32,
+      "position": false
+    },
+    {
+      "name": "content_rank32_position",
+      "kind": "content",
+      "rank": 32,
+      "position": true
+    }
+  ],
+  "architecture": "From GELU(original128dimregionprojection), LayerNorm then rank16/32 value GELU. Content branch uses separate query/key scaled dot products, or uniform nonself attention. Compute attention@values-values, then zero-initialized linear readout to128dim and0.1scale. Add residual to original pre-GELU projection. Optional25relative displacement biases on3x3grid. Shared M5 parameters, initial outputs and RNG unchanged; no extra task loss.",
+  "planned_new_seed_fits": 48,
+  "training": "Original M5 inputs, image sampling, patient/class weights, full coarse+diagnosis+fine-contrastive loss, hyperparameters and original patient fit/stop/outer plans. Each arm3formal+3foldx3seed. Single-image early stopping and ensemble scoring.",
+  "selection": "Require original patient CV Macro-F1>0.8090823139275858 and validation Macro-F1>=0.8893107959516184. Freeze before fresh patient confirmation against M5 and fixed Gaussian. No automatic external scoring.",
+  "verification": "Independent double NumPy/SciPy formula; numerical query/key/value/position derivatives, singleton/constant/allmasked limits and permutation equivariance; exact initial common parameters/train/eval/RNG identity and actual loss gradients passed. Every trained head CPU-recovered with actual relation formula reconstructed, attention entropy/distance and branch-off diagnostics retained.",
+  "external_test_policy": "Only2091development rows accessed by fit/stop/outer. All external feature rows explicitly NaN; no external result or raw image access.",
+  "code_sha256": {
+    "regional_relation.py": "cee37ecf3857f467472b788c32d9d2de3e9dd0c5124d11c151f0ae00d393c5c5",
+    "verify_regional_relation.py": "17617587547959904783cf69a89680debbce68c4d1bbd48f16e96fa568e60647",
+    "regional_relation_experiments.py": "f8776e725f767e569c75f40ae734fff7550c29528c6ad122f6f1fd0b37d32588"
+  }
+}

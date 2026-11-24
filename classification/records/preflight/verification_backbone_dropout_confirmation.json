@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "four_phases": [
+    {
+      "phase": "validation",
+      "images": 374,
+      "candidate_exactly_recovered": true,
+      "source_prediction_sha256": {
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/predictions.npz": "633633bc936d1d9730b2ef7868adc2518824f8cdb28d47059be85e24f9dcdbee",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/predictions.npz": "4e1f0bbbb889a1d870cf48dff3147882b7cc846f2aad11b3bc312794b47c8c5f",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/validation/predictions.npz": "4d72712205b6c23c052c8a1486368726df748885ab4b9201f2c4cf8ab7710f5a",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/backbone_prob0p1/validation/predictions.npz": "fdd008d800aee2b59cf17dd2d7d2b74b72695513bd7b0a539bdbd312adc7fc66"
+      }
+    },
+    {
+      "phase": "fold_0",
+      "images": 572,
+      "candidate_exactly_recovered": true,
+      "source_prediction_sha256": {
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/predictions.npz": "40e9a0f496ae6f1b8f6fdc791ed825aa97b97268455cdcba87d08527f7668643",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/predictions.npz": "c820281330e81a4d3cf16095deb09f449d36dab677e02a00dc36bf37b0a1a931",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/fold_0/predictions.npz": "de718a6ac27b6cc4b84181d87fa59242e046bfdd17eadf10aa1340ee568ac2f9",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/backbone_prob0p1/fold_0/predictions.npz": "faa1f1919e5ef8cba5297505bfea173f3c0d17cccb6f93dcb6296dc6d15e6850"
+      }
+    },
+    {
+      "phase": "fold_1",
+      "images": 572,
+      "candidate_exactly_recovered": true,
+      "source_prediction_sha256": {
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/predictions.npz": "05fd8a34648bf5eb6db6313e9933fd57ef84508efedb068ceb42a1958cca9ec9",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/predictions.npz": "011ef53c43092ea827fa21ead64609c042ba03e8d913b98d09c4ddc099d32b79",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/fold_1/predictions.npz": "43faf9fc4574375c225266d03f805de7b92082f3d3cba7b11f9c73decb7145a0",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/backbone_prob0p1/fold_1/predictions.npz": "e55282ed3b84b86b505b2ad79b432ec802699fdbbd53f85c90adf75ffeb49df2"
+      }
+    },
+    {
+      "phase": "fold_2",
+      "images": 573,
+      "candidate_exactly_recovered": true,
+      "source_prediction_sha256": {
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/predictions.npz": "c6c036ed5c08e4562271608dfbd1ee9b798f65162697b7bad6f641a690057bd5",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/predictions.npz": "fc71b365bb9bdfa4097a712a807af145d4d3ed5e54023f961fda7fb18a43eab1",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/fold_2/predictions.npz": "ba07f8eb260bb1a89d0963b573bdb8b8bb70a16a873cf934cb44712d2c2069cd",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/backbone_dropout/backbone_prob0p1/fold_2/predictions.npz": "29ad57fac3b0f5dd44de497813bc7aa0a06c9e67d5c9518715849d815badc623"
+      }
+    }
+  ],
+  "source_complete_task_audit": "results/research_backbone_dropout/verification.json",
+  "source_complete_task_audit_sha256": "a1ecb0f919088896ba1925e09abff848f6b13c5a856f97f67223fb7c69dd010b",
+  "candidate": "backbone_prob0p1_fusion075",
+  "new_seed_fits": 0,
+  "code_sha256": {
+    "backbone_dropout_confirmation.py": "8766e55444c129a5aea624aa8db93c06b66884671ee94b9324d86a7c4d8f505f",
+    "verify_backbone_dropout_confirmation.py": "25c031af0898962fa5822f0cfdedc5677d4a04cabdb4554b4052dded4ad03f9d"
+  },
+  "external_test_evaluated": false
+}

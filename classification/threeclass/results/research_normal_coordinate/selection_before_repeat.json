@@ -1,0 +1,231 @@
+{
+  "candidate": {
+    "group": "validation",
+    "mode": "flat",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 256,
+      "dropout": 0.6,
+      "lr": 0.002,
+      "wd": 0.1,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 0.8,
+      "label_smoothing": 0.03,
+      "fine_contrastive": 0.05,
+      "normal_rank": 32,
+      "normal_strength": 1.0,
+      "normal_coordinate_mode": "shift",
+      "normal_coordinate_conditioned": true
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.893048128342246,
+      "balanced_accuracy": 0.887222574552368,
+      "macro_f1": 0.8904827120381046,
+      "log_loss": 0.30252172992538745,
+      "recall": {
+        "infectious": 0.900709219858156,
+        "noninfectious": 0.896551724137931,
+        "normal": 0.864406779661017
+      },
+      "confusion_matrix": [
+        [
+          127,
+          14,
+          0
+        ],
+        [
+          12,
+          156,
+          6
+        ],
+        [
+          2,
+          6,
+          51
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.8717616847007208,
+      0.8797174544061984,
+      0.8818538773366611
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/shift_conditional/validation/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/shift_conditional/validation/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/shift_conditional/validation/seed_2/model.pt"
+    ],
+    "name": "shift_conditional_fusion075",
+    "candidate_id": "shift_conditional_fusion075",
+    "coordinate_configuration": {
+      "name": "shift_conditional",
+      "mode": "shift",
+      "conditioned": true
+    },
+    "cv": {
+      "folds": [
+        {
+          "phase": "fold_0",
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8216783216783217,
+            "balanced_accuracy": 0.8282142280736093,
+            "macro_f1": 0.8166888656818688,
+            "log_loss": 0.43475268546266843,
+            "recall": {
+              "infectious": 0.782051282051282,
+              "noninfectious": 0.8473282442748091,
+              "normal": 0.8552631578947368
+            },
+            "confusion_matrix": [
+              [
+                183,
+                46,
+                5
+              ],
+              [
+                23,
+                222,
+                17
+              ],
+              [
+                0,
+                11,
+                65
+              ]
+            ]
+          }
+        },
+        {
+          "phase": "fold_1",
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8024475524475524,
+            "balanced_accuracy": 0.8256084607028762,
+            "macro_f1": 0.8156641733218354,
+            "log_loss": 0.5627708163829275,
+            "recall": {
+              "infectious": 0.7521367521367521,
+              "noninfectious": 0.816793893129771,
+              "normal": 0.9078947368421053
+            },
+            "confusion_matrix": [
+              [
+                176,
+                55,
+                3
+              ],
+              [
+                36,
+                214,
+                12
+              ],
+              [
+                1,
+                6,
+                69
+              ]
+            ]
+          }
+        },
+        {
+          "phase": "fold_2",
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.8446771378708552,
+            "balanced_accuracy": 0.8726599207387681,
+            "macro_f1": 0.850079606875951,
+            "log_loss": 0.46032226817578903,
+            "recall": {
+              "infectious": 0.8589743589743589,
+              "noninfectious": 0.7984790874524715,
+              "normal": 0.9605263157894737
+            },
+            "confusion_matrix": [
+              [
+                201,
+                26,
+                7
+              ],
+              [
+                41,
+                210,
+                12
+              ],
+              [
+                0,
+                3,
+                73
+              ]
+            ]
+          }
+        }
+      ],
+      "mean_macro_f1": 0.8274775486265518,
+      "sd_macro_f1": 0.019580660776391205
+    },
+    "paired_original_oof_vs_reference": {
+      "accuracy_difference": 0.015142690739662235,
+      "macro_f1_difference": 0.01857881658135907,
+      "accuracy_ci95": [
+        -0.0034706794055649605,
+        0.0340852901873219
+      ],
+      "macro_f1_ci95": [
+        0.0013354752991143473,
+        0.03585568033852029
+      ],
+      "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+    },
+    "development_gate_passed": true,
+    "source_coordinate_arm": "shift_conditional",
+    "subspace_weight": 0.75
+  },
+  "checkpoint_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/shift_conditional/validation/seed_0/model.pt": "3131f142fb04472bd193415b3b9c27c1c71749c55e4decc21b5288047b68a6ff",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/shift_conditional/validation/seed_1/model.pt": "c6f2d27986ed223b32acc042ffac0acec8b422d6855d77a384b7a01fcf6b3212",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/shift_conditional/validation/seed_2/model.pt": "0aa494243a1d772a7b629be0decebeb0953b84bc2079882bb86b691063f39658"
+  },
+  "geometry_and_plans_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_conditional/fold_0/geometry.npz": "b7128cbf19e45d4301077da6cba3158ec709d26c50edfa12aaf42800b5703a4c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_conditional/fold_1/geometry.npz": "45f46a3b882955feaf5e787e9b305eb2aedb75e1a3b9499e070d454847332433",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_conditional/fold_2/geometry.npz": "594f30de5e9680b06ea3dbbbd4d74ba5b8ef8f4c3638d30f1031b9974feb6d2e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_conditional/validation/geometry.npz": "2f6409ebe46c65e7c34792e096b05e536358f380009a03e25b223970a132c7df",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_constant/fold_0/geometry.npz": "b7128cbf19e45d4301077da6cba3158ec709d26c50edfa12aaf42800b5703a4c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_constant/fold_1/geometry.npz": "45f46a3b882955feaf5e787e9b305eb2aedb75e1a3b9499e070d454847332433",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_constant/fold_2/geometry.npz": "594f30de5e9680b06ea3dbbbd4d74ba5b8ef8f4c3638d30f1031b9974feb6d2e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/affine_constant/validation/geometry.npz": "2f6409ebe46c65e7c34792e096b05e536358f380009a03e25b223970a132c7df",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_conditional/fold_0/geometry.npz": "b7128cbf19e45d4301077da6cba3158ec709d26c50edfa12aaf42800b5703a4c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_conditional/fold_1/geometry.npz": "45f46a3b882955feaf5e787e9b305eb2aedb75e1a3b9499e070d454847332433",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_conditional/fold_2/geometry.npz": "594f30de5e9680b06ea3dbbbd4d74ba5b8ef8f4c3638d30f1031b9974feb6d2e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_conditional/validation/geometry.npz": "2f6409ebe46c65e7c34792e096b05e536358f380009a03e25b223970a132c7df",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_constant/fold_0/geometry.npz": "b7128cbf19e45d4301077da6cba3158ec709d26c50edfa12aaf42800b5703a4c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_constant/fold_1/geometry.npz": "45f46a3b882955feaf5e787e9b305eb2aedb75e1a3b9499e070d454847332433",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_constant/fold_2/geometry.npz": "594f30de5e9680b06ea3dbbbd4d74ba5b8ef8f4c3638d30f1031b9974feb6d2e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/geometry/shift_constant/validation/geometry.npz": "2f6409ebe46c65e7c34792e096b05e536358f380009a03e25b223970a132c7df",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_conditional/fold_0.json": "389a5671b5ee201a4c29ae8e83fff0b3f9321bef2b0851d6b60e9ec930be2cd9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_conditional/fold_1.json": "94f468ec5912384384cd7d7700b12d42cca4280386b58c2f74b8253fd1a0e9e9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_conditional/fold_2.json": "d4fe41c47d5506a76d3805f5d9949bef710a6478a447847f660137fb4950d38b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_conditional/validation.json": "a95b2d4bf5c68847f314cc3232bb224ae42332ee1c45b7fcdf11a2af94b3a2f5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_constant/fold_0.json": "6ac4c6f1feb4d43c8a3c1d8d3396e671fcab9af9576b6353d09db046d95b7f97",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_constant/fold_1.json": "690e448003fc4ed219d7ea3057e85e96c66a14aa56e79c9e497e37ca1f53ca35",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_constant/fold_2.json": "96358fc27ada1fd3464d85f7038f6ddfae2b6caf17d31950c55cb42f56815891",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/affine_constant/validation.json": "6f6b83dcf81883236f8902c6f4f9ec365c1d73179305f69065bb4989747f6657",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_conditional/fold_0.json": "007120565617375d876714b365c54e0fbc7743ed3396da7255a5e4d7b2634f54",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_conditional/fold_1.json": "eaeb54dc28d005d212594135f8b3ba2c26e5b35b91b532c0fdcb53ed8aa7f346",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_conditional/fold_2.json": "3eb4babb3f5b2fe1dee3b61b4582aa516d5c554c186e54f4b4f63eff8df5ec5a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_conditional/validation.json": "36b10132aa1dac580215d773e2a5cffd588f9849d0644f39eaf95ad32f7015ba",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_constant/fold_0.json": "1c1b1884a7bf6c433d36840b770d5beed9b985d137ccdecf143e16404d8f1047",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_constant/fold_1.json": "f2280ec3248abd586a35dc51f92cbd74951077a1b41163775d9bca09883fb557",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_constant/fold_2.json": "f275287d0f94b4db18c3ab5e326d409d6ecb430284d4bb2e8642974f01ede559",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_coordinate/split_plans/shift_constant/validation.json": "d94736f6d797c649c0fa93e4d7617189fdb1ab6f3f1c6ab8d363af019ac86fdd"
+  },
+  "requires_fresh_patient_confirmation": true,
+  "external_test_evaluated": false
+}

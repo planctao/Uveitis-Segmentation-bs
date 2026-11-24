@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Independent NumPy cosine and interpatient Gram loss formulas match double precision",
+    "Selected numerical derivatives and permutation invariance verified for both objectives",
+    "Teacher targets detached; all same-patient pairs excluded; one-patient loss differentiably zero",
+    "Changing every nonfit teacher row cannot affect fit statistics or targets",
+    "Common initialization, train/eval outputs and RNG streams exactly match M5",
+    "Zero distillation preserves an entire supervised AdamW step",
+    "Nonzero semantic loss reaches decoder, student hidden encoder and global projection",
+    "Training checkpoints strictly restore; original M5 inference export gives identical probabilities"
+  ]
+}

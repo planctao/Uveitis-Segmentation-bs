@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-11-24T01:33:05.591843+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_record": "results/research_adaptive_activation/selection_before_repeat.json",
+  "selection_record_sha256": "e8100ddd285f34bfb308463dc8d754d29817f8a756379f0b4166362bb0367f2f",
+  "source_protocol": "runs/adaptive_activation/protocol.json",
+  "source_protocol_sha256": "a5a2eaeb24c676c1c872977b39f7d5027af36b0d56b19fc5fd56e6a7fb0e4fc8",
+  "source_verification": "results/research_adaptive_activation/verification.json",
+  "source_verification_sha256": "11bb3819dad2b42f0e3fb350940ee1b815f77015c7480ff0d0f014f711d1747e",
+  "source_buffer_verification": "results/research_adaptive_activation/buffer_verification.json",
+  "source_buffer_verification_sha256": "bf68ee558f85f16dac313083c690638eb3d36077e4959e1225265acf4ea0ef32",
+  "selected_candidate": "gaussian_groups16",
+  "fixed_candidate_config": {
+    "arch": "attention",
+    "mode": "flat",
+    "hidden": 256,
+    "dropout": 0.6,
+    "lr": 0.002,
+    "wd": 0.1,
+    "epochs": 120,
+    "patience": 18,
+    "taxonomy_only": true,
+    "aux": 0.8,
+    "label_smoothing": 0.03,
+    "fine_contrastive": 0.05,
+    "activation_kind": "gaussian",
+    "activation_groups": 16
+  },
+  "arms": [
+    "reference",
+    "fixed_gaussian",
+    "candidate"
+  ],
+  "outer_split_seeds": [
+    20270801,
+    20270811
+  ],
+  "inner_stop_rule": "20percent of outer-fit patient splitgroups stratified bymodal coarse label; seed20270824+repeat_index*10+fold",
+  "planned_new_seed_fits": 36,
+  "planned_generative_fits": 18,
+  "controls": "Refit fixedM5 andfrozencandidate with3seeds on eachmatchedpartition. FixedGaussian onlyuses newM5fitpatientembeddings, coarsepatientbalancedsharedcovariance shrinkage0.1, sqrt256temperature,10percentprobabilityblend. No search onconfirmationpartitions.",
+  "selection_rule": "One original-CV champion amongdevelopmentpassers frozenbeforeanyfreshsplitfit. Candidate mustbeatM5 andfixedGaussian meansixfoldMacro-F1 and bothpatientpairedjointlyrepeatedpooledMacro-F1CI95lowerbounds>0. If failed,nochangeofcandidateorfamilysettingsbasedonconfirmationoutcomes.",
+  "verification": "Everypatient/duplicatepartition andfit-onlystat/diseasemap checked. CPUrestoreall36actualheadsstop/outerpredictions andensembles; NumPyrebuildallcandidateactivationbasis/residuals andall18Gaussianpatientmoments. Assert1717trainimagesonceperrepeat; fixedknots/groupbuffersandallsourcehashesverified.",
+  "external_test_policy": "Onlyoriginaltrainisrepartitioned. Originalvalidationandexternalsetsnotfit/scored. ExternalfeaturesNaN. Noautomaticexternaltest.",
+  "frozen_validation_checkpoint_sha256": {
+    "0": "01dafac5dfe478cd055c41fb24a52b28e45286214dc742127618e7ecce45a5c4",
+    "1": "6053adb9f49292ff9cc5aa108d86bc34a729b271777470612ff22d41a6645b97",
+    "2": "1005b8fabe5f6c24d642c8db47cb5d87e0dee07e85b589c40023c5f6032a2264"
+  },
+  "code_sha256": {
+    "activation_confirmation.py": "59e92fbfba120809a0bc347715d951133cfecc38876ed7e15203b028a3a5ee81",
+    "adaptive_activation.py": "df5962dca92cab4c1bead8aaea7cbbcb54f95e298a667bc87829270d1e205c7d",
+    "activation_experiments.py": "488b8c2c01422c440abe296744bd1bcd89deea9a66be6a4fa2393af9c3af8c5b",
+    "verify_adaptive_activation.py": "ce9a90c4dde7f8c710f6282d53fcef8b60794fa0d7a61ca6d31abc56b7f655df",
+    "patient_gaussian.py": "9a5685ac8d85794cb0ee53ddb0cc100a58072a5f13c8dc1432559b7cd27c49e1"
+  }
+}

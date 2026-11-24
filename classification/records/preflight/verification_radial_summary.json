@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "ring_region_counts": [
+    9,
+    20,
+    20
+  ],
+  "checks": [
+    "Independent weighted global/ring/contrast formulas; empty-ring and all-empty fallback; quarter-turn and reflection invariance; constant-token limits",
+    "Original M5 four input arrays unchanged for all summary layouts; strict development-only row identities and external NaN arrays",
+    "Common parameters, initial full train/eval predictions and RNG exactly preserve M5; actual loss reaches readout then projection",
+    "Actual adapter independently reconstructed in double precision; finite gradients and strict full model recovery"
+  ]
+}

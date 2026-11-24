@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "real_input_images": 96,
+  "diagnostics": [
+    {
+      "rank": 8,
+      "conditioned": false,
+      "parameters": 990076,
+      "mean_gains": [
+        1.0010567880289056,
+        1.0010568916902696,
+        0.9989431476395655,
+        1.0010568412696454
+      ]
+    },
+    {
+      "rank": 8,
+      "conditioned": true,
+      "parameters": 990076,
+      "mean_gains": [
+        1.000982709930381,
+        1.0007403411463522,
+        0.9986573634371348,
+        1.0006493045473561
+      ]
+    },
+    {
+      "rank": 32,
+      "conditioned": false,
+      "parameters": 1005556,
+      "mean_gains": [
+        1.0012620370093872,
+        1.001262410366716,
+        0.9987377322129257,
+        1.0012622276324816
+      ]
+    },
+    {
+      "rank": 32,
+      "conditioned": true,
+      "parameters": 1005556,
+      "mean_gains": [
+        1.0012920897663964,
+        1.0003325286369364,
+        0.9977008434401395,
+        1.0002367276869304
+      ]
+    }
+  ],
+  "checks": [
+    "Originalinitialcommonweights, RNG and train/evalprobabilities exactly identical",
+    "IndependentNumPy/SciPyLayerNorm,GELU,fourboundedgains andgroupmultiplication",
+    "Sameparameterconstantcontrol, constantinvariance andnonconstantconditionedgainsafteractualtaskupdate",
+    "Finite differencederivatives forinputthroughgainandmultiplication; finitenonzeroreal taskgradients",
+    "Strictrestorationafteroptimization, fullM5evidencepreserved withgainsin[0.5,1.5]"
+  ]
+}

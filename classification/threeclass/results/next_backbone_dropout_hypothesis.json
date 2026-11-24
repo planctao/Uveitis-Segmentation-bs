@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-11-24T09:40:27.298307+00:00",
+  "family": "backbone_dropout",
+  "status": "completed_confirmation_failed",
+  "hypothesis": "M7 confirms complementary B/L models but concatenation/hidden interaction paths have not displaced it. Test training-time structured omission of a full backbone to discourage concatenated MLP reliance on a single representation. Compare matching expected-retention per-channel masks tied across all four streams, with exactly the same architecture and geometry. Modality dropout is established; do not claim a novel method.",
+  "development_evidence": [
+    "results/research_normal_large_blend_confirmation/comparison.json",
+    "results/research_normal_large_interaction/comparison.json",
+    "results/research_residual_m7_confirmation/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "channel_prob0p1",
+      "kind": "channel",
+      "probability": 0.1
+    },
+    {
+      "name": "channel_prob0p25",
+      "kind": "channel",
+      "probability": 0.25
+    },
+    {
+      "name": "backbone_prob0p1",
+      "kind": "backbone",
+      "probability": 0.1
+    },
+    {
+      "name": "backbone_prob0p25",
+      "kind": "backbone",
+      "probability": 0.25
+    }
+  ],
+  "architecture": "Single3584DattentionMLP with independent normalB/L PCA32 perstream. After normalprojection, training-only masks are tied across global/regions/mid/dispersion for each image. Backbone mode chooses B or L with equalprobability and removes atmostone with totalprobabilityp; scale all retainedfeatures by1/(1-p/2). Channel mode independently retains everychannel withprobability1-p/2, same scaling and tiedstream/tokenmask. All eval paths are exact unmasked ordinary projectedMLP. Same weights/init/permutation/dropoutRNG, using separate NumPy maskRNG. No extra learnedparams.",
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachrawbranch and fixed .75branch+.25M5; no fusionfits.",
+  "launch_condition": "Only after normal_cross_geometry completes full48head/8score audit and nonepassesM7. Freeze then-current retainedgates. No scoresyet.",
+  "preflight": "verification_backbone_dropout.json",
+  "scores_evaluated": 8,
+  "external_test_evaluated": false,
+  "selection": "Highest qualifying originalpatientCV strictlyabove retainedM7 and validation>=M7, frozenbefore two unusedpatient3fold repeats. HighermeanF1 and jointpairedpatient95%lowerendpoint>0 versus EACHofM7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "protocol": "runs/backbone_dropout/protocol.json",
+  "protocol_sha256": "cb176c11960fcf4dfa20d33804f3d2f582f8b87372a749a1f49efb0f40c4e468",
+  "pid": 10741,
+  "passing_development_gates": 1,
+  "selected_candidate": "backbone_prob0p1_fusion075",
+  "confirmation_protocol": "runs/backbone_dropout_confirmation/protocol.json",
+  "confirmation_protocol_sha256": "f73649ef5fd4e65585832d30b610c944f9bdf798b75665555f43eb2b6f940d3c",
+  "confirmation_pid": 11891,
+  "confirmation_gate_passed": false,
+  "confirmation_comparison": "results/research_backbone_dropout_confirmation/comparison.json",
+  "confirmation_comparison_sha256": "bdb269bd3fc3b770008d8578aeb4414134a8b0539b3f925255c06daae224044b",
+  "confirmation_verification_sha256": "94073cc3e57a168d57f64987a81baf6c8c0e3a9272b84697aef8c402ab1ac007",
+  "paired_macro_f1_ci95_vs_m7": [
+    -0.0005465015269520285,
+    0.01954027137249975
+  ],
+  "decision": "RetainM7. SixfoldcandidateF1is higher but95%pairedpatient lowerendpoint vsM7 is negative. Do not select alternatives from confirmation outcomes or score external tests."
+}

@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-11-24T01:37:02.193411+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Mean or attention pooling may lose distributional regional evidence. Evaluate per-channel lower/median/upper percentiles of a learned low-rank regional encoding. Identical-parameter repeated-mean controls distinguish extra residual capacity from region-distribution summaries. This is a known order-statistic pooling idea used in a matched exact-identity architecture, without claiming methodological invention.",
+  "configuration_plan": [
+    {
+      "name": "mean_rank16",
+      "kind": "mean",
+      "rank": 16
+    },
+    {
+      "name": "quantile_rank16",
+      "kind": "quantile",
+      "rank": 16
+    },
+    {
+      "name": "mean_rank32",
+      "kind": "mean",
+      "rank": 32
+    },
+    {
+      "name": "quantile_rank32",
+      "kind": "quantile",
+      "rank": 32
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "KeepallM5arrays/projections/attention/MLP/objective. OnGELUregion_proj128 applyLayerNorm→rank16/32LinearGELU. For eachchannel computelinearinterpolatedq.25/.5/.75overvalidregions, ormeanrepeatedthree forcontrol. Concatenatesummary3rank→zero256readout,0.1residualbeforeoriginalhiddenDropout. Invalidregions excludedbefore sorting; allmaskedfallbackallvalid; onevalidregionreplicated. No spatialcoordinate or diseaseclass used bypool.",
+  "controls": "Mean/quantile exactlysameparameters withinrank, sameoriginalcommoninit/RNG,initialtrain/evalprobabilities, sampling/earlystop/fit/stop/outer plansandallhparams. Fourfixedarms each3formal+3foldx3seeds.",
+  "verification": "IndependentNumPylinearquantiles andmean/fullprojectedvalues/residual match; numericalactualprojectionderivative,permutationinvariance,maskedexclusion,singleton/allmask/tiedgradientboundaries andsame-mean/differentsummarycontrast verified. All48actualheads CPUrestorestop/outerprobabilities,fitstats,diseasemaps andensembles; independentlyrebuildeveryactualsummary/residual. Retaininterquartilespread, norms,relativecorrections,branchoffdiagnostics.",
+  "selection": "OriginalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes beforefreshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentrows;externalrowsNaN andexplicitindexguard. Noexternalimages,predictionsoroutcomesaccessed.",
+  "code_sha256": {
+    "quantile_summary.py": "bc1e7c12d74dfd2d4c6d0d972c4c91fb7f381f5c04074b13642fdf7fe8d99ceb",
+    "verify_quantile_summary.py": "4a81e8b6b0c7493eb8c22401f76a161d3e5b190a5abcc9b91689728366b5feaf",
+    "quantile_experiments.py": "c833b7617de6cabda6c4ef69bb7b3d4d5fb735bf0bf60b63af0806ee9810f38c"
+  }
+}

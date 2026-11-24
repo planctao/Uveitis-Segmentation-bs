@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Entmax1.5/sparsemax distributions independently solved by scalar SciPy roots, softmax by independent SciPy function",
+    "Selected numerical score derivatives, shift/permutation invariance, masked/single-valid/allmasked/equal/extreme boundaries verified",
+    "All parameter tensors and random streams identical to M5, no new parameters; ordinary softmax temperature1 exactly restores original model",
+    "Actual task gradients finite and reach regional scores/encoder; strict model recovery exact"
+  ]
+}

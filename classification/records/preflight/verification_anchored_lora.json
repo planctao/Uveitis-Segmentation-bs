@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "real_training_microbatch": 16,
+  "successful_optimizer_steps_checked": 1,
+  "peak_allocated_gpu_gib": 2.3125367164611816,
+  "initial_adapter_sha256": "284a7992014145a0ece5b3a2f9232335281119ffd3c42d345a813287ae8f5ef3",
+  "initial_teacher_mean_probability_error": 5.678540765075013e-05,
+  "initial_teacher_kl": 3.460380639808136e-07,
+  "initial_normalized_global_mse": 2.697229319892358e-06,
+  "fit_teacher_images": 1717,
+  "training_images_checked": [
+    0,
+    3,
+    4,
+    5,
+    9,
+    10,
+    745,
+    748,
+    749,
+    750,
+    751,
+    752,
+    785,
+    789,
+    790,
+    791
+  ],
+  "checks": [
+    "Probability and feature anchors vanish at identical teacher/student predictions",
+    "Perturbed predictions/features produce positive penalties and finite gradients",
+    "Teacher arrays cover only fitting images in exact mask order",
+    "Actual adapter initialization equals the independent v3 seed fingerprint",
+    "Live image initialization matches frozen-feature teacher",
+    "A real16image AMP training step succeeds with the corrected scheduler",
+    "Only LoRA parameters receive backbone gradients",
+    "Adapter/head serialization restores exact live-image predictions"
+  ]
+}

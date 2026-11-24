@@ -1,0 +1,39 @@
+{
+  "created_at_utc": "2026-11-24T01:27:11.040044+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Extra dense evidence branches have not consistently passed development gates. Test a much smaller learned nonlinearity correction in the original MLP: adapt activation shape on a bounded grid rather than add feature mixing matrices. Group sharing controls effective degrees of freedom. These are known adaptive activation/basis ideas used in an exact-identity residual architecture, without a claim of methodological invention.",
+  "configuration_plan": [
+    {
+      "name": "spline_groups16",
+      "kind": "spline",
+      "groups": 16
+    },
+    {
+      "name": "gaussian_groups16",
+      "kind": "gaussian",
+      "groups": 16
+    },
+    {
+      "name": "spline_groups256",
+      "kind": "spline",
+      "groups": 256
+    },
+    {
+      "name": "gaussian_groups256",
+      "kind": "gaussian",
+      "groups": 256
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "KeepallM5inputs/projections/attention/encoderlinear/head. Atoriginal256dimhiddenGELU useu=3tanh(x/3), knots[-3,-1.5,0,1.5,3]. Splinebasis=max(1-|u-center|/1.5,0); Gaussianbasis=softmax(-0.5*((u-center)/1.5)^2). Learnedzero-initializedcoefficients indexedby16contiguousgroupsof16channels or256singlechannels. Delta=0.1sum5basis*coefficients, addtooriginalGELUoutputbeforeoriginalDropout. Only80or1280newparameters. Partitionofunity boundsamplitude by0.1maxabsolutecoefficient.",
+  "controls": "Spline/Gaussian exactlysameparameters withingroups; sharinggroups changesonlycoefficientmapping. Originalcommoninitialization,RNG,initialtrain/evalprobabilities,fullobjective andtrainingplanidentical. Allfourarms3formal+3foldx3seeds.",
+  "verification": "Independent neighboring-knot interpolation reconstructs triangularbasis. DoubleNumPy/SciPy Gaussianbasis/fullresidual, partitionofunity,convexbound, extremefiniteforward/backward,continuity, numericalinput/coefficientgradients andexactinitialM5identity/RNG passed. All48actualheads CPUrestoreallstop/outerprobabilities andensembles; independentlyreconstructeveryactualactivationbasis/residual, stats,maps,knots/groupbuffers. Retaincoefficientnorm,inputoutside3fraction,relativecorrection,branchoffdiagnostics.",
+  "selection": "OriginalpatientCVMacro-F1>0.8090823139275858 andoriginalvalidation>=0.8893107959516184. HighestpassingCVcandidate freezes beforefreshpatientconfirmation againstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeature rows, externalrowsNaN andexplicitindexguard. Noexternalimages,predictionsoroutcomesused.",
+  "code_sha256": {
+    "adaptive_activation.py": "df5962dca92cab4c1bead8aaea7cbbcb54f95e298a667bc87829270d1e205c7d",
+    "verify_adaptive_activation.py": "ce9a90c4dde7f8c710f6282d53fcef8b60794fa0d7a61ca6d31abc56b7f655df",
+    "activation_experiments.py": "488b8c2c01422c440abe296744bd1bcd89deea9a66be6a4fa2393af9c3af8c5b"
+  }
+}

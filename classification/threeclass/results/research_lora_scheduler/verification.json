@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "algorithm_version": 2,
+  "version1_excluded_from_selection": true,
+  "real_training_runs": [
+    {
+      "history": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/lora_adaptation_v2/00_rank0_blocks0/seed_0/history.json",
+      "epochs_checked": 4,
+      "last_accounting": {
+        "epoch": 3,
+        "successful_optimizer_updates": 314,
+        "amp_skipped_updates": 10,
+        "scheduler_epoch": 314
+      }
+    },
+    {
+      "history": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/lora_adaptation_v2/00_rank0_blocks0/seed_1/history.json",
+      "epochs_checked": 4,
+      "last_accounting": {
+        "epoch": 3,
+        "successful_optimizer_updates": 312,
+        "amp_skipped_updates": 12,
+        "scheduler_epoch": 312
+      }
+    },
+    {
+      "history": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/lora_adaptation_v2/00_rank0_blocks0/seed_2/history.json",
+      "epochs_checked": 7,
+      "last_accounting": {
+        "epoch": 6,
+        "successful_optimizer_updates": 637,
+        "amp_skipped_updates": 11,
+        "scheduler_epoch": 637
+      }
+    },
+    {
+      "history": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/lora_adaptation_v2/01_rank4_blocks2/seed_0/history.json",
+      "epochs_checked": 1,
+      "last_accounting": {
+        "epoch": 0,
+        "successful_optimizer_updates": 0,
+        "amp_skipped_updates": 0,
+        "scheduler_epoch": 0
+      }
+    }
+  ],
+  "checks": [
+    "LR schedule advances exactly with successful AMP updates",
+    "Successful plus skipped updates account for every accumulation group",
+    "All saved head and adapter tensors remain finite"
+  ],
+  "forced_overflow_test": "/root/autodl-tmp/uveitis_threeclass_20261124/verification_amp_optimizer.json"
+}

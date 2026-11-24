@@ -1,0 +1,2129 @@
+{
+  "time": "2026-11-23T19:11:41.612782+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_policy": "Select with development evidence only; compare all predeclared ablations; no external evaluation without improved CV and nondecreasing development validation macro-F1.",
+  "incumbent": {
+    "candidate_id": "4726000e84fe",
+    "cv_macro_f1": 0.8002170959549074,
+    "cv_sd": 0.010396531543253365,
+    "val_macro_f1": 0.880455192955193
+  },
+  "families": [
+    {
+      "family": "support_taxonomy",
+      "planned_configurations": 8,
+      "completed_validation_configurations": 8,
+      "completed_cv_configurations": 8,
+      "best_validation_candidate": "support_7bb7c4b86a7a",
+      "candidates": [
+        {
+          "candidate_id": "support_bb004dd4f0a6",
+          "group": "00_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 1.0,
+            "support_prior": "uniform",
+            "support_shrink": 0.0,
+            "residual_penalty": 0.0
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8422459893048129,
+            "balanced_accuracy": 0.8346901498163047,
+            "macro_f1": 0.8390536486276852,
+            "log_loss": 0.45895154982112535,
+            "recall": {
+              "infectious": 0.8226950354609929,
+              "noninfectious": 0.867816091954023,
+              "normal": 0.8135593220338984
+            },
+            "confusion_matrix": [
+              [
+                116,
+                24,
+                1
+              ],
+              [
+                15,
+                151,
+                8
+              ],
+              [
+                3,
+                8,
+                48
+              ]
+            ]
+          },
+          "ablation_index": 0,
+          "head_parameters_per_seed": 837459,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7999213575565283,
+            "sd_macro_f1": 0.018893773693535072,
+            "mean_accuracy": 0.7932364319798874
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 1.0
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 1.0
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 1.0
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 1.0
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 1.0
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 1.0
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 1.0
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 1.0
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 1.0
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 1.0
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 1.0
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 1.0
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 1.0
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 1.0
+            }
+          }
+        },
+        {
+          "candidate_id": "support_a31c951b4f9e",
+          "group": "01_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 1.0,
+            "support_prior": "support",
+            "support_shrink": 0.0,
+            "residual_penalty": 0.0
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8262032085561497,
+            "balanced_accuracy": 0.8110971560739643,
+            "macro_f1": 0.8226408993601574,
+            "log_loss": 0.5077914301736685,
+            "recall": {
+              "infectious": 0.8085106382978723,
+              "noninfectious": 0.8620689655172413,
+              "normal": 0.7627118644067796
+            },
+            "confusion_matrix": [
+              [
+                114,
+                27,
+                0
+              ],
+              [
+                17,
+                150,
+                7
+              ],
+              [
+                4,
+                10,
+                45
+              ]
+            ]
+          },
+          "ablation_index": 1,
+          "head_parameters_per_seed": 837459,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7951410962027792,
+            "sd_macro_f1": 0.010393232837212916,
+            "mean_accuracy": 0.786251561120671
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 1.0
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 1.0
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 1.0
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 1.0
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 1.0
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 1.0
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 1.0
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 1.0
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 1.0
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 1.0
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 1.0
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 1.0
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 1.0
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 1.0
+            }
+          }
+        },
+        {
+          "candidate_id": "support_1a6b5eee6995",
+          "group": "02_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 1.0,
+            "support_prior": "support",
+            "support_shrink": 10.0,
+            "residual_penalty": 0.001
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8368983957219251,
+            "balanced_accuracy": 0.8266763661083271,
+            "macro_f1": 0.8338233852788396,
+            "log_loss": 0.5032212110464633,
+            "recall": {
+              "infectious": 0.8156028368794326,
+              "noninfectious": 0.867816091954023,
+              "normal": 0.7966101694915254
+            },
+            "confusion_matrix": [
+              [
+                115,
+                25,
+                1
+              ],
+              [
+                16,
+                151,
+                7
+              ],
+              [
+                4,
+                8,
+                47
+              ]
+            ]
+          },
+          "ablation_index": 2,
+          "head_parameters_per_seed": 837459,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7934801042783567,
+            "sd_macro_f1": 0.015376039273577117,
+            "mean_accuracy": 0.7874119772025532
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 0.9258200997725514
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 0.8790490729915326
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 0.7745966692414834
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 0.8760375907831331
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 0.6882472016116853
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 0.8623164985025763
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 0.9577867048047944
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 0.816496580927726
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 0.4803844614152614
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 0.7071067811865476
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 0.6416889479197478
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 0.9172076325837248
+            }
+          }
+        },
+        {
+          "candidate_id": "support_24ae069d210c",
+          "group": "03_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 1.0,
+            "support_prior": "support",
+            "support_shrink": 30.0,
+            "residual_penalty": 0.001
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8342245989304813,
+            "balanced_accuracy": 0.8163959251291532,
+            "macro_f1": 0.8316856519593774,
+            "log_loss": 0.5459053837834548,
+            "recall": {
+              "infectious": 0.8014184397163121,
+              "noninfectious": 0.8850574712643678,
+              "normal": 0.7627118644067796
+            },
+            "confusion_matrix": [
+              [
+                113,
+                28,
+                0
+              ],
+              [
+                15,
+                154,
+                5
+              ],
+              [
+                4,
+                10,
+                45
+              ]
+            ]
+          },
+          "ablation_index": 3,
+          "head_parameters_per_seed": 837459,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7853210820397901,
+            "sd_macro_f1": 0.020948251527623647,
+            "mean_accuracy": 0.7763448012139111
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 0.816496580927726
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 0.7288689868556626
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 0.5773502691896257
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 0.7237468644557459
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 0.4803844614152614
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 0.25
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 0.7010887416930995
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 0.8872621047656614
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 0.6324555320336759
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 0.30151134457776363
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 0.5
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 0.25
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 0.43495883620084
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 0.7990958746405026
+            }
+          }
+        },
+        {
+          "candidate_id": "support_6bd2d4a9b2ad",
+          "group": "04_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 1.0,
+            "support_prior": "uniform",
+            "support_shrink": 10.0,
+            "residual_penalty": 0.001
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8288770053475936,
+            "balanced_accuracy": 0.8143579370310036,
+            "macro_f1": 0.8224394827857503,
+            "log_loss": 0.47430640133632535,
+            "recall": {
+              "infectious": 0.8297872340425532,
+              "noninfectious": 0.8505747126436781,
+              "normal": 0.7627118644067796
+            },
+            "confusion_matrix": [
+              [
+                117,
+                24,
+                0
+              ],
+              [
+                17,
+                148,
+                9
+              ],
+              [
+                3,
+                11,
+                45
+              ]
+            ]
+          },
+          "ablation_index": 4,
+          "head_parameters_per_seed": 837459,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7953991189600901,
+            "sd_macro_f1": 0.01834517312606796,
+            "mean_accuracy": 0.7903236960828584
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 0.9258200997725514
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 0.8790490729915326
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 0.7745966692414834
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 0.8760375907831331
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 0.6882472016116853
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 0.8623164985025763
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 0.9577867048047944
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 0.816496580927726
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 0.4803844614152614
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 0.7071067811865476
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 0.6416889479197478
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 0.9172076325837248
+            }
+          }
+        },
+        {
+          "candidate_id": "support_15dfaf006182",
+          "group": "05_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 1.0,
+            "support_prior": "support",
+            "support_shrink": 10.0,
+            "residual_penalty": 0.01
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8315508021390374,
+            "balanced_accuracy": 0.8191109397819422,
+            "macro_f1": 0.8323450330644575,
+            "log_loss": 0.5041789242031705,
+            "recall": {
+              "infectious": 0.8156028368794326,
+              "noninfectious": 0.8620689655172413,
+              "normal": 0.7796610169491526
+            },
+            "confusion_matrix": [
+              [
+                115,
+                26,
+                0
+              ],
+              [
+                19,
+                150,
+                5
+              ],
+              [
+                3,
+                10,
+                46
+              ]
+            ]
+          },
+          "ablation_index": 5,
+          "head_parameters_per_seed": 837459,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7934801042783567,
+            "sd_macro_f1": 0.015376039273577117,
+            "mean_accuracy": 0.7874119772025532
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 0.9258200997725514
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 0.8790490729915326
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 0.7745966692414834
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 0.8760375907831331
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 0.6882472016116853
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 0.8623164985025763
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 0.9577867048047944
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 0.816496580927726
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 0.4803844614152614
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 0.7071067811865476
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 0.6416889479197478
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 0.9172076325837248
+            }
+          }
+        },
+        {
+          "candidate_id": "support_9818c0c9cfe9",
+          "group": "06_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 0.6,
+            "support_prior": "support",
+            "support_shrink": 10.0,
+            "residual_penalty": 0.001
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8368983957219251,
+            "balanced_accuracy": 0.8251841443144278,
+            "macro_f1": 0.833713557397768,
+            "log_loss": 0.4812553904886377,
+            "recall": {
+              "infectious": 0.851063829787234,
+              "noninfectious": 0.8448275862068966,
+              "normal": 0.7796610169491526
+            },
+            "confusion_matrix": [
+              [
+                120,
+                21,
+                0
+              ],
+              [
+                20,
+                147,
+                7
+              ],
+              [
+                4,
+                9,
+                46
+              ]
+            ]
+          },
+          "ablation_index": 6,
+          "head_parameters_per_seed": 837459,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7910821580018657,
+            "sd_macro_f1": 0.020344250264689112,
+            "mean_accuracy": 0.78217840914176
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 0.9258200997725514
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 0.8790490729915326
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 0.7745966692414834
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 0.8760375907831331
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 0.6882472016116853
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 0.8623164985025763
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 0.9577867048047944
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 0.816496580927726
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 0.4803844614152614
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 0.7071067811865476
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 0.6416889479197478
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 0.9172076325837248
+            }
+          }
+        },
+        {
+          "candidate_id": "support_7bb7c4b86a7a",
+          "group": "07_support_residual",
+          "config": {
+            "arch": "attention",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "taxonomy_residual": true,
+            "aux": 1.0,
+            "support_prior": "support",
+            "support_shrink": 10.0,
+            "residual_penalty": 0.001,
+            "fine_contrastive": 0.01
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8475935828877005,
+            "balanced_accuracy": 0.8455412274629603,
+            "macro_f1": 0.8490285824588626,
+            "log_loss": 0.494352950897932,
+            "recall": {
+              "infectious": 0.8156028368794326,
+              "noninfectious": 0.8735632183908046,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                115,
+                26,
+                0
+              ],
+              [
+                14,
+                152,
+                8
+              ],
+              [
+                2,
+                7,
+                50
+              ]
+            ]
+          },
+          "ablation_index": 7,
+          "head_parameters_per_seed": 845779,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7861043681036991,
+            "sd_macro_f1": 0.015495294768854313,
+            "mean_accuracy": 0.7798413047104146
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "support_shrinkage": {
+            "ARN": {
+              "fit_patients": 60,
+              "shrink_factor": 0.9258200997725514
+            },
+            "Behcet": {
+              "fit_patients": 34,
+              "shrink_factor": 0.8790490729915326
+            },
+            "CMVR": {
+              "fit_patients": 15,
+              "shrink_factor": 0.7745966692414834
+            },
+            "Eales": {
+              "fit_patients": 33,
+              "shrink_factor": 0.8760375907831331
+            },
+            "Endophthalmitis": {
+              "fit_patients": 9,
+              "shrink_factor": 0.6882472016116853
+            },
+            "MCP": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "MEWDS": {
+              "fit_patients": 29,
+              "shrink_factor": 0.8623164985025763
+            },
+            "Normal": {
+              "fit_patients": 111,
+              "shrink_factor": 0.9577867048047944
+            },
+            "PIC": {
+              "fit_patients": 20,
+              "shrink_factor": 0.816496580927726
+            },
+            "SC": {
+              "fit_patients": 3,
+              "shrink_factor": 0.4803844614152614
+            },
+            "SO": {
+              "fit_patients": 10,
+              "shrink_factor": 0.7071067811865476
+            },
+            "Toxocariasis": {
+              "fit_patients": 2,
+              "shrink_factor": 0.408248290463863
+            },
+            "Toxoplasmosis": {
+              "fit_patients": 7,
+              "shrink_factor": 0.6416889479197478
+            },
+            "VKH": {
+              "fit_patients": 53,
+              "shrink_factor": 0.9172076325837248
+            }
+          }
+        }
+      ],
+      "external_test_evaluated": false,
+      "best_cv_candidate": "support_bb004dd4f0a6",
+      "paired_outer_cv_versus_incumbent": {
+        "accuracy_difference": -0.0011648223645893685,
+        "macro_f1_difference": -0.000623856996468497,
+        "accuracy_ci95": [
+          -0.023088558138996147,
+          0.021929889557919652
+        ],
+        "macro_f1_ci95": [
+          -0.023651796314252686,
+          0.02342639246743115
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "inference": "Exploratory paired patient bootstrap after family search; intervals do not adjust for candidate selection.",
+      "decision": "Keep incumbent; no candidate passed both development CV improvement and nondecreasing validation macro-F1."
+    },
+    {
+      "family": "scale_consensus",
+      "planned_configurations": 7,
+      "completed_validation_configurations": 7,
+      "completed_cv_configurations": 7,
+      "best_validation_candidate": "scale_84cb6fdee74a",
+      "candidates": [
+        {
+          "candidate_id": "scale_e548833a5e86",
+          "group": "00_shared_scales",
+          "config": {
+            "arch": "scale_consensus",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "learn_scale_gate": false,
+            "scale_aux": 0.0,
+            "scale_consistency": 0.0
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8556149732620321,
+            "balanced_accuracy": 0.8530817834261136,
+            "macro_f1": 0.8556713251689695,
+            "log_loss": 0.4070035040247468,
+            "recall": {
+              "infectious": 0.8439716312056738,
+              "noninfectious": 0.867816091954023,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                119,
+                22,
+                0
+              ],
+              [
+                15,
+                151,
+                8
+              ],
+              [
+                2,
+                7,
+                50
+              ]
+            ]
+          },
+          "ablation_index": 0,
+          "head_parameters_per_seed": 485137,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7991421682958579,
+            "sd_macro_f1": 0.01360552845246922,
+            "mean_accuracy": 0.7932405000467827
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.5,
+              0.5
+            ],
+            "sd_across_images": [
+              0.0,
+              0.0
+            ],
+            "mean_entropy": 0.6931471228599548
+          }
+        },
+        {
+          "candidate_id": "scale_8cb08f6707ce",
+          "group": "01_shared_scales",
+          "config": {
+            "arch": "scale_consensus",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "scale_aux": 0.0,
+            "scale_consistency": 0.0
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8663101604278075,
+            "balanced_accuracy": 0.8691093508420691,
+            "macro_f1": 0.8680634117446262,
+            "log_loss": 0.42748195452226945,
+            "recall": {
+              "infectious": 0.8581560283687943,
+              "noninfectious": 0.867816091954023,
+              "normal": 0.8813559322033898
+            },
+            "confusion_matrix": [
+              [
+                121,
+                20,
+                0
+              ],
+              [
+                15,
+                151,
+                8
+              ],
+              [
+                2,
+                5,
+                52
+              ]
+            ]
+          },
+          "ablation_index": 1,
+          "head_parameters_per_seed": 485137,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7893436322547891,
+            "sd_macro_f1": 0.01742402173643409,
+            "mean_accuracy": 0.7856677935211968
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.4392298460006714,
+              0.5607702136039734
+            ],
+            "sd_across_images": [
+              0.2366568148136139,
+              0.23665682971477509
+            ],
+            "mean_entropy": 0.5593714118003845
+          }
+        },
+        {
+          "candidate_id": "scale_18f96dfbf99c",
+          "group": "02_shared_scales",
+          "config": {
+            "arch": "scale_consensus",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "scale_aux": 0.3,
+            "scale_consistency": 0.0
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8716577540106952,
+            "balanced_accuracy": 0.8687584023831335,
+            "macro_f1": 0.8747230104576156,
+            "log_loss": 0.4142614294975876,
+            "recall": {
+              "infectious": 0.851063829787234,
+              "noninfectious": 0.8908045977011494,
+              "normal": 0.864406779661017
+            },
+            "confusion_matrix": [
+              [
+                120,
+                21,
+                0
+              ],
+              [
+                14,
+                155,
+                5
+              ],
+              [
+                2,
+                6,
+                51
+              ]
+            ]
+          },
+          "ablation_index": 2,
+          "head_parameters_per_seed": 485137,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7975361760110072,
+            "sd_macro_f1": 0.009247292652933883,
+            "mean_accuracy": 0.7920780499314531
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.47252994775772095,
+              0.5274701118469238
+            ],
+            "sd_across_images": [
+              0.20351824164390564,
+              0.20351827144622803
+            ],
+            "mean_entropy": 0.6008703708648682
+          }
+        },
+        {
+          "candidate_id": "scale_65cb339bc964",
+          "group": "03_shared_scales",
+          "config": {
+            "arch": "scale_consensus",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "scale_aux": 0.3,
+            "scale_consistency": 0.05
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8663101604278075,
+            "balanced_accuracy": 0.8649269847586124,
+            "macro_f1": 0.869008825668863,
+            "log_loss": 0.4183560621683624,
+            "recall": {
+              "infectious": 0.851063829787234,
+              "noninfectious": 0.8793103448275862,
+              "normal": 0.864406779661017
+            },
+            "confusion_matrix": [
+              [
+                120,
+                21,
+                0
+              ],
+              [
+                15,
+                153,
+                6
+              ],
+              [
+                2,
+                6,
+                51
+              ]
+            ]
+          },
+          "ablation_index": 3,
+          "head_parameters_per_seed": 485137,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7975361760110072,
+            "sd_macro_f1": 0.009247292652933883,
+            "mean_accuracy": 0.7920780499314531
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.4666590690612793,
+              0.5333409309387207
+            ],
+            "sd_across_images": [
+              0.2034904807806015,
+              0.2034904658794403
+            ],
+            "mean_entropy": 0.6001231074333191
+          }
+        },
+        {
+          "candidate_id": "scale_84cb6fdee74a",
+          "group": "04_shared_scales",
+          "config": {
+            "arch": "scale_consensus",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "scale_aux": 0.3,
+            "scale_consistency": 0.05,
+            "scale_dropout": 0.15
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8796791443850267,
+            "balanced_accuracy": 0.8712198774996441,
+            "macro_f1": 0.8788953803016163,
+            "log_loss": 0.4215587913210744,
+            "recall": {
+              "infectious": 0.8581560283687943,
+              "noninfectious": 0.9080459770114943,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                121,
+                20,
+                0
+              ],
+              [
+                11,
+                158,
+                5
+              ],
+              [
+                3,
+                6,
+                50
+              ]
+            ]
+          },
+          "ablation_index": 4,
+          "head_parameters_per_seed": 485137,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.796022396930468,
+            "sd_macro_f1": 0.012955910243679737,
+            "mean_accuracy": 0.7914932653152548
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.48114022612571716,
+              0.5188596844673157
+            ],
+            "sd_across_images": [
+              0.1896786093711853,
+              0.1896786093711853
+            ],
+            "mean_entropy": 0.6148214936256409
+          }
+        },
+        {
+          "candidate_id": "scale_0f7bfcb680d9",
+          "group": "05_shared_scales",
+          "config": {
+            "arch": "scale_consensus",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "scale_aux": 0.3,
+            "scale_consistency": 0.1,
+            "scale_probability_blend": 0.5
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8743315508021391,
+            "balanced_accuracy": 0.8669401024935303,
+            "macro_f1": 0.8748573552561237,
+            "log_loss": 0.38785780621212046,
+            "recall": {
+              "infectious": 0.851063829787234,
+              "noninfectious": 0.9022988505747126,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                120,
+                21,
+                0
+              ],
+              [
+                12,
+                157,
+                5
+              ],
+              [
+                2,
+                7,
+                50
+              ]
+            ]
+          },
+          "ablation_index": 5,
+          "head_parameters_per_seed": 485137,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7925224986913472,
+            "sd_macro_f1": 0.017706689330813374,
+            "mean_accuracy": 0.7879957448020275
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.4739861786365509,
+              0.526013970375061
+            ],
+            "sd_across_images": [
+              0.2022991180419922,
+              0.202299103140831
+            ],
+            "mean_entropy": 0.6023807525634766
+          }
+        },
+        {
+          "candidate_id": "scale_efe69cc5ee61",
+          "group": "06_shared_scales",
+          "config": {
+            "arch": "scale_consensus",
+            "mode": "flat",
+            "hidden": 128,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "scale_aux": 0.1,
+            "scale_consistency": 0.05
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8689839572192514,
+            "balanced_accuracy": 0.8644537570137878,
+            "macro_f1": 0.8678702238239197,
+            "log_loss": 0.3696567929434882,
+            "recall": {
+              "infectious": 0.8723404255319149,
+              "noninfectious": 0.8735632183908046,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                123,
+                18,
+                0
+              ],
+              [
+                15,
+                152,
+                7
+              ],
+              [
+                2,
+                7,
+                50
+              ]
+            ]
+          },
+          "ablation_index": 6,
+          "head_parameters_per_seed": 527057,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7878130016095582,
+            "sd_macro_f1": 0.007974915744071345,
+            "mean_accuracy": 0.783338825223642
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.4823949337005615,
+              0.5176051259040833
+            ],
+            "sd_across_images": [
+              0.2022707164287567,
+              0.2022707164287567
+            ],
+            "mean_entropy": 0.603549063205719
+          }
+        }
+      ],
+      "external_test_evaluated": false,
+      "best_cv_candidate": "scale_e548833a5e86",
+      "paired_outer_cv_versus_incumbent": {
+        "accuracy_difference": -0.0011648223645893685,
+        "macro_f1_difference": -0.0013304799095891218,
+        "accuracy_ci95": [
+          -0.011811158644180936,
+          0.008903819310886242
+        ],
+        "macro_f1_ci95": [
+          -0.01288085502314088,
+          0.0090241138800589
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "inference": "Exploratory paired patient bootstrap after family search; intervals do not adjust for candidate selection.",
+      "decision": "Keep incumbent; no candidate passed both development CV improvement and nondecreasing validation macro-F1."
+    },
+    {
+      "family": "scale_interaction",
+      "planned_configurations": 6,
+      "completed_validation_configurations": 6,
+      "completed_cv_configurations": 6,
+      "best_validation_candidate": "interaction_66951e601dbc",
+      "candidates": [
+        {
+          "candidate_id": "interaction_daa995827d1c",
+          "group": "00_scale_interaction",
+          "config": {
+            "arch": "scale_interaction",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "learn_scale_gate": false,
+            "scale_aux": 0.0,
+            "scale_consistency": 0.0,
+            "interaction_rank": 64,
+            "interaction_kind": "difference"
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8636363636363636,
+            "balanced_accuracy": 0.8588289098628952,
+            "macro_f1": 0.8634228696703342,
+            "log_loss": 0.41252163510306594,
+            "recall": {
+              "infectious": 0.8439716312056738,
+              "noninfectious": 0.8850574712643678,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                119,
+                22,
+                0
+              ],
+              [
+                13,
+                154,
+                7
+              ],
+              [
+                2,
+                7,
+                50
+              ]
+            ]
+          },
+          "ablation_index": 0,
+          "head_parameters_per_seed": 530449,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7953823705849014,
+            "sd_macro_f1": 0.020025933747617,
+            "mean_accuracy": 0.7920739818645578
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.5,
+              0.5
+            ],
+            "sd_across_images": [
+              0.0,
+              0.0
+            ],
+            "mean_entropy": 0.6931471228599548
+          },
+          "mean_interaction_gate_by_seed": [
+            0.29533636569976807,
+            0.27735602855682373,
+            0.30148157477378845
+          ]
+        },
+        {
+          "candidate_id": "interaction_d792e31441fb",
+          "group": "01_scale_interaction",
+          "config": {
+            "arch": "scale_interaction",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "learn_scale_gate": false,
+            "scale_aux": 0.0,
+            "scale_consistency": 0.0,
+            "interaction_rank": 64,
+            "interaction_kind": "product"
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8689839572192514,
+            "balanced_accuracy": 0.8622119701058234,
+            "macro_f1": 0.8675745893957171,
+            "log_loss": 0.3951590538257209,
+            "recall": {
+              "infectious": 0.8368794326241135,
+              "noninfectious": 0.9022988505747126,
+              "normal": 0.847457627118644
+            },
+            "confusion_matrix": [
+              [
+                118,
+                23,
+                0
+              ],
+              [
+                10,
+                157,
+                7
+              ],
+              [
+                2,
+                7,
+                50
+              ]
+            ]
+          },
+          "ablation_index": 1,
+          "head_parameters_per_seed": 530449,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7993840212884691,
+            "sd_macro_f1": 0.017949216940145108,
+            "mean_accuracy": 0.7949846837281392
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.5,
+              0.5
+            ],
+            "sd_across_images": [
+              0.0,
+              0.0
+            ],
+            "mean_entropy": 0.6931471228599548
+          },
+          "mean_interaction_gate_by_seed": [
+            0.27509602904319763,
+            0.2810698449611664,
+            0.28456979990005493
+          ]
+        },
+        {
+          "candidate_id": "interaction_a9ed3160a70f",
+          "group": "02_scale_interaction",
+          "config": {
+            "arch": "scale_interaction",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "learn_scale_gate": false,
+            "scale_aux": 0.0,
+            "scale_consistency": 0.0,
+            "interaction_rank": 64,
+            "interaction_kind": "both"
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8770053475935828,
+            "balanced_accuracy": 0.8664668747487058,
+            "macro_f1": 0.8708454761383354,
+            "log_loss": 0.3762058218485481,
+            "recall": {
+              "infectious": 0.8723404255319149,
+              "noninfectious": 0.896551724137931,
+              "normal": 0.8305084745762712
+            },
+            "confusion_matrix": [
+              [
+                123,
+                18,
+                0
+              ],
+              [
+                10,
+                156,
+                8
+              ],
+              [
+                2,
+                8,
+                49
+              ]
+            ]
+          },
+          "ablation_index": 2,
+          "head_parameters_per_seed": 534609,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7966237215867151,
+            "sd_macro_f1": 0.011166944661170368,
+            "mean_accuracy": 0.7914912312818072
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.5,
+              0.5
+            ],
+            "sd_across_images": [
+              0.0,
+              0.0
+            ],
+            "mean_entropy": 0.6931471228599548
+          },
+          "mean_interaction_gate_by_seed": [
+            0.27299854159355164,
+            0.2739051878452301,
+            0.27521684765815735
+          ]
+        },
+        {
+          "candidate_id": "interaction_66951e601dbc",
+          "group": "03_scale_interaction",
+          "config": {
+            "arch": "scale_interaction",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "learn_scale_gate": true,
+            "scale_aux": 0.0,
+            "scale_consistency": 0.0,
+            "interaction_rank": 64,
+            "interaction_kind": "both"
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8823529411764706,
+            "balanced_accuracy": 0.881500318478818,
+            "macro_f1": 0.8809060135376763,
+            "log_loss": 0.37536701391502264,
+            "recall": {
+              "infectious": 0.8723404255319149,
+              "noninfectious": 0.8908045977011494,
+              "normal": 0.8813559322033898
+            },
+            "confusion_matrix": [
+              [
+                123,
+                18,
+                0
+              ],
+              [
+                11,
+                155,
+                8
+              ],
+              [
+                2,
+                5,
+                52
+              ]
+            ]
+          },
+          "ablation_index": 3,
+          "head_parameters_per_seed": 534609,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7907946357909977,
+            "sd_macro_f1": 0.015272657013904845,
+            "mean_accuracy": 0.7850819918882745
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.4636370539665222,
+              0.5363630056381226
+            ],
+            "sd_across_images": [
+              0.21837815642356873,
+              0.21837815642356873
+            ],
+            "mean_entropy": 0.585422158241272
+          },
+          "mean_interaction_gate_by_seed": [
+            0.27473366260528564,
+            0.27697721123695374,
+            0.2769698202610016
+          ]
+        },
+        {
+          "candidate_id": "interaction_cdf28178218a",
+          "group": "04_scale_interaction",
+          "config": {
+            "arch": "scale_interaction",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "learn_scale_gate": true,
+            "scale_aux": 0.3,
+            "scale_consistency": 0.05,
+            "interaction_rank": 64,
+            "interaction_kind": "both"
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8823529411764706,
+            "balanced_accuracy": 0.8810519610972252,
+            "macro_f1": 0.8808594131026833,
+            "log_loss": 0.39555079626335476,
+            "recall": {
+              "infectious": 0.8652482269503546,
+              "noninfectious": 0.896551724137931,
+              "normal": 0.8813559322033898
+            },
+            "confusion_matrix": [
+              [
+                122,
+                19,
+                0
+              ],
+              [
+                10,
+                156,
+                8
+              ],
+              [
+                2,
+                5,
+                52
+              ]
+            ]
+          },
+          "ablation_index": 4,
+          "head_parameters_per_seed": 534609,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.8001250086348007,
+            "sd_macro_f1": 0.012737433711602162,
+            "mean_accuracy": 0.7926546984138607
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.4934994578361511,
+              0.5065004825592041
+            ],
+            "sd_across_images": [
+              0.18577270209789276,
+              0.18577270209789276
+            ],
+            "mean_entropy": 0.6191070079803467
+          },
+          "mean_interaction_gate_by_seed": [
+            0.27462664246559143,
+            0.2762027084827423,
+            0.2744794189929962
+          ]
+        },
+        {
+          "candidate_id": "interaction_04496ed2490a",
+          "group": "05_scale_interaction",
+          "config": {
+            "arch": "scale_interaction",
+            "mode": "flat",
+            "hidden": 64,
+            "dropout": 0.3,
+            "lr": 0.001,
+            "wd": 0.01,
+            "epochs": 120,
+            "patience": 18,
+            "taxonomy_only": true,
+            "aux": 1.0,
+            "learn_scale_gate": true,
+            "scale_aux": 0.3,
+            "scale_consistency": 0.05,
+            "interaction_rank": 64,
+            "interaction_kind": "both",
+            "interaction_dropout": 0.2
+          },
+          "val": {
+            "n": 374,
+            "accuracy": 0.8796791443850267,
+            "balanced_accuracy": 0.8762989583462867,
+            "macro_f1": 0.8755740218569955,
+            "log_loss": 0.3804462455645011,
+            "recall": {
+              "infectious": 0.8794326241134752,
+              "noninfectious": 0.8850574712643678,
+              "normal": 0.864406779661017
+            },
+            "confusion_matrix": [
+              [
+                124,
+                17,
+                0
+              ],
+              [
+                11,
+                154,
+                9
+              ],
+              [
+                2,
+                6,
+                51
+              ]
+            ]
+          },
+          "ablation_index": 5,
+          "head_parameters_per_seed": 534609,
+          "cv_complete": true,
+          "cv": {
+            "mean_macro_f1": 0.7908506862916568,
+            "sd_macro_f1": 0.012874103284941346,
+            "mean_accuracy": 0.7850819918882745
+          },
+          "audit_passed": true,
+          "fit_patient_counts_by_fold": [
+            178,
+            176,
+            176
+          ],
+          "eligible_for_external_evaluation": false,
+          "validation_scale_weights": {
+            "scale_order": [
+              320,
+              448
+            ],
+            "mean": [
+              0.4957776367664337,
+              0.5042224526405334
+            ],
+            "sd_across_images": [
+              0.1896459460258484,
+              0.1896459460258484
+            ],
+            "mean_entropy": 0.6160244345664978
+          },
+          "mean_interaction_gate_by_seed": [
+            0.27367258071899414,
+            0.27585306763648987,
+            0.2756447494029999
+          ]
+        }
+      ],
+      "external_test_evaluated": false,
+      "best_cv_candidate": "interaction_cdf28178218a",
+      "paired_outer_cv_versus_incumbent": {
+        "accuracy_difference": -0.0017472335468841083,
+        "macro_f1_difference": -0.0005534650021956633,
+        "accuracy_ci95": [
+          -0.015299619693699315,
+          0.011442025222946137
+        ],
+        "macro_f1_ci95": [
+          -0.014022950626834143,
+          0.01239383675501796
+        ],
+        "bootstrap_clusters": "patient split groups, original training data outer predictions only"
+      },
+      "inference": "Exploratory paired patient bootstrap after family search; intervals do not adjust for candidate selection.",
+      "decision": "Keep incumbent; no candidate passed both development CV improvement and nondecreasing validation macro-F1."
+    }
+  ],
+  "external_files_read": false,
+  "code_sha256": {
+    "taxonomy_head.py": "38ab0edb944e260b6e91cc82302c934687f14dd117ce49dc26f7f1674069d558",
+    "scale_head.py": "875feb421111e0fc57655c922fe53dab43d911a7ac579a80d490db8889c28cea",
+    "interaction_head.py": "ef13336f9fe2134522dccdc990b8631fae7b9bee387dd202c41c24d6c8160964",
+    "experiment.py": "9aa6f9bbc2d6d0a7312cdb9736d8664579d64986d3c5f1bf99ba3568825687d5",
+    "audit_candidate_cv.py": "8b0196a282dc06910ece9bfc73645d58031053b8aef9a95cbaa4bf99482e8826"
+  }
+}

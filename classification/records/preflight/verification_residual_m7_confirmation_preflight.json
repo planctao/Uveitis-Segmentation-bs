@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "selected_configuration": {
+    "name": "all_rank16_weight0p1",
+    "residual_arm": "all_rank16",
+    "weight": 0.1
+  },
+  "four_phases": [
+    {
+      "phase": "validation",
+      "maximum_independent_error": 1.1920928955078125e-07
+    },
+    {
+      "phase": "fold_0",
+      "maximum_independent_error": 1.1920928955078125e-07
+    },
+    {
+      "phase": "fold_1",
+      "maximum_independent_error": 1.1920928955078125e-07
+    },
+    {
+      "phase": "fold_2",
+      "maximum_independent_error": 1.1920928955078125e-07
+    }
+  ],
+  "checks": [
+    "Exact recovery of selected original probabilities with new fourbranch confirmation arithmetic",
+    "Independent float64 coefficient expansion gives same decisions in all four phases",
+    "Same previously verified residual/large models, losses and complete CUDA witness auditors reused without changes"
+  ],
+  "code_sha256": {
+    "residual_m7_confirmation.py": "23794b49bbfdb64cb511a79d8fb2933ee82aba5fa0d1491c2fba8eae705f5f61",
+    "start_residual_m7_confirmation.py": "4da8e5463aac7aebe1218490653d63d8d94f3d17b4fe2f5f87c216c2947bccef"
+  }
+}

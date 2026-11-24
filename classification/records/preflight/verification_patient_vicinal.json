@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "real_input_images": 256,
+  "diagnostics": [
+    {
+      "mode": "any",
+      "max_formula_errors": {
+        "mixed": 1.0583902199101658e-06,
+        "hidden": 9.250648112413273e-06,
+        "logits": 6.122899602445386e-06,
+        "p": 3.5102513917806277e-07
+      },
+      "valid_fraction": 1.0,
+      "cross_class_fraction": 0.59375,
+      "cross_disease_fraction": 0.86328125,
+      "mean_coefficient": 0.4897402999644661,
+      "total_loss": 0.8616861840419117
+    },
+    {
+      "mode": "coarse",
+      "max_formula_errors": {
+        "mixed": 1.0363923763634375e-06,
+        "hidden": 8.148340533864484e-06,
+        "logits": 6.1193368541268e-06,
+        "p": 3.6863235686190876e-07
+      },
+      "valid_fraction": 1.0,
+      "cross_class_fraction": 0.0,
+      "cross_disease_fraction": 0.60546875,
+      "mean_coefficient": 0.49709670345643353,
+      "total_loss": 0.5162948636582505
+    },
+    {
+      "mode": "disease",
+      "max_formula_errors": {
+        "mixed": 8.609843753504265e-07,
+        "hidden": 8.962224779196504e-06,
+        "logits": 5.1508403267064296e-06,
+        "p": 3.7297907895528226e-07
+      },
+      "valid_fraction": 0.9921875,
+      "cross_class_fraction": 0.0,
+      "cross_disease_fraction": 0.0,
+      "mean_coefficient": 0.49864466774621796,
+      "total_loss": 0.3209971600153592
+    }
+  ],
+  "checks": [
+    "Exact original training/evaluation probabilities and RNG stream; same dropout mask reused for synthetic view",
+    "Independent NumPy/SciPy latent interpolation, encoder GELU, disease/coarse targets and endpoint patient weights",
+    "Patient exclusion, hierarchy constraints, no eligible partner fallback and local random stream",
+    "Finite difference gradients and finite real task backpropagation through both endpoints and original pooling",
+    "Zero-strength task exactly original; inference has original parameter schema and strict restoration after update"
+  ]
+}

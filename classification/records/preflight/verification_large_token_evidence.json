@@ -1,0 +1,149 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "stream": "mid_regions",
+      "batch_size": 256,
+      "tokens": 9,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5087425708770752e-07,
+      "token_permutation_error": 2.9103830456733704e-11,
+      "hidden_query_attention_change": 0.2554738521575928
+    },
+    {
+      "stream": "late_regions_control",
+      "batch_size": 256,
+      "tokens": 9,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.3783574104309082e-07,
+      "token_permutation_error": 1.3969838619232178e-09,
+      "hidden_query_attention_change": 0.19056004285812378
+    },
+    {
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5273690223693848e-07,
+      "token_permutation_error": 1.1641532182693481e-09,
+      "hidden_query_attention_change": 0.3313611149787903
+    },
+    {
+      "stream": "quadrants_control",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 2.477318048477173e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 0.3629544973373413
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "mid_regions": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 4.632451977570895e-09,
+      "maximum_center_error": 2.96606921246223e-08
+    },
+    "late_regions_control": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08
+    },
+    "quadrants_control": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 4.4875072546801675e-09,
+      "maximum_center_error": 2.9671770263028918e-08
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "stream": "mid_regions",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 9,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.1324882507324219e-06
+      }
+    },
+    {
+      "stream": "late_regions_control",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 9,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      }
+    },
+    {
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "stream": "quadrants_control",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.6689300537109375e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "large_token_evidence.py": "659fbafc8bed48e8bf5b4e9aafd2a84c5bf6814d6aa66bd1b8e7b92dfb7b674d",
+    "audit_large_token_evidence.py": "335fd3e7d054e61a2025a49fdbf224b12373bf12448f12f877ef41683f2cf4b2",
+    "verify_large_token_evidence.py": "813eae8f65d61af45bd3414e1fcd5b47f862fccb8c57fb9e24113ae94ef9242d",
+    "large_token_data.py": "f093038f30d9d23c2d0dd63587944d564fbedeaa6478143485b282eface4f461"
+  },
+  "checks": [
+    "Four actual tokenstreams256image complete task/allparametergradients independently reconstructed",
+    "OriginalnormalL initialization/RNG/fulltask/basegradients identical atzeroreadout; equalparameters across9/9/4/4tokencontrols",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Tokenpermutation invariance, nonzero hiddenquery connectivity, optimizerupdates/frozenbuffers/strictrestore and fouractualCUDA firsttask/allgradientreplays"
+  ],
+  "external_test_evaluated": false
+}

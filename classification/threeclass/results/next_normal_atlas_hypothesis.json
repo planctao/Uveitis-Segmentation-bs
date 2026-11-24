@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-11-24T05:42:04.226036+00:00",
+  "status": "completed",
+  "family": "normal_atlas",
+  "hypothesis": "A global normal-patient PCA reference improved CV, but regional weighting and finer regions did not preserve validation and CV together. Test an input-conditional normal reference: mix locally weighted tangent spaces based only on normal-patient nuisance coordinates. This tests heterogeneity of normal feature distributions; no disease labels enter the atlas.",
+  "development_evidence": [
+    "results/research_normal_subspace_fusion/comparison.json",
+    "results/research_fine_normal_reference/comparison.json",
+    "results/research_normal_evidence_attention/comparison.json"
+  ],
+  "configuration_plan": [
+    {
+      "name": "clusters2_temperature0p5",
+      "count": 2,
+      "temperature": 0.5
+    },
+    {
+      "name": "clusters2_temperature2p0",
+      "count": 2,
+      "temperature": 2.0
+    },
+    {
+      "name": "clusters4_temperature0p5",
+      "count": 4,
+      "temperature": 0.5
+    },
+    {
+      "name": "clusters4_temperature2p0",
+      "count": 4,
+      "temperature": 2.0
+    }
+  ],
+  "geometry": "Original fit-only standardization. Equal normal-patient centers. Fit global normalPCA32 and whiten its coordinates for deterministic farthest-initialized Lloyd clustering2/4,max100withconvergenceassert. Gate distance is mean32coordinate squared distance,bandwidth mean nearest-normal-patient-center distance. Softmax(-distance/(temperature*bandwidth)). Percluster covariance uses .25uniformnormalpatientweights+.75normalizedresponsibility and rank32 for each of4streams; query samegate mixes local orthogonal projection corrections. Freeze16arm/phase geometry and16patientplans before allfits.",
+  "architecture": "Inputconditional softmixture of normal tangent projections, fullstrength1. Same original attentionMLP parameter schemas,initialization,RNG,fulltask,patientweights,hparams,3seeds.2/4clusters x temperature.5/2 gives4arms48newMLPheads. Score branches andfixed.75new/.25M5fusions,8scores0fusionfits. Cluster gates/localspacesarestatisticalbuffersnotlearnedneuralparameters.",
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 8,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "selection": "Freeze highest originalCV passingcandidate,requiringCVstrictly>M6andvalidation>=M6; then unusedpatientpartition confirmationagainstM6/M5/fixedGaussian withpositivepairedpatient95%lowerbounds.20271101/20271111alreadyused; noautomaticexternaltests.",
+  "audit": "Normalpatientonlygeometry withduplicatednormal/nonnormalchangeinvariance; independentpatientloops/Gramspectra recover gateandalllocalspaces; Kmeansfixedpoints,responsibilityandshrinkage verified.Originalparameter/RNGidentity; disabledatlasexactfulltaskloss/gradient/RNG; independentNumPyconditionalprojections+plainM5recoverfourreal256imagefulltasksandupdates/restores. Restoreall48actual stop/outerprobabilities,eachactualrouter/buffer/normalization/bestepoch/patientcoverage and16fixedfusionphases;freezeallsourcecode/features/weights.",
+  "preflight": "verification_normal_atlas.json",
+  "formal_fits_started": "Inspect actual checkpoints",
+  "external_test_evaluated": false,
+  "protocol": "runs/normal_atlas/protocol.json",
+  "protocol_sha256": "05d10c2a62a31a8983aed0664912c770f34cc9d818a28e479ec03a67e5d14ba6",
+  "pid": 85323,
+  "completed_at_utc": "2026-11-24T05:52:13.416329+00:00",
+  "actual_new_seed_fits": 48,
+  "actual_seed_heads_checked": 48,
+  "passing_development_gates": 0,
+  "best_original_cv": {
+    "name": "clusters4_temperature2p0_fusion075",
+    "cv": 0.8266095620283456,
+    "validation": 0.8907187111335642
+  },
+  "decision": "Retain M6; all branches/fixed mixtures failed originalCVgate; no external evaluation."
+}

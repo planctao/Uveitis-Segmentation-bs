@@ -1,0 +1,96 @@
+{
+  "hypothesis": "Twenty-one head-only structural ablations did not beat the frozen ViT-B development CV; test representational capacity and complementarity with public self-supervised DINOv2-L features.",
+  "configuration_plan": [
+    {
+      "feature": "dinov2_vitl_322",
+      "config": {
+        "arch": "global",
+        "mode": "flat",
+        "hidden": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      }
+    },
+    {
+      "feature": "dinov2_vitl_322",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      }
+    },
+    {
+      "feature": "dinov2_vitl_322",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      }
+    },
+    {
+      "feature": "dinov2_vitl_322",
+      "config": {
+        "arch": "attention",
+        "mode": "dual",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "aux": 0.4,
+        "consistency": 0.3
+      }
+    },
+    {
+      "feature": "dinov2l_dinov3b",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      }
+    },
+    {
+      "feature": "dinov2l_dinov3b",
+      "config": {
+        "arch": "attention",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.45,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18,
+        "taxonomy_only": true,
+        "aux": 1.0
+      }
+    }
+  ],
+  "selection": "All six configurations receive three seeds and three outer patient folds; inner patient holdout only for stopping. No external evaluation or thresholds chosen from external data.",
+  "preprocessing": "Same peripheral crop, aspect-preserving black padding and fixed manifest; 322 input is divisible by the 14-pixel patch size.",
+  "gpu_policy": "One frozen large backbone; small heads continue in the existing search process."
+}

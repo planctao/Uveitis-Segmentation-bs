@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "mean",
+      "rank": 16,
+      "batch_size": 256,
+      "parameters": 2041200,
+      "maximum_full_task_gradient_error": 1.3783574104309082e-07,
+      "maximum_d4_invariance_error": 1.1920928955078125e-07
+    },
+    {
+      "kind": "d4",
+      "rank": 16,
+      "batch_size": 256,
+      "parameters": 2041200,
+      "maximum_full_task_gradient_error": 2.2165477275848389e-07,
+      "maximum_d4_invariance_error": 1.1920928955078125e-07
+    },
+    {
+      "kind": "mean",
+      "rank": 32,
+      "batch_size": 256,
+      "parameters": 2054288,
+      "maximum_full_task_gradient_error": 2.076849341392517e-07,
+      "maximum_d4_invariance_error": 1.1920928955078125e-07
+    },
+    {
+      "kind": "d4",
+      "rank": 32,
+      "batch_size": 256,
+      "parameters": 2054288,
+      "maximum_full_task_gradient_error": 3.762543201446533e-07,
+      "maximum_d4_invariance_error": 2.384185791015625e-07
+    }
+  ],
+  "normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 3.536082315847011e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 4.401173647750056e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 3.3752636241501932e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.437490679938151e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "centered_spatial_contrast_restored": true,
+    "zero_initial_delta": true,
+    "maximum_independent_forward_error": 1.430511474609375e-06
+  },
+  "code_sha256": {
+    "normal_spatial_contrast.py": "6c85b699f519349c29f34042986ef4e48325705a7e69490a2cb86cbe36b67109",
+    "audit_normal_spatial_contrast.py": "4b5d84cb3f33a9c83b1d4d8362194f5f07419e6996db765d7ecca4fe6e7f47d3",
+    "verify_large_spatial_contrast.py": "0be91723ae7f15324737d5f4b51cf8b576f6af3b2dd52352815758fac0358d50"
+  },
+  "checks": [
+    "All4full256imagetrainedstates/completeM5task/allparametergradients match independentfunctionalbranchandNumPynormalprojection",
+    "Exactoriginalinit/outputs/basegradients/RNGatzeroreadout;newreadoutgradientnonzero;newconstructionpreservesoriginaldrawstream",
+    "D4invariancewithnonzerobranch,meancontrolarbitrarypermutationinvariance,D4noninvariancetoarbitrarypermutation,commonshiftinvarianceofcontrasttokens",
+    "Equalparamcountcontrols,optimizerupdates,strictrestores,frozengeometryandpermutations;actualCUDAfirstfulltaskindependentlyrestored"
+  ]
+}

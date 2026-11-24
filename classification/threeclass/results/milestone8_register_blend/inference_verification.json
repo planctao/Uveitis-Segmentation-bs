@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "package_sha256": "ff4581345f9a1ccb61d696dbf640a1c452821e6152b14d4aff83b185f4e375af",
+  "validation_images_checked": 374,
+  "frozen_head_states_checked": 9,
+  "validation": {
+    "n": 374,
+    "accuracy": 0.8983957219251337,
+    "balanced_accuracy": 0.8923990643216677,
+    "macro_f1": 0.894785003714643,
+    "log_loss": 0.28700446737958885,
+    "recall": {
+      "infectious": 0.9219858156028369,
+      "noninfectious": 0.8908045977011494,
+      "normal": 0.864406779661017
+    },
+    "confusion_matrix": [
+      [
+        130,
+        11,
+        0
+      ],
+      [
+        13,
+        155,
+        6
+      ],
+      [
+        2,
+        6,
+        51
+      ]
+    ]
+  },
+  "real_validation_indices": [
+    1002,
+    451,
+    442,
+    1631,
+    1812,
+    1657
+  ],
+  "real_cached_and_original_images_checked": 6,
+  "maximum_validation_probability_error": 3.5762786865234375e-07,
+  "mean_live_vs_cache_probability_error": 0.00014587667828891426,
+  "maximum_original_vs_cache_image_probability_error": 0.0,
+  "external_images_or_outcomes_used": false,
+  "checks": [
+    "All9 frozenheadstates and their fullconfirmation/codehashes verified",
+    "All374validation probabilities and decisions match original frozen source formula",
+    "Distinct fit-only normalization and projection used per rawB/normalB/registerL",
+    "Six actualcache/original sourceimages pass crop/pad/JPEG and bothfrozenDINObackbones at320/448",
+    "Rawimage methods reuse proven source extractor; predictor adds only fixedthreebranch probabilityarithmetic"
+  ]
+}

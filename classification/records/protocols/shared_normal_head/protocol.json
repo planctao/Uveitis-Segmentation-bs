@@ -1,0 +1,75 @@
+{
+  "created_at_utc": "2026-11-24T03:54:04.129618+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "reference_sha256": "d7b25156747ca29c1b752a61f1d711cf74458c98063f2eeb2aa990e0ae2132d8",
+  "preflight_sha256": "97b04e35e682450ac9c969cd26ad4871a0ae7a8e07406be361abf7b1fed277cd",
+  "source_checkpoints": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_0/model.pt": "d89dcf4653122512b1f37d2524c53e985ec39265e08d7b8379539a0bff3dd366",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_1/model.pt": "b2ff000fdc26b003f1845ecb5389ab957307ce8afe45542a09a54fb0250b5638",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_0/seed_2/model.pt": "ad365026b35d6cad4e8554739c91560bc8cbced6599eef95a320878dd5c1fa7e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_0/model.pt": "2cbaccd52e295c24557ba74ad2b2ba31798fe952df3b862b755858af3b62bab4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_1/model.pt": "b6fe3ea26157acbb8a8a38b86f21d4533a56d60b0362ae6e040a2f415d1523ba",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_1/seed_2/model.pt": "b146cdb9b41265d5b08d0115c05bfebe13bbb7b66e40fd87aaeb99f87271558c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_0/model.pt": "566a2cfdef6c275353428cff3cf971b0617986b6c21c28eb9e86db5672cc8c03",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_1/model.pt": "1b1ac4547ec70512d9ddbbd3903a2ae4f2d3991da62b762b5cef3477e1e8ce39",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_63c585e70306/fold_2/seed_2/model.pt": "ceae608ce29f8ffd14b0bfb4487d767a75eac75da438abd7266daf43d80eee07"
+  },
+  "frozen_parent_artifacts": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone6/package.json": "81b955917f68ab610358990ff9846c955eec7b1e251cd11fd7e9853978f48403",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_normal_axis_augmentation/comparison.json": "7b297e879ccb75c8027149ec25eb8cafd503af52693b15b0bfd2d6f8ec753fa4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_normal_axis_augmentation/verification.json": "bd6be52c438f852dda2d3eee5f6a9e8c801e10b0a6c1392564e23f86583fd634",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_normal_axis_augmentation/freeze_integrity_after_training.json": "e8e9ca06eda4c86fcfd298f38b6279517bd51b6effc3cf4a3f77c085bef33fc0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/predictions.npz": "633633bc936d1d9730b2ef7868adc2518824f8cdb28d47059be85e24f9dcdbee",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/predictions.npz": "40e9a0f496ae6f1b8f6fdc791ed825aa97b97268455cdcba87d08527f7668643",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/predictions.npz": "05fd8a34648bf5eb6db6313e9933fd57ef84508efedb068ceb42a1958cca9ec9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/predictions.npz": "c6c036ed5c08e4562271608dfbd1ee9b798f65162697b7bad6f641a690057bd5"
+  },
+  "configuration_plan": [
+    {
+      "name": "shared_control",
+      "level": "coarse",
+      "consistency": 0.0
+    },
+    {
+      "name": "shared_coarse01",
+      "level": "coarse",
+      "consistency": 0.1
+    },
+    {
+      "name": "shared_disease01",
+      "level": "disease",
+      "consistency": 0.1
+    },
+    {
+      "name": "shared_disease05",
+      "level": "disease",
+      "consistency": 0.5
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_candidate_scores": 4,
+  "fixed_normal_view_weight": 0.75,
+  "minimum_cv_macro_f1": 0.8270827413505814,
+  "minimum_validation_macro_f1": 0.8904827120381046,
+  "hypothesis": "The successful M6 mixes independently trained raw and normal-reference MLPs. Test whether sharing every MLP parameter while supervising both views retains complementary evidence with fewer unique head parameters. A zero-consistency control isolates the shared two-view task from coarse/disease probability agreement.",
+  "geometry": "Unchanged fit-only normalization and normal-patient-centroid PCA32, refit per phase. Only normal fitting patients define the projection. Raw and projected paths use the same standardized cached DINO features.",
+  "architecture": "One original M5 attention MLP parameter set evaluates raw and normal-reference inputs. Training task=.25 complete raw M5 loss+.75 complete projected M5 loss, including original fine contrastive terms separately. Optional patient-weighted symmetric KL over coarse or disease probabilities. Four fixed configurations: zero-consistency shared control; coarse KL .1; disease KL .1/.5. Inference always .25 raw+.75 normal-reference probabilities. 48 actual heads and four scores, no additional parent M5 mixture.",
+  "selection": "Original CV strictly > .8270827413505814 and validation >= .8904827120381046; freeze highest passing CV candidate before previously unused patient partitions against M6, M5 and fixed Gaussian. No automatic external evaluation.",
+  "audit": "Preflight verifies full weighted two-view task and NumPy coarse/disease KL, both view gradients, actual 256-image update and strict restore. All actual checkpoints must have exactly one original trainable parameter schema plus normal buffers. Independently reconstruct each raw and projected path with plain M5 plus NumPy projector; verify all stopping/outer probabilities, ensembles, fit statistics and geometry hashes.",
+  "external_test_policy": "Only 2091 development rows; external feature arrays set to NaN before fitting. No external outcomes, raw images or prediction files loaded for research selection.",
+  "code_sha256": {
+    "shared_normal_head.py": "f398a82e0cb1820850dbe076fb57264ed106ef1f5ba55bef31c1deb31ca6824e",
+    "shared_normal_experiments.py": "d5db590683c263a3a8b5b257b266dd2e72de096843e667901f38e82fc36af46a",
+    "verify_shared_normal_head.py": "d475e213de58e681cb43384bd095cf05869a36233e6ea65ab53df96094b7fa17",
+    "start_shared_normal_head.py": "c4f307165256bd923e24a3004d4a75574c9caa5c97961e5353d61b17574e3d11",
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b",
+    "verify_normal_subspace.py": "4731f410ab79e0d656f5ad9eee65e9af427b50ffb56015a350a5a439b4102c72",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "kernel_residual_experiments.py": "2fa80606d2b3e797047df2c7cdb26701519cbeddad1202bf21a3b2847028f065",
+    "milestone2.py": "5197d7463b2764cadceb39e40e86d6aa9e34e4576824f2d67d1e894b892848e2"
+  }
+}

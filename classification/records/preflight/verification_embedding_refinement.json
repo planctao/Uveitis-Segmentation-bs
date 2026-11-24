@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "All fixedranks/steps initially exactlypreserve embeddings",
+    "Step1readout and step2bottleneck/normalization gradients finite and nonzero",
+    "Twosteprefinement equals twiceapplying thesameone-stepoperator",
+    "Common model tensors and CPU RNGstate matchM5after construction",
+    "Train/evalinitialprobabilities,fineembeddings and postforwardRNGmatchM5",
+    "Full classifierloss trains residualbranch; strict fullcheckpointrestoration preservespredictions"
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "arm": {
+        "name": "shared_control",
+        "kind": "none"
+      },
+      "original_M8_shared_control_error": 0.0,
+      "maximum_zero_residual_base_gradient_error": 4.039611667394638e-08,
+      "independent_intermediate_errors": {
+        "p": 1.7881393432617188e-07,
+        "token_projected": 1.5497207641601562e-06,
+        "token_query": 1.9073486328125e-06,
+        "token_keys": 1.52587890625e-05,
+        "token_values": 1.52587890625e-05,
+        "token_attention": 1.430511474609375e-06,
+        "token_pooled": 7.62939453125e-05,
+        "token_delta": 2.7567148208618164e-07,
+        "token_base_hidden": 2.1457672119140625e-06
+      },
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.043081283569336e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 1.0
+    },
+    {
+      "arm": {
+        "name": "normal_position_mean",
+        "kind": "normal_mean"
+      },
+      "original_M8_shared_control_error": null,
+      "maximum_zero_residual_base_gradient_error": 0.0,
+      "independent_intermediate_errors": {
+        "p": 2.384185791015625e-07,
+        "token_projected": 1.5497207641601562e-06,
+        "token_query": 1.0728836059570312e-06,
+        "token_keys": 1.1026859283447266e-06,
+        "token_values": 1.3113021850585938e-06,
+        "token_attention": 1.4901161193847656e-07,
+        "token_pooled": 4.76837158203125e-07,
+        "token_delta": 1.979060471057892e-09,
+        "token_base_hidden": 2.1457672119140625e-06
+      },
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.9837170839309692e-07,
+      "token_permutation_error": 1.1920928955078125e-07,
+      "hidden_query_attention_change": 0.25024479627609253
+    },
+    {
+      "arm": {
+        "name": "normal_position_standardize",
+        "kind": "normal_standardize"
+      },
+      "original_M8_shared_control_error": null,
+      "maximum_zero_residual_base_gradient_error": 0.0,
+      "independent_intermediate_errors": {
+        "p": 2.086162567138672e-07,
+        "token_projected": 1.430511474609375e-05,
+        "token_query": 1.0728836059570312e-06,
+        "token_keys": 1.4424324035644531e-05,
+        "token_values": 1.5288591384887695e-05,
+        "token_attention": 1.1026859283447266e-06,
+        "token_pooled": 4.172325134277344e-06,
+        "token_delta": 9.953510016202927e-09,
+        "token_base_hidden": 2.1457672119140625e-06
+      },
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5087425708770752e-07,
+      "token_permutation_error": 9.313225746154785e-10,
+      "hidden_query_attention_change": 0.3294943571090698
+    },
+    {
+      "arm": {
+        "name": "all_patient_position_standardize",
+        "kind": "all_standardize"
+      },
+      "original_M8_shared_control_error": null,
+      "maximum_zero_residual_base_gradient_error": 0.0,
+      "independent_intermediate_errors": {
+        "p": 2.384185791015625e-07,
+        "token_projected": 1.430511474609375e-05,
+        "token_query": 1.0728836059570312e-06,
+        "token_keys": 1.531839370727539e-05,
+        "token_values": 1.4901161193847656e-05,
+        "token_attention": 1.2814998626708984e-06,
+        "token_pooled": 4.380941390991211e-06,
+        "token_delta": 1.0419171303510666e-08,
+        "token_base_hidden": 2.1457672119140625e-06
+      },
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.7229467630386353e-07,
+      "token_permutation_error": 1.1641532182693481e-09,
+      "hidden_query_attention_change": 0.34551388025283813
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "shared_control": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08,
+      "moments": {
+        "scope": "normal",
+        "patients": 111,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1583825587635488e-07
+      }
+    },
+    "normal_position_mean": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08,
+      "moments": {
+        "scope": "normal",
+        "patients": 111,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1583825587635488e-07
+      }
+    },
+    "normal_position_standardize": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08,
+      "moments": {
+        "scope": "normal",
+        "patients": 111,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1583825587635488e-07
+      }
+    },
+    "all_patient_position_standardize": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08,
+      "moments": {
+        "scope": "all",
+        "patients": 332,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1661560694875561e-07
+      }
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "arm": {
+        "name": "shared_control",
+        "kind": "none"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "arm": {
+        "name": "normal_position_mean",
+        "kind": "normal_mean"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "arm": {
+        "name": "normal_position_standardize",
+        "kind": "normal_standardize"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.537799835205078e-05
+      }
+    },
+    {
+      "arm": {
+        "name": "all_patient_position_standardize",
+        "kind": "all_standardize"
+      },
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.7702579498291016e-05
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_position_calibration.py": "ef8be496d9ee2d6870240b86a65333b3e29e3401a72af64c6a4e67da4023426b",
+    "audit_register_position_calibration.py": "1178cf2b5d99a77472baa95ee781798b2e8f30f17ac9b37f6b12bc654261d3d2",
+    "verify_register_position_calibration.py": "558409781a8de3f9b64248dcf20def7352549f21dd595fd23af51aa1d72c619b",
+    "large_token_data.py": "f093038f30d9d23c2d0dd63587944d564fbedeaa6478143485b282eface4f461"
+  },
+  "checks": [
+    "Four actual tokenstreams256image complete task/allparametergradients independently reconstructed",
+    "OriginalnormalL initialization/RNG/task identical atzero; basegradients numericallymatched (atol1e-7,rtol1e-5); equalparameters/allfourregisters; sharedcontrol exactM8learnedidentity",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Jointtoken/momentpermutation invariance, nonzero hiddenquery connectivity, optimizerupdates/frozenbuffers/strictrestore and fouractualCUDA firsttask/allgradientreplays"
+  ],
+  "side_intermediate_atol_standardization": 0.00014,
+  "probability_atol": 7e-06,
+  "roundoff_note": "Sidecalibration scale>=.05 may amplify projection roundoff20x. Fulltask/gradient/probability tolerances unchanged; allperstage errors recorded beforeclassification.",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

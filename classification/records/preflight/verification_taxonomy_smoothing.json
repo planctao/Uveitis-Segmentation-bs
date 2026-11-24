@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "diagnostics": [
+    {
+      "mode": "uniform",
+      "diseases": 14,
+      "matrix_entropy_mean": 1.6070539951324463
+    },
+    {
+      "mode": "geometry",
+      "diseases": 14,
+      "matrix_entropy_mean": 1.6034897565841675
+    }
+  ],
+  "checks": [
+    "Independent patient-normalized DINO centroids and within-parent transitions",
+    "Nonnegative stochastic rows, no crossparent mass and exact original coarse target preservation",
+    "Repeating onepatientsimages leaves transition unchanged",
+    "Independent doubleprecision weighted softtarget formula, ignored unknown labels and finite difference gradients"
+  ]
+}

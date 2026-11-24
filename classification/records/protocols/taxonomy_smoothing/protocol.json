@@ -1,0 +1,41 @@
+{
+  "created_at_utc": "2026-11-24T02:09:09.923575+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Compare known within-parent label smoothing with patient-balanced DINO disease-neighborhood smoothing. Soften potentially ambiguous fine disease labels while exactly retaining original coarse target. A controlled objective ablation, not claimed method invention.",
+  "configuration_plan": [
+    {
+      "name": "hard_control",
+      "mode": "uniform",
+      "alpha": 0.0
+    },
+    {
+      "name": "uniform_a0p1",
+      "mode": "uniform",
+      "alpha": 0.1
+    },
+    {
+      "name": "geometry_a0p1",
+      "mode": "geometry",
+      "alpha": 0.1
+    },
+    {
+      "name": "geometry_a0p3",
+      "mode": "geometry",
+      "alpha": 0.3
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "geometry": "Onlycurrentfittingpatient globalDINO320+448 features. L2normalizeeachimage;mean perpatient/disease andL2normalize;equalpatientmean perdisease andL2normalize. Paircosine/temperature0.2 softmaxover OTHER diseases insamecoarseparent; nootherparentmass. Uniformcontrol equaloverothersiblings. Singletonnormalrowidentity. No validation or stop data used to construct transitions.",
+  "objective": "OriginalFullM5Loss+0.8*alpha*(CE_transition-CE_hard), preserving full originalcoarseNLL,original0.03coarsesmoothing and0.05finecontrastive. CE_transition is weighted mean(-transition[disease] dot logsoftmax(disease_logits)) usingoriginalpatientweights. Thus originalfineCEtargetbecomes(1-alpha)onehot+alpha*transition. Alpha0 exactoriginalM5 control. Unknowndiseasestarget ignored. No model, initialization, optimizer, RNG, inference or earlystop changes.",
+  "controls": "Fourfixedarms each3formal+3foldx3seeds underoriginalpatientpartitions. Uniformvsgeometrysamealpha isolatesneighborgeometry;geometryalpha0.3 predeclaredstrength. Patientnormalization makesrepeatimagesofpatientnotincreaseitscenterweight.",
+  "audit": "Independentdictionary/NumPyrebuildall16fit-onlytransitionbanks,parents/support/centers. Actualfirststep logits,targets,patientweights,graph,losswitnesses per48fit; independentlySciPylogsumexpfullreplacementformula. All48heads CPUrestorefitstats/schema/stop/outerprobs,classdecisions andensembles. All12alpha0controls mustreproduce originalM5sourceheldoutdecisions. Finite difference objectivegradients andcoarsemasspreservation checked beforetraining.",
+  "selection": "Nonzeroarm originalpatientCVMacroF1>0.8090823139275858 andvalidation>=0.8893107959516184. HighestpassingCV freeze beforefreshpatientconfirmationagainstM5/fixedGaussian; noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeaturerows; externalfeatures NaN. Noexternalimagesorpredictionsoroutcomes.",
+  "code_sha256": {
+    "taxonomy_smoothing.py": "4a40411c9fef885407719040d438b678232ad184e0557423582004130fa197ee",
+    "verify_taxonomy_smoothing.py": "6f3ef9387190ac3b97ab825a7f88fcfe2416158f76de4fb3e11345a7337ec225",
+    "taxonomy_smoothing_experiments.py": "3d025e05002f30b6e3d91f089aaf3da7c8e9191d389de44a30f7c7a54c917f6b",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-24T02:18:01.773433+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Replaceoriginal14diseaselinearreadout withknownEuclidean/Poincareprototype-distanceclassification. Testwhethercurvedmetric ratherthanextraconditioningbranches improvescoarseclassification throughsamefineprobabilitymarginalization. Doesnotimposeorclaimlearnedclinicalhierarchy; notclaimedmethodinvention.",
+  "configuration_plan": [
+    {
+      "name": "euclidean_rank16",
+      "rank": 16,
+      "geometry": "euclidean"
+    },
+    {
+      "name": "poincare_rank16",
+      "rank": 16,
+      "geometry": "poincare"
+    },
+    {
+      "name": "euclidean_rank32",
+      "rank": 32,
+      "geometry": "euclidean"
+    },
+    {
+      "name": "poincare_rank32",
+      "rank": 32,
+      "geometry": "poincare"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "OriginalM5poolingand256hiddenDropout unchanged. ReplaceflatreadoutbyLayerNorm256->Lineartorank16/32->multiply0.1tangent,radialnormcap3. FourteenlearnedtangentprototypesN(0,.05),samemaxnorm. Euclideannegative4squaredL2distance; Poincarecurvature1exponentialmapexp0(v)=tanh(norm)v/norm, negativegeodesicdistancesquared. Bothlearnedscaleexp(logscale)clamp[1,100],initial10,plus14biasesinitial0. Fineprobsoftmaxaggregatesexactoriginalcoarseparents. Smoothasinh-squaredseriesnearcoincidentpoints; boundednormtanh3<1.",
+  "controls": "Euclidean/Poincareeachrank identicalparametercounts,classifierinitialweights andoriginalcommonweights/RNG. Geometrychanges initialpredictions,unlikeresidualM5identitystudies. OriginalcompleteM5losses,sampleweights,hparams,patientplansandstopping unchanged. Fourfixedarms each3formal+3foldx3seedheads.",
+  "audit": "Preflight independentNumPyprojection,radialcap,expmapandindependentarcoshdistanceformula; realtaskgradients andstrictrestoration. Doubleprecisionfinite differences,originunitderivative,coincidentzerodistancegradients,smalltangentEuclideanlimit,extremeboundedinputs. All48actualheads CPUrestorefitstats/maps/stop/outerprobabilities andindependentlyreconstructactualgeometry/logits; checkPoincareprototypes/querynorms<1 andallensembles/metrics.",
+  "selection": "OriginalpatientCVMacroF1>0.8090823139275858 andvalidation>=0.8893107959516184;highestpassingCV freeze beforefreshpatientconfirmationagainstM5/fixedGaussian. Noautomaticexternal scoring.",
+  "external_test_policy": "Only2091developmentfeaturerows;externalarraysNaN. Noexternalimages/predictions/outcomes.",
+  "code_sha256": {
+    "distance_taxonomy.py": "2fa0ea62c805c11bc5493b62e37cb4076c9177ffc2a8e931f3ad6e7f9a06cf27",
+    "verify_distance_taxonomy.py": "42c19b83212c62fb5ddac16bea3232233f9d8a04b054aeae6eeaf0b527fd333f",
+    "distance_taxonomy_experiments.py": "f6088af2291683daac1b4db8b04314d395c7d304bd0667a74722941c0433630a",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc"
+  }
+}

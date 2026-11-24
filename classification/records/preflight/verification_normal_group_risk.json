@@ -1,0 +1,181 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "groups": 2,
+      "strength": 0.1,
+      "full_task_batch": 256,
+      "penalty": 8.716329466551542e-05,
+      "geometry": {
+        "global": {
+          "maximum_principal_cosine_error": 5.585237827787637e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.7959215427061395e-08
+        },
+        "regions": {
+          "maximum_principal_cosine_error": 5.6878988186070956e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.9757623365433972e-08
+        },
+        "mid": {
+          "maximum_principal_cosine_error": 5.265183178337907e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.9596440671327855e-08
+        },
+        "dispersion": {
+          "maximum_principal_cosine_error": 6.2611587026140114e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.917584707162746e-08
+        },
+        "risk_clusters": {
+          "normal_patients": 111,
+          "cluster_counts": [
+            11,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "groups": 2,
+      "strength": 0.5,
+      "full_task_batch": 256,
+      "penalty": 8.716329466551542e-05,
+      "geometry": {
+        "global": {
+          "maximum_principal_cosine_error": 5.585237827787637e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.7959215427061395e-08
+        },
+        "regions": {
+          "maximum_principal_cosine_error": 5.6878988186070956e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.9757623365433972e-08
+        },
+        "mid": {
+          "maximum_principal_cosine_error": 5.265183178337907e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.9596440671327855e-08
+        },
+        "dispersion": {
+          "maximum_principal_cosine_error": 6.2611587026140114e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.917584707162746e-08
+        },
+        "risk_clusters": {
+          "normal_patients": 111,
+          "cluster_counts": [
+            11,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "groups": 4,
+      "strength": 0.1,
+      "full_task_batch": 256,
+      "penalty": 9.149507968686521e-05,
+      "geometry": {
+        "global": {
+          "maximum_principal_cosine_error": 5.585237827787637e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.7959215427061395e-08
+        },
+        "regions": {
+          "maximum_principal_cosine_error": 5.6878988186070956e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.9757623365433972e-08
+        },
+        "mid": {
+          "maximum_principal_cosine_error": 5.265183178337907e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.9596440671327855e-08
+        },
+        "dispersion": {
+          "maximum_principal_cosine_error": 6.2611587026140114e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.917584707162746e-08
+        },
+        "risk_clusters": {
+          "normal_patients": 111,
+          "cluster_counts": [
+            2,
+            61,
+            24,
+            24
+          ]
+        }
+      }
+    },
+    {
+      "groups": 4,
+      "strength": 0.5,
+      "full_task_batch": 256,
+      "penalty": 9.149507968686521e-05,
+      "geometry": {
+        "global": {
+          "maximum_principal_cosine_error": 5.585237827787637e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.7959215427061395e-08
+        },
+        "regions": {
+          "maximum_principal_cosine_error": 5.6878988186070956e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.9757623365433972e-08
+        },
+        "mid": {
+          "maximum_principal_cosine_error": 5.265183178337907e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 5.9596440671327855e-08
+        },
+        "dispersion": {
+          "maximum_principal_cosine_error": 6.2611587026140114e-09,
+          "normal_patients": 111,
+          "maximum_center_error": 2.917584707162746e-08
+        },
+        "risk_clusters": {
+          "normal_patients": 111,
+          "cluster_counts": [
+            2,
+            61,
+            24,
+            24
+          ]
+        }
+      }
+    }
+  ],
+  "cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "risk_variance_restored": 4.327141505200416e-05,
+    "class_group_batch_counts": [
+      [
+        8,
+        96
+      ],
+      [
+        10,
+        111
+      ],
+      [
+        1,
+        30
+      ]
+    ]
+  },
+  "code_sha256": {
+    "normal_group_risk.py": "6e9d675bddd57854105a0aa018e0c1146abc05ea01bf132f439163ae27ad27da",
+    "audit_normal_group_risk.py": "c3b522b035bbac6be827c414ddca73bd28b73aadbacc42765bfd2d1a64f6d048",
+    "verify_normal_group_risk.py": "ae89ee6858b48ce898f0fbbda80c66d02970f1dbe994ae9d814a07790829f679"
+  },
+  "checks": [
+    "Normal-only group PCA/cluster geometry independently audited; duplicate normal and changed nonnormal images leave geometry unchanged",
+    "Class-conditional weighted variance recovered by independent pairwise identity; weight-scaling invariance and absent-group handling verified",
+    "Same original parameters/initialization/RNG and inference; zero risk penalty restores full normal-reference loss,gradients,and RNG exactly",
+    "Four real256image complete tasks independently reproduce full losses/parameter gradients,updates and strict checkpoint recovery",
+    "Actual CUDA first-permutation training witness independently recovers source inputs,parameters,RNG,complete task and class/group risks"
+  ]
+}

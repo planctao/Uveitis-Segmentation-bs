@@ -1,0 +1,56 @@
+{
+  "created_at_utc": "2026-11-24T00:48:00.571111+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "backbone_sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c",
+  "hypothesis": "Prior QKV low-rank updates and extra frozen heads did not reliably improve development generalization. Test minimal feature calibration by adapting only pretrained LayerNorm affine terms with original head/evidence anchoring. This is known parameter-efficient normalization tuning, evaluated here without a claim of methodological novelty.",
+  "configuration_plan": [
+    {
+      "name": "matched_head16",
+      "norm_blocks": 0,
+      "final_norm": false,
+      "adapter_lr": 0.0,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "final_norm_lr1e5",
+      "norm_blocks": 0,
+      "final_norm": true,
+      "adapter_lr": 1e-05,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "last4_final_norm_lr1e5",
+      "norm_blocks": 4,
+      "final_norm": true,
+      "adapter_lr": 1e-05,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "last4_final_norm_lr3e5",
+      "norm_blocks": 4,
+      "final_norm": true,
+      "adapter_lr": 3e-05,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    }
+  ],
+  "algorithm_version": 1,
+  "planned_formal_seed_fits": 12,
+  "conditional_extra_seed_fits": 18,
+  "architecture": "Same live320+448DINOv3-B/M5head/fit-onlynormalization. Tune either only1536finalnormaffine parameters or13824final+last4blocknorm1/norm2affines. FreezeallQKV/FFN/token/otherbackboneweights. Head-onlycontrol matched. Load from protectedM5checkpoint0/1/2; no changes to originals.",
+  "training": "Actual16images/loss, noaccumulation; original taskloss including finecontrastive+0.5teacherKLtemperature2. Teachers onlyfitrows from exact sourcehead; featureanchor0. Headlr1e-5/wd0.01; normlrpredeclared/wd0. AdamW6epochs cosine schedule onlysuccessfulAMPupdates, initialscale128. Noaugmentation. Evaluateepoch0and6trainingepochs,patience3; epoch0eligible. Same matched streamseeding and train/valpatient masks.",
+  "conditional_cv": "Only if adapted3seedensemble beats its ownliveepoch0Macro-F1 and validation>=0.8893107959516184. Freezehighestvalidqualifier then original3outerpatientfolds for it and matchedheadcontrol, each3seeds. Eachfold starts its ownfit-onlyM5source. Complete originalCVgate and newpatientconfirmation required before promotion. Noautomaticexternal scoring.",
+  "input_audit": "Hashpinnedpretrainedweight; allfitstats and sourcemaps reconstructed; liveinitialpredictionsMAE<0.001vsfrozencache. Per-scope pretrainedaffinetensorhash matches independent verified initializations. Preservefull originalsource and trainingindex hashes.",
+  "verification": "Actual16imageAMPgradients reach onlyprescribednormscope, successfulupdateandscheduleralignment, teacheridentity, exactnorm+headrestorationpassed. Automaticposttrainingaudit will rebuildallteachers onCPU, restoreallactualstop/outerimageprobabilities, checkloss/updateaccounting,sourcehashes,affinecounts/scopesandepochselection.",
+  "external_test_policy": "Trainingandstoppingoriginaldevelopmentrowsonly; optionalouterfolds onlyoriginaltrain. Noexternalimages,probabilitiesoroutcomesevaluated.",
+  "code_sha256": {
+    "norm_adaptation.py": "118a60c4e7e0ebe1511e8e270720ed95b7def8b9b4e53683258126d7673b11fd",
+    "verify_norm_adaptation.py": "dd6dd5fcdeab0dd7a3426b50d290a35acd5b9e5d2630194f7c8a57daa488318a",
+    "norm_adaptation_experiments.py": "734e7975b7e202a1262acc7b303d70f00ae5443a0c76eff44c57f358abcfb2ba",
+    "analyze_norm_adaptation.py": "3353cf59bfb72ad868f204e9a9d021fa90bd808f9ee085b81c2896ed64ac3110",
+    "complete_norm_adaptation.py": "1a1f2f5e14034444381dc753107e06fa84a6cde02cc3a7f6f464e8f1cddd2bee"
+  }
+}

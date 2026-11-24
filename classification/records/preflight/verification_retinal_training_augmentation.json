@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "configurations": [
+    {
+      "mode": "none",
+      "actual_train_images_checked": 8
+    },
+    {
+      "mode": "horizontal",
+      "actual_train_images_checked": 8
+    },
+    {
+      "mode": "horizontal_photometric",
+      "actual_train_images_checked": 8
+    }
+  ],
+  "checks": [
+    "Trainingonlyimage sources unchangedbyte-for-byte andinputPILobjectnotmutated",
+    "OnestochasticPILviewfeedsboth320/448resolutions;seededreplayexact",
+    "NoaugmentationexactoriginalPairs;horizontalmodeexactidentityorflipwithoutcropping",
+    "Labels,diseases,patientweights,patientIDs andlocalindicesunchanged",
+    "Photometricbackgroundrestorationandall-blackinvariance; finitecorrectshapes"
+  ],
+  "status": "Input pipeline verified; no augmentation model fit claimed."
+}

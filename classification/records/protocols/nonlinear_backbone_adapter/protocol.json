@@ -1,0 +1,63 @@
+{
+  "created_at_utc": "2026-11-24T02:30:18.050624+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "reference_sha256": "d7b25156747ca29c1b752a61f1d711cf74458c98063f2eeb2aa990e0ae2132d8",
+  "backbone_sha256": "73cec8be7427c8655ceced13ce62f6e20a1fa90d1b4d4a550df17a1144081a7c",
+  "preflight_verification": "verification_nonlinear_backbone_adapter.json",
+  "preflight_verification_sha256": "2cb29029529b6fcf2f0c0d5973fc7cd10fbdb4a791f1e276e806f10a9f3daa4a",
+  "hypothesis": "Known nonlinear bottleneck adapters in the frozen DINO final4 blockoutputs may adaptretinal evidence moreeffectively than priorlinearLoRA oraffineLayerNorm tuning. Preserveoriginalpretrained weights andexactinitialrealimageprediction; comparematchedMLPonlycontrol. Notclaimedmethodinvention.",
+  "configuration_plan": [
+    {
+      "name": "matched_head16",
+      "blocks": 0,
+      "rank": 16,
+      "adapter_lr": 0.0,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "last4_rank16_lr1e4",
+      "blocks": 4,
+      "rank": 16,
+      "adapter_lr": 0.0001,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "last4_rank64_lr1e4",
+      "blocks": 4,
+      "rank": 64,
+      "adapter_lr": 0.0001,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    },
+    {
+      "name": "last4_rank16_lr3e4",
+      "blocks": 4,
+      "rank": 16,
+      "adapter_lr": 0.0003,
+      "anchor_kl": 0.5,
+      "anchor_feature": 0.0
+    }
+  ],
+  "planned_formal_seed_fits": 12,
+  "maximum_new_seed_fits_if_cv_triggered": 30,
+  "architecture": "Alltokensaftereachoflast4blocks: residual+0.1up(GELU(down(LayerNorm(tokens))));rank16/64, upweight/biaszero. OriginalDINOweights frozen/eval; adaptersandheadtrain. Original320+448rawfeaturepipeline, cachedfloat16rounding andoriginalfit-onlystats. AdapterinitializationprivateCPUseed20361124+seed independentoffolddiseasecount; trainingstreamreset20261124+seedafterconstruction.",
+  "objective": "OriginalfullM5lossactual16imagebatchplus0.5teacherKL attemperature2; teacherfromonlyexactcurrentfitpatients sourceM5andoriginalfrozenfeatures. Featureanchorweight0. Headlr1e-5, adapterlrpredeclared,allweightdecay.01; cosine6epochs;patience3;epoch0eligible. Noaugmentation.",
+  "selection": "Onlyadaptedformalensemble muststrictlyimproveitsownliveepoch0 andvalidation>=0.8893107959516184 toqualify. Highestqualifyingvalidationcandidate freeze beforeoriginalCV. CompareONLYthatwinnerandmatchedheadcontrol onoriginal3outerpatientfolds,each3seeds. Fullgate requiresoriginalCVMacroF1>0.8090823139275858 andvalidation>=0.8893107959516184; afterfullauditsfreezequalifierbeforefreshpatientconfirmationagainstM5/fixedGaussian. Noexternalautomatic scoring.",
+  "audit": "Allactualteachers CPUrestorefromprecisefitrows. Allsourceandbackbonehashes,initialdeltaseeds/zerooutputs,fit-onlystatsandpatientgroups,losscomponentweightedmeans,selectedepochs,successful/skippedAMPupdates andschedulers verified. Everyactualselectedmodelstop/outerrawimageprobabilities,classdecisionsandensemblesrecomputed. Everyactualblockadapter atbothresolutions independentlyNumPy/SciPyrebuilt onrealimages. Expected12or30fits accordingtooriginalselectionrule.",
+  "external_test_policy": "Onlytrain/validationrawcacheimages anddevelopmentfeature rows. ExternalfeaturesNaN;noexternalrawimages,predictionsoroutcomes.",
+  "code_sha256": {
+    "nonlinear_backbone_adapter.py": "eac5dbb89971ccf765c5fb6902727e47283237d77849b0623d775d9af20c2874",
+    "verify_nonlinear_backbone_adapter.py": "0ab2187c85083b119014a62748a0bb79bd17982a75f41a4728c7341ef40eb758",
+    "nonlinear_adapter_experiments.py": "1af6392c53c68edf60d668671574a98ff4d1fee25c720c4c79ee5b4bdc74d765",
+    "norm_adaptation_experiments.py": "734e7975b7e202a1262acc7b303d70f00ae5443a0c76eff44c57f358abcfb2ba",
+    "anchored_lora.py": "94b52efd13a77e14393c84c2c2bbf1e91c2195be1070d33be5d429debdf9d9be",
+    "lora_model.py": "4c32bb1c347dcbfef0ddcd9920d88bf3a0b03c89d07c1d150de70944d0e1ab0d",
+    "lora_seed.py": "7c51807f5d5cf5e6e75144778cde9fdfb3e32d9f6ed297d204f0d9090b02e847",
+    "amp_optimizer.py": "54d3492c99bda9f57a73065afe44b7e0aced807fec21fcbd7d722cc147a948de",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "kernel_residual_experiments.py": "2fa80606d2b3e797047df2c7cdb26701519cbeddad1202bf21a3b2847028f065"
+  }
+}

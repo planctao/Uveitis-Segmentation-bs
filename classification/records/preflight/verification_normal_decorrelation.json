@@ -1,0 +1,108 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "scope": "coarse",
+      "strength": 0.1,
+      "batch_size": 256,
+      "penalty": 0.03489324823021889,
+      "stratum_sizes": [
+        47,
+        75,
+        27
+      ]
+    },
+    {
+      "scope": "coarse",
+      "strength": 1.0,
+      "batch_size": 256,
+      "penalty": 0.03489324823021889,
+      "stratum_sizes": [
+        47,
+        75,
+        27
+      ]
+    },
+    {
+      "scope": "disease",
+      "strength": 0.1,
+      "batch_size": 256,
+      "penalty": 0.13331525027751923,
+      "stratum_sizes": [
+        26,
+        17,
+        12,
+        13,
+        4,
+        4,
+        27,
+        6,
+        5,
+        28
+      ]
+    },
+    {
+      "scope": "disease",
+      "strength": 1.0,
+      "batch_size": 256,
+      "penalty": 0.13331525027751923,
+      "stratum_sizes": [
+        26,
+        17,
+        12,
+        13,
+        4,
+        4,
+        27,
+        6,
+        5,
+        28
+      ]
+    }
+  ],
+  "normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 5.585237827787637e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.7959215427061395e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.6878988186070956e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.9757623365433972e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 5.265183178337907e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.9596440671327855e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 6.2611587026140114e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.917584707162746e-08
+    }
+  },
+  "cuda_full_task_witness": {
+    "batch_size": 256,
+    "full_task_restored": true,
+    "independent_patient_penalty_restored": true,
+    "stratum_sizes": [
+      46,
+      70,
+      27
+    ],
+    "numpy_penalty_error": 2.789865574670536e-09
+  },
+  "code_sha256": {
+    "normal_decorrelation.py": "acefd489e999791b36fc9fa7f255cf9c5cc4b6028c58f1977473d83501a4a064",
+    "audit_normal_decorrelation.py": "31806e9bb7223f405caebafffe83d3dc14c1b9da86eff67a829d4e22a7bdfe5e",
+    "verify_normal_decorrelation.py": "0d8635ac17e40a66a0927fd9337c41b584b70361964fdde8168f1df4bf46d1c1"
+  },
+  "checks": [
+    "Fourreal256imagefulltasks,independentexplicitpatientaggregation/correlationfullparametergradients,updatesandstrictrestore",
+    "Originalparameters,init,RNGandpredictionsexact;zero-strengthfulltaskgradientsidentical",
+    "NumPysecondimplementationrestorespatient-diseasecenters/penalty;duplicateimageinvarianceandundersupportedzerofinitegradientchecked",
+    "ActualCUDAfirsttrainingfulltask,pre-dropouthidden,normalcoordinatesandconditionalpatientpenaltyindependentlyrestored"
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "candidate": {
+    "group": "validation",
+    "mode": "flat",
+    "config": {
+      "arch": "attention",
+      "mode": "flat",
+      "hidden": 256,
+      "dropout": 0.6,
+      "lr": 0.002,
+      "wd": 0.1,
+      "epochs": 120,
+      "patience": 18,
+      "taxonomy_only": true,
+      "aux": 0.8,
+      "label_smoothing": 0.03,
+      "fine_contrastive": 0.05,
+      "normal_rank": 32,
+      "normal_strength": 1.0,
+      "normal_large_feature": "large_dual",
+      "token_evidence_stream": "registers"
+    },
+    "seeds": 3,
+    "thresholds": null,
+    "val": {
+      "n": 374,
+      "accuracy": 0.8983957219251337,
+      "balanced_accuracy": 0.8923990643216677,
+      "macro_f1": 0.894785003714643,
+      "log_loss": 0.28700446797495854,
+      "recall": {
+        "infectious": 0.9219858156028369,
+        "noninfectious": 0.8908045977011494,
+        "normal": 0.864406779661017
+      },
+      "confusion_matrix": [
+        [
+          130,
+          11,
+          0
+        ],
+        [
+          13,
+          155,
+          6
+        ],
+        [
+          2,
+          6,
+          51
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.9036269348628899,
+      0.8862882027978259,
+      0.8760946187944132
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_2/model.pt"
+    ],
+    "name": "registers_m7replace",
+    "candidate_id": "registers_m7replace",
+    "token_configuration": {
+      "name": "registers",
+      "tokens": 4
+    },
+    "cv": {
+      "folds": [
+        {
+          "phase": "fold_0",
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8391608391608392,
+            "balanced_accuracy": 0.8504302120212124,
+            "macro_f1": 0.8357695405425383,
+            "log_loss": 0.41860673473647914,
+            "recall": {
+              "infectious": 0.7863247863247863,
+              "noninfectious": 0.8702290076335878,
+              "normal": 0.8947368421052632
+            },
+            "confusion_matrix": [
+              [
+                184,
+                43,
+                7
+              ],
+              [
+                20,
+                228,
+                14
+              ],
+              [
+                0,
+                8,
+                68
+              ]
+            ]
+          }
+        },
+        {
+          "phase": "fold_1",
+          "metrics": {
+            "n": 572,
+            "accuracy": 0.8146853146853147,
+            "balanced_accuracy": 0.8326185071866069,
+            "macro_f1": 0.8250282862721011,
+            "log_loss": 0.5098106096781865,
+            "recall": {
+              "infectious": 0.7863247863247863,
+              "noninfectious": 0.816793893129771,
+              "normal": 0.8947368421052632
+            },
+            "confusion_matrix": [
+              [
+                184,
+                47,
+                3
+              ],
+              [
+                37,
+                214,
+                11
+              ],
+              [
+                2,
+                6,
+                68
+              ]
+            ]
+          }
+        },
+        {
+          "phase": "fold_2",
+          "metrics": {
+            "n": 573,
+            "accuracy": 0.849912739965096,
+            "balanced_accuracy": 0.87350073861981,
+            "macro_f1": 0.8562285031625684,
+            "log_loss": 0.4268616227719896,
+            "recall": {
+              "infectious": 0.8632478632478633,
+              "noninfectious": 0.8098859315589354,
+              "normal": 0.9473684210526315
+            },
+            "confusion_matrix": [
+              [
+                202,
+                26,
+                6
+              ],
+              [
+                40,
+                213,
+                10
+              ],
+              [
+                0,
+                4,
+                72
+              ]
+            ]
+          }
+        }
+      ],
+      "mean_macro_f1": 0.8390087766590693,
+      "sd_macro_f1": 0.015850327172239335
+    },
+    "development_gate_passed": true,
+    "source_token_arm": "registers",
+    "m7_replacement_weight": 0.25
+  },
+  "checkpoint_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_0/model.pt": "88908e7720d773ca409cb97dc5867c37a8c7fe1d9d603e84451717ee31cffe0d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_1/model.pt": "a52186d034e677dbba0d3f23dd18932b90ea9d3275cd2c54476145129a568e1b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_2/model.pt": "c7b1a119feef7625fecfa0c95c2bff7df6c6a52b8c6ffe5790cc2a340e2db230",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_0/model.pt": "9b7ccc0ff541aab81c5fbfc7b82ffbd9e165a4690ed59284fa66aee7da3e66ee",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_1/model.pt": "65bdabf2788de1725ebd6eebca5b62caabf4e0ac1f418c398486ddda22fb41a3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_2/model.pt": "ac6b140edfa752188d270b5e006872f1c0b21f69e3de71954c6ff1b18c9e2f0f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_0/model.pt": "d460a5fde0dcf8678752f660baadc59a5fe08cd244025a1853dc44ad5e5f1450",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_1/model.pt": "9e66ace92226fbf456990dbfd0f95d48b960f140f3891d3e1a55e2c1394e32cd",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_2/model.pt": "dc3b99cd2d40c92ad66dd7e24264ff2ffff10453d3609d953f14447ff78ceb0a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_0/model.pt": "9846a7d151446a296fd59c8368aa8b4e8044027434b917bbb16e114e130efe00",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_1/model.pt": "5d1af37546c206295ef2c91c5023002821e40f26c5edb383553608cc40c63408",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_2/model.pt": "0aec793f23f304a3f9401f9554d9b17c50ff1dafa9ac1873ecda56e37e9103b4"
+  },
+  "geometry_and_plans_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/geometry/fold_0/geometry.npz": "cc82cbff23cc8e61f6fa3f03f4278abca55a7ad43d436de9a8da2eacd35d2e06",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/geometry/fold_1/geometry.npz": "063ff1398702b7dec9446c4db4969a2aff68a43563a2913f8877ad5603eab738",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/geometry/fold_2/geometry.npz": "d7a07fda072b7ff928b415a2762c0799a72c3a76e54cf10fb718d40a35b42666",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/geometry/validation/geometry.npz": "51cb28cad8d308bf6c54505e19c4316613ad1754b0a49e49b1695e366ef1730e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/split_plans/fold_0.json": "3e8084640ef25aa952f6c2a310d5d14eb566c08f1e2c037343fe320c6364ac41",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/split_plans/fold_1.json": "dcf42cf02aabbaae909f57571aa63e001c933a23650c8d1e41e2450667cc17b0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/split_plans/fold_2.json": "f13b6c843fa82272f4cefb27c4f4e4681e09f87d9683b3950f7a9a2563c449de",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/split_plans/validation.json": "82ffa10da6c5f963078c708a0e78f32115b2f5545eb22b2b77aee72857274af5"
+  },
+  "requires_fresh_patient_confirmation": true,
+  "external_test_evaluated": false
+}

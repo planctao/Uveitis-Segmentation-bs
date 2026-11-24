@@ -1,0 +1,41 @@
+{
+  "created_at_utc": "2026-11-24T00:25:13.765252+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "reference": "results/milestone5/selection_before_test.json",
+  "hypothesis": "Fixed M5 training OOF shows heterogeneous evidence within same-patient/same-diagnosis images. A fit-only bag auxiliary objective may share evidence across such images without requiring a bag at inference. Bag/image accuracy units differ; this is not evidence of label error or improvement.",
+  "configuration_plan": [
+    {
+      "name": "group_batch_control",
+      "pool": "mean",
+      "weight": 0.0
+    },
+    {
+      "name": "mean_bag_aux0p2",
+      "pool": "mean",
+      "weight": 0.2
+    },
+    {
+      "name": "attention_bag_aux0p2",
+      "pool": "attention",
+      "weight": 0.2
+    },
+    {
+      "name": "attention_bag_aux0p5",
+      "pool": "attention",
+      "weight": 0.5
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "architecture": "Original M5 plus a training-only zero-initialized linear 256-to-1 quality scorer reading pre-Dropout hidden features. Bag image probabilities and diagnosis probabilities use mean/within-bag softmax pooling. Export removes quality scorer and loads strictly into original M5 single-image Model.",
+  "bags": "Construct only within current fit patients using (patient_group,disease,label); never merge discordant diagnoses/classes. Bag weights balance coarse class and patient, dividing multiple same-patient/coarse-class diagnoses. All images appear once per epoch; random group order, no split bag, target256images/batch. Save every epoch group order and coverage hashes.",
+  "training": "Original M5 image losses, patient/class image weights, hyperparameters, original fit/stop/outer splits, image-based early stopping. Add lambda times bag coarse label-smoothed NLL +0.8diagnosisNLL, balanced by bag patient/class weights. Common initialization/RNG preserved. All four arms have identical complete-bag sampling, including zero auxiliary control; no additional contrastive loss at bag level.",
+  "evaluation": "Four fixed configurations each3formal seeds+3outer folds x3seeds. Single-image validation and patient-CV determine selection; group scores descriptive only.",
+  "selection": "Original patient-CV Macro-F1 must exceed0.8090823139275858 and original validation Macro-F1 must be at least0.8893107959516184. Freeze qualifier before fresh fixed patient confirmation against M5 and fixed Gaussian. No automatic external evaluation.",
+  "verification": "Independent NumPy pooling and loss, invariance, numerical derivatives, coverage and weights, initialization and RNG, zero auxiliary identity, full gradients and strict export checked. All48actual heads will undergo CPU stop/outer restoration, export identity, fit-stat/split/disease/bag reconstruction and every epoch coverage audit.",
+  "external_test_policy": "Only development fit/stop/outer rows used; all explicit inference indices below2091. No external metrics read or evaluated for this study.",
+  "code_sha256": {
+    "patient_bag.py": "1671c4ee5a97214880d1bc697322137752764d16918da286a26fd2a7006e7fc0",
+    "verify_patient_bag.py": "76e4b6a98dec74e8878afd8573ee51e6638a4c76715376f72e2acdf0f44bc5ed",
+    "patient_bag_experiments.py": "a7086e2cb527606b5c11a517237e165a698c76922391e5dd6eaa6d520feb579c"
+  }
+}

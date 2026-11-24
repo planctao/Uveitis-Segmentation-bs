@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "development_images": 2091,
+  "shards_checked": 131,
+  "sampled_raw_images": [
+    0,
+    100,
+    500,
+    1000,
+    1500,
+    2090
+  ],
+  "live_pooling_reproduction": [
+    {
+      "scale": 320,
+      "grid": 3,
+      "pool": "ordinary",
+      "max_error": 0.002082347869873047,
+      "mean_error": 0.0001600214745849371
+    },
+    {
+      "scale": 320,
+      "grid": 3,
+      "pool": "weighted",
+      "max_error": 0.002082347869873047,
+      "mean_error": 0.00016707715985830873
+    },
+    {
+      "scale": 320,
+      "grid": 7,
+      "pool": "ordinary",
+      "max_error": 0.00250244140625,
+      "mean_error": 0.00019014367717318237
+    },
+    {
+      "scale": 320,
+      "grid": 7,
+      "pool": "weighted",
+      "max_error": 0.0025649070739746094,
+      "mean_error": 0.00019777685520239174
+    },
+    {
+      "scale": 448,
+      "grid": 3,
+      "pool": "ordinary",
+      "max_error": 0.00225067138671875,
+      "mean_error": 0.0001757736026775092
+    },
+    {
+      "scale": 448,
+      "grid": 3,
+      "pool": "weighted",
+      "max_error": 0.002074718475341797,
+      "mean_error": 0.00018793590425048023
+    },
+    {
+      "scale": 448,
+      "grid": 7,
+      "pool": "ordinary",
+      "max_error": 0.0036003589630126953,
+      "mean_error": 0.0002186533238273114
+    },
+    {
+      "scale": 448,
+      "grid": 7,
+      "pool": "weighted",
+      "max_error": 0.003520488739013672,
+      "mean_error": 0.00023566524032503366
+    }
+  ],
+  "checks": [
+    "Every bank array value hash, dtype, shape, manifest and development row identity verified",
+    "All131 shards reproduce exact final regional arrays and paired occupancy values",
+    "All common global/mid/dispersion arrays exactly copied from original fixed bank",
+    "Only training/validation rows have regional evidence; external rows explicitly NaN",
+    "All pixel-only masks independently rebuilt with an explicit empty-image fallback",
+    "Six actual development images reproduce all8scale/grid/pooling branches from original weights",
+    "Per-scale foreground occupancy reproduced exactly"
+  ]
+}

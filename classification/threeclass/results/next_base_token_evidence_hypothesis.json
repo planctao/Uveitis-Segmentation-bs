@@ -1,0 +1,33 @@
+{
+  "created_at_utc": "2026-11-24T12:52:10.593868+00:00",
+  "family": "base_token_evidence",
+  "status": "extracting_development_features",
+  "scores_evaluated": 0,
+  "hypothesis": "M8 adds finalregister evidence only to the25% DINO-L branch while the56.25% normalDINO-B branch uses CLS/spatialmeans. Test a corresponding hiddenquery tokenresidual in normalB using final4registers, mid9regions and matched late9/quadrant4 spatialcontrols. This is a transfer of the alreadyconfirmed Lcomponent to another backbone branch, no originalityclaim. Designed before current position and structuredregister classifier outcomes.",
+  "feature_plan": "Exact historical DINOv3-B/16 officialcheckpoint, same320/448 cachetransforms; only2091developmentimages. Capture block7raw3x3midregions, finalnorm4registers, final3x3control, final2x2control. Independently recoverprefixpositions and adaptivepool on6realimages, compareeveryfreshforward legacyCLS/regions/block7mean/patchstd againstoldBbank; preservehistorical late3x3regionbytes afteragreement. Freeze2091cachehashes/allsource/codebeforeextract,262shards and6distinctpostextractforwards; featurestage0classificationfits/scores/externalimages.",
+  "architecture_plan": "OriginalnormalB1536 attentionMLP/fulltask/init/RNG; eachnewstream separatelyfitnormalize and normalpatientPCA32remove/clamp. LayerNorm1536->key/value32GELU; originalhiddenLayerNorm256->query32, softmaxpool thenzeroLinear32->256 times.1 residual. Mid9/late9 andregister4/quadrant4 controls, identicallearnedparameters. No tokenpositionalparameters.",
+  "configuration_plan": [
+    {
+      "name": "mid_regions"
+    },
+    {
+      "name": "late_regions_control"
+    },
+    {
+      "name": "registers"
+    },
+    {
+      "name": "quadrants_control"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachstandalone newnormalB and fixed .1875rawB+.5625newnormalB+.25originalM8registerL.24fusion-sourceheads(rawB/registerL) frozenbeforefits; ifreferenceadvancespreservethisformula.",
+  "geometry_plan": "FouroriginalB and16newstreamnormalspaces/allpatientplans frozenbefore48heads; originalBspaceexacthistoricalsource. All preprocessing fittedwithinfitpatients.",
+  "launch_condition": "Featureonlywork mayproceedwhile currentclassifiersrun. No classificationfits/scores until registergeometry all48audit and any required confirmation/package/promotion decision terminal, complete-task/CUDApreflight and thencurrentgates frozen.",
+  "selection": "OriginalCV strictlyhigher and validation>=thencurrentreference; freezehighestqualifyingCV beforetwo unusedpatient3foldrepeatsets; highermeanF1 AND pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian. No automaticexternaltesting.",
+  "external_test_evaluated": false,
+  "feature_protocol": "runs/base_token_features/protocol.json",
+  "feature_protocol_sha256": "ff137767ce34ef1593f0b0e61b5281a5b411c4cb833b4c8f0d558a4c4826f400",
+  "feature_extraction_pid": 30711
+}
