@@ -1,0 +1,41 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "scope": "Train split only; equal patient-label centers. Descriptive contrast energy; no performance or causal inference. No new model fits.",
+  "fit_images": 1717,
+  "streams": {
+    "global": {
+      "patient_label_groups": 386,
+      "fraction_pairwise_class_mean_squared_contrast_removed": {
+        "infection_vs_noninfection": 0.501644184974924,
+        "infection_vs_normal": 0.5599103153383509,
+        "noninfection_vs_normal": 0.6039669629553847
+      }
+    },
+    "regions": {
+      "patient_label_groups": 386,
+      "fraction_pairwise_class_mean_squared_contrast_removed": {
+        "infection_vs_noninfection": 0.6403355140579768,
+        "infection_vs_normal": 0.6913934354460222,
+        "noninfection_vs_normal": 0.702719740405137
+      }
+    },
+    "mid": {
+      "patient_label_groups": 386,
+      "fraction_pairwise_class_mean_squared_contrast_removed": {
+        "infection_vs_noninfection": 0.5569811099749902,
+        "infection_vs_normal": 0.6192853090275153,
+        "noninfection_vs_normal": 0.6093714998566434
+      }
+    },
+    "dispersion": {
+      "patient_label_groups": 386,
+      "fraction_pairwise_class_mean_squared_contrast_removed": {
+        "infection_vs_noninfection": 0.5102656181508269,
+        "infection_vs_normal": 0.5655425817766917,
+        "noninfection_vs_normal": 0.5738019228063522
+      }
+    }
+  },
+  "code_sha256": "7ae0081eccbe183460fd9007a843e4c98d5ea9a8539c49a55950a1279dfde153",
+  "external_test_evaluated": false
+}

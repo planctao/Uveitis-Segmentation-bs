@@ -47,7 +47,22 @@ def omit_patient_lists(value, changes, trail=''):
         result = {}
         for key, item in value.items():
             location = trail + '.' + key
-            if isinstance(item, list) and item and isinstance(item[0], str) and any(term in key.lower() for term in ['patient_groups', 'patient_ids', 'patient_names', 'image_paths']):
+            identity_records = (
+                isinstance(item, list) and item
+                and any(isinstance(row, dict) and any(field in row for field in
+                    ['patient', 'patient_id', 'patient_name', 'image_path', 'sample_id',
+                     'validation_index', 'manifest_indices', 'image_index'])
+                    for row in item)
+            )
+            identity_list = (
+                isinstance(item, list) and item and isinstance(item[0], str)
+                and any(term in key.lower() for term in
+                    ['patient_groups', 'patient_ids', 'patient_names', 'image_paths'])
+            )
+            individual_predictions = isinstance(item, list) and item and key.lower() in {
+                'probabilities', 'predictions', 'per_image_predictions', 'per_patient_predictions',
+            }
+            if identity_records or identity_list or individual_predictions:
                 fingerprint = hashlib.sha256(json.dumps(item, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
                 result[key] = {'omitted_from_github_snapshot': True, 'count': len(item), 'source_list_sha256': fingerprint}
                 changes.append({'json_path': location, 'count': len(item), 'source_list_sha256': fingerprint})
@@ -110,8 +125,13 @@ def main() -> None:
         directories[:] = sorted(d for d in directories if d not in SKIP_DIRECTORIES and depth < 3)
         for name in sorted(names):
             path = Path(root) / name
-            if name in RESULT_NAMES and not path.is_symlink():
-                export(path, Path('threeclass') / relative / name, 'aggregate_result')
+            already_exported = depth == 0 and (name in REFERENCE_NAMES or
+                name.startswith('next_') and name.endswith('_hypothesis.json'))
+            if path.suffix == '.json' and not path.is_symlink() and not already_exported:
+                # Result directories also contain aggregate diagnostics and independent
+                # audits. Preserve these alongside the comparison/metric records.
+                category = 'aggregate_result' if name in RESULT_NAMES else 'aggregate_audit_or_diagnostic'
+                export(path, Path('threeclass') / relative / name, category)
     for study in sorted((source / 'runs').iterdir()):
         if not study.is_dir() or study.name == 'continuous_search':
             continue
@@ -165,7 +185,7 @@ def main() -> None:
     manifest = {
         'captured_at_utc': datetime.now(timezone.utc).isoformat(),
         'threeclass_source': str(source), 'legacy_source': str(legacy),
-        'snapshot_policy': 'Stable per-file reads from an active experiment; aggregate records only. Source bytes and aggregate records preserved except explicitly indexed patient-identity list omissions.',
+        'snapshot_policy': 'Stable per-file reads from an active experiment; aggregate records only. Source bytes and aggregate records preserved except explicitly indexed identity/per-individual detail omissions.',
         'excluded_artifacts': ['raw images', 'patient/image manifests', 'per-image/patient predictions', 'feature caches', 'model weights', 'raw training logs'],
         'file_count': len(files), 'bytes': sum(item['bytes'] for item in files),
         'counts_by_category': dict(Counter(item['category'] for item in files)),

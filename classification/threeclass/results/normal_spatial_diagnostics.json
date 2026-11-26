@@ -1,0 +1,69 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "scope": "Training only; five held-normal-patient folds; all normalization and four normal PCA spaces fitted excluding held patients. Equal normal patient scores. Frozen global8 coordinate ridge lambda1. Diagnostic of spatial prediction,not classification.",
+  "summary": {
+    "zero_mse": 0.46888462622602833,
+    "mean_mse": 0.08921997332144235,
+    "conditional_mse": 0.06833057041307886,
+    "conditional_reduction_vs_zero": 0.8542699704977323,
+    "conditional_reduction_vs_mean": 0.2341337049396216
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "fit_normal_patients": 88,
+      "held_normal_patients": 23,
+      "patients": {
+        "omitted_from_github_snapshot": true,
+        "count": 23,
+        "source_list_sha256": "03db61997932ab599912cef3d79cbb9158f7e79bfb64276ee19994eb8781a348"
+      }
+    },
+    {
+      "fold": 1,
+      "fit_normal_patients": 89,
+      "held_normal_patients": 22,
+      "patients": {
+        "omitted_from_github_snapshot": true,
+        "count": 22,
+        "source_list_sha256": "5c0e78ceab82bf9989a24ca58d5412accfca0dfbe4226a17f550d36c32e00f8e"
+      }
+    },
+    {
+      "fold": 2,
+      "fit_normal_patients": 89,
+      "held_normal_patients": 22,
+      "patients": {
+        "omitted_from_github_snapshot": true,
+        "count": 22,
+        "source_list_sha256": "189a2ec82d41195e9f24080144f03958a0fca4e45b72b1a17777c3009b7164b5"
+      }
+    },
+    {
+      "fold": 3,
+      "fit_normal_patients": 89,
+      "held_normal_patients": 22,
+      "patients": {
+        "omitted_from_github_snapshot": true,
+        "count": 22,
+        "source_list_sha256": "4ccf326ecdea37e57ccb4a22e261e70ae1b68ad815c6ef2c56496c48bf5c701c"
+      }
+    },
+    {
+      "fold": 4,
+      "fit_normal_patients": 89,
+      "held_normal_patients": 22,
+      "patients": {
+        "omitted_from_github_snapshot": true,
+        "count": 22,
+        "source_list_sha256": "0b53eef853d4c9c667179c4142b8c5a8edf614038c3342621005369b506ef62d"
+      }
+    }
+  ],
+  "new_classification_heads": 0,
+  "code_sha256": {
+    "normal_spatial_reference.py": "0bd92cf9b9ea76a7f4ef33cdf1068781c4ace2d9b05bce5310d3bb6777c9ca3a",
+    "normal_spatial_diagnostics.py": "2d7722c27ca5c86a7965c26cbc2da391d5778049afabd050b5d3a7d2699938db"
+  },
+  "external_test_evaluated": false
+}

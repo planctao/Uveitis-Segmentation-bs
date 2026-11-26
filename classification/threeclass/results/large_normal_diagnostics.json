@@ -1,0 +1,194 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "scope": "Train split only, equal normal-patient centers and equal patient-label coarse means. Description of feature geometry; neither classification-generalization evidence nor causal interpretation. All four prior cached feature arms retained without choosing among them.",
+  "arms": [
+    {
+      "feature": "large320",
+      "streams": {
+        "global": {
+          "dimension": 1024,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.8342774469116714,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5893176062911332,
+            "infection_vs_normal": 0.6732115166597308,
+            "noninfection_vs_normal": 0.7439590422000658
+          }
+        },
+        "regions": {
+          "dimension": 1024,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.8532339467964856,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.7330227302456265,
+            "infection_vs_normal": 0.7449808794704388,
+            "noninfection_vs_normal": 0.7138477960142755
+          }
+        },
+        "mid": {
+          "dimension": 1024,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7493191740177707,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5455967128171987,
+            "infection_vs_normal": 0.6153276145094924,
+            "noninfection_vs_normal": 0.5926651025115901
+          }
+        },
+        "dispersion": {
+          "dimension": 1024,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.8137994212505921,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5544816062445387,
+            "infection_vs_normal": 0.6183551068619645,
+            "noninfection_vs_normal": 0.6545466993805019
+          }
+        }
+      }
+    },
+    {
+      "feature": "large_dual",
+      "streams": {
+        "global": {
+          "dimension": 2048,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.811752216721226,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.559727398809842,
+            "infection_vs_normal": 0.6427529314179143,
+            "noninfection_vs_normal": 0.7125728184971756
+          }
+        },
+        "regions": {
+          "dimension": 2048,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.8347093451538499,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.7079913239900297,
+            "infection_vs_normal": 0.722037587803661,
+            "noninfection_vs_normal": 0.6804660128853216
+          }
+        },
+        "mid": {
+          "dimension": 2048,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7434654988280945,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5677056882610954,
+            "infection_vs_normal": 0.6245363150755353,
+            "noninfection_vs_normal": 0.5898462088769396
+          }
+        },
+        "dispersion": {
+          "dimension": 2048,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.8008809414768663,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5145347218064443,
+            "infection_vs_normal": 0.5840766042622899,
+            "noninfection_vs_normal": 0.6275601345217333
+          }
+        }
+      }
+    },
+    {
+      "feature": "base_dual_large_dual",
+      "streams": {
+        "global": {
+          "dimension": 3584,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7741704930300657,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5241377603563867,
+            "infection_vs_normal": 0.5933680483776226,
+            "noninfection_vs_normal": 0.6359252593176951
+          }
+        },
+        "regions": {
+          "dimension": 3584,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7901312096877299,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.601276181194169,
+            "infection_vs_normal": 0.6350574936825103,
+            "noninfection_vs_normal": 0.6233153516027132
+          }
+        },
+        "mid": {
+          "dimension": 3584,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7303792651666421,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5262465013336292,
+            "infection_vs_normal": 0.5965762905376556,
+            "noninfection_vs_normal": 0.5858709201841483
+          }
+        },
+        "dispersion": {
+          "dimension": 3584,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7581535087740904,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.4470281143987402,
+            "infection_vs_normal": 0.5136048650143742,
+            "noninfection_vs_normal": 0.5363638237836866
+          }
+        }
+      }
+    },
+    {
+      "feature": "base_dual_large448",
+      "streams": {
+        "global": {
+          "dimension": 2560,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7803944743126383,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.49772183544151716,
+            "infection_vs_normal": 0.5683426534730815,
+            "noninfection_vs_normal": 0.6200067480033743
+          }
+        },
+        "regions": {
+          "dimension": 2560,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7977450118209912,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5961517715983751,
+            "infection_vs_normal": 0.646114699635208,
+            "noninfection_vs_normal": 0.6555191543146658
+          }
+        },
+        "mid": {
+          "dimension": 2560,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7395644299977941,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.5292930703484487,
+            "infection_vs_normal": 0.5950717262369453,
+            "noninfection_vs_normal": 0.5883697903281774
+          }
+        },
+        "dispersion": {
+          "dimension": 2560,
+          "normal_patients": 111,
+          "normal_centroid_variance_fraction_in_top32": 0.7641165965139648,
+          "coarse_mean_contrast_fraction_in_normal32": {
+            "infection_vs_noninfection": 0.46583444679565467,
+            "infection_vs_normal": 0.5334923071254107,
+            "noninfection_vs_normal": 0.5568240512810502
+          }
+        }
+      }
+    }
+  ],
+  "code_sha256": {
+    "large_normal_diagnostics.py": "79201d9c3fe823f3531a60352fd558e0d8f34fb7a9455ef9457b325eea5dee90",
+    "dinov3_large_data.py": "0757f789829a3fec367326ba2aec0d5280867c44e987448197c5e0e1a85b14b2",
+    "normal_subspace.py": "d4dbc408dff402a41f1ee1cbe7aa6ba073527aa7ec44be685cceabbbfdaf884b"
+  },
+  "source_protocol_sha256": "865dee3cc62f01f125ba6dfe6f3d16f79aa0e944c6016e54039465524168b128",
+  "external_test_evaluated": false,
+  "new_classification_heads": 0
+}

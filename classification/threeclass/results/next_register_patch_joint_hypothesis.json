@@ -1,0 +1,67 @@
+{
+  "created_at_utc": "2026-11-24T16:03:41.471914+00:00",
+  "family": "register_patch_joint",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "Changing final-register patch selection and changing selected-patch value content may interact. Test their joint differentiable residual, including the attention-change times value-change interaction, while preserving the original frozen DINO-L tail and fitting-only M8L classifier. This tests complementary standard low-rank adaptation paths; no originality or equivalence to full-patch LoRA claim. Original query/value studies remain the causal single-path controls.",
+  "feature_plan": "Reuse the complete verified development-only top64 patch K/V bank at scales320/448, original register query inputs/queries/postattention states and original M8 features. No extra image reads, features, label-based patch selection or external evaluation.",
+  "architecture_plan": "Train original1024->r->1024 queryA/B (sharedmean-register or individual-register) together with64->r->64 valueA/B (shared16heads or perhead). Both alpha/r=2; queryB and valueB initialize zero, queryA Kaiming with20292100+seed, valueA Kaiming with20293100+seed. Four matched configurations: sharedQ/sharedV and individualQ/perheadV crossed withrank4/8. Originalselectedpatch softmax fixed for baseline; adaptedQ defines modifiedattention. Production residual equals (Pmodified@V-Pbaseline@V)+ValueLowRank(Pmodified@V), retaining the Q/V interaction. Independentoracle transforms everyselectedpatch V first and computes Pmodified@(V+DeltaV)-Pbaseline@V. SelectedQK/softmax/valuepools in float64, residualfloat32 through originalfrozenattentionprojection/gamma1 and counterfactual originalfrozenMLP/finalnorm. Add taildifference to originalregisterfeatures, originalfloat16cachepolicy, originalfit-onlystats/normalPCA32/frozenM8L classifier. Originalglobal/region/mid/dispersion inputs unchanged. Nohead/tailupdates or extra dropout.",
+  "configuration_plan": [
+    {
+      "name": "shared_q_shared_v_rank4",
+      "query_kind": "shared",
+      "value_kind": "shared",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "individual_q_perhead_v_rank4",
+      "query_kind": "individual",
+      "value_kind": "perhead",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "shared_q_shared_v_rank8",
+      "query_kind": "shared",
+      "value_kind": "shared",
+      "rank": 8,
+      "alpha": 16
+    },
+    {
+      "name": "individual_q_perhead_v_rank8",
+      "query_kind": "individual",
+      "value_kind": "perhead",
+      "rank": 8,
+      "alpha": 16
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_training": "Original complete taxonomy task and patient/near-duplicate fit/stop/outer plans. Actualbatch256; onlyquerydown/up andvalue_down/up trainable. AdamWlr.001 wd.01 max60/patience12 clip3, epoch0eligible. Init/order20292100+seed; valueinit usesoffset1000; three seedlabels.",
+  "fixed_fusions": "Four standalonejointL models and fixed .1875rawB+.5625normalB+.25candidateL. Reuse and independentlyaudit12M8L sources and24B sources, not newfits.",
+  "preflight_plan": "Completeverifiedbank and actualrandom256 trainingimages withfullfit patientweights. Exact zero sourcep/subtype. With valueBzero, exactforward reduction to frozen originalquery implementation withmatchingweights; withqueryBzero exactreduction to frozen originalvalue implementation. Bothnonzero: independent perpatchvsproductionpooled jointattention/valueinteraction, complete taxonomy task and allfourtrainablegradientoracles; sourcehead/tail unchangedafteroptimizer, jointpatchpermutation invariance, namedinitialparameter/actualCUDAfirsttask compactwitness and bitwisecheckpointrestore. Noclassificationfits/scores inpreflight. Record memory/runtime.",
+  "launch_condition": "No classifierfit until BOTHquery andvalue families finishall48actualtaskaudits/12L/24B/16fusions and anyqualifyingcandidatefreshconfirmation/promotiondecision is terminal. RequireM8retained and no pendingpassingconfirmation beforefreezingjointprotocol. If eitherpromotes a newreference, review/redesign this queuedfamily beforeanyfit. No silentcomparison only againstolderM8.",
+  "selection": "OriginalpatientCV strictlyabove then-currentM8reference andvalidationMacroF1>=reference; freezehighestqualifyingoriginalCV beforetwo unusedpatient3foldrepeats. Higher sixfoldmeanF1 andpairedpatient95%lower>0 vsEACH retainedreference/M8/M7/M6/M5/fixedGaussian. Jointwarmstart freshconfirmation needs reviewed workflow. Noautomaticexternal scoring.",
+  "query_training_state_at_preregistration": {
+    "status": "training",
+    "pid": 50169,
+    "arm": "individual_rank4",
+    "phase": "validation",
+    "seed": 2,
+    "external_test_evaluated": false
+  },
+  "value_classification_fits_at_preregistration": 0,
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_patch_joint_model.json",
+  "preregistration_snapshot": "results/register_patch_joint_preregistration_before_single_path_outcomes.json",
+  "continuation_protocol": "runs/patch_loop_cuda_ready/protocol.json",
+  "continuation_pid": 54139,
+  "confirmation_plan_preflight": "verification_register_patch_joint_confirmation_plan.json",
+  "continuation_protocol_sha256": "52d10df22dbb7e0f322481006621eea7e6ff2320ebdf8e174672042462f9fe3a",
+  "protocol": "runs/register_patch_joint/protocol.json",
+  "protocol_sha256": "a5c2853a22858d4f88919385eda479d25161ca55d62656514efd98ec78b05450",
+  "pid": 58202,
+  "passing_development_gates": 0
+}

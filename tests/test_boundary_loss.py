@@ -14,6 +14,30 @@ def test_boundary_weight_zero_matches_default_loss() -> None:
     assert torch.allclose(default_loss(logits, mask), boundary_off_loss(logits, mask))
 
 
+def test_channel_weights_can_train_lesion2_only() -> None:
+    logits = torch.zeros(1, 2, 8, 8, requires_grad=True)
+    mask = torch.zeros(1, 8, 8, dtype=torch.long)
+    mask[:, 2:5, 3:6] = 2
+    loss_fn = AsymmetricFocalTverskyBCE(
+        pos_weight=(3.0, 60.0),
+        channel_weights=(0.0, 1.0),
+    )
+
+    loss_fn(logits, mask).backward()
+
+    assert torch.count_nonzero(logits.grad[:, 0]).item() == 0
+    assert torch.count_nonzero(logits.grad[:, 1]).item() > 0
+
+
+def test_channel_weights_default_matches_explicit_equal_weights() -> None:
+    logits = torch.randn(2, 2, 8, 8)
+    mask = torch.randint(0, 4, (2, 8, 8))
+    default_loss = AsymmetricFocalTverskyBCE(pos_weight=(3.0, 60.0))
+    equal_loss = AsymmetricFocalTverskyBCE(pos_weight=(3.0, 60.0), channel_weights=(1.0, 1.0))
+
+    assert torch.allclose(default_loss(logits, mask), equal_loss(logits, mask))
+
+
 def test_hard_negative_ratio_zero_matches_default_loss() -> None:
     logits = torch.randn((2, 2, 8, 8), generator=torch.Generator().manual_seed(17))
     mask = torch.zeros((2, 8, 8), dtype=torch.long)

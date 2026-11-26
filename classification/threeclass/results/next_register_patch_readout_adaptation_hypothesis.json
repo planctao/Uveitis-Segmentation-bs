@@ -1,0 +1,63 @@
+{
+  "created_at_utc": "2026-11-24T16:55:58.731593+00:00",
+  "family": "register_patch_readout_adaptation",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "Query adapters materially changed probabilities in36/48 nonzero-epoch selected models without crossing M8 gates. A frozen taxonomy readout may restrict how new local content supports class evidence. Test anchored refinement of the original final disease-linear readout, alone versus jointly with nonlinear perpatch gated value correction. This is a readout-bottleneck hypothesis, not a claim that previous negative results prove the cause. Standard residual classifiers and SwiGLU components; no originalityclaim.",
+  "architecture_plan": "Keep originalM8L backbone/tail/featureencoder/tokenencoder/normalgeometry/sourceclassifier fullyfrozen. Replace only final disease-linear operation W0*h+b0 with W0*h+b0+DeltaW*h+Deltab; DeltaW/Deltab exactzero atinit andtrainable. Head-only control freezes allpatchadapterweightsatzeroup. Other3arms jointlytrain the finalreadoutdelta and preregistered nonlinearpatchvalueA/G/B withoriginalfixedQ/K attention, frozen counterfactualtail andfloat16policy. The sourceclassifier remains storedunchanged. Entiremodel eval mode exceptgradienttracking; no newdropout, task/weights unchanged. Sourceidentity exactatzerodelta/zeroB. Noexternalimages or additionalfeatures.",
+  "configuration_plan": [
+    {
+      "name": "readout_only",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8,
+      "adapt_patches": false
+    },
+    {
+      "name": "readout_shared_rank4",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8,
+      "adapt_patches": true
+    },
+    {
+      "name": "readout_perhead_rank4",
+      "kind": "perhead",
+      "rank": 4,
+      "alpha": 8,
+      "adapt_patches": true
+    },
+    {
+      "name": "readout_perhead_rank8",
+      "kind": "perhead",
+      "rank": 8,
+      "alpha": 16,
+      "adapt_patches": true
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "EachstandaloneL and fixed .1875rawB+.5625normalB+.25candidateL. Original12L/24Bheads reused/audited; never recount as newfits.",
+  "fixed_training": "Originalcomplete taxonomy task, fit-onlyweights/stats/normalgeometry, originalpatient/near-duplicate fit/stop/outerplans. Init/order20292500+seed, AdamWlr.001 wd.01 max60/patience12 clip3, actualbatch256, epoch0eligible. Decayonlynewparameters; originalsourceweights neverdecayed. No additionalcandidate-specificlosses orhyperparametertuning.",
+  "preflight_plan": "Fouractualrandom256image completefirsttasks/independentCUDA output/input/gradientwitnessreplay; exactzero sourceprobability/subtype; nonzero readout/patchparameters allgradients finite/nonzero; independentheadwisepatchtransform andoriginalheadreconstruction withseparate functionalreadoutdelta hook; exacthead-onlyreduction byzeroingvalueup; sourceclassifier/tail/encoder/normalbuffers unchangedafteroptimizer; checkpointrestore bitwise underordinaryCUDA; ensurehead-onlyhas exactlytwo trainabletensors, otherarmsfive; samebatchmemory/runtime; no newfits/scores.",
+  "launch_condition": "No supervisedfit until query/value/joint/gatedvalue decisions and requiredfreshconfirmations terminal withM8retained, architecturefullpreflightpassed, allsources/plans/proofs/code/referencefrozen. Positive predecessor requiresreference review andredesign beforeanyfit. No duplicate launches.",
+  "selection": "All8scores require originalCV>M8 andvalidationF1>=M8, freezehighestqualifyingCV; new unused2xpatient3fold confirmation withsame72freshsources+18adapters, sixfoldmeanF1higher andpairedpatient95%lowerCI>0 vsEACH M8/M7/M6/M5/fixedGaussian. Preservehead-onlycontrol comparisons; gains ofpatch+readout overM8 alone do not establish patch benefit; inspectpairedcomparisonversus matchedhead-only before attributinglocalmechanism. Noautomaticexternal scoring.",
+  "external_test_evaluated": false,
+  "evidence_record": "results/research_register_patch_query/descriptive_adapter_behavior.json",
+  "evidence_record_sha256": "d82caa241523b47a1b28301ab23a791bcab34b15229c93410a29e73cf878b7fe",
+  "confirmation_amendment": "results/register_patch_readout_adaptation_confirmation_amendment_before_any_fits.json",
+  "confirmation_amendment_sha256": "f7ab5d6b2bf02d7cfe322a2c46fe5719087b1336d39994b034386f5a5cf33857",
+  "confirmation_policy": "Ifselectedwinnerisreadout_only:72freshsources+18head-onlyadapters=90fits/54CUDAwitnesses. Ifjointpatch/readoutwinner:72freshsources+18selectedadapters+18matchedreadout-onlycontrols=108fits/72CUDAwitnesses. Both18normalspaces/6unusedpatientplans/18Gaussianfits. Samefreshsource, readoutinitialization/optimizer/task/stoprule/order forcontrol; rank4sharedpatchweights frozenzero. Applyselectedstandaloneor.25fusionweighttoBOTHcandidateandmatchedcontrol.",
+  "confirmation_gate": "SamehighermeanF1 andpairedpatient95%lowerCI>0 vsEACH M8/M7/M6/M5/fixedGaussian; forjointwinner ALSOrequire meanF1higher andpairedpatient95%lowerCI>0 vsmatchedreadout-onlycontrol. No reselection fromconfirmationresults, noautomaticexternal scoring.",
+  "model_preflight": "verification_register_patch_readout_adaptation_model.json",
+  "confirmation_plan_preflight": "verification_register_patch_readout_adaptation_confirmation_plan_v2.json",
+  "continuation_protocol": "runs/readout_adaptation_continuation/protocol.json",
+  "continuation_protocol_sha256": "c8d239f9b38ca70041b55afc19e6e87aff2c8caf3700a776a5fc063da9b88bb7",
+  "continuation_pid": 56654,
+  "preregistration_sha256": "eebac8c08983beb5ff38eb8f7b50f36bd8a54040d986f3f5b450f25a2443a90c",
+  "protocol": "runs/register_patch_readout_adaptation/protocol.json",
+  "protocol_sha256": "f7af8cc321b681c5fab61316270ba6a2e00e58eff1b8024fb4faf95f011134ba",
+  "pid": 64870,
+  "passing_development_gates": 0
+}

@@ -1,0 +1,41 @@
+{
+  "created_at_utc": "2026-11-24T13:24:43.195956+00:00",
+  "family": "register_cosine",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "Training-only frozenM8 diagnosis on1717 fitimages/332patients, zero outcomescores: register attention max>.95 for99.6%-100% patientbalanced images across3seeds; logitrange means198-374, querynorm7-10/keynorm74-91. Test unit-normalized query/key directions with fixed cosine temperatures, removing the unbounded norm route to hard attention. Standard cosine attention applied to this task; no originalityclaim.",
+  "diagnostic": "results/register_attention_training_diagnostics.json",
+  "architecture_plan": "Exact original normalL/PCA32/shared tokenPCA/querykeyvalue32/zero32->256residual .1/init/RNG/fulltask. Four parameter-matched arms: original scaled dot exactM8control and cosine query/key normalization eps1e-6 with fixed logit multipliers1,4,8. Values unchanged. Query/keypositive-scale invariance and logits bounded by multiplier; no learned temperature.",
+  "configuration_plan": [
+    {
+      "name": "dot_control",
+      "kind": "dot_control"
+    },
+    {
+      "name": "cosine_1",
+      "kind": "cosine_1"
+    },
+    {
+      "name": "cosine_4",
+      "kind": "cosine_4"
+    },
+    {
+      "name": "cosine_8",
+      "kind": "cosine_8"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL. Dotcontrol must recover exact M8 development probabilities. Preserve formula if current reference advances; gates use then-current reference.",
+  "geometry_plan": "Four original normalL and four register normal spaces/all patient-near-duplicate plans frozen before48heads; exact historical M8 geometry; fit-only normalization.",
+  "launch_condition": "No classfits/scores until register_common_mode all48 audits/24sources/16fusions and any required freshconfirmation/package/promotion decision terminal. Four real256image complete-task/allgradient and actualCUDAwitness preflights; freeze all dependencies and then-current reference.",
+  "selection": "OriginalCV strictly above currentreference AND validation>=currentreference; freeze highestqualifyingoriginalCV before two unusedpatient3fold repeats. SixfoldmeanF1higher AND pairedpatient95%lower>0 against EACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_cosine.json",
+  "protocol": "runs/register_cosine/protocol.json",
+  "protocol_sha256": "82cc469e79390704e65889beddccb9d04c3bbaaaa2436e66261d2b69f207cfb0",
+  "pid": 36480,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_cosine/comparison.json"
+}

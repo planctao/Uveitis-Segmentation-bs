@@ -1,0 +1,45 @@
+{
+  "created_at_utc": "2026-11-24T14:26:41.609191+00:00",
+  "family": "register_routing_information",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "Training-only M8 diagnostics show nearlyhard registerattention and repeated registeridentity selection; fixedmean/cosine/frozenprojection controls have not passed developmentgates. Test three predeclared patientbalanced information constraints on the original learnedregisterrouter, retaining full M8 inferencearchitecture. Smoothing discourages perimage collapse; marginalbalance discourages populationcollapse; informationmaximization favors confident but imagevariable routing. These are standard informationregularizers, no originalityclaim. Preregister before classifiercontext outcomes.",
+  "architecture_plan": "Exact M8 originalnormalL/base/sidePCA32/LN2048/keyvalue32/query256->32/zero32->256 .1residual/init/RNG. Four equalparameter arms; architecture and inference are identical, only trainingobjective differs. Attention a over4registers. Within eachactualtrainingbatch average attention/entropy perpatient first, then averagepatients equally using inverse inbatch imagecounts. Hc=patientmean entropy(a); Hm=entropy(patientmean a); L=log4. Coefficient fixed .02: control0; smooth .02*(L-Hc)/L; balance .02*(L-Hm)/L; information .02*(Hc+L-Hm)/L. No classlabels used in routingregularizer; basefulltask unchanged and added term independentlyaudited. Routingterm can change basegradients already atzero readout; do not claim fulltask/basegradient identity for modifiedarms.",
+  "configuration_plan": [
+    {
+      "name": "control",
+      "kind": "control",
+      "weight": 0
+    },
+    {
+      "name": "smooth",
+      "kind": "smooth",
+      "weight": 0.02
+    },
+    {
+      "name": "balance",
+      "kind": "balance",
+      "weight": 0.02
+    },
+    {
+      "name": "information",
+      "kind": "information",
+      "weight": 0.02
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachstandalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL. OriginalM8control. Then-currentreferencegates, fixedcoefficients.",
+  "geometry_plan": "FouroriginalnormalL/fourregisternormalPCA32spaces and allpatient/near-duplicate fit/stop/outerplans frozen before48fits; exact historicalM8geometry. No preprocessing adds stopping/outerpatients.",
+  "preflight_plan": "Fourreal256image complete augmentedtasks/allparametergradients independently reconstructed, fouractualCUDAwitnesses. Originalbaseinit/RNG and unregularizedtask/basegradients identical atzero readout; augmentedgradient differences explicit. Originalcontrol actualcheckpoints/witness/GPUstopprobabilities exacthistoricalbits, freshCPU existingtolerance plus samedecisions/discretemetrics. Independent perpatient loopentropy/marginal and allgradientchecks; patientroworder, patientIDrename, tokenpermutation and duplicatingallimagesofonepatient invariance; finite nearsaturated entropygradients; linked query/key/basegradients atzero readout and optimizerupdate/frozenbuffers/strictrestore.",
+  "launch_condition": "No classificationfits/scores until classifiercontext all48audits/24sources/16fusions and any required freshconfirmation/package/promotiondecision terminal; fourpreflights and then-current reference/code/artifactfreeze.",
+  "selection": "OriginalCV strictlyabove currentreference AND validation>=currentreference; freezehighestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_routing_information.json",
+  "protocol": "runs/register_routing_information/protocol.json",
+  "protocol_sha256": "2b4732088cca6af36ebc154ac3bfbe5bf3132d4420aba76dacbe5c6f23cbea98",
+  "pid": 42123,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_routing_information/comparison.json"
+}

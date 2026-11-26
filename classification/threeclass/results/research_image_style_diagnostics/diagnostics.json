@@ -1,0 +1,1214 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "original_training_images": 1717,
+  "descriptor_names": [
+    "foreground_fraction",
+    "luminance_p10",
+    "luminance_p50",
+    "luminance_p90",
+    "luminance_std",
+    "red_mean",
+    "green_mean",
+    "blue_mean",
+    "chroma_mean",
+    "dark_fraction",
+    "bright_fraction",
+    "log_laplacian_variance"
+  ],
+  "analyses": [
+    {
+      "descriptor": "foreground_fraction",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.7811957465277778,
+        0.7860060024970777,
+        0.7892252604166666
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 172,
+          "weighted_accuracy": 0.7019036054182464
+        },
+        {
+          "quartile": 2,
+          "images": 171,
+          "weighted_accuracy": 0.8379920440394986
+        },
+        {
+          "quartile": 3,
+          "images": 180,
+          "weighted_accuracy": 0.8361442797887177
+        },
+        {
+          "quartile": 4,
+          "images": 179,
+          "weighted_accuracy": 0.8288871095659163
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.2037308548119923
+    },
+    {
+      "descriptor": "foreground_fraction",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.7745044209535484,
+        0.7814670138888888,
+        0.7859932870380832
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 171,
+          "weighted_accuracy": 0.866627287030783
+        },
+        {
+          "quartile": 2,
+          "images": 189,
+          "weighted_accuracy": 0.8122849092674048
+        },
+        {
+          "quartile": 3,
+          "images": 212,
+          "weighted_accuracy": 0.8128181809563692
+        },
+        {
+          "quartile": 4,
+          "images": 215,
+          "weighted_accuracy": 0.724166940111702
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.21096163972249382
+    },
+    {
+      "descriptor": "foreground_fraction",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.7691627696172079,
+        0.7774698884008749,
+        0.7826741590302589
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 62,
+          "weighted_accuracy": 0.945233265512901
+        },
+        {
+          "quartile": 2,
+          "images": 50,
+          "weighted_accuracy": 0.9822555206176473
+        },
+        {
+          "quartile": 3,
+          "images": 57,
+          "weighted_accuracy": 0.8921509892668136
+        },
+        {
+          "quartile": 4,
+          "images": 59,
+          "weighted_accuracy": 0.8280024147383396
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.1099029098857126
+    },
+    {
+      "descriptor": "luminance_p10",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.09073129643493762,
+        0.11333251644864206,
+        0.13492929553220678
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 192,
+          "weighted_accuracy": 0.767166704473622
+        },
+        {
+          "quartile": 2,
+          "images": 190,
+          "weighted_accuracy": 0.7944826790122939
+        },
+        {
+          "quartile": 3,
+          "images": 153,
+          "weighted_accuracy": 0.8048895712865529
+        },
+        {
+          "quartile": 4,
+          "images": 167,
+          "weighted_accuracy": 0.8412967353450882
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.2125171228200052
+    },
+    {
+      "descriptor": "luminance_p10",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.07889691782715934,
+        0.0925286342594716,
+        0.11066965146085214
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 176,
+          "weighted_accuracy": 0.8562353895405368
+        },
+        {
+          "quartile": 2,
+          "images": 189,
+          "weighted_accuracy": 0.7841928103090873
+        },
+        {
+          "quartile": 3,
+          "images": 197,
+          "weighted_accuracy": 0.7887846721987987
+        },
+        {
+          "quartile": 4,
+          "images": 225,
+          "weighted_accuracy": 0.7870221433646647
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.17420100756872173
+    },
+    {
+      "descriptor": "luminance_p10",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.07188050142090896,
+        0.08321019607843137,
+        0.09465568627450979
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 58,
+          "weighted_accuracy": 0.9281293679724547
+        },
+        {
+          "quartile": 2,
+          "images": 59,
+          "weighted_accuracy": 0.9740988559794912
+        },
+        {
+          "quartile": 3,
+          "images": 51,
+          "weighted_accuracy": 0.9659413429115055
+        },
+        {
+          "quartile": 4,
+          "images": 60,
+          "weighted_accuracy": 0.7832970524262873
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.2511658924418913
+    },
+    {
+      "descriptor": "luminance_p50",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.2255054021860037,
+        0.2741172870178216,
+        0.32658292427315755
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 209,
+          "weighted_accuracy": 0.7435032647688518
+        },
+        {
+          "quartile": 2,
+          "images": 172,
+          "weighted_accuracy": 0.7970052893714323
+        },
+        {
+          "quartile": 3,
+          "images": 161,
+          "weighted_accuracy": 0.7727889220004817
+        },
+        {
+          "quartile": 4,
+          "images": 160,
+          "weighted_accuracy": 0.8946128940809519
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.17909665809709566
+    },
+    {
+      "descriptor": "luminance_p50",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.17051991779557266,
+        0.2008829711616607,
+        0.25258266090173304
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 153,
+          "weighted_accuracy": 0.8336277739101169
+        },
+        {
+          "quartile": 2,
+          "images": 186,
+          "weighted_accuracy": 0.8150069807343581
+        },
+        {
+          "quartile": 3,
+          "images": 215,
+          "weighted_accuracy": 0.814774184701619
+        },
+        {
+          "quartile": 4,
+          "images": 233,
+          "weighted_accuracy": 0.7522817831979474
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.20540833351272222
+    },
+    {
+      "descriptor": "luminance_p50",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.16303835246306098,
+        0.17998826655323302,
+        0.20372943231359472
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 52,
+          "weighted_accuracy": 0.9098738238468055
+        },
+        {
+          "quartile": 2,
+          "images": 59,
+          "weighted_accuracy": 0.9939135725185186
+        },
+        {
+          "quartile": 3,
+          "images": 58,
+          "weighted_accuracy": 0.9204009441210671
+        },
+        {
+          "quartile": 4,
+          "images": 59,
+          "weighted_accuracy": 0.8249496986271782
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.1499555124641448
+    },
+    {
+      "descriptor": "luminance_p90",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.36304770049959983,
+        0.44821772555761835,
+        0.535257300462497
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 198,
+          "weighted_accuracy": 0.7165355479597416
+        },
+        {
+          "quartile": 2,
+          "images": 176,
+          "weighted_accuracy": 0.7555983761121168
+        },
+        {
+          "quartile": 3,
+          "images": 172,
+          "weighted_accuracy": 0.8252262237781397
+        },
+        {
+          "quartile": 4,
+          "images": 156,
+          "weighted_accuracy": 0.910877939424166
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.2571218291382886
+    },
+    {
+      "descriptor": "luminance_p90",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.26286365199492456,
+        0.30454220203286647,
+        0.410990004008828
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 142,
+          "weighted_accuracy": 0.8647739475420864
+        },
+        {
+          "quartile": 2,
+          "images": 157,
+          "weighted_accuracy": 0.8284035889168226
+        },
+        {
+          "quartile": 3,
+          "images": 266,
+          "weighted_accuracy": 0.8030461055495076
+        },
+        {
+          "quartile": 4,
+          "images": 222,
+          "weighted_accuracy": 0.7196097950326081
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.24325740419852748
+    },
+    {
+      "descriptor": "luminance_p90",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.24571109677437286,
+        0.26475155985525484,
+        0.3081029108673785
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 51,
+          "weighted_accuracy": 0.9097291879311129
+        },
+        {
+          "quartile": 2,
+          "images": 57,
+          "weighted_accuracy": 0.945783133088902
+        },
+        {
+          "quartile": 3,
+          "images": 60,
+          "weighted_accuracy": 0.955134596703634
+        },
+        {
+          "quartile": 4,
+          "images": 60,
+          "weighted_accuracy": 0.8380000000049939
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.11253106939899275
+    },
+    {
+      "descriptor": "luminance_std",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.11616131307212091,
+        0.13507460743300556,
+        0.15751704096135008
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 177,
+          "weighted_accuracy": 0.7152315481302117
+        },
+        {
+          "quartile": 2,
+          "images": 188,
+          "weighted_accuracy": 0.6920549093986019
+        },
+        {
+          "quartile": 3,
+          "images": 192,
+          "weighted_accuracy": 0.8916477309668673
+        },
+        {
+          "quartile": 4,
+          "images": 145,
+          "weighted_accuracy": 0.909382022259463
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.3298235326351942
+    },
+    {
+      "descriptor": "luminance_std",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.07203695959882117,
+        0.09067906043851735,
+        0.12239820577654326
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 136,
+          "weighted_accuracy": 0.8535298273742584
+        },
+        {
+          "quartile": 2,
+          "images": 170,
+          "weighted_accuracy": 0.8722852746067034
+        },
+        {
+          "quartile": 3,
+          "images": 243,
+          "weighted_accuracy": 0.8160403503538113
+        },
+        {
+          "quartile": 4,
+          "images": 238,
+          "weighted_accuracy": 0.6752395674393823
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.2597298185924516
+    },
+    {
+      "descriptor": "luminance_std",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.06717896249938138,
+        0.07444604957470011,
+        0.08735229671485104
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 56,
+          "weighted_accuracy": 0.9109087314451396
+        },
+        {
+          "quartile": 2,
+          "images": 50,
+          "weighted_accuracy": 0.9360146255963231
+        },
+        {
+          "quartile": 3,
+          "images": 60,
+          "weighted_accuracy": 0.9271255069255282
+        },
+        {
+          "quartile": 4,
+          "images": 62,
+          "weighted_accuracy": 0.8756415315113227
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.039204765319421866
+    },
+    {
+      "descriptor": "red_mean",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.30185833224526776,
+        0.3710539024519943,
+        0.44430396619830986
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 180,
+          "weighted_accuracy": 0.682641625005962
+        },
+        {
+          "quartile": 2,
+          "images": 185,
+          "weighted_accuracy": 0.7049745141343748
+        },
+        {
+          "quartile": 3,
+          "images": 160,
+          "weighted_accuracy": 0.8694371869389489
+        },
+        {
+          "quartile": 4,
+          "images": 177,
+          "weighted_accuracy": 0.9517899814291458
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.3471165359001773
+    },
+    {
+      "descriptor": "red_mean",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.19854496622288056,
+        0.2418318194952929,
+        0.3154297761332841
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 116,
+          "weighted_accuracy": 0.8375823330526223
+        },
+        {
+          "quartile": 2,
+          "images": 196,
+          "weighted_accuracy": 0.8729041932852486
+        },
+        {
+          "quartile": 3,
+          "images": 247,
+          "weighted_accuracy": 0.7768445218459553
+        },
+        {
+          "quartile": 4,
+          "images": 228,
+          "weighted_accuracy": 0.7290074121017882
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.21108324199464404
+    },
+    {
+      "descriptor": "red_mean",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.1840491083950023,
+        0.21382620963793528,
+        0.2437584408670858
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 46,
+          "weighted_accuracy": 0.9094931621331416
+        },
+        {
+          "quartile": 2,
+          "images": 58,
+          "weighted_accuracy": 0.8959571942513119
+        },
+        {
+          "quartile": 3,
+          "images": 67,
+          "weighted_accuracy": 1.0
+        },
+        {
+          "quartile": 4,
+          "images": 57,
+          "weighted_accuracy": 0.8435305914939834
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.05360216749029652
+    },
+    {
+      "descriptor": "green_mean",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.2333409276851647,
+        0.2836978121732415,
+        0.34043870478550525
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 213,
+          "weighted_accuracy": 0.7379208597566637
+        },
+        {
+          "quartile": 2,
+          "images": 159,
+          "weighted_accuracy": 0.8342560581067545
+        },
+        {
+          "quartile": 3,
+          "images": 171,
+          "weighted_accuracy": 0.7790664566630143
+        },
+        {
+          "quartile": 4,
+          "images": 159,
+          "weighted_accuracy": 0.8571947770614935
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.1670692585987446
+    },
+    {
+      "descriptor": "green_mean",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.1808823857450776,
+        0.214467603958867,
+        0.2712633725214323
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 161,
+          "weighted_accuracy": 0.8352820534468236
+        },
+        {
+          "quartile": 2,
+          "images": 176,
+          "weighted_accuracy": 0.8241907028719898
+        },
+        {
+          "quartile": 3,
+          "images": 221,
+          "weighted_accuracy": 0.8381865131846261
+        },
+        {
+          "quartile": 4,
+          "images": 229,
+          "weighted_accuracy": 0.7169751939823934
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.22871399161779987
+    },
+    {
+      "descriptor": "green_mean",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.16860435568471674,
+        0.1908236880946949,
+        0.21406897986960896
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 56,
+          "weighted_accuracy": 0.9090725406172802
+        },
+        {
+          "quartile": 2,
+          "images": 57,
+          "weighted_accuracy": 1.0
+        },
+        {
+          "quartile": 3,
+          "images": 56,
+          "weighted_accuracy": 0.9733464958594737
+        },
+        {
+          "quartile": 4,
+          "images": 59,
+          "weighted_accuracy": 0.7628698832425317
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.16915425626658165
+    },
+    {
+      "descriptor": "blue_mean",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.0022430515635843387,
+        0.0025571194768672697,
+        0.0028119836064450228
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 191,
+          "weighted_accuracy": 0.7700197535931539
+        },
+        {
+          "quartile": 2,
+          "images": 186,
+          "weighted_accuracy": 0.8752047043506517
+        },
+        {
+          "quartile": 3,
+          "images": 127,
+          "weighted_accuracy": 0.764110051828145
+        },
+        {
+          "quartile": 4,
+          "images": 198,
+          "weighted_accuracy": 0.7988597949055685
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.06574978392431917
+    },
+    {
+      "descriptor": "blue_mean",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.0022083201301918895,
+        0.0024900778387452944,
+        0.0028433680827023825
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 179,
+          "weighted_accuracy": 0.8453434394235124
+        },
+        {
+          "quartile": 2,
+          "images": 188,
+          "weighted_accuracy": 0.8022069779709109
+        },
+        {
+          "quartile": 3,
+          "images": 183,
+          "weighted_accuracy": 0.763288862587034
+        },
+        {
+          "quartile": 4,
+          "images": 237,
+          "weighted_accuracy": 0.8047307320302086
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.08340480721125747
+    },
+    {
+      "descriptor": "blue_mean",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.002166236998083393,
+        0.0023183840889866077,
+        0.0025930335577690022
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 64,
+          "weighted_accuracy": 0.9006223657378996
+        },
+        {
+          "quartile": 2,
+          "images": 51,
+          "weighted_accuracy": 0.982057416400926
+        },
+        {
+          "quartile": 3,
+          "images": 55,
+          "weighted_accuracy": 0.9089253197279022
+        },
+        {
+          "quartile": 4,
+          "images": 58,
+          "weighted_accuracy": 0.8571995236936024
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.0679615215581826
+    },
+    {
+      "descriptor": "chroma_mean",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.32095254837842674,
+        0.3902791391552877,
+        0.45518730808240543
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 189,
+          "weighted_accuracy": 0.7147880818959202
+        },
+        {
+          "quartile": 2,
+          "images": 168,
+          "weighted_accuracy": 0.6914392433893247
+        },
+        {
+          "quartile": 3,
+          "images": 166,
+          "weighted_accuracy": 0.8397383461411261
+        },
+        {
+          "quartile": 4,
+          "images": 179,
+          "weighted_accuracy": 0.9625266226127984
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.31558904333199106
+    },
+    {
+      "descriptor": "chroma_mean",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.2224314320381712,
+        0.2580222867655964,
+        0.33797262362344643
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 131,
+          "weighted_accuracy": 0.8529468244213336
+        },
+        {
+          "quartile": 2,
+          "images": 169,
+          "weighted_accuracy": 0.8567582950749068
+        },
+        {
+          "quartile": 3,
+          "images": 257,
+          "weighted_accuracy": 0.7665179441689405
+        },
+        {
+          "quartile": 4,
+          "images": 230,
+          "weighted_accuracy": 0.7391084027402033
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.21007320169899335
+    },
+    {
+      "descriptor": "chroma_mean",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.20567920768650905,
+        0.22917932892843496,
+        0.2602515298145759
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 48,
+          "weighted_accuracy": 0.9284436496461572
+        },
+        {
+          "quartile": 2,
+          "images": 57,
+          "weighted_accuracy": 0.9123514008360925
+        },
+        {
+          "quartile": 3,
+          "images": 64,
+          "weighted_accuracy": 0.9634146346621014
+        },
+        {
+          "quartile": 4,
+          "images": 59,
+          "weighted_accuracy": 0.8460323727020201
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.07334152332076631
+    },
+    {
+      "descriptor": "dark_fraction",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.04965528839682431,
+        0.07572349816240005,
+        0.11955317758779366
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 168,
+          "weighted_accuracy": 0.8773686047648754
+        },
+        {
+          "quartile": 2,
+          "images": 144,
+          "weighted_accuracy": 0.779231963864401
+        },
+        {
+          "quartile": 3,
+          "images": 190,
+          "weighted_accuracy": 0.8133370638628784
+        },
+        {
+          "quartile": 4,
+          "images": 200,
+          "weighted_accuracy": 0.7386671539218148
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": 0.24365610145250585
+    },
+    {
+      "descriptor": "dark_fraction",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.08034952713404184,
+        0.11766304290603513,
+        0.16304927215981388
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 225,
+          "weighted_accuracy": 0.7971614453489975
+        },
+        {
+          "quartile": 2,
+          "images": 191,
+          "weighted_accuracy": 0.776819237966062
+        },
+        {
+          "quartile": 3,
+          "images": 190,
+          "weighted_accuracy": 0.8104271114883488
+        },
+        {
+          "quartile": 4,
+          "images": 181,
+          "weighted_accuracy": 0.8310802627592488
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": -0.11908550237218027
+    },
+    {
+      "descriptor": "dark_fraction",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.11313834368631602,
+        0.15439220850708021,
+        0.190221134871194
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 60,
+          "weighted_accuracy": 0.782002788491252
+        },
+        {
+          "quartile": 2,
+          "images": 54,
+          "weighted_accuracy": 0.9639639634610742
+        },
+        {
+          "quartile": 3,
+          "images": 56,
+          "weighted_accuracy": 0.9754047960009575
+        },
+        {
+          "quartile": 4,
+          "images": 58,
+          "weighted_accuracy": 0.9291756843807147
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": -0.2053760503116997
+    },
+    {
+      "descriptor": "bright_fraction",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.0,
+        3.451576368294374e-05,
+        0.0007556024341833759
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 0,
+          "weighted_accuracy": null
+        },
+        {
+          "quartile": 2,
+          "images": 376,
+          "weighted_accuracy": 0.7395776491413448
+        },
+        {
+          "quartile": 3,
+          "images": 155,
+          "weighted_accuracy": 0.8458666126534489
+        },
+        {
+          "quartile": 4,
+          "images": 171,
+          "weighted_accuracy": 0.883605505680556
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.16677033469321054
+    },
+    {
+      "descriptor": "bright_fraction",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 0,
+          "weighted_accuracy": null
+        },
+        {
+          "quartile": 2,
+          "images": 0,
+          "weighted_accuracy": null
+        },
+        {
+          "quartile": 3,
+          "images": 0,
+          "weighted_accuracy": null
+        },
+        {
+          "quartile": 4,
+          "images": 787,
+          "weighted_accuracy": 0.803945459709607
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.27026756516244094
+    },
+    {
+      "descriptor": "bright_fraction",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 0,
+          "weighted_accuracy": null
+        },
+        {
+          "quartile": 2,
+          "images": 0,
+          "weighted_accuracy": null
+        },
+        {
+          "quartile": 3,
+          "images": 0,
+          "weighted_accuracy": null
+        },
+        {
+          "quartile": 4,
+          "images": 228,
+          "weighted_accuracy": 0.912162162433779
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": 0.06516693818976224
+    },
+    {
+      "descriptor": "log_laplacian_variance",
+      "class": 0,
+      "weighted_quartile_thresholds": [
+        0.0008072535733424694,
+        0.0010849570981654522,
+        0.001483990156430464
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 175,
+          "weighted_accuracy": 0.7646787253771083
+        },
+        {
+          "quartile": 2,
+          "images": 206,
+          "weighted_accuracy": 0.7668079429274722
+        },
+        {
+          "quartile": 3,
+          "images": 175,
+          "weighted_accuracy": 0.7964621507905731
+        },
+        {
+          "quartile": 4,
+          "images": 146,
+          "weighted_accuracy": 0.8804988922084807
+        }
+      ],
+      "patient_groups": 93,
+      "patient_mean_spearman_with_error": -0.09221832907464227
+    },
+    {
+      "descriptor": "log_laplacian_variance",
+      "class": 1,
+      "weighted_quartile_thresholds": [
+        0.0005158227827990033,
+        0.0007929028759293226,
+        0.0012144644754055528
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 141,
+          "weighted_accuracy": 0.8797940557253295
+        },
+        {
+          "quartile": 2,
+          "images": 209,
+          "weighted_accuracy": 0.8467573599311633
+        },
+        {
+          "quartile": 3,
+          "images": 213,
+          "weighted_accuracy": 0.753664535875253
+        },
+        {
+          "quartile": 4,
+          "images": 224,
+          "weighted_accuracy": 0.7360357696037141
+        }
+      ],
+      "patient_groups": 182,
+      "patient_mean_spearman_with_error": 0.21532074052980743
+    },
+    {
+      "descriptor": "log_laplacian_variance",
+      "class": 2,
+      "weighted_quartile_thresholds": [
+        0.00043559612695481977,
+        0.0005565590098795855,
+        0.0008349390573258531
+      ],
+      "quartiles": [
+        {
+          "quartile": 1,
+          "images": 62,
+          "weighted_accuracy": 0.9452110393938999
+        },
+        {
+          "quartile": 2,
+          "images": 53,
+          "weighted_accuracy": 0.8845926226358334
+        },
+        {
+          "quartile": 3,
+          "images": 62,
+          "weighted_accuracy": 0.9333333337817173
+        },
+        {
+          "quartile": 4,
+          "images": 51,
+          "weighted_accuracy": 0.8867474660097671
+        }
+      ],
+      "patient_groups": 111,
+      "patient_mean_spearman_with_error": -0.012228660300526193
+    }
+  ],
+  "limitations": [
+    "Descriptive associations only; not evidence of causal image-style confounding.",
+    "Appearance descriptors may contain disease information and must not be treated as validated quality labels.",
+    "OriginaltrainingOOF was used in earlier development decisions; these diagnostics do not constitute new generalization evidence."
+  ],
+  "external_test_evaluated": false
+}

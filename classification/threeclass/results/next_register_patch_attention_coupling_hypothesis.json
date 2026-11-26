@@ -1,0 +1,129 @@
+{
+  "created_at_utc": "2026-11-24T20:52:59.437843+00:00",
+  "family": "register_patch_attention_coupling",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "current_predecessor_state": {
+    "status": "training",
+    "pid": 73581,
+    "arm": "query_top16_perhead_rank4",
+    "phase": "validation",
+    "seed": 2,
+    "external_test_evaluated": false
+  },
+  "evidence_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/mass_calibration_correction_structure/analysis.json": "44d93a69c38f851d6c6bf50b1c0a80eb62b4553d493206ce0666f52d3d120f36",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_mass_calibration/independent_saved_output_review.json": "65147303f322422c6e74f71b588c51f465cd74c910d6e74c98961ad2f078d533",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_readout_adaptation/comparison.json": "44aeabb4fc6e5588e0731fe7af86dfcd1e0a1027e8d579327c3e9f26b6772ac3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/readout_patch_correction_structure/analysis.json": "261b0d2726e11ab72a637663c3eb7b66545237fa15acaa7c82f8e9a29a227c6f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_query_selection/protocol.json": "d37b0970c3ecd72e8dd07b31697ac3eccf1082f356c157dc3970e6c0f5f448c8",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/register_query_selection_bank_root_review.json": "66ae207095b054bda6870d94a7d5fcaa8b913edee16703166d04cd0cf6fa7a3d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_registry.json": "0da36e047ba94459eee36fae8d593cb821decb76ee6225dc894e51617f17023d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_m8.json": "f51c3369a43d3b706479c48e13dec3a5c2c4248c155ae563310833f3d3d6dc74"
+  },
+  "hypothesis": "Test whether jointly adapting the existing register-evidence attention reader and the nonlinear selected-patch pathway improves over both reader-only continuation and frozen-reader patch adaptation. Prior frozen-reader patch variants and final classifier-delta refinement did not beat M8; completedMass source adaptations correct no M8 errors after fixedfusion. These observations do NOT establish a causal frozen-reader bottleneck. The current query-selection trial is still active and unscored.",
+  "architecture_plan": "Start from the exact fit-matched M8L source. Reuse verified2091development query16/shared16 cache and frozenDINOtail. Train source token_evidence LayerNorm/query/key/value/readout parameters jointly with the source-mass-weighted gated patch residual, retaining all global MLP, final disease readout, normal geometry, source normalization and DINOtail parameters/buffers frozen. Freeze key.bias because it contributes the same constant to all register logits and has no identifiable softmax effect in real arithmetic. Reader-only control uses the same source and reader adaptation with all patch parameters frozen at exactzero-up initialization. Otherarms differ only in declared patchselection/sharedness. No rawimage/backbone forward/newcache. This is a controlled coupling hypothesis, not a claim of universal/component originality.",
+  "configuration_plan": [
+    {
+      "name": "attention_only",
+      "kind": "shared",
+      "selection": "query_top16",
+      "adapt_patches": false,
+      "rank": 4,
+      "alpha": 8,
+      "adapt_attention": true
+    },
+    {
+      "name": "attention_query_shared_rank4",
+      "kind": "shared",
+      "selection": "query_top16",
+      "adapt_patches": true,
+      "rank": 4,
+      "alpha": 8,
+      "adapt_attention": true
+    },
+    {
+      "name": "attention_query_perhead_rank4",
+      "kind": "perhead",
+      "selection": "query_top16",
+      "adapt_patches": true,
+      "rank": 4,
+      "alpha": 8,
+      "adapt_attention": true
+    },
+    {
+      "name": "attention_shared16_shared_rank4",
+      "kind": "shared",
+      "selection": "shared_top16",
+      "adapt_patches": true,
+      "rank": 4,
+      "alpha": 8,
+      "adapt_attention": true
+    }
+  ],
+  "fixed_training": {
+    "initialization_and_order_seed_base": 20292900,
+    "batch_size": 256,
+    "optimizer": "AdamW",
+    "attention_learning_rate": 0.0001,
+    "patch_learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "max_epochs": 60,
+    "patience": 12,
+    "gradient_clip_norm": 3.0,
+    "epoch_zero_eligible": true,
+    "task": "Original complete taxonomy task and fitting-only patient/class sample weights; exact original patient/near-duplicate fit/stop/outer plans; match existing patch initializations and order. All trainable attention weights start from source; no attention randomness. Keep source head in eval mode because reader has no stochastic training components and rest is frozen."
+  },
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "standaloneL and .1875rawB+.5625normalB+.25candidateL, no weight or threshold search.",
+  "original_selection": "All candidates originalCV strictlyhigherthan M8 and validationF1>=M8. Each patch+reader candidate must ALSO have originalCV strictlyhigherthan BOTHsame-selection/same-kind frozen-reader candidate in predecessor query-selection study AND new attention_only control, with validationF1>=both matching controls; compare standalone or same fixed fusion respectively. Reader-only candidate uses M8 gate. FreezehighesteligibleoriginalCVonce before freshconfirmation; no reselection on fresh patient outcomes.",
+  "required_original_frozen_patch_controls": {
+    "attention_query_shared_rank4": "query_top16_shared_rank4",
+    "attention_query_perhead_rank4": "query_top16_perhead_rank4",
+    "attention_shared16_shared_rank4": "shared_top16_shared_rank4"
+  },
+  "confirmation_plan": {
+    "outer_seeds": [
+      20293401,
+      20293411
+    ],
+    "inner_seeds": [
+      20293424,
+      20293425,
+      20293426,
+      20293434,
+      20293435,
+      20293436
+    ],
+    "reader_only_winner_fits": 90,
+    "reader_only_winner_witnesses": 54,
+    "coupled_winner_fits": 126,
+    "coupled_winner_witnesses": 90,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "matched_controls": "Coupledwinnerrefits18attention_only and18matchingfrozen-readerpatchcontrols fromSAMEfreshregisterLsource, samepatchinit/order/task/epochs/optimizer and selectedstandalone/fusion. 72freshrawB/normalB/normalL/registerLheads+18candidate+36controls. Reader-onlywinner72freshsourceheads+18reader=90, no inventedpatchcontrol.",
+    "gate": "Candidatehighermean6foldMacroF1 ANDpairedpatient95lowerCI>0 againstEACHM8/M7/M6/M5/fixedGaussian ANDbothrequiredmatchedcontrols for a coupledwinner. Allsixpatientplans/18geometries frozenbeforefits; independent fulltask/head/normalization/Gaussian/fusion audit; no freshselection."
+  },
+  "preflight_plan": "Fouractual256image zero-source and complete-task firstgrad cases; independent frozenMLP and reader-Q/K/V/LayerNorm manual formula, every trainable gradient; arbitrary nonzero patch/reader state gradients; frozen base/geometry/tail buffers unchanged after optimizer; head-only patchzero invariant; attention-frozen state matches existing parent patchmodel; joint patch position permutation; ordinaryCUDA checkpointrestore bitwise. Verify actual control engine and unusedpatientplans before any classifierfit. Engineeringchecks must pass and allscientificdependencies frozen before original48fits.",
+  "launch_condition": "Only after currentquery-selection48study and any requiredconfirmation terminalnegative, retainedreference stillM8, completequery saved-output review passed, and newmodel/data/task/confirmation-plan proofs completed. Positive predecessor requiresrootreference review first. Thispreregistration/prototype work does not launch any supervisedfit.",
+  "scientific_limits": "Reader-only and patch-only are architectural ablations with different trainable parameter counts. Query/sharedtop16 unique evidence unions differ as already documented. Do not claim equal unique evidence/totalparameter budget or infer causality solely from originalselectedOOF.",
+  "external_test_policy": "Developmentonly. Original1717train for freshpatients, validationexcludedfromfreshfit. No external images/probabilities/outcomes or automatic promotion/scoring.",
+  "model_preflight": "verification_register_patch_attention_coupling_model.json",
+  "model_preflight_sha256": "c84d059e5562e574003c777ff84e858fb834b158545f13b44e84f66a21eea90e",
+  "model_preflight_actual256_cases": 4,
+  "original_engine_implementation": "nonzero_prediction_restore_and_actual_control_fulltask_preflight_passed_no_formal_fit_yet",
+  "confirmation_engine_implementation": "six_patient_plans_four_formulas_two_gates_and_actual_control_engines_preflight_passed_no_formal_confirmation_yet",
+  "training_launched": true,
+  "engine_preflight": "verification_register_patch_attention_coupling_confirmation_plan.json",
+  "engine_preflight_sha256": "efe4598dcef13c693ee2837a3950884c4fff31fd0a7d52548d7c92efd322348e",
+  "startup_proof": "verification_register_patch_attention_coupling_startup.json",
+  "startup_proof_sha256": "4c2435194fc8efc828273ef3364da526e7c5a750913d0566a31a42c385e2b27f",
+  "saved_review_rule": "runs/register_patch_attention_coupling_saved_review/protocol.json",
+  "saved_review_rule_sha256": "d39e0c56fab38e1507d756be8954fa4906f87c55c291f074fa97218baad40839",
+  "pid": 77579,
+  "protocol": "runs/register_patch_attention_coupling/protocol.json",
+  "protocol_sha256": "16fcfff0a3f158696d71814599d5342099ba14818a65d44a4b78775683aa53eb",
+  "passing_development_gates": 0
+}

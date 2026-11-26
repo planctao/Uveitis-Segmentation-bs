@@ -17,10 +17,17 @@
 | [research_backbone_consistency](../threeclass/results/research_backbone_consistency/comparison.json) | 开发候选 | 0.83379 | 0.91252 | 0 |
 | [research_backbone_dropout](../threeclass/results/research_backbone_dropout/comparison.json) | 开发候选 | 0.83680 | 0.90377 | 1 |
 | [research_backbone_dropout_confirmation](../threeclass/results/research_backbone_dropout_confirmation/comparison.json) | 新患者划分确认 | 0.83358 | — | 未通过 |
+| [research_base_token_evidence](../threeclass/results/research_base_token_evidence/comparison.json) | 开发候选 | 0.83621 | 0.89072 | 0 |
 | [research_bayesian_normal_reference](../threeclass/results/research_bayesian_normal_reference/comparison.json) | 开发候选 | 0.82180 | 0.86593 | 0 |
 | [research_bounded_normal_projection](../threeclass/results/research_bounded_normal_projection/comparison.json) | 开发候选 | 0.81539 | 0.89045 | 0 |
 | [research_capacity](../threeclass/results/research_capacity/comparison.json) | 开发候选 | 0.78260 | 0.87542 | 0 |
 | [research_class_covariance](../threeclass/results/research_class_covariance/comparison.json) | 开发候选 | 0.81343 | 0.88447 | 0 |
+| [research_class_patch_dispersion](../threeclass/results/research_class_patch_dispersion/comparison.json) | 开发候选 | 0.83900 | 0.89051 | 0 |
+| [research_class_patch_hadamard_variance](../threeclass/results/research_class_patch_hadamard_variance/comparison.json) | 开发候选 | 0.83862 | 0.89051 | 0 |
+| [research_class_patch_log_moment](../threeclass/results/research_class_patch_log_moment/comparison.json) | 开发候选 | 0.83863 | 0.89479 | 0 |
+| [research_class_patch_spatial_semivariance](../threeclass/results/research_class_patch_spatial_semivariance/comparison.json) | 开发候选 | 0.83853 | 0.89051 | 0 |
+| [research_class_query_patch_evidence](../threeclass/results/research_class_query_patch_evidence/comparison.json) | 开发候选 | 0.84000 | 0.89479 | 2 |
+| [research_class_query_patch_evidence_confirmation](../threeclass/results/research_class_query_patch_evidence_confirmation/comparison.json) | 新患者划分确认 | 0.82065 | — | 未通过 |
 | [research_conditional_experts](../threeclass/results/research_conditional_experts/comparison.json) | 开发候选 | 0.79515 | 0.86373 | 0 |
 | [research_context_attention](../threeclass/results/research_context_attention/comparison.json) | 开发候选 | 0.81034 | 0.87809 | 0 |
 | [research_coupled_normal_reference](../threeclass/results/research_coupled_normal_reference/comparison.json) | 开发候选 | 0.82101 | 0.87264 | 0 |
@@ -41,6 +48,8 @@
 | [research_foreground_multiscale](../threeclass/results/research_foreground_multiscale/comparison.json) | 开发候选 | 0.80983 | 0.87953 | 0 |
 | [research_gaussian_evidence](../threeclass/results/research_gaussian_evidence/comparison.json) | 开发候选 | 0.81459 | 0.88802 | 2 |
 | [research_gaussian_repeat](../threeclass/results/research_gaussian_repeat/comparison.json) | 新患者划分确认 | — | — | 通过 |
+| [research_inflammatory_pair_specialist](../threeclass/results/research_inflammatory_pair_specialist/comparison.json) | 开发候选 | 0.83855 | 0.89479 | 0 |
+| [research_large_lastblock_delta_lora](../threeclass/results/research_large_lastblock_delta_lora/comparison.json) | 开发候选 | 0.83983 | 0.89479 | 0 |
 | [research_large_spatial_contrast](../threeclass/results/research_large_spatial_contrast/comparison.json) | 开发候选 | 0.82431 | 0.90804 | 0 |
 | [research_large_teacher_distillation](../threeclass/results/research_large_teacher_distillation/comparison.json) | 开发候选 | 0.80927 | 0.88461 | 0 |
 | [research_large_token_confirmation](../threeclass/results/research_large_token_confirmation/comparison.json) | 新患者划分确认 | 0.82889 | — | 通过 |
@@ -97,8 +106,27 @@
 | [research_raw_highres](../threeclass/results/research_raw_highres/comparison.json) | 开发候选 | 0.80373 | 0.87476 | 0 |
 | [research_regional_relation](../threeclass/results/research_regional_relation/comparison.json) | 开发候选 | 0.81342 | 0.88931 | 2 |
 | [research_regional_relation_confirmation](../threeclass/results/research_regional_relation_confirmation/comparison.json) | 新患者划分确认 | 0.78576 | — | 未通过 |
+| [research_register_classifier_context](../threeclass/results/research_register_classifier_context/comparison.json) | 开发候选 | 0.83932 | 0.89195 | 0 |
+| [research_register_common_mode](../threeclass/results/research_register_common_mode/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
+| [research_register_conditional_readout](../threeclass/results/research_register_conditional_readout/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
+| [research_register_cosine](../threeclass/results/research_register_cosine/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
 | [research_register_depth](../threeclass/results/research_register_depth/comparison.json) | 开发候选 | 0.83960 | 0.89286 | 0 |
+| [research_register_geometry](../threeclass/results/research_register_geometry/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
 | [research_register_multiquery](../threeclass/results/research_register_multiquery/comparison.json) | 开发候选 | 0.83839 | 0.88770 | 0 |
+| [research_register_patch_attention_coupling](../threeclass/results/research_register_patch_attention_coupling/comparison.json) | 开发候选 | 0.83992 | 0.89265 | 0 |
+| [research_register_patch_gated_value](../threeclass/results/research_register_patch_gated_value/comparison.json) | 开发候选 | 0.83901 | 0.89265 | 0 |
+| [research_register_patch_joint](../threeclass/results/research_register_patch_joint/comparison.json) | 开发候选 | 0.83901 | 0.89265 | 0 |
+| [research_register_patch_mass_calibration](../threeclass/results/research_register_patch_mass_calibration/comparison.json) | 开发候选 | 0.83901 | 0.89265 | 0 |
+| [research_register_patch_query](../threeclass/results/research_register_patch_query/comparison.json) | 开发候选 | 0.83901 | 0.89265 | 0 |
+| [research_register_patch_query_selection](../threeclass/results/research_register_patch_query_selection/comparison.json) | 开发候选 | 0.83901 | 0.89265 | 0 |
+| [research_register_patch_readout_adaptation](../threeclass/results/research_register_patch_readout_adaptation/comparison.json) | 开发候选 | 0.83808 | 0.89479 | 0 |
+| [research_register_patch_value](../threeclass/results/research_register_patch_value/comparison.json) | 开发候选 | 0.83901 | 0.89265 | 0 |
+| [research_register_position_calibration](../threeclass/results/research_register_position_calibration/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
+| [research_register_projection_freezing](../threeclass/results/research_register_projection_freezing/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
+| [research_register_recurrent_refinement](../threeclass/results/research_register_recurrent_refinement/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
+| [research_register_routing_information](../threeclass/results/research_register_routing_information/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
+| [research_register_scale_factorization](../threeclass/results/research_register_scale_factorization/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
+| [research_register_static_context](../threeclass/results/research_register_static_context/comparison.json) | 开发候选 | 0.83901 | 0.89479 | 0 |
 | [research_regularization](../threeclass/results/research_regularization/comparison.json) | 开发候选 | 0.81405 | 0.87467 | 0 |
 | [research_repeat_cv](../threeclass/results/research_repeat_cv/comparison.json) | 开发候选 | — | — | 0 |
 | [research_residual_m7_confirmation](../threeclass/results/research_residual_m7_confirmation/comparison.json) | 新患者划分确认 | 0.82706 | — | 未通过 |
@@ -126,4 +154,4 @@
 | [research_weight_averaging](../threeclass/results/research_weight_averaging/comparison.json) | 开发候选 | 0.83932 | 0.89218 | 0 |
 | [vitb_320/baseline](../threeclass/results/vitb_320/baseline/comparison.json) | 基线/外部评估 | — | 0.77338 | 见原记录 |
 
-共 121 份比较记录；其他打包、逐阶段核查、模型选择及外部指标见 threeclass/results/ 和本目录协议。
+共 149 份比较记录；其他打包、逐阶段核查、模型选择及外部指标见 threeclass/results/ 和本目录协议。

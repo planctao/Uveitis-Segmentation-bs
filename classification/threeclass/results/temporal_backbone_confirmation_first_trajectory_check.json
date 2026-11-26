@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "repeat": 20281001,
+  "fold": 0,
+  "seed": 0,
+  "actual_cuda_full_task_and_all_parameter_gradients": {
+    "batch_size": 256,
+    "full_objective_and_all_parameter_gradients_restored": true,
+    "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+    "maximum_independent_projection_error": 1.1920928955078125e-06
+  },
+  "all_temporal_states_recovered": [
+    {
+      "arm": "raw",
+      "selected_epoch": 46,
+      "maximum_temporal_weight_expansion_error": 0.0
+    },
+    {
+      "arm": "ema0p8",
+      "selected_epoch": 35,
+      "maximum_temporal_weight_expansion_error": 4.071129464100487e-08
+    },
+    {
+      "arm": "ema0p95",
+      "selected_epoch": 49,
+      "maximum_temporal_weight_expansion_error": 7.280161509748417e-08
+    }
+  ],
+  "raw_checkpoint_sha256": "28761f7d5f21ca92ccd7dbfcfbdf546951c0912fa6ed8619d17ef35286de24c7",
+  "all_frozen_sources_unchanged": true,
+  "external_test_evaluated": false
+}

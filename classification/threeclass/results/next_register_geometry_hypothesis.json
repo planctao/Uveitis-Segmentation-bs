@@ -1,8 +1,8 @@
 {
   "created_at_utc": "2026-11-24T12:42:51.856929+00:00",
   "family": "register_geometry",
-  "status": "preflight_passed_waiting_for_position_calibration_decision",
-  "scores_evaluated": 0,
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
   "hypothesis": "M8 normal-register PCA fits patientcenters after averaging four distinct pretrainedpositions. This discards normal covariation between positions. Compare existing poolednormalPCA32 with joint8192dimensional patientregisterPCA32 and four independentpositionPCA8spaces (totalrank32), plus no-registerprojection control. Keep original normalL geometry and tokenquery module fixed. Design based on explicit geometrydefinition before reading multiquery or positionclassificationoutcomes; established structurednormalPCA, no originalityclaim.",
   "architecture_plan": "Same final4register bank and fit-only globalacrosspositions standardization. Fourarms side-only: none (clamprawnormalizedtokens), pooled32originalM8control, joint32 (flatten4x2048, subtract centerednormalpatientPCA32 nuisance, unflatten), position8 (ownnormalpatientPCA8 perregisterposition). All newspaces from normalpatientimageaverages; originalnormalL untouched. Same originalhiddenquery32/keys/values32GELU/zeroReadout256 times.1 residual, identicallearnedparameters.",
   "configuration_plan": [
@@ -30,5 +30,11 @@
   "launch_condition": "No classificationfits/scores until positioncalibration all48audit and any required newpatientconfirmation/package/promotion decision terminal. Freeze thencurrentreferencegates after completepreflight.",
   "selection": "OriginalCV strictlyhigher and validation>=thencurrentreference; freezehighestqualifyingCV before two unusedpatient3foldrepeatsets. HighermeanF1 and pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian; no automaticexternaltests.",
   "external_test_evaluated": false,
-  "model_preflight": "verification_register_geometry.json"
+  "model_preflight": "verification_register_geometry.json",
+  "protocol": "runs/register_geometry/protocol.json",
+  "protocol_sha256": "0c9c14151d4ee4d45f1bb11e61375e24f649b7e15c9bcb3984e906459cf894e7",
+  "pid": 33542,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_geometry/comparison.json"
 }

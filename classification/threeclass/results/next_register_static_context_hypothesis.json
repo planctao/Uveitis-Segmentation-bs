@@ -1,0 +1,44 @@
+{
+  "created_at_utc": "2026-11-24T13:42:39.777767+00:00",
+  "family": "register_static_context",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "Training-only M8 routing diagnosis shows seed2 always selects register1; seeds0/1 also heavily concentrate on a few slots, register3 never selected. Test whether per-image register evidence is needed, or if a hidden-query contextbank can explain the benefit. Compare real image tokens, fitting-patient balanced fixed per-position meanbank, per-image deviation from that bank, and equally pooled static+dynamic branches. This is a mechanism ablation and architecture proposal, no noveltyclaim.",
+  "diagnostic": "results/register_routing_training_diagnostics.json",
+  "architecture_plan": "Same normalL/baseM8hiddenquery/key/value32/zero32->256 .1 residual and same learnedparameters/init/RNG/fulltask. Compute each fitpatient mean4x2048 after fit-only side standardization/normalPCA/clamp; averagepatients equally to freeze a per-position staticbank. Original realtokens exactM8control; staticbank expanded for every image; dynamic=tokens-staticbank; static_dynamic uses same query/key/value modules on two separatebanks, averages their pooled32D values then one readout. No parameters added; same trainable base and auxiliary task. Dynamic deviation uses shared LayerNorm affine parameters but fixed eps=.05^2, bounding normalization amplification at20; static/real retain originaleps1e-5.",
+  "configuration_plan": [
+    {
+      "name": "real_control",
+      "kind": "real_control"
+    },
+    {
+      "name": "static_context",
+      "kind": "static_context"
+    },
+    {
+      "name": "dynamic_deviation",
+      "kind": "dynamic_deviation"
+    },
+    {
+      "name": "static_dynamic",
+      "kind": "static_dynamic"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Standalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL; originalrealcontrol must recover exactM8 development probabilities. Then-current reference gates, fixed coefficients.",
+  "geometry_plan": "Freeze originalL/registernormalPCA32, patientbalanced per-position projectedtokenmean, and patient/near-duplicate plans for allfourphases beforeall48fits. No stopping/outerdata in any preprocessing.",
+  "preflight_plan": "Four real256image fulltasks/allparametergradients and actualCUDAwitnesses. ExactM8control; staticbank output independentof image-tokenchanges for fixedhidden; dynamic subtraction and two-branch mean independently recovered; positional permutation tested jointly with bank, without claiming rawinput-only permutation invariance. All actual learned/fulltask gradients, buffers, fixed sources and probabilities restored.",
+  "launch_condition": "No classfits/scores until register_scale_factorization all48 audits and any required freshconfirmation/package/promotion decision terminal; complete preflight and then-current reference/code/artifact freeze.",
+  "selection": "OriginalCV strictlyabove currentreference AND validation>=currentreference; freeze highestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 versus EACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "engineering_preflight_refinement_before_classification": "Before any classfits/scores, dynamic-token per-image across-channel std reached.00266766. Originaleps1e-5 amplified independent float32/float64 normalprojection rounding, producing maximum keyerror2.91765e-5. Instead of loosening any complete-task/probability/gradient/intermediate tolerance, set dynamic-only LayerNorm eps=.05^2 (same.05 stability scale as inputstandardizer), cap amplification20. Static/real remain original, parametercount/baseinit/RNG/fulltask unchanged. Re-run all four preflights before any classification.",
+  "model_preflight": "verification_register_static_context.json",
+  "exact_control_audit_before_training": "In light of the preceding scale-study audit issue and before any staticcontextclassfits, require every originalM8 control parameter/buffer/GPUstopprobability and allfirstCUDAwitness arrays equalbitwise (apart from added frozenpositionmeanbuffer). FreshCPUstop/outerprobs use existing5e-5/5e-5 and identicaldecisions/discretemetrics, no tighterCPUbitwise requirement. No actualheadloss/gradient/probability tolerancechanged.",
+  "protocol": "runs/register_static_context/protocol.json",
+  "protocol_sha256": "77aa0245be600ab9a4c9bc79fa1dfade55da9127af59ef8c0d0c8746b0882eab",
+  "pid": 39004,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_static_context/comparison.json"
+}

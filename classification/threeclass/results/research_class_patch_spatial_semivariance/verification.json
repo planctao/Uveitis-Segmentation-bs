@@ -1,0 +1,890 @@
+{
+  "passed": true,
+  "actual_seed_heads_checked": 24,
+  "actual_training_witnesses_checked": 24,
+  "fits": [
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "04048ff0a720a482452031bad0736f5d9e5d4b1a904aa59278e82942f0e82bc5",
+      "training_witness_sha256": "8d95e2dbd981d0bcc6a90337d55b236a4d4e1d9b93e2bc357aee4ddd4ffab6d7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.2747477740049362e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "63eb30e77b021c82d6338d5153c55df51bf01fee3409ec625f7281c75e619d7f",
+      "training_witness_sha256": "e2533606c1aaa18fb1e09450848bf210151dab90ea628617aef7366b3073d791",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.434251993894577e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "5bf3db653f523941576ef72872a2f6e3de43021ae3cbe112df7239f69bf8e252",
+      "training_witness_sha256": "1e240967bc7fde6f3257911e801d50d5eab277c80a0c2a99a453e3ecb4fcea60",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 2.898741513490677e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "a681392f77dff2b974c3b3f0bf6c4b6a4e5a0a71a5a89e98a01320cdc5df1109",
+      "training_witness_sha256": "c03ba1c6d2a104f91ea9da7c0a6597996f9ba0fa9cd6ad7feae3f785d464aa8a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.3737007975578308e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "cf647e4b775b6c2f5cf3207a9388ad08a52aebf088585d41dfd602344b37639f",
+      "training_witness_sha256": "a49fbad2575e7b2fddd8966492b285261791a5e4fe814dccebf97f05094276c2",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.1175870895385742e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "4d56df495bdbcb2c50dc5990d8102a42b989dde7e32ab28c7ff587d6661eaca1",
+      "training_witness_sha256": "e586373360e2e0cdc07e7af2fec7b22172d6457c62f5e946329f4526b4b0782a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.6996636986732483e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "5f350791acb990894ca33c94c16ca00a50357c8ed9b03a1b9c88aacca1356a3c",
+      "training_witness_sha256": "7eb4819d6477819a1f5108dde18416c51da117045f1a0860838e05aae8f4a7dc",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 6.402842700481415e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "d35945211b87d24bd9aac77d3ac36f20102b338fbf87e9074b48bc1172cd6381",
+      "training_witness_sha256": "2a06e7143b2874e7ad8a4047262418481e36f7845642e011a3807cddb77023df",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.664739102125168e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "ae1eee3e30ab6228d3c467fe8b33fed866d88e7337e0628d7033aa49ff14a84c",
+      "training_witness_sha256": "137ac62a87d5a59b5631d7106b0b3364437ce6ab1ba4b6d91899bc15efdbc341",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.888271749019623e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "9f65ec548bab3fd80d7e929d51e84375bd580758f758a5315e1b96eeebda51c8",
+      "training_witness_sha256": "4943453d3c53b41a05c78647b5ced17c3e9bdb99bea8f7dcb37c410d6145056d",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 9.19681042432785e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "fb1d5756cbdd8ec1b791b9d39ac51276e6f7c0537b26e79cd3dc0323578f8f49",
+      "training_witness_sha256": "a59bca981808bc55a2733200cd5b39effb709983808f2a7276049c5a37e8af09",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 9.458744898438454e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "uniform_spatial_semivariance",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "df45da66441a8945cb93faea049b1e77d755cb076aa574fbb937d26339baa079",
+      "training_witness_sha256": "7986a4db169e475a0c94282a6aa60494564bf08730c41ec8782ef2686e68a20d",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.4668330550193787e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "88f3b1195153ceda4ae8a6e9703757cabdf98d1d6d7a1e2aa7958143edde5d66",
+      "training_witness_sha256": "4063d0da02325071ce8def1676b7e785dadce146c423216e372fc6d1ceec552b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.3096723705530167e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "09284059e3570303e398c5e9bfd3ba596725ac204d95fdfa71d4e088760422d4",
+      "training_witness_sha256": "1ab716c55b176e331dac9487dfdac67fdcf1e6fb0a4d8d1c8705fd248f73b19f",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.434251993894577e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "afc4f4c373788452e01ebc661e2a920254881ce4806c664a093ef477d9c35f29",
+      "training_witness_sha256": "e3c772a59f9a1e132e5fe143ce50a867654445bbcec54c07a94d30e8e85628f2",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 2.898741513490677e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "f3e50943ee1f42df4cf5bf414d1f9b766dbb0357f66788af201fb76dc199d7a4",
+      "training_witness_sha256": "76ac5c59d22724c9cee0316fda9cdf026054fbea9e26ab5592ab82ac143c51c6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.3737007975578308e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "5d6d124f7dea52b828ab0d9ddf07f8e15d00064c83dd195fc9c79d2f3abad508",
+      "training_witness_sha256": "02b24140fa94ea63089abae05acbccf13735cc0a13fbe0f0d3f2f2859ddfe96a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.1175870895385742e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "9d17af02b22eb1abab124bed9dc752a9046fa59fd528ff9b73bb2073960e1719",
+      "training_witness_sha256": "642d3b82fba2cf3ddee9fbfdc4f4ca71a01f060520f54d0cfdbd960336637b08",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.6996636986732483e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "3db14c807ba6609b6bf161ceb37ba978c5fb5e41eec8749375e9c774fc67f66f",
+      "training_witness_sha256": "6448cd1a1ea6917583eb035379baf08a02e9ec5f2e6ea376028643cab8dc7082",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 6.402842700481415e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "43c70e63667aa47d34574e5c2927f5a2313d6499988aecd9f91854f088a481ee",
+      "training_witness_sha256": "65bf1fb801a5509953f0ac111e89067203ee22d5dbf252a10ee3957a4878b16d",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.8277205526828766e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "2ffa65ca9cd55754d187cbde6700fda1ed8ec4e13ce8a140cbbd20d1cd010b4e",
+      "training_witness_sha256": "c2f34f68955197b0eb2a84bd1ef699e4d4cc7c63f4d277c7f0fc77c30eb5e86f",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.888271749019623e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "1680730727a0b05baa4643a058ac29307611f251e3ca2723a861749f2c11df6b",
+      "training_witness_sha256": "fa242e952a2b38460f0312e70f3ee9b5c3fcdcb0e7c33b00a194cc01dd0fc441",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.0302755981683731e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "70678fef81a27d7271f083d1c53fd833e7dadf068f0ceac9278d62503afea867",
+      "training_witness_sha256": "dccc88b115a83289240c3f7c08713267b7c21ec8404771e4a286d6722dc0baf7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 9.953510016202927e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    },
+    {
+      "arm": "source_query_spatial_semivariance",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "34e853486ee6c997f4a3e8cc93713fcb78f6292441549e9eeb82e026f12a9cd3",
+      "training_witness_sha256": "cde4ae9f52c83a46e984f6122f1ba36b145c4dd327622b6fbcb52d1ef36ba882",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.539592631161213e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      }
+    }
+  ],
+  "frozen_register_source_heads_checked": 12,
+  "register_source_heads": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_0/model.pt",
+      "checkpoint_sha256": "88908e7720d773ca409cb97dc5867c37a8c7fe1d9d603e84451717ee31cffe0d",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_1/model.pt",
+      "checkpoint_sha256": "a52186d034e677dbba0d3f23dd18932b90ea9d3275cd2c54476145129a568e1b",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_2/model.pt",
+      "checkpoint_sha256": "c7b1a119feef7625fecfa0c95c2bff7df6c6a52b8c6ffe5790cc2a340e2db230",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.3709068298339844e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "9b7ccc0ff541aab81c5fbfc7b82ffbd9e165a4690ed59284fa66aee7da3e66ee",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.6689300537109375e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "65bdabf2788de1725ebd6eebca5b62caabf4e0ac1f418c398486ddda22fb41a3",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8069986253976822e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "ac6b140edfa752188d270b5e006872f1c0b21f69e3de71954c6ff1b18c9e2f0f",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 2.384185791015625e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "d460a5fde0dcf8678752f660baadc59a5fe08cd244025a1853dc44ad5e5f1450",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9e66ace92226fbf456990dbfd0f95d48b960f140f3891d3e1a55e2c1394e32cd",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "dc3b99cd2d40c92ad66dd7e24264ff2ffff10453d3609d953f14447ff78ceb0a",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 9.313225746154785e-09,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "9846a7d151446a296fd59c8368aa8b4e8044027434b917bbb16e114e130efe00",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.30385160446167e-08,
+        "maximum_independent_forward_error": 1.430511474609375e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "5d1af37546c206295ef2c91c5023002821e40f26c5edb383553608cc40c63408",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "0aec793f23f304a3f9401f9554d9b17c50ff1dafa9ac1873ecda56e37e9103b4",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      }
+    }
+  ],
+  "reused_fusion_source_heads_checked": 24,
+  "source_heads": [
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_0/model.pt",
+      "checkpoint_sha256": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_1/model.pt",
+      "checkpoint_sha256": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_2/model.pt",
+      "checkpoint_sha256": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_0/model.pt",
+      "checkpoint_sha256": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_1/model.pt",
+      "checkpoint_sha256": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_2/model.pt",
+      "checkpoint_sha256": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "d88244e9531a4655ae5875f1272aefd22f54ff53995d84f810cc7e1135a513e5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "666e5f037ec2d0d3a9b66c7c532db4a3094ba99ef648ac2d510eb5641ccb2733"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "f0104ecdbec7e01c63be873d752661b15894687b6061e3d6aed459a112c74efe"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "069024b449b9c6854193bfa5bdade86a172f5e7f41eaa7a2cc87efc1e30400cf"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "5e590d0d5a4497c9d76a67862654972a7ed5c7072a21d3f4976d95e5b8b3c0fc"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "136a4335107a7cc456374b60c9d60a312a9d83ba7f9beb9884b8cb99f652a0b3"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "a9fb3bb0925b42b0385816cb181872f3d619167a7a8d845fd63692ed73aa8f54"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9ed0f89422d82e67dbc576957d1d7a8f5ed80812e27fd38c9ee23509ead42c3b"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "f7895a90c2ab390ed64a2977511cb8677b49617ba1fed30c0d33b301592836bd"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "b0e40a5f6fce2eecedb58fe7e443a9ba83ef20c1f043b925bc04a92da9bb6454"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "e660541eeeb5cbb705590b0f1bfb8f42cc40b2965a707c87d7be8f959e44501d"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "29f1bca70e7d266e3320fc260871f2191aa9cd82922016eafbef75a4ba24d6d5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "c8f49d4702a1a67d26b2b2afa7d0771affdfbb7a36883da37d560af6c35d7f77"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "dda695a36c462b1cc907fb0c48286a1c8e1f8a58d792553bfac180a06080a55f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "6aa8e8b77db8fbaae1ecd5e6941650339961cf0baaa8a2074cabee593a17ea73"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "b3132e295a018cad9923ba7348680ede91793e380bfbd3dcb3e4afd80e896f28"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "8841bab05304629b71ddf2b33c0eabda66d1a8da0d36a2fdabe307b75d780fd0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "a0eba0367ff8f7260e55b936e1d998a749688492cb75f0c2a8b3bcfcca6c0341"
+    }
+  ],
+  "fixed_fusion_phases_checked": [
+    {
+      "source": "uniform_spatial_semivariance",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "uniform_spatial_semivariance",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "uniform_spatial_semivariance",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "uniform_spatial_semivariance",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "source_query_spatial_semivariance",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "source_query_spatial_semivariance",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "source_query_spatial_semivariance",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "source_query_spatial_semivariance",
+      "phase": "fold_2",
+      "images": 573
+    }
+  ],
+  "only_patch_spatial_semivariance_readouts_and_bias_trained": true,
+  "equal_matched_mean_readout_parameters": 4098,
+  "reused_mean_control_trajectories": 24,
+  "reused_global_variance_control_trajectories": 24,
+  "equal_matched_global_variance_readout_parameters": 4098,
+  "original_shared64_patch_bank_and_frozen_source_verified": true,
+  "external_test_evaluated": false
+}

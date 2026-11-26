@@ -1,0 +1,128 @@
+{
+  "passed": true,
+  "checked_at_utc": "2026-11-24T06:18:16.536325+00:00",
+  "previous_goal_turn_classification": "progress",
+  "goal_status": "active",
+  "studies": [
+    {
+      "family": "normal_atlas",
+      "actual_audited_new_heads": 48,
+      "all_frozen_code_source_features_geometry_and_actual_weights_unchanged": true,
+      "protocol_sha256": "05d10c2a62a31a8983aed0664912c770f34cc9d818a28e479ec03a67e5d14ba6",
+      "comparison_sha256": "8e0c9af9d290597399148857a5001f4d6c8df1b839a7510439b6daa0a312e537",
+      "verification_sha256": "e5cecce17ab5e45857552b52b5f723e36bf7763876d5c4bd30a6acb54c9ddc65",
+      "external_test_evaluated": false,
+      "passing_development_gates": 0
+    },
+    {
+      "family": "normal_group_risk",
+      "actual_audited_new_heads": 48,
+      "all_frozen_code_source_features_geometry_and_actual_weights_unchanged": true,
+      "protocol_sha256": "0a8f4a239061850fbcdad614b412a5d95c1a8b8162a9d4b12766543519d2bf14",
+      "comparison_sha256": "3cb716208d6922a94d0b6902ff30e59bf89329d929429af7fa10d3ac117def5a",
+      "verification_sha256": "c01dd53a0262eadbb6cf0a35c8a65626089cd7197b53d21d9ee90ad1a3bcae8a",
+      "external_test_evaluated": false,
+      "passing_development_gates": 1
+    },
+    {
+      "family": "normal_group_risk_confirmation",
+      "actual_audited_new_heads": 54,
+      "all_frozen_code_source_features_geometry_and_actual_weights_unchanged": true,
+      "protocol_sha256": "d9f14e631260ebc1278504ae30f18c7218d4b90bd5e7261d3d8a66655be1ba85",
+      "comparison_sha256": "e91c6f14a238efc25ecc113c875c204b1e1d4c5fd0c8ac1bfb8220b88ba5dbd6",
+      "verification_sha256": "f709f443814a8dab89abc2ad670c9976e96bbc01a34f600feeb825a5643ad9d5",
+      "external_test_evaluated": false,
+      "confirmation_gate_passed": false,
+      "paired_macro_f1_ci95": {
+        "reference": [
+          0.0027688762541611235,
+          0.032073893255123796
+        ],
+        "fixed_gaussian": [
+          -0.001414351926699095,
+          0.028514815045146736
+        ],
+        "m6": [
+          -0.000775248993290395,
+          0.007354897616188665
+        ]
+      },
+      "mean_f1": {
+        "reference": 0.7905809599320698,
+        "subspace": 0.8036911325707466,
+        "risk": 0.8032978623818946,
+        "fixed_gaussian": 0.7944188807642768,
+        "m6": 0.8041373344551422,
+        "candidate": 0.8072501394052266
+      }
+    },
+    {
+      "family": "normal_task_gradient",
+      "actual_audited_new_heads": 48,
+      "all_frozen_code_source_features_geometry_and_actual_weights_unchanged": true,
+      "protocol_sha256": "86c7d3c8f99c13ec2baa7fd45569b6d981dab53e19a289225495cee801a41045",
+      "comparison_sha256": "88877486f1e93b032a9fdf175e954b0f396477a7fb9d6f461416e41d4a13e9d9",
+      "verification_sha256": "eb1544455ef599b4b6115aa9a67359849226f3c2a9020c6539a82b58c20fa9f0",
+      "passing_development_gates": 2,
+      "selected_candidate": "batch_strength1p0_fusion075",
+      "selected_cv": 0.8283662852472798,
+      "selected_validation": 0.8904827120381046,
+      "external_test_evaluated": false
+    }
+  ],
+  "newly_audited_threeclass_heads": 198,
+  "additional_generative_fits_checked": 18,
+  "M5_M6_frozen_references_models_and_reproduction_code_unchanged": true,
+  "ongoing_study": {
+    "family": "normal_task_gradient_confirmation",
+    "state": {
+      "status": "training",
+      "pid": 88026,
+      "arm": "gradient",
+      "repeat": 20280111,
+      "fold": 1,
+      "seed": 0,
+      "external_test_evaluated": false
+    },
+    "protocol_sha256": "9f66134502a86cf02e0031beb022a5cc25f882caca8a1eddf616b0993f0df65b",
+    "outer_split_seeds": [
+      20280101,
+      20280111
+    ],
+    "planned_new_heads": 54,
+    "planned_additional_gaussians": 18,
+    "all_old_protocols_verified_to_exclude_these_seeds": true,
+    "all6splitplans_frozen_before_fits": true,
+    "first_actual_gradient_head_predictions_and_training_task_verified": true,
+    "first_actual_witness": {
+      "batch_size": 256,
+      "full_task_restored": true,
+      "task_gradient_repair_restored": true,
+      "negative_dot_fraction": 0.0,
+      "maximum_independent_correction_error": 0.0
+    }
+  },
+  "continuous_search_live": {
+    "status": "running",
+    "pid": 22236,
+    "round": 634,
+    "completed_round": 633,
+    "completed_experiment_rounds": 633,
+    "proposal_iteration": 350212,
+    "legacy_proposal_iterations": 349843,
+    "feature": "multiscale_raw768",
+    "candidate_id": "6c8b19939a1c",
+    "hypothesis": "Joint optimizer, regularization and capacity exploration after tested local proposals were exhausted",
+    "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+    "time": "2026-11-24T14:18:13.011101+08:00",
+    "external_test_policy": "Never read or evaluate external results inside this loop."
+  },
+  "external_test_evaluated_in_these_studies": false,
+  "retained_reference": "M6",
+  "cache_storage_migration": {
+    "verification": "results/feature_storage_migration_20261124.json",
+    "all_original_file_paths_and_content_preserved": true,
+    "bytes_freed": 732321459,
+    "post_migration_frozen_study_integrity_passed": true
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "group": "a9669a36590f",
+  "mode": "flat",
+  "config": {
+    "arch": "attention",
+    "mode": "flat",
+    "hidden": 256,
+    "dropout": 0.6,
+    "lr": 0.002,
+    "wd": 0.1,
+    "epochs": 120,
+    "patience": 18,
+    "taxonomy_only": true,
+    "aux": 0.8,
+    "label_smoothing": 0.06,
+    "fine_contrastive": 0.05
+  },
+  "seeds": 3,
+  "thresholds": null,
+  "val": {
+    "n": 374,
+    "accuracy": 0.9037433155080213,
+    "balanced_accuracy": 0.9041468567315093,
+    "macro_f1": 0.8998170419492214,
+    "log_loss": 0.3354196642038429,
+    "recall": {
+      "infectious": 0.9290780141843972,
+      "noninfectious": 0.8850574712643678,
+      "normal": 0.8983050847457628
+    },
+    "confusion_matrix": [
+      [
+        131,
+        9,
+        1
+      ],
+      [
+        13,
+        154,
+        7
+      ],
+      [
+        2,
+        4,
+        53
+      ]
+    ]
+  },
+  "seed_macro_f1": [
+    0.8873789225426112,
+    0.8854352057438111,
+    0.8825498762490098
+  ],
+  "checkpoints": [
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_repeat_cv/protected_candidates/a9669a36590f/seed_0/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_repeat_cv/protected_candidates/a9669a36590f/seed_1/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_repeat_cv/protected_candidates/a9669a36590f/seed_2/model.pt"
+  ],
+  "candidate_id": "a9669a36590f",
+  "feature": "multiscale_vit",
+  "source_candidate_id": "a9669a36590f",
+  "protection_time": "2026-11-23T19:56:36.402946+00:00",
+  "external_test_evaluated": false,
+  "purpose": "Preserve a fixed development finalist while new patient partitions assess stability.",
+  "checkpoint_sha256": {
+    "0": "abdadd8b6e91e28e14982e51c2af7ce635b522ad454cc58053e48488ee115ece",
+    "1": "c96fa393b1bdd7ba11d32f8c2359b1c1b341a0144f458259ccea13a187826302",
+    "2": "cef6c22a6e1507de095e3f64f3c8b433954f2c4ac7bf06a233a23c4c7dfec807"
+  }
+}

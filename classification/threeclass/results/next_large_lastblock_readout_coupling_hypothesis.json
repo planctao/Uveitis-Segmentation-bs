@@ -1,0 +1,149 @@
+{
+  "created_at_utc": "2026-11-25T14:48:47.960164+00:00",
+  "family": "large_lastblock_readout_coupling",
+  "status": "running",
+  "hypothesis": "Jointly learn the final DINOv3-L QKV low-rank delta and its diagnostic-leaf linear readout. A representation update may require modest classifier co-adaptation. Test against both equal-adapter-capacity token residual plus the same readout learning, and readout-only learning. Frozen upstream feature encoding and normal geometry preserve a small, explicit adaptation scope.",
+  "motivation": "The completed frozen-readout study had0eligible attention candidates after24actualfits/task/saved/root reviews. Attention fixedfusion originalCV .8388786700494966 failed M8 .8390087766590693 and token .839833968113592. The earlier token arm remains a control and is not retrospectively nominated. The present experiment changes the trainable architecture by adding diagnostic readout co-adaptation; no evidence yet establishes that frozen readout caused the prior result.",
+  "predecessor_completed_record_sha256": {
+    "results/research_large_lastblock_delta_lora/comparison.json": "92eb4e4f47867148a64e539f8df52235df419a809daaa9a7b17dc6a7defef5db",
+    "results/research_large_lastblock_delta_lora/verification.json": "df37e5b090f06de63bcc9e304343c59540c729a21478c96f4566d6d3f3f322c4",
+    "results/research_large_lastblock_delta_lora/independent_saved_output_review.json": "7c73f68171fae7e27ec8e440b4332d48603a6187fa8cd382b2670cafd1f6ccc3",
+    "results/large_lastblock_delta_lora_completed_root_review.json": "1c68bf4efbc3e0b8dfd6cd92eb474ae2b45b28d59a46f8551c74b8dcc2c17c03"
+  },
+  "retained_reference_registry": "results/research_reference_registry.json",
+  "retained_reference_registry_sha256": "0da36e047ba94459eee36fae8d593cb821decb76ee6225dc894e51617f17023d",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "configuration_plan": [
+    {
+      "name": "attention_joint",
+      "role": "sole_upgrade_candidate",
+      "adapter": {
+        "kind": "attention",
+        "rank": 4,
+        "alpha": 8
+      },
+      "readout_trainable": true
+    },
+    {
+      "name": "token_joint",
+      "role": "matched_capacity_control_not_upgrade_candidate",
+      "adapter": {
+        "kind": "token",
+        "rank": 8,
+        "alpha": 16
+      },
+      "readout_trainable": true
+    },
+    {
+      "name": "readout_only",
+      "role": "readout_only_control_not_upgrade_candidate",
+      "adapter_trainable": false,
+      "readout_trainable": true
+    }
+  ],
+  "shared_architecture": "Original paired320/448 DINOv3-L final-block RAMfloat32 cache and subtraction-first source-feature anchoring. Ordinary block23/finalnorm and all previous trunk blocks remain frozen. Load each exact source M8 registerL checkpoint, statistics, diagnostic mapping and normal/global/side geometry. Train only adapter A/B plus head.flat.weight/bias for joint arms. The readout-only control trains only the same head.flat weight/bias on original cached features. All frozen feature encoders/token attention/fine-projection parameters and dropout remain eval; eval mode does not disable readout gradients.",
+  "trainable_parameters": "Readout count=257*number of fit diagnostic leaves; each joint arm adds16384 adapterparameters. Actual validation source has14leaves, hence3598readout and19982joint parameters. The readout-only arm has fewer parameters and is a scope control, not a capacity-matched adapter control.",
+  "initialization": "Exact source diagnostic readout weight/bias; private Kaiming A/zeroB with20294600+seed. Identical seed recipe/order across3arms, different A/B shapes between attention andtoken. At initialization rawfeatures, p/subtype/embeddings and complete task must match source bitwise.",
+  "fixed_training": {
+    "seed_base": 20294600,
+    "optimizer": "AdamW",
+    "lr_all_trainables": 0.0001,
+    "weight_decay": 0.01,
+    "clip_global_trainable_norm": 3.0,
+    "batch_size": 256,
+    "checkpoint_microbatch": 8,
+    "epochs": 20,
+    "patience": 5,
+    "epoch_zero_eligible": true,
+    "selection": "Maximum stopping MacroF1 then minimum stopping logloss. Concatenate all differentiable256features before ONE unchanged coarse+subtype+patient contrastive task; no independent microbatch losses. No teacher or new penalty. Fineprojection stays frozen, but its loss can still differentiate adapter inputs.",
+    "data_order": "numpy default_rng(20294600+seed), fresh permutation per training epoch, paired acrossarms."
+  },
+  "planned_original_new_seed_fits": 36,
+  "planned_original_actual_task_witnesses": 36,
+  "planned_original_training_products": 180,
+  "source_models_reused_not_refitted": {
+    "registerL": 12,
+    "rawB_and_normalB": 24
+  },
+  "predeclared_saved_scores": 6,
+  "upgrade_candidate_scores": 2,
+  "original_metric_phases": 24,
+  "original_fixed_fusion_phases": 12,
+  "fixed_fusions": "For each of3arms, standaloneL and.1875rawB+.5625normalB+.25newL. No weight/rank/lr/temperature/threshold search.",
+  "original_selection": "Only attention_joint standalone/fusion can qualify. Its original3fold meanMacroF1 must strictly exceed M8 AND corresponding new token_joint AND readout_only controls; validationF1>=all3. Highest eligible originalCV exactlyonce. Neither new control nor the prior control is nominated after outcomes.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20294701,
+      20294711
+    ],
+    "inner_seeds": [
+      20294724,
+      20294725,
+      20294726,
+      20294734,
+      20294735,
+      20294736
+    ],
+    "supervised_fits": 126,
+    "actual_complete_task_witnesses": 90,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "allocation": "72freshrawB/normalB/normalL/registerL sourcefits+18attention_joint+18token_joint+18readout_only. Actual complete tasks36normalL/registerL+54newadapted/readout. Every new arm starts its same matching fresh registerL source.",
+    "comparisons": [
+      "m8",
+      "m7",
+      "m6",
+      "reference",
+      "fixed_gaussian",
+      "matched_token_joint",
+      "matched_readout_only"
+    ],
+    "gate": "Higher sixfoldmeanMacroF1 AND paired patient95%lowerCI>0 against EACH of7references/controls. No fresh reselection, no external scoring, no automatic promotion.",
+    "storage": "Source data plus54compact trainable-only adapter/readout checkpoints. Recompute byte estimate before any eligible launch; do not delete scientific outputs to make room."
+  },
+  "engineering_requirements": [
+    "Reuse completed float32cache producer/model proofs by verifiedhash; reconstruct actual256trainingimage cache and pin imagebytes before engineering.",
+    "All3arms actual256 complete tasks atzero/after1engineeringstep; separate readout affine/exp-marginalization arithmetic plus independent complete loss and finalblock oracle. Verify all gradients, source zero anchors, frozen tensors, true8checkpoint/direct, ordinaryCUDArestore.",
+    "Actual shared-engine original/fresh warmstart/firsttask/prediction/restore for all3arms; six patient_group AND split_group isolated plans; explicit formula and strict gate boundary cases.",
+    "Actual no-launch fullstartup including36fits/36tasks/6scores/24metricphases/12fusions and conditional126fresh90tasks; freeze source checkpoints/images/code/packages before formal training.",
+    "Independent actual post-fit model/task audit, saved-output and final immutable-byte review on either outcome. Prepare saved/final review rules before original/fresh outcomes. No other architecture until current required reviews finish."
+  ],
+  "scientific_limits": "Joint linear readout and low-rank adaptation are standard components, not a claim of method invention or identified causal mechanism. This is a new controlled current-M8/DINOv3-L scope experiment. Prior ViT-B/M5 joint nonlinear/normalization/augmentation studies already exist. Repeated development exploration is optimistic; fresh group partitions are not a new external cohort and paired intervals omit full fitting/selection uncertainty.",
+  "external_test_policy": "Original fits only train/validation developmentimages; fresh only1717trainingimages and no validation rawimagebytes. No externalimages/outcomes/predictions used for selection. Nontraining feature rows masked for fresh fitting.",
+  "model_code_sha256": {
+    "large_lastblock_readout_coupling.py": "e771e6a749605ed6544bbd12612dc4970f60af5affba684ace2971993dc0bb2d",
+    "verify_large_lastblock_readout_coupling_model.py": "9e152258a2791168edb6203b77b7b42498efc061f4efb50100cd8c355ec9ef63",
+    "prepare_large_lastblock_readout_coupling_model_proof.py": "c47e8534b4a7b196f98d88ac18ad6ee34377d929f0694027a9aad5ba87258665"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "training_launched": true,
+  "external_test_evaluated": false,
+  "active_preregistration": "results/large_lastblock_readout_coupling_preregistration.json",
+  "active_preregistration_sha256": "180e3bbd1f9fbbf3e70d428c117d4c6c5950ef1c510d0fda0eff5d67266d19e0",
+  "model_proof_pid": 30319,
+  "model_proof_protocol": "runs/large_lastblock_readout_coupling_model_preflight/protocol.json",
+  "model_proof_sha256": "72837ebd23711b473abb7c21ab6c80d19371a25fe240d543dcb669d144043be1",
+  "engine_proof_pid": 30562,
+  "engine_proof_protocol": "runs/large_lastblock_readout_coupling_engine_preflight/protocol.json",
+  "model_engineering_completed": true,
+  "engine_engineering_completed": true,
+  "engineering_root_review_passed": true,
+  "worker_wiring_passed": true,
+  "completed_engineering_record_sha256": {
+    "results/large_lastblock_readout_coupling_preregistration.json": "180e3bbd1f9fbbf3e70d428c117d4c6c5950ef1c510d0fda0eff5d67266d19e0",
+    "verification_large_lastblock_readout_coupling_model.json": "72837ebd23711b473abb7c21ab6c80d19371a25fe240d543dcb669d144043be1",
+    "verification_large_lastblock_readout_coupling_engine.json": "43f14093af6c638b46ef026a18301cefaecce3346201530d0ae35653b476c4a2",
+    "results/large_lastblock_readout_coupling_engineering_root_review.json": "9f06e3aa529fed0cd92c36f0c8ad588dd8a7f0a456bbd59583ba9b8543651200",
+    "verification_large_lastblock_readout_coupling_wiring.json": "2ffd2a8d785c0f1e99cd6c4278d5167215a485e89f480ebbd1e98400d4a63ad8"
+  },
+  "remaining_before_formal_training": [],
+  "pid": 32044,
+  "observer_pid": 32045,
+  "protocol": "runs/large_lastblock_readout_coupling/protocol.json",
+  "protocol_sha256": "0df546929d48d073999c065022f650ceac3cb13896fcd13e091dcbd792877b2b",
+  "full_startup_passed": true,
+  "pre_outcome_saved_and_final_review_rules_frozen": true,
+  "formal_launch_and_bound_observer_verified": true,
+  "formal_launch_review": "verification_large_lastblock_readout_coupling_launch.json"
+}

@@ -1,0 +1,62 @@
+{
+  "observed_at_utc": "2026-11-24T02:03:35.319737+00:00",
+  "models": [
+    {
+      "model": "cmerk/dinoret",
+      "official_url": "https://huggingface.co/cmerk/dinoret",
+      "metadata_url": "https://hf-mirror.com/api/models/cmerk/dinoret",
+      "status_code": 200,
+      "sha": "f58f5d439fd8f4e77cdaf8c88b31e56416be03da",
+      "gated": "manual",
+      "private": false,
+      "files": [
+        ".gitattributes",
+        "0_blocks_3_patches.pth",
+        "3_blocks_3_patches.pth",
+        "README.md",
+        "bedinoret.pth",
+        "dinoret.pth",
+        "loradinoret.pth"
+      ],
+      "decision": "Do not fetch checkpoint while author access approval is required."
+    },
+    {
+      "model": "YukunZhou/RETFound_dinov2_meh",
+      "official_url": "https://huggingface.co/YukunZhou/RETFound_dinov2_meh",
+      "metadata_url": "https://hf-mirror.com/api/models/YukunZhou/RETFound_dinov2_meh",
+      "status_code": 200,
+      "sha": "6dff4c76632983267a6ae3000f7852b1f8667d9c",
+      "gated": "auto",
+      "private": false,
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "RETFound_dinov2_meh.pth",
+        "config.json"
+      ],
+      "decision": "Do not fetch checkpoint while author access approval is required."
+    },
+    {
+      "model": "YukunZhou/RETFound_dinov2_shanghai",
+      "official_url": "https://huggingface.co/YukunZhou/RETFound_dinov2_shanghai",
+      "metadata_url": "https://hf-mirror.com/api/models/YukunZhou/RETFound_dinov2_shanghai",
+      "status_code": 200,
+      "sha": "6008478ae74791515baa29c77fec2872e7cfd08e",
+      "gated": "auto",
+      "private": false,
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "RETFound_dinov2_shanghai.pth",
+        "config.json"
+      ],
+      "decision": "Do not fetch checkpoint while author access approval is required."
+    }
+  ],
+  "official_repositories": [
+    "https://github.com/cm090999/dinoret",
+    "https://github.com/rmaphoh/RETFound"
+  ],
+  "checkpoint_downloaded": false,
+  "experiment_policy": "Continue existing authorized training and architecture studies; gated availability is not a block to the goal. No model-access circumvention."
+}

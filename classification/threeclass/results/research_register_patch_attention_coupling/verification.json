@@ -1,0 +1,1946 @@
+{
+  "passed": true,
+  "actual_seed_heads_checked": 48,
+  "actual_training_witnesses_checked": 48,
+  "fits": [
+    {
+      "arm": "attention_only",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "1516a9e2b4406278033c47af3eda38c141f3f734641cedbf7bb25aa64b02a5db",
+      "training_witness_sha256": "8ff466e3555d270a994965c7360bc4aa441cbe35f4a8686eb7b279628484b20e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 1.1932570487260818e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "658ad0e30ad8e339c3486eb509625e883617507d6ae101305776b96dffa7995a",
+      "training_witness_sha256": "ab3214a5f09e3fd8cf444b8987d97821088118d49121f261153416dbf755c840",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 1.9863364286720753e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "d8d5b9bb6c04dc507b4867880f7a3a7828aab2be3161368fac0e471eb547d662",
+      "training_witness_sha256": "4a5dcd5bc9854ff716663380bb91eb8645c6d99dc585472a37a95b603d42bb9a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 2.6193447411060333e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "7a9e27cd446a8e0f45e379a9e945cc8189909fd2e8c4b13375921e31ae163958",
+      "training_witness_sha256": "f55e77656be43e8f3f9a823fbe9c4d1c609a7e7f4c1d57da4bf3fdca855dd117",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 4.598405212163925e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "92e961e9bca8dc19411799ba8fef159fb3a462ab923c8ea491177e395d2cb59d",
+      "training_witness_sha256": "e119cf5da6f49d166efd9ed6e54f84e6817140ccaf55563e64209f5b055efc3e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 2.0372681319713593e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "5dd56950b8b7c67ebf5e2c17e165a37e51b2b021fe1d3729017594846f25536e",
+      "training_witness_sha256": "33e1c14fae8a7e26c58725365f06db15af6c7ed523a2bac3eee703bf86a94e50",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 1.4202669262886047e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "3aa376669c42adc6270ac3914624e18885287b5a171110f2530832e692a60318",
+      "training_witness_sha256": "67ec8f7780071330859922bdd9205d8c7ef0e950dbcda2cf87bdf220cd08247d",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 8.789356797933578e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "0b93955143a40b50340d7a90be1dd7e04fb1a66cf742e77b068ad12676238d1f",
+      "training_witness_sha256": "1e5ba96d5e2da444e6d54b6aa7fc3e2f8f80cb6805d275dc77c4db93b668bc47",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 2.2118911147117615e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "b9938ec3f2faab0d3329021b620a8f467119abc089e40aea97328fd257646d9f",
+      "training_witness_sha256": "6ef810f01cc318e2ffc23831106d8449c833fbb14fde6f0ab45f9e7da1425af4",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 1.5585101209580898e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "f479c0362828e031e004817ebbcc3ecf175c6d70c43746d2de0ae8745a25e715",
+      "training_witness_sha256": "05b7e6f68a77e23c18033e57baae6da5b04e5c8fe05e9289badc01fcc22b14f1",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "693d4189260e3101bac0678a5c6cb6923deed272ab52cc0586df31017efb3f29",
+      "training_witness_sha256": "79cc0d9a95670e886dadc646536161249143a0f146aab2b22eb7405d58ffbe82",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 7.101334631443024e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_only",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "5c605f970354f126848e8bfa7dec2cd5f90f049e7ca3d1389b05b8dc5eac407b",
+      "training_witness_sha256": "1b99ce562668490c46f2a8d1dac230f23d45b5a2bf1a783109bc0c16947b539f",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 152384,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "7c480730cc748ee5d37abc1d1d6f5b598acf88ab1d9a69de5e1e7318f8b7c327",
+      "training_witness_sha256": "ecbf8bed7ce302879f75be986fb904b60e3f488830efbb4f776968ff27382d81",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.1932570487260818e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "8f1a60e3c36cf782dc3259fd603d2cfd6edb7a12ce2ddf2e1b6d9d33c53d57aa",
+      "training_witness_sha256": "d8bbbf50170ab8d0d8fb8c8d6b78cb4f333c4127119dffc06d9199ea80b9de94",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.9863364286720753e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "2301edae080bac2748a017a0b881c8cfe679f69f33bf78a480024b0e385fedd7",
+      "training_witness_sha256": "9abc7d66cc078a0d77559c363c1086c1e0da66c7d0648fc8e5b3c666aeef6e93",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 2.6193447411060333e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "20cb6cd8571d65232406173d359a769dda6fc04cca53f2442cc1e6b6ee553950",
+      "training_witness_sha256": "6397e8f3a063d82c6ad5e7cb7a9b9f2c8c84e5397496e18447de54c8bb8d5541",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 6.687059794785455e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "0481e2fa53cc260eaff7860c76a25a32191a093e82b79dfb973fb543e8c1ca20",
+      "training_witness_sha256": "c22c9660b8f4c66139a367009a317f54ba2703e0cfd402a14486f83028792adc",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 2.0372681319713593e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "c2bb9671c34a4deaee75eee04dd2d6255e601ebfd1c256846278b6cd794c05af",
+      "training_witness_sha256": "e24c3cd324319fa58d4e74ad7eabbe493634cad218875ff388ceceb9f4070911",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.4202669262886047e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "638ad0c4bd1bd5bb6daf39eda6161642bccab44c46545f8dbad8c95636f507b1",
+      "training_witness_sha256": "83358abcf0e026cd1923336bd17e3ffa757f5ec8b783103f413f004771808217",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 8.789356797933578e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "2e782515d767552d34aa3656d10c021ec3631c578fd396b4a53270beb74d644a",
+      "training_witness_sha256": "f4c48b31ebf01146c3aded2a5a1182b25058edbaa2ffd131ba979552b86fbd88",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 2.2118911147117615e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "8e61b4de139d89f824d87c3dd73949b2d564385875cdb08708d972fe5c1a4916",
+      "training_witness_sha256": "fd0413ff87635be483607d15aff30356f5506b08b58ef613ec96fc609716229c",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.5585101209580898e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "b5e1adb341e2fcee50ff2137914ada9d2f3aafea1dbcd46fb6960a89b98d707c",
+      "training_witness_sha256": "be690115fc8c73a4a2605e4864ea5e3e40cffb6b79cf438af483c5b609b9cb7a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "ad24c203bd0f27d7b9b54260c1527442de91bc19aecfb7bf2970f7f743cca3bf",
+      "training_witness_sha256": "a31401aff8e47da9bb996a7ddb386ac037cd13c3108b28af6f5dacf72d468d98",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 7.101334631443024e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_shared_rank4",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "7f66e730c06af0fd20d8e82083eff01424cc402fe886e8abed49e58299143be5",
+      "training_witness_sha256": "9339884b182d7369e49d4cc5ea34d2237863317b7653bf71279b80944966dfa3",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "0666bcde0821660366e231965c44254b1bc2211621b7f0c4c2227a2d92d0d4de",
+      "training_witness_sha256": "bceb6c553009545bcb7efb6d7d1d595a9ab5e6d666c87d64812d609df5362ea0",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 1.1932570487260818e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "3cd1c55cd21d10d1cb9ad6457f5b92ffd5d0f2bd40eaf1541cb996381355c31a",
+      "training_witness_sha256": "540fc196a358bcc590999b9512c9b825f3a34d827e41a9f8710565c38d6c4d8a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 1.9863364286720753e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "6890f6f00130d5c9bcde6f87654710215687e361c207842f8a78c56114437edd",
+      "training_witness_sha256": "f41a9e76803930ae475fd21823230283fc20cbd5cee983c770d829e5ee6de7b2",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 2.6193447411060333e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "09892abf7579383d34f47f3ba2e2ef82ee7b9816e5a782347fa3a930a8a2e088",
+      "training_witness_sha256": "fa950ac41b83b4154531714628c6810dcbdad2363f54829aa490223db3f28992",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 4.598405212163925e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "75dafcf67ebb4072f6c84a9fb911aa0cf4fde6457f6bd1cfa01d15c075b63a2e",
+      "training_witness_sha256": "d3050e833106396778b5c44464962129658bc678549cfc5e8a44689dbfb47cc1",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 2.0372681319713593e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "b30c2ac7ba247a74d2e015693e9eeaffdadfc71e7e235b88023e7dfe8f00d7bd",
+      "training_witness_sha256": "680ad79e9d84aede205c9612628bbf5b8036f065abae7a1311d295830b3edb7e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 1.4202669262886047e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "7956875ed614d75439bbf0d0ff947c59957fd1f4d6b1663e2cbaf4240c131a6d",
+      "training_witness_sha256": "38425d6de1d9531c75c08855be15bbf761054a85e423d1490566aba1178803da",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 8.789356797933578e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "b4c900bdd8daf6ea5a3e7ad6eff1892f32a9ac0e6934a8070cb8a147083a7125",
+      "training_witness_sha256": "9ade4c6efdecab5e46a35ead37df7e1594d67cdd04756eab42ebb4448a4d0e46",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 2.2118911147117615e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "a77b17edb670d1a340d62b1e44e586a90fe2f17683e61ee3498ad5d34fa896c5",
+      "training_witness_sha256": "1d84500fdf4acf022495ccdcbfbf544e744e34376e0a7b7612eb0fecf9ca80f3",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 1.5585101209580898e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "4cb6e188cd1aaf1a5aec25fe07f1c975e457610a74f79956d8b5e036c577b707",
+      "training_witness_sha256": "ab71df80b35e7f0e554f2b024d4db601e23b74b0c48c2e2083bd088609d684a9",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "6df92bd807aa84100c649f03204486499fb87d9b8740f9f708757f76e644e4b2",
+      "training_witness_sha256": "4da20aebe5e8b423eb604942b1be2e4aba7ad9ba01216aff0e38e2da96a32301",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 7.101334631443024e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_query_perhead_rank4",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "b9503b0355ef9c155d787fd3d5ed4b7a832aa54987a12af507277d5459a0ee63",
+      "training_witness_sha256": "65199f017be6f0c017042a3dcc556bd6a2df124872ae4a63254b229b73f89185",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 164672,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "9e497f1ee7f3532037d073b259919ef6e1e50a0d7473e76348c797e6f3064fd8",
+      "training_witness_sha256": "0ecec5251b868b11541eccd21c2caa5166d0bfe551e230123ab4420564d08b02",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.1932570487260818e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "45d7f92ba0ac610d5c483e057f4487e2e36c8c47feed1098e5ac35b326d3e5b3",
+      "training_witness_sha256": "d67c91a430de6dc64982098c349cac6a467310e2cad5e6e45d5c6abd7e268602",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.9863364286720753e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "de7c328acf49d12e07ef2cdb60f22df0fa2ca8bcddf6919515ebc599bffaf746",
+      "training_witness_sha256": "703df7768153a54f725a99d715b964216b8192fd986e732def8c6a3b7d1d8212",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 2.6193447411060333e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "ff9690a41776dc86ec74c2f399e7b35c7337465175eeafa6a0cbfd57c1b84fca",
+      "training_witness_sha256": "b804ff368be809194be6a5c61c9d1ae4cb4cc741e1a1385f1d5f358b4d06484c",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 4.937191988574341e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "7adc90e7e9f311af5a1ba8b17c5d26da37af118e129d90a99bdea4bdfe216719",
+      "training_witness_sha256": "df3566323418ee50d08fae5b8106fadc70d6d25a9447e0a45d3791cdc813d746",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 2.0372681319713593e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "6509335795e163fe97e7816621a3bd29158c8f787c76f729a7c4c9682d4363d9",
+      "training_witness_sha256": "99a139cd8947d1cd045e5bde578d63cf944b3b7e1267648fc7b82ba3140f28cf",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.4202669262886047e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "e2efb7b688078fbd95627d36fe4638e6290bda88910e783f92eb34b0c934d8be",
+      "training_witness_sha256": "fbce21b8a3b665aa4c964ff86882b5cbbc5ee7768b63400f341d9aac4eef0386",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 8.789356797933578e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "f57e608cc0a2b8578fd937507ca3a76eac1bd9845735756742d24f3333482617",
+      "training_witness_sha256": "fd0100fbc99ebeb8c67ba6de1a2ab75138cd9a70218c183a00ceaf170e1f0f72",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 2.2118911147117615e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "5d00ed3be483641bceeb04cee2acc72bc806d736e1c6f1a4d86263e21265db02",
+      "training_witness_sha256": "1f985b1c8bd68ae896cf7c365de10677f1f9b9952a2ef93ad27133f8b540a29b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 1.5585101209580898e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "ff3e44bf6222383a3ec0f0d228c657e2f8a7f310084c3320bbee5a33eed8855d",
+      "training_witness_sha256": "27ab1aab4594aa65def1eba8d36b2af32e34300b3d1568c5d16b0f9756697189",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "36cb8145b898f19c2d2f79130f301ae5c9e0767095a85e3b3cc431451f280d56",
+      "training_witness_sha256": "27ab73f28b38a50342673252d62d40aa7366920c05c2f0e55a739c3b5536dd8a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 7.101334631443024e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    },
+    {
+      "arm": "attention_shared16_shared_rank4",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "f91192255b93bb069ccef9bc2d5d42b711efc1325497dc8cce28a1c5df6eebd2",
+      "training_witness_sha256": "2f3671aaf21f9c313aafcaa9bb86ccdd3680abaf76907291edbd50c3bd8ff6ad",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.token_evidence.token_norm.weight",
+          "head.token_evidence.token_norm.bias",
+          "head.token_evidence.query_norm.weight",
+          "head.token_evidence.query_norm.bias",
+          "head.token_evidence.query.weight",
+          "head.token_evidence.query.bias",
+          "head.token_evidence.key.weight",
+          "head.token_evidence.value.weight",
+          "head.token_evidence.value.bias",
+          "head.token_evidence.readout.weight",
+          "head.token_evidence.readout.bias"
+        ],
+        "trainable_parameters": 153152,
+        "complete_task_gradient_error": 6.868503987789154e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "only_attention_except_constant_key_bias_and_planned_patch_parameters_trainable": true,
+        "frozen_base_classifier_normal_geometry_and_tail_verified": true
+      }
+    }
+  ],
+  "frozen_register_source_heads_checked": 12,
+  "register_source_heads": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_0/model.pt",
+      "checkpoint_sha256": "88908e7720d773ca409cb97dc5867c37a8c7fe1d9d603e84451717ee31cffe0d",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_1/model.pt",
+      "checkpoint_sha256": "a52186d034e677dbba0d3f23dd18932b90ea9d3275cd2c54476145129a568e1b",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_2/model.pt",
+      "checkpoint_sha256": "c7b1a119feef7625fecfa0c95c2bff7df6c6a52b8c6ffe5790cc2a340e2db230",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.3709068298339844e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "9b7ccc0ff541aab81c5fbfc7b82ffbd9e165a4690ed59284fa66aee7da3e66ee",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.6689300537109375e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "65bdabf2788de1725ebd6eebca5b62caabf4e0ac1f418c398486ddda22fb41a3",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8069986253976822e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "ac6b140edfa752188d270b5e006872f1c0b21f69e3de71954c6ff1b18c9e2f0f",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 2.384185791015625e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "d460a5fde0dcf8678752f660baadc59a5fe08cd244025a1853dc44ad5e5f1450",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9e66ace92226fbf456990dbfd0f95d48b960f140f3891d3e1a55e2c1394e32cd",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "dc3b99cd2d40c92ad66dd7e24264ff2ffff10453d3609d953f14447ff78ceb0a",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 9.313225746154785e-09,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "9846a7d151446a296fd59c8368aa8b4e8044027434b917bbb16e114e130efe00",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.30385160446167e-08,
+        "maximum_independent_forward_error": 1.430511474609375e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "5d1af37546c206295ef2c91c5023002821e40f26c5edb383553608cc40c63408",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "0aec793f23f304a3f9401f9554d9b17c50ff1dafa9ac1873ecda56e37e9103b4",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      }
+    }
+  ],
+  "reused_fusion_source_heads_checked": 24,
+  "source_heads": [
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_0/model.pt",
+      "checkpoint_sha256": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_1/model.pt",
+      "checkpoint_sha256": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_2/model.pt",
+      "checkpoint_sha256": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_0/model.pt",
+      "checkpoint_sha256": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_1/model.pt",
+      "checkpoint_sha256": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_2/model.pt",
+      "checkpoint_sha256": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "d88244e9531a4655ae5875f1272aefd22f54ff53995d84f810cc7e1135a513e5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "666e5f037ec2d0d3a9b66c7c532db4a3094ba99ef648ac2d510eb5641ccb2733"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "f0104ecdbec7e01c63be873d752661b15894687b6061e3d6aed459a112c74efe"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "069024b449b9c6854193bfa5bdade86a172f5e7f41eaa7a2cc87efc1e30400cf"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "5e590d0d5a4497c9d76a67862654972a7ed5c7072a21d3f4976d95e5b8b3c0fc"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "136a4335107a7cc456374b60c9d60a312a9d83ba7f9beb9884b8cb99f652a0b3"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "a9fb3bb0925b42b0385816cb181872f3d619167a7a8d845fd63692ed73aa8f54"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9ed0f89422d82e67dbc576957d1d7a8f5ed80812e27fd38c9ee23509ead42c3b"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "f7895a90c2ab390ed64a2977511cb8677b49617ba1fed30c0d33b301592836bd"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "b0e40a5f6fce2eecedb58fe7e443a9ba83ef20c1f043b925bc04a92da9bb6454"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "e660541eeeb5cbb705590b0f1bfb8f42cc40b2965a707c87d7be8f959e44501d"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "29f1bca70e7d266e3320fc260871f2191aa9cd82922016eafbef75a4ba24d6d5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "c8f49d4702a1a67d26b2b2afa7d0771affdfbb7a36883da37d560af6c35d7f77"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "dda695a36c462b1cc907fb0c48286a1c8e1f8a58d792553bfac180a06080a55f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "6aa8e8b77db8fbaae1ecd5e6941650339961cf0baaa8a2074cabee593a17ea73"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "b3132e295a018cad9923ba7348680ede91793e380bfbd3dcb3e4afd80e896f28"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "8841bab05304629b71ddf2b33c0eabda66d1a8da0d36a2fdabe307b75d780fd0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "a0eba0367ff8f7260e55b936e1d998a749688492cb75f0c2a8b3bcfcca6c0341"
+    }
+  ],
+  "fixed_fusion_phases_checked": [
+    {
+      "source": "attention_only",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "attention_only",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "attention_only",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "attention_only",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "attention_query_shared_rank4",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "attention_query_shared_rank4",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "attention_query_shared_rank4",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "attention_query_shared_rank4",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "attention_query_perhead_rank4",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "attention_query_perhead_rank4",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "attention_query_perhead_rank4",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "attention_query_perhead_rank4",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "attention_shared16_shared_rank4",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "attention_shared16_shared_rank4",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "attention_shared16_shared_rank4",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "attention_shared16_shared_rank4",
+      "phase": "fold_2",
+      "images": 573
+    }
+  ],
+  "only_attention_except_constant_key_bias_and_planned_patch_parameters_trained": true,
+  "fit_only_cached_selection_and_reader_coupling_verified": true,
+  "external_test_evaluated": false
+}

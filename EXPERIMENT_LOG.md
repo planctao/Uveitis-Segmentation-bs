@@ -172,6 +172,10 @@ TTA翻转对齐、原子保存失败保留旧权重、完整epoch校验及部分
 | 41 | 2026-08-10 | edge_pdc_tta_f1 | ConvNeXt-Tiny + Edge Oriented-PDC | configs/dinov3_convnext_tiny_edge_pdc_tta_f1.yaml | f1 | 30 | fixed ep26 macro=0.7667 dice_1=0.7701 dice_2=0.7633; shared sweep ep23 macro=0.7867 dice_1=0.7976 dice_2=0.7759; ind sweep ep23 macro=0.7867 dice_1=0.7976 dice_2=0.7759 | runs/edge_pdc_tta_f1/f1/checkpoints/ | TTA 消融: 在 Edge-PDC(cpdc/apdc/rpdc) 头上仅启用验证/推理 flip TTA(h/v/hv, scale=1.0), 不启用额外后处理 | 已完成; latest ep30 sweep=0.7849; 与非TTA Edge-PDC f1 结果接近, 暂无明确涨点 |
 | 42 | 2026-08-11 | convnext_tiny_baseline_clean_f2_f5 + diffleak_f1_baseline_clean | ConvNeXt-Tiny + FPN baseline | configs/dinov3_convnext_tiny_multilabel_itksnap.yaml | f1-f5 | 30 | fixed f2-f5 macro=0.7765/0.8116/0.7403/0.7822; shared sweep 5折 macro=0.7849±0.0219 dice_1=0.8080 dice_2=0.7618; f1/f2/f3/f4/f5 macro=0.7769/0.7845/0.8215/0.7536/0.7881 | runs/diffleak_f1_baseline_clean/f1/checkpoints/ + runs/convnext_tiny_baseline_clean_f2_f5/{f2..f5}/checkpoints/ | 无代码改动; 按当前 clean 验证集口径补训基础 ConvNeXt-Tiny + FPN baseline 的 f2-f5, head=conv, bs=8, 768x768 | 所有 fold 最优 shared sweep 阈值均为 0.9; 可替代历史 f1-f4 均值0.7710作为正式五折 baseline |
 | 43 | 2026-08-13 | edge_cpdc_soft_5fold_20260813 | ConvNeXt-Tiny + CPDC edge head | configs/dinov3_convnext_tiny_edge.yaml | f1-f5 | 30 | fixed macro=0.7747±0.0206 dice_1=0.7962 dice_2=0.7533; shared sweep macro=0.7853±0.0195 dice_1=0.8136 dice_2=0.7570; f1/f2/f3/f4/f5 sweep macro=0.7751/0.7864/0.8159/0.7569/0.7920 | runs/edge_cpdc_soft_5fold_20260813/{f1..f5}/checkpoints/ | 无代码改动; 复跑 CPDC 单一中心像素差分边缘头五折, head=edge, edge_pdc_types=cpdc, edge_soft=true, bs=8, 768x768 | 与正式 ConvNeXt baseline 0.7849±0.0219 基本打平, macro +0.04pp; dice_1 +0.56pp 但 dice_2 -0.48pp; f5 最优阈值0.8/0.8, 其余0.9/0.9 |
+| 44 | 2026-09-21 | nnunet2d_clean_f1_30 + resume | official nnU-Net v2 PlainConvUNet 2D | configs/nnunet_2d_multilabel_itksnap.yaml | f1 | 30 | fixed ep28 macro=0.7298 dice_1=0.7304 dice_2=0.7293; shared/ind sweep ep28 macro=0.7571 dice_1=0.7685 dice_2=0.7457; peak VRAM=6.84GB | runs/nnunet2d_clean_f1_resume_final_30/f1/checkpoints/ | official dynamic-network-architectures PlainConvUNet; 6 stages [32,64,128,256,320,320], InstanceNorm + LeakyReLU; 与后续 AAAG/U-KAN 共用 clean multilabel 协议 | 负对照: 比 ConvNeXt clean f1 sweep=0.7769 低1.98pp; 从头训练 encoder 在当前小样本 FA 数据上弱于 DINOv3 预训练 encoder；epoch11 后按完整 optimizer/scaler/scheduler 状态续训，最终 best checkpoint 可复核 |
+| 45 | 2026-09-21 | hmvf_mambavision_f1_30 | DINOv3 ConvNeXt-Tiny + Hybrid MambaVision Feature Fusion | configs/dinov3_convnext_tiny_hmvf.yaml | f1 | 30 | best ep21 fixed macro=0.7685 dice_1=0.7854 dice_2=0.7516; shared/ind sweep ep21 macro=0.7802 dice_1=0.7979 dice_2=0.7626, threshold=0.9/0.9; peak VRAM=12.21GB | runs/hmvf_mambavision_f1_30/f1/checkpoints/ | 在 FPN fused decoder feature 上并联 depthwise local branch 与低分辨率四向 selective-SSM global branch，以学习门控融合；输出投影 zero-init，初始等价于 baseline | 轻微正向: 相对 clean ConvNeXt f1 sweep=0.7769 提升0.34pp，超过旧 S3RD Mamba=0.7807 约0.01pp，但低于 VS-UBR f1=0.7902；需要跨折验证确认稳定性 |
+| 46 | 2026-09-21 | aaag_nnunet2d_clean_f1_30 | AAAG-UNet 2D (official nnU-Net + axial attention + attention-gated skips) | configs/aaag_nnunet_2d_multilabel_itksnap.yaml | f1 | 30 | best ep18 fixed macro=0.7390 dice_1=0.7621 dice_2=0.7158; shared sweep ep18 macro=0.7443 dice_1=0.7684 dice_2=0.7202 at threshold=0.8; independent sweep macro=0.7456 dice_1=0.7684 dice_2=0.7228 at threshold=0.8/0.9; peak VRAM=11.19GB | runs/aaag_nnunet2d_clean_f1_30/f1/checkpoints/ | Medical Physics 2026 AAAG-UNet 的 2D 适配: pooled axial attention、spatial/channel calibrated attention-gated skip；与 official nnU-Net 共用 clean multilabel 协议 | 负结果: independent sweep 比 official nnU-Net baseline=0.7571 低1.15pp，主要损失来自 lesion_2（-2.29pp），虽 fixed macro 比 nnU-Net fixed=0.7298 高0.91pp；比 DINOv3 ConvNeXt clean sweep=0.7769 低3.13pp，完整30轮 best checkpoint 可复核 |
+| 47 | 2026-09-23 | upen_pelit_{baseline,pe,pehmvf}_f1_screen5 + hmvf_mambavision_f1_screen5 | DINOv3 ConvNeXt-Tiny + U-PEN Mamba PEL-3 启发的 PE-lite 消融 | configs/dinov3_convnext_tiny_hmvf.yaml + `--decoder-attention {none,pe-lite,mambavision,pe-hmvf}` | f1 | 5 | matched baseline ep4: d1=0.7610 d2=0.7661 macro=0.7636; PE-lite ep5: 0.7614/0.7258/0.7436; HMVF ep5: 0.7599/0.7377/0.7488; PE-lite+HMVF ep4: 0.7525/0.7446/0.7485; peak VRAM=10.54/13.34/12.21/15.01GB | runs/upen_pelit_baseline_f1_screen5/; runs/upen_pelit_pe_f1_screen5/; runs/hmvf_mambavision_f1_screen5/; runs/upen_pelit_pehmvf_f1_screen5/ | 对 fused FPN feature 做归一化、限幅后拼接一至三阶项，zero-init residual；并与已有 HMVF 做 2×2 组合筛选；附加参数 0/178081/117553/295634 | 5 epoch clean f1 负筛选：PE-lite 比 matched baseline 低2.00pp，主要损伤 lesion_2；PE+HMVF 比 baseline 低1.50pp，且与 HMVF macro 基本相同但资源更高；不扩展30 epoch/5折，不进入默认配置 |
 
 ### 2026-08-10 TTA 有/无对比总结
 
@@ -1543,6 +1547,42 @@ radius=8 MVP 的 `0.79920/0.80470` 分别为 **+0.309pp/+0.208pp**，click3 为
 该组合可作为当前推荐的“轻量提示适配 + 弥散足迹校准”配置，但增益仍然有限，
 不能替代 MVP 的主模型结论。
 
+## Lesion-2 单任务专家与双模型路由消融（2026-09-23，f1）
+
+为验证极稀有 `lesion_2` 是否适合从共享多标签模型中拆出，新增可配置的
+`loss.channel_weights`。专家模型使用 `[0, 1]`，因此只有 lesion_2 会产生训练
+梯度；结构仍保持两个输出通道，以便从共享主模型 checkpoint 稳定初始化。
+
+专家从 `runs/hmvf_vsubr_f1_30/f1/checkpoints/best.pt` 初始化，使用 HMVF +
+VS-UBR、learning rate `3e-5`、5 epoch，在 clean f1 验证集按 lesion_2 的独立
+阈值 Dice 选模。最佳为 epoch 3：lesion_2 Dice **0.771877**（threshold=0.8），
+相同验证口径下主模型 lesion_2 为 **0.762987**（threshold=0.9），提升
+**+0.889pp**。训练初期出现 7 个 non-finite batch，epoch 4 出现 1 个，均由
+现有 skip 保护处理；峰值显存约 12.21 GiB。
+
+最终推理不是平均两个模型的全部输出，而是逐通道路由：lesion_1 固定使用主模型，
+lesion_2 在主模型/专家之间改变概率权重，并对两个通道独立搜索阈值。所有结果均
+关闭 TTA、形态学后处理、强度修正和 FOV mask，避免把后处理收益混入模型消融。
+
+| lesion_2 主模型权重 | lesion_2 专家权重 | 最优阈值 (L1/L2) | Dice-1 | Dice-2 | Macro |
+|---:|---:|---:|---:|---:|---:|
+| 1.00 | 0.00 | 0.8 / 0.9 | 0.795973 | 0.762987 | 0.779480 |
+| 0.75 | 0.25 | 0.8 / 0.9 | 0.795973 | 0.768858 | 0.782416 |
+| 0.50 | 0.50 | 0.8 / 0.9 | 0.795973 | 0.770506 | 0.783240 |
+| 0.25 | 0.75 | 0.8 / 0.9 | 0.795973 | 0.771045 | 0.783509 |
+| **0.00** | **1.00** | **0.8 / 0.8** | **0.795973** | **0.771877** | **0.783925** |
+
+硬路由相对单主模型使 lesion_2 提升 **+0.889pp**，Macro 提升 **+0.445pp**；
+且专家权重从 25% 增至 100% 时性能单调提高，当前不需要概率平均。这个结论仍然
+只是 f1 单折验证集上的适配/选模结果，不能当作独立测试集或五折结论；下一步应在
+f2-f5 分别训练各自专家并做交叉验证汇总，再决定是否作为最终部署路径。
+
+配置与权重位于
+`configs/dinov3_convnext_tiny_hmvf_vsubr_lesion2_expert.yaml` 和
+`runs/lesion2_expert_hmvf_vsubr_f1_screen5/f1/checkpoints/best.pt`；完整联合评估
+JSON 位于 `runs/ablation_lesion2_expert_f1/`。评估器同时增加无后处理情况下的
+等价快速阈值扫描，相关回归测试已通过。
+
 ## Experiment Archive Records
 
 | Date | Archive ZIP | Backbone | Method | Results | Included runs |
@@ -1552,3 +1592,163 @@ radius=8 MVP 的 `0.79920/0.80470` 分别为 **+0.309pp/+0.208pp**，click3 为
 | 20260830 | `20260830_dinov3-convnext-tiny_fa-ubir.zip` | DINOv3-ConvNeXt-Tiny | FA-UBIR | outputs_interactive_boundary_runs_fa_ubir_v1_f1_metrics_oracle_click3_paper_dice_1_best=0.758444; outputs_interactive_boundary_runs_fa_ubir_v1_f1_metrics_oracle_click3_paper_dice_2_best=0.750387; outputs_interactive_boundary_runs_fa_ubir_v1_f1_metrics_oracle_click3_paper_macro_dice_best=0.748740; outputs_interactive_boundary_runs_fa_ubir_v1_f2_metrics_oracle_click3_paper_dice_1_best=0.783258; outputs_interactive_boundary_runs_fa_ubir_v1_f2_metrics_oracle_click3_paper_dice_2_best=0.724693; outputs_interactive_boundary_runs_fa_ubir_v1_f2_metrics_oracle_click3_paper_macro_dice_best=0.749813; outputs_interactive_boundary_runs_fa_ubir_v1_f3_metrics_oracle_click3_paper_dice_1_best=0.778449; outputs_interactive_boundary_runs_fa_ubir_v1_f3_metrics_oracle_click3_paper_dice_2_best=0.798642; outputs_interactive_boundary_runs_fa_ubir_v1_f3_metrics_oracle_click3_paper_macro_dice_best=0.787065; status=early_stopped_manual; f1_best_oracle_click3_macro_dice=0.748740; f2_best_oracle_click3_macro_dice=0.749813; f3_best_oracle_click3_macro_dice=0.787065; complete_folds=2; partial_fold=f3_epoch11 | `outputs/interactive_boundary_runs/fa_ubir_v1` |
 | 20260903 | `20260903_dinov3-convnext-tiny_mvp-r12-interactive.zip` | DINOv3-ConvNeXt-Tiny | MVP-R12-Interactive | outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click0_paper_dice_1_best=0.775192; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click0_paper_dice_2_best=0.765483; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click0_paper_macro_dice_best=0.770338; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click1_paper_dice_1_best=0.780071; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click1_paper_dice_2_best=0.768226; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click1_paper_macro_dice_best=0.774148; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click3_paper_dice_1_best=0.786511; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click3_paper_dice_2_best=0.773842; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click3_paper_macro_dice_best=0.779011; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click5_paper_dice_1_best=0.791791; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click5_paper_dice_2_best=0.777675; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f1_metrics_click5_paper_macro_dice_best=0.782579; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click0_paper_dice_1_best=0.816481; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click0_paper_dice_2_best=0.752624; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click0_paper_macro_dice_best=0.783349; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click1_paper_dice_1_best=0.819859; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click1_paper_dice_2_best=0.762182; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click1_paper_macro_dice_best=0.788824; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click3_paper_dice_1_best=0.825441; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click3_paper_dice_2_best=0.774748; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click3_paper_macro_dice_best=0.796096; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click5_paper_dice_1_best=0.829355; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click5_paper_dice_2_best=0.782388; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f2_metrics_click5_paper_macro_dice_best=0.802470; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click0_paper_dice_1_best=0.804196; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click0_paper_dice_2_best=0.808572; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click0_paper_macro_dice_best=0.805402; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click1_paper_dice_1_best=0.808972; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click1_paper_dice_2_best=0.812170; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click1_paper_macro_dice_best=0.809080; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click3_paper_dice_1_best=0.816522; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click3_paper_dice_2_best=0.817266; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click3_paper_macro_dice_best=0.815856; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click5_paper_dice_1_best=0.822932; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click5_paper_dice_2_best=0.823318; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f3_metrics_click5_paper_macro_dice_best=0.822039; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click0_paper_dice_1_best=0.790636; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click0_paper_dice_2_best=0.699803; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click0_paper_macro_dice_best=0.745214; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click1_paper_dice_1_best=0.795567; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click1_paper_dice_2_best=0.703094; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click1_paper_macro_dice_best=0.749330; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click3_paper_dice_1_best=0.800215; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click3_paper_dice_2_best=0.707258; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click3_paper_macro_dice_best=0.753183; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click5_paper_dice_1_best=0.803709; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click5_paper_dice_2_best=0.712207; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f4_metrics_click5_paper_macro_dice_best=0.757731; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click0_paper_dice_1_best=0.804032; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click0_paper_dice_2_best=0.771027; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click0_paper_macro_dice_best=0.786770; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click1_paper_dice_1_best=0.807872; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click1_paper_dice_2_best=0.782718; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click1_paper_macro_dice_best=0.792973; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click3_paper_dice_1_best=0.814250; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click3_paper_dice_2_best=0.805238; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click3_paper_macro_dice_best=0.807095; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click5_paper_dice_1_best=0.819209; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click5_paper_dice_2_best=0.818223; outputs_interactive_refiner_runs_dino_sam_refiner_vsubr_vw05_compact_full_f5_metrics_click5_paper_macro_dice_best=0.816557; fivefold_r12_click0_macro=0.787355±0.019682; fivefold_r12_click1_macro=0.793279±0.020686; fivefold_r12_click3_macro=0.800413±0.021850; fivefold_r12_click5_macro=0.803711±0.021954; r12_vs_r8_click3_delta_pp=+0.105; r12_vs_r8_click5_delta_pp=-0.023; fivefold_r12_click3_gain_vs_click0_pp=+1.306; fivefold_r12_click5_gain_vs_click0_pp=+1.636 | `outputs/interactive_refiner_runs/dino_sam_refiner_vsubr_vw05_compact_full` |
 | 20260906 | `20260906_dinov3-convnext-tiny_va-rdh-oriented-pdc-neck-screen.zip` | DINOv3-ConvNeXt-Tiny | VA-RDH-Oriented-PDC-neck-screen | runs_va_rdh_pdcneck_f1_screen_f1_metrics_train_paper_dice_1_best=0.755021; runs_va_rdh_pdcneck_f1_screen_f1_metrics_train_paper_dice_2_best=0.798546; runs_va_rdh_pdcneck_f1_screen_f1_metrics_train_paper_macro_dice_best=0.776784; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_dice_1_best=0.746329; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_dice_2_best=0.704107; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_macro_dice_best=0.720888; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_sweep_best_dice_1_best=0.755899; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_sweep_best_dice_2_best=0.728636; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_sweep_best_macro_dice_best=0.742267; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_sweep_ind_dice_1_best=0.755899; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_sweep_ind_dice_2_best=0.728636; runs_va_rdh_pdcneck_f1_screen_f1_metrics_val_paper_sweep_ind_macro_dice_best=0.742267; runs_va_rdh_pdcneck_f1_screen_fold_summary_best_paper_macro_dice_best=0.720888; runs_va_rdh_pdcneck_f1_screen_fold_summary_best_paper_dice_1_best=0.746329; runs_va_rdh_pdcneck_f1_screen_fold_summary_best_paper_dice_2_best=0.695446; runs_va_rdh_pdcneck_f1_screen_mean_paper_dice_1=0.746329; runs_va_rdh_pdcneck_f1_screen_mean_paper_dice_2=0.695446; runs_va_rdh_pdcneck_f1_screen_mean_paper_macro_dice=0.720888; best_sweep_macro_dice=0.7423; best_fixed_macro_dice=0.5727; baseline_va_rdh_k16_macro_dice=0.7872; peak_vram_gb=13.31 | `runs/va_rdh_pdcneck_f1_screen` |
+| 20260921 | `20260921_dinov3-convnext-tiny_vsubr-vw05-repro.zip` | DINOv3-ConvNeXt-Tiny | VSUBR-VW05-Repro | runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_train_paper_dice_1_best=0.838295; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_train_paper_dice_2_best=0.900012; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_train_paper_macro_dice_best=0.867842; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_dice_1_best=0.786711; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_dice_2_best=0.762778; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_macro_dice_best=0.770947; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_sweep_best_dice_1_best=0.794288; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_sweep_best_dice_2_best=0.771076; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_sweep_best_macro_dice_best=0.781235; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_sweep_ind_dice_1_best=0.794288; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_sweep_ind_dice_2_best=0.775393; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f1_metrics_val_paper_sweep_ind_macro_dice_best=0.782263; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_train_paper_dice_1_best=0.835231; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_train_paper_dice_2_best=0.907253; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_train_paper_macro_dice_best=0.871242; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_dice_1_best=0.823893; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_dice_2_best=0.752427; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_macro_dice_best=0.786044; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_sweep_best_dice_1_best=0.828558; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_sweep_best_dice_2_best=0.752594; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_sweep_best_macro_dice_best=0.787477; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_sweep_ind_dice_1_best=0.829373; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_sweep_ind_dice_2_best=0.752594; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f2_metrics_val_paper_sweep_ind_macro_dice_best=0.787477; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_train_paper_dice_1_best=0.836464; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_train_paper_dice_2_best=0.899719; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_train_paper_macro_dice_best=0.868092; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_dice_1_best=0.813041; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_dice_2_best=0.806523; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_macro_dice_best=0.809782; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_sweep_best_dice_1_best=0.815766; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_sweep_best_dice_2_best=0.811636; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_sweep_best_macro_dice_best=0.811449; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_sweep_ind_dice_1_best=0.815766; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_sweep_ind_dice_2_best=0.819109; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f3_metrics_val_paper_sweep_ind_macro_dice_best=0.812819; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_train_paper_dice_1_best=0.841747; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_train_paper_dice_2_best=0.904137; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_train_paper_macro_dice_best=0.872476; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_dice_1_best=0.799130; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_dice_2_best=0.703347; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_macro_dice_best=0.748929; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_sweep_best_dice_1_best=0.802108; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_sweep_best_dice_2_best=0.706558; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_sweep_best_macro_dice_best=0.752691; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_sweep_ind_dice_1_best=0.802108; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_sweep_ind_dice_2_best=0.707747; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f4_metrics_val_paper_sweep_ind_macro_dice_best=0.753286; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_train_paper_dice_1_best=0.839474; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_train_paper_dice_2_best=0.906891; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_train_paper_macro_dice_best=0.872983; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_dice_1_best=0.821586; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_dice_2_best=0.766968; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_macro_dice_best=0.787460; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_sweep_best_dice_1_best=0.823235; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_sweep_best_dice_2_best=0.766968; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_sweep_best_macro_dice_best=0.791198; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_sweep_ind_dice_1_best=0.823235; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_sweep_ind_dice_2_best=0.771431; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_f5_metrics_val_paper_sweep_ind_macro_dice_best=0.791525; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_fold_summary_best_paper_macro_dice_best=0.809782; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_fold_summary_best_paper_dice_1_best=0.819661; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_fold_summary_best_paper_dice_2_best=0.806523; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_mean_paper_dice_1=0.803482; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_mean_paper_dice_2=0.757783; runs_dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514_mean_paper_macro_dice=0.780633 | `runs/dinov3_convnext_tiny_vsubr_vw05_repro_20260822_182514` |
+| 20260921 | `20260921_dinov3-vit-b16_hmvf.zip` | DINOv3-ViT-B16 | HMVF | runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_train_paper_dice_1_best=0.734663; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_train_paper_dice_2_best=0.729509; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_train_paper_macro_dice_best=0.732086; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_dice_1_best=0.686949; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_dice_2_best=0.658181; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_macro_dice_best=0.670957; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_sweep_best_dice_1_best=0.733188; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_sweep_best_dice_2_best=0.668572; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_sweep_best_macro_dice_best=0.693566; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_sweep_ind_dice_1_best=0.733188; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_sweep_ind_dice_2_best=0.669527; runs_vitb16_hmvf_f1_20260921_2010_f1_metrics_val_paper_sweep_ind_macro_dice_best=0.694043 | `runs/vitb16_hmvf_f1_20260921_2010` |
+| 20260921 | `20260921_dinov3-vit-b16_vsubr.zip` | DINOv3-ViT-B16 | VSUBR | runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_train_paper_dice_1_best=0.785748; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_train_paper_dice_2_best=0.816803; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_train_paper_macro_dice_best=0.800143; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_dice_1_best=0.727758; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_dice_2_best=0.715840; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_macro_dice_best=0.708692; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_sweep_best_dice_1_best=0.738360; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_sweep_best_dice_2_best=0.735600; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_sweep_best_macro_dice_best=0.734755; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_sweep_ind_dice_1_best=0.738360; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_sweep_ind_dice_2_best=0.735600; runs_vitb16_vsubr_f1_20260921_2010_f1_metrics_val_paper_sweep_ind_macro_dice_best=0.736027; runs_vitb16_vsubr_f1_20260921_2010_fold_summary_best_paper_macro_dice_best=0.734755; runs_vitb16_vsubr_f1_20260921_2010_fold_summary_best_paper_dice_1_best=0.701545; runs_vitb16_vsubr_f1_20260921_2010_fold_summary_best_paper_dice_2_best=0.715840; runs_vitb16_vsubr_f1_20260921_2010_mean_paper_dice_1=0.701545; runs_vitb16_vsubr_f1_20260921_2010_mean_paper_dice_2=0.715840; runs_vitb16_vsubr_f1_20260921_2010_mean_paper_macro_dice=0.734755 | `runs/vitb16_vsubr_f1_20260921_2010` |
+| 20260921 | `20260921_nnunet-2d_aaag.zip` | nnUNet-2D | AAAG | runs_aaag_nnunet2d_clean_f1_30_f1_metrics_train_paper_dice_1_best=0.769528; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_train_paper_dice_2_best=0.825907; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_train_paper_macro_dice_best=0.795985; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_dice_1_best=0.762086; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_dice_2_best=0.715817; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_macro_dice_best=0.738951; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_best_dice_1_best=0.770976; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_best_dice_2_best=0.723746; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_best_macro_dice_best=0.744304; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_ind_dice_1_best=0.770976; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_ind_dice_2_best=0.723746; runs_aaag_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_ind_macro_dice_best=0.745616; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_macro_dice_best=0.738951; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_dice_1_best=0.762086; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_dice_2_best=0.715817; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_macro_dice_best=0.744304; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_dice_1_best=0.768437; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_dice_2_best=0.720171; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_ind_macro_dice_best=0.745616; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_ind_dice_1_best=0.768437; runs_aaag_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_ind_dice_2_best=0.722796; runs_aaag_nnunet2d_clean_f1_30_mean_paper_dice_1=0.762086; runs_aaag_nnunet2d_clean_f1_30_mean_paper_dice_2=0.715817; runs_aaag_nnunet2d_clean_f1_30_mean_paper_macro_dice=0.738951 | `runs/aaag_nnunet2d_clean_f1_30` |
+| 20260921 | `20260921_nnunet-2d_ukan.zip` | nnUNet-2D | UKAN | runs_ukan_nnunet2d_clean_f1_30_f1_metrics_train_paper_dice_1_best=0.769876; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_train_paper_dice_2_best=0.821588; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_train_paper_macro_dice_best=0.793767; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_dice_1_best=0.740362; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_dice_2_best=0.741230; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_macro_dice_best=0.726886; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_best_dice_1_best=0.770288; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_best_dice_2_best=0.749787; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_best_macro_dice_best=0.752010; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_ind_dice_1_best=0.770288; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_ind_dice_2_best=0.749787; runs_ukan_nnunet2d_clean_f1_30_f1_metrics_val_paper_sweep_ind_macro_dice_best=0.752010; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_macro_dice_best=0.726886; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_dice_1_best=0.712541; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_dice_2_best=0.741230; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_macro_dice_best=0.752010; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_dice_1_best=0.754233; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_dice_2_best=0.749787; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_ind_macro_dice_best=0.752010; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_ind_dice_1_best=0.754233; runs_ukan_nnunet2d_clean_f1_30_fold_summary_best_paper_sweep_ind_dice_2_best=0.749787; runs_ukan_nnunet2d_clean_f1_30_mean_paper_dice_1=0.712541; runs_ukan_nnunet2d_clean_f1_30_mean_paper_dice_2=0.741230; runs_ukan_nnunet2d_clean_f1_30_mean_paper_macro_dice=0.726886 | `runs/ukan_nnunet2d_clean_f1_30` |
+| 20261015 | `20261015_dinov3-convnext-tiny_physleak-cdp.zip` | DINOv3-ConvNeXt-Tiny | PhysLeak-CDP | cdp_beta10_pos_pooled_rho_3seed=0.7478; cdp_nested_pooled_rho=0.748; prior_global_rho=0.7065; cdp_cell_auroc=0.894; supervised_oof_ceiling_rho=0.965; vitb16_r1_rho_mean=0.7101; vitb16_oracle_rho=0.7304; knn_lesion2_presence_auc=0.914 | `outputs/physleak_severity_20261014` |
+
+
+## 推理优化：病灶保真约束下的 CPU 部署（2026-10-09，clean f1）
+
+此次不重训，优化现存可完整加载的最强 f1 自动模型 HMVF：`runs/hmvf_mambavision_f1_30/f1/checkpoints/best.pt`，epoch 21，SHA256 `03c688c3dcf7cd3e30a1e86d854c2fa540b5e0193394766613dcf4faf2c51fdc`。历史 VA-RDH K16 / VS-UBR 最佳及 10 月采样实验权重未找到，未纳入本次优化，不能把本次结果标为这些历史模型的部署表现。
+
+评估固定 clean f1 全部 444 张、768×768、batch=1、阈值 0.90/0.90、无 TTA。原模型 GPU eager FP16 macro=0.7802335209。接受要求为 macro 降幅 ≤0.2pp、各类 ≤0.3pp、逐病例配对无新增整图漏检（GT 阳性且预测为空）。PTQ 校准为 f2–f5 干净图随机 128 张，seed=42，不使用 f1。
+
+| 方案 | Dice-1 | Dice-2 | Macro | Δ Macro (pp) | 新增整图漏检 L1/L2 | 结论 |
+|---|---:|---:|---:|---:|---:|---|
+| 原模型 GPU eager FP16 | 0.797852 | 0.762616 | 0.780234 | 0 | — | 基准 |
+| GPU 合批 + channels_last + compile | 0.797869 | 0.762579 | 0.780224 | −0.00093 | 0/0 | 通过 |
+| OpenVINO FP32（8 线程复评） | 0.797870 | 0.762541 | 0.780205 | −0.00282 | 0/0 | 通过，备选包 |
+| **OpenVINO 解码器 INT8（最终 9 线程复评）** | **0.797650** | **0.763843** | **0.780747** | **+0.05131** | **0/0** | **默认 CPU 包** |
+| 大范围 INT8，保留敏感分支 | 0.794831 | 0.761781 | 0.778306 | −0.19274 | 1/0 | 拒绝：病例 9604 新增漏检；Dice-1 −0.3021pp |
+| 上述 INT8 再保护首 stage | 0.796393 | 0.754231 | 0.775312 | −0.49211 | 2/1 | 拒绝 |
+
+默认策略保留 backbone、SSM 全局分支、最后分割卷积为 FP32，仅量化其余 decoder。整图漏检数为 L1=1、L2=6，与基准相同；稀有类只有 38 张阳性图，不能将小幅 Dice 上浮视为已证实的泛化改进。降分辨率 736/704/672/640 全折筛查均失败，Dice-2 分别 −1.248/−1.193/−1.203/−1.641pp，保留 768。
+
+速度实测使用 Xeon Platinum 8255C + RTX 2080 Ti；容器 CPU 配额 9 核。最终计时串行运行，CPU 主对照均 9 线程，8 次 warmup 后计时 40 次，从预处理后 NumPy batch 到 CPU logits（包括 GPU 数据传输）：
+
+- CPU 原始 PyTorch NCHW：平均 **672.6 ms**；channels_last **505.1 ms**；OpenVINO 合批 FP32 **345.5 ms**；仅 decoder INT8 **219.4 ms**，相对 NCHW **3.07×**，相对 channels_last **2.30×**。
+- GPU 原始 eager **32.33 ms** → 完整 compile 组合 **18.57 ms（1.74×）**；此次缓存后的首次调用仍需 10.51 秒。单独合批 eager 为 26.74 ms；单独 channels_last 没有收益。
+- 实际独立 CPU 入口（无 torch/CUDA）从已解码 PIL 图片到标签图，50 次热启动平均 **246.0 ms**，P95 **268.3 ms**；构造/模型校验/编译 **1.54 秒**，峰值 RSS **563 MiB**。不含磁盘解码与写图。
+- 默认权重 109.26 MiB，FP32 117.95 MiB；没有达到四倍体积压缩。8/9 线程有极少阈值边缘像素差异，因此默认包使用重新完整复评的 9 线程结果。
+
+新增 SSM 方向合批、CPU 图导出、训练折 PTQ、固定阈值全折复评、校验后打包、纯 NumPy/Pillow/OpenVINO 预测入口。可方形扫描 4 次循环合为 1 次，保持权重、递推公式与方向累加次序，不宣称 FLOPs 变成四分之一。OpenVINO 单独合批没有稳定收益，主要 CPU 加速来自图编译和选择性 INT8。
+
+验证：23 项相关测试通过；全部 444 张预处理与训练管线最大差 0；最终纯 CPU 部署全部 444 张逐图面积与 Dice 对齐最终 9 线程复评，`torch_imported=false`，执行设备仅 CPU。
+
+默认包 `outputs/inference_optimization_20261009/deployment/`；全 FP32 备选 `deployment_fp32/`（8 线程）。示例 `example_prediction/`。全部证据及图表在 `outputs/inference_optimization_20261009/`；方法、完整消融、复现命令和论文叙事边界见 [推理优化报告](docs/inference_optimization_2026-10-09.md)。本结果为单折部署验证，后续方法论主张需固定策略的五折或独立测试验证。
+
+
+## PhysLeak / CDP：无监督稠密 FA 渗漏负荷与 5 项后续验证（2026-10-14 ~ 10-15，5 折全量 2,055 图）
+
+**目标与口径**：不读 mask 或临床标签，给出稠密渗漏潜势图，并把它汇聚成图像级渗漏负荷。评估只在预测 sha256 冻结之后读取 mask。目标是 **mask 并集面积代理，不是临床分级**。指标为每折内先 rank 再 pooled Spearman ρ；cell 级（32×32）AUROC 以 cell 中 mask 占比 ≥0.5 为正类。bootstrap 按图像重采样；数据没有患者 ID，同一患者的多张图可能相关，CI 可能偏窄。对比基线是 10-13 的全局方法（DINOv3 CLS + 合成方向 + gamma 正交投影），ρ = 0.7065。
+
+**方法（CDP，Counterfactual Difference Probe）**：
+- 冻结 DINOv3 ConvNeXt-Tiny，取 stage1–3 特征，统一到 32×32 网格（C = 1536，输入 512）。
+- 以 Hessian 脊线检出的血管段为源，物理合成渗漏反事实 I′：扩散 σ 1.5–8，幅度 0.1–0.5。
+- 逐 cell 用岭回归拟合 w·(F(I′)−F(I)) ≈ ΔI。同时惩罚 β‖w·(F(N(I))−F(I))‖²，其中 N 为滋扰视图（整体增亮、gamma 0.8/1.2）。
+- λ 只用训练折内的合成 SSE 来选。图像负荷取 FOV 内 mean、正部 mean（pos）或 top10%。
+- 实现：`src/bs/physleak.py`、`scripts/physleak_{stats,fit_predict,evaluate,nested_select,select_beta}.py`。`tests/test_physleak.py` 5/5 通过。
+
+### 1. 主实验与 β 扫描（ConvNeXt-T，seed 42/2026/3407 均值）
+
+| 方法 | pooled ρ | 配对 Δ vs 先前 95%CI | lesion2 存在 AUROC | cell AUROC |
+|---|---:|---|---:|---:|
+| 先前全局方法（10-13） | 0.7065 | — | 0.581 | 无稠密图 |
+| 强度 / DoG / PatchCore 式 kNN | 0.383 / 0.385 / 0.072 | 显著更差 | 0.562 / 0.556 / **0.913** | 0.811 / 0.727 / 0.513 |
+| CDP β0（无滋扰惩罚，pos） | 0.464 | 显著更差 | 0.630 | 0.818 |
+| CDP β1 mean（**预注册主方法**） | 0.487 | 显著更差 | 0.714 | 0.873 |
+| CDP β3 pos | 0.715 | [−0.021, +0.025] | 0.697 | 0.891 |
+| **CDP β10 pos** | **0.748±0.007** | **[+0.014, +0.057]** | 0.675 | **0.894** |
+| CDP β30 pos | 0.741 | [+0.008, +0.049] | 0.669 | 0.887 |
+| CDP β100 pos | 0.704 | [−0.030, +0.012] | 0.694 | 0.872 |
+
+- **β10/pos 逐折 ρ**：0.671 / 0.775 / 0.755 / 0.760 / 0.798。先前方法为 0.633 / 0.751 / 0.744 / 0.729 / 0.677。
+- **嵌套选择**：外层留一折，内层在 21 个 (β, 汇聚) 配置中按面积 ρ 选优，15/15 次都选中 β10/pos。嵌套 pooled ρ 为 0.7427 / 0.7556 / 0.7451（均值 0.748）。
+- **滋扰惩罚是决定性组件**：gamma 四分位翻转率 β0 为 66–70%，β10 降到 2.6–3.0%。合成拟合 R² 从 β0 的 0.994 降到 β10 的 0.906。
+- **生成器消融**：物理生成器优于 Gauss 斑块（0.665 vs 0.521，β1 top10）。
+- **诚实说明**：预注册的 β1/mean 只有 0.487，未达标。β10/pos 是在看过 mask 后挑出的，属于后验选择。嵌套选择只能说明「在这 21 个配置里挑选的乐观偏差很小」，不能替代前瞻验证。
+
+### 2. 后续验证 ① 监督上限（参考，非无监督）
+
+HMVF+VS-UBR 5 折 OOF：768 输入，sigmoid ≥ 0.5，无 TTA，用同一 within-fold rank 协议评估。
+- best.pt 所在 epoch：f1 28、f2 9、f3 23、f4 26、f5 8。f2 和 f5 偏欠训。
+
+| 指标 | 监督 OOF | CDP β10/pos（seed42） |
+|---|---:|---:|
+| pooled ρ（面积代理） | **0.965** [0.962, 0.968] | 0.743 |
+| 逐折 ρ | 0.970 / 0.978 / 0.978 / 0.965 / 0.973 | — |
+| cell AUROC / AP | 0.982 / 0.846 | 0.894 / 0.445 |
+| lesion2 存在 AUC | 0.960（lesion2 头最大概率） | 0.68 |
+
+结论：这个代理指标在有标签时几乎可以完全学到，所以 CDP 与监督之间约 **0.22 ρ** 的差距是方法差距，不是标签噪声。
+
+### 3. 后续验证 ② kNN–lesion2 混杂审计（seed42，`scripts/physleak_audits.py` A 部分）
+
+| 指标 | patch_kNN | CDP β10 |
+|---|---:|---:|
+| lesion2 存在 AUC（全部） | 0.914 | 0.681 |
+| 按来源 jpg / png / tif 分层 | 0.891 / 0.946 / 0.917 | 0.703 / 0.679 / 0.661 |
+| 折内平均 | 0.914 | 0.676 |
+| 面积五分位层内平均 | 0.919 | 0.683 |
+| 来源（扩展名）η² | 0.016 | 0.029 |
+| lesion2+ 图内：lesion2 cell vs lesion1-only cell AUC | 0.817 | 0.311 |
+| lesion1 cell vs 背景 AUC | 0.468 | 0.877 |
+| lesion2+ 图内与 lesion2 面积 ρ | 0.04 | 0.32 |
+
+- kNN 的 0.91 不能用来源、折或总面积解释。在 lesion2+ 图像中，kNN 得分前 10% 的 cell 里 lesion2 占 10.4%（基础率 2.3%）。
+- 它对 lesion1 和面积不敏感，本质上是 **lesion2 存在性检测器**，与跟踪 lesion1/面积的 CDP 互补。
+- lesion2 的临床语义仍未经确认。
+
+### 4. 后续验证 ③ 预注册 β 规则 R1 的前瞻检验（ViT-B/16，blocks 6/9/12，C = 2304）
+
+- **R1 规则**：τ = 0.03，取 burden_pos 下滋扰翻转率 ≤ τ 的最小 β。
+- **跑前登记的哈希**（`physleak_vitb16/protocol_sha256_before_run.txt`）：规则脚本 sha256 8334b965…，协议文档 d7df1796…。
+- **两条预注册标准**：R1 均值 ≥ 0.7065；与 oracle 的差距 ≤ 0.03。
+
+| seed | R1 选中 | ρ（burden_pos） | Δ vs 先前 CI 下界 |
+|---|---|---:|---:|
+| 42 | β30 | 0.6997 | −0.035 |
+| 2026 | β10 | 0.7270 | −0.007 |
+| 3407 | β30 | 0.7036 | −0.030 |
+
+- **两条标准都通过**：R1 均值 0.7101 ≥ 0.7065；oracle 为 β3/pos 0.7304，差距 0.020 ≤ 0.03。
+- **但通过得很弱**：3 个 seed 中有 2 个单独低于先前方法，也没有任何一个 seed 的 CI 排除 0。
+- ViT 上 β0.3–β3/pos 是一个平台（0.7285–0.7304），R1 在 ViT 上选的 β 偏大。seed42 的翻转率：β0 0.677、β1 0.043、β10 0.031、β30 0.026。
+- ViT 整体弱于 ConvNeXt：oracle 0.730 vs 0.748，cell AUROC 0.872–0.878。ViT 上 patch_kNN 的 ρ 为 0.22，lesion2 AUC 0.84。
+- 结论：「无标签 β 规则不会输给先前方法」有初步前瞻证据；「规则能找到最优 β」不成立。
+
+### 5. 后续验证 ④ CDP 分歧审计（ConvNeXt β10，seed42，B 部分）
+
+- **假阳性**定义为折内 z 分数前 5% 的 mask 阴性 cell。
+  - 视盘启发区占 FP cell 的 18.1%，而在全部阴性 cell 中只占 2.7%，**富集 6.8 倍**。FOV 边缘（1.0×）和血管（0.93×）无富集。
+  - 注意：视盘启发区本身有 21.9% 的 cell 是 mask 阳性（其他区域 7.5%），所以这个定位并不精确。
+- **图像残差**（score rank − area rank）：
+  - **最被低估**的 50 张：面积中位数 0.162，FOV 更亮，即弥漫性大面积渗漏被低估。
+  - **最被高估**的 50 张：面积中位数 0.013，其中 28% 为 lesion2+（全体为 11%）。
+  - 面积最大的四分位内 ρ 只有 0.23；残差与 lesion1 面积的 ρ 为 −0.33。
+  - 来源效应弱：平均残差 tif +0.013、jpg −0.016、png −0.034；按来源的 ρ 为 0.711 / 0.716 / 0.753。
+
+### 6. 后续验证 ⑤ 外部数据
+
+没有可访问的、带标签的独立葡萄膜炎 FA 队列（见 `docs/severity_external_validation_feasibility_20261013.md`）。Duke DME 数据链接本轮再次超时或返回 404。**未做外部验证。**
+
+### 总结与局限
+
+- **结论**：
+  - CDP 在完全无标签的设定下给出了稠密渗漏图（cell AUROC 0.89，强度基线 0.81）。图像级面积代理 ρ = 0.748，配对显著优于先前的 0.707。
+  - 换到第二个特征空间（ViT）后排序仍能复现（约 0.73），但离监督上限 0.965 很远。
+  - 主要错误模式：低估弥漫性大面积渗漏；视盘假阳性。
+  - kNN 提供了 CDP 缺少的 lesion2 存在性信息，可以考虑「CDP 面积 + kNN lesion2 存在」的双轴报告。这一组合是后验想法，需要重新预注册后才能检验。
+- **局限**：
+  - 目标只是 mask 面积代理，不能宣称临床分级。
+  - 没有患者 ID，bootstrap 按图像进行。
+  - 最佳 β 和汇聚方式是后验选择；R1 前瞻通过得很弱。
+  - 只在单一数据集上验证，没有外部队列。
+  - 监督上限只作参考（f2/f5 checkpoint 偏欠训）。
+
+**产物**：
+- 原始产物：`/root/autodl-fs/uveitis_severity_20261013/`
+  - `physleak/`：主实验
+  - `physleak_beta_sweep/`：β 扫描与嵌套选择
+  - `physleak_vitb16/`：R1 前瞻检验，含 `r1_forward_test_result.json`
+  - `physleak_followup/`：监督上限与审计，含 `audit_seed42/cdp_disagreement_cases.png`
+  - fold_stats.pt 是中间缓存，已删除或未归档；稠密图 npz 只保留在 autodl-fs。
+- 项目内精简副本：`outputs/physleak_severity_20261014/`
+- 文档：
+  - [PhysLeak 主结果](docs/severity_physleak_findings_20261014.md)
+  - [β 规则预注册协议](docs/severity_physleak_beta_rule_protocol_20261014.md)
+  - [5 项后续验证](docs/severity_physleak_followup_20261014.md)
+- 归档 ZIP 见本文件「Experiment Archive Records」表中 PhysLeak-CDP 一行。

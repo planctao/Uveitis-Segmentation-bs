@@ -1,0 +1,28 @@
+{
+  "failure": {
+    "status": "failed",
+    "pid": 55324,
+    "error": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/sparse_region_pool_experiments.py\", line 151, in main\n    try: run()\n         ^^^^^\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/sparse_region_pool_experiments.py\", line 72, in run\n    train_one(frame, features, digest, {**cfg, 'seed': seed}, folder, fit_mask, stop_mask, model_class=SparseRegionModel)\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/experiment.py\", line 557, in train_one\n    if not torch.isfinite(loss): raise ValueError(f'Nonfinite loss: {cfg}')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Nonfinite loss: {'arch': 'attention', 'mode': 'flat', 'hidden': 256, 'dropout': 0.6, 'lr': 0.002, 'wd': 0.1, 'epochs': 120, 'patience': 18, 'taxonomy_only': True, 'aux': 0.8, 'label_smoothing': 0.03, 'fine_contrastive': 0.05, 'region_pool_kind': 'entmax15', 'region_pool_temperature': 1.0, 'seed': 1}\n"
+  },
+  "old_implementation_sha256": "97260c5ce47b060b81152f3e6d5cfb6f8eff3b0906d6b27705085e8c51284420",
+  "examples": [
+    {
+      "scores": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "probabilities": {
+        "omitted_from_github_snapshot": true,
+        "count": 4,
+        "source_list_sha256": "4f4be235ee665df97c9d5b3a87868edfb63c7dd850524cb8a09f4114b43c0e9d"
+      },
+      "nonfinite_gradient_entries": 4
+    }
+  ],
+  "reason": "Inactive entmax threshold candidates with zero discriminant evaluate sqrt derivative at0. Autograd can propagate0*inf asNaN even when gather does not select that candidate.",
+  "invalidated_arm": "entmax1p5",
+  "softmax_arms_unaffected": true,
+  "external_test_evaluated": false
+}

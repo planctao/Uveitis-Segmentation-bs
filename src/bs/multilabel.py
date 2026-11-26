@@ -169,6 +169,7 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         clinical_area_weight: float = 0.0,
         clinical_area_scale: float = 1e-4,
         clinical_area_channel_weights: float | list[float] | tuple[float, ...] = (1.0, 1.0),
+        channel_weights: float | list[float] | tuple[float, ...] = (1.0, 1.0),
         eps: float = 1e-6,
     ) -> None:
         super().__init__()
@@ -211,7 +212,22 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         if area_weights.numel() != 2:
             raise ValueError(f"clinical_area_channel_weights must be scalar or have 2 values, got {area_weights.numel()}")
         self.register_buffer("clinical_area_channel_weights", area_weights)
+        loss_weights = torch.as_tensor(channel_weights, dtype=torch.float32).flatten()
+        if loss_weights.numel() == 1:
+            loss_weights = loss_weights.repeat(2)
+        if loss_weights.numel() != 2:
+            raise ValueError(f"channel_weights must be scalar or have 2 values, got {loss_weights.numel()}")
+        if bool((loss_weights < 0.0).any()) or float(loss_weights.sum().item()) <= 0.0:
+            raise ValueError("channel_weights must be non-negative and sum to a positive value")
+        self.register_buffer("channel_weights", loss_weights)
         self.eps = eps
+
+    def _channel_weights(self, values: Tensor) -> Tensor:
+        return self.channel_weights.to(device=values.device, dtype=values.dtype)
+
+    def _weighted_channel_mean(self, values: Tensor) -> Tensor:
+        weights = self._channel_weights(values)
+        return (values * weights).sum() / weights.sum().clamp_min(self.eps)
 
     def _boundary_weight_map(self, target: Tensor, valid: Tensor) -> Tensor:
         if self.boundary_weight <= 0.0 or self.boundary_kernel <= 1:
@@ -266,7 +282,8 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         dims = (0, 2, 3)
         intersection = (pred_boundary * target_boundary).sum(dim=dims)
         denominator = (pred_boundary + target_boundary).sum(dim=dims).clamp_min(self.eps)
-        return (1.0 - (2.0 * intersection + self.eps) / (denominator + self.eps)).mean()
+        loss = 1.0 - (2.0 * intersection + self.eps) / (denominator + self.eps)
+        return self._weighted_channel_mean(loss)
 
     def _boundary_dou_loss(self, probs: Tensor, target: Tensor, valid: Tensor) -> Tensor:
         """Boundary Difference over Union Loss (Sun et al., MICCAI 2023).
@@ -294,7 +311,7 @@ class AsymmetricFocalTverskyBCE(nn.Module):
             alpha = (1.0 - boundary_count / foreground_count).clamp(0.0, self.boundary_dou_alpha_cap)
         numerator = z_sum + y_sum - 2.0 * intersect
         denominator = (z_sum + y_sum - (1.0 + alpha) * intersect).clamp_min(self.eps)
-        return (numerator / denominator).mean()
+        return self._weighted_channel_mean(numerator / denominator)
 
     def _dmt_response(self, values: Tensor, valid: Tensor, direction: str, scale: int) -> Tensor:
         channels = values.shape[1]
@@ -350,10 +367,15 @@ class AsymmetricFocalTverskyBCE(nn.Module):
                 intersection = (weight * pred_edge * target_edge).sum(dim=dims)
                 denominator = (weight * (pred_edge.square() + target_edge.square())).sum(dim=dims).clamp_min(eps)
                 dice = 1.0 - (2.0 * intersection + eps) / (denominator + eps)
-                terms.append(dice[present])
+                channel_weights = self._channel_weights(dice)
+                active = present & (channel_weights > 0.0)
+                if bool(active.any()):
+                    terms.append((dice[active], channel_weights[active]))
         if not terms:
             return probs.new_tensor(0.0)
-        return torch.cat([term.flatten() for term in terms]).mean()
+        values = torch.cat([term[0].flatten() for term in terms])
+        weights = torch.cat([term[1].flatten() for term in terms])
+        return (values * weights).sum() / weights.sum().clamp_min(self.eps)
 
     def _dmt_boundary_closure(self, pred_edge: Tensor, target_edge: Tensor, valid: Tensor) -> Tensor:
         channels = pred_edge.shape[1]
@@ -363,8 +385,9 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         target_edge = target_edge.float().detach().clamp(0.0, 1.0) * valid.float()
         degree = F.conv2d(pred_edge, kernel, padding=1, groups=channels)
         gap = F.relu(2.0 - degree).square()
-        numerator = (target_edge * pred_edge * gap).sum()
-        denominator = (target_edge * pred_edge.detach()).sum().clamp_min(1.0)
+        channel_weights = self._channel_weights(pred_edge).view(1, -1, 1, 1)
+        numerator = (target_edge * pred_edge * gap * channel_weights).sum()
+        denominator = (target_edge * pred_edge.detach() * channel_weights).sum().clamp_min(1.0)
         return numerator / denominator
 
     def _dmt_close_loss(self, probs: Tensor, target: Tensor, valid: Tensor) -> Tensor:
@@ -422,7 +445,9 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         if not bool((focus > 0.0).any()):
             return logits.new_tensor(0.0)
         bce = F.binary_cross_entropy_with_logits(logits, target, reduction="none")
-        return (bce * focus).sum() / focus.sum().clamp_min(1.0)
+        channel_weights = self._channel_weights(focus).view(1, -1, 1, 1)
+        weighted_focus = focus * channel_weights
+        return (bce * weighted_focus).sum() / weighted_focus.sum().clamp_min(1.0)
 
     def _clinical_area_loss(self, probs: Tensor, target: Tensor, valid: Tensor) -> Tensor:
         if self.clinical_area_weight <= 0.0:
@@ -434,7 +459,8 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         pred_burden = torch.log1p(pred_fraction.float() / scale)
         target_burden = torch.log1p(target_fraction.float() / scale).detach()
         loss = F.smooth_l1_loss(pred_burden, target_burden, reduction="none")
-        weights = self.clinical_area_channel_weights.to(device=probs.device, dtype=loss.dtype).view(1, -1)
+        weights = self.clinical_area_channel_weights.to(device=probs.device, dtype=loss.dtype)
+        weights = (weights * self._channel_weights(loss)).view(1, -1)
         return (loss * weights).sum() / weights.sum().clamp_min(1.0) / max(loss.shape[0], 1)
 
     def _hard_negative_ratios(self, channels: int, device: torch.device, dtype: torch.dtype) -> Tensor:
@@ -485,6 +511,7 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         bce = F.binary_cross_entropy_with_logits(logits, bce_target, pos_weight=pos_weight, reduction="none")
         bce_pixel_weight = self._boundary_weight_map(target, valid)
         bce_pixel_weight = bce_pixel_weight * self._hard_negative_weight_map(bce, target, valid)
+        bce_pixel_weight = bce_pixel_weight * self._channel_weights(bce).view(1, -1, 1, 1)
         bce = (bce * bce_pixel_weight).sum() / bce_pixel_weight.sum().clamp_min(1.0)
 
         probs = torch.sigmoid(logits)
@@ -495,7 +522,7 @@ class AsymmetricFocalTverskyBCE(nn.Module):
         fp = (probs * (1.0 - target) * valid).sum(dim=dims)
         fn = ((1.0 - probs) * target).sum(dim=dims)
         tversky = (tp + self.eps) / (tp + self.alpha * fp + self.beta * fn + self.eps)
-        focal_tversky = torch.pow(1.0 - tversky, self.gamma).mean()
+        focal_tversky = self._weighted_channel_mean(torch.pow(1.0 - tversky, self.gamma))
         boundary_dice = self._boundary_dice_loss(probs, target, valid)
         boundary_dou = self._boundary_dou_loss(probs, target, valid)
         dmt_dice2 = self._dmt_dice2_loss(probs, target, valid)

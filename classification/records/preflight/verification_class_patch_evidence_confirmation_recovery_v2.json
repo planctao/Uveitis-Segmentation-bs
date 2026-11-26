@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "case": "failed",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "startup_no_pid",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "same_pid",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "changed_pid",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "missing_pid_after_startup",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "exited_worker",
+      "expected": "reject",
+      "passed": true
+    }
+  ],
+  "no_original_worker_launch_path": true,
+  "code_sha256": {
+    "continue_class_patch_evidence_confirmation_recovery_v2.py": "2624ba849c145b16ec3510191ba3190a9307098fde4028bef5f3bb21dfd583a1"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Seven real wait-loop cases and no original worker launch path; full frozen confirmation awaits actual run."
+}

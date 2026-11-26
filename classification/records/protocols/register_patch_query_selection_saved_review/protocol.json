@@ -1,0 +1,34 @@
+{
+  "created_at_utc": "2026-11-24T20:19:57.849422+00:00",
+  "execution_entrypoint": "review_register_patch_query_selection_outputs.py",
+  "code_sha256": "a58e28d12018bf8a5054a3b54990205a8987607d6f6d1bbbbdf07596ff7ffe29",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "frozen_artifacts": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/metadata/manifest.csv": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/review_register_patch_mass_calibration_outputs.py": "d12378719c101848776cf8f8708f7c3d827961c93006598953dca2669cf72cd3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_mass_calibration_saved_review/protocol.json": "6484fdfbec532d619d13e51532834c0911123d59b14e69624157128c7f7439f8",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_mass_calibration/protocol.json": "1cd4a6981d6efec8898e3ad67bda27e45472a04f5b275f8f68bf6f2b100b2c97",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/query_selection_continuation/protocol.json": "ee3ed1bb3b53d2c06a28ee76735daa8dd9ee85d24f75ca7d39c0841b838e9f6e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_query_selection_bank/protocol.json": "654e89b37d18ebb0ca257da9969ad9970a9b25fcf613d100875af3185944f360",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/register_patch_query_selection_preregistration_before_mass_outcome.json": "af1999f77e63e121fa0f4c2b2b2d9175c2d7ad5020ffc500f2471dc7152fe55d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_registry.json": "0da36e047ba94459eee36fae8d593cb821decb76ee6225dc894e51617f17023d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_m8.json": "f51c3369a43d3b706479c48e13dec3a5c2c4248c155ae563310833f3d3d6dc74"
+  },
+  "purpose": "Only after completed query-selection48fits and independent semantic audit, reconstruct all32 saved metric phases,16 frozen shared64 control phases,16 fixed fusions,8 original-and-matched gates,4 patient-isolated plans,240training products,48first-task ten-array retrieval input hashes. Preserve original protocol and code; no fit/prediction/new candidate/external evaluation. This script is NOT added to or modifying the already-frozen live continuation; root must run it once after completion.",
+  "planned_study_fits": 48,
+  "candidate_metric_phases": 32,
+  "shared64_control_metric_phases": 16,
+  "actual_first_task_witnesses": 48,
+  "retrieval_arrays_per_witness": 10,
+  "development_images": 2091,
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false,
+  "prelaunch_guard": {
+    "passed": true,
+    "message": "Only completed studies can be reviewed; this study has not started.",
+    "no_completed_or_active_checkpoint_read": true
+  },
+  "full_runtime_review_passed": false,
+  "current_query_study_started": false
+}

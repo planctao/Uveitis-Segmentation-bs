@@ -1,0 +1,69 @@
+{
+  "created_at_utc": "2026-11-25T11:52:50.942779+00:00",
+  "family": "class_patch_log_moment",
+  "status": "preregistered_before_implementation",
+  "hypothesis": "Learn the direction of patch evidence before smooth multiple-instance pooling. A log weighted exponential moment of per-patch class projections can retain focal directional evidence lost when the patch distribution is first reduced to fixed means or fixed-coordinate variances. This is standard log-mean-exp multiple-instance pooling, not an originality or causal claim.",
+  "motivation": "The completed Hadamard variance study passed24actual-model/task audits and independent saved-output/root reviews but0/4development gates. Uniform/source fixed fusion CVMacroF1 .8386211817681845/.8385477629028392, validationF1 .8905077977443203; M8 remains. These negative fixed-statistic results motivate a learned-direction pooling hypothesis, without establishing why prior models failed.",
+  "predecessor_proofs": {
+    "results/research_class_patch_hadamard_variance/independent_saved_output_review.json": "85f16952a9a8683ecebce2276fd731719eb4c8fb181c56f4b7fda26a7fa59271",
+    "results/class_patch_hadamard_variance_completed_root_review.json": "fb1611ac82576c554c78f457d31b07eaa3e1d49da4625d028cb13261885a7d40"
+  },
+  "architecture": "Reuse2091development sharedtop64 query/key/value bank, no new backbone extraction. Freeze M8L source statistics/normal geometry/head/register reader/tail and original uniform/source attention. RMS-normalize64D patchV exactly as mean/variance controls. For each pathology class c,scale s,head h and patch k, x[c,s,h,k]=dot(w[c,s,h],V[s,h,k]); m=logsumexp(log(a)+x)-logsumexp(log(a)) across64patches. Score[c]=sum(s,h)m+b[c]; compute projection and both logsumexp in float64, cast summed moment to float32 before adding bias. Temperature fixed1, no temperature/head weighting/search. w[2,2,16,64] and b[2] zero initialized,4098parameters; original bounded2tanh infection/noninfection shifts, normalshift0 (normalprobability is not invariant), anchored coarse probabilities and class-wide subtype shifts preserve within-class subtype odds. Means and unrotated variance control modes exactly reduce to originals.",
+  "configuration_plan": [
+    {
+      "name": "uniform_log_moment",
+      "pooling": "uniform",
+      "statistic": "log_moment"
+    },
+    {
+      "name": "source_query_log_moment",
+      "pooling": "source",
+      "statistic": "log_moment"
+    }
+  ],
+  "fixed_training": {
+    "initialization_and_order_seed_base": 20293500,
+    "batch_size": 256,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "max_epochs": 60,
+    "patience": 12,
+    "gradient_clip_norm": 3.0,
+    "epoch_zero_eligible": true,
+    "task": "Unchanged complete coarse+subtype task and fit-only patient weights. Same source/init/order/patient-and-near-duplicate isolated fit/stop/outer/optimizer/stopping as corresponding completed mean and variance controls."
+  },
+  "planned_new_seed_fits": 24,
+  "reused_mean_control_trajectories": 24,
+  "reused_global_variance_control_trajectories": 24,
+  "predeclared_scores": 4,
+  "fixed_fusions": "StandaloneL and.1875rawB+.5625normalB+.25LogMomentL only; no weights/threshold/temperature tuning.",
+  "original_selection": "OriginalCVMacroF1 strictly>M8 AND corresponding mean AND corresponding unrotatedvariance; validationMacroF1>=allthree. Highest eligible originalCV once only.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20294301,
+      20294311
+    ],
+    "inner_seeds": [
+      20294324,
+      20294325,
+      20294326,
+      20294334,
+      20294335,
+      20294336
+    ],
+    "supervised_fits": 126,
+    "actual_task_witnesses": 90,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "allocation": "72fresh rawB/normalB/normalL/registerL sources+18selectedLogMoment+18matchedmean+18matchedvariance. Same4098readout capacity/source/init/order/task/optimizer/stopping/fusion.",
+    "gate": "Highermean6foldMacroF1 ANDpatientpaired95%lowerCI>0 versus eachM8/M7/M6/M5/fixedGaussian ANDboth matched mean/variance. No fresh reselection, external scoring or automatic promotion."
+  },
+  "preflight_plan": "Six actual256trainingimage cases uniform/source xmean/variance/logmoment; complete coarse+subtype loss/alltrainable gradients atzero/nonzero, frozen weights, zero source identity, ordinary CUDA restore, exact parent control reductions. Independent max-centered normalized-weight exponential formula vs model logsumexp difference. Actual-bank directional input/output and nearzero first derivative, token joint permutation, constant V reduction, numerical extremes, Jensen bound, gradient-as-tilted-expectation and Hessian-as-weighted-covariance toy checks. Two optimizer engineering steps only newarms. Original/fresh/control/task/plan/gates/startup success proofs required before classifier launch.",
+  "launch_condition": "Only after completednegative Hadamard24+actualaudit+savedreview+root4951inputreview andM8retained; finalized newmodel/engine/task/control/partition/gate/fullsuccess proofs pass and scientific dependencies frozen. No classifier fits at preregistration.",
+  "scientific_limits": "Fixed64 selected patch bank may omit lesions; no anatomical correspondence claim. Log-moment pooling learns a direction and mixes all moment orders, not a complete distribution/full covariance representation. Jensen effect and gradient curvature differ from fixed-statistic controls; capacity matching does not establish mechanism or equal compute. Data remain small; development selection is exploratory and fresh confirmation is mandatory. No originality, causal or generalization claim from engineering checks; no external outcome access.",
+  "classification_fits": 0,
+  "scores_evaluated": 0,
+  "training_launched": false,
+  "external_test_evaluated": false
+}

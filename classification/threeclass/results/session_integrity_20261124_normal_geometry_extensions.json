@@ -1,0 +1,74 @@
+{
+  "passed": true,
+  "time_utc": "2026-11-24T04:00:56.898131+00:00",
+  "completed_studies": [
+    {
+      "study": "normal_moment_geometry",
+      "audited_actual_fits": 48,
+      "comparison_sha256": "0edd669b76eacfaf8fd56172aafa2bfacae278f5efa8716707a6ea8f5045b0c1",
+      "verification_sha256": "1c6dc58704994477e2084bdbe42e6007bd78e65045bb10e053e14f44cc5d148c",
+      "passing_gates": 0
+    },
+    {
+      "study": "diagnostic_normal_projection",
+      "audited_actual_fits": 48,
+      "comparison_sha256": "b6d9b45a1bbe835f5d6db78e91dd79f327d12dbe30961aca317d68417f8a4819",
+      "verification_sha256": "277253f8a42dce6f0ac4fa1caebbca3c3166ddd336c6f9f8d80ae793a0b3e384",
+      "passing_gates": 0
+    },
+    {
+      "study": "normal_axis_augmentation",
+      "audited_actual_fits": 48,
+      "comparison_sha256": "7b297e879ccb75c8027149ec25eb8cafd503af52693b15b0bfd2d6f8ec753fa4",
+      "verification_sha256": "bd6be52c438f852dda2d3eee5f6a9e8c801e10b0a6c1392564e23f86583fd634",
+      "passing_gates": 0
+    },
+    {
+      "study": "shared_normal_head",
+      "audited_actual_fits": 48,
+      "comparison_sha256": "6eebb1dcd99e85ce1d50f6534cd5cbea9538956b7421cbeeb1e8ec3efd9e10a3",
+      "verification_sha256": "2912379601a436311dc1d4b9aa6310187f86f4665391f6d4e36114df6c66d244",
+      "passing_gates": 0
+    }
+  ],
+  "new_fully_audited_actual_fits": 192,
+  "original_M5_source_models_unchanged": 12,
+  "m6_package_and_all_six_models_unchanged": true,
+  "m6_frozen_code_and_reproduction_archive_unchanged": true,
+  "m6_selection_sha256": "a9845b5753da0ea28caf2e7aa8f7aa752a452d7748a9522e3f4abae66e9be3e2",
+  "next_study": "runs/bounded_normal_projection/protocol.json",
+  "next_study_sha256": "4fd1c1ebdd02dc1386e88014d788898d3e991e8a85acabcd786eeead41cf383f",
+  "live_states": {
+    "bounded_normal_projection": {
+      "status": "training",
+      "pid": 77998,
+      "arm": "hard_bound2",
+      "phase": "fold_2",
+      "seed": 2,
+      "external_test_evaluated": false,
+      "process_confirmed_live": true,
+      "observed_at_utc": "2026-11-24T04:00:56.897936+00:00",
+      "process_command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/bounded_normal_experiments.py "
+    },
+    "continuous_search": {
+      "status": "running",
+      "pid": 22236,
+      "round": 541,
+      "completed_round": 540,
+      "completed_experiment_rounds": 540,
+      "proposal_iteration": 350119,
+      "legacy_proposal_iterations": 349843,
+      "feature": "multiscale_raw768",
+      "candidate_id": "308d26c1225f",
+      "hypothesis": "Change label_smoothing around a leading validation configuration",
+      "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+      "time": "2026-11-24T12:00:46.614240+08:00",
+      "external_test_policy": "Never read or evaluate external results inside this loop.",
+      "process_confirmed_live": true,
+      "observed_at_utc": "2026-11-24T04:00:56.898100+00:00",
+      "process_command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/continuous.py "
+    }
+  },
+  "research_search_external_test_evaluated": false,
+  "goal_status": "active"
+}

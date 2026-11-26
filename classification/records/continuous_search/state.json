@@ -1,12 +1,15 @@
 {
-  "status": "cross_validation",
+  "status": "running",
   "pid": 2272,
-  "round": 880,
-  "completed_round": 880,
-  "completed_experiment_rounds": 880,
-  "proposal_iteration": 350459,
-  "candidate_id": "d465f2cf4270",
+  "round": 1313,
+  "completed_round": 1312,
+  "completed_experiment_rounds": 1312,
+  "proposal_iteration": 350892,
+  "legacy_proposal_iterations": 349843,
   "feature": "multiscale_raw768",
-  "time": "2026-11-24T20:53:41.123880+08:00",
-  "external_test_policy": "Training/validation evidence only; external files never read."
+  "candidate_id": "e3a4bd39c2a8",
+  "hypothesis": "Joint optimizer, regularization and capacity exploration after tested local proposals were exhausted",
+  "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+  "time": "2026-11-25T08:53:05.864745+08:00",
+  "external_test_policy": "Never read or evaluate external results inside this loop."
 }

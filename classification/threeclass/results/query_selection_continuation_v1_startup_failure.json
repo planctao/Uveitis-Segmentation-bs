@@ -1,0 +1,22 @@
+{
+  "created_at_utc": "2026-11-24T20:38:03.667034+00:00",
+  "failure_kind": "watcher startup state lacked pid before training worker updated state",
+  "failed_state": {
+    "status": "failed",
+    "pid": 71673,
+    "error": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/continue_query_selection_after_mass.py\", line 108, in main\n    try:run()\n        ^^^^^\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/continue_query_selection_after_mass.py\", line 76, in run\n    state=wait('register_patch_query_selection','register_patch_query_selection_experiments.py',{'completed'})\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/continue_query_selection_after_mass.py\", line 36, in wait\n    assert live(state['pid'],script),('Do not restart automatically',family,state)\n                ~~~~~^^^^^^^\nKeyError: 'pid'\n",
+    "external_test_evaluated": false
+  },
+  "failed_state_sha256": "dfd3da6323cdf36652b33ee42786d0e285b8a99e19ecfd20a71dd274c1600fcd",
+  "frozen_queue_protocol_sha256": "ee3ed1bb3b53d2c06a28ee76735daa8dd9ee85d24f75ca7d39c0841b838e9f6e",
+  "observed_classifier_state": {
+    "status": "frozen_before_training",
+    "new_seed_fits": 0,
+    "external_test_evaluated": false
+  },
+  "launched_worker_pid": 73581,
+  "actual_worker_cmdline": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/register_patch_query_selection_experiments.py ",
+  "worker_not_failed_or_restarted": true,
+  "classification_protocol_sha256": "d37b0970c3ecd72e8dd07b31697ac3eccf1082f356c157dc3970e6c0f5f448c8",
+  "external_test_evaluated": false
+}

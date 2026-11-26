@@ -82,6 +82,9 @@ class LeakageInstance:
     image: Tensor  # [3, h, w] raw pixels in [0, 1]
     mask: Tensor  # [h, w] float in {0, 1}
     quality_score: float = 1.0
+    # CLS (contrast-ratio leakage synthesis) 字段，由 compute_excess_profile 懒计算
+    excess: Tensor | None = None  # [h, w] 相对局部背景的超额荧光比 g/bg-1 (>=0)
+    kappa: float = 0.38  # 真实边界处超额 / 内部 p90 超额，用于 iso-contour 标注
 
 
 def leakage_instance_quality(image: Tensor, mask: Tensor) -> dict[str, float]:
@@ -274,6 +277,43 @@ def build_instance_bank(
     return instances
 
 
+def _dilate(mask: Tensor, radius: int) -> Tensor:
+    if radius <= 0:
+        return mask > 0.5
+    k = 2 * int(radius) + 1
+    return F.max_pool2d(mask.float().view(1, 1, *mask.shape), k, stride=1, padding=int(radius)).view(*mask.shape) > 0.5
+
+
+def compute_excess_profile(instance: LeakageInstance, ring_inner: int = 3, ring_outer: int = 12, smooth_sigma: float = 1.5) -> None:
+    """CLS-B/C: 把实例外观换算成"相对局部背景的超额荧光比"并估计其标注等值线水平 kappa。
+
+    真实 lesion_2 统计（f1 训练折 459 个连通域）：内部/外环亮度比中位数 1.27、P10 1.12，97% 比外环亮；
+    边界处超额约为内部 p90 超额的 0.38。用比值而非绝对外观粘贴，可以保持目标图局部纹理(血管)与对比度分布。
+    """
+    gray = instance.image.float().max(dim=0).values
+    mask = instance.mask > 0.5
+    if not bool(mask.any()):
+        instance.excess = torch.zeros_like(gray)
+        return
+    ring = _dilate(instance.mask, ring_outer) & ~_dilate(instance.mask, ring_inner)
+    if int(ring.sum()) < 10:
+        ring = ~mask
+    bg_values = gray[ring] if bool(ring.any()) else gray[mask]
+    bg = float(bg_values.median().clamp_min(4.0 / 255.0))
+    smooth = gaussian_blur(gray.unsqueeze(0), smooth_sigma).squeeze(0)
+    excess = (smooth / bg - 1.0).clamp_min(0.0)
+    taper = gaussian_blur(_dilate(instance.mask, 4).float().unsqueeze(0), 3.0).squeeze(0)
+    taper = (taper / taper.max().clamp_min(1e-6)).clamp(0.0, 1.0)
+    excess = excess * taper
+    inner = excess[mask]
+    peak = float(torch.quantile(inner, 0.9)) if inner.numel() > 0 else 0.0
+    eroded = ~_dilate((~mask).float(), 1)
+    edge = mask & ~eroded
+    if peak > 1e-3 and bool(edge.any()):
+        instance.kappa = float(np.clip(float(excess[edge].median()) / peak, 0.15, 0.7))
+    instance.excess = excess
+
+
 class LeakageCopyPaste(AugmentationBlock):
     """DALS 增强块：把病灶实例经热核扩散后合成到 (image, mask)。
 
@@ -295,12 +335,42 @@ class LeakageCopyPaste(AugmentationBlock):
         alpha_threshold: float = 0.5,
         ignore_index: int = 255,
         fov_threshold: float = 0.03,
+        co_label_lesion1: bool = False,
+        appearance: str = "absolute",
+        ratio_jitter: Any = (0.85, 1.2),
+        cls_diffusion_sigma: Any = (0.0, 3.0),
+        label_mode: str = "alpha",
+        avoid_foreground: bool = False,
+        min_ratio_excess: float = 0.05,
         **kwargs: Any,
     ) -> None:
         super().__init__(prob=prob, enabled=enabled, strength=strength, **kwargs)
+        # CLS 开关（默认全关 = 原 DALS 行为）
+        #   co_label_lesion1: 合成的 lesion_2 同时置 lesion_1（真实数据 98% 的 lesion_2 像素是 label 3）
+        #   appearance="ratio": 以真实超额荧光比乘性叠加到目标局部背景（B）
+        #   label_mode="isocontour": 标签取叠加后超额场在实例自身 kappa 水平的等值线（C）
+        self.co_label_lesion1 = bool(co_label_lesion1)
+        self.appearance = str(appearance).lower()
+        self.ratio_jitter = _as_float_pair(ratio_jitter, (0.85, 1.2))
+        self.cls_diffusion_sigma = _as_float_pair(cls_diffusion_sigma, (0.0, 3.0))
+        self.label_mode = str(label_mode).lower()
+        self.avoid_foreground = bool(avoid_foreground)
+        self.min_ratio_excess = float(min_ratio_excess)
+        if self.appearance not in {"absolute", "ratio"}:
+            raise ValueError(f"appearance must be absolute|ratio, got {appearance}")
+        if self.label_mode not in {"alpha", "isocontour", "footprint"}:
+            raise ValueError(f"label_mode must be alpha|isocontour|footprint, got {label_mode}")
+        if self.label_mode == "isocontour" and self.appearance != "ratio":
+            raise ValueError("label_mode=isocontour requires appearance=ratio")
         self.targets = tuple(int(x) for x in targets)
         self._by_lesion: dict[int, list[LeakageInstance]] = {}
         for instance in instances or []:
+            if self.appearance == "ratio":
+                if instance.excess is None:
+                    compute_excess_profile(instance)
+                inner = instance.excess[instance.mask > 0.5]
+                if inner.numel() == 0 or float(torch.quantile(inner, 0.9)) < self.min_ratio_excess:
+                    continue  # 不比背景亮的实例不符合"渗漏=高荧光"，剔除
             self._by_lesion.setdefault(instance.lesion, []).append(instance)
         self.max_instances = _as_int_pair(max_instances, (1, 3))
         self.scale = _as_float_pair(scale, (0.7, 1.3))
@@ -313,7 +383,11 @@ class LeakageCopyPaste(AugmentationBlock):
 
     def describe(self) -> str:
         counts = {lesion: len(items) for lesion, items in self._by_lesion.items()}
-        return f"LeakageCopyPaste(p={self.prob:g}, targets={self.targets}, bank={counts})"
+        cls = ""
+        if self.co_label_lesion1 or self.appearance != "absolute" or self.label_mode != "alpha" or self.avoid_foreground:
+            cls = (f", cls[co1={int(self.co_label_lesion1)},app={self.appearance},label={self.label_mode},"
+                   f"avoid={int(self.avoid_foreground)}]")
+        return f"LeakageCopyPaste(p={self.prob:g}, targets={self.targets}, bank={counts}{cls})"
 
     def apply(self, image: Tensor, mask: Tensor) -> tuple[Tensor, Tensor]:
         pool = [lesion for lesion in self.targets if self._by_lesion.get(lesion)]
@@ -329,11 +403,16 @@ class LeakageCopyPaste(AugmentationBlock):
         for _ in range(max(0, count)):
             lesion = random.choice(pool)
             instance = random.choice(self._by_lesion[lesion])
-            crop_image, crop_mask = self._jitter(instance.image, instance.mask)
-            self._paste(raw, mask, crop_image, crop_mask, lesion, fov, height, width)
+            if self.appearance == "ratio":
+                crop_excess, crop_mask = self._jitter(instance.excess.unsqueeze(0), instance.mask, clamp=False)
+                self._paste_ratio(raw, mask, crop_excess.squeeze(0).clamp_min(0.0), crop_mask, lesion, fov, height, width,
+                                  instance.kappa)
+            else:
+                crop_image, crop_mask = self._jitter(instance.image, instance.mask)
+                self._paste(raw, mask, crop_image, crop_mask, lesion, fov, height, width)
         return normalize(raw.clamp(0.0, 1.0)), mask
 
-    def _jitter(self, image: Tensor, mask: Tensor) -> tuple[Tensor, Tensor]:
+    def _jitter(self, image: Tensor, mask: Tensor, clamp: bool = True) -> tuple[Tensor, Tensor]:
         factor = random.uniform(self.scale[0], self.scale[1])
         new_h = max(2, int(round(image.shape[1] * factor)))
         new_w = max(2, int(round(image.shape[2] * factor)))
@@ -349,7 +428,21 @@ class LeakageCopyPaste(AugmentationBlock):
         if rotations:
             image = torch.rot90(image, rotations, dims=(1, 2))
             mask = torch.rot90(mask, rotations, dims=(0, 1))
-        return image.clamp(0.0, 1.0), (mask > 0.5).float()
+        return (image.clamp(0.0, 1.0) if clamp else image), (mask > 0.5).float()
+
+    def _sample_location_cls(
+        self, mask: Tensor, height: int, width: int, crop_h: int, crop_w: int, fov: Tensor | None
+    ) -> tuple[int, int] | None:
+        location = self._sample_location(height, width, crop_h, crop_w, fov)
+        if not self.avoid_foreground or location is None:
+            return location
+        for _ in range(10):
+            top, left = location
+            window = mask[top : top + crop_h, left : left + crop_w]
+            if not bool(((window > 0) & (window != self.ignore_index)).any()):
+                return location
+            location = self._sample_location(height, width, crop_h, crop_w, fov)
+        return location
 
     def _sample_location(
         self, height: int, width: int, crop_h: int, crop_w: int, fov: Tensor | None
@@ -390,7 +483,7 @@ class LeakageCopyPaste(AugmentationBlock):
         crop_h, crop_w = crop_mask.shape
         if crop_h >= height or crop_w >= width:
             return
-        location = self._sample_location(height, width, crop_h, crop_w, fov)
+        location = self._sample_location_cls(mask, height, width, crop_h, crop_w, fov)
         if location is None:
             return
         top, left = location
@@ -420,7 +513,13 @@ class LeakageCopyPaste(AugmentationBlock):
         alpha_c = alpha.unsqueeze(0)
         raw[:, y0:y1, x0:x1] = (1.0 - alpha_c) * raw[:, y0:y1, x0:x1] + alpha_c * appearance
 
-        region = alpha > self.alpha_threshold
+        if self.label_mode == "footprint":
+            region = plane > 0.5
+        else:
+            region = alpha > self.alpha_threshold
+        self._write_label(mask, region, lesion, y0, y1, x0, x1)
+
+    def _write_label(self, mask: Tensor, region: Tensor, lesion: int, y0: int, y1: int, x0: int, x1: int) -> None:
         window = mask[y0:y1, x0:x1]
         valid = window != self.ignore_index
         has1 = (window == 1) | (window == 3)
@@ -429,5 +528,60 @@ class LeakageCopyPaste(AugmentationBlock):
             has1 = has1 | region
         else:
             has2 = has2 | region
+            if self.co_label_lesion1:
+                has1 = has1 | region
         updated = has1.long() + 2 * has2.long()
         mask[y0:y1, x0:x1] = torch.where(valid, updated, window)
+
+    def _paste_ratio(
+        self,
+        raw: Tensor,
+        mask: Tensor,
+        crop_excess: Tensor,
+        crop_mask: Tensor,
+        lesion: int,
+        fov: Tensor | None,
+        height: int,
+        width: int,
+        kappa: float,
+    ) -> None:
+        """CLS-B/C：raw <- raw * (1 + excess)，标签取超额场 kappa 等值线（或足迹/alpha）。"""
+        crop_h, crop_w = crop_mask.shape
+        if crop_h >= height or crop_w >= width:
+            return
+        location = self._sample_location_cls(mask, height, width, crop_h, crop_w, fov)
+        if location is None:
+            return
+        top, left = location
+        sigma = random.uniform(self.cls_diffusion_sigma[0], self.cls_diffusion_sigma[1]) * max(self.strength, 1e-3)
+        pad = int(round(3.0 * sigma)) + 2
+        y0 = max(0, top - pad)
+        y1 = min(height, top + crop_h + pad)
+        x0 = max(0, left - pad)
+        x1 = min(width, left + crop_w + pad)
+        oy, ox = top - y0, left - x0
+        plane = torch.zeros((y1 - y0, x1 - x0), dtype=raw.dtype)
+        excess = torch.zeros_like(plane)
+        plane[oy : oy + crop_h, ox : ox + crop_w] = crop_mask
+        excess[oy : oy + crop_h, ox : ox + crop_w] = crop_excess.to(raw.dtype)
+        if sigma > 0.3:
+            excess = gaussian_blur(excess.unsqueeze(0), sigma).squeeze(0)
+        excess = excess * random.uniform(self.ratio_jitter[0], self.ratio_jitter[1])
+        if fov is not None:
+            excess = excess * fov[y0:y1, x0:x1].to(raw.dtype)
+        raw[:, y0:y1, x0:x1] = (raw[:, y0:y1, x0:x1] * (1.0 + excess.unsqueeze(0))).clamp(0.0, 1.0)
+
+        footprint = plane > 0.5
+        if self.label_mode == "isocontour":
+            inner = excess[footprint]
+            if inner.numel() == 0:
+                return
+            peak = float(torch.quantile(inner, 0.9))
+            if peak <= 1e-4:
+                return
+            region = (excess >= kappa * peak) & _dilate(plane, 6)
+        elif self.label_mode == "footprint":
+            region = footprint
+        else:
+            region = (excess / excess.max().clamp_min(1e-6)) > self.alpha_threshold
+        self._write_label(mask, region, lesion, y0, y1, x0, x1)

@@ -1,0 +1,309 @@
+{
+  "created_at_utc": "2026-11-24T13:22:35.585689+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "fit_images": 1717,
+  "fit_patients": 332,
+  "split_plan": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/split_plans/validation.json",
+  "split_plan_sha256": "82ffa10da6c5f963078c708a0e78f32115b2f5545eb22b2b77aee72857274af5",
+  "code_sha256": "5d7beaabfb3ba963b159a69f8f4f5de38bf0ebe29f351121de2b44ff6429fc85",
+  "records": [
+    {
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_0/model.pt",
+      "checkpoint_sha256": "88908e7720d773ca409cb97dc5867c37a8c7fe1d9d603e84451717ee31cffe0d",
+      "diagnostics": {
+        "normalized_entropy": {
+          "patient_balanced_mean": 0.0010163617231565313,
+          "image_quantiles_05_25_50_75_95": [
+            -0.0,
+            0.0,
+            0.0,
+            0.0,
+            2.472329507324709e-15
+          ]
+        },
+        "maximum_attention": {
+          "patient_balanced_mean": 0.9995245778328218,
+          "image_quantiles_05_25_50_75_95": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "logit_range": {
+          "patient_balanced_mean": 374.3883089668532,
+          "image_quantiles_05_25_50_75_95": [
+            54.13725128173828,
+            214.63839721679688,
+            342.2746887207031,
+            505.23883056640625,
+            653.0163818359373
+          ]
+        },
+        "query_l2": {
+          "patient_balanced_mean": 9.844470509196595,
+          "image_quantiles_05_25_50_75_95": [
+            4.059959030151367,
+            6.134565353393555,
+            9.09085464477539,
+            12.430543899536133,
+            15.463262367248532
+          ]
+        },
+        "mean_key_l2": {
+          "patient_balanced_mean": 89.26034510064385,
+          "image_quantiles_05_25_50_75_95": [
+            78.12679748535156,
+            86.0701904296875,
+            89.92668151855469,
+            91.79325866699219,
+            93.04351959228515
+          ]
+        },
+        "pooled_norm": {
+          "patient_balanced_mean": 85.1353756619494,
+          "image_quantiles_05_25_50_75_95": [
+            80.99818878173828,
+            85.59920501708984,
+            85.60888671875,
+            85.61486053466797,
+            87.18862762451172
+          ]
+        },
+        "common_value_norm": {
+          "patient_balanced_mean": 32.15044968114637,
+          "image_quantiles_05_25_50_75_95": [
+            30.960158920288087,
+            31.919174194335938,
+            32.264408111572266,
+            32.46733474731445,
+            32.72075271606445
+          ]
+        },
+        "differential_value_norm": {
+          "patient_balanced_mean": 67.52805382521018,
+          "image_quantiles_05_25_50_75_95": [
+            64.91108856201171,
+            67.54251098632812,
+            67.76078796386719,
+            67.95667266845703,
+            69.4436248779297
+          ]
+        },
+        "register_common_energy_fraction": {
+          "patient_balanced_mean": 0.08251286512307453,
+          "image_quantiles_05_25_50_75_95": [
+            0.05665684714913368,
+            0.06503376364707947,
+            0.07594244927167892,
+            0.10094542056322098,
+            0.1661379069089889
+          ]
+        }
+      },
+      "patient_balanced_fraction_attention_above_095": 0.9960090361445784
+    },
+    {
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_1/model.pt",
+      "checkpoint_sha256": "a52186d034e677dbba0d3f23dd18932b90ea9d3275cd2c54476145129a568e1b",
+      "diagnostics": {
+        "normalized_entropy": {
+          "patient_balanced_mean": 7.929820404439026e-06,
+          "image_quantiles_05_25_50_75_95": [
+            -0.0,
+            0.0,
+            0.0,
+            3.9416283723914184e-40,
+            1.9449601043900432e-26
+          ]
+        },
+        "maximum_attention": {
+          "patient_balanced_mean": 0.9999985459813665,
+          "image_quantiles_05_25_50_75_95": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "logit_range": {
+          "patient_balanced_mean": 251.6993146942707,
+          "image_quantiles_05_25_50_75_95": [
+            139.10135498046876,
+            222.42584228515625,
+            284.6737365722656,
+            344.2308349609375,
+            407.2856567382812
+          ]
+        },
+        "query_l2": {
+          "patient_balanced_mean": 8.41366690862346,
+          "image_quantiles_05_25_50_75_95": [
+            5.539405155181885,
+            7.530029296875,
+            9.086094856262207,
+            10.535442352294922,
+            12.391499710083007
+          ]
+        },
+        "mean_key_l2": {
+          "patient_balanced_mean": 91.33566126375214,
+          "image_quantiles_05_25_50_75_95": [
+            82.30938110351562,
+            89.02910614013672,
+            92.06529998779297,
+            93.26561737060547,
+            94.05280303955078
+          ]
+        },
+        "pooled_norm": {
+          "patient_balanced_mean": 86.9159406844096,
+          "image_quantiles_05_25_50_75_95": [
+            66.78641052246094,
+            69.02410888671875,
+            90.94273376464844,
+            94.03877258300781,
+            95.34910583496094
+          ]
+        },
+        "common_value_norm": {
+          "patient_balanced_mean": 34.452224802934,
+          "image_quantiles_05_25_50_75_95": [
+            32.507466888427736,
+            34.045623779296875,
+            34.61542510986328,
+            34.91676330566406,
+            35.21678924560547
+          ]
+        },
+        "differential_value_norm": {
+          "patient_balanced_mean": 70.15380423898313,
+          "image_quantiles_05_25_50_75_95": [
+            56.32291030883789,
+            57.32957458496094,
+            72.82474517822266,
+            75.07202911376953,
+            76.01998291015624
+          ]
+        },
+        "register_common_energy_fraction": {
+          "patient_balanced_mean": 0.08251286512307453,
+          "image_quantiles_05_25_50_75_95": [
+            0.05665684714913368,
+            0.06503376364707947,
+            0.07594244927167892,
+            0.10094542056322098,
+            0.1661379069089889
+          ]
+        }
+      },
+      "patient_balanced_fraction_attention_above_095": 1.0
+    },
+    {
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_2/model.pt",
+      "checkpoint_sha256": "c7b1a119feef7625fecfa0c95c2bff7df6c6a52b8c6ffe5790cc2a340e2db230",
+      "diagnostics": {
+        "normalized_entropy": {
+          "patient_balanced_mean": 9.246642298065672e-21,
+          "image_quantiles_05_25_50_75_95": [
+            -0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.7537390410871261e-40
+          ]
+        },
+        "maximum_attention": {
+          "patient_balanced_mean": 1.0,
+          "image_quantiles_05_25_50_75_95": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "logit_range": {
+          "patient_balanced_mean": 198.09743560292466,
+          "image_quantiles_05_25_50_75_95": [
+            103.6742431640625,
+            129.28482055664062,
+            176.30441284179688,
+            219.76695251464844,
+            259.9560241699218
+          ]
+        },
+        "query_l2": {
+          "patient_balanced_mean": 7.150980488922702,
+          "image_quantiles_05_25_50_75_95": [
+            5.001980113983154,
+            6.013970851898193,
+            6.771116733551025,
+            7.6818461418151855,
+            9.131485748291013
+          ]
+        },
+        "mean_key_l2": {
+          "patient_balanced_mean": 73.9081552769547,
+          "image_quantiles_05_25_50_75_95": [
+            64.31273193359375,
+            71.54594421386719,
+            74.54118347167969,
+            75.82492065429688,
+            76.80547180175782
+          ]
+        },
+        "pooled_norm": {
+          "patient_balanced_mean": 136.02652223065581,
+          "image_quantiles_05_25_50_75_95": [
+            136.0178649902344,
+            136.022705078125,
+            136.02615356445312,
+            136.02943420410156,
+            136.03447570800782
+          ]
+        },
+        "common_value_norm": {
+          "patient_balanced_mean": 39.904098078103665,
+          "image_quantiles_05_25_50_75_95": [
+            37.61590347290039,
+            38.999549865722656,
+            39.95536422729492,
+            40.47311019897461,
+            40.87970123291016
+          ]
+        },
+        "differential_value_norm": {
+          "patient_balanced_mean": 104.09526373281166,
+          "image_quantiles_05_25_50_75_95": [
+            103.02292022705078,
+            103.75492858886719,
+            104.14765930175781,
+            104.34835815429688,
+            104.5109359741211
+          ]
+        },
+        "register_common_energy_fraction": {
+          "patient_balanced_mean": 0.08251286512307453,
+          "image_quantiles_05_25_50_75_95": [
+            0.05665684714913368,
+            0.06503376364707947,
+            0.07594244927167892,
+            0.10094542056322098,
+            0.1661379069089889
+          ]
+        }
+      },
+      "patient_balanced_fraction_attention_above_095": 1.0
+    }
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false,
+  "purpose": "Training-only model behavior diagnosis; no prediction accuracy, ranking or candidate selection."
+}

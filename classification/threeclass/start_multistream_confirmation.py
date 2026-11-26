@@ -15,7 +15,7 @@ from resolution_repeat_cv import check_plan
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(); parser.add_argument('--family', required=True, choices=['large_token_interaction', 'large_token_cross_attention', 'register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry'])
+    parser = argparse.ArgumentParser(); parser.add_argument('--family', required=True, choices=['large_token_interaction', 'large_token_cross_attention', 'register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry', 'base_token_evidence', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout'])
     family = parser.parse_args().family; suffix = 'pair' if family=='large_token_interaction' else 'cross'
     out = ROOT/'runs'/(family+'_confirmation'); assert not (out/'protocol.json').exists()
     source = ROOT/'results'/('research_'+family); selection_path = source/'selection_before_repeat.json'
@@ -25,9 +25,9 @@ def main():
     assert verification['reused_fusion_source_heads_checked'] == 24 and len(verification['fixed_fusion_phases_checked']) == 16
     eligible = [row for row in comparison['candidates'] if row['development_gate_passed']]
     assert selected == max(eligible, key=lambda row: row['cv']['mean_macro_f1'])
-    assert selected.get('m7_replacement_weight', 1.) in [.25, 1.]
-    architecture_key = family+'_configuration' if family in ['register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry'] else 'token_'+suffix+'_configuration'
-    source_key = 'source_'+family+'_arm' if family in ['register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry'] else 'source_token_'+suffix+'_arm'
+    assert selected.get('normalB_replacement_weight', selected.get('m7_replacement_weight', 1.)) in [.25, .5625, 1.]
+    architecture_key = family+'_configuration' if family in ['register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry', 'base_token_evidence', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout'] else 'token_'+suffix+'_configuration'
+    source_key = 'source_'+family+'_arm' if family in ['register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry', 'base_token_evidence', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout'] else 'source_token_'+suffix+'_arm'
     arm = selected[architecture_key]
     assert selected.get(source_key, selected['name']) == arm['name']
     registry = json.loads((ROOT/'results/research_reference_registry.json').read_text()); current_path=ROOT/registry['active_reference']
@@ -48,7 +48,7 @@ def main():
     configurations = {'reference': raw, 'subspace': normal,
         'large': {**normal, 'normal_large_feature': 'large_dual'},
         'token': {**normal, 'normal_large_feature': 'large_dual', 'token_evidence_stream':'registers'}, 'multistream': selected['config']}
-    seed_base = {'large_token_interaction':20290100, 'large_token_cross_attention':20290200, 'register_depth':20290300, 'register_multiquery':20290400, 'register_position_calibration':20290500, 'register_geometry':20290600}[family]
+    seed_base = {'large_token_interaction':20290100, 'large_token_cross_attention':20290200, 'register_depth':20290300, 'register_multiquery':20290400, 'register_position_calibration':20290500, 'register_geometry':20290600, 'base_token_evidence':20290700, 'register_common_mode':20290800, 'register_cosine':20290900, 'register_scale_factorization':20291000, 'register_static_context':20291100, 'register_projection_freezing':20291200, 'register_classifier_context':20291300, 'register_routing_information':20291400, 'register_recurrent_refinement':20291500, 'register_conditional_readout':20291600}[family]
     repeats = [seed_base+1, seed_base+11]; inner_seeds = [seed_base+24+10*ri+fold for ri in range(2) for fold in range(3)]
     old_protocols = sorted(ROOT.glob('runs/*/protocol.json'))
     for path in old_protocols: assert all(str(seed) not in path.read_text() for seed in repeats+inner_seeds), str(path)
@@ -92,17 +92,17 @@ def main():
         'normal_subspace_experiments.py', 'verify_normal_subspace.py'})
     protocol = {'family': family, 'created_at_utc': datetime.now(timezone.utc).isoformat(), 'manifest_sha256': digest,
         'selection_record': str(selection_path.relative_to(ROOT)), 'selected_candidate': selected['candidate_id'],
-        'selected_configuration': {'architecture': arm, 'replacement_weight': selected.get('m7_replacement_weight',1.)},
+        'selected_configuration': {'architecture': arm, 'replacement_weight': selected.get('normalB_replacement_weight', selected.get('m7_replacement_weight',1.))},
         'configurations': configurations, 'outer_split_seeds': repeats,
         'inner_split_rule': str(seed_base+24)+'+10*repeat_index+fold;20% of possible fit patient/near-duplicate groups',
         'fresh_seed_audit': {str(p): sha(p) for p in old_protocols}, 'split_plan_sha256': {str(p): sha(p) for p in plans},
         'arms': ['reference', 'subspace', 'large', 'token', 'multistream', 'fixed_gaussian', 'm6', 'm7', 'm8', 'candidate'],
         'planned_new_seed_fits': 90, 'planned_generative_fits': 18,
-        'hypothesis': 'Confirm the highest qualifying originalCV token candidate. Refit rawB,normalB,originalnormalL,registerL,multistreamL on sixunusedpatientplans; all preprocessing and normalspaces fit strictly within fittingpatients. Candidate fixed selectedstandalone or .1875rawB+.5625normalB+.25multistreamL; do not reselect standalone/alternate arms from confirmation outcomes.',
+        'hypothesis': 'Confirm the highest qualifying originalCV token candidate. Refit rawB,normalB,originalnormalL,registerL,multistreamL on sixunusedpatientplans; all preprocessing and normalspaces fit strictly within fittingpatients. Candidate fixed selectedstandalone or predeclaredL/B replacement formula; do not reselect standalone/alternate arms from confirmation outcomes.',
         'reference_comparators': 'M5;fixed.9M5+.1patientGaussian;M6=.25rawB+.75normalB;M7=.1875rawB+.5625normalB+.25normalL;M8=.1875rawB+.5625normalB+.25registerL.',
         'confirmation_gate': 'Mean sixfold MacroF1 strictly higher AND paired patient95% lower endpoint>0 versus EACH M8/M7/M6/M5/fixedGaussian. No automatic external evaluation.',
         'external_test_policy': 'Only original1717 trainingrows form fit/stop/outer; validation unused; all externalfeature rows NaN. No external outcomes or predictions loaded.',
-        'audit': 'Freeze all6plans/24geometries before90optimizertrajectories; freeze products before independentaudit. Restore all90selectedheads/statistics/maps/epochs/stop/outerprobs, all54actualCUDA normalL/registerL/multistreamL complete tasks/allgradients,18Gaussian moments, tenensembles/fivepairedcomparisons. Independentlyexpand allfixedfusion arithmetic in float64.',
+        'audit': 'Freeze all6plans/24geometries before90optimizertrajectories; freeze products before independentaudit. Restore all90selectedheads/statistics/maps/epochs/stop/outerprobs, all54actualCUDA normalL/registerL/candidate complete augmentedtasks/alltrainablegradients,18Gaussian moments, tenensembles/fivepairedcomparisons. Independentlyexpand allfixedfusion arithmetic in float64.',
         'frozen_artifacts': {str(p): sha(p) for p in sorted(artifacts)}, 'code_sha256': {name: sha(ROOT/name) for name in code}}
     dump(out/'protocol.json', protocol)
     dump(out/'state.json', {'status': 'frozen_before_training', 'new_seed_fits': 0, 'external_test_evaluated': False})

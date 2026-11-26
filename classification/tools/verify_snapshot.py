@@ -11,6 +11,9 @@ def main():
     manifest = json.loads((root / 'SNAPSHOT_MANIFEST.json').read_text())
     failures = []
     kinds = Counter()
+    paths = [entry['path'] for entry in manifest['files']]
+    if len(paths) != len(set(paths)):
+        failures.append('Duplicate paths in snapshot manifest')
     for entry in manifest['files']:
         path = root / entry['path']
         if not path.is_file():

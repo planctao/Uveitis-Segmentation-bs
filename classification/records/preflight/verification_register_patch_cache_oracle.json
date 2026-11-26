@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "size": 320,
+      "actual_images": 8,
+      "source_attention_output_maximum_error": 0.0078125,
+      "selected_patch_count": 64,
+      "minimum_selected_score_cutoff_error": 0.0,
+      "maximum_postattention_magnitude": 157474.140625,
+      "all_cached_arrays_finite": true,
+      "prefix_keys_excluded": true
+    },
+    {
+      "size": 448,
+      "actual_images": 8,
+      "source_attention_output_maximum_error": 0.0078125,
+      "selected_patch_count": 64,
+      "minimum_selected_score_cutoff_error": 0.0,
+      "maximum_postattention_magnitude": 156761.84375,
+      "all_cached_arrays_finite": true,
+      "prefix_keys_excluded": true
+    }
+  ],
+  "train_image_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "seconds": 9.727612972259521,
+  "code_sha256": {
+    "verify_register_patch_cache_oracle.py": "bab9eb16a2523834c3f412b153c0b381a3c2ca969a4bf8579c1a96a3d0084590",
+    "register_patch_query_features.py": "ec1157f5077f37fe4e8fcb15aced4f60bc1c1a8a8c9fb872c22854b2de65dd12"
+  }
+}

@@ -7,6 +7,7 @@ import torch
 import torch.nn.functional as F
 from torch import Tensor, nn
 
+from bs.convnext_seg import MambaVisionFusion, PEMambaVisionFusion, ProgressiveExpansionLite
 from bs.rdh import ReactionDiffusionHead
 from bs.wavelet import MultiScaleWBE
 
@@ -38,6 +39,7 @@ class TokenFPNHead(nn.Module):
         num_classes: int,
         dropout: float = 0.1,
         head_type: str = "conv",
+        decoder_attention: str = "none",
         rdh_iters: int = 8,
         rdh_dt: float = 0.2,
         rdh_reaction: str = "fisher",
@@ -59,9 +61,26 @@ class TokenFPNHead(nn.Module):
         self.projections = nn.ModuleList(
             [ConvNormAct(in_channels, decoder_channels, kernel_size=1) for _ in range(num_inputs)]
         )
+        fused_channels = decoder_channels * num_inputs
+        normalized_attention = str(decoder_attention).lower()
+        if normalized_attention in {"none", "identity", "off", "false", "0"}:
+            self.attention: nn.Module = nn.Identity()
+        elif normalized_attention in {"mambavision", "mamba-vision", "hmvf", "hybrid-mamba"}:
+            self.attention = MambaVisionFusion(
+                channels=fused_channels,
+                inner_channels=64,
+                d_state=8,
+                max_spatial_size=48,
+            )
+        elif normalized_attention in {"pe", "pe-lite", "pelite", "progressive-expansion"}:
+            self.attention = ProgressiveExpansionLite(channels=fused_channels, bottleneck=96)
+        elif normalized_attention in {"pe-hmvf", "pe+hmvf", "pelite-hmvf", "progressive-expansion-hmvf"}:
+            self.attention = PEMambaVisionFusion(channels=fused_channels, bottleneck=96)
+        else:
+            raise ValueError(f"Unsupported ViT decoder attention: {decoder_attention}")
         if self.head_type == "rdh":
             self.neck = nn.Sequential(
-                ConvNormAct(decoder_channels * num_inputs, decoder_channels, kernel_size=3, dropout=dropout),
+                ConvNormAct(fused_channels, decoder_channels, kernel_size=3, dropout=dropout),
                 ConvNormAct(decoder_channels, decoder_channels, kernel_size=3, dropout=dropout),
             )
             self.rdh_head = ReactionDiffusionHead(
@@ -85,7 +104,7 @@ class TokenFPNHead(nn.Module):
             )
         else:
             self.fuse = nn.Sequential(
-                ConvNormAct(decoder_channels * num_inputs, decoder_channels, kernel_size=3, dropout=dropout),
+                ConvNormAct(fused_channels, decoder_channels, kernel_size=3, dropout=dropout),
                 ConvNormAct(decoder_channels, decoder_channels, kernel_size=3, dropout=dropout),
                 nn.Conv2d(decoder_channels, num_classes, kernel_size=1),
             )
@@ -95,6 +114,7 @@ class TokenFPNHead(nn.Module):
     ) -> Tensor:
         projected = [projection(feature) for projection, feature in zip(self.projections, features)]
         fused = torch.cat(projected, dim=1)
+        fused = self.attention(fused)
         if self.head_type == "rdh":
             feat = self.neck(fused)
             guide = None
@@ -228,6 +248,7 @@ class DinoV3SegmentationModel(nn.Module):
         wbe_version: int = 1,
         wbe_snr_temperature: float = 1.0,
         head_type: str = "conv",
+        decoder_attention: str = "none",
         rdh_iters: int = 8,
         rdh_dt: float = 0.2,
         rdh_reaction: str = "fisher",
@@ -277,6 +298,7 @@ class DinoV3SegmentationModel(nn.Module):
             num_classes=num_classes,
             dropout=dropout,
             head_type=head_type,
+            decoder_attention=decoder_attention,
             rdh_iters=rdh_iters,
             rdh_dt=rdh_dt,
             rdh_reaction=rdh_reaction,

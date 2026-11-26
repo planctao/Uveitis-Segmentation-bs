@@ -1,0 +1,594 @@
+{
+  "created_at_utc": "2026-11-24T19:45:37.102976+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "rows": [
+    {
+      "arm": "hidden_linear",
+      "role": "standalone",
+      "base": "sourceL",
+      "images": 1717,
+      "corrected": 9,
+      "introduced": 26,
+      "net_correct_change": -17,
+      "infection_noninfection_relabels": 33,
+      "normal_vs_inflammatory_decision_flips": 5,
+      "normal_flips_corrected": 1,
+      "normal_flips_introduced": 2,
+      "true_inflammatory_pair_errors_corrected": 8,
+      "true_inflammatory_pair_errors_introduced": 24,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            555,
+            16,
+            0
+          ],
+          [
+            5,
+            108,
+            1
+          ],
+          [
+            0,
+            0,
+            17
+          ]
+        ],
+        "1": [
+          [
+            109,
+            3,
+            1
+          ],
+          [
+            8,
+            631,
+            2
+          ],
+          [
+            0,
+            0,
+            33
+          ]
+        ],
+        "2": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            1,
+            28,
+            1
+          ],
+          [
+            0,
+            0,
+            194
+          ]
+        ]
+      }
+    },
+    {
+      "arm": "hidden_linear",
+      "role": "fixed_fusion",
+      "base": "M8",
+      "images": 1717,
+      "corrected": 1,
+      "introduced": 6,
+      "net_correct_change": -5,
+      "infection_noninfection_relabels": 7,
+      "normal_vs_inflammatory_decision_flips": 1,
+      "normal_flips_corrected": 0,
+      "normal_flips_introduced": 0,
+      "true_inflammatory_pair_errors_corrected": 1,
+      "true_inflammatory_pair_errors_introduced": 6,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            566,
+            4,
+            0
+          ],
+          [
+            0,
+            115,
+            1
+          ],
+          [
+            0,
+            0,
+            16
+          ]
+        ],
+        "1": [
+          [
+            96,
+            1,
+            0
+          ],
+          [
+            2,
+            653,
+            0
+          ],
+          [
+            0,
+            0,
+            35
+          ]
+        ],
+        "2": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            18,
+            0
+          ],
+          [
+            0,
+            0,
+            208
+          ]
+        ]
+      }
+    },
+    {
+      "arm": "hidden_mlp64",
+      "role": "standalone",
+      "base": "sourceL",
+      "images": 1717,
+      "corrected": 13,
+      "introduced": 31,
+      "net_correct_change": -18,
+      "infection_noninfection_relabels": 40,
+      "normal_vs_inflammatory_decision_flips": 5,
+      "normal_flips_corrected": 2,
+      "normal_flips_introduced": 2,
+      "true_inflammatory_pair_errors_corrected": 11,
+      "true_inflammatory_pair_errors_introduced": 29,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            550,
+            21,
+            0
+          ],
+          [
+            4,
+            110,
+            0
+          ],
+          [
+            0,
+            0,
+            17
+          ]
+        ],
+        "1": [
+          [
+            105,
+            7,
+            1
+          ],
+          [
+            8,
+            631,
+            2
+          ],
+          [
+            0,
+            1,
+            32
+          ]
+        ],
+        "2": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            0,
+            29,
+            1
+          ],
+          [
+            0,
+            0,
+            194
+          ]
+        ]
+      }
+    },
+    {
+      "arm": "hidden_mlp64",
+      "role": "fixed_fusion",
+      "base": "M8",
+      "images": 1717,
+      "corrected": 4,
+      "introduced": 5,
+      "net_correct_change": -1,
+      "infection_noninfection_relabels": 9,
+      "normal_vs_inflammatory_decision_flips": 0,
+      "normal_flips_corrected": 0,
+      "normal_flips_introduced": 0,
+      "true_inflammatory_pair_errors_corrected": 4,
+      "true_inflammatory_pair_errors_introduced": 5,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            567,
+            3,
+            0
+          ],
+          [
+            2,
+            114,
+            0
+          ],
+          [
+            0,
+            0,
+            16
+          ]
+        ],
+        "1": [
+          [
+            95,
+            2,
+            0
+          ],
+          [
+            2,
+            653,
+            0
+          ],
+          [
+            0,
+            0,
+            35
+          ]
+        ],
+        "2": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            18,
+            0
+          ],
+          [
+            0,
+            0,
+            208
+          ]
+        ]
+      }
+    },
+    {
+      "arm": "hidden_token_linear",
+      "role": "standalone",
+      "base": "sourceL",
+      "images": 1717,
+      "corrected": 11,
+      "introduced": 21,
+      "net_correct_change": -10,
+      "infection_noninfection_relabels": 33,
+      "normal_vs_inflammatory_decision_flips": 1,
+      "normal_flips_corrected": 0,
+      "normal_flips_introduced": 0,
+      "true_inflammatory_pair_errors_corrected": 11,
+      "true_inflammatory_pair_errors_introduced": 21,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            556,
+            15,
+            0
+          ],
+          [
+            7,
+            107,
+            0
+          ],
+          [
+            0,
+            0,
+            17
+          ]
+        ],
+        "1": [
+          [
+            108,
+            4,
+            1
+          ],
+          [
+            6,
+            635,
+            0
+          ],
+          [
+            0,
+            0,
+            33
+          ]
+        ],
+        "2": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            1,
+            29,
+            0
+          ],
+          [
+            0,
+            0,
+            194
+          ]
+        ]
+      }
+    },
+    {
+      "arm": "hidden_token_linear",
+      "role": "fixed_fusion",
+      "base": "M8",
+      "images": 1717,
+      "corrected": 1,
+      "introduced": 6,
+      "net_correct_change": -5,
+      "infection_noninfection_relabels": 7,
+      "normal_vs_inflammatory_decision_flips": 0,
+      "normal_flips_corrected": 0,
+      "normal_flips_introduced": 0,
+      "true_inflammatory_pair_errors_corrected": 1,
+      "true_inflammatory_pair_errors_introduced": 6,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            567,
+            3,
+            0
+          ],
+          [
+            0,
+            116,
+            0
+          ],
+          [
+            0,
+            0,
+            16
+          ]
+        ],
+        "1": [
+          [
+            96,
+            1,
+            0
+          ],
+          [
+            3,
+            652,
+            0
+          ],
+          [
+            0,
+            0,
+            35
+          ]
+        ],
+        "2": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            18,
+            0
+          ],
+          [
+            0,
+            0,
+            208
+          ]
+        ]
+      }
+    },
+    {
+      "arm": "hidden_token_mlp64",
+      "role": "standalone",
+      "base": "sourceL",
+      "images": 1717,
+      "corrected": 14,
+      "introduced": 31,
+      "net_correct_change": -17,
+      "infection_noninfection_relabels": 42,
+      "normal_vs_inflammatory_decision_flips": 6,
+      "normal_flips_corrected": 2,
+      "normal_flips_introduced": 1,
+      "true_inflammatory_pair_errors_corrected": 12,
+      "true_inflammatory_pair_errors_introduced": 30,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            549,
+            22,
+            0
+          ],
+          [
+            7,
+            106,
+            1
+          ],
+          [
+            0,
+            1,
+            16
+          ]
+        ],
+        "1": [
+          [
+            107,
+            5,
+            1
+          ],
+          [
+            8,
+            632,
+            1
+          ],
+          [
+            0,
+            0,
+            33
+          ]
+        ],
+        "2": [
+          [
+            3,
+            0,
+            1
+          ],
+          [
+            0,
+            29,
+            1
+          ],
+          [
+            0,
+            0,
+            194
+          ]
+        ]
+      }
+    },
+    {
+      "arm": "hidden_token_mlp64",
+      "role": "fixed_fusion",
+      "base": "M8",
+      "images": 1717,
+      "corrected": 3,
+      "introduced": 7,
+      "net_correct_change": -4,
+      "infection_noninfection_relabels": 10,
+      "normal_vs_inflammatory_decision_flips": 1,
+      "normal_flips_corrected": 0,
+      "normal_flips_introduced": 0,
+      "true_inflammatory_pair_errors_corrected": 3,
+      "true_inflammatory_pair_errors_introduced": 7,
+      "base_prediction_to_candidate_by_true_label": {
+        "0": [
+          [
+            566,
+            4,
+            0
+          ],
+          [
+            1,
+            115,
+            0
+          ],
+          [
+            0,
+            1,
+            15
+          ]
+        ],
+        "1": [
+          [
+            95,
+            2,
+            0
+          ],
+          [
+            3,
+            652,
+            0
+          ],
+          [
+            0,
+            0,
+            35
+          ]
+        ],
+        "2": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            18,
+            0
+          ],
+          [
+            0,
+            0,
+            208
+          ]
+        ]
+      }
+    }
+  ],
+  "input_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/protocol.json": "ef5c7212539b28ca72f4a08331a6cdd29b82d1bd0b21de4dfaa0766d499460a3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_inflammatory_pair_specialist/verification.json": "e08ff2a680004a0307dbfc665d81c79c9f6d305c4b66d80ff0cacaff2f7e7b67",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_inflammatory_pair_specialist/comparison.json": "763275159df2f51f02abfe6a64ad82920dfcc3a75390070788cb1686f2aa174e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_inflammatory_pair_specialist/independent_saved_output_review_v3.json": "08707a271679a7c3ee2ad2765eeb85a862fe152f986463b50eb30b4fa86863a6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/metadata/manifest.csv": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/predictions.npz": "9077f2c381054ef07ab96f144d83522caf6945c7d4c3b4230f398cf30f04c27b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/predictions.npz": "2c2a6484b2063860e4cd14e5f9be37492a09867ff0df909e2ca21c8e38aa0f10",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/predictions.npz": "84d60fd4bd2c7b4a984e8b4da97c8ff3d1d400b5525db83dcaddf51e17208852",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_0/predictions.npz": "822dcfc4515a24425b72ee5f64ae2ac5def9ac8550d7029656fb6977632e2e0f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_1/predictions.npz": "6d36e7eb2625d2ad716f6f0628383d679da85467f1dd07836131ce012f604341",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_2/predictions.npz": "91d3c6b8ccbc165f1289196148895134a802b98fedae950b8075e37c6847ade2",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_linear/fold_0/predictions.npz": "a4f391a7f83e0070c3ecd05c1941f59033c39101d1c913f778b96ec5760cc918",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_linear/fold_1/predictions.npz": "a43a585633743f369bd7b6d3465eb7c236bdfbd1176d6dfbb5f3e8fd055e1d58",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_linear/fold_2/predictions.npz": "6165fbad7c7f9e084ba6bc76df205e1f0cd75f6aacf1098d07e64805a319cbc1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_mlp64/fold_0/predictions.npz": "ffc3527fbcde9113d08dc26a9835e5115474ea13bc735f6a2ed49a61e2dd61ee",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_mlp64/fold_1/predictions.npz": "eec66d597cc473d8e218353bd5e0b1ac93086396af983b7a10578dc12fe43539",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_mlp64/fold_2/predictions.npz": "764f8005568fd7f2b69664c1aa5d185b1b3ce295db06b2b738f36307cf74766a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_linear/fold_0/predictions.npz": "eea9db87956ff986a3b5d5bcce146aaad7c3fa686580a5746ecfccaa795a8ad5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_linear/fold_1/predictions.npz": "49688cc0c518d6f5a6ad3c82465410c2988a5efbe723d19a9ac096da668b6a5e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_linear/fold_2/predictions.npz": "223ae3e516e83d779eaedf710abfb9a3d0e7c0806938085ba09a1e60f8353c7e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_mlp64/fold_0/predictions.npz": "3f9e30bdc111b5345f6ea104c56f4c433e51ca4bc8c3db3199d374febc3fa538",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_mlp64/fold_1/predictions.npz": "031a0d8f85b1e484116dac1b40942d7590bd227f15961347cd627110e085c3b7",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_mlp64/fold_2/predictions.npz": "0ccdd682b33d33e01ad04ad2bd85ca80d6443da255c9a933d49893dca44b9df3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_linear_m8replace/fold_0/predictions.npz": "d1578d2028df1ea5b96b8a0feab0fd32b75e4c226d56a26ec44d6a42e6ceb582",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_linear_m8replace/fold_1/predictions.npz": "568d280ef0ae392a0df034e2dc29404dbda6d20a0064b675838e1ccab07724ad",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_linear_m8replace/fold_2/predictions.npz": "3524ad22df880b0268633a8c872def046d32d7faf8b141ef81e1939260146414",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_mlp64_m8replace/fold_0/predictions.npz": "8d22a917aecf894942ed2a7ee2dfb23cfa4c2fa037c305466789a8420d9a2fbf",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_mlp64_m8replace/fold_1/predictions.npz": "8f54a573aa2e53ba4a568307982ad8e0217c17f207bb102d01ff55b2c0231ee2",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_mlp64_m8replace/fold_2/predictions.npz": "874e463b0f63aa2c8bfdbb73779de10c52dd1e28a54869d7f5e2515b99000458",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_linear_m8replace/fold_0/predictions.npz": "673b35a470bbdaed0d137e18200a54af6a2bd5e47ec31204c355feb587cecdec",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_linear_m8replace/fold_1/predictions.npz": "b5e96eb2c1a0d2f3e900492af52b4d0d2cfcf38b5aec313f55d492e6904ae384",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_linear_m8replace/fold_2/predictions.npz": "c3d02314ee4af0f9c97f59388b1aca74fc31ac35d7d446bdf8268beadb1eaca1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_mlp64_m8replace/fold_0/predictions.npz": "202a8afafede30d39d3605a49265eca21ddac5893fc31952f1f0df0043d5cc91",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_mlp64_m8replace/fold_1/predictions.npz": "99cc865036a33a3ff430b9b395dcc55e5ebb6772a8c15c0d00b9f079827c9b82",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/inflammatory_pair_specialist/hidden_token_mlp64_m8replace/fold_2/predictions.npz": "bd3ffe9e15e9f6236786b69b1cc6128262530c1df22855462da0ed88f99dbdf5"
+  },
+  "case_table_sha256": "901d795ab5b9ea1539ae479b912a5fc66b9c7c2859ac003453e89209bb0a9dd7",
+  "code_sha256": "db3026da9330bd8de247a063b4a546129dd573b78fa0e8851b345fd3e76e227d",
+  "new_model_fits": 0,
+  "new_model_predictions": 0,
+  "new_candidate_scores": 0,
+  "external_test_evaluated": false,
+  "scope": "Descriptive reuse of selected original1717trainOOF only. No independent confirmation or causality claim. Preserving the normal probability does not guarantee preserving the normal argmax boundary because the larger of the other two probabilities can change. Historic sourceL is CPU-saved; sameCUDA normalcopy was proved separately and historic rounding difference reported. No changedstudy gates, hyperparameters, weights or newcandidate selection."
+}

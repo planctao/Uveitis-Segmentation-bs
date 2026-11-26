@@ -1,0 +1,59 @@
+{
+  "created_at_utc": "2026-11-24T15:38:17.848751+00:00",
+  "family": "register_patch_value",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "Query adaptation changes where the final register reads, but cannot change the content supplied by frozen value vectors. Test the complementary content path: learn small headwise or shared low-rank value residuals for the same selected spatial patch evidence, with the original DINO-L tail and fit-only M8L classifier frozen. This uses standard low-rank adaptation and counterfactual residual ingredients; no claim of architectural originality or equivalence to full-patch LoRA.",
+  "feature_plan": "Reuse the verified development-only patch-query bank, exact top64 spatial keys/values perhead at scales320/448, original register queries, postattention states and frozen original M8features. No new image reads/cache or label-based patch selection. Prefixkeys excluded. Original selected-attention distribution frozen; no query training.",
+  "architecture_plan": "Use the original query and selected keys to compute fixed softmax over64 selectedpatches in float64. Apply a64->rank->64 lowrank residual to each selected V before pooling; production may commute the linear update with the weighted sum, but the independentoracle applies the update to eachpatch first. Shared residual uses identical64D A/B across16heads and bothscales; perhead residual has16 independent A/B maps, shared acrossscales/registers/patches. A Kaiming, B zero, alpha/rank=2. Only the residual selected-value pool goes through frozen finalattention projection/gamma1 and the counterfactual frozenMLP/finalnorm correction. Add modified-minus-baseline registertail to originalregisterfeatures, originalfloat16cachepolicy, source fit-onlystats/normalPCA32/frozenclassifier. ZeroB must recover sourceprobabilities exactly. Source head/tail eval; baseglobal/regions/mid/dispersion unchanged. This is a selectedpatch anchoredcorrection, not an exact fullbackbone valueLoRA.",
+  "configuration_plan": [
+    {
+      "name": "shared_rank4",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "perhead_rank4",
+      "kind": "perhead",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "shared_rank8",
+      "kind": "shared",
+      "rank": 8,
+      "alpha": 16
+    },
+    {
+      "name": "perhead_rank8",
+      "kind": "perhead",
+      "rank": 8,
+      "alpha": 16
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Four standalone valueadaptedL and fixed .1875rawB+.5625normalB+.25candidateL. Reuse and verify12 originalM8L plus24B sourceheads; do not count again as newfits.",
+  "fixed_training": "Original complete taxonomy task and patient/near-duplicate fit/stop/outerplans. Actualbatch256; only valueA/B parameters. Init/order20291900+seed, AdamWlr.001 wd.01 epochs60 patience12 clip3; epoch0eligible. Sourcehead and tail remain frozen/eval. Three seedlabels.",
+  "preflight_plan": "Before classifierfits: test exact zero sourceidentity; both capacities/sharingrules; finite actualtrainimage tensors; shared/scalewise and registerpermutation checks; independent tokenwise-versus-pooled valueupdate through fullfrozen tail/head and independentlyexpanded complete task; nonzeroB alltrainablegradients; no frozenparameter changes across optimizer; compact actualCUDA firsttask witness and checkpointrestore; actual256image memory/runtime. Existingbank remains immutable. No preflight classification score.",
+  "launch_condition": "No classifierfit until register_patch_query all48heads/48fulltaskwitnesses/24Bsourceheads/16fusionphases audited and its qualification/requiredfreshconfirmation/promotiondecision terminal. If M8remains retained, freeze the complete verifiedbank, original12M8L/24Bheads, originalspaces/plans, allcode/proofs and then-currentreference before48fits. If querypromotes anewreference, review/redesign this queuedprotocol before anyfits; do not silently claim comparison againstoldM8 is sufficient.",
+  "selection": "OriginalCV strictlyabove then-current reference AND validationMacroF1 at least reference. Freeze highest qualifying originalCV candidate before two unusedpatient3fold repeats; higher sixfoldmeanF1 and pairedpatient95%lower>0 versus EACH retainedreference/M8/M7/M6/M5/fixedGaussian. A separate reviewed warmstart confirmation is required. Noautomaticexternal scoring.",
+  "external_test_evaluated": false,
+  "prefix256_preflight": "verification_register_patch_value_prefix256.json",
+  "preregistration_snapshot": "results/register_patch_value_preregistration_before_query_outcomes.json",
+  "preregistration_sha256": "24c43eb5c6b2841b1253c3103e15da74cd56ec7a2357c3bdc1d13389ad86c0db",
+  "continuation_protocol": "runs/patch_loop_cuda_ready/protocol.json",
+  "continuation_pid": 54139,
+  "protocol": "runs/register_patch_value/protocol.json",
+  "protocol_sha256": "24cd8c9a04508f6e2327350e882d34de4fc02b3aaf23abbd36616574b2468101",
+  "pid": 54383,
+  "model_preflight": "verification_register_patch_value_model.json",
+  "continuation_protocol_sha256": "52d10df22dbb7e0f322481006621eea7e6ff2320ebdf8e174672042462f9fe3a",
+  "passing_development_gates": 0,
+  "verification": "results/research_register_patch_value/verification.json",
+  "verification_sha256": "27c8064bf9c7f69bd967d902f314635a4643e63142b5fd726ef9b11a7f55f0af",
+  "comparison": "results/research_register_patch_value/comparison.json",
+  "comparison_sha256": "0bdd3393100af006163b7d5cca58416e8c448da9a156842097b67f9b46fbde72"
+}

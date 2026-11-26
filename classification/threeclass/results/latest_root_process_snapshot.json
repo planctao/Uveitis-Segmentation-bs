@@ -1,0 +1,54 @@
+{
+  "time_utc": "2026-11-24T21:35:57.632714+00:00",
+  "processes": {
+    "77579": {
+      "live": true,
+      "command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/register_patch_attention_coupling_experiments.py "
+    },
+    "77585": {
+      "live": true,
+      "command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/continue_register_patch_attention_coupling.py "
+    },
+    "2272": {
+      "live": true,
+      "command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/continuous.py "
+    },
+    "73581": {
+      "live": false,
+      "command": null
+    },
+    "73809": {
+      "live": false,
+      "command": null
+    },
+    "76787": {
+      "live": false,
+      "command": null
+    }
+  },
+  "active_coupling_state": {
+    "status": "training",
+    "pid": 77579,
+    "arm": "attention_only",
+    "phase": "fold_0",
+    "seed": 1,
+    "external_test_evaluated": false
+  },
+  "active_coupling_completed_summaries": 4,
+  "observer_state": {
+    "status": "waiting_register_patch_attention_coupling",
+    "pid": 77585,
+    "worker_pid": 77579,
+    "worker_status": "training",
+    "arm": "attention_only",
+    "phase": "fold_0",
+    "seed": 1,
+    "external_test_evaluated": false
+  },
+  "disk_free_bytes": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124": 901840896,
+    "/": 1886081024,
+    "/autodl-fs/data": 3081674752
+  },
+  "external_test_evaluated": false
+}

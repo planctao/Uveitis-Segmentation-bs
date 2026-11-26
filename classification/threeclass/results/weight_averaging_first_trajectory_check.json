@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "phase": "validation",
+  "seed": 0,
+  "raw_selected_parameters_bitwise_equal_original": true,
+  "actual_cuda_full_task": {
+    "batch_size": 256,
+    "full_objective_and_all_parameter_gradients_restored": true,
+    "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+    "maximum_independent_projection_error": 1.1920928955078125e-06
+  },
+  "temporal_cases": [
+    {
+      "arm": "raw",
+      "selected_epoch": 7,
+      "maximum_temporal_weight_expansion_error": 0.0
+    },
+    {
+      "arm": "ema0p8",
+      "selected_epoch": 25,
+      "maximum_temporal_weight_expansion_error": 3.993813912916977e-08
+    },
+    {
+      "arm": "ema0p95",
+      "selected_epoch": 25,
+      "maximum_temporal_weight_expansion_error": 5.6309290480394125e-08
+    }
+  ],
+  "checkpoint_sha256": "cb35d650ce02bac51a4139f1f57c0591d9326d4ee6df35ae77857ebec86ba523",
+  "external_test_evaluated": false
+}

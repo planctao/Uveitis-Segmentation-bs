@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "guard_cases": [
+    {
+      "case": "reject_duplicate_original",
+      "expected_rejection": "AssertionError",
+      "message": "Never duplicate a formal study.",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_active_predecessor",
+      "expected_rejection": "AssertionError",
+      "message": "The predecessor must complete before any new fit.",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_duplicate_fresh",
+      "expected_rejection": "AssertionError",
+      "message": "",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_unselected_fresh",
+      "expected_rejection": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/coupling-startup-guard-a7ve2nyn/results/research_register_patch_attention_coupling/selection_before_repeat.json'",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_unselected_formula_review",
+      "expected_rejection": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/coupling-startup-guard-3968z9a1/results/research_register_patch_attention_coupling/selection_before_repeat.json'",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_unstarted_saved_review",
+      "expected_rejection": "AssertionError",
+      "message": "Only completed studies can be reviewed; this study has not started.",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_active_saved_review",
+      "expected_rejection": "AssertionError",
+      "message": "Only completed studies can be reviewed; never read active checkpoints.",
+      "no_process_launch_or_file_mutation": true
+    }
+  ],
+  "code_sha256": {
+    "start_register_patch_attention_coupling.py": "7baf62fa7d89e197e0fd8769396f619657ce4918050b44bbb90e51d54bcf1faa",
+    "start_register_patch_attention_coupling_confirmation.py": "8abad754461f282fad0ff593e05865d9b93a08be40288bd00d0204041fed1222",
+    "verify_register_patch_attention_coupling_confirmation.py": "dfa10c244948d4c697d68fc05222286cec5d381f00ceab0533308627047e93e9",
+    "review_register_patch_attention_coupling_outputs.py": "2adcb475d649b278f577ac1515725b574f153fed700536f0870f61d5fbee5591",
+    "verify_register_patch_attention_coupling_startup.py": "fd7db4f1e2b06470bf1bd71050927d26d32c144e67d8ec0ee31c87eadc3e2d05"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "model_predictions": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Only rejected startup paths tested. Does not claim the unstarted original/fresh/full saved-output workflow has run. Actual prediction/restore/full-task engine checks are recorded separately."
+}

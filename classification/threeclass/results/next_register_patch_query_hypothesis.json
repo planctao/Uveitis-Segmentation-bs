@@ -1,0 +1,74 @@
+{
+  "created_at_utc": "2026-11-24T15:04:53.822002+00:00",
+  "family": "register_patch_query",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "Frozen-register head variations have largely failed M8 gates. Broaden the architecture: allow final DINO-L registerqueries to re-read spatialpatch evidence, instead of only recombining the four frozen registeroutputs. Restrict adaptation to a new small queryupdate; keep pretrainedbackbone, rawglobal/region/mid/dispersion features and the trained fit-only M8L head frozen. Earlier negative LoRA studies adapted B backbone QKV with small onlineimage batches, which differs from this L register-only cachedpatch correction. Standard lowrank attention and anchoredresidual ingredients; no originalityclaim.",
+  "feature_plan": "Development2091 images only. Capture actual lastblock normalized attentioninput atregisterpositions1:5, all postrotary patchkeys/values and originalperhead registerqueries, plus postattention/preMLP registerstate. Perimage/perhead choose exactly64 patchpositions with highest mean originalregister attention; class/registerprefix keys are excluded, deterministic index tie breaking. Store only selectedK/V float16, register queryinput/preMLPstate float32, originalquery float16 and sourcepixel/model hashes; scales320/448,16heads,headdim64. No labels used to selectpatches; no externalimage read. Featurebank estimated~1.2GB, no fullpatch bank. RawM8features remain originalfrozen bank.",
+  "architecture_plan": "Four configurations rank4/8 crossedwith shared/individual registerqueryupdate. A1024->rank Kaiming, B rank->1024 zero, scale alpha/rank=2. Shared uses mean normalizedregisterinput repeated4times; individual uses eachregisterinput. DeltaQ adds to originalregisterquery before original frozenqnorm; keys are frozen postrotary selectedpatchkeys. Compare selectedpatchsoftmax attention with/withoutDeltaQ and subtract the two weightedvalue pools. Project the1024D difference through frozenfinalattn norm/proj/gamma1; add to cached postattentionregisterstate. Recompute frozenfinalMLP/gamma2 and finalnorm for modified versus identicalbaseline cachedstate; difference corrects originalfrozen registerfeature. Thus correctionexactlyzero atzeroB even if cachedpreMLPstate is quantized and selectedpatchbank approximates fullattention. Cast correctedregisterfeatures through originalfloat16cachepolicy before originalfit-only statistics/normalPCA32/frozen M8Lhead. Allglobal/region/mid/dispersion features are exactly unchanged. No claim that top64 correction equals fullpatch LoRA. Head/backbone stay eval/frozen; onlyA/B trainable. Originalcomplete taxonomy task at actual256image batches, same patient/near-duplicate fit/stop/outerplans and three seed labels. Epoch0 eligible, AdamW lr.001 wd.01 epochs60 patience12 gradientclip3; configuration/hyperparameters fixed before classificationresults.",
+  "configuration_plan": [
+    {
+      "name": "shared_rank4",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "individual_rank4",
+      "kind": "individual",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "shared_rank8",
+      "kind": "shared",
+      "rank": 8,
+      "alpha": 16
+    },
+    {
+      "name": "individual_rank8",
+      "kind": "individual",
+      "rank": 8,
+      "alpha": 16
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachstandalone adapted frozenM8L classifier and fixed .1875rawB+.5625normalB+.25candidateL, unchanged referenceM8. Exact initialrawfeatures/M8head checkpoint perphase/seed reused, not trained anew or counted again.",
+  "preflight_plan": "Label-free actualimage extractionoracle, exact source attention/keys/values/rotary/patchindices/MLPstate reconstruction; no prefixkey leak; top64 deterministic and invariantto joint keyvalueindex permutation except declaredtieorder. Counterfactualbaseline cancels exactly; pretrainedallfrozen and sourcehead hashes unchanged before/after; rawglobalfeatures unchanged; rank4/8 shared/individual zeroB outputs exact sourceM8p at identicaleval batching, sharedqueries and individualquery connectivity, lowrank gradient oracle with nonzeroB through selectedsoftmax/proj/gamma/MLP/finalnorm/float16cast/normalprojection/originalhead and complete task. ActualCUDA firsttask/trainablegradients with parameter names, initialhashes and bitwiseoriginalmodel replay. Benchmark memory/runtime using trainimages only,0classificationfits/scores. Feature cache feasibility before full extraction.",
+  "launch_condition": "Architecture and featurepreflight may use trainingimages without scores; no classifierfit until conditionalreadout all48audits/24sources/16fusions and anyrequired freshconfirmation/promotion decision terminal. Before fitting freeze sourceM8L12heads/24Bheads, all originalspaces/plans, bank, code/preflight and then-current reference. Fresh confirmation requires a separate reviewed workflow because candidates adapt queries of a frozen warmstarted M8Lhead.",
+  "selection": "OriginalCV strictlyabove currentreference AND validation>=currentreference; freezehighestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "feasibility_dtype_amendment": {
+    "classification_fits": 0,
+    "classification_scores": 0,
+    "initial_failure": "postattention register residual overflows float16 on real trainimages; no classification score computed",
+    "resolution": "Keep actual normalizedqueryinput and postattention state asfloat32, selectedK/V and originalquery remain originalfloat16. No clipping/finite replacement. Re-run actualimage feasibility checks.",
+    "estimated_extra_bank_bytes": 68517888
+  },
+  "feasibility_difference_precision_amendment": {
+    "classification_fits": 0,
+    "classification_scores": 0,
+    "initial_failure": "FP32 subtraction of two attention pools amplified equivalent softmax kernel roundoff; independent projected attention difference discrepancy1.9664526917040348e-5 exceeded unchanged1e-5 tolerance.",
+    "resolution": "Compute only selectedquery/key dotproducts, bothsoftmaxes and valuepoolsubtraction in float64 in both candidate and independentoracle, cast pooleddifference tofloat32 for frozenprojection/tail/head. No tolerance widened. Originalcache sourceprecision remainsunchanged.",
+    "all_original_checks_retained": true
+  },
+  "feature_protocol": "runs/register_patch_query_bank/protocol.json",
+  "feature_protocol_sha256": "7c5e81491e1f0d549767e49d65e2c8f91340c43c55924321e4a7ace67ce4ec36",
+  "feature_pid": 45215,
+  "feasibility_preflight": "verification_register_patch_query_feasibility.json",
+  "cache_oracle": "verification_register_patch_cache_oracle.json",
+  "prefix256_preflight": "verification_register_patch_query_prefix256.json",
+  "continuation_protocol": "runs/patch_loop_cuda_ready/protocol.json",
+  "continuation_protocol_sha256": "52d10df22dbb7e0f322481006621eea7e6ff2320ebdf8e174672042462f9fe3a",
+  "continuation_pid": 54139,
+  "protocol": "runs/register_patch_query/protocol.json",
+  "protocol_sha256": "158cfdf46371529a0e50865bcdcc81d9a5fa734ba20535e3cf8f7205290d71d3",
+  "pid": 50169,
+  "model_preflight": "verification_register_patch_query_model.json",
+  "passing_development_gates": 0,
+  "audit_recovery_protocol": "runs/register_patch_query/audit_cuda_ready_protocol.json",
+  "audit_recovery_protocol_sha256": "127b2051fe87641a2b111baacc4c7f711db6e3b9386cb14f0f47b9321e1494d2",
+  "all_saved_stop_probabilities_bitwise_identical": true
+}

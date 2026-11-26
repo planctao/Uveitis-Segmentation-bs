@@ -1,0 +1,15 @@
+{
+  "recorded_at_utc": "2026-11-24T14:49:45.494145+00:00",
+  "prior_audit_pid": 40086,
+  "prior_audit_exit_code": 1,
+  "error": "KeyError: 'input_artifact_sha256'",
+  "source": "audit_m7_residual_session.py recovery protocol loop",
+  "cause": "The frozen scale-factorization audit recovery protocol v2 names its input digest map frozen_artifacts; the generic audit expected only input_artifact_sha256.",
+  "repair": "Require at least one recognized input digest map and verify all entries in each present map plus code_sha256. No frozen research source or artifact modified.",
+  "replacement_audit_pid": 41221,
+  "replacement_audit_status": "completed_passed",
+  "last_completed_audit_preserved": "results/session_integrity_20261124_m7_residual.json",
+  "external_test_evaluated": false,
+  "replacement_audit_archive": "results/session_integrity_archive_20261124T145010_336320_0000.json",
+  "replacement_audit_archive_sha256": "526d962ab6503048b3321db90457399faaff6a3d4ded72dbc16c70ce336145cb"
+}

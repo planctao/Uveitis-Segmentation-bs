@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "time_utc": "2026-11-24T04:22:37.131151+00:00",
+  "previous_goal_turn": "progress",
+  "previous_progress_evidence": "results/session_integrity_20261124_normal_geometry_extensions.json",
+  "completed_studies": [
+    {
+      "study": "bounded_normal_projection",
+      "new_threeclass_head_fits": 48,
+      "comparison_sha256": "ef7d73e6051952414e6c702b5ba674f85f642f2c6145dfea3864bab63991694e",
+      "verification_sha256": "fe561c0c74cd63da7a05dc68a167dca3dddfd22a05eee869fc3ee00dd8d4c675",
+      "passing_gates": 0
+    },
+    {
+      "study": "scale_normal_geometry",
+      "new_threeclass_head_fits": 48,
+      "comparison_sha256": "1f8cbf979a01788998bd0a2ad4ea2592e444e04e3766e2d8fadf724e4680ab9f",
+      "verification_sha256": "fe6bed71e388a2fe311737972f931788fd3c739fb93873867a9cdfe294e466a7",
+      "passing_gates": 0
+    },
+    {
+      "study": "normal_reference_gaussian",
+      "fit_kind": "generative_models",
+      "actual_fits": 48,
+      "reused_sources_not_counted": 24,
+      "comparison_sha256": "3b592c0cb95ecc51568987140aacc28de978d5c0aa1eb6ac8ff228da0a1c7b92",
+      "verification_sha256": "46b892bc9d9164efa03bead1027ec7d063a7680339d8fc3783419a592b9a5f8b",
+      "passing_gates": 0
+    },
+    {
+      "study": "dual_reference_cascades",
+      "fit_kind": "binary_heads",
+      "actual_fits": 96,
+      "reused_sources_not_counted": 24,
+      "comparison_sha256": "178bf25586b853f3c0f815d45448ee9846189ded340b8c7ff83dd1e773bb5d7d",
+      "verification_sha256": "59b397aefbe828de0cee0b5a8bf0f816e235e2a8a8063e56989d5020bb294fa5",
+      "passing_gates": 0
+    }
+  ],
+  "new_threeclass_head_fits": 96,
+  "new_binary_head_fits": 96,
+  "new_cascade_system_fits": 48,
+  "new_generative_fits": 48,
+  "m6_all_six_frozen_models_and_reproduction_code_unchanged": true,
+  "m6_selection_sha256": "a9845b5753da0ea28caf2e7aa8f7aa752a452d7748a9522e3f4abae66e9be3e2",
+  "continuous_search": {
+    "status": "running",
+    "pid": 22236,
+    "round": 556,
+    "completed_round": 555,
+    "completed_experiment_rounds": 555,
+    "proposal_iteration": 350134,
+    "legacy_proposal_iterations": 349843,
+    "feature": "multiscale_raw768",
+    "candidate_id": "ff9dfb3f1df4",
+    "hypothesis": "Joint optimizer, regularization and capacity exploration after tested local proposals were exhausted",
+    "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+    "time": "2026-11-24T12:22:24.874520+08:00",
+    "external_test_policy": "Never read or evaluate external results inside this loop.",
+    "process_confirmed_live": true,
+    "observed_at_utc": "2026-11-24T04:22:37.131072+00:00",
+    "process_command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/continuous.py "
+  },
+  "goal_status": "active",
+  "research_search_external_test_evaluated": false
+}

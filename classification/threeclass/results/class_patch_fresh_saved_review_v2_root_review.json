@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-11-25T10:34:07.143643+00:00",
+  "review_sha256": "676febcb640570cd7831f38b1a3877bfdf2312e6a9ba32a2835ae155de2daa2f",
+  "rule_sha256": "b0f2e5eac67b22fb522256385a8c41d1ad1873f08f6d61203b60175b17229940",
+  "input_artifacts_checked": 871,
+  "saved_metric_sets": 84,
+  "fixed_fusion_phases": 36,
+  "paired_comparisons": 7,
+  "patient_plans": 6,
+  "case_rows": 3434,
+  "unique_training_images": 1717,
+  "completed_models": 126,
+  "completed_actual_task_witnesses": 90,
+  "confirmation_gate_passed": false,
+  "m8_corrections_by_repeat": [
+    {
+      "repeat": 20293601,
+      "control": "m8",
+      "images": 1717,
+      "decision_changes": 0,
+      "errors_corrected": 0,
+      "errors_introduced": 0,
+      "net_correct_change": 0,
+      "changed_patients": 0,
+      "normal_boundary_changes": 0,
+      "infectious_noninfectious_changes": 0,
+      "maximum_probability_change": 1.7881393432617188e-07,
+      "mean_absolute_probability_change": 1.0143963002917644e-08
+    },
+    {
+      "repeat": 20293611,
+      "control": "m8",
+      "images": 1717,
+      "decision_changes": 7,
+      "errors_corrected": 1,
+      "errors_introduced": 5,
+      "net_correct_change": -4,
+      "changed_patients": 6,
+      "normal_boundary_changes": 3,
+      "infectious_noninfectious_changes": 4,
+      "maximum_probability_change": 0.03140176832675934,
+      "mean_absolute_probability_change": 0.003270125249400735
+    }
+  ],
+  "selected_epoch_zero_heads": {
+    "value": 16,
+    "matched_uniform": 16,
+    "matched_source_query": 17
+  },
+  "new_model_fits": 0,
+  "new_model_predictions": 0,
+  "new_candidate_scores": 0,
+  "external_images_read": 0,
+  "scope": "Root existing independent saved-review contracts/source/871inputbytes and correction-accounting checks, no model/task/statistic replay. V1 failed-review bytes preserved; V2 retained original tolerances and independently reconstructed declared float64 clip/normalize log-loss."
+}

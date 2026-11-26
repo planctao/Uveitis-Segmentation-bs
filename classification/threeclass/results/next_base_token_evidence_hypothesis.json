@@ -1,8 +1,8 @@
 {
   "created_at_utc": "2026-11-24T12:52:10.593868+00:00",
   "family": "base_token_evidence",
-  "status": "extracting_development_features",
-  "scores_evaluated": 0,
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
   "hypothesis": "M8 adds finalregister evidence only to the25% DINO-L branch while the56.25% normalDINO-B branch uses CLS/spatialmeans. Test a corresponding hiddenquery tokenresidual in normalB using final4registers, mid9regions and matched late9/quadrant4 spatialcontrols. This is a transfer of the alreadyconfirmed Lcomponent to another backbone branch, no originalityclaim. Designed before current position and structuredregister classifier outcomes.",
   "feature_plan": "Exact historical DINOv3-B/16 officialcheckpoint, same320/448 cachetransforms; only2091developmentimages. Capture block7raw3x3midregions, finalnorm4registers, final3x3control, final2x2control. Independently recoverprefixpositions and adaptivepool on6realimages, compareeveryfreshforward legacyCLS/regions/block7mean/patchstd againstoldBbank; preservehistorical late3x3regionbytes afteragreement. Freeze2091cachehashes/allsource/codebeforeextract,262shards and6distinctpostextractforwards; featurestage0classificationfits/scores/externalimages.",
   "architecture_plan": "OriginalnormalB1536 attentionMLP/fulltask/init/RNG; eachnewstream separatelyfitnormalize and normalpatientPCA32remove/clamp. LayerNorm1536->key/value32GELU; originalhiddenLayerNorm256->query32, softmaxpool thenzeroLinear32->256 times.1 residual. Mid9/late9 andregister4/quadrant4 controls, identicallearnedparameters. No tokenpositionalparameters.",
@@ -29,5 +29,16 @@
   "external_test_evaluated": false,
   "feature_protocol": "runs/base_token_features/protocol.json",
   "feature_protocol_sha256": "ff137767ce34ef1593f0b0e61b5281a5b411c4cb833b4c8f0d558a4c4826f400",
-  "feature_extraction_pid": 30711
+  "feature_extraction_pid": 30711,
+  "feature_bank": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/base_token_features/features/dinov3_base_token_development.npz",
+  "feature_bank_verification": "verification_base_token_feature_bank.json",
+  "model_preflight": "verification_base_token_evidence.json",
+  "study_preflight": "verification_base_token_study.json",
+  "training_only_diagnostics": "results/base_token_diversity_diagnostics.json",
+  "protocol": "runs/base_token_evidence/protocol.json",
+  "protocol_sha256": "d740944db640b7a1c426a1f45870f81f73a46c9732060f61278a91dd7a3d6fc8",
+  "pid": 34379,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_base_token_evidence/comparison.json"
 }

@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "time_utc": "2026-11-24T04:49:53.574139+00:00",
+  "previous_goal_turn": "progress",
+  "previous_progress_evidence": "results/session_integrity_20261124_scale_gaussian_cascades.json",
+  "completed_studies": [
+    {
+      "study": "bayesian_normal_reference",
+      "new_threeclass_head_fits": 48,
+      "reused_source_heads_not_counted": 0,
+      "comparison_sha256": "43a4df67b5e3e649f7ca4d5ad380d1d7ccff84d2355b09d8485be7c13d6b2d7c",
+      "verification_sha256": "817841430ef2f376904022f0b8b35de7e7b736714096885b5818156189913590",
+      "passing_gates": []
+    },
+    {
+      "study": "coupled_normal_reference",
+      "new_threeclass_head_fits": 48,
+      "reused_source_heads_not_counted": 0,
+      "comparison_sha256": "cb65f19dda2616d3141c0d73138b100bb54574e6abb74d3f4531020937bf2252",
+      "verification_sha256": "2a67425f19f0b3a208f9d8ec8d0ceea73fb208ea5ebd3ff10bcc1d9e2e152b8d",
+      "passing_gates": []
+    },
+    {
+      "study": "axis_reference_mixtures",
+      "new_threeclass_head_fits": 0,
+      "reused_source_heads_not_counted": 48,
+      "comparison_sha256": "939e0f738766de8bc21fcd3c9e3f4e445f73331027d62c9043de3dac3d015015",
+      "verification_sha256": "6432a6c8dedfd44929c16e9e5edef4b06f80cce6aa1ea96fd98cbd7815d9d5bd",
+      "passing_gates": [
+        "gaussian_scale10_m6_weight0p1",
+        "gaussian_scale10_m6_weight0p25"
+      ]
+    }
+  ],
+  "new_threeclass_head_fits": 150,
+  "m6_all_six_frozen_models_and_reproduction_code_unchanged": true,
+  "active_confirmation": "runs/axis_mixture_confirmation/protocol.json",
+  "active_confirmation_protocol_sha256": "d2f81506391067b9cb5c9b052e0c453c775ae3a5009fb32f9ada0aa0bef3bf69",
+  "goal_status": "active",
+  "research_search_external_test_evaluated": false,
+  "confirmation": {
+    "study": "axis_mixture_confirmation",
+    "new_threeclass_head_fits": 54,
+    "generative_fits": 18,
+    "comparison_sha256": "ae3c4868a6764914b3cae5220e7dd3bd72e5d643d7262c210e90b0e192fa66fb",
+    "verification_sha256": "4de225255eaa2967e5df6749513ce32cb63c31a7687be3adabf2a770bd400265",
+    "confirmation_gate_passed": false,
+    "candidate_vs_m6": {
+      "accuracy_difference": 0.00029120559114725886,
+      "macro_f1_difference": 0.00016176376057319697,
+      "accuracy_ci95": [
+        -0.001397487413752177,
+        0.0019221399028038371
+      ],
+      "macro_f1_ci95": [
+        -0.001729511370463796,
+        0.0019136810401230967
+      ],
+      "bootstrap_unit": "Patient split group; all images and repeated predictions jointly retained.",
+      "point_metric": "Pooled repeated predictions; distinct from averaging per-fold macro-F1."
+    }
+  },
+  "new_generative_fits": 18,
+  "next_hypothesis": "results/next_normal_tangent_adversarial_hypothesis.json",
+  "next_hypothesis_status": "planned_not_started",
+  "continuous_search": {
+    "status": "running",
+    "pid": 22236,
+    "round": 574,
+    "completed_round": 573,
+    "completed_experiment_rounds": 573,
+    "proposal_iteration": 350152,
+    "legacy_proposal_iterations": 349843,
+    "feature": "multiscale_raw768",
+    "candidate_id": "74d6f412b794",
+    "hypothesis": "Joint optimizer, regularization and capacity exploration after tested local proposals were exhausted",
+    "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+    "time": "2026-11-24T12:49:35.346724+08:00",
+    "external_test_policy": "Never read or evaluate external results inside this loop.",
+    "process_confirmed_live": true
+  }
+}

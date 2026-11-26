@@ -1,0 +1,180 @@
+{
+  "time_utc": "2026-11-23T23:08:09.146955+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "completed_studies": [
+    {
+      "study": "foreground_multiscale",
+      "neural_seed_fits": 48,
+      "generative_fits": 0,
+      "verification_passed": true,
+      "original_gate_passers": [],
+      "comparison": "results/research_foreground_multiscale/comparison.json",
+      "comparison_sha256": "708b50be6a746331cedb61249bf7eb8990889217872464b37c6899ece452ec72",
+      "verification": "results/research_foreground_multiscale/verification.json",
+      "verification_sha256": "4a48c5a266f98e1f222871315d79b758e23beeae56d067775adb155e39848d88"
+    },
+    {
+      "study": "factorized_taxonomy",
+      "neural_seed_fits": 48,
+      "generative_fits": 0,
+      "verification_passed": true,
+      "original_gate_passers": [],
+      "comparison": "results/research_factorized_taxonomy/comparison.json",
+      "comparison_sha256": "e49abb8b62b844fb168c5c0f92a7351ae79d7300e7ab5a1e6857e85c5dc22304",
+      "verification": "results/research_factorized_taxonomy/verification.json",
+      "verification_sha256": "62c38bde901c8954776e5603bd50cca8eeb1672662d0e91ab49a139611d5bd33"
+    },
+    {
+      "study": "spatial_graph",
+      "neural_seed_fits": 48,
+      "generative_fits": 0,
+      "verification_passed": true,
+      "original_gate_passers": [],
+      "comparison": "results/research_spatial_graph/comparison.json",
+      "comparison_sha256": "b0f87ea6183a43c1c1b375ed7864afe2667dacb7909ef0ec6e35cc258f88e556",
+      "verification": "results/research_spatial_graph/verification.json",
+      "verification_sha256": "7cf484d7fe856cb53ffe54519f8a5606e4b2679bdea7702b7a5cc9b98a0c35cc"
+    },
+    {
+      "study": "support_group_taxonomy",
+      "neural_seed_fits": 72,
+      "generative_fits": 0,
+      "verification_passed": true,
+      "original_gate_passers": [],
+      "comparison": "results/research_support_group/comparison.json",
+      "comparison_sha256": "2539e4e24490006ee80a0d274489d3e4ace2f199af7ce2357c201d35770b57e6",
+      "verification": "results/research_support_group/verification.json",
+      "verification_sha256": "91ea78d4940212438cb2454a89ababd40f5bd9b55d456d3704e7ffd43105a307"
+    },
+    {
+      "study": "context_attention",
+      "neural_seed_fits": 48,
+      "generative_fits": 0,
+      "verification_passed": true,
+      "original_gate_passers": [],
+      "comparison": "results/research_context_attention/comparison.json",
+      "comparison_sha256": "a21f96f660deb15ca0ab21c0086f60f7663c557df5098f6d08f9ad1322760dab",
+      "verification": "results/research_context_attention/verification.json",
+      "verification_sha256": "703dc04f5fa634152be025cd58a5c6d830b2555f1bd884e010709977a1bec1e9"
+    },
+    {
+      "study": "attention_diversity",
+      "neural_seed_fits": 48,
+      "generative_fits": 0,
+      "verification_passed": true,
+      "original_gate_passers": [],
+      "comparison": "results/research_attention_diversity/comparison.json",
+      "comparison_sha256": "b7e20f3bfb13588e40bb30af9c544f77b0c47faaf570e821ad8dcdddbf49437f",
+      "verification": "results/research_attention_diversity/verification.json",
+      "verification_sha256": "d4f94cbacc01d6179e3d8d7667879d5deee6afcde7ee89b0e8f175a0e40dd098"
+    },
+    {
+      "study": "subcluster_taxonomy",
+      "neural_seed_fits": 48,
+      "generative_fits": 0,
+      "verification_passed": true,
+      "original_gate_passers": [
+        "components4_penalty0.001"
+      ],
+      "comparison": "results/research_subcluster_taxonomy/comparison.json",
+      "comparison_sha256": "8dcf1733a3923f3c6b1282c0a35c469d4a3b7c49d3a9bb1bfdfeb36a68c04841",
+      "verification": "results/research_subcluster_taxonomy/verification.json",
+      "verification_sha256": "69389218886d7cfbc1f2fa79d3601f6cc969ede1d261a8a83356accfd9cd8ef5"
+    },
+    {
+      "study": "subcluster_patient_confirmation",
+      "neural_seed_fits": 36,
+      "generative_fits": 18,
+      "verification_passed": true,
+      "comparison": "results/research_subcluster_repeat/comparison.json",
+      "comparison_sha256": "cb2d58a8aac1b0c3a410e65ad849e6be557bccd1585f5a0c61d3051ac6f4b5c1",
+      "verification": "results/research_subcluster_repeat/verification.json",
+      "verification_sha256": "26376fdae3e37d8d160d1aef6aedba5589de9d50361c047a48b06e0e7b31e277"
+    },
+    {
+      "study": "subcluster_gaussian",
+      "neural_seed_fits": 0,
+      "generative_fits": 12,
+      "verification_passed": true,
+      "comparison": "results/research_subcluster_gaussian/comparison.json",
+      "comparison_sha256": "faae3e96f2ead1833c54770b157be8d618e49ab01df4d2cc8fbe4e5281fa9131",
+      "verification": "results/research_subcluster_gaussian/verification.json",
+      "verification_sha256": "1252b0b2fd8ef2eebc991da4246c486f250874234de83363262e1db94d93b82c"
+    }
+  ],
+  "actual_neural_seed_fits": 396,
+  "actual_generative_fits": 30,
+  "external_test_evaluated": false,
+  "count_note": "These nine studies include the216recorded in earlier foreground-taxonomysnapshot, plus144newsourceheads,36confirmationheadsand30statisticalfits. Do not add overlappingprogresssnapshots. Earlierkernel/anchored66andcontinuoussearch excluded.",
+  "new_shared_morphology_study": "runs/shared_morphology/protocol.json",
+  "protected_gaussian_hashes_verified": [
+    {
+      "path": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_0/source_model.pt",
+      "sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6"
+    },
+    {
+      "path": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_0/geometry.npz",
+      "sha256": "8a943227cd6c814b81da6b4e95ed8af17b3c1cdc0ca182196590ddada612dde6"
+    },
+    {
+      "path": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_1/source_model.pt",
+      "sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32"
+    },
+    {
+      "path": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_1/geometry.npz",
+      "sha256": "ba75f13ca268a218507cc1a16c10a772a974c1d2014cd357b3bdcbf4bc1cc5ca"
+    },
+    {
+      "path": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_2/source_model.pt",
+      "sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176"
+    },
+    {
+      "path": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone_gaussian/frozen_package/seed_2/geometry.npz",
+      "sha256": "51b79aacbfa8eae268606aac15e0a956193c999f48ad78933a71fc07c4f24c84"
+    }
+  ],
+  "continuation": "Goalactive. Continuoussearch22236remainsrunning. Sharedmorphology48fitslive; qualifiednewarchitecturesmustreceivefreshpatientconfirmation. No test-drivenselection.",
+  "protected_m5_full_validation_reproduction": {
+    "heads": [
+      {
+        "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+        "sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+        "all_validation_decisions_reproduced": true
+      },
+      {
+        "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+        "sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+        "all_validation_decisions_reproduced": true
+      },
+      {
+        "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt",
+        "sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+        "all_validation_decisions_reproduced": true
+      }
+    ],
+    "external_test_evaluated": false
+  },
+  "last_observed_shared_morphology": {
+    "status": "formal_training",
+    "pid": 44674,
+    "arm": "components4_penalty0.01",
+    "phase": "validation",
+    "seed": 0,
+    "external_test_evaluated": false
+  },
+  "last_observed_continuous_search": {
+    "status": "running",
+    "pid": 22236,
+    "round": 371,
+    "completed_round": 370,
+    "completed_experiment_rounds": 370,
+    "proposal_iteration": 349949,
+    "legacy_proposal_iterations": 349843,
+    "feature": "multiscale_raw768",
+    "candidate_id": "f8894753acf2",
+    "hypothesis": "Change lr around a leading validation configuration",
+    "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+    "time": "2026-11-24T07:09:10.495717+08:00",
+    "external_test_policy": "Never read or evaluate external results inside this loop."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "created_at_utc": "2026-11-24T08:27:40.731948+00:00",
+  "retained_development_model": "M7",
+  "candidate_id": "milestone7_normal_large_blend025",
+  "package": "results/milestone7_normal_large_blend/package.json",
+  "package_sha256": "eb4263c89ff0ee96d0c111d7de7cf4bbeead8062c1a67f532144ddeda9963c64",
+  "selection": "results/milestone7_normal_large_blend/selection_development_only.json",
+  "selection_sha256": "55d5791a007f4a6270e6d26002c770fa121597d3b7635a9a0669d88d3203033f",
+  "inference_verification": "results/milestone7_normal_large_blend/inference_verification.json",
+  "inference_verification_sha256": "0a84388cbf433e2a4f3a5ce20b2d7e5064e9af2fdb11c5ab95fe3ce2c5b244b7",
+  "original_cv_macro_f1": 0.8359324594339994,
+  "validation_macro_f1": 0.8928552155846959,
+  "validation_accuracy": 0.8957219251336899,
+  "fresh_sixfold_macro_f1": 0.825728467086445,
+  "fresh_sixfold_accuracy": 0.82414662126704,
+  "paired_f1_ci95_vs_m6": [
+    0.002012389807251913,
+    0.017281940940383385
+  ],
+  "next_candidate_gate": {
+    "original_cv_strictly_greater_than": 0.8359324594339994,
+    "validation_at_least": 0.8928552155846959,
+    "fresh_patient_comparators": [
+      "M7",
+      "M6",
+      "M5",
+      "fixed_gaussian"
+    ],
+    "fresh_confirmation": "Freeze the highest qualifying original development-CV candidate, then two unused patient3fold repeats; higher sixfold meanF1 AND joint paired patient95% lower endpoint>0 versus EACH comparator."
+  },
+  "external_test_evaluated": false,
+  "historical_external_reference": "M6, M5 and fixedGaussian preserved; external outcomes not used for continued selection.",
+  "inference_command": "python predict_normal_large_blend_v2.py --image /absolute/path/image.jpg",
+  "goal_status": "active"
+}

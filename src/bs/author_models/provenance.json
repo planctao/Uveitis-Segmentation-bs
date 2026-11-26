@@ -1,0 +1,116 @@
+[
+  {
+    "name": "ConDSeg",
+    "url": "https://github.com/Mengqi-Lei/ConDSeg.git",
+    "commit": "b4c22c399e72ec858026abc0e87143f3c53fe12d",
+    "source_file": "network/model.py",
+    "local_file": "condseg.py",
+    "source_sha256": "db0fba1a6bfdbae648fc9a6b30679472ad2edaec0926a3d391c552de30d10cd4",
+    "local_sha256": "3e96ae23b3394991be804d3bd64d4bce6122eb7cfe40fd9409aecab5191328f1",
+    "changes": [
+      "relative resnet import",
+      "explicit pretrained switch (default remains True)"
+    ]
+  },
+  {
+    "name": "ConDSeg",
+    "url": "https://github.com/Mengqi-Lei/ConDSeg.git",
+    "commit": "b4c22c399e72ec858026abc0e87143f3c53fe12d",
+    "source_file": "network/model_stage1.py",
+    "local_file": "condseg_stage1.py",
+    "source_sha256": "2df3f86fff7dcedd5e27a30385947a0e8f5de1e82f5cd140744fa8805ba4ddb0",
+    "local_sha256": "c6fd8b300151ea0fd8639f3854672891e9e15da2653a87909ec7cc6b5e802d46",
+    "changes": [
+      "relative resnet import",
+      "explicit pretrained switch (default remains True)"
+    ]
+  },
+  {
+    "name": "ConDSeg",
+    "url": "https://github.com/Mengqi-Lei/ConDSeg.git",
+    "commit": "b4c22c399e72ec858026abc0e87143f3c53fe12d",
+    "source_file": "network/resnet.py",
+    "local_file": "resnet.py",
+    "source_sha256": "889b2db27cb0d78f4c9bae3cba5826c28b85f9e5a636ec76fc10f8e48a006503",
+    "local_sha256": "62535edc0d16f9c2bb7e9d760fa2d1ffeaa03bc5aee81663052ccc07a241dcc6",
+    "changes": []
+  },
+  {
+    "name": "MedCAGD",
+    "url": "https://github.com/saadwazir/MedCAGD.git",
+    "commit": "fe2cbfc3656e72e033cfeb2bf4af162ded4656d0",
+    "source_file": "model.py",
+    "local_file": "medcagd.py",
+    "source_sha256": "b72fa46aca70f240c2e965cae4c38a1e33ae7d17ad06b8f85a90daa86062eb2c",
+    "local_sha256": "938a72c2d7a855762370953a3ceb372532dcaad7edf57020f35901b4a64f0558",
+    "changes": [
+      "explicit constructor parameters instead of cfgs globals",
+      "use feature_info.channels instead of dummy forward",
+      "NCHW encoder: remove incorrect channel-vs-width heuristic",
+      "two multilabel output logits",
+      "explicit pretrained_file passed to timm pretrained_cfg_overlay; no online dependency in formal training"
+    ]
+  },
+  {
+    "name": "U-KAN",
+    "url": "https://github.com/CUHK-AIM-Group/U-KAN.git",
+    "commit": "b20bf63490f01ba45cc2c18834bc0c4975c12715",
+    "source_file": "Seg_UKAN/archs.py",
+    "local_file": "ukan.py",
+    "source_sha256": "933747d2dab69944631e21a7082fe0365c0130d5a33d12c9b04bfc88964d7858",
+    "local_sha256": "7790ba41da0140181156073ab0d525fd3a260d77b7e4e48dbe1c613380fe4d43",
+    "changes": [
+      "remove unused utils wildcard import",
+      "relative KAN import"
+    ]
+  },
+  {
+    "name": "U-KAN",
+    "url": "https://github.com/CUHK-AIM-Group/U-KAN.git",
+    "commit": "b20bf63490f01ba45cc2c18834bc0c4975c12715",
+    "source_file": "Seg_UKAN/kan.py",
+    "local_file": "kan.py",
+    "source_sha256": "43043e22121baa3a75bf1f5f48a0ea6337dca14b337462e7e3e05efffd5b9550",
+    "local_sha256": "dd857818fad4cc8b873ddbe8ae17acf7c36d9c7921d9d4bc42d11bce95f2581f",
+    "changes": []
+  },
+  {
+    "name": "MK-UNet",
+    "url": "https://github.com/SLDGroup/MK-UNet.git",
+    "commit": "2fa8b230a057602539af7655203ad434bf56a5b6",
+    "source_file": "mkunet_network.py",
+    "local_file": "mkunet.py",
+    "source_sha256": "b9ba5ade1b116aef3a40ca35d756dcc15de9336c743a2022f90475bd4dec7031",
+    "local_sha256": "841eebb99a57147f26589eedadec196b0961e4f06108d411f5d26dc5a1506066",
+    "changes": [
+      "normalize CRLF line endings to LF",
+      "add vendored-origin comment; Python AST unchanged"
+    ],
+    "source_text_lf_sha256": "5672f2300cec718bb29bfecc37a1447d4aff976c69ffe17cd285ae76f5e6003d",
+    "source_hash_basis": "raw file bytes; previous value used text decoded with LF normalization"
+  },
+  {
+    "name": "PBE-UNet",
+    "url": "https://github.com/cruelMouth/PBE-UNet.git",
+    "commit": "49e25c908a54a19e240c63b01efeb3d862c85dd5",
+    "source_file": "network/PBEUNet.py",
+    "local_file": "pbeunet.py",
+    "source_sha256": "5224796311219a4cfa72c2200cf6e693dc097cff86a29c14d54bc0fedc1b2fb0",
+    "local_sha256": "8aa77ef4e959b624d4122bd21f03ebd2bac68719a7325a532cd4d90bdaab8aa0",
+    "changes": []
+  },
+  {
+    "name": "UD-Mamba",
+    "url": "https://github.com/piooip/UD-Mamba.git",
+    "commit": "f8aa3b873fc776214c0280034d4af41cf7082dad",
+    "source_file": "code/networks/mamba_sys.py",
+    "local_file": "udmamba.py",
+    "source_sha256": "da745fab0c6dbce3349f5e05d055b86c4e0bf600c3f710ba630a74259d65445c",
+    "local_sha256": "128819caa691c1e76ffa70f2fbe33bba1a00732bc84b1e33c506d226ee33f4d1",
+    "changes": [
+      "lazy optional fvcore profiling import",
+      "remove invalid debug tensor hook (wrong signature and breaks no_grad)",
+      "remove constructor directory creation outside repository; plotting remains explicit"
+    ]
+  }
+]

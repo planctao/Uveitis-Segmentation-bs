@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "time_utc": "2026-11-24T03:36:38.202205+00:00",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "completed_studies": {
+    "nonlinear_backbone_adapter": {
+      "verified_fits": 12,
+      "verification_sha256": "e2a63c49547ee443984593d6e6f8945c09d7a2b57bd26927b958d5d11f4c56e6",
+      "comparison_sha256": "354d7569e63a2b1e0317e9ed863372de28728cd8d74cb6246948495a2f0fc4f1"
+    },
+    "augmented_adapter": {
+      "verified_fits": 6,
+      "verification_sha256": "002879316531c77fdbd44c849a7cd2682f765c3c565135a646e59266fa007149",
+      "comparison_sha256": "fd9e0d58800930855e074121fb8765924dc383999e579c8699d0557ed7a3859b"
+    },
+    "normal_subspace": {
+      "verified_fits": 48,
+      "verification_sha256": "0c4756ac292efc11fd2d9676a93c912224640d3a4af5a80454ce5f6d8a579892",
+      "comparison_sha256": "dd1cec2f13bf6cd16326f9e12e32b4a0ffbcaa1a45f5fee015121d8d673b0a99"
+    },
+    "scoped_normal_subspace": {
+      "verified_fits": 48,
+      "verification_sha256": "80717de95f478649b6cb5b89e05dbd521a2fc6e2284c798a44a188cc2b30ffd5",
+      "comparison_sha256": "3d218d9a8fb8e9277d45c7494cd57b24d0345379fa0050d7a999765cbe584939"
+    }
+  },
+  "new_fresh_patient_confirmation_fits": 36,
+  "all12_original_M5_source_models_unchanged": true,
+  "m6_external_evaluation_verified": true,
+  "m6_selection_sha256": "a9845b5753da0ea28caf2e7aa8f7aa752a452d7748a9522e3f4abae66e9be3e2",
+  "m6_reproduction_archive_matches_all_frozen_code": true,
+  "next_study": "runs/normal_moment_geometry/protocol.json",
+  "next_study_hash": "d2a7209ffa73abc16ed81bf3eee39bcade7a958769818151ffb62ef79832c053",
+  "live_states": {
+    "normal_moment_geometry": {
+      "status": "training",
+      "pid": 75613,
+      "arm": "images_rank32",
+      "phase": "fold_2",
+      "seed": 1,
+      "external_test_evaluated": false
+    },
+    "continuous_search": {
+      "status": "running",
+      "pid": 22236,
+      "round": 525,
+      "completed_round": 524,
+      "completed_experiment_rounds": 524,
+      "proposal_iteration": 350103,
+      "legacy_proposal_iterations": 349843,
+      "feature": "multiscale_raw768",
+      "candidate_id": "2adf47078a40",
+      "hypothesis": "Change fine_contrastive around a leading validation configuration",
+      "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+      "time": "2026-11-24T11:36:31.941903+08:00",
+      "external_test_policy": "Never read or evaluate external results inside this loop."
+    }
+  },
+  "goal_status": "active",
+  "research_search_external_test_evaluated": false
+}

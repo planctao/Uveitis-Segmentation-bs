@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "family": "query",
+      "actual_stop_images": 242,
+      "saved_stop_probabilities_bitwise_identical": true
+    },
+    {
+      "family": "value",
+      "actual_train_images": 256,
+      "nonzero_adapter_checkpoint_restore_bitwise_identical": true
+    },
+    {
+      "family": "joint",
+      "actual_train_images": 256,
+      "nonzero_adapter_checkpoint_restore_bitwise_identical": true
+    }
+  ],
+  "conversion_inside_inference_produces_inference_parameters": true,
+  "conversion_outside_inference_preserves_ordinary_parameters": true,
+  "all48_replay_diagnosis_sha256": "4279f1e7c50854958cfa2b4a48c3159819d39fa61a7f0c5048623e4e30483417",
+  "unchanged_criteria": "Bitwise saved stop probabilities; independent probability5e-5 and exactdecisions; complete-taskgradient1e-6/3e-3.",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "code_sha256": {
+    "patch_adapter_cuda_ready.py": "4b6a2e95f3d668c1be7978e23aa6ad5b2599a8df6ce95db353da47bd79bcabbc",
+    "verify_patch_adapter_cuda_ready.py": "ccbdad2205ca5dcce8e7e10d88c553a0ff6e325123a5ab1c92fa49b95e2abeae",
+    "run_patch_value_cuda_ready.py": "9effff8a8d8a9271cfe271e1d6642d1df2843d1a6b35b1b34f60809d0733c4d7",
+    "run_patch_joint_cuda_ready.py": "221c6ffa877e16409f78e9efb320987b6fa01bcc3297311bb630db2ee1091aca",
+    "run_patch_query_confirmation_cuda_ready.py": "608cba7b4912f7defa674235fc42014d3ab49c6ecbd68f93a0144b95b99b6fc1",
+    "run_patch_value_confirmation_cuda_ready.py": "dfd7231934cf076f6eed524e387f3e60de194ef3d582099fe6da2efe306f43b7",
+    "run_patch_joint_confirmation_cuda_ready.py": "d59cfe8e9aeaa8462edca6adf926394c62add5d6f6052c05b4c831bdb5d4fff9",
+    "start_patch_value_cuda_ready.py": "2a282d7dd44b8264c8a2c870752a8bc50b9f2bcd69c3b86c625d0aef4cda64b3",
+    "start_patch_joint_cuda_ready.py": "1637525977545240377eec9115e4b6d803b89f6527d5627ad1214654f279a089",
+    "start_patch_query_confirmation_cuda_ready.py": "00a015b42060688387bdd415af67003a71c9c77610c5e09eee76a983770c30a5",
+    "start_patch_value_confirmation_cuda_ready.py": "28b1c36992e8e16c2c0dd486a744ec4d2b6c9582ded4a92e3f6f7feca8f88b15",
+    "start_patch_joint_confirmation_cuda_ready.py": "16728c5005d7039a3ec8bdde9b236c2761f3f7ceb4d1a185feb1f6f998652fcb"
+  }
+}

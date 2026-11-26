@@ -1,0 +1,188 @@
+project:
+  name: paper_author_pbeunet
+  seed: 42
+runtime:
+  device: cuda
+  precision: amp
+  num_workers: 8
+data:
+  root: dataset/dataset/split_dataorigin
+  image_dir: img
+  mask_dir: mask_only_itksnap
+  hrnet_result_dir: HRNet_Result
+  image_extensions:
+  - .jpg
+  - .jpeg
+  - .png
+  - .bmp
+  - .tif
+  - .tiff
+  mask_extensions:
+  - .nii.gz
+  - .nii
+  - .png
+  - .jpg
+  - .jpeg
+  - .bmp
+  - .tif
+  - .tiff
+  result_extensions:
+  - .png
+  - .jpg
+  - .jpeg
+  - .bmp
+  - .tif
+  - .tiff
+  folds:
+  - f1
+  - f2
+  - f3
+  - f4
+  - f5
+  label_values:
+  - 0
+  - 1
+  - 2
+  - 3
+  ignore_index: 255
+  exclude_val_augmented: true
+train:
+  image_size:
+  - 256
+  - 256
+  batch_size: 8
+  grad_accum_steps: 1
+  epochs: 30
+  optimizer: sgd
+  learning_rate: 0.001
+  min_learning_rate: 1.0e-06
+  scheduler: poly
+  weight_decay: 0.0001
+  amp: true
+  clip_grad_norm: 1.0
+  progress_log_interval: 100
+  save_interval: 30
+  sample_interval: 10
+  lesion1_sample_weight: 1.0
+  lesion2_sample_weight: 6.0
+  sampler_epoch_multiplier: 1.0
+  max_train_samples: null
+  max_val_samples: null
+  folds_to_run:
+  - f1
+  - f2
+  - f3
+  - f4
+  - f5
+  momentum: 0.9
+  nesterov: false
+  lr_power: 0.9
+model:
+  name: pbeunet_author
+  in_channels: 3
+  out_channels: 2
+  boundary_reduction: sum
+loss:
+  name: paper_dice_bce
+  bce_weight: 0.5
+  dice_weight: 1.0
+  per_image_dice: true
+  dice_smooth: 1.0e-05
+metric:
+  threshold: 0.5
+  selection_metric: paper_sweep_best_macro_dice
+  threshold_sweep:
+    enabled: true
+    thresholds:
+    - 0.05
+    - 0.1
+    - 0.15
+    - 0.2
+    - 0.25
+    - 0.3
+    - 0.35
+    - 0.4
+    - 0.45
+    - 0.5
+    - 0.6
+    - 0.7
+    - 0.8
+    - 0.9
+augmentations:
+  enabled: true
+  pipeline:
+  - name: hflip
+    prob: 0.5
+  - name: vflip
+    prob: 0.2
+  - name: affine
+    prob: 0.8
+    strength: 1.0
+    degrees:
+    - -25
+    - 25
+    scale:
+    - 0.9
+    - 1.1
+    translate: 0.04
+  - name: foreground_resized_crop
+    prob: 0.25
+    strength: 1.0
+    scale:
+    - 0.88
+    - 1.0
+    foreground_labels:
+    - 1
+    - 2
+    - 3
+    ignore_index: 255
+    min_keep: 0.7
+    attempts: 8
+  - name: random_order
+    prob: 1.0
+    blocks:
+    - name: brightness_contrast
+      prob: 0.55
+      strength: 0.75
+      brightness:
+      - -0.1
+      - 0.1
+      contrast:
+      - 0.85
+      - 1.2
+    - name: gamma
+      prob: 0.35
+      strength: 0.75
+      gamma:
+      - 0.8
+      - 1.25
+  - name: one_of
+    prob: 0.25
+    weights:
+    - 0.7
+    - 0.3
+    blocks:
+    - name: gaussian_noise
+      prob: 1.0
+      strength: 0.75
+      std:
+      - 0.0
+      - 0.025
+    - name: gaussian_blur
+      prob: 1.0
+      strength: 0.75
+      kernel_size: 5
+      sigma:
+      - 0.2
+      - 0.8
+outputs:
+  root: outputs/paper_reproduction_20261011/runs
+reproduction:
+  implementation: pinned_author_architecture
+  task_adaptation: two overlapping FA lesion masks
+  training_protocol: FA 30-epoch screening; not original benchmark scores
+  input_resolution: 256
+  encoder_pretraining: false
+  experiment_class: screen
+  optimization_choice: Paper SGD lr1e-3 + poly; author trainer defaults lr1e-2 and
+    combines iteration-poly with epoch cosine. Paper protocol chosen explicitly.

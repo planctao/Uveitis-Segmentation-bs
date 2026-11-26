@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "configuration": {
+        "rank": 4,
+        "kind": "shared",
+        "alpha": 8
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up"
+        ],
+        "trainable_parameters": 512,
+        "complete_task_gradient_error": 1.6439116734545678e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 1.9700905795616563e-08,
+      "checkpoint_source_reference_and_value_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    },
+    {
+      "configuration": {
+        "rank": 4,
+        "kind": "perhead",
+        "alpha": 8
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up"
+        ],
+        "trainable_parameters": 8192,
+        "complete_task_gradient_error": 1.0744088285719045e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 1.3377302821027115e-08,
+      "checkpoint_source_reference_and_value_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    },
+    {
+      "configuration": {
+        "rank": 8,
+        "kind": "shared",
+        "alpha": 16
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up"
+        ],
+        "trainable_parameters": 1024,
+        "complete_task_gradient_error": 1.7670572560746223e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 1.7846105038188398e-08,
+      "checkpoint_source_reference_and_value_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    },
+    {
+      "configuration": {
+        "rank": 8,
+        "kind": "perhead",
+        "alpha": 16
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.1746124073397368e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 1.4107342849456472e-08,
+      "checkpoint_source_reference_and_value_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    }
+  ],
+  "code_sha256": {
+    "register_patch_query_data.py": "6a7331e1c1e3a56badb557b075ea10bf7941729f730b9d48186840d9009236b5",
+    "register_patch_value_witness.py": "6abc1e5793f659d1b4f87655cb41789758ea83e95e5b89bb0d7f20ba98450934",
+    "verify_register_patch_value_model.py": "82f5d9e11c5dee5deca98beed765fef07314809a442c7ba9b1a89156568fb08f",
+    "register_patch_value.py": "ac6914de7862c41f0dc06c9794d49d0c5d3cb56819e2c36b5bf7c4103dbe88d0",
+    "audit_register_patch_value.py": "a9c3c7aa52139ef767dbd831068c01606b69bbe322f71beb646d1093c381813b",
+    "register_patch_query_features.py": "ec1157f5077f37fe4e8fcb15aced4f60bc1c1a8a8c9fb872c22854b2de65dd12",
+    "register_patch_value_experiments.py": "71f52ee1032806073aa18762095b5a56b7d72fc3e1af0eb03fb95eda42653f47"
+  },
+  "bank_verification_sha256": "f106c537b5b5067d21e6bd64e3e1296aad5d8177e02b1e9447bc1fd30dd3201c",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "seconds": 21.3301043510437,
+  "peak_allocated_bytes": 2761129984
+}

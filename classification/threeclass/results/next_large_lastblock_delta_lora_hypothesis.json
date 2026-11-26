@@ -1,0 +1,124 @@
+{
+  "created_at_utc": "2026-11-25T12:31:02.819486+00:00",
+  "family": "large_lastblock_delta_lora",
+  "status": "completed_no_candidate_passed",
+  "hypothesis": "Adapt the final DINOv3-L attention computation serving current M8, while keeping the complete source classifier and normal geometry frozen and preserving its cached-feature outputs exactly at zero update. Compare against an equal-parameter tokenwise low-rank residual before final normalization. This explores placement of learned updates; LoRA/residual anchoring are standard components, not an originality claim.",
+  "motivation": "Completed log-moment24fit/24actualtask/saved/root review passed with0eligible. Its best fixedfusionCV .8386251574322169 did not exceed M8 .8390087766590693. Prior generic full-block/LoRA/teacher-anchored studies exist on DINOv3 ViT-B and an older M5 head; this is a controlled new DINOv3-L/current frozenM8 source experiment, not a repeat or a claim that no backbone tuning was previously tried.",
+  "predecessor_proofs": {
+    "results/research_class_patch_log_moment/independent_saved_output_review.json": "4b686d71a858296a1a947b44a908c42144d55fe861d63290877aa1493e947a94",
+    "results/class_patch_log_moment_completed_root_review.json": "1a8235c1cec6138b62845d3213fba8518e11d699bb94ea933014428775d38c9f"
+  },
+  "retained_reference_registry": "results/research_reference_registry.json",
+  "retained_reference_registry_sha256": "0da36e047ba94459eee36fae8d593cb821decb76ee6225dc894e51617f17023d",
+  "backbone": {
+    "repository": "timm/vit_large_patch16_dinov3_qkvb.lvd1689m",
+    "commit": "3653d393df9fd16a9c1bae8a6c5a514f683b70ce",
+    "bytes": 1212548648,
+    "sha256": "56df97c299afea2ffa1eb90f866e8a290f452e227e732fef32a9eb9e8b52027f",
+    "storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/weights/dinov3_vitl16_lvd1689m.safetensors",
+    "access": "Public ungatedrepository via hf-mirror, exactcommit andcontenthashpinnedbeforedownload.",
+    "hash_source": "Pinnedcommit initial302response x-linked-etag (LFSobjectSHA256); final CDNresponse ETag is not contentSHA256."
+  },
+  "architecture_plan": {
+    "shared": "DINOv3-L/16,24blocks,1024channels,5prefix tokens, paired320/448. Freeze pretrained blocks0..22, block23 ordinary weights, finalnorm, original M8L classifier/taxonomy/normal geometry/fit-only source stats and all base-B fusion constituents. Source checkpoints are existing matched phase/seed runs/large_token_evidence/registers. No source head training in original study.",
+    "primary_attention": "Shared across resolutions, rank4 QKV low-rank delta in block23: Wqkv+2*B@A; A[4,1024],B[3072,4],16384 trainable scalar parameters, no trained bias. Kaiming-uniform A, zero B.",
+    "token_control": "Frozen block23 output x, then x+2*B@A@x before the same frozen final LayerNorm; rank8 A[8,1024],B[1024,8],16384parameters, no trained bias. Same A initialization recipe/seed and zero B. Shapes differ, so initial tensors are not claimed identical.",
+    "feature_anchor": "For each raw feature/global,3x3regions,patchstd and4registers, form original cached float16-to-float32 source feature plus (adapted feature minus frozen feature), with the subtraction evaluated first. Both new forwards use identical prelast cached activations, same microbatch, float32 final block/norm and identical feature operators. The mid block15 mean stays the original cached source value. Concatenate two resolutions as original. Zero B must give bitwise source features, complete source p/subtype/task; source class probabilities are not otherwise constrained invariant.",
+    "complete_task": "Unchanged existing coarse+subtype taxonomy loss with fit-only patient/leaf weights and patient consistency. Freeze original normal/global/side projections and classifier. No new teacher loss or regularizer other than stated AdamW decay."
+  },
+  "configuration_plan": [
+    {
+      "name": "attention_qkv_rank4",
+      "kind": "attention",
+      "rank": 4,
+      "alpha": 8,
+      "role": "sole_upgrade_candidate"
+    },
+    {
+      "name": "token_residual_rank8",
+      "kind": "token",
+      "rank": 8,
+      "alpha": 16,
+      "role": "matched_capacity_control_not_upgrade_candidate"
+    }
+  ],
+  "ram_activation_cache": {
+    "reason": "Current shared disk free~1.6GiB while host availableRAM~459GiB. Avoid a persistent multiGiB activation bank; keep a read-only in-memory cache and persist reproducible input/producer/content hashes and compact actual-task witnesses.",
+    "original_scope": "Exactly2091development rows selected by split(train/val), pretrained feature extraction only, no label/fit statistics. Deterministic original cachedRGB preprocessing320/448, float16 frozen trunk as existing large extraction. Capture full block23 input and exact rotary/auxiliary inputs. Freeze producer code, timm/torch implementation bytes/version, backbone bytes, manifest and all actual source image bytes before extraction; freeze cache array digests before any adapter fit.",
+    "estimated_activation_bytes": "2091*(405+789)*1024*2=5113104384bytes for token tensors, plus bounded auxiliary inputs. This is a static estimate, not a measured allocation.",
+    "fresh_scope": "Regenerate a frozen read-only cache only from1717training rows, no validation/external raw-image read in fresh confirmation. Freeze actual producer/row/content hashes before all fresh fits.",
+    "durability": "RAM is temporary. Each checkpoint records immutable source/pretrained/producer/config/input identities; replay reconstructs cache from original image bytes and checks saved actual-task row digests. No claim that a RAM path is a durable artifact."
+  },
+  "fixed_training": {
+    "initialization_and_order_seed_base": 20294400,
+    "batch_size": 256,
+    "microbatch_size": 8,
+    "precision": "float32 finalblock/norm/sourcehead; cached frozen trunkfloat16",
+    "gradient_checkpointing": "Non-reentrant checkpoint per8image final-block chunk; concatenate all256 differentiable features before ONE complete loss so cross-patient consistency semantics are retained. Never replace by an average of microbatch task losses.",
+    "optimizer": "AdamW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "max_epochs": 20,
+    "patience": 5,
+    "gradient_clip_norm": 3.0,
+    "epoch_zero_eligible": true,
+    "checkpoint_rule": "Maximum stop MacroF1, then minimum stop logloss. Same source phase/seed, data order, fulltask, optimizer and stopping across both arms; capacity/order/source matching is not identical initialization or equal compute."
+  },
+  "planned_original_new_seed_fits": 24,
+  "fit_allocation": "12primary+12newtokencontrol (validation and3patientCVphases x3seeds). Reuse original12M8L source heads and24base-fusion sources; no source/control refit beyond these24newadapters.",
+  "predeclared_saved_scores": 4,
+  "upgrade_candidate_scores": 2,
+  "fixed_fusions": "Standalone attentionL or.1875rawB+.5625normalB+.25attentionL only. Compute corresponding control scores at identical standalone/fusion weight; no weight/threshold/rank/temperature search.",
+  "original_selection": "Only attention primary is upgrade eligible. Original3foldmeanMacroF1 strictly>M8 AND corresponding newly trained token control; validationMacroF1>=both. If both standalone/fusion eligible, highest originalCV once only. Control is reported but never retrospectively nominated.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20294501,
+      20294511
+    ],
+    "inner_seeds": [
+      20294524,
+      20294525,
+      20294526,
+      20294534,
+      20294535,
+      20294536
+    ],
+    "supervised_fits": 108,
+    "actual_complete_task_witnesses": 72,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "allocation": "72freshrawB/normalB/normalL/registerL source heads+18selectedattentionadapter+18tokencontrol. Complete-task witnesses36normalL/registerL+36adapters. Frozen source/classifier/normal geometry as each fresh M8 source; paired controls share source/data/order/task/optimizer/stopping/fusion.",
+    "gate": "Highermean6foldMacroF1 ANDpairedpatient95%lowerCI>0 versus EACHM8/M7/M6/M5/fixedGaussian ANDtokencontrol. Six comparisons, no fresh reselection/external scoring/automatic promotion."
+  },
+  "engineering_requirements": [
+    "Pin actual trunk/last-block input, rotary arguments, cached image bytes and full cache digests; independently compare resumed lastblock/finalnorm to original raw image pipeline on fixed training images, and cached M8 feature/task zero anchors bitwise.",
+    "Actual256trainingimage fulltask for both arms atzero/nonzero, all16384trainable gradients compared to independent functional block/low-rank formula and complete loss. Atzero B, A gradients are mathematically zero; verify finite nonzero B gradient. After declared engineering steps verify finite A/B gradients. Freeze all other parameters and buffers.",
+    "Compare checkpointed micro8 ONE256 loss/allgradients to direct/independent calculation; preserve patient pairs spanning microbatches. Full actual CUDA checkpoint restore and saved witness row content replay.",
+    "Both actual standalone/fused original pipelines, fresh108/72allocation, six patient+near-duplicate isolated plans, gate boundary/formula tests and actual no-launch fullstartup before classifier fitting.",
+    "Independent completed saved-output review required after original24; if eligible freeze selected once, complete fresh108/72actualaudit and pre-outcome saved-output/pairedCI review before any inference/package/reference decision."
+  ],
+  "launch_condition": "No classifier fit until source/cache/image/task/control/gradient/frozen-state/partition/gate/startup engineering actually passes and all scientific dependencies are frozen. Preserve observed failures; use versioned recovery. Current log-moment negative+savedreview+root5128 review is completed. No new architecture may be stacked after formal launch until its original/fresh required reviews finish.",
+  "scientific_limits": "This is ordinary low-rank final-block adaptation with source feature anchoring and a matched parameter-count tokenwise residual control. Not full-backbone training, causal identification, anatomical localization or an originality claim. Rank/control placement/curvature and compute differ. Small data and repeated development exploration require fresh confirmation. No external image/outcome/prediction access.",
+  "classification_fits": 24,
+  "classification_scores": 0,
+  "new_activation_extraction_launched": true,
+  "training_launched": true,
+  "external_test_evaluated": false,
+  "cache_proof_pid": 25031,
+  "cache_proof_protocol": "runs/large_lastblock_delta_lora_cache_preflight_v2/protocol.json",
+  "active_preregistration": "results/large_lastblock_delta_lora_preregistration_v2.json",
+  "active_preregistration_sha256": "ee784341a64d46619fa28990e7452ac76e5410faeea6d39790df3d43d21d72c3",
+  "preregistration_version": 2,
+  "failed_cache_proof_pid": 24638,
+  "precision_diagnostic_pid": 24850,
+  "precision_diagnostic_sha256": "4aa9a477c2008427ce46e755462a89480a95f6a49e6bce41fd10449bdb9c621b",
+  "model_proof_pid": 25717,
+  "model_proof_protocol": "runs/large_lastblock_delta_lora_model_preflight/protocol.json",
+  "engine_proof_pid": 26088,
+  "engine_proof_protocol": "runs/large_lastblock_delta_lora_engine_preflight/protocol.json",
+  "pid": 26650,
+  "protocol": "runs/large_lastblock_delta_lora/protocol.json",
+  "protocol_sha256": "1b00851d8cfcae1e02a15a3abae6e18fa9edc4e4b42af899bfcee7fb7fb3d6d2",
+  "scores_evaluated": 4,
+  "passing_development_gates": 0
+}

@@ -1,0 +1,48 @@
+"""Exercise startup rejection paths without starting fitting, scoring, or child processes."""
+import json
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
+from experiment import ROOT, dump
+from kernel_residual_experiments import sha
+import start_register_patch_attention_coupling as original
+import start_register_patch_attention_coupling_confirmation as fresh
+import verify_register_patch_attention_coupling_confirmation as selected
+import review_register_patch_attention_coupling_outputs as reviewer
+
+
+def main():
+    destination=ROOT/'verification_register_patch_attention_coupling_startup.json'
+    assert not destination.exists()
+    cases=[]
+    for name, module, fixture, action, error in [
+        ('reject_duplicate_original',original,{'runs/register_patch_attention_coupling/protocol.json':{}},original.main,AssertionError),
+        ('reject_active_predecessor',original,{'runs/register_patch_query_selection/state.json':{'status':'training'}},original.main,AssertionError),
+        ('reject_duplicate_fresh',fresh,{'runs/register_patch_attention_coupling_confirmation/protocol.json':{}},fresh.main,AssertionError),
+        ('reject_unselected_fresh',fresh,{},fresh.main,FileNotFoundError),
+        ('reject_unselected_formula_review',selected,{},selected.main,FileNotFoundError),
+        ('reject_unstarted_saved_review',reviewer,{},lambda:reviewer.review('register_patch_attention_coupling'),AssertionError),
+        ('reject_active_saved_review',reviewer,{'runs/register_patch_attention_coupling/state.json':{'status':'training'}},lambda:reviewer.review('register_patch_attention_coupling'),AssertionError),
+    ]:
+        with tempfile.TemporaryDirectory(prefix='coupling-startup-guard-') as directory:
+            root=Path(directory)
+            for file,content in fixture.items():
+                path=root/file;path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(content))
+            before={str(p.relative_to(root)):sha(p) for p in root.rglob('*') if p.is_file()}
+            with patch.object(module,'ROOT',root),patch('subprocess.Popen',side_effect=RuntimeError('Forbidden launch in guard proof')):
+                try:action()
+                except error as exc:message=str(exc)
+                else:raise AssertionError(name+' unexpectedly proceeded')
+            after={str(p.relative_to(root)):sha(p) for p in root.rglob('*') if p.is_file()}
+            assert before==after,name
+            cases.append({'case':name,'expected_rejection':error.__name__,'message':message,'no_process_launch_or_file_mutation':True})
+    names=['start_register_patch_attention_coupling.py','start_register_patch_attention_coupling_confirmation.py',
+        'verify_register_patch_attention_coupling_confirmation.py','review_register_patch_attention_coupling_outputs.py',
+        'verify_register_patch_attention_coupling_startup.py']
+    dump(destination,{'passed':True,'guard_cases':cases,'code_sha256':{name:sha(ROOT/name) for name in names},
+        'classification_fits':0,'classification_scores':0,'model_predictions':0,'child_processes_started':0,
+        'external_images_read':0,'scope':'Only rejected startup paths tested. Does not claim the unstarted original/fresh/full saved-output workflow has run. Actual prediction/restore/full-task engine checks are recorded separately.'})
+    print('Seven duplicate/active/unselected guards rejected before file changes or process launches.',flush=True)
+
+
+if __name__=='__main__':main()

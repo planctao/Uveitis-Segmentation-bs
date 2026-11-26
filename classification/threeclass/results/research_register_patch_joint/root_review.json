@@ -1,0 +1,94 @@
+{
+  "created_at_utc": "2026-11-24T17:56:03.686148+00:00",
+  "review_passed": true,
+  "scope": "Review completed study accounting, existing independent semantic verification records, original-development gates, and all240 frozen training product bytes. No semantic model replay, new fit, new prediction or external scoring in this root review.",
+  "family": "register_patch_joint",
+  "classification_fits": 48,
+  "actual_task_witnesses": 48,
+  "source_register_heads": 12,
+  "source_fusion_heads": 24,
+  "fixed_fusion_phases": 16,
+  "training_product_digests_rechecked": 240,
+  "max_complete_task_gradient_error": 4.537878339760937e-08,
+  "candidate_scores_predeclared": 8,
+  "gate_passers": 0,
+  "retained_model": "M8",
+  "fresh_confirmation_launched": false,
+  "reason": "No candidate strictly improves M8 original CV while retaining M8 validation F1.",
+  "candidates": [
+    {
+      "name": "shared_q_shared_v_rank4",
+      "cv_macro_f1": 0.8147358387504604,
+      "validation_macro_f1": 0.8869203221761109,
+      "validation_accuracy": 0.8877005347593583,
+      "development_gate_passed": false
+    },
+    {
+      "name": "individual_q_perhead_v_rank4",
+      "cv_macro_f1": 0.8141572727526857,
+      "validation_macro_f1": 0.8883844014278797,
+      "validation_accuracy": 0.8877005347593583,
+      "development_gate_passed": false
+    },
+    {
+      "name": "shared_q_shared_v_rank8",
+      "cv_macro_f1": 0.8156650916128066,
+      "validation_macro_f1": 0.8883844014278797,
+      "validation_accuracy": 0.8877005347593583,
+      "development_gate_passed": false
+    },
+    {
+      "name": "individual_q_perhead_v_rank8",
+      "cv_macro_f1": 0.8150027056918163,
+      "validation_macro_f1": 0.8869203221761109,
+      "validation_accuracy": 0.8877005347593583,
+      "development_gate_passed": false
+    },
+    {
+      "name": "shared_q_shared_v_rank4_m8replace",
+      "cv_macro_f1": 0.8390087766590693,
+      "validation_macro_f1": 0.8926484202157984,
+      "validation_accuracy": 0.8957219251336899,
+      "development_gate_passed": false
+    },
+    {
+      "name": "individual_q_perhead_v_rank4_m8replace",
+      "cv_macro_f1": 0.8390087766590693,
+      "validation_macro_f1": 0.8926484202157984,
+      "validation_accuracy": 0.8957219251336899,
+      "development_gate_passed": false
+    },
+    {
+      "name": "shared_q_shared_v_rank8_m8replace",
+      "cv_macro_f1": 0.8381566517801158,
+      "validation_macro_f1": 0.8926484202157984,
+      "validation_accuracy": 0.8957219251336899,
+      "development_gate_passed": false
+    },
+    {
+      "name": "individual_q_perhead_v_rank8_m8replace",
+      "cv_macro_f1": 0.8390087766590693,
+      "validation_macro_f1": 0.8926484202157984,
+      "validation_accuracy": 0.8957219251336899,
+      "development_gate_passed": false
+    }
+  ],
+  "input_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_joint/protocol.json": "a5c2853a22858d4f88919385eda479d25161ca55d62656514efd98ec78b05450",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_joint/training_products_freeze_before_audit.json": "ecb06e3e8113fb5ff825ee15bb0ba70da5fbf2b1515084c7bab45fa6008e8e98",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_joint/comparison.json": "a89c76a082f3808964d59aad47b6aedfed1d157ff25059009e145bd3641e33d4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_joint/verification.json": "6eb0a705442f15e5139d9ccc301589ac73719081e90790460c2413da4566feb4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_joint/freeze_integrity_after_training.json": "35997c8a9a0d14ba3602337ab6ded68778eda0c77e3f4897a2f19cf7928e634b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_m8.json": "f51c3369a43d3b706479c48e13dec3a5c2c4248c155ae563310833f3d3d6dc74"
+  },
+  "next_study_already_launched": {
+    "family": "register_patch_gated_value",
+    "protocol_sha256": "08c1f9ad679132e7e0d597b03952ef3520a8a4c3911a2655312f0e38d0ba4d1a",
+    "pid_confirmed": 61166,
+    "actual_command_at_review": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/register_patch_gated_value_experiments.py "
+  },
+  "new_model_fits": 0,
+  "new_model_predictions": 0,
+  "new_candidate_scores": 0,
+  "external_test_evaluated": false
+}

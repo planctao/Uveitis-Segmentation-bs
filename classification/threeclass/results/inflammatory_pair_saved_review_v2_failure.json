@@ -1,0 +1,18 @@
+{
+  "created_at_utc": "2026-11-24T19:39:47.846337+00:00",
+  "status": "failed_saved_review_preserved",
+  "family": "inflammatory_pair_specialist",
+  "reviewer_sha256": "c172ebf243c25c1609349a209b2448c7d6166a9c75fce2b32ff457ac3709efef",
+  "protocol_sha256": "a8135fa778a9586cbc2322f5ebdc6699322776ed388c517657bbb57adf4ee2d2",
+  "failure": "assert np.array_equal(adapted[:,2],historical_saved_sourceL[:,2]) failed at line177; no output review written. V2 code/protocol unmodified.",
+  "diagnostic": "All4adaptedarms have bitwise equal normal-column ensembles in everyphase; historic savedsourceL differs at maximum1.6391277313232422e-6. Need new same-execution-path source replay rather than claiming historical bitwise identity.",
+  "historical_normal_difference_maximum": 1.6391277313232422e-06,
+  "classification_fits": 0,
+  "new_model_predictions": 0,
+  "external_test_evaluated": false,
+  "input_sha256": {
+    "runs/inflammatory_pair_specialist/protocol.json": "ef5c7212539b28ca72f4a08331a6cdd29b82d1bd0b21de4dfaa0766d499460a3",
+    "results/research_inflammatory_pair_specialist/comparison.json": "763275159df2f51f02abfe6a64ad82920dfcc3a75390070788cb1686f2aa174e",
+    "results/research_inflammatory_pair_specialist/verification.json": "e08ff2a680004a0307dbfc665d81c79c9f6d305c4b66d80ff0cacaff2f7e7b67"
+  }
+}

@@ -38,6 +38,7 @@ from bs.intensity_refine import apply_intensity_refiner, build_intensity_refiner
 from bs.model import DinoV3SegmentationModel, DinoV3FpnSegmentationModel
 from bs.multilabel import AsymmetricFocalTverskyBCE, EdgeGuidedLoss, EOCLoss, FICLoss, PaperDice, masks_to_paper_targets
 from bs.paths import project_path
+from bs.paired_experiments import initialize_paired_model, initial_weight_fingerprints, seed_paired_epoch
 from bs.postprocess import apply_postprocessor, build_postprocessor
 from bs.seed import set_seed
 from bs.tta import predict_with_tta
@@ -71,6 +72,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--clinical-area-weight", type=float, default=None)
     parser.add_argument("--clinical-area-scale", type=float, default=None)
     parser.add_argument("--clinical-area-channel-weights", default=None)
+    parser.add_argument("--loss-channel-weights", default=None, help="Per-lesion loss weights, e.g. 1,0 or 0,1 for a single-lesion expert")
     parser.add_argument("--edge-weight", type=float, default=None)
     parser.add_argument("--edge-band", type=int, default=None)
     parser.add_argument("--edge-soft", action=argparse.BooleanOptionalAction, default=None)
@@ -94,11 +96,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--freeze-backbone", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--variant", choices=["tiny", "small"], default=None)
     parser.add_argument("--weights", default=None)
-    parser.add_argument("--decoder-attention", choices=["none", "cbam", "emcad", "emcad-lite", "mosc", "ta-mosc", "wbe", "wbe-lite", "wavelet", "boundary", "boundary-lite", "boundary-refine", "pdc-neck", "oriented-pdc-neck", "pdc-refine", "oriented-pdc"], default=None)
+    parser.add_argument("--decoder-attention", choices=["none", "cbam", "emcad", "emcad-lite", "mosc", "ta-mosc", "wbe", "wbe-lite", "wavelet", "boundary", "boundary-lite", "boundary-refine", "pdc-neck", "oriented-pdc-neck", "pdc-refine", "oriented-pdc", "mambavision", "pe-lite", "pe-hmvf"], default=None)
     parser.add_argument("--decoder-attention-reduction", type=int, default=None)
     parser.add_argument("--decoder-deep-supervision", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--aux-loss-weight", type=float, default=None)
-    parser.add_argument("--head", choices=["conv", "rdh", "coleak", "zab", "edge", "gac", "dual_branch", "rdh_dual_branch"], default=None)
+    parser.add_argument("--head", choices=["conv", "rdh", "coleak", "zab", "edge", "gac", "dual_branch", "rdh_dual_branch", "mcads"], default=None)
     parser.add_argument("--edge-pdc-types", default=None, help="Comma-separated PDC types, e.g. cpdc,apdc,rpdc")
     parser.add_argument("--gac-iters", type=int, default=None)
     parser.add_argument("--gac-dt", type=float, default=None)
@@ -131,6 +133,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--rdh-ced-alpha", type=float, default=None)
     parser.add_argument("--rdh-ced-contrast", type=float, default=None)
     parser.add_argument("--rdh-ced-direction", choices=["along", "across"], default=None)
+    parser.add_argument("--logit-upsample", choices=["bilinear", "guided", "pls"], default=None)
+    parser.add_argument("--pls-use-vessel", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--pls-monotone", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--lesion2-sample-weight", type=float, default=None)
     parser.add_argument("--ema", action=argparse.BooleanOptionalAction, default=None)
     parser.add_argument("--ema-decay", type=float, default=None)
     parser.add_argument("--ema-start-epoch", type=int, default=None)
@@ -196,6 +202,7 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         ("loss", "soft_boundary_sigma"): args.soft_boundary_sigma,
         ("loss", "soft_boundary_band"): args.soft_boundary_band,
         ("loss", "soft_boundary_weight"): args.soft_boundary_weight,
+        ("loss", "channel_weights"): parse_float_or_list(args.loss_channel_weights),
         ("train", "max_train_samples"): args.max_train_samples,
         ("train", "max_val_samples"): args.max_val_samples,
         ("train", "progress_log_interval"): args.progress_log_interval,
@@ -208,6 +215,10 @@ def resolve_config(config: dict[str, Any], args: argparse.Namespace) -> dict[str
         ("model", "decoder_deep_supervision"): args.decoder_deep_supervision,
         ("model", "aux_loss_weight"): args.aux_loss_weight,
         ("model", "head"): args.head,
+        ("model", "logit_upsample"): args.logit_upsample,
+        ("model", "pls_use_vessel"): args.pls_use_vessel,
+        ("model", "pls_monotone"): args.pls_monotone,
+        ("train", "lesion2_sample_weight"): args.lesion2_sample_weight,
         ("train", "ema_enabled"): args.ema,
         ("train", "ema_decay"): args.ema_decay,
         ("train", "ema_start_epoch"): args.ema_start_epoch,
@@ -436,6 +447,12 @@ def build_loader(config: dict[str, Any], val_fold: str, split: str, logger: logg
         else:
             logger.info("train augmentations: %s", " -> ".join(dataset.augmentation.describe()))
 
+    paired_seed = config.get("runtime", {}).get("paired_data_seed")
+    worker_generator = None
+    sampler_generator = None
+    if paired_seed is not None:
+        worker_generator = torch.Generator().manual_seed(int(paired_seed) + (1 if split == "train" else 3))
+        sampler_generator = torch.Generator().manual_seed(int(paired_seed) + 2)
     sampler = None
     shuffle = split == "train"
     if split == "train":
@@ -457,7 +474,8 @@ def build_loader(config: dict[str, Any], val_fold: str, split: str, logger: logg
                 weights.append(weight)
             multiplier = float(train_cfg.get("sampler_epoch_multiplier", 1.0) or 1.0)
             num_samples = max(1, int(round(len(weights) * multiplier)))
-            sampler = WeightedRandomSampler(torch.tensor(weights, dtype=torch.double), num_samples=num_samples, replacement=True)
+            sampler = WeightedRandomSampler(torch.tensor(weights, dtype=torch.double), num_samples=num_samples,
+                                            replacement=True, generator=sampler_generator)
             shuffle = False
             logger.info(
                 "lesion-positive sampler: lesion1=%d/%d weight=%.2f lesion2=%d/%d weight=%.2f epoch_samples=%d",
@@ -478,7 +496,8 @@ def build_loader(config: dict[str, Any], val_fold: str, split: str, logger: logg
         num_workers=int(config["runtime"]["num_workers"]),
         pin_memory=True,
         drop_last=split == "train",
-        persistent_workers=int(config["runtime"]["num_workers"]) > 0,
+        persistent_workers=int(config["runtime"]["num_workers"]) > 0 and paired_seed is None,
+        generator=worker_generator,
     )
 
 
@@ -523,6 +542,7 @@ def build_model(config: dict[str, Any], load_pretrained: bool = True) -> nn.Modu
             wbe_version=int(wbe_cfg.get("version", 1)),
             wbe_snr_temperature=float(wbe_cfg.get("snr_temperature", 1.0)),
             head_type=("rdh" if head_type == "rdh" else "conv"),
+            decoder_attention=str(model_cfg.get("decoder_attention", "none")),
             rdh_iters=int(rdh.get("iters", 8)),
             rdh_dt=float(rdh.get("dt", 0.2)),
             rdh_reaction=str(rdh.get("reaction", "fisher")),
@@ -554,6 +574,13 @@ def build_model(config: dict[str, Any], load_pretrained: bool = True) -> nn.Modu
             decoder_attention=str(model_cfg.get("decoder_attention", "none")),
             decoder_attention_reduction=int(model_cfg.get("decoder_attention_reduction", 16)),
             decoder_deep_supervision=bool(model_cfg.get("decoder_deep_supervision", False)),
+            decoder_fusion_mode=str(model_cfg.get("decoder_fusion_mode", "sum")),
+            logit_upsample=str(model_cfg.get("logit_upsample", "bilinear")),
+            guided_radius=int(model_cfg.get("guided_radius", 2)),
+            guided_eps=float(model_cfg.get("guided_eps", 1e-2)),
+            pls_monotone=bool(model_cfg.get("pls_monotone", True)),
+            pls_use_vessel=bool(model_cfg.get("pls_use_vessel", True)),
+            pls_bg_sigma=float(model_cfg.get("pls_bg_sigma", 32.0)),
             head_type=str(model_cfg.get("head", "conv")),
             edge_channels=int(edge_cfg.get("channels", 0)),
             edge_pdc_types=edge_cfg.get("pdc_types"),
@@ -638,6 +665,7 @@ def build_loss(config: dict[str, Any]) -> nn.Module:
         clinical_area_weight=float(clinical_area_cfg.get("weight", 0.0) or 0.0),
         clinical_area_scale=float(clinical_area_cfg.get("scale", 1e-4) or 1e-4),
         clinical_area_channel_weights=clinical_area_cfg.get("channel_weights", (1.0, 1.0)) or (1.0, 1.0),
+        channel_weights=loss_cfg.get("channel_weights", (1.0, 1.0)) or (1.0, 1.0),
     )
     head_type = str(config["model"].get("head", "conv")).lower()
     if head_type == "coleak":
@@ -779,6 +807,23 @@ class ThresholdSweepDice:
         self.targets = torch.zeros((len(thresholds), 2), dtype=torch.float64)
 
     def update(self, logits: torch.Tensor, mask: torch.Tensor, image: torch.Tensor | None = None) -> None:
+        if self.postprocessor is None and self.intensity_refiner is None and self.fov_masker is None:
+            target, valid = masks_to_paper_targets(mask.detach(), self.ignore_index)
+            target = target.bool()
+            valid = valid.expand_as(target).bool()
+            probabilities = torch.sigmoid(logits.detach())
+            tgt = target & valid
+            target_counts = tgt.sum(dim=(0, 2, 3)).cpu().to(torch.float64)
+            self.targets += target_counts.unsqueeze(0)
+            device_thresholds = self.thresholds.to(device=probabilities.device, dtype=probabilities.dtype)
+            for start in range(0, len(device_thresholds), 4):
+                stop = min(start + 4, len(device_thresholds))
+                thresholds = device_thresholds[start:stop].view(-1, 1, 1, 1, 1)
+                pred = (probabilities.unsqueeze(0) >= thresholds) & valid.unsqueeze(0)
+                self.intersections[start:stop] += (pred & tgt.unsqueeze(0)).sum(dim=(1, 3, 4)).cpu().to(torch.float64)
+                self.predicted[start:stop] += pred.sum(dim=(1, 3, 4)).cpu().to(torch.float64)
+            return
+
         target, valid = masks_to_paper_targets(mask.detach().cpu(), self.ignore_index)
         target = target.bool()
         valid = valid.expand_as(target).bool()
@@ -1134,7 +1179,10 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
 
     train_loader = build_loader(config, val_fold, "train", logger)
     val_loader = build_loader(config, val_fold, "val", logger)
-    model = build_model(config).to(device)
+    model = initialize_paired_model(build_model, config)
+    if config.get("runtime", {}).get("paired_model_seed") is not None:
+        (fold_dir / "initial_weight_fingerprints.json").write_text(json.dumps(initial_weight_fingerprints(model), indent=2) + "\n")
+    model = model.to(device)
     if init_from:
         checkpoint = torch.load(init_from, map_location="cpu", weights_only=True)
         model.load_state_dict(checkpoint["model"] if "model" in checkpoint else checkpoint)
@@ -1168,6 +1216,7 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
         logger.info("ema enabled decay=%.6f start_epoch=%d", ema.decay, ema_start_epoch)
 
     for epoch in range(1, epochs + 1):
+        seed_paired_epoch(config, epoch, train_loader, val_loader)
         if device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(device)
         lrs = format_lrs(optimizer)
@@ -1221,7 +1270,7 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
             logger.info("new best %s=%.6f", selection_metric, best_score)
         save_checkpoint(fold_dir / "checkpoints" / "latest.pt", model, optimizer, scaler, epoch, best_score, config)
         if ema is not None and ema_val_metrics is not None:
-            ema_score = ema_val_metrics["paper_macro_dice"]
+            ema_score = ema_val_metrics.get(selection_metric, ema_val_metrics["paper_macro_dice"])
             if ema_score > best_ema_score:
                 best_ema_score = ema_score
                 best_ema_epoch = epoch
@@ -1236,7 +1285,7 @@ def train_fold(config: dict[str, Any], root_run_dir: Path, val_fold: str, init_f
                     config,
                     checkpoint_type="ema",
                 )
-                logger.info("new best_ema paper_macro_dice=%.6f", best_ema_score)
+                logger.info("new best_ema %s=%.6f", selection_metric, best_ema_score)
             save_checkpoint(
                 fold_dir / "checkpoints" / "latest_ema.pt",
                 ema.module,

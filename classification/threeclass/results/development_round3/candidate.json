@@ -1,0 +1,76 @@
+{
+  "group": "multiscale_vit_9fb62d66a053",
+  "mode": "flat",
+  "config": {
+    "arch": "attention",
+    "mode": "flat",
+    "hidden": 64,
+    "dropout": 0.4,
+    "lr": 0.001,
+    "wd": 0.01,
+    "epochs": 120,
+    "patience": 18,
+    "taxonomy_only": true,
+    "fine_contrastive": 0.01
+  },
+  "seeds": 3,
+  "thresholds": null,
+  "val": {
+    "n": 374,
+    "accuracy": 0.8796791443850267,
+    "balanced_accuracy": 0.8683825835609662,
+    "macro_f1": 0.874604779885324,
+    "log_loss": 0.41385764968069755,
+    "recall": {
+      "infectious": 0.8723404255319149,
+      "noninfectious": 0.9022988505747126,
+      "normal": 0.8305084745762712
+    },
+    "confusion_matrix": [
+      [
+        123,
+        18,
+        0
+      ],
+      [
+        10,
+        157,
+        7
+      ],
+      [
+        1,
+        9,
+        49
+      ]
+    ]
+  },
+  "seed_macro_f1": [
+    0.8548211952741033,
+    0.869008825668863,
+    0.8642208961144627
+  ],
+  "checkpoints": [
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/development_round3/seed_0/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/development_round3/seed_1/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/development_round3/seed_2/model.pt"
+  ],
+  "feature": "multiscale_vit",
+  "candidate_id": "9fb62d66a053",
+  "round": 203,
+  "proposal_iteration": 349781,
+  "round_policy_version": 2,
+  "hypothesis": "Change fine_contrastive around a leading validation configuration",
+  "group_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053",
+  "time": "2026-11-24T02:30:59.145141+08:00",
+  "source_checkpoints": [
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053/seed_0/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053/seed_1/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/continuous_search/multiscale_vit_9fb62d66a053/seed_2/model.pt"
+  ],
+  "snapshot_time": "2026-11-24T02:33:01.043088+08:00",
+  "checkpoint_sha256": {
+    "0": "2138ce8557857314361660277c8f757d24378319782c1534df91a44f397c9c4f",
+    "1": "6f0eef5faa50b9b8916024ef4884adb23e39d90af7f6dca1e1477d47585d2265",
+    "2": "c6479b9f74a7ce1a9a43bb7fc42e7ee3f112b0e89d4be6f4cd79e1bb9885a5e8"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "created_at_utc": "2026-11-24T15:56:17.108553+00:00",
+  "status": "v2_plan_and_zero_source_engine_preflight_passed_actual_selection_preflight_required",
+  "family": "register_patch_value_confirmation",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "finding": "Draft value confirmation arithmetic verifier referenced the sibling query architecture proof. Found in code review before any value fitting or confirmation launch. Its original planning proof only establishes plan/arithmetic/zero-source engine checks and is not classification evidence.",
+  "resolution": "Preserve all original draft code and planning proof bytes. Use value-specific architecture proof in versioned v2 verifier; versioned starter and plan verifier freeze exact v2 references. Original confirmation engine already imports the value model/trainer/witness and is unchanged.",
+  "preserved_original_code_sha256": {
+    "verify_register_patch_value_confirmation.py": "f56c2f0813c8e16e9e2e5a93a5f88750c67f279b82804a514c786b61be8e6834",
+    "start_register_patch_value_confirmation.py": "aaca8cccf1c062e32118fb507af51d1df8144bdbabbc079713f5166637a164aa",
+    "verify_register_patch_value_confirmation_plan.py": "772ec1803e9272562cfe766c3ebf8554ffb85de7688dabce47f7e785e1e6ffdd"
+  },
+  "replacement_code_sha256": {
+    "verify_register_patch_value_confirmation_v2.py": "101d0979f3f90ac421178db51b9a57b7f0e20f317be82a8757c67f851f28b5cd",
+    "start_register_patch_value_confirmation_v2.py": "deb7616bd3f5e5973c51e7cb3047f9071fb6191959679c7c9fb989a1f392b28b",
+    "verify_register_patch_value_confirmation_plan_v2.py": "d41572cc90a5aa0e42e7b5c3b7ff27e63124ed8fce13e674b86ccd572433c970"
+  },
+  "external_test_evaluated": false,
+  "replacement_planning_proof": "verification_register_patch_value_confirmation_plan_v2.json"
+}

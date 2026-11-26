@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-11-25T09:04:01.780181+00:00",
+  "failure": "Original starter referenced missing preregistration.external_test_policy while constructing protocol. It had only created the empty storage symlink; no formal protocol/state, classifier fit or launch occurred.",
+  "changes": "Version2 derives the unchanged development-only/no-automatic-external/promotion policy from existing scientific_limits/launch_condition, and adds an explicit no-launch protocol preview. Architecture, arms, training, original gate and confirmation plan equal preregistration.",
+  "original_sources_and_failure_preserved": true,
+  "actual_success_path_protocol_checked": true,
+  "code_sha256": {
+    "start_class_query_patch_evidence.py": "a03d40c263c6dc7e180918c9335dd7a16838fc0af1af76cb226762972699e031",
+    "start_class_query_patch_evidence_v2.py": "7a775252c25d5a73671d11c3eb1dda0bbf5219601763a1e55c371e73e92f49f4",
+    "verify_class_query_patch_evidence_startup_v2.py": "51dee85b1b260913f63de9ca58c56afae71c042dbeaba9504d6b6e8a2235b0d6",
+    "continue_class_patch_evidence_after_coupling.py": "49eac5269dd8999c5f41593c7884bc6542babdcdde8d13998a8e8df40159ce0d",
+    "continue_class_patch_evidence_after_coupling_v2.py": "63ceeabe64d0962f50e0bf51772837f32a6b04e5283f1417485a8c559167406f",
+    "verify_class_patch_evidence_after_coupling_v2.py": "c1fd07dc6e4aae19871973890d746afce6b0a4bcf8d325f9a38741abf612b92b"
+  },
+  "input_artifact_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_class_query_patch_evidence_startup_v2.json": "571561b59e2bd8b6b462098858d6ce790591c1615e5a9de18a0b9d9ae475b545",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_class_patch_evidence_after_coupling_v2.json": "be5e29cb2ba31bbc0d1cba544cd9b9d6fee5050b4e27a393f3fa6e93a41a152f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_startup_v2_preflight/protocol_preview.json": "2e3d51a65a08a96359ff33d7c2c59ca8888cc3fad06cedb237b45927f0c797dd",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_patch_evidence_after_coupling/state.json": "76c4112e425274613a920cf38f78b23f7d7630976308814431af65d1d4b7c148",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/class_patch_evidence_after_coupling.log": "72fddb37c968d8ad49e9eae0abfd6ed8de4374126e898545c1e877459020e381",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_patch_evidence_after_coupling/protocol.json": "9e4cda3376b1bb4b018bfe44f20c29bd5ded2e800dffcd35f75a40cc9f1b77e2"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "model_predictions": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Startup metadata/queue recovery only, not a change to model/training/evaluation and not architecture performance evidence."
+}

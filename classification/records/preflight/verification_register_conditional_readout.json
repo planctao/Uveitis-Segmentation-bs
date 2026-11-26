@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "control",
+      "m8_exact_control_error": 0.0,
+      "constant_hidden_modulation_zero_verified": true,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.043081283569336e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 1.0
+    },
+    {
+      "kind": "bounded_add",
+      "m8_exact_control_error": null,
+      "constant_hidden_modulation_zero_verified": true,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5459954738616943e-07,
+      "token_permutation_error": 5.587935447692871e-09,
+      "hidden_query_attention_change": 0.3313611149787903
+    },
+    {
+      "kind": "multiplicative",
+      "m8_exact_control_error": null,
+      "constant_hidden_modulation_zero_verified": true,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.9278377294540405e-07,
+      "token_permutation_error": 6.984919309616089e-10,
+      "hidden_query_attention_change": 0.3313611149787903
+    },
+    {
+      "kind": "hybrid",
+      "m8_exact_control_error": null,
+      "constant_hidden_modulation_zero_verified": true,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 3.296881914138794e-07,
+      "token_permutation_error": 1.1641532182693481e-10,
+      "hidden_query_attention_change": 0.3313611149787903
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "kind": "control",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "compact_raw_and_projected_arrays_sha256_restored": true,
+        "original_model_cuda_forward_replayed_at_saved_bits": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "bounded_add",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "compact_raw_and_projected_arrays_sha256_restored": true,
+        "original_model_cuda_forward_replayed_at_saved_bits": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "multiplicative",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "compact_raw_and_projected_arrays_sha256_restored": true,
+        "original_model_cuda_forward_replayed_at_saved_bits": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "hybrid",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "compact_raw_and_projected_arrays_sha256_restored": true,
+        "original_model_cuda_forward_replayed_at_saved_bits": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_conditional_readout.py": "12406e40f84047f8edbbbb9ca79f2ff3ed57c997f8b3811907072aac6d2804d5",
+    "audit_register_conditional_readout.py": "b996af47419aa61bc9e788655331a136f5d56793a966eb437cb654fb982a2fa9",
+    "verify_register_conditional_readout.py": "37a19bf2dbf0be4a594a0ea00abd29e56d3096ee3ecc18ccbf24e46e592acfc3",
+    "compact_token_witness.py": "a98b2f42da8b7888cba1b0951e6b8799b11cf475d4d0e3280c936a725dd0ef1f",
+    "large_token_data.py": "f093038f30d9d23c2d0dd63587944d564fbedeaa6478143485b282eface4f461"
+  },
+  "checks": [
+    "Four actual256image complete tasks/allparametergradients independently reconstructed with linked hiddenreadout factors",
+    "OriginalnormalL initialization/RNG/zeroreadouttask/basegradients identical; equalparameters, originalcontrol exactM8trainedidentity",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Readout/tanh/affinefreehiddennormalization/factors independently verified, constant hidden has zeromultiplicativefactor; tokenpermutation, linkedhiddenquery, optimizerupdates/frozenbuffers/strictrestore; fouractualCUDA compactfirsttask/allgradientreplays with byteexactraw/projectedhashes and originalCUDA probabilities"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

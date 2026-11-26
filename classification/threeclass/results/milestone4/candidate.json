@@ -1,0 +1,68 @@
+{
+  "group": "protected_model",
+  "mode": "flat",
+  "config": {
+    "arch": "attention",
+    "mode": "flat",
+    "hidden": 64,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "wd": 0.01,
+    "epochs": 120,
+    "patience": 18,
+    "taxonomy_only": true,
+    "aux": 1.0
+  },
+  "seeds": 3,
+  "thresholds": null,
+  "val": {
+    "n": 374,
+    "accuracy": 0.8823529411764706,
+    "balanced_accuracy": 0.8782146671585472,
+    "macro_f1": 0.880455192955193,
+    "log_loss": 0.38585195766533587,
+    "recall": {
+      "infectious": 0.8794326241134752,
+      "noninfectious": 0.8908045977011494,
+      "normal": 0.864406779661017
+    },
+    "confusion_matrix": [
+      [
+        124,
+        17,
+        0
+      ],
+      [
+        12,
+        155,
+        7
+      ],
+      [
+        2,
+        6,
+        51
+      ]
+    ]
+  },
+  "seed_macro_f1": [
+    0.8775863473444119,
+    0.8812592206104198,
+    0.8621760955094288
+  ],
+  "checkpoints": [
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone4/protected_model/seed_0/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone4/protected_model/seed_1/model.pt",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone4/protected_model/seed_2/model.pt"
+  ],
+  "feature": "multiscale_vit",
+  "candidate_id": "4726000e84fe",
+  "source_candidate_id": "4726000e84fe",
+  "source_cv_summary": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/multiscale_vit/candidate_crossvalidation/continuous_4726000e84fe/summary.json",
+  "protected_from_pruning": true,
+  "full_fit_refitted": false,
+  "checkpoint_sha256": {
+    "0": "4867aa080bed208c9bec0c88d5d94ed4bb9c3ba3ec9b71e6360e639d6f52e76e",
+    "1": "101c9ba29f513f82bd355a9ce1dbd253d36f4a211032ed99f136486954e3cfe7",
+    "2": "fbf3a500b25a733f33a440b74a5458f34aed880f7351c1e689729b21361b6f30"
+  }
+}

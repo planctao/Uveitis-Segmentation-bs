@@ -1,0 +1,49 @@
+{
+  "phase": "validation",
+  "seed": 0,
+  "selected_epoch": 0,
+  "stop_images": 374,
+  "saved_vs_replay": {
+    "bitwise_equal": true,
+    "maximum_absolute_error": 0.0,
+    "differing_values": 0,
+    "differing_decisions": 0
+  },
+  "replay_vs_repeat": {
+    "bitwise_equal": true,
+    "maximum_absolute_error": 0.0,
+    "differing_values": 0,
+    "differing_decisions": 0
+  },
+  "replay_vs_fresh_restore": {
+    "bitwise_equal": true,
+    "maximum_absolute_error": 0.0,
+    "differing_values": 0,
+    "differing_decisions": 0
+  },
+  "saved_vs_independent": {
+    "bitwise_equal": false,
+    "maximum_absolute_error": 2.384185791015625e-07,
+    "differing_values": 260,
+    "differing_decisions": 0
+  },
+  "saved_vs_no_grad": {
+    "bitwise_equal": true,
+    "maximum_absolute_error": 0.0,
+    "differing_values": 0,
+    "differing_decisions": 0
+  },
+  "query_parameter_maxima": {
+    "down.weight": 0.031248915940523148,
+    "up.weight": 0.0
+  },
+  "torch_version": "2.5.1+cu124",
+  "float32_matmul_precision": "highest",
+  "matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "all_original_training_products_sha256_unchanged": true,
+  "new_classification_fits": 0,
+  "classification_scores_evaluated": 0,
+  "external_test_evaluated": false,
+  "seconds": 11.261471509933472
+}

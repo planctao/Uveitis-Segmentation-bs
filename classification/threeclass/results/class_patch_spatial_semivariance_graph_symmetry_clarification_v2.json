@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-11-25T10:40:48.154131+00:00",
+  "preregistration_sha256": "bfbdcaa415abfa0eec440a4e2e3fb6ff0c8618084f9d8052e09028e1ed79603d",
+  "finding": "The explicit deterministic ascending physical-index tie rule cannot also guarantee full reflection equivariance when the fourth-neighbour cutoff is tied. Preserve the exact preregistered4NN architecture and training/selection gates. Clarify only the overbroad engineering reflection test before any classifier fit.",
+  "preflight_clarification": "Joint value/key/index permutation invariance and translation invariance remain required. Under reflection compare physical neighbour sets only for nodes with strict fourth-vs-fifth distance separation; explicitly expose cutoff-tie cases and do not claim general reflection invariance.",
+  "cutoff_tie_counterexample": {
+    "original_positions": [
+      5,
+      1,
+      4,
+      9,
+      0,
+      2
+    ],
+    "reflected_positions": [
+      6,
+      2,
+      7,
+      10,
+      3,
+      1
+    ],
+    "original_center_neighbour_node_ids": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "reflected_center_neighbour_node_ids": [
+      1,
+      2,
+      3,
+      5
+    ]
+  },
+  "translation_neighbour_graph_equal": true,
+  "same_mean_variance_different_spatial_arrangement_toy_passed": true,
+  "toy_mean_semivariance_by_arrangement": [
+    0.140625,
+    1.75
+  ],
+  "architecture_training_selection_confirmation_unchanged": true,
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "engineering_optimizer_steps": 0,
+  "external_images_read": 0,
+  "scope": "Pure mathematical graph/property clarification before full model engineering proof or classifier launch. Original preregistration bytes preserved. No performance or novelty claim."
+}

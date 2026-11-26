@@ -1,0 +1,85 @@
+{
+  "created_at_utc": "2026-11-25T10:36:53.439088+00:00",
+  "family": "class_patch_spatial_semivariance",
+  "status": "preregistered_no_training",
+  "hypothesis": "Mean and global diagonal dispersion ignore spatial arrangement. A fixed4-nearest-neighbour directed semivariogram over the already-selected patch positions may add class evidence that equal-capacity mean and global-variance readouts lack. This is a standard spatial statistic and a controlled architectural hypothesis, not an originality or causal claim.",
+  "motivation": "Completed fresh class-query candidate failedM8 confirmation; saved-output review shows16/18candidate continuations selectedepoch0 and secondrepeat1M8error corrected/5introduced. This post-outcome description does not identify why. Current dispersion comparison has not been opened for this design.",
+  "current_dispersion_state_at_preregistration": {
+    "status": "completed",
+    "pid": 16836,
+    "new_seed_fits": 24,
+    "passing_development_gates": 0,
+    "external_test_evaluated": false
+  },
+  "dispersion_comparison_existed_at_preregistration": true,
+  "dispersion_comparison_read_for_this_design": false,
+  "motivation_record": "results/research_class_query_patch_evidence_confirmation/independent_saved_output_review.json",
+  "motivation_record_sha256": "676febcb640570cd7831f38b1a3877bfdf2312e6a9ba32a2835ae155de2daa2f",
+  "architecture_plan": "Reuse verified2091development sharedtop64query/key/value/patch-index bank; no newbackboneforward or image extraction. Freeze sourceM8L normalgeometry/stats/head/registerreader/tail. RMS-normalize64Dpatchvalues and originalquery/keys exactly as mean controls. For each image/view/head, decode integerpatchpositions on20x20(320)or28x28(448)grid. Select4nearest distinct cachedpositions by squaredgridEuclideandistance; breakties by ascending physicalpatchindex; exclude self. Directed neighbour graph and all pooling weights are parameter-free. For each feature dimension define e_i=(1/8)sum_j_in4NN(i)(z_i-z_j)^2. Normalize rounded uniform/sourcequeryattention weights in float64; S=sum_iw_i e_i, evidence=log1p(S) thenfloat32. Share evidence between2pathologyreadouts. Zero classreadout[2,2,16,64]+bias2 gives4098parameters, bounded2tanhshifts for infection/noninfection, normalshift0. Same anchoredprobability and class-wide diseaselogit shifts as prior models, preserving within-class conditional odds. Mean and globalvariance modes reduce exactly to their frozen controls.",
+  "configuration_plan": [
+    {
+      "name": "uniform_spatial_semivariance",
+      "pooling": "uniform",
+      "statistic": "log_semivariance"
+    },
+    {
+      "name": "source_query_spatial_semivariance",
+      "pooling": "source",
+      "statistic": "log_semivariance"
+    }
+  ],
+  "fixed_graph": {
+    "neighbours": 4,
+    "distance": "squared integer Euclidean grid distance",
+    "ties": "ascending physical patch index",
+    "self_edges": false,
+    "directed": true,
+    "edge_energy_factor": 0.5,
+    "edge_average": 0.25
+  },
+  "fixed_training": {
+    "initialization_and_order_seed_base": 20293500,
+    "batch_size": 256,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "max_epochs": 60,
+    "patience": 12,
+    "gradient_clip_norm": 3.0,
+    "epoch_zero_eligible": true,
+    "task": "Unchangedcompletecoarse+subtypetaxonomytask and fit-onlypatientweights; sourcehead eval. Same originalpatient/duplicateisolatedfit/stop/outerplans and identicalsourcewarmstart to correspondingmean/globalvariancecontrols."
+  },
+  "planned_new_seed_fits": 24,
+  "reused_mean_control_trajectories": 24,
+  "reused_global_variance_control_trajectories": 24,
+  "predeclared_scores": 4,
+  "fixed_fusions": "StandaloneL and.1875rawB+.5625normalB+.25spatialSemivarianceL only; no new weights or thresholds.",
+  "original_selection": "For each standalone/fusion candidate, originalCVstrictlyaboveM8ANDcorrespondingmeanANDcorrespondingglobalvariance; validationMacroF1>=allthree. Freeze highesteligibleoriginalCVonce, no confirmationreselection.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20294001,
+      20294011
+    ],
+    "inner_seeds": [
+      20294024,
+      20294025,
+      20294026,
+      20294034,
+      20294035,
+      20294036
+    ],
+    "supervised_fits": 126,
+    "actual_task_witnesses": 90,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "allocation": "72newrawB/normalB/normalL/registerLsources+18selectedspatial+18freshcorrespondingmean+18freshcorrespondingglobalvariance. Everynewreadout4098trainableparameters, identicalsource/init/order/task/optimizer/stopping/selectedfusionweight.",
+    "gate": "Highermean6foldMacroF1 ANDpairedpatient95%lowerCI>0versusEACHM8/M7/M6/M5/fixedGaussianANDbothmatchedmean/globalvariancecontrols. No freshreselection or automatic external scoring/promotion."
+  },
+  "preflight_plan": "Sixactual256trainingimagecases(uniform/source xmean/globalvariance/spatial), exactzeroidentity/fulltaskgradient, independentCPUlexicographic4NN andfloat64edgeenergy/normalization/anchoredprobability formulas, arbitrarynonzeroreadoutallgradients, exactparentmean/globalvariance reductions, fixedgraphindexbounds/uniqueselfexclusion/tiepolicy, jointK/V/indexpermutation, translation/reflectiongraphinvariance, constantVzero, samehistogramdifferentarrangementtoy, finiteedges, frozenweights andordinaryCUDArestore. Oneengineeringoptimizerstep pernewspatialarm only. Original/freshfullengine/control/task/plan/gate proofs compulsory beforefit.",
+  "launch_condition": "Only after currentdispersion24andanyrequired108freshconfirmationterminalnegative+independentsavedoutputreviewpass andM8retained; allnewmodel/data/position/fulltask/control/plan/gate/originalsuccesspreflights completed anddependenciesfrozen. Positivepredecessorrequiresrootreference review. No classifier launch from this preregistration.",
+  "scientific_limits": "4NNlocality is within sparse preselected positions, not necessarily adjacent pixels or lesions. Different heads have different positions; no aligned cross-head anatomy claim. Directed edges and repeated heads are correlated. Standard spatial semivariance components; no causal interpretation or novelty claim. Freshdiagnostic was post-outcome and cannot serve as another independent confirmation. No external image/outcome/prediction access.",
+  "classification_fits": 0,
+  "scores_evaluated": 0,
+  "training_launched": false,
+  "external_test_evaluated": false
+}

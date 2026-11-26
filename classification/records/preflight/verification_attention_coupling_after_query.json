@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "negative_terminal",
+      "passed": true,
+      "expected": "negative"
+    },
+    {
+      "case": "positive_terminal",
+      "passed": true,
+      "expected": "positive"
+    },
+    {
+      "case": "live_same_observer",
+      "passed": true,
+      "expected": "wait"
+    },
+    {
+      "case": "changed_pid",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "case": "exited_observer",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "case": "failed_observer",
+      "passed": true,
+      "expected": "reject"
+    }
+  ],
+  "code_sha256": {
+    "continue_attention_coupling_after_query.py": "61abeffa0f7b6a94e0e35394536f5e492c8dc47e1ca157d2998d2c561fb32142"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "scope": "Six pure predecessor-decision checks, not full queue runtime."
+}

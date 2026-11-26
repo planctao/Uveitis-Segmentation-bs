@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "input_sha256": "cffb812cdcf0705956f136a54f777cc5ae9aca00a417ad4f548ce2575604125f",
+  "cases": [
+    {
+      "inference_mode": false,
+      "batch": 3,
+      "keys": 405,
+      "probability_maximum_error": 1.1102230246251565e-16,
+      "input_logits_preserved": true
+    },
+    {
+      "inference_mode": false,
+      "batch": 3,
+      "keys": 789,
+      "probability_maximum_error": 1.1102230246251565e-16,
+      "input_logits_preserved": true
+    },
+    {
+      "inference_mode": false,
+      "batch": 8,
+      "keys": 405,
+      "probability_maximum_error": 1.1102230246251565e-16,
+      "input_logits_preserved": true
+    },
+    {
+      "inference_mode": false,
+      "batch": 8,
+      "keys": 789,
+      "probability_maximum_error": 1.6653345369377348e-16,
+      "input_logits_preserved": true
+    },
+    {
+      "inference_mode": true,
+      "batch": 3,
+      "keys": 405,
+      "probability_maximum_error": 1.1102230246251565e-16,
+      "input_logits_preserved": true
+    },
+    {
+      "inference_mode": true,
+      "batch": 3,
+      "keys": 789,
+      "probability_maximum_error": 1.1102230246251565e-16,
+      "input_logits_preserved": true
+    },
+    {
+      "inference_mode": true,
+      "batch": 8,
+      "keys": 405,
+      "probability_maximum_error": 1.1102230246251565e-16,
+      "input_logits_preserved": true
+    },
+    {
+      "inference_mode": true,
+      "batch": 8,
+      "keys": 789,
+      "probability_maximum_error": 1.6653345369377348e-16,
+      "input_logits_preserved": true
+    }
+  ],
+  "native_full_width_softmax_not_called": true,
+  "classification_fits": 0,
+  "classifier_predictions": 0,
+  "backbone_forwards": 0,
+  "external_images_read": 0
+}

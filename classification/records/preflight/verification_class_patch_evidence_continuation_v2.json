@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "case": "failed",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "startup_missing_pid",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "same_live_pid",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "changed_pid",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "missing_pid_after_startup",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "exited_worker",
+      "expected": "reject",
+      "passed": true
+    }
+  ],
+  "observer_has_no_original_worker_launch_path": true,
+  "code_sha256": {
+    "continue_class_query_patch_evidence.py": "bdfc10f323050db2ef0dcdb93a8632bd15db957e11202a03bc3c98a069dd8ae3",
+    "verify_class_patch_evidence_continuation.py": "b20bb6969a10b2f4a0788ba27f0bcbce62f47a73ac420e2be4b8ec11ec4c4694",
+    "verify_class_patch_evidence_continuation_v2.py": "073dd60540a1900cee40a30e5744ec3174160f7c1c0c3b790ca55c2e3e3f2296",
+    "continue_query_selection_after_mass_v2.py": "888e2dc3510fc8869973798939425364d738afb8411de9ac1cd38864cffaa45e"
+  },
+  "reused_identity_proof": "verification_query_selection_continuation_v2.json",
+  "reused_identity_proof_sha256": "f1fd1e85c639195cbbfdee716173989e90476f76c1aa039e600209abf62b6f13",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "child_processes_started": 0,
+  "recovery": "Preserved original verifier failed before any proof output because its output filename referenced the predecessor proof. Version2 only corrects destination and pins both sources.",
+  "scope": "Seven actual wait-loop cases only; the full original/completion/confirmation queue still requires its actual formal run."
+}

@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-11-25T11:01:35.585796+00:00",
+  "cases": [
+    {
+      "case": "negative_no_confirmation",
+      "rejected": false,
+      "steps": [
+        "review_class_patch_spatial_semivariance_outputs.py"
+      ],
+      "passed": true
+    },
+    {
+      "case": "eligible_negative_confirmation",
+      "rejected": false,
+      "steps": [
+        "review_class_patch_spatial_semivariance_outputs.py",
+        "verify_class_patch_spatial_semivariance_confirmation.py",
+        "start_class_patch_spatial_semivariance_confirmation.py"
+      ],
+      "passed": true
+    },
+    {
+      "case": "eligible_positive_requires_root_review",
+      "rejected": false,
+      "steps": [
+        "review_class_patch_spatial_semivariance_outputs.py",
+        "verify_class_patch_spatial_semivariance_confirmation.py",
+        "start_class_patch_spatial_semivariance_confirmation.py"
+      ],
+      "passed": true
+    },
+    {
+      "case": "failed_saved_review_rejected",
+      "rejected": true,
+      "steps": [
+        "review_class_patch_spatial_semivariance_outputs.py"
+      ],
+      "passed": true
+    },
+    {
+      "case": "missing_variance_control_rejected",
+      "rejected": true,
+      "steps": [
+        "review_class_patch_spatial_semivariance_outputs.py",
+        "verify_class_patch_spatial_semivariance_confirmation.py",
+        "start_class_patch_spatial_semivariance_confirmation.py"
+      ],
+      "passed": true
+    },
+    {
+      "case": "failed_worker_rejected",
+      "passed": true
+    },
+    {
+      "case": "exited_worker_rejected",
+      "passed": true
+    },
+    {
+      "case": "active_wait_then_completed",
+      "passed": true
+    }
+  ],
+  "actual_live_worker_entrypoint_binding_checked": true,
+  "wrong_entrypoint_rejected": true,
+  "input_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/observe_class_patch_spatial_semivariance.py": "04c47c6cce35beb230f10a565120eb10ebd6fbb58aa7b2c26e0f42cfff495d0b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verify_spatial_semivariance_observer_control.py": "5c31dfe64cd01b64360e3022eafd10d22e82b21f809a1ccb620170d6d3eaf85e"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "model_predictions": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Actual observer control flow with isolated synthetic completed/failed/live states; no scientific/model/metric proof or actual confirmation completion claim."
+}

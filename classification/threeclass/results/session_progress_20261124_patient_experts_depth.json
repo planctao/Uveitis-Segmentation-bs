@@ -1,0 +1,134 @@
+{
+  "time_utc": "2026-11-23T23:32:09.540576+00:00",
+  "previous_goal_turn_classification": "progress",
+  "completed_studies": [
+    {
+      "study": "shared_morphology",
+      "threeclass_head_fits": 48,
+      "binary_head_fits": 0,
+      "new_cascade_systems": 0,
+      "comparison": "results/research_shared_morphology/comparison.json",
+      "comparison_sha256": "a1b9548213accadbd1f6bdb7ea92ec05bd815a320fd6ac6e63e72fcab5426227",
+      "verification": "results/research_shared_morphology/verification.json",
+      "verification_sha256": "11501c9ae302c42e22ac546c8085371efa7ae817967e43ba2f9d87dd01957e98",
+      "gate_passers": []
+    },
+    {
+      "study": "patient_contrastive",
+      "threeclass_head_fits": 24,
+      "binary_head_fits": 0,
+      "new_cascade_systems": 0,
+      "comparison": "results/research_patient_contrastive/comparison.json",
+      "comparison_sha256": "c47fb0ccaf424231c1bf3f70945c48594a6e9d263f96e8036a639bb2ed4ad595",
+      "verification": "results/research_patient_contrastive/verification.json",
+      "verification_sha256": "2e2d4c29b4b6192e4406f5c1579e7878f13890a9a6d52637fe0a9a7133951a83",
+      "gate_passers": []
+    },
+    {
+      "study": "embedding_refinement",
+      "threeclass_head_fits": 48,
+      "binary_head_fits": 0,
+      "new_cascade_systems": 0,
+      "comparison": "results/research_embedding_refinement/comparison.json",
+      "comparison_sha256": "2f823479e33b88b0f47939d3d54b881aa88023251c54831962861a6c8919fad2",
+      "verification": "results/research_embedding_refinement/verification.json",
+      "verification_sha256": "2e8e3d56f9016e6b3615bfe63149e1b9225cb80c2de0ca36f3201f0a6740f222",
+      "gate_passers": []
+    },
+    {
+      "study": "conditional_experts",
+      "threeclass_head_fits": 0,
+      "binary_head_fits": 96,
+      "new_cascade_systems": 48,
+      "comparison": "results/research_conditional_experts/comparison.json",
+      "comparison_sha256": "173f5554859b7d8f33b2ae2f5058b4eb36a58712bf9880c9739fe17dee8594b6",
+      "verification": "results/research_conditional_experts/verification.json",
+      "verification_sha256": "ae6900a252c0381cbe348bb233a7de9c40110dfc2d2777180624d0e3f344308d",
+      "gate_passers": []
+    }
+  ],
+  "actual_threeclass_head_fits": 120,
+  "actual_binary_head_fits": 96,
+  "cascade_systems_from_binary_heads": 48,
+  "count_note": "This snapshot includes48sharedmorphologyfits started in previousgoalturn but completed/audited now,24patientcontrastive,48embeddingrefinement,and96binaryheadsforming48cascadesystems. Syntheticverificationfits and reusedsourceheads excluded; do not count cascade systemsas additionalneuralheads.",
+  "external_test_evaluated": false,
+  "next_capacity_study": "runs/dinov3_large/protocol.json",
+  "continuous_search": "runs/continuous_search/state.json",
+  "continuation": "Goalactive. DINOv3-L weightsverified and developmentfeatureextraction live; no restart on observationtimeout. Qualifiedcandidate stillrequiresfreshpatientconfirmation.",
+  "large_download": {
+    "status": "completed",
+    "pid": 46566,
+    "bytes": 1212548648,
+    "sha256": "56df97c299afea2ffa1eb90f866e8a290f452e227e732fef32a9eb9e8b52027f",
+    "storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/weights/dinov3_vitl16_lvd1689m.safetensors",
+    "external_images_read": 0
+  },
+  "large_extraction": {
+    "status": "completed",
+    "pid": 46668,
+    "development_images": 2091,
+    "feature_storage": "/root/uveitis_experiment_storage/uveitis_threeclass_20261124/features/dinov3_large_development.npz",
+    "external_raw_images_read": 0
+  },
+  "large_pipeline": {
+    "status": "running",
+    "pid": 46644,
+    "step": "verify_dinov3_large.py",
+    "external_test_evaluated": false
+  },
+  "protected_m5_full_validation_reproduction": {
+    "heads": [
+      {
+        "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_0/model.pt",
+        "sha256": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+        "all_validation_decisions_reproduced": true
+      },
+      {
+        "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_1/model.pt",
+        "sha256": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+        "all_validation_decisions_reproduced": true
+      },
+      {
+        "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/results/milestone5/protected_model/seed_2/model.pt",
+        "sha256": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176",
+        "all_validation_decisions_reproduced": true
+      }
+    ],
+    "external_test_evaluated": false
+  },
+  "ongoing_feature_audit_note": "Original runningverifier validates everyshard againstcompressedbank; it is confirmedlive. Futureverifier caches arraysonce toavoidrepeatdecompression. No runningjob interruptedorrestarted.",
+  "large_feature_verification": {
+    "path": "verification_dinov3_large.json",
+    "sha256": "7721140dc8205cfb3be32609365f4bb039c257b4134e9ace4a168015c180005f",
+    "passed": true,
+    "development_images": 2091,
+    "shards": 262,
+    "actual_images_recomputed": 6
+  },
+  "last_observed_large_study": {
+    "status": "formal_training",
+    "pid": 49404,
+    "arm": "large_dual",
+    "phase": "validation",
+    "seed": 0,
+    "external_test_evaluated": false,
+    "process_confirmed_live_at_utc": "2026-11-23T23:36:50.528536+00:00"
+  },
+  "last_observed_continuous_search": {
+    "status": "running",
+    "pid": 22236,
+    "round": 391,
+    "completed_round": 390,
+    "completed_experiment_rounds": 390,
+    "proposal_iteration": 349969,
+    "legacy_proposal_iterations": 349843,
+    "feature": "multiscale_raw768",
+    "candidate_id": "8ab6caae54ef",
+    "hypothesis": "Joint optimizer, regularization and capacity exploration after tested local proposals were exhausted",
+    "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+    "time": "2026-11-24T07:36:38.224450+08:00",
+    "external_test_policy": "Never read or evaluate external results inside this loop.",
+    "process_confirmed_live_at_utc": "2026-11-23T23:36:50.528642+00:00"
+  },
+  "updated_at_utc": "2026-11-23T23:36:50.528649+00:00"
+}

@@ -1,0 +1,193 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "real_control",
+      "m8_exact_control_error": 0.0,
+      "static_bank_token_input_invariance_error": null,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.043081283569336e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 1.0
+    },
+    {
+      "kind": "static_context",
+      "m8_exact_control_error": null,
+      "static_bank_token_input_invariance_error": 0.0,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 2.60770320892334e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 0.342596173286438
+    },
+    {
+      "kind": "dynamic_deviation",
+      "m8_exact_control_error": null,
+      "static_bank_token_input_invariance_error": null,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 3.1478703022003174e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 0.31808003783226013
+    },
+    {
+      "kind": "static_dynamic",
+      "m8_exact_control_error": null,
+      "static_bank_token_input_invariance_error": null,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 2.384185791015625e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 0.342596173286438
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "real_control": {
+      "normal_space": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "context_bank": {
+        "scope": "all",
+        "patients": 332,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1661560694875561e-07
+      }
+    },
+    "static_context": {
+      "normal_space": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "context_bank": {
+        "scope": "all",
+        "patients": 332,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1661560694875561e-07
+      }
+    },
+    "dynamic_deviation": {
+      "normal_space": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "context_bank": {
+        "scope": "all",
+        "patients": 332,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1661560694875561e-07
+      }
+    },
+    "static_dynamic": {
+      "normal_space": {
+        "normal_patients": 111,
+        "maximum_principal_cosine_error": 6.104103889015278e-09,
+        "maximum_center_error": 2.7872823049612805e-08
+      },
+      "context_bank": {
+        "scope": "all",
+        "patients": 332,
+        "minimum_scale": 0.05,
+        "maximum_mean_error": 1.1661560694875561e-07
+      }
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "kind": "real_control",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "static_context",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "dynamic_deviation",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 3.039836883544922e-06
+      }
+    },
+    {
+      "kind": "static_dynamic",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 3.0472874641418457e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_static_context.py": "7499d4c0815fac298d1605bda51dd1e001d228e0d9b1c23dfaa7c380b31f9583",
+    "audit_register_static_context.py": "e14914c0cb5b6f35585ee6c53c770a5ba87b3474da36a815c4a550d5d28e6d45",
+    "verify_register_static_context.py": "4e11be7ab1f34da774986bf4f90e847b76d68abdd40ed19160c78c9265b579cb",
+    "register_multiquery_data.py": "a41dc9ef8013c3edc1405cf7d0a44a071d7eaadba225a347ced956e85d4ea391",
+    "register_position_calibration.py": "ef8be496d9ee2d6870240b86a65333b3e29e3401a72af64c6a4e67da4023426b",
+    "audit_register_position_calibration.py": "1178cf2b5d99a77472baa95ee781798b2e8f30f17ac9b37f6b12bc654261d3d2"
+  },
+  "checks": [
+    "Four actual tokenstreams256image complete task/allparametergradients independently reconstructed",
+    "OriginalnormalL initialization/RNG/fulltask/basegradients identical atzeroreadout; equalparameters across all four attentionarms; dotcontrol exact M8trainedidentity",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Joint token/bank permutation invariance, fixedbank image-token invariance, static/dynamic mean pooling, nonzero hiddenquery connectivity, optimizerupdates/frozenbuffers/strictrestore and fouractualCUDA firsttask/allgradientreplays"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

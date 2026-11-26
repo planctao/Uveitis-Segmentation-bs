@@ -1,8 +1,8 @@
 {
   "created_at_utc": "2026-11-24T12:31:24.169835+00:00",
   "family": "register_position_calibration",
-  "status": "running",
-  "scores_evaluated": 0,
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
   "hypothesis": "Existing trainingonly diagnostics show finalregister within-image variance0.8108 but between-image tokenmean variance0.0522 after normalPCA; four pretrained register positions have different learned identities. Shared across-token normalization may preserve a large position-dependent nuisance mean. Test patient-balanced position calibration after the exact original normalprojection while keeping learnedTokenQueryResidual fixed. This is standard moment calibration applied to fixed registerpositions, no originality or clinicalcausality claim. Designed before reading current depth outcomes or launching multiquery classifiers.",
   "architecture_plan": "OriginalnormalL and originalfinalregister own fitnormalPCA32projection unchanged. Arm0 sharedcontrol uses originalprojectedtokens exactly. Arm1 normalpositioncenter: subtract normalpatient positionmean minus normalpatient pooledmean. Arm2 normalpositionstandardize: (tokens-normalpatient positionmean)/max(normalpatientpositionstd,.05)+normalpatientpooledmean. Arm3 allfitpatientpositionstandardize: sameformula using allfitpatients. Clamp newcalibratedtokens(-10,10). Means and secondmoments average perpatient before averagingpatients. Allarms reuse unchanged hiddenquery/key/value32/zeroReadout256 times.1 residual, identicallearnedparameters; newpositionbuffers fitted withinfitpatients only.",
   "configuration_plan": [
@@ -36,5 +36,7 @@
   "protocol": "runs/register_position_calibration/protocol.json",
   "protocol_sha256": "99dc056b4ad451d41a3dbc99f2766024a73acd45e72c245e32fccb85c2df54c1",
   "pid": 30177,
-  "retained_reference": "M8"
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_position_calibration/comparison.json"
 }

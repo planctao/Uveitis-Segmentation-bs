@@ -1,0 +1,22 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "source_sha256": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e",
+  "patient_disease_centers": 388,
+  "scope": "Original training split only,trained normal-reference model; descriptive in-sample dependence,not causal or performance proof.20 fixed within-stratum patient permutations.0 new models.",
+  "results": {
+    "coarse": {
+      "observed_mean_squared_conditional_correlation": 0.023838834860743716,
+      "within_stratum_permutation_mean": 0.007673810189767693,
+      "within_stratum_permutation_max": 0.008387356693227812,
+      "strata_with_at_least_four_patient_disease_groups": 3
+    },
+    "disease": {
+      "observed_mean_squared_conditional_correlation": 0.07947971316405192,
+      "within_stratum_permutation_mean": 0.05653471055049399,
+      "within_stratum_permutation_max": 0.05899864247729857,
+      "strata_with_at_least_four_patient_disease_groups": 11
+    }
+  },
+  "code_sha256": "f5681623eed11dfbcbe5b04b3e6e8ee9026c51930f69ed5929b8789e2baaa282",
+  "external_test_evaluated": false
+}

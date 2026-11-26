@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "protocol_sha256": "ff137767ce34ef1593f0b0e61b5281a5b411c4cb833b4c8f0d558a4c4826f400",
+  "feature_storage": "/autodl-fs/data/uveitis_threeclass_experiment_storage_20261124/base_token_features/features/dinov3_base_token_development.npz",
+  "feature_bank_sha256": "6c85b66a0f8d0d30230c6644e99c0bde051f15cc899dba8c482c5d459e9175b8",
+  "metadata_sha256": "dbbb4bba14c97a8691da229c65ba55bbf2f23918866a7f56ce48fd9865e0a4c2",
+  "development_images_checked": 2091,
+  "shards_checked": 262,
+  "actual_images_independently_recomputed": [
+    {
+      "development_index": 137,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.00390625,
+        "registers": 0.0078125,
+        "quadrants_control": 0.00146484375
+      }
+    },
+    {
+      "development_index": 459,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.001953125,
+        "registers": 0.0078125,
+        "quadrants_control": 0.00390625
+      }
+    },
+    {
+      "development_index": 999,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.00390625,
+        "registers": 0.0078125,
+        "quadrants_control": 0.00390625
+      }
+    },
+    {
+      "development_index": 1456,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.0010986328125,
+        "registers": 0.0078125,
+        "quadrants_control": 0.0009765625
+      }
+    },
+    {
+      "development_index": 1789,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.0118408203125,
+        "late_regions_control": 0.001953125,
+        "registers": 0.0078125,
+        "quadrants_control": 0.001953125
+      }
+    },
+    {
+      "development_index": 2057,
+      "independent_pooling_and_prefix_max_errors": {
+        "mid_regions": 0.015625,
+        "late_regions_control": 0.00390625,
+        "registers": 0.0078125,
+        "quadrants_control": 0.001220703125
+      }
+    }
+  ],
+  "token_counts": {
+    "mid_regions": 9,
+    "late_regions_control": 9,
+    "registers": 4,
+    "quadrants_control": 4
+  },
+  "legacy_late_regions_exact_match": true,
+  "all_cache_image_hashes_unchanged": true,
+  "checks": [
+    "Allbankarrays/all262shards and proofbytes independentlyfingerprinted; exactrowcoverage and all2091cachehashes checked",
+    "Originallegacy streams checked duringeveryforward; final3x3regioncontrol exactlyequals originalfrozenbank",
+    "Six additionaldevelopmentimages forwarded with directfinal/intermediatehooks and independent NumPy pooling/prefixslicing",
+    "All frozenweights/sourcefeatures/code/preflight hashes intact; no classificationfits/scores or externalimages/outcomes"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

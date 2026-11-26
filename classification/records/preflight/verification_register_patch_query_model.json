@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "configuration": {
+        "rank": 4,
+        "kind": "shared",
+        "alpha": 8
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8192,
+        "complete_task_gradient_error": 3.1519675758318044e-11,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 4.2433612179593183e-10,
+      "checkpoint_source_reference_and_query_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    },
+    {
+      "configuration": {
+        "rank": 4,
+        "kind": "individual",
+        "alpha": 8
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8192,
+        "complete_task_gradient_error": 5.6843418860808015e-11,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 1.3415046851150692e-09,
+      "checkpoint_source_reference_and_query_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    },
+    {
+      "configuration": {
+        "rank": 8,
+        "kind": "shared",
+        "alpha": 16
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 5.709921424568165e-11,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 2.141291588486638e-09,
+      "checkpoint_source_reference_and_query_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    },
+    {
+      "configuration": {
+        "rank": 8,
+        "kind": "individual",
+        "alpha": 16
+      },
+      "actual_images": 256,
+      "first_task_witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 9.254108590539545e-11,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      },
+      "nonzero_adapter_complete_task_gradient_error": 3.0977389542385936e-09,
+      "checkpoint_source_reference_and_query_restore_bitwise_identical": true,
+      "maximum_probability_error": 1.1920928955078125e-07
+    }
+  ],
+  "code_sha256": {
+    "register_patch_query_data.py": "6a7331e1c1e3a56badb557b075ea10bf7941729f730b9d48186840d9009236b5",
+    "register_patch_query_witness.py": "451493e72727b109de2c9e582e292f471c2d361a29e47952c5e03e82d03d5699",
+    "verify_register_patch_query_model.py": "fe369613a33e51d46659bb7283d4a8dfde3e8f11f98673261c27d673305673c4",
+    "register_patch_query.py": "ecd527d0db814a259740c6e2b76cad467feac1f35dcd059a66272c0a24243e15",
+    "audit_register_patch_query.py": "b6b390eb16a5e1663f78f140a98acf112aa5e1d374a988a3dae418531245d6b6",
+    "register_patch_query_features.py": "ec1157f5077f37fe4e8fcb15aced4f60bc1c1a8a8c9fb872c22854b2de65dd12",
+    "register_patch_query_experiments.py": "b0a0c326c6500c5b6355cf77299b2841f2c1220c536178320698ff2abd92bd18"
+  },
+  "bank_verification_sha256": "f106c537b5b5067d21e6bd64e3e1296aad5d8177e02b1e9447bc1fd30dd3201c",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "seconds": 20.890790939331055,
+  "peak_allocated_bytes": 3583580672
+}

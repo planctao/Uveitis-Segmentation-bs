@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-11-24T19:53:47.668290+00:00",
+  "passed": true,
+  "input_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_mass_bank_v2/verification.json": "5e41cd49edf5d8e8c8de7dba6a93dc02722afef3d3e9d88a96d74704cdb4e807",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_mass_bank_v2/witnesses/00000_0.npz": "74a8b8dc3342c524d043a257d25136e2e40be1e45ab82766f7ae586163760c24",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_mass_bank_v2/witnesses/00000_1.npz": "d7746ca04ad5ff9a3a646d8d8cd14703af2fd76ff865d3027948b7d7be33a86e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_mass_bank_v2/witnesses/01048_0.npz": "e6101183b39cb87239948d04d3f9d59aa8aa97a21d02ba0b84d23d6bedbd907a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_mass_bank_v2/witnesses/01048_1.npz": "8a7340354c9047cd946554dd9f636a74f656e9b5ef566cd07b2dc6837150d3d1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_mass_bank_v2/witnesses/02088_0.npz": "73aa1a9e1a2eed13459258e257d431e31d84820c6886b6542f6fd614b26ecc43",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_mass_bank_v2/witnesses/02088_1.npz": "93fd75a33ffb30d137f70dd67d01c9938c68f7ad9bbf6ff37b4ef69ae75cd830"
+  },
+  "rows": [
+    {
+      "view": 0,
+      "resolution": 320,
+      "development_images": 19,
+      "shared_top16_full_mass_mean": 0.11744748023121974,
+      "specific_top16_full_mass_mean": 0.19406798872868636,
+      "within_image_mean_mass_gain_median": 0.07662050849746656,
+      "shared_specific_selected_position_overlap_fraction_mean": 0.4507606907894737,
+      "query_specific_union_unique_positions_mean_per_head": 47.95065789473684,
+      "shared_unique_positions_per_head": 16,
+      "query_specific_unique_positions_per_head_maximum": 64,
+      "query_top16_mass_maximality_verified": true
+    },
+    {
+      "view": 1,
+      "resolution": 448,
+      "development_images": 19,
+      "shared_top16_full_mass_mean": 0.08982238801889192,
+      "specific_top16_full_mass_mean": 0.1407583570881421,
+      "within_image_mean_mass_gain_median": 0.05093596906925019,
+      "shared_specific_selected_position_overlap_fraction_mean": 0.3932976973684211,
+      "query_specific_union_unique_positions_mean_per_head": 53.76315789473684,
+      "shared_unique_positions_per_head": 16,
+      "query_specific_unique_positions_per_head_maximum": 64,
+      "query_top16_mass_maximality_verified": true
+    }
+  ],
+  "measurements_sha256": "77dc69ab488e7e07a6f28eb5a70637ecf5bb037c09fb733536c457bddaeb1b74",
+  "code_sha256": "07e305f05d45733394d6dfa5d51e27ecb942496ff0f6b650b9d782869b2dca77",
+  "classifier_fits": 0,
+  "classifier_scores": 0,
+  "new_model_forwards": 0,
+  "external_images_read": 0,
+  "scope": "Fixed six cache-witness batches,19developmentimages; NOlabels/classifierprobabilities/outcomesread. Bothselections use samefullF64attentionfromFP16capturedQ/K includingallprefixkeys; stabledescendingtiesbyspatialposition. Perquerytop16maximizesmassbydefinition, so greatermass is a mathematicalproperty and NOTperformanceevidence. Queryspecificselection can retrieve up to64unique headpositions versus16shared; matchedperqueryattentionlength16 andsameadapterparameters, but uniqueevidencebudget differs bydesign. Conveniencewitnesssample does not establish diseasecoverage or populationeffect."
+}

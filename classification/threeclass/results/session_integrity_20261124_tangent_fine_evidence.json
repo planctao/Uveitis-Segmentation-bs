@@ -1,0 +1,91 @@
+{
+  "checked_at_utc": "2026-11-24T05:40:32.983326+00:00",
+  "passed": true,
+  "goal_status": "active",
+  "studies": [
+    {
+      "family": "normal_tangent_adversarial",
+      "status": "completed",
+      "actual_audited_heads": 48,
+      "candidate_scores": 8,
+      "gate_passers": 0,
+      "best_cv_name": "fgsm_epsilon0p03",
+      "best_cv_macro_f1": 0.8235179876314785,
+      "best_cv_validation_macro_f1": 0.880040293936112,
+      "protocol_sha256": "05b3f84e696ded0b476023440d4f99762c728332467daf3bb05739f3d0ee8f59",
+      "comparison_sha256": "e09110d1eae0b35b47009dca78e615988d2b8cf6f768f17ff24aae4eaaec115d",
+      "verification_sha256": "94ea5725dd37321dbe4191fb44c5a46e1efe7d03b1ff9dc213daf59f57ea5e18",
+      "all_frozen_source_code_features_geometry_unchanged": true,
+      "external_test_evaluated": false
+    },
+    {
+      "family": "fine_normal_reference",
+      "status": "completed",
+      "actual_audited_heads": 48,
+      "candidate_scores": 8,
+      "gate_passers": 0,
+      "best_cv_name": "fine7_weighted_masked_fusion075",
+      "best_cv_macro_f1": 0.8233194189702712,
+      "best_cv_validation_macro_f1": 0.8883629985305018,
+      "protocol_sha256": "26af9bac55e69b06b41957c8cce1c0a26aa22abc9823ebad5a374b12f34ebbad",
+      "comparison_sha256": "5fabf68bc546a3b7fb174f57cd7845af139af61ba552b70a1fa0e792173f740a",
+      "verification_sha256": "bb598443065d35322b84d9eb0adf648e6bff24f16db02abe798970fa1fcd17d3",
+      "all_frozen_source_code_features_geometry_unchanged": true,
+      "external_test_evaluated": false
+    },
+    {
+      "family": "normal_evidence_attention",
+      "status": "completed",
+      "actual_audited_heads": 48,
+      "candidate_scores": 8,
+      "gate_passers": 0,
+      "best_cv_name": "pooled_strength0p5",
+      "best_cv_macro_f1": 0.8283157353489754,
+      "best_cv_validation_macro_f1": 0.8842686682907915,
+      "protocol_sha256": "d83f5d41be275c9f9cae15c4b760e7090c7cb34db1d5fb628b0e9dcc74a6d7c9",
+      "comparison_sha256": "88902954f29d7f3145e4d102e94f31643a7f92348ed61a8191f5d361c9db3b25",
+      "verification_sha256": "9ea617e1659c0e533f52dd579d40b82b4cfb10b2dc0121b5d40eceb37ba491ef",
+      "all_frozen_source_code_features_geometry_unchanged": true,
+      "external_test_evaluated": false
+    }
+  ],
+  "newly_audited_threeclass_heads_in_these_studies": 144,
+  "M5_M6_selections_models_reproduction_code_unchanged": true,
+  "continuous_search_live": {
+    "status": "cross_validation",
+    "pid": 22236,
+    "round": 608,
+    "completed_round": 608,
+    "completed_experiment_rounds": 608,
+    "proposal_iteration": 350186,
+    "candidate_id": "3ea7d05b319e",
+    "feature": "multiscale_raw768",
+    "time": "2026-11-24T13:40:17.860136+08:00",
+    "external_test_policy": "Training/validation evidence only; external files never read."
+  },
+  "external_test_evaluated_in_these_studies": false,
+  "note": "Counts exclude continuous search, statistics-only fits, exports and preflight updates.",
+  "next_study_launch": {
+    "passed": true,
+    "checked_at_utc": "2026-11-24T05:44:17.183591+00:00",
+    "protocol_sha256": "05d10c2a62a31a8983aed0664912c770f34cc9d818a28e479ec03a67e5d14ba6",
+    "pid": 85323,
+    "observed_state": {
+      "status": "training",
+      "pid": 85323,
+      "arm": "clusters2_temperature2p0",
+      "phase": "fold_2",
+      "seed": 0,
+      "external_test_evaluated": false
+    },
+    "planned_heads": 48,
+    "actual_checkpoints_so_far": 21,
+    "all16atlas_geometry_and16plans_frozen_before_allfits": true,
+    "all_frozen_source_code_and_models_unchanged": true,
+    "first_actual_head_checkpoint_sha256": "c7bb84370d0460e35e2b97d6f7e2725e034ac3d1e19a89cf790781868584c349",
+    "first_actual_head_CPU_and_independent_NumPy_plus_plainMLP_probabilities_verified": true,
+    "maximum_actual_saved_probability_error": 5.960464477539062e-07,
+    "maximum_actual_independent_probability_error": 5.066394805908203e-07,
+    "external_test_evaluated": false
+  }
+}

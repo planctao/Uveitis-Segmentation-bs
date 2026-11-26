@@ -1,0 +1,30 @@
+{
+  "split": "validation only",
+  "heads": [
+    {
+      "seed": 0,
+      "validation_images": 374,
+      "normalized_attention_entropy_correct": 0.8302232623100281,
+      "normalized_attention_entropy_errors": 0.8229644894599915,
+      "head_cosine_correct": 0.9847667217254639,
+      "head_cosine_errors": 0.9898649454116821
+    },
+    {
+      "seed": 1,
+      "validation_images": 374,
+      "normalized_attention_entropy_correct": 0.9030717611312866,
+      "normalized_attention_entropy_errors": 0.8983922600746155,
+      "head_cosine_correct": 0.919776201248169,
+      "head_cosine_errors": 0.9226656556129456
+    },
+    {
+      "seed": 2,
+      "validation_images": 374,
+      "normalized_attention_entropy_correct": 0.8169863820075989,
+      "normalized_attention_entropy_errors": 0.8233873248100281,
+      "head_cosine_correct": 0.9501625299453735,
+      "head_cosine_errors": 0.954815685749054
+    }
+  ],
+  "limitation": "Attention entropy and head similarity are descriptive; they do not establish explanation fidelity or causal error mechanisms."
+}

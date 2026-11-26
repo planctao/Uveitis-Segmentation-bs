@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "protocol_sha256": "cfa8fedb3977e92f9f889a4e6135138a57f447c5ede3e51c0d09e43b371b6810",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": {
+    "omitted_from_github_snapshot": true,
+    "count": 3,
+    "source_list_sha256": "571e64ee3294d9c97bfd69f121a2bcdc7f7e7cf8802ceaf8afde47da3801e1f2"
+  },
+  "original_images_checked": 24,
+  "source_adapter_models_checked": 4,
+  "adapter_batch_checks": 12,
+  "checks": [
+    "Original image fixed crop/pad/JPEG pixels match stored cache exactly",
+    "Each top64 bank array matches original extraction bitwise with matching batch boundaries",
+    "All eight B/L classification streams plus four-register stream match inherited feature tolerances",
+    "New inference API exactly matches reviewed original adapter engine on identical cached tensors",
+    "Original-image and cached-adapter probabilities agree within fixed engineering tolerance with identical decisions",
+    "Only completed independently verified checkpoints restore, with ordinary CUDA parameters"
+  ],
+  "feature_tolerance": {
+    "atol": 0.05,
+    "rtol": 0.005
+  },
+  "raw_vs_cached_probability_tolerance": {
+    "atol": 0.0005,
+    "rtol": 0.002
+  },
+  "scope_limit": "Engineering numerical equivalence check on existing development images only; no accuracy or new candidate ranking. Does not confirm an adapter gain or create a promoted model. Different image batch shapes may change float16 top64 selection near ties; exact bank equality is asserted here only at original eight-image boundaries.",
+  "new_model_fits": 0,
+  "new_candidate_scores": 0,
+  "external_images_read": 0,
+  "external_test_evaluated": false,
+  "seconds": 31.846116542816162,
+  "code_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/research_patch_image_inference.py": "703917b5a8a9349b673779f4ecee6d5e2f637396be4f60b230db958b1a76be64",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verify_research_patch_image_inference.py": "d4eeb8d3a2d0f5758235e9dd836f86e0828cbddff3f948a9e586ef86721b42e2"
+  }
+}

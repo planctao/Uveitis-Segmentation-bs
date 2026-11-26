@@ -1,0 +1,27 @@
+{
+  "saved_input_sha256": "cffb812cdcf0705956f136a54f777cc5ae9aca00a417ad4f548ce2575604125f",
+  "cases": [
+    {
+      "inference_mode": false,
+      "initial_GPU_logits_vs_CPU": 0.0,
+      "native_softmax_vs_CPU": 0.27373879512940713,
+      "logits_changed_by_native_softmax": 0.0,
+      "manual_exp_normalization_vs_CPU": 1.6653345369377348e-16,
+      "native_row_sum_min": 0.1563415814822801,
+      "native_row_sum_max": 1.4130929283351725
+    },
+    {
+      "inference_mode": true,
+      "initial_GPU_logits_vs_CPU": 0.0,
+      "native_softmax_vs_CPU": 0.27373879512940713,
+      "logits_changed_by_native_softmax": 2.436066049322105,
+      "manual_exp_normalization_vs_CPU": 0.0306842937657607,
+      "native_row_sum_min": 0.1563415814822801,
+      "native_row_sum_max": 1.4130929283351725
+    }
+  ],
+  "source_model_forward_batches": 0,
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0
+}

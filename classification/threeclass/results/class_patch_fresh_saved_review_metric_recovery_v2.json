@@ -1,0 +1,16 @@
+{
+  "created_at_utc": "2026-11-25T10:31:38.830501+00:00",
+  "finding": "The first independent saved review passed raw float32 probabilities to log-loss, while the declared original metric clips float64 probabilities to1e-7 and renormalizes. Preserve failed review/code/protocol; V2 independently computes the declared float64 normalized negative log probability without altering1e-12 metric tolerance or2e-7 fusion tolerance.",
+  "original_review_failure_preserved": true,
+  "input_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/review_class_patch_evidence_fresh_outputs.py": "8eb048ba7a0c40dd0f8b9732f5ad4f9cd35554fd86dd5081d75f78545040130b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_patch_fresh_saved_review/protocol.json": "78c4e86a37189b525783ffdfdbd4be11abd99310a9dbcbdcee6093f9121c5df4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_patch_fresh_saved_review/state.json": "f934bbe19916d723f90cb166bbf59cfd266b3e68fa117ca5e654c11da05f8be7",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc"
+  },
+  "new_model_fits": 0,
+  "new_model_predictions": 0,
+  "new_candidate_scores": 0,
+  "external_images_read": 0,
+  "scope": "Versioned metric-recipe recovery plan after observed review failure; V2 full saved-output review still must actually run."
+}

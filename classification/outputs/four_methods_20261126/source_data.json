@@ -1,0 +1,582 @@
+{
+  "source_root": "/root/autodl-tmp/uveitis_threeclass_20261124",
+  "source_sha256": {
+    "results/vitb_320/baseline/comparison.json": "d580663267c1c54f71cc3da4f2b5309a6d68eb2bdcbd108d34361fe96d216159",
+    "results/milestone1/primary/metrics.json": "033859ffe0bf5188195a933e173097b5b30f07bec253571e22285646fe908d2a",
+    "results/milestone2/primary/metrics.json": "cd2a3adf6883463dd524cfc77c314bce180310ae244d551b81ba96d8b74cce7d",
+    "results/milestone1/selection_before_test.json": "1a82c0ca18b0d24e3b1cb4a06fc8657c68af311766a7cb0b61e677c66ab4f75e",
+    "results/milestone2/selection_before_test.json": "7eb8206067bc9b4937838cc0ccb0c043156ca5fc5887c8aa9b0190c2f74595e7",
+    "extract_vit.py": "3f4fcac986e83020682d7a90e5ded8d490c8d9caaf248663f8d00b5abbd281b7",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "subtype_experiments.py": "8f16edef391f30f8fe8a9de38659458c5a9040b549d9b028cf444a7aaada63f3"
+  },
+  "slide_notes": [
+    {
+      "slide": 1,
+      "title": "葡萄膜炎三分类：四类方法与实验结果",
+      "sources": "来源：README.md；results/vitb_320/baseline/comparison.json；milestone1/2 的 selection_before_test.json 和 primary/metrics.json。全部结果为既有汇总，无新增模型拟合或外部测试。"
+    },
+    {
+      "slide": 2,
+      "title": "统一任务与评估口径",
+      "sources": "来源：README.md 数据与评估；experiment.py normalize/sample_weights/train_one；crossvalidate.py。不同患者的多眼、多时点图像整组隔离；CV 内另设早停患者。"
+    },
+    {
+      "slide": 3,
+      "title": "基线：DINOv3 全局特征＋直接 MLP",
+      "sources": "来源：vitb_320/baseline/comparison.json 的 flat.selection/config；extract_vit.py:32-35；experiment.py:96-100,150-168,300-302,366-368。配置 global/flat/h256/dropout0.3，3种子平均概率。"
+    },
+    {
+      "slide": 4,
+      "title": "两阶段：把三分类拆成两个二分类任务",
+      "sources": "来源：experiment.py routed/tune_thresholds/Model/loss_fn；baseline comparison.json。感染优先选定阈值[0.55,0.30]；正常优先[0.35,0.50]；阈值由开发验证集选择，CV只用内层早停集。外部评价采用硬路由。"
+    },
+    {
+      "slide": 5,
+      "title": "M1 模型结构：区域证据＋双层级软融合",
+      "sources": "结构严格依据 extract_vit.py:21-35 与 experiment.py:110-117,150-179,254-282,366-379。四路特征768维；区域9×768→9×128；2头区域加性打分softmax池化为256；其余投影256/64/64；拼接640→共享MLP128。直接/感染优先/正常优先三路概率经softmax门控融合。细病种头只作为辅助监督，不参与M1推理融合。"
+    },
+    {
+      "slide": 6,
+      "title": "M1 如何计算：局部选择与软层级融合",
+      "sources": "来源：experiment.py:265-282,370-379,455-468；M1配置aux0.4、consistency0.3。q的四个sigmoid分量a,b,c,d对应感染、非感染|非感染性集合、异常、感染|异常；BCE使用各真实适用子集掩码。"
+    },
+    {
+      "slide": 7,
+      "title": "M2：将细病种辅助头变成第四个预测分支",
+      "sources": "来源：milestone2/selection_before_test.json；subtype_experiments.py；experiment.py:174-182,370-379,455-468。subtype_fusion=true；病种类别映射由拟合患者构建；aux0.6, consistency0.3, subtype_consistency0.1；非后续M4/M5紧凑taxonomy-only结构。"
+    },
+    {
+      "slide": 8,
+      "title": "开发集结果：M1 / M2 提升了验证与患者 CV 表现",
+      "sources": "来源：baseline comparison.json；milestone1 selection_before_test.json winner.cv/group；milestone2 selection_before_test.json selected/cv。CV标准差来自三折。"
+    },
+    {
+      "slide": 9,
+      "title": "外部准确率：M1 两来源提高，M2 的收益不一致",
+      "sources": "来源：baseline comparison.json；milestone1/primary/metrics.json；milestone2/primary/metrics.json。图表为PowerPoint原生可编辑图表；y轴从0开始。"
+    },
+    {
+      "slide": 10,
+      "title": "为什么不能只看阶段准确率或总体准确率",
+      "sources": "来源：baseline comparison.json 各results.image.stage*_accuracy；milestone1/2 primary metrics recall；milestone1 paired_comparison.json；milestone2 paired_external_comparison.json；README.md。M2宁波感染召回67.16%。"
+    },
+    {
+      "slide": 11,
+      "title": "M2 的分支诊断：病种汇总承担主要决策权重",
+      "sources": "来源：milestone2/selection_before_test.json.subtype_contribution。mean_mixture_weights=[0.0106559163,0.0002415119,0.0003604556,0.9887433052]；with_subtype_branch_removed F1=.81204275；full F1=.83668780；subtype_branch_only与full分类相同。移除诊断使用联合训练权重，不等同于重新训练消融。"
+    },
+    {
+      "slide": 12,
+      "title": "四类方法的结论与可追溯来源",
+      "sources": "全部数据仅重排既有汇总，不涉及训练或外部评估。完整来源及sha256见同目录source_data.json；可编辑结构图在第5页，PDF/PNG为导出的审阅版本。生成脚本：classification/tools/build_four_methods_ppt.py。"
+    }
+  ],
+  "metrics": {
+    "基线 MLP": {
+      "val": {
+        "n": 374,
+        "accuracy": 0.7647058823529411,
+        "balanced_accuracy": 0.7671830030410928,
+        "macro_f1": 0.7733847432895584,
+        "log_loss": 0.5399386882781982,
+        "recall": {
+          "infectious": 0.75177304964539,
+          "noninfectious": 0.7701149425287356,
+          "normal": 0.7796610169491526
+        },
+        "confusion_matrix": [
+          [
+            106,
+            34,
+            1
+          ],
+          [
+            32,
+            134,
+            8
+          ],
+          [
+            3,
+            10,
+            46
+          ]
+        ]
+      },
+      "test_independent": {
+        "n": 807,
+        "accuracy": 0.8079306071871127,
+        "balanced_accuracy": 0.8172008402157088,
+        "macro_f1": 0.8085481596807153,
+        "log_loss": 0.4452918469905853,
+        "recall": {
+          "infectious": 0.8708791208791209,
+          "noninfectious": 0.7186544342507645,
+          "normal": 0.8620689655172413
+        },
+        "confusion_matrix": [
+          [
+            317,
+            41,
+            6
+          ],
+          [
+            71,
+            235,
+            21
+          ],
+          [
+            2,
+            14,
+            100
+          ]
+        ]
+      },
+      "test_ningbo": {
+        "n": 508,
+        "accuracy": 0.8267716535433071,
+        "balanced_accuracy": 0.8356464936662539,
+        "macro_f1": 0.8188364666387624,
+        "log_loss": 0.44090408086776733,
+        "recall": {
+          "infectious": 0.753731343283582,
+          "noninfectious": 0.8309859154929577,
+          "normal": 0.9222222222222223
+        },
+        "confusion_matrix": [
+          [
+            101,
+            32,
+            1
+          ],
+          [
+            18,
+            236,
+            30
+          ],
+          [
+            0,
+            7,
+            83
+          ]
+        ]
+      }
+    },
+    "感染优先两阶段": {
+      "val": {
+        "n": 374,
+        "accuracy": 0.7967914438502673,
+        "balanced_accuracy": 0.792266146047063,
+        "macro_f1": 0.800262872843518,
+        "log_loss": 0.5125635266304016,
+        "recall": {
+          "infectious": 0.8439716312056738,
+          "noninfectious": 0.7701149425287356,
+          "normal": 0.7627118644067796
+        },
+        "confusion_matrix": [
+          [
+            119,
+            21,
+            1
+          ],
+          [
+            34,
+            134,
+            6
+          ],
+          [
+            2,
+            12,
+            45
+          ]
+        ],
+        "stage1_n": 374,
+        "stage1_accuracy": 0.8449197860962567,
+        "stage1_auroc": 0.9136760722004078,
+        "stage2_oracle_n": 233,
+        "stage2_oracle_accuracy": 0.9141630901287554,
+        "stage2_actually_routed_n": 219,
+        "stage2_accuracy_among_all_actually_routed": 0.817351598173516,
+        "wrong_stage1_routing_n": 58,
+        "end_to_end_correct_n": 298,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "test_independent": {
+        "n": 807,
+        "accuracy": 0.7980173482032218,
+        "balanced_accuracy": 0.7962737638473166,
+        "macro_f1": 0.8028369534948482,
+        "log_loss": 0.4729158878326416,
+        "recall": {
+          "infectious": 0.8653846153846154,
+          "noninfectious": 0.7217125382262997,
+          "normal": 0.8017241379310345
+        },
+        "confusion_matrix": [
+          [
+            315,
+            46,
+            3
+          ],
+          [
+            79,
+            236,
+            12
+          ],
+          [
+            2,
+            21,
+            93
+          ]
+        ],
+        "stage1_n": 807,
+        "stage1_accuracy": 0.838909541511772,
+        "stage1_auroc": 0.9238335028402749,
+        "stage2_oracle_n": 443,
+        "stage2_oracle_accuracy": 0.9209932279909706,
+        "stage2_actually_routed_n": 411,
+        "stage2_accuracy_among_all_actually_routed": 0.8004866180048662,
+        "wrong_stage1_routing_n": 130,
+        "end_to_end_correct_n": 644,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "test_ningbo": {
+        "n": 508,
+        "accuracy": 0.8267716535433071,
+        "balanced_accuracy": 0.8332142106369561,
+        "macro_f1": 0.8178060386952279,
+        "log_loss": 0.48881474137306213,
+        "recall": {
+          "infectious": 0.7686567164179104,
+          "noninfectious": 0.8309859154929577,
+          "normal": 0.9
+        },
+        "confusion_matrix": [
+          [
+            103,
+            30,
+            1
+          ],
+          [
+            17,
+            236,
+            31
+          ],
+          [
+            0,
+            9,
+            81
+          ]
+        ],
+        "stage1_n": 508,
+        "stage1_accuracy": 0.905511811023622,
+        "stage1_auroc": 0.9454266102641871,
+        "stage2_oracle_n": 374,
+        "stage2_oracle_accuracy": 0.893048128342246,
+        "stage2_actually_routed_n": 388,
+        "stage2_accuracy_among_all_actually_routed": 0.8170103092783505,
+        "wrong_stage1_routing_n": 48,
+        "end_to_end_correct_n": 420,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      }
+    },
+    "正常优先两阶段": {
+      "val": {
+        "n": 374,
+        "accuracy": 0.7807486631016043,
+        "balanced_accuracy": 0.7767366767391638,
+        "macro_f1": 0.7887718695829625,
+        "log_loss": 0.5570158362388611,
+        "recall": {
+          "infectious": 0.7801418439716312,
+          "noninfectious": 0.7873563218390804,
+          "normal": 0.7627118644067796
+        },
+        "confusion_matrix": [
+          [
+            110,
+            31,
+            0
+          ],
+          [
+            31,
+            137,
+            6
+          ],
+          [
+            3,
+            11,
+            45
+          ]
+        ],
+        "stage1_n": 374,
+        "stage1_accuracy": 0.946524064171123,
+        "stage1_auroc": 0.9600215227333871,
+        "stage2_oracle_n": 315,
+        "stage2_oracle_accuracy": 0.8031746031746032,
+        "stage2_actually_routed_n": 323,
+        "stage2_accuracy_among_all_actually_routed": 0.7647058823529411,
+        "wrong_stage1_routing_n": 20,
+        "end_to_end_correct_n": 292,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "test_independent": {
+        "n": 807,
+        "accuracy": 0.80545229244114,
+        "balanced_accuracy": 0.7974490885753145,
+        "macro_f1": 0.8069831621858703,
+        "log_loss": 0.450723797082901,
+        "recall": {
+          "infectious": 0.8489010989010989,
+          "noninfectious": 0.7675840978593272,
+          "normal": 0.7758620689655172
+        },
+        "confusion_matrix": [
+          [
+            309,
+            53,
+            2
+          ],
+          [
+            64,
+            251,
+            12
+          ],
+          [
+            4,
+            22,
+            90
+          ]
+        ],
+        "stage1_n": 807,
+        "stage1_accuracy": 0.9504337050805453,
+        "stage1_auroc": 0.9846299715554669,
+        "stage2_oracle_n": 691,
+        "stage2_oracle_accuracy": 0.8248914616497829,
+        "stage2_actually_routed_n": 703,
+        "stage2_accuracy_among_all_actually_routed": 0.7965860597439545,
+        "wrong_stage1_routing_n": 40,
+        "end_to_end_correct_n": 650,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      },
+      "test_ningbo": {
+        "n": 508,
+        "accuracy": 0.8267716535433071,
+        "balanced_accuracy": 0.8279587975614883,
+        "macro_f1": 0.8173095564451671,
+        "log_loss": 0.4733767807483673,
+        "recall": {
+          "infectious": 0.7388059701492538,
+          "noninfectious": 0.8450704225352113,
+          "normal": 0.9
+        },
+        "confusion_matrix": [
+          [
+            99,
+            35,
+            0
+          ],
+          [
+            13,
+            240,
+            31
+          ],
+          [
+            0,
+            9,
+            81
+          ]
+        ],
+        "stage1_n": 508,
+        "stage1_accuracy": 0.9212598425196851,
+        "stage1_auroc": 0.9723285486443382,
+        "stage2_oracle_n": 418,
+        "stage2_oracle_accuracy": 0.8851674641148325,
+        "stage2_actually_routed_n": 396,
+        "stage2_accuracy_among_all_actually_routed": 0.8560606060606061,
+        "wrong_stage1_routing_n": 40,
+        "end_to_end_correct_n": 420,
+        "note": "Oracle stage2 uses the true eligible subset. End-to-end accuracy includes every first-stage routing error; it is not a product of stage accuracies."
+      }
+    },
+    "M1 区域双层级": {
+      "val": {
+        "n": 374,
+        "accuracy": 0.820855614973262,
+        "balanced_accuracy": 0.8148809055022915,
+        "macro_f1": 0.8240541977384082,
+        "log_loss": 0.5048547387123108,
+        "recall": {
+          "infectious": 0.75177304964539,
+          "noninfectious": 0.8793103448275862,
+          "normal": 0.8135593220338984
+        },
+        "confusion_matrix": [
+          [
+            106,
+            35,
+            0
+          ],
+          [
+            14,
+            153,
+            7
+          ],
+          [
+            3,
+            8,
+            48
+          ]
+        ]
+      },
+      "test_independent": {
+        "n": 807,
+        "accuracy": 0.8265179677819083,
+        "balanced_accuracy": 0.8269287744137475,
+        "macro_f1": 0.8278631244691255,
+        "log_loss": 0.4174807667732239,
+        "recall": {
+          "infectious": 0.8708791208791209,
+          "noninfectious": 0.7737003058103975,
+          "normal": 0.8362068965517241
+        },
+        "confusion_matrix": [
+          [
+            317,
+            45,
+            2
+          ],
+          [
+            58,
+            253,
+            16
+          ],
+          [
+            2,
+            17,
+            97
+          ]
+        ]
+      },
+      "test_ningbo": {
+        "n": 508,
+        "accuracy": 0.8405511811023622,
+        "balanced_accuracy": 0.836077048248585,
+        "macro_f1": 0.8298148148148149,
+        "log_loss": 0.41199931502342224,
+        "recall": {
+          "infectious": 0.7238805970149254,
+          "noninfectious": 0.8732394366197183,
+          "normal": 0.9111111111111111
+        },
+        "confusion_matrix": [
+          [
+            97,
+            36,
+            1
+          ],
+          [
+            9,
+            248,
+            27
+          ],
+          [
+            0,
+            8,
+            82
+          ]
+        ]
+      }
+    },
+    "M2 病种汇总": {
+      "val": {
+        "n": 374,
+        "accuracy": 0.839572192513369,
+        "balanced_accuracy": 0.8303855044469591,
+        "macro_f1": 0.8366878015526823,
+        "log_loss": 0.4718482792377472,
+        "recall": {
+          "infectious": 0.8439716312056738,
+          "noninfectious": 0.8505747126436781,
+          "normal": 0.7966101694915254
+        },
+        "confusion_matrix": [
+          [
+            119,
+            22,
+            0
+          ],
+          [
+            18,
+            148,
+            8
+          ],
+          [
+            3,
+            9,
+            47
+          ]
+        ]
+      },
+      "test_independent": {
+        "n": 807,
+        "accuracy": 0.8451053283767038,
+        "balanced_accuracy": 0.8478854970471547,
+        "macro_f1": 0.8479244368067248,
+        "log_loss": 0.44725391268730164,
+        "recall": {
+          "infectious": 0.8681318681318682,
+          "noninfectious": 0.8134556574923547,
+          "normal": 0.8620689655172413
+        },
+        "confusion_matrix": [
+          [
+            316,
+            45,
+            3
+          ],
+          [
+            48,
+            266,
+            13
+          ],
+          [
+            2,
+            14,
+            100
+          ]
+        ]
+      },
+      "test_ningbo": {
+        "n": 508,
+        "accuracy": 0.8385826771653543,
+        "balanced_accuracy": 0.8206463768792968,
+        "macro_f1": 0.8256648689558918,
+        "log_loss": 0.4559277594089508,
+        "recall": {
+          "infectious": 0.6716417910447762,
+          "noninfectious": 0.9014084507042254,
+          "normal": 0.8888888888888888
+        },
+        "confusion_matrix": [
+          [
+            90,
+            44,
+            0
+          ],
+          [
+            5,
+            256,
+            23
+          ],
+          [
+            0,
+            10,
+            80
+          ]
+        ]
+      }
+    }
+  }
+}

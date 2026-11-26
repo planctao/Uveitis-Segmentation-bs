@@ -1,0 +1,58 @@
+[2026-10-15 12:22:00] start seg26_control_s6_f1
+[2026-10-16 15:49:30] start seg26_sample3_f1
+[2026-10-16 18:52:37] end seg26_sample3_f1 (from v2)
+[2026-10-16 18:52:37] start seg26_pls_s6_f1
+[2026-10-16 21:50:28] end seg26_pls_s6_f1 exit=0
+[2026-10-16 21:50:28] start seg26_pls_novessel_s6_f1
+[2026-10-17 00:40:14] end seg26_pls_novessel_s6_f1 exit=0
+[2026-10-17 00:40:14] start seg26_sample3_guided_f1
+[2026-10-17 03:27:10] end seg26_sample3_guided_f1 exit=0
+[2026-10-17 03:27:10] start seg26_sample3_dals_f1
+[2026-10-17 06:13:53] end seg26_sample3_dals_f1 exit=0
+QUEUE_DONE
+[2026-10-17 06:14:19] start seg26_control_s6_seed7_f1
+[2026-10-17 08:58:18] end seg26_control_s6_seed7_f1 exit=0
+[2026-10-17 09:06:42] V4_EVAL_DONE
+[2026-10-17 20:32:45] start seg26_control_s6_f2
+[2026-10-17 23:01:02] end seg26_control_s6_f2 exit=0
+[2026-10-17 23:01:02] start seg26_pls_s6_f2
+[2026-10-18 01:34:14] end seg26_pls_s6_f2 exit=0
+[2026-10-18 01:36:22] eval f2 done
+[2026-10-18 01:36:22] start seg26_control_s6_f3
+[2026-10-18 04:03:45] end seg26_control_s6_f3 exit=0
+[2026-10-18 04:03:45] start seg26_pls_s6_f3
+[2026-10-18 06:33:08] end seg26_pls_s6_f3 exit=0
+[2026-10-18 06:35:19] eval f3 done
+[2026-10-18 06:35:19] start seg26_control_s6_f4
+[2026-10-18 09:07:10] end seg26_control_s6_f4 exit=0
+[2026-10-18 09:07:10] start seg26_pls_s6_f4
+[2026-10-18 11:37:30] end seg26_pls_s6_f4 exit=0
+[2026-10-18 11:39:43] eval f4 done
+[2026-10-18 11:39:43] start seg26_control_s6_f5
+[2026-10-18 14:08:47] end seg26_control_s6_f5 exit=0
+[2026-10-18 14:08:47] start seg26_pls_s6_f5
+[2026-10-18 16:37:51] end seg26_pls_s6_f5 exit=0
+[2026-10-18 16:39:59] eval f5 done
+[2026-10-18 16:39:59] V5_5FOLD_DONE
+[2026-10-18 17:57:02] start seg26_control_s6_seed7_f2
+[2026-10-18 19:24:44] v6 seed7 queue ABORTED by user at f2 ep~13 (run dir removed); GPU handed to CLS synthesis
+[2026-10-18 19:52:19] start seg26_cls_ABC_f1
+[2026-10-18 22:30:35] end seg26_cls_ABC_f1 exit=0
+[2026-10-18 22:31:30] eval seg26_cls_ABC_f1 done
+[2026-10-18 22:31:30] start seg26_dals_s6_f1
+[2026-10-19 00:57:21] end seg26_dals_s6_f1 exit=0
+[2026-10-19 00:58:14] eval seg26_dals_s6_f1 done
+[2026-10-19 00:58:14] start seg26_cls_A_f1
+[2026-10-19 01:09:01] v8 queued (waiting for V7_CLS_F1_DONE)
+[2026-10-19 03:21:45] end seg26_cls_A_f1 exit=0
+[2026-10-19 03:22:06] start seg26_cls_B_f1
+[2026-10-19 03:22:53] eval seg26_cls_A_f1 done
+[2026-10-19 03:22:53] start seg26_cls_AB_f1
+[2026-10-19 03:28:07] end seg26_cls_AB_f1 exit=0
+[2026-10-19 03:28:07] eval seg26_cls_AB_f1 done
+[2026-10-19 03:28:07] V7_CLS_F1_DONE
+[2026-10-19 05:46:24] end seg26_cls_B_f1 exit=0
+[2026-10-19 05:47:17] V8_CLS_B_DONE
+[2026-10-19 17:50:50] start seg26_cls_AB_f1 (rerun after OOM)
+[2026-10-19 20:25:04] end seg26_cls_AB_f1 exit=0
+[2026-10-19 20:26:39] V9_RERUN_FINISHED

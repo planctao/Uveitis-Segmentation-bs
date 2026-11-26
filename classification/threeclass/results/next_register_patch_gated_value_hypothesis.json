@@ -1,0 +1,54 @@
+{
+  "created_at_utc": "2026-11-24T16:43:57.776049+00:00",
+  "family": "register_patch_gated_value",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "Linear per-patch value residuals commute with attention pooling and cannot represent content-dependent evidence interactions. Test a nonlinear patch-wise gated bottleneck before pooling, so heterogeneous local evidence can change the correction even when pooled linear value evidence matches. Keep original selected attention and M8L classifier/DINO tail frozen. Standard RMS normalization, SwiGLU and anchored residual ingredients; no claim of originality or equivalence to full-patch tuning.",
+  "feature_plan": "Immutable2091development-only top64spatial K/V bank, scales320/448. No new image reads, no additional cached features, no label-dependent patch selection; prefixkeys excluded.",
+  "architecture_plan": "For every64D value v and head: rho=sqrt(mean(v^2)+1e-6), z=v/rho, code=SiLU(Az)*(Gz), delta_v=2*rho*B(code). A/G Kaiminguniform, Bzero. Shared maps across16heads versus one map perhead; bothscales/registers/patches share eachhead map. Originalfixedquery/key softmax pools delta_v over64patches. This nonlinear mapping is applied BEFORE pooling and cannot commute through pooling. Run frozenattention projection/gamma1, modified-minus-baseline finalMLP/finalnorm and add to cachedoriginalregisters, originalfloat16policy/stats/PCA/head. OnlyA/G/B trainable, frozenhead/tail eval. AtzeroB exactsourcep/subtype. Allglobal/region/mid/dispersion unchanged. Float64attention, gating andpool; float32frozen tail/head.",
+  "configuration_plan": [
+    {
+      "name": "shared_rank4",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "perhead_rank4",
+      "kind": "perhead",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "shared_rank8",
+      "kind": "shared",
+      "rank": 8,
+      "alpha": 16
+    },
+    {
+      "name": "perhead_rank8",
+      "kind": "perhead",
+      "rank": 8,
+      "alpha": 16
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Fourstandalone adaptedL andfixed .1875rawB+.5625normalB+.25candidateL. Original12M8L/24B heads reused/audited, never recounted.",
+  "fixed_training": "Originalcomplete taxonomy task andpatient/near-duplicate fit/stop/outerplans. Actualbatch256, seeds20292300+seed, AdamWlr.001 wd.01, max60/patience12/clip3, epoch0eligible. TrainonlyA/G/B, sourcehead/tail eval. Originalthree seedlabels.",
+  "preflight_plan": "Beforeanyfits/scores: fouractualrandom256image firsttasks; compactactualCUDA output/input/initialparameter hashes and independent complete-task/allparametergradient replay; exactzero sourcep/subtype; nonzeroB allA/G/B gradients finite/nonzero; vectorizedversus independentlyheadwise perpatch formula andindependent frozen tail/head; jointpatchpermutation invariance; explicit noncommutation withpooling; gatingablationzero; allfrozenparameters/buffers unchangedafteroptimizer; bitwisecheckpointrestoration withordinaryCUDA conversion; source/cachebytes unchanged; actual256memory/runtime.",
+  "launch_condition": "No supervisedfit until query/value/joint decisions and requiredfreshconfirmations terminal, M8stillretained, completearchitectureproof passes, and alloriginalsources/spaces/plans/code/proofs/reference frozen. Ifpredecessorpromotesnewreference, review/redesign beforeanyfit; noautomaticcomparisonagainstobsoleteM8.",
+  "selection": "OriginalCV strictlyabove retainedM8 andvalidationF1>=reference; freezehighestqualifyingCV, thentwo unusedpatient3foldrepeats against EACH M8/M7/M6/M5/fixedGaussian, highermeanF1 andpairedpatient95%lowerCI>0 foreach. Separate reviewed90-fit warmstartconfirmation required. Noautomaticexternalscoring.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_patch_gated_value_model.json",
+  "confirmation_plan_preflight": "verification_register_patch_gated_value_confirmation_plan.json",
+  "continuation_protocol": "runs/gated_patch_continuation/protocol.json",
+  "continuation_protocol_sha256": "7c841f12146c999ff9174b684ffb6f3f865a6eb26a47879e8e6bc841d5ea2793",
+  "continuation_pid": 55395,
+  "preregistration_sha256": "8446b71e095d924899c3b63de60624d4a3a3c23d130a72a07ef743f5e6cdb325",
+  "protocol": "runs/register_patch_gated_value/protocol.json",
+  "protocol_sha256": "08c1f9ad679132e7e0d597b03952ef3520a8a4c3911a2655312f0e38d0ba4d1a",
+  "pid": 61166,
+  "passing_development_gates": 0
+}

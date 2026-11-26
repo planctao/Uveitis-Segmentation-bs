@@ -1,0 +1,186 @@
+project:
+  name: paper_puunet_control
+  seed: 42
+runtime:
+  device: cuda
+  precision: amp
+  num_workers: 8
+data:
+  root: dataset/dataset/split_dataorigin
+  image_dir: img
+  mask_dir: mask_only_itksnap
+  hrnet_result_dir: HRNet_Result
+  image_extensions:
+  - .jpg
+  - .jpeg
+  - .png
+  - .bmp
+  - .tif
+  - .tiff
+  mask_extensions:
+  - .nii.gz
+  - .nii
+  - .png
+  - .jpg
+  - .jpeg
+  - .bmp
+  - .tif
+  - .tiff
+  result_extensions:
+  - .png
+  - .jpg
+  - .jpeg
+  - .bmp
+  - .tif
+  - .tiff
+  folds:
+  - f1
+  - f2
+  - f3
+  - f4
+  - f5
+  label_values:
+  - 0
+  - 1
+  - 2
+  - 3
+  ignore_index: 255
+  exclude_val_augmented: true
+train:
+  image_size:
+  - 256
+  - 256
+  batch_size: 8
+  grad_accum_steps: 1
+  epochs: 30
+  optimizer: adamw
+  learning_rate: 0.001
+  min_learning_rate: 1.0e-06
+  scheduler: cosine
+  weight_decay: 0.0001
+  amp: true
+  clip_grad_norm: 1.0
+  progress_log_interval: 100
+  save_interval: 30
+  sample_interval: 10
+  lesion1_sample_weight: 1.0
+  lesion2_sample_weight: 6.0
+  sampler_epoch_multiplier: 1.0
+  max_train_samples: null
+  max_val_samples: null
+  folds_to_run:
+  - f1
+  - f2
+  - f3
+  - f4
+  - f5
+model:
+  name: puunet_control
+  out_channels: 2
+  base_channels: 32
+  pretrained: false
+loss:
+  name: pu_focal_tversky_bce
+  alpha: 0.7
+  gamma: 1.33
+metric:
+  threshold: 0.5
+  selection_metric: paper_sweep_best_macro_dice
+  threshold_sweep:
+    enabled: true
+    thresholds:
+    - 0.05
+    - 0.1
+    - 0.15
+    - 0.2
+    - 0.25
+    - 0.3
+    - 0.35
+    - 0.4
+    - 0.45
+    - 0.5
+    - 0.6
+    - 0.7
+    - 0.8
+    - 0.9
+augmentations:
+  enabled: true
+  pipeline:
+  - name: hflip
+    prob: 0.5
+  - name: vflip
+    prob: 0.2
+  - name: affine
+    prob: 0.8
+    strength: 1.0
+    degrees:
+    - -25
+    - 25
+    scale:
+    - 0.9
+    - 1.1
+    translate: 0.04
+  - name: foreground_resized_crop
+    prob: 0.25
+    strength: 1.0
+    scale:
+    - 0.88
+    - 1.0
+    foreground_labels:
+    - 1
+    - 2
+    - 3
+    ignore_index: 255
+    min_keep: 0.7
+    attempts: 8
+  - name: random_order
+    prob: 1.0
+    blocks:
+    - name: brightness_contrast
+      prob: 0.55
+      strength: 0.75
+      brightness:
+      - -0.1
+      - 0.1
+      contrast:
+      - 0.85
+      - 1.2
+    - name: gamma
+      prob: 0.35
+      strength: 0.75
+      gamma:
+      - 0.8
+      - 1.25
+  - name: one_of
+    prob: 0.25
+    weights:
+    - 0.7
+    - 0.3
+    blocks:
+    - name: gaussian_noise
+      prob: 1.0
+      strength: 0.75
+      std:
+      - 0.0
+      - 0.025
+    - name: gaussian_blur
+      prob: 1.0
+      strength: 0.75
+      kernel_size: 5
+      sigma:
+      - 0.2
+      - 0.8
+outputs:
+  root: outputs/paper_reproduction_20261011/runs
+reproduction:
+  implementation: paper_equations_with_documented_assumptions
+  task_adaptation: two overlapping FA lesion masks
+  training_protocol: FA 30-epoch screening; not original benchmark scores
+  input_resolution: 256
+  encoder_pretraining: false
+  experiment_class: screen
+  assumptions:
+  - maxpool downsampling; transpose-convolution upsampling; residual stem
+  - theta_raw initialized to -3; scalar learned separately in each product block
+  figure_topology: 'Fig.1c: two RBs at 1/2, 1/4 and 1/8; one encoder PU block plus
+    bottleneck PU block at 1/16; first two decoder PU blocks'

@@ -1,0 +1,14 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "fit_source": "Original training only; fixed M5 patient-OOF probabilities",
+  "images": 1717,
+  "bags": 388,
+  "multiple_image_bags": 245,
+  "bag_size_median": 2.0,
+  "max_bag_images": 70,
+  "wrong_images_in_correct_mean_bags": 161,
+  "image_oof_accuracy": 0.807804309842749,
+  "bag_mean_accuracy": 0.8582474226804123,
+  "interpretation": "Within-patient/disease image evidence varies. Bag aggregation is a different evaluation unit and does not prove image labels are wrong. Hypothesis: complete same-patient/disease bags can supply auxiliary evidence during training, while image metrics remain primary.",
+  "external_test_evaluated": false
+}

@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "negative_terminal",
+      "expected": "negative",
+      "passed": true
+    },
+    {
+      "case": "positive_terminal",
+      "expected": "positive",
+      "passed": true
+    },
+    {
+      "case": "live_same_observer",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "changed_pid",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "exited_observer",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "failed_observer",
+      "expected": "reject",
+      "passed": true
+    }
+  ],
+  "code_sha256": {
+    "continue_class_patch_evidence_after_coupling.py": "49eac5269dd8999c5f41593c7884bc6542babdcdde8d13998a8e8df40159ce0d",
+    "continue_class_patch_evidence_after_coupling_v2.py": "63ceeabe64d0962f50e0bf51772837f32a6b04e5283f1417485a8c559167406f",
+    "verify_class_patch_evidence_after_coupling_v2.py": "c1fd07dc6e4aae19871973890d746afce6b0a4bcf8d325f9a38741abf612b92b"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Six pure predecessor-decision checks only. The full queue runtime awaits a terminal predecessor and the actual formal study."
+}

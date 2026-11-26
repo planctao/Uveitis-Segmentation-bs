@@ -215,6 +215,11 @@ ViT 各头明细（best sweep macro）：
 | 2026-09-06 | `va_rdh_wbe_f1_screen` | VA-RDH K=16 + WBE/PFESA-lite Haar boundary attention | `runs/va_rdh_mosc_f1_screen2/config.yaml` + `--decoder-attention wbe` | f1 | clean 444 | 5 | 0.7621 | 0.7536 | 0.7579 | `runs/va_rdh_wbe_f1_screen/f1/checkpoints/best.pt` | 轻量 Haar 高频增强（96-channel bottleneck、zero-init residual）；sweep macro 0.7579，peak VRAM 12.42GB；低于 VA-RDH 0.7872，不扩展 |
 | 2026-09-06 | `va_rdh_boundary_f1_screen` | VA-RDH K=16 + edge-guided boundary refinement | `runs/va_rdh_mosc_f1_screen2/config.yaml` + `--decoder-attention boundary-lite` | f1 | clean 444 | 5 | 0.7491 | 0.7297 | 0.7493 | `runs/va_rdh_boundary_f1_screen/f1/checkpoints/best.pt` | neck 前零初始化边界门控；最佳 sweep ep4=0.7493，peak VRAM 13.36GB；未超过主线 |
 | 2026-09-06 | `va_rdh_pdcneck_f1_screen` | VA-RDH K=16 + Oriented-PDC neck residual | `runs/va_rdh_mosc_f1_screen2/config.yaml` + `--decoder-attention pdc-neck` | f1 | clean 444 | 5 | 0.7559 | 0.7286 | 0.7423 | `runs/va_rdh_pdcneck_f1_screen/f1/checkpoints/best.pt` | CPDC/APDC/RPDC 仅作 neck 特征残差、无边界辅助 loss；最佳 sweep 0.7423，1 个 non-finite batch，peak VRAM 13.31GB；不扩展 |
+| 2026-09-23 | `upen_pelit_baseline_f1_screen5` | matched ConvNeXt-FPN baseline | `configs/dinov3_convnext_tiny_hmvf.yaml` + `--decoder-attention none` | f1 | clean 444 | 5 | 0.7610 | 0.7661 | **0.7636** | `runs/upen_pelit_baseline_f1_screen5/f1/checkpoints/best.pt` | U-PEN/PE-lite 受控筛选基线；best epoch=4，peak VRAM 10.54GB |
+| 2026-09-23 | `upen_pelit_pe_f1_screen5` | U-PEN PEL-3 启发的 bounded PE-lite | `configs/dinov3_convnext_tiny_hmvf.yaml` + `--decoder-attention pe-lite` | f1 | clean 444 | 5 | 0.7614 | 0.7258 | 0.7436 | `runs/upen_pelit_pe_f1_screen5/f1/checkpoints/best.pt` | 比 matched baseline 低2.00pp，主要损伤 lesion_2；178,081 参数，peak VRAM 13.34GB；不扩展 |
+| 2026-09-23 | `hmvf_mambavision_f1_screen5` | HMVF 同协议短程对照 | `configs/dinov3_convnext_tiny_hmvf.yaml` + `--decoder-attention mambavision` | f1 | clean 444 | 5 | 0.7599 | 0.7377 | 0.7488 | `runs/hmvf_mambavision_f1_screen5/f1/checkpoints/best.pt` | 117,553 参数，peak VRAM 12.21GB；短程筛选低于 baseline，但其独立30 epoch结果为0.7802，不能据此否定 HMVF |
+| 2026-09-23 | `upen_pelit_pehmvf_f1_screen5` | PE-lite + HMVF 顺序组合 | `configs/dinov3_convnext_tiny_hmvf.yaml` + `--decoder-attention pe-hmvf` | f1 | clean 444 | 5 | 0.7525 | 0.7446 | 0.7485 | `runs/upen_pelit_pehmvf_f1_screen5/f1/checkpoints/best.pt` | 比 baseline 低1.50pp；与 HMVF macro 基本相同但参数295,634、peak VRAM 15.01GB，无互补增益，不扩展 |
+| 2026-09-23 | `lesion2_expert_hmvf_vsubr_f1_screen5` | lesion_2-only loss 专家；推理按通道路由 | `configs/dinov3_convnext_tiny_hmvf_vsubr_lesion2_expert.yaml` | f1 | clean 444 | 5 | 0.7960 | **0.7719** | **0.7839** | `runs/lesion2_expert_hmvf_vsubr_f1_screen5/f1/checkpoints/best.pt` | lesion_1 来自主模型、lesion_2 来自专家；相对单主模型独立阈值结果，Dice-2 +0.89pp、Macro +0.45pp；25/50/75/100% 专家权重消融单调改善，当前硬路由最佳；仅单折，需扩展五折 |
 
 ## ZAB-LeakNet 新方案（2026-07-20）
 
@@ -229,3 +234,25 @@ ZAB v1 高于 ConvNeXt reference `0.7769`（+0.16pp），但尚未超过 RDH-PDE
 `0.7830`。ZAB v2 的软层级/双向耦合已实现于
 `configs/dinov3_convnext_tiny_zab_v2.yaml`，当前只有 v1 权重代理筛查，不能
 替代 v2 正式训练；详见 `outputs/reports/zab_screen.md`。
+
+
+## 推理优化与 CPU 部署（2026-10-09，现存 HMVF，clean f1）
+
+本节针对现存完整 checkpoint `runs/hmvf_mambavision_f1_30/f1/checkpoints/best.pt`。历史 VA-RDH / VS-UBR 最佳权重未找到，未复评。444 张、768×768、固定阈值 0.90/0.90、无 TTA，无重训。速度主对照为相同 9 CPU 线程，NumPy 输入至 CPU logits，包含 GPU 数据传输；质量基准为原模型 GPU eager FP16。
+
+| 实现 | 平均推理 ms/张 | Macro Dice | Δ Macro (pp) | 新增整图漏检 L1/L2 | 状态 |
+|---|---:|---:|---:|---:|---|
+| CPU PyTorch FP32 原始 NCHW（性能对照） | 672.6 | — | — | — | 性能对照 |
+| CPU PyTorch FP32 channels_last（性能对照） | 505.1 | — | — | — | 性能对照 |
+| CPU OpenVINO FP32，方向合批 | 345.5 | 0.780205 | −0.00282 | 0/0 | 通过；质量在 8 线程复评 |
+| **CPU OpenVINO 解码器 INT8，9 线程** | **219.4** | **0.780747** | **+0.05131** | **0/0** | **默认部署，完整复评** |
+| GPU 原模型 eager FP16 | 32.33 | 0.780234 | 0 | — | 质量基准 |
+| GPU 合批 + channels_last + compile FP16 | 18.57 | 0.780224 | −0.00093 | 0/0 | 通过 |
+
+CPU 默认方案保留 backbone、SSM 全局分支与最后分割卷积为 FP32，仅量化其余 decoder；校准 128 张来自 f2–f5，验证折排除。Dice-1/2 为 **0.797650 / 0.763843**，整图漏检数 1/6，无新增漏检病例。CPU 相对同线程 NCHW 快 **3.07×**，相对 channels_last 快 **2.30×**。实际不依赖 PyTorch 的 CPU 入口包含预处理和标签生成，平均 **246.0 ms/张**，P95 **268.3 ms**；模型加载/编译 1.54 秒，RSS 563 MiB，权重 109.26 MiB。
+
+负结果：大范围 INT8 macro −0.19274pp，新增 L1 整图漏检且 Dice-1 −0.3021pp，拒绝；保护首 stage 的 INT8 macro −0.49211pp，新增 L1/L2 漏检 2/1，拒绝。输入降到 736/704/672/640 均未通过，稀有类 Dice-2 降幅约 1.19–1.64pp。
+
+质量要求：macro 降幅 ≤0.2pp、各类 ≤0.3pp、配对无新增整图漏检。最终部署全部 444 张逐图指标与最终 9 线程复评一致，23 项相关测试通过。当前单折结果不能证明临床安全性或五折泛化提升。
+
+默认部署包：`outputs/inference_optimization_20261009/deployment/`；入口：`scripts/predict_cpu.py`。完整协议、原始证据、复现命令与研究叙事见 [推理优化报告](docs/inference_optimization_2026-10-09.md)。

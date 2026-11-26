@@ -1,0 +1,160 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "full_control",
+      "m8_exact_control_error": 0.0,
+      "frozen_parameters": 0,
+      "true_trainable_parameters": 1398192,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.043081283569336e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 1.0
+    },
+    {
+      "kind": "freeze_qk",
+      "m8_exact_control_error": null,
+      "frozen_parameters": 4,
+      "true_trainable_parameters": 1324400,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5273690223693848e-07,
+      "token_permutation_error": 1.1641532182693481e-09,
+      "hidden_query_attention_change": 0.3313611149787903
+    },
+    {
+      "kind": "freeze_value",
+      "m8_exact_control_error": null,
+      "frozen_parameters": 2,
+      "true_trainable_parameters": 1332624,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5273690223693848e-07,
+      "token_permutation_error": 1.1641532182693481e-09,
+      "hidden_query_attention_change": 0.3313611149787903
+    },
+    {
+      "kind": "freeze_qkv",
+      "m8_exact_control_error": null,
+      "frozen_parameters": 6,
+      "true_trainable_parameters": 1258832,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5273690223693848e-07,
+      "token_permutation_error": 1.1641532182693481e-09,
+      "hidden_query_attention_change": 0.3313611149787903
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "kind": "full_control",
+      "witness": {
+        "trainable_parameters": 1398192,
+        "total_parameters": 1398192,
+        "frozen_projections_at_initial_bits": true,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "freeze_qk",
+      "witness": {
+        "trainable_parameters": 1324400,
+        "total_parameters": 1398192,
+        "frozen_projections_at_initial_bits": true,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "freeze_value",
+      "witness": {
+        "trainable_parameters": 1332624,
+        "total_parameters": 1398192,
+        "frozen_projections_at_initial_bits": true,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "freeze_qkv",
+      "witness": {
+        "trainable_parameters": 1258832,
+        "total_parameters": 1398192,
+        "frozen_projections_at_initial_bits": true,
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_projection_freezing.py": "cef77080eb5d05c63cbd9a3b68c776686f16a0ffa0c1f8ce98c326f144a363a2",
+    "audit_register_projection_freezing.py": "3acd280516075d76025f229b290bdbc4869dee6668cda431969d7c8e919af479",
+    "verify_register_projection_freezing.py": "cf73dbb014a1013035f66e9269934b3d95dc641bffc3aec12cb6ac9e3e331a1e",
+    "register_multiquery_data.py": "a41dc9ef8013c3edc1405cf7d0a44a071d7eaadba225a347ced956e85d4ea391"
+  },
+  "checks": [
+    "Four actual tokenstreams256image complete task/allparametergradients independently reconstructed",
+    "OriginalnormalL initialization/RNG/fulltask/basegradients identical atzeroreadout; equalparameters across all four attentionarms; dotcontrol exact M8trainedidentity",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Tokenpermutation invariance, frozen projectionparameters remain atinitialbits and have no AdamWdecay; true trainablegradientnames/counts explicit, nonzero hiddenquery connectivity, optimizerupdates/frozenbuffers/strictrestore and fouractualCUDA firsttask/allgradientreplays"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

@@ -1,0 +1,60 @@
+{
+  "slides": [
+    {
+      "slide": 1,
+      "title": "基线：冻结 DINOv3 特征＋直接 MLP 分类",
+      "source": "extract_vit.py:21-35；experiment.py:96-100,150-168,366-368；results/vitb_320/baseline/comparison.json.flat。"
+    },
+    {
+      "slide": 2,
+      "title": "两阶段方法一：先判断感染，再区分非感染和正常",
+      "source": "experiment.py Model/cascade_i、routed、tune_thresholds、loss_fn；baseline comparison.json.cascade_i。阈值0.55/0.30来自开发验证选择。"
+    },
+    {
+      "slide": 3,
+      "title": "两阶段方法二：先判断异常，再区分感染和非感染",
+      "source": "experiment.py Model/cascade_n、routed、tune_thresholds、loss_fn；baseline comparison.json.cascade_n。阈值0.35/0.50来自开发验证选择。"
+    },
+    {
+      "slide": 4,
+      "title": "M1 为什么要这样改？",
+      "source": "方法动机依据首轮候选结构及README.md“架构探索与稳健性”，并与extract_vit.py和experiment.py实际实现核对。以下是结构设计假设，不是已证明的独立机制贡献；首轮多个组件联合改变。"
+    },
+    {
+      "slide": 5,
+      "title": "M1：区域特征＋双层级软融合",
+      "source": "extract_vit.py:21-35；experiment.py:110-117,150-179,254-282,366-379。CLS投影256；区域9×768投影9×128后2头池化256；中层/标准差投影64/64；拼接640→共享隐藏128。细病种头仅辅助训练。"
+    },
+    {
+      "slide": 6,
+      "title": "M1 的“软层级”如何工作？",
+      "source": "experiment.py:265-282,370-379,455-468；M1冻结配置aux0.4、consistency0.3。四个二分类sigmoid输出a,b,c,d对应条件概率；三个分支均按感染/非感染/正常排序。"
+    },
+    {
+      "slide": 7,
+      "title": "M2：增加病种概率汇总分支",
+      "source": "milestone2/selection_before_test.json；subtype_experiments.py；experiment.py:174-182,370-379,455-468。M2保留M1的三个预测分支，并将病种softmax通过映射求和作为第四分支；不是后续紧凑M4结构。"
+    },
+    {
+      "slide": 8,
+      "title": "方法与结果总表",
+      "source": "验证及外部指标：baseline comparison.json、milestone1/2 primary/metrics.json；CV：milestone1 selection_before_test.json的相应finalists与milestone2 selection_before_test.json.cv。所有准确率/F1为图像级；CV按患者分组。"
+    }
+  ],
+  "source_root": "/root/autodl-tmp/uveitis_threeclass_20261124",
+  "source_sha256": {
+    "results/vitb_320/baseline/comparison.json": "d580663267c1c54f71cc3da4f2b5309a6d68eb2bdcbd108d34361fe96d216159",
+    "results/milestone1/primary/metrics.json": "033859ffe0bf5188195a933e173097b5b30f07bec253571e22285646fe908d2a",
+    "results/milestone2/primary/metrics.json": "cd2a3adf6883463dd524cfc77c314bce180310ae244d551b81ba96d8b74cce7d",
+    "results/milestone1/selection_before_test.json": "1a82c0ca18b0d24e3b1cb4a06fc8657c68af311766a7cb0b61e677c66ab4f75e",
+    "results/milestone2/selection_before_test.json": "7eb8206067bc9b4937838cc0ccb0c043156ca5fc5887c8aa9b0190c2f74595e7",
+    "extract_vit.py": "3f4fcac986e83020682d7a90e5ded8d490c8d9caaf248663f8d00b5abbd281b7",
+    "experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc",
+    "subtype_experiments.py": "8f16edef391f30f8fe8a9de38659458c5a9040b549d9b028cf444a7aaada63f3"
+  },
+  "validation": {
+    "slide_count": 8,
+    "orthogonal_line_segments": 60,
+    "last_slide": "方法与结果总表"
+  }
+}

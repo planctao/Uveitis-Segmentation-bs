@@ -1,0 +1,47 @@
+{
+  "created_at_utc": "2026-11-25T13:31:00.784208+00:00",
+  "kind": "storage_estimate_not_experiment_result",
+  "historical_completed_source": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation",
+  "historical_training_products_freeze_sha256": "2a3c80775e156096839d2248a73a79940c26d2b45e2d059122b68f96863182ef",
+  "source_rows": [
+    {
+      "arm": "reference",
+      "observed_seed_folders": 18,
+      "observed_total_bytes": 110802234,
+      "maximum_observed_seed_bytes": 6189667,
+      "eighteen_times_observed_maximum": 111414006
+    },
+    {
+      "arm": "subspace",
+      "observed_seed_folders": 18,
+      "observed_total_bytes": 87285163,
+      "maximum_observed_seed_bytes": 4862015,
+      "eighteen_times_observed_maximum": 87516270
+    },
+    {
+      "arm": "large",
+      "observed_seed_folders": 18,
+      "observed_total_bytes": 216893015,
+      "maximum_observed_seed_bytes": 12067687,
+      "eighteen_times_observed_maximum": 217218366
+    },
+    {
+      "arm": "token",
+      "observed_seed_folders": 18,
+      "observed_total_bytes": 535187995,
+      "maximum_observed_seed_bytes": 29752549,
+      "eighteen_times_observed_maximum": 535545882
+    }
+  ],
+  "seventy_two_fresh_sources_estimate_bytes": 951694524,
+  "thirty_six_compact_adapter_budget_bytes": 37748736,
+  "remaining_original_fit_budget_bytes": 25165824,
+  "additional_metadata_and_filesystem_reserve_bytes": 134217728,
+  "total_estimate_bytes": 1148826812,
+  "shared_available_bytes_observed": 1616216064,
+  "estimated_margin_bytes": 467389252,
+  "sufficient_at_observation": true,
+  "new_classifier_fits_or_scores": 0,
+  "external_images_read": 0,
+  "limits": "Estimate uses each source arm maximum from18completed historical fresh fits plus explicit adapter/original/metadata reserves. It is not a future allocation guarantee. Recheck available space before any eligible108fit confirmation; its frozen launch guard still applies. No scientific files removed, relocated or modified."
+}

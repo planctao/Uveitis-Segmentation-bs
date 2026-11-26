@@ -1,0 +1,376 @@
+{
+  "created_at_utc": "2026-11-24T17:09:12.606913+00:00",
+  "purpose": "Descriptive diagnosis from existing selected M8 training OOF probabilities. These original folds were already used in model selection; this is not fresh confirmation or a new improvement claim.",
+  "scope": "Exactly original1717training rows, eachonce; validation and external rows excluded.",
+  "new_model_fits": 0,
+  "new_candidate_models_scored": 0,
+  "external_test_evaluated": false,
+  "original_cv_mean_macro_f1_restored": 0.8390087766590693,
+  "fold_metrics": [
+    {
+      "fold": 0,
+      "metrics": {
+        "n": 572,
+        "accuracy": 0.8391608391608392,
+        "balanced_accuracy": 0.8504302120212124,
+        "macro_f1": 0.8357695405425383,
+        "log_loss": 0.41860673473647914,
+        "recall": {
+          "infectious": 0.7863247863247863,
+          "noninfectious": 0.8702290076335878,
+          "normal": 0.8947368421052632
+        },
+        "confusion_matrix": [
+          [
+            184,
+            43,
+            7
+          ],
+          [
+            20,
+            228,
+            14
+          ],
+          [
+            0,
+            8,
+            68
+          ]
+        ]
+      }
+    },
+    {
+      "fold": 1,
+      "metrics": {
+        "n": 572,
+        "accuracy": 0.8146853146853147,
+        "balanced_accuracy": 0.8326185071866069,
+        "macro_f1": 0.8250282862721011,
+        "log_loss": 0.5098106096781865,
+        "recall": {
+          "infectious": 0.7863247863247863,
+          "noninfectious": 0.816793893129771,
+          "normal": 0.8947368421052632
+        },
+        "confusion_matrix": [
+          [
+            184,
+            47,
+            3
+          ],
+          [
+            37,
+            214,
+            11
+          ],
+          [
+            2,
+            6,
+            68
+          ]
+        ]
+      }
+    },
+    {
+      "fold": 2,
+      "metrics": {
+        "n": 573,
+        "accuracy": 0.849912739965096,
+        "balanced_accuracy": 0.87350073861981,
+        "macro_f1": 0.8562285031625684,
+        "log_loss": 0.4268616227719896,
+        "recall": {
+          "infectious": 0.8632478632478633,
+          "noninfectious": 0.8098859315589354,
+          "normal": 0.9473684210526315
+        },
+        "confusion_matrix": [
+          [
+            202,
+            26,
+            6
+          ],
+          [
+            40,
+            213,
+            10
+          ],
+          [
+            0,
+            4,
+            72
+          ]
+        ]
+      }
+    }
+  ],
+  "confusion_matrix": [
+    [
+      570,
+      116,
+      16
+    ],
+    [
+      97,
+      655,
+      35
+    ],
+    [
+      2,
+      18,
+      208
+    ]
+  ],
+  "total_training_oof_errors": 284,
+  "disease_error_counts": [
+    {
+      "disease": "ARN",
+      "true_label": 0,
+      "images": 467,
+      "patients": 60,
+      "patients_with_any_error": 20,
+      "errors": 61,
+      "prediction_counts": {
+        "0": 406,
+        "1": 54,
+        "2": 7
+      },
+      "B_L_agree_wrong": 33,
+      "B_L_disagree": 64
+    },
+    {
+      "disease": "Behcet",
+      "true_label": 1,
+      "images": 262,
+      "patients": 34,
+      "patients_with_any_error": 21,
+      "errors": 57,
+      "prediction_counts": {
+        "0": 51,
+        "1": 205,
+        "2": 6
+      },
+      "B_L_agree_wrong": 39,
+      "B_L_disagree": 51
+    },
+    {
+      "disease": "CMVR",
+      "true_label": 0,
+      "images": 142,
+      "patients": 15,
+      "patients_with_any_error": 9,
+      "errors": 33,
+      "prediction_counts": {
+        "0": 109,
+        "1": 32,
+        "2": 1
+      },
+      "B_L_agree_wrong": 18,
+      "B_L_disagree": 26
+    },
+    {
+      "disease": "Eales",
+      "true_label": 1,
+      "images": 81,
+      "patients": 33,
+      "patients_with_any_error": 10,
+      "errors": 25,
+      "prediction_counts": {
+        "0": 17,
+        "1": 56,
+        "2": 8
+      },
+      "B_L_agree_wrong": 14,
+      "B_L_disagree": 15
+    },
+    {
+      "disease": "VKH",
+      "true_label": 1,
+      "images": 314,
+      "patients": 53,
+      "patients_with_any_error": 14,
+      "errors": 24,
+      "prediction_counts": {
+        "0": 10,
+        "1": 290,
+        "2": 14
+      },
+      "B_L_agree_wrong": 12,
+      "B_L_disagree": 22
+    },
+    {
+      "disease": "SO",
+      "true_label": 1,
+      "images": 50,
+      "patients": 10,
+      "patients_with_any_error": 6,
+      "errors": 22,
+      "prediction_counts": {
+        "0": 18,
+        "1": 28,
+        "2": 4
+      },
+      "B_L_agree_wrong": 20,
+      "B_L_disagree": 5
+    },
+    {
+      "disease": "Normal",
+      "true_label": 2,
+      "images": 228,
+      "patients": 111,
+      "patients_with_any_error": 15,
+      "errors": 20,
+      "prediction_counts": {
+        "0": 2,
+        "1": 18,
+        "2": 208
+      },
+      "B_L_agree_wrong": 13,
+      "B_L_disagree": 35
+    },
+    {
+      "disease": "Toxoplasmosis",
+      "true_label": 0,
+      "images": 37,
+      "patients": 7,
+      "patients_with_any_error": 4,
+      "errors": 16,
+      "prediction_counts": {
+        "0": 21,
+        "1": 12,
+        "2": 4
+      },
+      "B_L_agree_wrong": 8,
+      "B_L_disagree": 12
+    },
+    {
+      "disease": "Endophthalmitis",
+      "true_label": 0,
+      "images": 42,
+      "patients": 9,
+      "patients_with_any_error": 5,
+      "errors": 12,
+      "prediction_counts": {
+        "0": 30,
+        "1": 12,
+        "2": 0
+      },
+      "B_L_agree_wrong": 9,
+      "B_L_disagree": 10
+    },
+    {
+      "disease": "Toxocariasis",
+      "true_label": 0,
+      "images": 14,
+      "patients": 2,
+      "patients_with_any_error": 2,
+      "errors": 10,
+      "prediction_counts": {
+        "0": 4,
+        "1": 6,
+        "2": 4
+      },
+      "B_L_agree_wrong": 4,
+      "B_L_disagree": 7
+    },
+    {
+      "disease": "PIC",
+      "true_label": 1,
+      "images": 31,
+      "patients": 20,
+      "patients_with_any_error": 1,
+      "errors": 3,
+      "prediction_counts": {
+        "0": 0,
+        "1": 28,
+        "2": 3
+      },
+      "B_L_agree_wrong": 3,
+      "B_L_disagree": 1
+    },
+    {
+      "disease": "SC",
+      "true_label": 1,
+      "images": 8,
+      "patients": 3,
+      "patients_with_any_error": 1,
+      "errors": 1,
+      "prediction_counts": {
+        "0": 1,
+        "1": 7,
+        "2": 0
+      },
+      "B_L_agree_wrong": 1,
+      "B_L_disagree": 2
+    },
+    {
+      "disease": "MCP",
+      "true_label": 1,
+      "images": 5,
+      "patients": 2,
+      "patients_with_any_error": 0,
+      "errors": 0,
+      "prediction_counts": {
+        "0": 0,
+        "1": 5,
+        "2": 0
+      },
+      "B_L_agree_wrong": 0,
+      "B_L_disagree": 0
+    },
+    {
+      "disease": "MEWDS",
+      "true_label": 1,
+      "images": 36,
+      "patients": 29,
+      "patients_with_any_error": 0,
+      "errors": 0,
+      "prediction_counts": {
+        "0": 0,
+        "1": 36,
+        "2": 0
+      },
+      "B_L_agree_wrong": 0,
+      "B_L_disagree": 1
+    }
+  ],
+  "branch_agreement_error_counts": [
+    {
+      "subset": "B_L_agree",
+      "images": 1466,
+      "patients": 316,
+      "m8_errors": 175
+    },
+    {
+      "subset": "B_L_disagree",
+      "images": 251,
+      "patients": 115,
+      "m8_errors": 109
+    },
+    {
+      "subset": "B_L_agree_wrong",
+      "images": 174,
+      "patients": 76,
+      "m8_errors": 172
+    }
+  ],
+  "limitation": "Image error counts are descriptive and correlated within patients. Rare subtype counts do not establish reliable per-disease effects. The same broad subtype label can include different acquisition contexts; do not infer a causal imaging mechanism.",
+  "input_artifact_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_m8.json": "f51c3369a43d3b706479c48e13dec3a5c2c4248c155ae563310833f3d3d6dc74",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/metadata/manifest.csv": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/predictions.npz": "40e9a0f496ae6f1b8f6fdc791ed825aa97b97268455cdcba87d08527f7668643",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/predictions.npz": "c820281330e81a4d3cf16095deb09f449d36dab677e02a00dc36bf37b0a1a931",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/predictions.npz": "9077f2c381054ef07ab96f144d83522caf6945c7d4c3b4230f398cf30f04c27b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_0/predictions.npz": "822dcfc4515a24425b72ee5f64ae2ac5def9ac8550d7029656fb6977632e2e0f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/predictions.npz": "05fd8a34648bf5eb6db6313e9933fd57ef84508efedb068ceb42a1958cca9ec9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/predictions.npz": "011ef53c43092ea827fa21ead64609c042ba03e8d913b98d09c4ddc099d32b79",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/predictions.npz": "2c2a6484b2063860e4cd14e5f9be37492a09867ff0df909e2ca21c8e38aa0f10",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_1/predictions.npz": "6d36e7eb2625d2ad716f6f0628383d679da85467f1dd07836131ce012f604341",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/predictions.npz": "c6c036ed5c08e4562271608dfbd1ee9b798f65162697b7bad6f641a690057bd5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/predictions.npz": "fc71b365bb9bdfa4097a712a807af145d4d3ed5e54023f961fda7fb18a43eab1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/predictions.npz": "84d60fd4bd2c7b4a984e8b4da97c8ff3d1d400b5525db83dcaddf51e17208852",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_2/predictions.npz": "91d3c6b8ccbc165f1289196148895134a802b98fedae950b8075e37c6847ade2"
+  },
+  "case_table_sha256": "8335bd3d2961e8d8b2d9d334f5b5d90fb4e64c24659be7b0c50fa0e167d50956",
+  "code_sha256": "ea55e00c9a9567a92dc022bf8fdf4c9f4f5ded75b7995c80ecaa9bd25c16a5f0"
+}

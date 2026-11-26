@@ -11,6 +11,7 @@ import pandas as pd
 import torch
 from experiment import ROOT,load_data,dump
 from evaluate import evaluate_group
+from integrity_reporting import generic_cv_review_report_text, load_integrity_snapshot, integrity_report_text, load_patch_image_check, patch_image_check_report_text, load_completed_patch_reviews, completed_patch_reviews_report_text, mass_research_report_text, query_selection_exploration_report_text, attention_coupling_exploration_report_text, class_patch_evidence_report_text, dispersion_exploration_report_text, class_patch_fresh_saved_review_report_text, spatial_semivariance_report_text, hadamard_variance_report_text, log_moment_report_text, lastblock_delta_lora_report_text
 
 def paired_ci(base,new,repetitions=2000):
     a=pd.read_csv(base);b=pd.read_csv(new)
@@ -444,7 +445,7 @@ def report():
             lines += ['\n| 寄存器多查询/固定替换 | 验证Macro-F1 | 原患者CV Macro-F1 | 通过门槛 |','|---|---:|---:|---|']
             for row in json.loads(result.read_text())['candidates']:
                 lines.append(f'| {row["name"]} | {row["val"]["macro_f1"]:.5f} | {row["cv"]["mean_macro_f1"]:.5f} | {"通过" if row["development_gate_passed"] else "未通过"} |')
-    for family,title in [('register_depth','寄存器深度'),('register_multiquery','寄存器多查询'),('register_position_calibration','寄存器位置校正'),('register_geometry','寄存器正常空间')]:
+    for family,title in [('register_depth','寄存器深度'),('register_multiquery','寄存器多查询'),('register_position_calibration','寄存器位置校正'),('register_geometry','寄存器正常空间'),('base_token_evidence','B分支证据'),('register_common_mode','寄存器共同与差异成分'),('register_cosine','寄存器余弦注意力'),('register_scale_factorization','寄存器尺度分解'),('register_static_context','固定与动态图像上下文'),('register_projection_freezing','寄存器投影冻结'),('register_classifier_context','分类器上下文查询'),('register_routing_information','寄存器路由信息'),('register_recurrent_refinement','共享权重查询反馈'),('register_conditional_readout','寄存器条件读出')]:
         protocol_path=ROOT/'runs'/(family+'_confirmation')/'protocol.json'
         if protocol_path.exists():
             state=json.loads((protocol_path.parent/'state.json').read_text())
@@ -479,6 +480,297 @@ def report():
             lines += ['\n| 寄存器正常空间/固定替换 | 验证Macro-F1 | 原患者CV Macro-F1 | 通过门槛 |','|---|---:|---:|---|']
             for row in json.loads(result.read_text())['candidates']:
                 lines.append(f'| {row["name"]} | {row["val"]["macro_f1"]:.5f} | {row["cv"]["mean_macro_f1"]:.5f} | {"通过" if row["development_gate_passed"] else "未通过"} |')
+    base_features=ROOT/'runs/base_token_features/protocol.json'
+    if base_features.exists():
+        state=json.loads((base_features.parent/'state.json').read_text())
+        lines.append(f'\nDINO-B证据特征准备：状态={state.get("status")}。同一历史B权重及320/448，只有2091开发图；block7中间9区域、末层9区域对照、4寄存器、4象限，末层区域保存原历史字节。6张真实图预检已通过，后续核验262分片/全部缓存哈希及6张额外前传；0分类拟合/评分。')
+    base_draft=ROOT/'results/next_base_token_evidence_hypothesis.json'
+    if base_draft.exists():
+        draft=json.loads(base_draft.read_text())
+        lines.append(f'\n下一条B分支预声明：把隐藏查询token残差接入原正常B，比较上述4流，同参数；单分支与固定18.75%原B＋56.25%新正常B＋25%原M8寄存器L，共8评分。须当前位置校正、寄存器空间及任何复验/晋级全部终结，完成任务/CUDA前检后才冻结48训练。当前状态={draft["status"]}，分类评分数={draft["scores_evaluated"]}。')
+    base_token_protocol=ROOT/'runs/base_token_evidence/protocol.json'
+    if base_token_protocol.exists():
+        protocol=json.loads(base_token_protocol.read_text());state=json.loads((base_token_protocol.parent/'state.json').read_text())
+        lines.append(f'\nB分支token实验状态={state.get("status")}；48实际训练/8固定评分，4原B与16侧流正常空间及患者计划提前冻结。全部真实任务/全梯度和CUDA预检通过；固定替换M8的56.25%正常B分支，24原B/寄存器L来源逐一恢复，门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_base_token_evidence/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda r:r['cv']['mean_macro_f1'])
+            lines.append(f'\n全部48任务/24来源/16融合阶段核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(r["development_gate_passed"] for r in rows)}项。')
+    common_draft=ROOT/'results/next_register_common_mode_hypothesis.json'
+    if common_draft.exists():
+        draft=json.loads(common_draft.read_text())
+        lines.append(f'\n寄存器共同/差异成分预声明：原M8注意力精确对照、均匀均值、去除值均值、逐图token居中，四方案同参数；48实际训练与8固定评分。当前状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    common_protocol=ROOT/'runs/register_common_mode/protocol.json'
+    if common_protocol.exists():
+        protocol=json.loads(common_protocol.read_text());state=json.loads((common_protocol.parent/'state.json').read_text())
+        lines.append(f'\n共同/差异实验状态={state.get("status")}；先冻结4原L/4寄存器正常空间与患者计划，独立复核48真实任务/全梯度、24来源和16融合；门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_common_mode/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n该轮完整核验已通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    cosine_draft=ROOT/'results/next_register_cosine_hypothesis.json'
+    if cosine_draft.exists():
+        draft=json.loads(cosine_draft.read_text())
+        lines.append(f'\n寄存器余弦注意力预声明：原M8点积精确对照、单位查询/键余弦分数乘1/4/8，四方案同参数；48实际训练与8固定评分。当前状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    cosine_protocol=ROOT/'runs/register_cosine/protocol.json'
+    if cosine_protocol.exists():
+        protocol=json.loads(cosine_protocol.read_text());state=json.loads((cosine_protocol.parent/'state.json').read_text())
+        lines.append(f'\n余弦注意力实验状态={state.get("status")}；先冻结4原L/4寄存器正常空间与患者计划，独立复核48真实任务/全梯度、24来源和16融合；门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_cosine/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n余弦注意力该轮完整核验已通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    scale_factorization_draft=ROOT/'results/next_register_scale_factorization_hypothesis.json'
+    if scale_factorization_draft.exists():
+        draft=json.loads(scale_factorization_draft.read_text())
+        lines.append(f'\n寄存器尺度分解预声明：原M8精确对照、分块值＋共享注意力、分块值＋独立尺度注意力、再加入分尺度LayerNorm；四方案同参数。保留联合正常PCA，独立尺度置换在正常投影及token标准化后的注意力模块检查，分尺度标准化组再检查完整残差模块。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    scale_factorization_protocol=ROOT/'runs/register_scale_factorization/protocol.json'
+    if scale_factorization_protocol.exists():
+        protocol=json.loads(scale_factorization_protocol.read_text());state=json.loads((scale_factorization_protocol.parent/'state.json').read_text())
+        lines.append(f'\n尺度分解实验状态={state.get("status")}；48实际训练/8固定评分，4原L/4寄存器正常空间与患者计划先冻结。门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_scale_factorization/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n尺度分解全部48任务/24来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    scale_recovery=ROOT/'runs/register_scale_factorization/audit_recovery_protocol_v2.json'
+    if scale_recovery.exists():
+        lines.append('\n尺度分解审计恢复：原逐位CPU概率对照断言失败，12个实际控制检查点权重/缓冲区/轮次/标准化/首批CUDA完整见证/训练停止概率均逐位相同；CPU验证集重算最大差7.75e-7且决策相同。原代码和训练结果保持冻结；单独恢复脚本要求12模型逐位一致，概率恢复采用原有5e-5容差及相同决策，新增训练0。')
+    static_context_draft=ROOT/'results/next_register_static_context_hypothesis.json'
+    if static_context_draft.exists():
+        draft=json.loads(static_context_draft.read_text())
+        lines.append(f'\n固定/动态图像上下文预声明：真实M8寄存器对照、拟合患者等权平均的固定寄存器库、逐图减去固定库的差异、两路共享参数平均；四方案同参数。检验增益是否需要每张图的register证据。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    static_context_protocol=ROOT/'runs/register_static_context/protocol.json'
+    if static_context_protocol.exists():
+        protocol=json.loads(static_context_protocol.read_text());state=json.loads((static_context_protocol.parent/'state.json').read_text())
+        lines.append(f'\n固定/动态上下文实验状态={state.get("status")}；48实际训练/8固定评分，4原L/4寄存器空间、4固定库与患者计划先冻结。门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_static_context/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n固定/动态上下文全部48任务/24来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    projection_freezing_draft=ROOT/'results/next_register_projection_freezing_hypothesis.json'
+    if projection_freezing_draft.exists():
+        draft=json.loads(projection_freezing_draft.read_text())
+        lines.append(f'\n寄存器投影冻结预声明：完整训练对照、固定初始query/key线性层、固定value线性层、固定三者；LayerNorm和读出仍可训练。总参数相同但实际可训练量不同，首批梯度只包含可训练参数并记录名称，冻结权重须无AdamW衰减且与初始位值相同。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    projection_freezing_protocol=ROOT/'runs/register_projection_freezing/protocol.json'
+    if projection_freezing_protocol.exists():
+        protocol=json.loads(projection_freezing_protocol.read_text());state=json.loads((projection_freezing_protocol.parent/'state.json').read_text())
+        lines.append(f'\n投影冻结实验状态={state.get("status")}；48实际训练/8固定评分，4原L/4寄存器空间及患者计划先冻结。门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_projection_freezing/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n投影冻结全部48任务/24来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    classifier_context_draft=ROOT/'results/next_register_classifier_context_hypothesis.json'
+    if classifier_context_draft.exists():
+        draft=json.loads(classifier_context_draft.read_text())
+        lines.append(f'\n分类器上下文查询预声明：原隐藏查询M8对照、粗类别权重生成查询、同查询断开分类器梯度、细病种权重生成查询且每粗类总权重1/3。全部使用原query/key/value/readout参数，无新增查询参数，比较任务上下文与梯度耦合。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    classifier_context_protocol=ROOT/'runs/register_classifier_context/protocol.json'
+    if classifier_context_protocol.exists():
+        protocol=json.loads(classifier_context_protocol.read_text());state=json.loads((classifier_context_protocol.parent/'state.json').read_text())
+        lines.append(f'\n分类器上下文实验状态={state.get("status")}；48实际训练/8固定评分，4原L/4寄存器空间及患者计划先冻结。门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_classifier_context/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n分类器上下文全部48任务/24来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    routing_information_draft=ROOT/'results/next_register_routing_information_hypothesis.json'
+    if routing_information_draft.exists():
+        draft=json.loads(routing_information_draft.read_text())
+        lines.append(f'\n路由信息约束预声明：保留M8推理结构，比较无约束、注意力平滑、患者均衡边际使用、路由互信息；每批先在患者内平均，再给该批出现的患者等权，新增损失系数预定0.02；原图像采样不变。独立核对增强任务与全部梯度；改动分支在零读出时也会改变训练梯度。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    routing_information_protocol=ROOT/'runs/register_routing_information/protocol.json'
+    if routing_information_protocol.exists():
+        protocol=json.loads(routing_information_protocol.read_text());state=json.loads((routing_information_protocol.parent/'state.json').read_text())
+        lines.append(f'\n路由信息约束实验状态={state.get("status")}；48实际训练/8固定评分，4原L/4寄存器空间及患者计划先冻结。门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_routing_information/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n路由信息约束全部48任务/24来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    recurrent_refinement_draft=ROOT/'results/next_register_recurrent_refinement_hypothesis.json'
+    if recurrent_refinement_draft.exists():
+        draft=json.loads(recurrent_refinement_draft.read_text())
+        lines.append(f'\n共享权重查询反馈预声明：原单次寄存器读取、两步Euler、四步Euler、一步Heun预测校正；所有步骤复用同一注意力参数，总积分步长固定1，根据更新后的隐藏特征重新查询。独立展开各步的非零读出前向及全部梯度，验证中间状态、参数量、初始化与原M8对照。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    recurrent_refinement_protocol=ROOT/'runs/register_recurrent_refinement/protocol.json'
+    if recurrent_refinement_protocol.exists():
+        protocol=json.loads(recurrent_refinement_protocol.read_text());state=json.loads((recurrent_refinement_protocol.parent/'state.json').read_text())
+        lines.append(f'\n共享权重查询反馈实验状态={state.get("status")}；48实际训练/8固定评分，4原L/4寄存器空间及患者计划先冻结。门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_recurrent_refinement/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n共享权重查询反馈全部48任务/24来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    conditional_readout_draft=ROOT/'results/next_register_conditional_readout_hypothesis.json'
+    if conditional_readout_draft.exists():
+        draft=json.loads(conditional_readout_draft.read_text())
+        lines.append(f'\n寄存器条件读出预声明：保留原M8注意力和参数量，比较原相加、tanh受限相加、隐藏通道乘法、相加与乘法组合。无仿射隐藏LayerNorm只参与读出因子，零读出保留原基线输出；独立验证非零读出任务及全部梯度，使用紧凑CUDA证据。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    conditional_readout_protocol=ROOT/'runs/register_conditional_readout/protocol.json'
+    if conditional_readout_protocol.exists():
+        protocol=json.loads(conditional_readout_protocol.read_text());state=json.loads((conditional_readout_protocol.parent/'state.json').read_text())
+        lines.append(f'\n寄存器条件读出实验状态={state.get("status")}；48实际训练/8固定评分，4原L/4寄存器空间及患者计划先冻结。门槛为{protocol["retained_model"]}原CV>{protocol["minimum_cv_macro_f1"]:.7f}且验证≥{protocol["minimum_validation_macro_f1"]:.7f}。')
+        result=ROOT/'results/research_register_conditional_readout/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n寄存器条件读出全部48任务/24来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    patch_query_draft=ROOT/'results/next_register_patch_query_hypothesis.json'
+    if patch_query_draft.exists():
+        draft=json.loads(patch_query_draft.read_text())
+        lines.append(f'\n寄存器重新查询patch证据：冻结原M8L分类器及DINO尾部，只训练rank4/8低秩query更新；共享/独立register查询四组预声明。每头缓存原注意力最高64个空间patch的key/value，以修改前后尾部输出之差校正原register，零更新时保留原M8预测。缓存和模型预检阶段无分类评分。状态={draft["status"]}，评分数={draft["scores_evaluated"]}。')
+    patch_bank_protocol=ROOT/'runs/register_patch_query_bank/protocol.json'
+    if patch_bank_protocol.exists():
+        state=json.loads((patch_bank_protocol.parent/'state.json').read_text())
+        lines.append(f'\nPatch查询缓存：{state.get("status")}，开发图像{state.get("completed_images",state.get("development_images",0))}/2091，外部图像读取0；256图完整任务预检通过后才可开始正式分类。query输入及大幅度preMLP状态保留float32，两个近似注意力池的差用float64计算，未放宽审计容差。')
+    patch_query_protocol=ROOT/'runs/register_patch_query/protocol.json'
+    if patch_query_protocol.exists():
+        state=json.loads((patch_query_protocol.parent/'state.json').read_text())
+        lines.append(f'\nPatch查询正式实验状态={state.get("status")}；48次新的query适配分类训练，原12个M8L头和24个B融合头复用并核验，不重复计入新训练数。')
+        result=ROOT/'results/research_register_patch_query/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\nPatch查询全部48适配任务/12冻结L来源/24B来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证F1={best["val"]["macro_f1"]:.5f}、验证准确率={best["val"]["accuracy"]*100:.2f}%，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    patch_continuation=ROOT/'runs/register_patch_query_continuation/state.json'
+    if patch_continuation.exists():
+        continuation=json.loads(patch_continuation.read_text())
+        lines.append(f'\nPatch查询后续执行状态={continuation["status"]}：完整缓存通过后，先按正式随机首批重放256图任务与梯度，再冻结训练协议并启动实验；任一检查失败会停止该流程。')
+
+    patch_loop=ROOT/'runs/patch_architecture_loop/state.json'
+    if patch_loop.exists() and not (ROOT/'runs/patch_loop_cuda_ready/protocol.json').exists():
+        state=json.loads(patch_loop.read_text())
+        lines.append(f'\n连续架构流程状态={state["status"]}：等待当前query实验完整审计；合格候选先复验，未获确认且M8保留时才运行预声明value实验。既有训练不重启，失败停止供复核。')
+    patch_confirmation=ROOT/'runs/register_patch_query_confirmation/protocol.json'
+    if patch_confirmation.exists():
+        state=json.loads((patch_confirmation.parent/'state.json').read_text())
+        lines.append(f'\nPatch查询候选已冻结并在两个未用患者三折复验，状态={state.get("status")}。先重训72个B/L来源头，再从各自新寄存器头训练18个query适配器，共90次新监督训练；6方案/18空间先冻结，逐一检查零适配恒等性与54个实际CUDA完整任务梯度。')
+        result=ROOT/'results/research_register_patch_query_confirmation/comparison.json'
+        if result.exists():
+            result=json.loads(result.read_text());candidate=next(row for row in result['arms'] if row['arm']=='candidate')
+            lines.append(f'\n查询候选六折Macro-F1={candidate["mean_macro_f1"]:.5f}、准确率={candidate["mean_accuracy"]*100:.2f}%，确认门槛={result["confirmation_gate_passed"]}；不自动测试外部集。')
+    value_confirmation=ROOT/'runs/register_patch_value_confirmation/protocol.json'
+    if value_confirmation.exists():
+        state=json.loads((value_confirmation.parent/'state.json').read_text())
+        lines.append(f'\nPatch内容适配候选已冻结并在两个未用患者三折复验，状态={state.get("status")}。先重训72个B/L来源头，再从各自新寄存器头训练18个value适配器，共90次新监督训练；6方案/18空间先冻结，逐一检查零适配恒等性与54个实际CUDA完整任务梯度。')
+        result=ROOT/'results/research_register_patch_value_confirmation/comparison.json'
+        if result.exists():
+            result=json.loads(result.read_text());candidate=next(row for row in result['arms'] if row['arm']=='candidate')
+            lines.append(f'\n内容适配候选六折Macro-F1={candidate["mean_macro_f1"]:.5f}、准确率={candidate["mean_accuracy"]*100:.2f}%，确认门槛={result["confirmation_gate_passed"]}；不自动测试外部集。')
+    patch_value_draft=ROOT/'results/next_register_patch_value_hypothesis.json'
+    if patch_value_draft.exists():
+        draft=json.loads(patch_value_draft.read_text())
+        lines.append(f'\n下一轮局部patch内容适配：复用同一开发缓存，对selected value学习共享/逐头rank4/8低秩残差，原query、DINO尾部及M8L分类器冻结。独立逐patch运算核验实际池后实现；当前状态={draft["status"]}，分类评分={draft["scores_evaluated"]}，只在查询实验及必要复验终结后训练。')
+    patch_value_protocol=ROOT/'runs/register_patch_value/protocol.json'
+    if patch_value_protocol.exists():
+        state=json.loads((patch_value_protocol.parent/'state.json').read_text())
+        lines.append(f'\nPatch内容适配正式实验状态={state.get("status")}；48次新适配训练，原12L/24B来源复用并核验。')
+        result=ROOT/'results/research_register_patch_value/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n内容适配全部48任务/12L/24B来源/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证F1={best["val"]["macro_f1"]:.5f}、验证准确率={best["val"]["accuracy"]*100:.2f}%，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+
+    joint_draft=ROOT/'results/next_register_patch_joint_hypothesis.json'
+    if joint_draft.exists():
+        draft=json.loads(joint_draft.read_text())
+        lines.append(f'\n已预登记查询与内容联合适配，状态={draft["status"]}、分类评分={draft["scores_evaluated"]}；沿用同一开发缓存，学习两条低秩路径及其交互。4组真实随机256图已检查关闭任一路的精确退化、完整任务梯度及冻结参数。只有两种单路候选决策终结且M8保留时才训练。')
+    joint_protocol=ROOT/'runs/register_patch_joint/protocol.json'
+    if joint_protocol.exists():
+        state=json.loads((joint_protocol.parent/'state.json').read_text())
+        lines.append(f'\n联合适配正式实验状态={state.get("status")}；48次新监督训练，原12L/24B头复用并核验。')
+        result=ROOT/'results/research_register_patch_joint/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n联合适配48任务/12L/24B来源/16融合全部核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证F1={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    joint_confirmation=ROOT/'runs/register_patch_joint_confirmation/protocol.json'
+    if joint_confirmation.exists():
+        state=json.loads((joint_confirmation.parent/'state.json').read_text())
+        lines.append(f'\nPatch联合适配候选已冻结并在两个未用患者三折复验，状态={state.get("status")}。先重训72个B/L来源头，再从各自新寄存器头训练18个联合适配器，共90次新监督训练；6方案/18空间先冻结，逐一检查零适配恒等性与54个实际CUDA完整任务梯度。')
+        result=ROOT/'results/research_register_patch_joint_confirmation/comparison.json'
+        if result.exists():
+            result=json.loads(result.read_text());candidate=next(row for row in result['arms'] if row['arm']=='candidate')
+            lines.append(f'\n联合适配候选六折Macro-F1={candidate["mean_macro_f1"]:.5f}、准确率={candidate["mean_accuracy"]*100:.2f}%，确认门槛={result["confirmation_gate_passed"]}；不自动测试外部集。')
+    recovery=ROOT/'runs/register_patch_query/cuda_ready_audit_recovery/state.json'
+    if recovery.exists():
+        state=json.loads(recovery.read_text())
+        lines.append(f'\nQuery审计恢复状态={state["status"]}：48份保存概率已逐位重现，完整任务和独立预测容差保持原值；恢复新增训练0次。原失败记录保留。')
+    cuda_loop=ROOT/'runs/patch_loop_cuda_ready/state.json'
+    if cuda_loop.exists():
+        from refresh_recent_progress import live_state
+        state=live_state('patch_loop_cuda_ready')
+        lines.append(f'\n当前连续架构流程={state["status"]}，进程核实={state["process_confirmed_live"]}：按Query→Value→联合适配推进，合格候选先做新患者划分复验，确认后进入模型复核。此版本接替两个已退出的旧流程，未重复训练Query，不自动评分外部集。')
+    gated_draft=ROOT/'results/next_register_patch_gated_value_hypothesis.json'
+    if gated_draft.exists():
+        draft=json.loads(gated_draft.read_text())
+        lines.append(f'\n新增逐patch内容门控假设，状态={draft["status"]}、分类评分={draft["scores_evaluated"]}：先对每个64维value作RMS标准化和低秩SwiGLU门控，再由固定注意力汇总，检验线性池化丢失的局部异质性。4组真实256图的零更新恒等性、独立完整任务/三矩阵梯度、非线性运算次序差异和冻结参数检查全部通过；这是工程证据，分类收益待验证。')
+    gated_loop=ROOT/'runs/gated_patch_continuation/state.json'
+    if gated_loop.exists():
+        from refresh_recent_progress import live_state
+        state=live_state('gated_patch_continuation')
+        lines.append(f'\n内容门控衔接流程={state["status"]}，实际进程核实={state["process_confirmed_live"]}；现有Query/Value/联合决策终结且M8保留后，才启动48次门控训练，任何合格候选再做90次新训练复验。')
+    gated_protocol=ROOT/'runs/register_patch_gated_value/protocol.json'
+    if gated_protocol.exists():
+        state=json.loads((gated_protocol.parent/'state.json').read_text())
+        lines.append(f'\n逐patch内容门控正式实验状态={state["status"]}；4组/48次新监督训练，原12L/24B复用并核验。')
+        result=ROOT/'results/research_register_patch_gated_value/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n门控适配48任务/16融合核验通过；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证F1={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    gated_confirmation=ROOT/'runs/register_patch_gated_value_confirmation/protocol.json'
+    if gated_confirmation.exists():
+        state=json.loads((gated_confirmation.parent/'state.json').read_text())
+        lines.append(f'\n门控候选新患者三折两次复验状态={state["status"]}；72个新来源头与18个适配器，54个真实CUDA任务梯度和18个正常空间独立核验。')
+        result=ROOT/'results/research_register_patch_gated_value_confirmation/comparison.json'
+        if result.exists():
+            result=json.loads(result.read_text());candidate=next(row for row in result['arms'] if row['arm']=='candidate')
+            lines.append(f'\n门控候选六折Macro-F1={candidate["mean_macro_f1"]:.5f}、准确率={candidate["mean_accuracy"]*100:.2f}%，确认门槛={result["confirmation_gate_passed"]}。')
+    readout_draft=ROOT/'results/next_register_patch_readout_adaptation_hypothesis.json'
+    if readout_draft.exists():
+        draft=json.loads(readout_draft.read_text())
+        lines.append(f'\n分类读出与局部证据联合适配已预登记，状态={draft["status"]}、分类评分={draft["scores_evaluated"]}。只新增零初始化的病种线性读出残差，原分类器/编码器/DINO尾部冻结；设置仅读出对照和3组局部门控联合方案。4组真实256图完整任务/全部梯度、关闭任一路的精确退化、权重冻结和模型恢复已通过，仍无分类收益结论。')
+        lines.append('\n若联合方案入围新患者复验，额外训练匹配的仅读出对照，总108次训练/72个CUDA任务；仅读出入围则90次/54个任务。联合方案必须同时超过匹配对照的患者配对区间门槛，才认定局部适配有额外收益。')
+    readout_loop=ROOT/'runs/readout_adaptation_continuation/state.json'
+    if readout_loop.exists():
+        from refresh_recent_progress import live_state
+        state=live_state('readout_adaptation_continuation')
+        lines.append(f'\n读出适配衔接流程={state["status"]}，实际进程核实={state["process_confirmed_live"]}；前序决策全部终结且M8保留后才运行。')
+    readout_protocol=ROOT/'runs/register_patch_readout_adaptation/protocol.json'
+    if readout_protocol.exists():
+        state=json.loads((readout_protocol.parent/'state.json').read_text())
+        lines.append(f'\n读出/局部证据正式实验状态={state["status"]}，4组/48次监督训练。')
+        result=ROOT/'results/research_register_patch_readout_adaptation/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n读出实验48任务/16融合已核验；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证F1={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    readout_confirmation=ROOT/'runs/register_patch_readout_adaptation_confirmation/protocol.json'
+    if readout_confirmation.exists():
+        protocol=json.loads(readout_confirmation.read_text());state=json.loads((readout_confirmation.parent/'state.json').read_text())
+        lines.append(f'\n读出候选复验状态={state["status"]}，预声明{protocol["planned_new_seed_fits"]}次训练/{protocol["planned_training_witnesses"]}个实际CUDA任务；包含18个正常空间和18个Gaussian拟合。')
+        result=ROOT/'results/research_register_patch_readout_adaptation_confirmation/comparison.json'
+        if result.exists():
+            result=json.loads(result.read_text());candidate=next(row for row in result['arms'] if row['arm']=='candidate')
+            lines.append(f'\n读出候选六折Macro-F1={candidate["mean_macro_f1"]:.5f}、准确率={candidate["mean_accuracy"]*100:.2f}%，确认门槛={result["confirmation_gate_passed"]}。')
+    pair_draft=ROOT/'results/next_inflammatory_pair_specialist_hypothesis.json'
+    if pair_draft.exists():
+        draft=json.loads(pair_draft.read_text())
+        lines.append(f'\n感染/非感染条件校正分支已预登记，状态={draft["status"]}、分类评分={draft["scores_evaluated"]}。原训练集OOF的284个错误有213个为感染与非感染互混，B/L共同误判占M8错误172个；这属于既有开发划分的描述性分析，不是新复验证据。4组线性/64MLP×隐向量/隐向量加token汇总，只学习有界条件概率校正，正常类概率逐位保持，原病种logits和编码器冻结。真实256图的完整任务梯度、零更新恒等性、概率守恒及恢复检查通过，分类收益待实验。')
+    pair_loop=ROOT/'runs/pair_specialist_continuation/state.json'
+    if pair_loop.exists():
+        from refresh_recent_progress import live_state
+        state=live_state('pair_specialist_continuation')
+        lines.append(f'\n条件校正衔接流程={state["status"]}，实际进程核实={state["process_confirmed_live"]}；读出实验及前序决策终结且M8保留后，才进行48次正式训练及任何合格候选90次新患者复验。')
+    pair_protocol=ROOT/'runs/inflammatory_pair_specialist/protocol.json'
+    if pair_protocol.exists():
+        state=json.loads((pair_protocol.parent/'state.json').read_text())
+        lines.append(f'\n感染/非感染校正正式实验状态={state["status"]}；48次新监督训练，原12L/24B来源复用核验。')
+        result=ROOT/'results/research_inflammatory_pair_specialist/comparison.json'
+        if result.exists():
+            rows=json.loads(result.read_text())['candidates'];best=max(rows,key=lambda row:row['cv']['mean_macro_f1'])
+            lines.append(f'\n条件校正48任务/16融合已核验；最高原CV={best["cv"]["mean_macro_f1"]:.5f}、对应验证F1={best["val"]["macro_f1"]:.5f}，通过门槛{sum(row["development_gate_passed"] for row in rows)}项。')
+    pair_confirmation=ROOT/'runs/inflammatory_pair_specialist_confirmation/protocol.json'
+    if pair_confirmation.exists():
+        state=json.loads((pair_confirmation.parent/'state.json').read_text())
+        lines.append(f'\n感染/非感染校正新患者复验状态={state["status"]}，90次监督训练/54个真实CUDA完整任务/18个正常空间和18个Gaussian拟合。')
+        result=ROOT/'results/research_inflammatory_pair_specialist_confirmation/comparison.json'
+        if result.exists():
+            result=json.loads(result.read_text());candidate=next(row for row in result['arms'] if row['arm']=='candidate')
+            lines.append(f'\n条件校正六折Macro-F1={candidate["mean_macro_f1"]:.5f}、准确率={candidate["mean_accuracy"]*100:.2f}%，确认门槛={result["confirmation_gate_passed"]}。')
+    joint_loop=ROOT/'runs/value_decision_and_joint/state.json'
+    if joint_loop.exists() and not (ROOT/'runs/patch_loop_cuda_ready/protocol.json').exists():
+        state=json.loads(joint_loop.read_text())
+        lines.append(f'\n内容适配复验与联合实验衔接状态={state["status"]}；任何确认成功都会返回参考模型复核，未确认时再进入预声明联合实验。')
+
     lines += ['\n## 后续消融记录', '\n| 候选家族 | 最佳验证准确率 | 最佳验证 Macro-F1 | 状态 |','|---|---:|---:|---|']
     for source,label in [('vitb_448/explore','448输入'),('multiscale_vit/explore','320与448多尺度'),('vitb_patch7/explore','7×7前景局部证据'),('vitb_320/memory','患者记忆混合'),('vitb_320/memory_attention','区域注意力＋患者记忆'),('vitb_320/subtype_hierarchy','病种概率汇总'),('vitb_320/taxonomy','紧凑病种汇总')]:
         path=ROOT/'runs'/source/'selection.json'
@@ -2108,6 +2400,32 @@ def report():
               '\n```bash\ncd /root/autodl-tmp/uveitis_threeclass_20261124\nexport OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 NUMEXPR_NUM_THREADS=4\npython prepare.py\npython extract.py\npython extract_vit.py\npython fuse_features.py\npython experiment.py --features vitb_320 --phase baseline\npython experiment.py --features vitb_320 --phase explore\npython crossvalidate.py --features vitb_320\npython evaluate.py --features vitb_320 --phase baseline\npython finetune.py\npython finetune_evaluate.py\npython continuous.py\n```',
               '\n训练脚本支持从已有完整试验摘要恢复。持续循环每轮提出配置、运行3个种子、按验证集排名，再提出下一轮；只清理该循环内非领先候选的检查点，保留摘要。主模型与基线检查点保留。若后续需要有序停止后台循环，在本目录创建 `STOP` 文件；恢复时移除该文件并运行 `continuous.py`。',
               f'\n固定清单SHA256：`{audit["manifest_sha256"]}`。本数据规模有限，单次验证被多轮使用可能逐步过拟合；后续候选仍需分组复核，最终结论需保留未参与选型的测试证据。']
+    lines.append(f'\n两阶段分类的精简结果、实际路由口径与患者聚类区间见 [两阶段分类结果]({ROOT}/REQUESTED_CASCADE_RESULTS.md)。')
+    value_diagnostic=ROOT/'results/research_register_patch_value/descriptive_adapter_behavior.json'
+    if value_diagnostic.exists():
+        behavior=json.loads(value_diagnostic.read_text());groups=list(behavior['summary'].values())
+        learned=sum(row['selected_after_epoch_zero'] for row in groups)
+        lines.append(f'\n已完成Value适配的描述性检查：48份已选权重中{learned}份选在第0轮之后，且其Value残差矩阵非零；四个方案的最大停止集概率变化为{min(row["maximum_saved_stop_probability_change"] for row in groups):.3f}–{max(row["maximum_saved_stop_probability_change"] for row in groups):.3f}。这些停止样本参与了权重选择，不能作为独立增益证据；正式8项评分仍均未通过M8门槛。检查只读取既有权重及概率，0新拟合、0新推理。记录：`results/research_register_patch_value/descriptive_adapter_behavior.json`。')
+    if (ROOT/'DEVELOPMENT_DIAGNOSTICS.md').exists():
+        lines.append(f'\n开发诊断中的适配学习行为、持续搜索CV快照和局部位置覆盖描述见 [开发诊断]({ROOT}/DEVELOPMENT_DIAGNOSTICS.md)。')
+    if (ROOT/'results/research_patch_image_inference_check.json').exists():
+        lines.append('\n'+patch_image_check_report_text(load_patch_image_check()))
+    lines.append('\n'+query_selection_exploration_report_text())
+    lines.append('\n'+attention_coupling_exploration_report_text())
+    lines.append('\n'+class_patch_evidence_report_text())
+    lines.append('\n'+dispersion_exploration_report_text())
+    lines.append('\n'+class_patch_fresh_saved_review_report_text())
+    lines.append('\n'+spatial_semivariance_report_text())
+    lines.append('\n'+hadamard_variance_report_text())
+    lines.append('\n'+log_moment_report_text())
+    lines.append('\n'+lastblock_delta_lora_report_text())
+    if (ROOT/'verification_large_lastblock_readout_coupling_wiring.json').exists():
+        from integrity_reporting import readout_coupling_report_text
+        lines.append('\n'+readout_coupling_report_text())
+    lines.append('\n'+generic_cv_review_report_text())
+    lines.append('\n'+mass_research_report_text())
+    lines.append('\n'+completed_patch_reviews_report_text(load_completed_patch_reviews()))
+    lines.append('\n'+integrity_report_text(load_integrity_snapshot()))
     (ROOT/'README.md').write_text('\n'.join(lines)+'\n')
     if (ROOT/'results/milestone6/metrics.json').exists():
         from write_latest_results import write as write_latest

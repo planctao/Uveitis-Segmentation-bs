@@ -1,0 +1,26 @@
+{
+  "created_at_utc": "2026-11-24T15:45:09.262387+00:00",
+  "purpose": "Continue the existing live query study; if eligible confirm the preselected winner on freshpatientplans. Ifqueryhasnogainorconfirmationfails andM8retained, run predeclaredvalueadaptationafterfullbank/random256preflight. No automaticrestart, noexternaltest and noreferencepromotion. Stoponanyfailure.",
+  "code_sha256": {
+    "continue_patch_architecture_loop.py": "02f85971a21713e0da373fa64f41966b070aaebcf948af13d27856a86ca7012f",
+    "register_patch_query_confirmation.py": "d6d55e83fc954aa3a53f77790d9192d63242b20e4bc5023210b8402e5c1098ce",
+    "start_register_patch_query_confirmation.py": "dd382955104bf17c474594f6a2ca01a84569b2bf0104893b6898f0f149983445",
+    "verify_register_patch_query_confirmation.py": "9bda189756187bf56f20faccbf963ad202f9247342c01a513be44264cf9af48b",
+    "verify_register_patch_query_confirmation_plan.py": "4ccdea0f33b26408526cbbddd8d4e6ba7d29472569b21e7a7e5945df98ebafd8",
+    "register_patch_value.py": "ac6914de7862c41f0dc06c9794d49d0c5d3cb56819e2c36b5bf7c4103dbe88d0",
+    "audit_register_patch_value.py": "a9c3c7aa52139ef767dbd831068c01606b69bbe322f71beb646d1093c381813b",
+    "register_patch_value_witness.py": "6abc1e5793f659d1b4f87655cb41789758ea83e95e5b89bb0d7f20ba98450934",
+    "register_patch_value_experiments.py": "71f52ee1032806073aa18762095b5a56b7d72fc3e1af0eb03fb95eda42653f47",
+    "verify_register_patch_value_prefix.py": "820f127287a11f5c1905245fdf7e00b6df99db4ebd801cf3e2cf7e655530dc79",
+    "verify_register_patch_value_model.py": "82f5d9e11c5dee5deca98beed765fef07314809a442c7ba9b1a89156568fb08f",
+    "start_register_patch_value.py": "d37edc2e83af2b12b9568c8d682c48161b274706710fa08bc2c78bfaf15754ce"
+  },
+  "frozen_artifacts": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_register_patch_query_confirmation_plan.json": "b60fa77cc85f6238893967e373bc59512352d34d68cc213be0b5034c227319ca",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_register_patch_value_prefix256.json": "4df3082bc5f1f77596823887a23b172c77966a83867710c702bde29b0b65e8e0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_query_continuation/protocol.json": "0106aaf2368fafb52277699928b744be3d7ba4cf419700d5afba6ebc36181c0d"
+  },
+  "planned_conditional_new_supervised_fits": "90freshconfirmation onlyifqueryeligible;48valueadapters onlyifquerynotconfirmedandM8retained",
+  "classification_fits_at_creation": 0,
+  "external_test_evaluated": false
+}

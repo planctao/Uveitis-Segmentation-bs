@@ -1,0 +1,140 @@
+{
+  "created_at_utc": "2026-11-24T18:56:00.336033+00:00",
+  "passed": true,
+  "scope": "Descriptive full-attention mass on the same24developmentrawimages/3fixed8imagebatches used by prior engineering check. Use frozen pretrained DINO-L only; no classifier/head forward, training, candidate score, model selection, external images or outcomes. Six backbone view forwards are new feature instrumentation, not zero inference. Reproduce selected indices/queries/keys bitwise before interpreting full-source-attention mass.",
+  "limitations": "Small convenience engineering sample, reused after prior engineering outcomes, not random or representative. Heads/registers/images correlated; no population or causal lesion-coverage claim. The explicit fp16 qkv attention reconstruction uses source extraction arithmetic and is checked against independently normalized float64 rounded logits; it is not proof of attention used internally by every fused-attention kernel or fullfloat64backbone equivalence. Conditional renormalization multiplier is descriptive of the adapter selected-set normalization, not an optimal scale or tuning decision. Prior spatialcoverage and Gatednegative results were known; current training/queued plans remain frozen.",
+  "protocol_sha256": "4816cf8522c63a3fbc371f3bf721e13867dd4bd8c757d83ab489918fdeaa40de",
+  "code_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/diagnose_selected_attention_mass.py": "3a13e414710155ed25c0421b27c45f44a4c46e015c3f65561cad58e7d5f15f89",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/research_patch_image_inference.py": "703917b5a8a9349b673779f4ecee6d5e2f637396be4f60b230db958b1a76be64",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/register_patch_query_features.py": "ec1157f5077f37fe4e8fcb15aced4f60bc1c1a8a8c9fb872c22854b2de65dd12",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/highres_data.py": "adea638d8d2b2cd7d7562f9f3cb2ee59175bb686a64cd1d3aa960f05924ce9a0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/predict_register_blend.py": "6b8b8c06b4993fb39aab2232e7b96d5d19acf173299d9597716f406708af9b6f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/predict_normal_large_blend_v2.py": "b4db09ecfb2b6106a06d53b62bdbabde38ecd03d9f99b9d076df4b4031ebb778",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/experiment.py": "87e0640fc5e02184a16f3c9294d93bd096e54f746d8754953f9fed1d26227cdc"
+  },
+  "development_images": 24,
+  "backbone_view_batches": 6,
+  "sizes": [
+    320,
+    448
+  ],
+  "head_query_observations_per_resolution": 1536,
+  "original_batch_top64_positions_query_and_selected_keys_bitwise_verified": true,
+  "rounded_logit_reference_checks": {
+    "omitted_from_github_snapshot": true,
+    "count": 6,
+    "source_list_sha256": "d82d31323f7dfd7b445ff48d794360fd2e72c43ea9b7b4372b77020c9d3218a7"
+  },
+  "summary": {
+    "320": {
+      "selected_mass": {
+        "mean": 0.3189229479714162,
+        "minimum": 0.024767126647930127,
+        "median": 0.30615024132248436,
+        "p05": 0.18034986699774436,
+        "p95": 0.5214337510501537,
+        "maximum": 0.7183997915735745
+      },
+      "spatial_mass": {
+        "mean": 0.925570012762814,
+        "minimum": 0.6658173640171299,
+        "median": 0.9356017917161807,
+        "p05": 0.7895866342641966,
+        "p95": 0.9999419615351144,
+        "maximum": 0.9999937376944672
+      },
+      "prefix_mass": {
+        "mean": 0.07442998723396854,
+        "minimum": 6.266403659083153e-06,
+        "median": 0.06439814227633178,
+        "p05": 5.801802529958877e-05,
+        "p95": 0.2104133868124336,
+        "maximum": 0.33418269641697407
+      },
+      "omitted_spatial_mass": {
+        "mean": 0.6066470647913978,
+        "minimum": 0.25444413702280144,
+        "median": 0.6152122747043904,
+        "p05": 0.38554530634246476,
+        "p95": 0.8098614680757237,
+        "maximum": 0.9748838097148109
+      },
+      "fraction_of_spatial_mass_selected": {
+        "mean": 0.34635461914108895,
+        "minimum": 0.024775774970057084,
+        "median": 0.3323163420478388,
+        "p05": 0.18632843468393115,
+        "p95": 0.5514829521221176,
+        "maximum": 0.7384532816174176
+      },
+      "conditional_renormalization_multiplier": {
+        "mean": 3.7525366754000156,
+        "minimum": 1.3919825864782223,
+        "median": 3.26637086808095,
+        "p05": 1.9177893829166455,
+        "p95": 5.544803484619218,
+        "maximum": 40.376100716696314
+      }
+    },
+    "448": {
+      "selected_mass": {
+        "mean": 0.23398801816619966,
+        "minimum": 0.0011400523337670165,
+        "median": 0.2060769369782065,
+        "p05": 0.017821179930251674,
+        "p95": 0.5470736080314964,
+        "maximum": 0.7790873855262817
+      },
+      "spatial_mass": {
+        "mean": 0.9300964877340455,
+        "minimum": 0.38550159027545305,
+        "median": 0.9550207298016176,
+        "p05": 0.7641952289795881,
+        "p95": 0.9999834904726868,
+        "maximum": 0.9999987880424897
+      },
+      "prefix_mass": {
+        "mean": 0.06990351316615988,
+        "minimum": 1.269095491807093e-06,
+        "median": 0.044979301281273365,
+        "p05": 1.6530444938211986e-05,
+        "p95": 0.235804837429896,
+        "maximum": 0.6144983819685876
+      },
+      "omitted_spatial_mass": {
+        "mean": 0.696108469567846,
+        "minimum": 0.18399259844045446,
+        "median": 0.7351166704970638,
+        "p05": 0.27215094429567444,
+        "p95": 0.9820151495950995,
+        "maximum": 0.9987831489634118
+      },
+      "fraction_of_spatial_mass_selected": {
+        "mean": 0.259205819101072,
+        "minimum": 0.0011401398950319896,
+        "median": 0.22585456094493495,
+        "p05": 0.01782385842960141,
+        "p95": 0.6523206463600658,
+        "maximum": 0.7930099529802258
+      },
+      "conditional_renormalization_multiplier": {
+        "mean": 16.329018854101687,
+        "minimum": 1.2835530629526104,
+        "median": 4.852556863275078,
+        "p05": 1.8279076749862815,
+        "p95": 56.1130082173564,
+        "maximum": 877.1527151703214
+      }
+    }
+  },
+  "measurements_sha256": "155215bea2eff9fb6af20db4eabc47173a5520e4a73f99ff3fb20fc420d03d6c",
+  "new_model_fits": 0,
+  "new_classifier_probability_predictions": 0,
+  "new_candidate_scores": 0,
+  "backbone_forward_batches": 6,
+  "external_images_read": 0,
+  "external_test_evaluated": false,
+  "seconds": 16.50363779067993,
+  "peak_cuda_allocated_bytes": 2047713792
+}

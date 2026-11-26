@@ -1,0 +1,10 @@
+{
+  "reason": "Manifest first2091rows are development, but train/val are interleaved. Formal training used split masks correctly. Actual-image implementation-gradient checks should map train-local rows to manifest indices instead of treating train as a contiguous prefix. Formula, invariance, gradient and initial identity checks unaffected; corrected checks repeated. No formal training or prediction changed.",
+  "original_verifier_sha256": "76e4b6a98dec74e8878afd8573ee51e6638a4c76715376f72e2acdf0f44bc5ed",
+  "original_proof_sha256": "cd8c896dfb91f6a0c2a1c90b387f29befb1fe2cc4744172b4dbbef9962ad7e32",
+  "formal_training_indices_used_split_masks": true,
+  "formal_results_affected": false,
+  "corrected_verifier_sha256": "cad0b762ee017e186ed3ccdc683d45380e0c332a7471689e11f16515b6e0c49c",
+  "corrected_proof_sha256": "cd8c896dfb91f6a0c2a1c90b387f29befb1fe2cc4744172b4dbbef9962ad7e32",
+  "corrected_check_passed": true
+}

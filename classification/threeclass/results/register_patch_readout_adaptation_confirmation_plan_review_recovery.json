@@ -1,0 +1,17 @@
+{
+  "created_at_utc": "2026-11-24T17:00:28.659276+00:00",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false,
+  "failure": "Draft preselection plan verifier omitted adapt_patches when passing the configuration to warmstart engine. It stopped on KeyError before any fit/score or planning proof was written.",
+  "resolution": "Preserve original drafts/failurelog; reviewed versionedv2planverifier passesallfour architecturefields. V2starter points toversionedproof andreportsactual90/108plannedfitcount. Nativearchitecture/trainer/oracle/modelproof unchanged.",
+  "preserved": {
+    "verify_register_patch_readout_adaptation_confirmation_plan.py": "0781d242102a6ff9152ff53b38ecb109b61080222ce5ca08e800bc77b416031c",
+    "start_register_patch_readout_adaptation_confirmation.py": "0e18ce974192607448f45906b1e15099f9024d69d2f3644256b96d1a674caa9e",
+    "register_patch_readout_adaptation_confirmation_plan.log": "54f8c994328477246ddecb14a0323df6151c20920fcbb9761583e58db38c1d77"
+  },
+  "replacement": {
+    "verify_register_patch_readout_adaptation_confirmation_plan_v2.py": "6d63ac63a0cef296da35870c1d1d107bf22e91a97286816b63406b2354b84595",
+    "start_register_patch_readout_adaptation_confirmation_v2.py": "bee931be58b8f5f6be486d7e1538db23650f026062a90c5c2bfb34d9b414a5ee"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-11-24T20:39:39.339115+00:00",
+  "cases": [
+    {
+      "name": "exact_preserved_startup_state",
+      "passed": true
+    },
+    {
+      "name": "ordinary_live_training_state",
+      "passed": true
+    },
+    {
+      "name": "reject_changed_pid",
+      "passed": true
+    },
+    {
+      "name": "reject_missing_pid_outside_startup",
+      "passed": true
+    },
+    {
+      "name": "reject_exited_startup_worker",
+      "passed": true
+    },
+    {
+      "name": "reject_failed_worker",
+      "passed": true
+    }
+  ],
+  "actual_live_worker_pid": 73581,
+  "actual_cmdline_verified": true,
+  "original_failed_startup_snapshot_sha256": "dd0066166a3609c3bc0e9d716cbd22f7868dcd6b3207574c299761914743a5e8",
+  "recovery_code_sha256": "888e2dc3510fc8869973798939425364d738afb8411de9ac1cd38864cffaa45e",
+  "no_original_study_launcher_or_popen_call": true,
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "new_model_forwards": 0,
+  "external_test_evaluated": false,
+  "scope": "Observer routing/identity/startup-state checks only; no worker restarts, no model or study changes, no proof of later candidate performance."
+}

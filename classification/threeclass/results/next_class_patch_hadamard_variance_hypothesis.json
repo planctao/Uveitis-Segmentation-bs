@@ -1,0 +1,81 @@
+{
+  "created_at_utc": "2026-11-25T11:20:03.867898+00:00",
+  "family": "class_patch_hadamard_variance",
+  "status": "completed_no_candidate_passed",
+  "hypothesis": "A fixed orthogonal channel basis may expose patch-channel coactivation that unrotated diagonal variance ignores. Test natural-order64D Sylvester Hadamard variance with identical two pathology readouts and4098parameters, against both corresponding frozen mean and unrotated-variance controls. This is standard second-order pooling with a fixed basis, not an originality or causal claim.",
+  "motivation": "Completed spatial semivariance study and saved review passed24models/24actualtasks but0/4originalgates. Fixed fusionCV .8385318240017089/validationF1 .8905077977443203 failedM8. Spatial edge differences did not pass this gate; the next hypothesis changes feature-channel interactions instead. The negative predecessor does not establish why it failed.",
+  "predecessor_saved_review": "results/research_class_patch_spatial_semivariance/independent_saved_output_review.json",
+  "predecessor_saved_review_sha256": "0d4104915dc6fe34078289a7b40c5e31244538563c7fd07adde82f8da89071d5",
+  "predecessor_root_review": "results/class_patch_spatial_semivariance_completed_root_review.json",
+  "predecessor_root_review_sha256": "567fc395a7829756e19b1a2501a93156de44cd30d53eb3dd58c89e566d58784a",
+  "architecture_plan": "Reuse existing2091development sharedtop64query/key/value bank, no new backbone extraction. Freeze originalM8L source stats/normal geometry/head/register reader/tail. Compute original uniform/sourcequery attention and per-patch64D RMS-normalizedV exactly as existing mean/variance controls. Fixed natural SylvesterH64 entries (-1)^popcount(i&j)/8, no seed/data/label dependence. Rotate normalizedV in float64 by H64; compute anchor-centered normalized weighted diagonal variance in float64, evidence log1p thenfloat32. Use same zero pathology readout[2,2,16,64]+bias2,4098parameters; bounded2tanh infection/noninfection shifts and normal shift0, anchored coarse probability/class-wide subtype shifts. Mean/unrotatedvariance modes reduce exactly to existing controls. No attention/key/query learning, extra ranks or selectable bases.",
+  "configuration_plan": [
+    {
+      "name": "uniform_hadamard_variance",
+      "pooling": "uniform",
+      "statistic": "log_hadamard_variance"
+    },
+    {
+      "name": "source_query_hadamard_variance",
+      "pooling": "source",
+      "statistic": "log_hadamard_variance"
+    }
+  ],
+  "fixed_basis": {
+    "dimension": 64,
+    "matrix": "H[i,j]=(-1)^popcount(i&j)/8; indices0..63, natural order",
+    "implementation": "float64 Sylvester butterfly, normalization1/8",
+    "orthonormal": true,
+    "trainable": false,
+    "basis_search": false
+  },
+  "fixed_training": {
+    "initialization_and_order_seed_base": 20293500,
+    "batch_size": 256,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "max_epochs": 60,
+    "patience": 12,
+    "gradient_clip_norm": 3.0,
+    "epoch_zero_eligible": true,
+    "task": "Unchanged complete coarse+subtype taxonomy task and fit-only patient weights. Source eval; original patient/near-duplicate isolated fit/stop/outer, source warmstart, initialization/order/optimizer/stopping exactly match corresponding completed mean/variance controls."
+  },
+  "planned_new_seed_fits": 24,
+  "reused_mean_control_trajectories": 24,
+  "reused_global_variance_control_trajectories": 24,
+  "predeclared_scores": 4,
+  "fixed_fusions": "StandaloneL and.1875rawB+.5625normalB+.25HadamardVarianceL only; no weight or threshold search.",
+  "original_selection": "For each standalone/fusion candidate, originalCVMacroF1 strictly above M8 AND corresponding mean AND corresponding unrotatedvariance; validationMacroF1>=allthree. Highest eligible originalCV once; no confirmation reselection.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20294201,
+      20294211
+    ],
+    "inner_seeds": [
+      20294224,
+      20294225,
+      20294226,
+      20294234,
+      20294235,
+      20294236
+    ],
+    "supervised_fits": 126,
+    "actual_task_witnesses": 90,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "allocation": "72freshrawB/normalB/normalL/registerL sources+18selectedHadamardVariance+18correspondingmean+18correspondingunrotatedvariance. Every readout4098parameters; same source/init/order/task/optimizer/stopping and selected fixed standalone/fusion weight.",
+    "gate": "Highermean6foldMacroF1 ANDpairedpatient95%lowerCI>0 versus EACHM8/M7/M6/M5/fixedGaussian ANDboth matched mean/unrotatedvariance. No fresh reselection, external scoring or automatic promotion."
+  },
+  "preflight_plan": "Sixactual256trainingimagecases uniform/source xmean/unrotatedvariance/Hadamardvariance; exact zero source/fulltask identity, independent CPU parity-matrix rotation vs float64 butterfly, independent variance/anchoredprobability/complete task and allgradients atzero/nonzero,4098capacity/frozen weights/ordinaryCUDArestore, exact parent mean/unrotatedvariance reductions, Horthonormal/inverse/norm+variance-trace conservation, token permutation, constantVzero, finite scales, same per-channel mean+variance but different channelcovariance toy. Twoengineeringoptimizersteps only newHadamardarms. Original/fresh/control/task/plan/gate/fullsuccess proofs compulsory before classifier launch.",
+  "launch_condition": "Only after completednegative spatial24+actualfullaudit+independentsavedreview+rootfrozen-byte review andM8retained; finalized newmodel/engine/patient/control/gate/success proofs actually pass andallscience/dependencies frozen. No classifier fit from this preregistration.",
+  "scientific_limits": "Fixed basis is coordinate-dependent, not a full covariance representation or invariant descriptor. Encodes selected linear combinations of off-diagonal covariance, may discard useful original diagonal information. No anatomy/lesion correspondence or improved generalization claim. StandardHadamard/second-order components, no originality or causal claim. Earlier negative outcomes motivate exploration only. No external image/outcome/prediction access.",
+  "classification_fits": 24,
+  "scores_evaluated": 4,
+  "training_launched": true,
+  "external_test_evaluated": false,
+  "pid": 21002,
+  "protocol": "runs/class_patch_hadamard_variance/protocol.json",
+  "protocol_sha256": "b7e4405bb29e233677faa3a0f7220a4c850a33258960f41e86dc5671119a1333",
+  "passing_development_gates": 0
+}

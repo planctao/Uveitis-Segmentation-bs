@@ -1,0 +1,81 @@
+{
+  "created_at_utc": "2026-11-24T19:55:51.769739+00:00",
+  "family": "register_patch_query_selection",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "FrozenDINOregisters use different queries, but current adapter cache selects one shared64set perhead by meanqueryattention. Test query-aligned sparsepatchretrieval: separately select16spatialkeys foreach of4queries, comparedwith shared16keys frommeanqueryattention, keeping perquerylength16 andadapterparametercount identical. Existing fixed19imageQ/Kprobe onlyestablishes selectionmassproperties, notperformance. Query-specificretrievalincreases unionuniqueevidence(up to64vs16) bydesign; include preservedshared64 currentMassmodel as anadditionaldeclaredcontrol inoriginalsavedoutputs andfreshconfirmation.",
+  "evidence_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/query_specific_patch_selection_diagnostic_v2/analysis.json": "a252a717b78a3ea7715d332ace93971d3da0366a237aad8e80f3350fa1e00b63",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/register_patch_attention_mass_bank_v2_root_review.json": "aa7239b36390333760db26e524ad5716bd46403dc1a5e95e67fea0251e2d13d6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_mass_calibration/protocol.json": "1cd4a6981d6efec8898e3ad67bda27e45472a04f5b275f8f68bf6f2b100b2c97"
+  },
+  "architecture_plan": "Keep originalfrozenDINO-Ltail andM8Lhead, same nonlinearpatch delta_v=(alpha/rank)*rho*B(SiLU(Az)*(Gz)),Bzero,rho=sqrt(mean(v^2)+1e-6),z=v/rho. FullF64 Q/Kattention fromsamecapturedFP16sourceQKV includingall5prefixkeys; stabletiesbyspatialposition. Forquery_top16 independentlysorteachqueryspatialattention; forshared_top16 sortmeanqueryspatialattentionandbroadcastsame16positionsto4queries. Pool perpatchdelta with FULLsourceweight onselected16positions (conditional16timesfullselectedmass), project/frozenMLPtail/FP16registerrounding/head unchanged. Sameparametercount. ZeroB/closedgate/mass0 exactsource; mass1 recoversconditional16pool. No new learnedquery, sourcehead/tail updates or fusionthresholdsearch.",
+  "configuration_plan": [
+    {
+      "name": "query_top16_shared_rank4",
+      "selection": "query_top16",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "query_top16_perhead_rank4",
+      "selection": "query_top16",
+      "kind": "perhead",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "shared_top16_shared_rank4",
+      "selection": "shared_top16",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8
+    },
+    {
+      "name": "shared_top16_perhead_rank4",
+      "selection": "shared_top16",
+      "kind": "perhead",
+      "rank": 4,
+      "alpha": 8
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "reused_shared64_controls": "The two source_mass_shared/perhead_rank4 arms of completedMassstudy, their frozenoriginalOOF/validationpredictions andmatchedfixedfusions are preregistered controls only, notreselectedcandidates/newfits. Sameinit/order20292900+seed andoriginalfittingplans/hparams asallnewarms.",
+  "fixed_training": "Initialization/order20292900+seed deliberatelymatches currentMass64control; fourarms x4originalphases x3seeds. Sameactualbatch256/AdamW.001wd.01/max60/patience12/clip3/epoch0eligible/originalcomplete taxonomy task/patientclassweights/fitting-stoppinggroups. No learnedstatistic fromstop/outer/val.",
+  "fixed_fusions": "EachstandaloneL and fixed.1875rawB+.5625normalB+.25candidateL; no newweight/thresholdsearch.",
+  "cache_plan": "Only2091developmentimages;524extraction+6freshreplay=530backboneviewforwards, zeroheadforward/fit/score/external. Allsixoriginalpatchbankarrays must reproduceBITWISEforeveryimage. Savequery-specificK/V[2091,2,16,4,16,64]FP16,positions[2091,2,16,4,16]int16,mass[2091,2,16,4]F64; shared16K/V[2091,2,16,16,64],positions[2091,2,16,16],samefullmassshape. Save6fullQ/K/VCPUwitnesses atoriginal8imagebatchstarts0/1048/2088 x2views. Bothselectionmodes use identicalfullF64attention; do notconflateshared16F64selectionwitholdshared64FP16importanceordering. Strict conditionalxmass identity1e-12atol/1e-11rtol,CPU5e-12; allnewarraysfreshreplayBITWISE. V2expnormalization only; nevercallbuggyfullwidthnativeF64softmax. Independentrootbyte/inventory/savedCPUreconstruction review beforeloaderuse.",
+  "preflight_plan": "4actual256complete-taskfirstgradientcases; arbitrarynonzero alltrainablegradients vs independentperhead/perqueryloop+frozenhead/tail. Savedfullweights@deltavalues algebra, exactsourcezero/closedgate/mass0, unitmassconditionalreduction, perqueryselectedpositionpermutationinvariance, shared16broadcast consistency, nonzeroquery/sharedoutputdistinction; allfrozenweights/buffers unchangedafteroptimizer; ordinaryCUDAcheckpointrestoreBITWISE. Allcode/data/model/confirmationplanprovenandfrozenbeforesupervisedfits.",
+  "selection": "OriginalpatientCVstrictlyhigherthanM8 ANDvalidationF1>=M8; freezehighesteligibleoriginalCV beforefreshpatientconfirmation. Newquerycandidate mustalsoexceed SAMEkind frozenMass64control originalCV andnotlower itsvalidationF1; shared16candidate same rule. Nofreshreselection.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20293201,
+      20293211
+    ],
+    "inner_seeds": [
+      20293224,
+      20293225,
+      20293226,
+      20293234,
+      20293235,
+      20293236
+    ],
+    "query_winner_fits": 126,
+    "query_winner_witnesses": 90,
+    "shared16_winner_fits": 108,
+    "shared16_winner_witnesses": 72,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "matched_controls": "Query_top16winner: refit SAMEkind/rank shared_top16 (18)ANDpreserved source_mass shared_top64 (18) fromsamefreshregisterLsource/init/order/hparams; selectedstandalone/fusionweightidenticalforall. Shared_top16winner: refitSAMEkind/rank preserved source_mass shared_top64(18). OriginalfreshrawB/normalB/normalL/registerL72heads +18candidate +18/36controls; no controlselection.",
+    "gate": "Candidatehighermean6foldF1 ANDpairedpatient95lowerCI>0 againstEACHM8/M7/M6/M5/fixedGaussian ANDALL requiredmatchedcontrols(shared64always,shared16ifquerywinner). Freeze6patientplans/18geometriesbeforefits, independentalltask/head/stat/selection/split/Gaussian/fusionaudit. Nofreshreselection."
+  },
+  "launch_condition": "No supervisedfit until currentMassstudy andanyrequiredconfirmationterminalnegative,M8retained, currentMasssaved-output andfitmeanreviewpassed,and newfullcache/model/confirmationplanproofspassed andallinputs/codefrozen. ApositiveMassconfirmation requiresrootreference-reviewfirst. Label-freecachebuilding/diagnosisallowedwhileMassruns; neverinterrupt/restartcurrentworker.",
+  "external_test_policy": "Developmentonly. Original1717train usedfornewpatientconfirmation; validationnotusedinfreshfits. Noexternalimages/outcomes/predictions orautomaticpromotion/external scoring.",
+  "protocol": "runs/register_patch_query_selection/protocol.json",
+  "protocol_sha256": "d37b0970c3ecd72e8dd07b31697ac3eccf1082f356c157dc3970e6c0f5f448c8",
+  "pid": 73581,
+  "model_preflight": "verification_register_patch_query_selection_model.json",
+  "passing_development_gates": 0
+}

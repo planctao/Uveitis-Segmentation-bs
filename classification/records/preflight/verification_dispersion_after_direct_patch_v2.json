@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "negative_terminal",
+      "expected": "negative",
+      "passed": true
+    },
+    {
+      "case": "positive_terminal",
+      "expected": "positive",
+      "passed": true
+    },
+    {
+      "case": "live_same_observer",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "changed_pid",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "exited_observer",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "failed_observer",
+      "expected": "reject",
+      "passed": true
+    }
+  ],
+  "code_sha256": {
+    "continue_dispersion_after_direct_patch.py": "c9897970ef0a93fe29c35dbdb107fe6809085679dc94a1c0888fc55cf8016076",
+    "continue_dispersion_after_direct_patch_v2.py": "08a5f2cc2c3590f27d7272b710b9d5734fb2b282e087a39a9744331e1d865e5a",
+    "verify_dispersion_after_direct_patch_v2.py": "17bd2e8c3d5ec4ca2c3dbd0f7c74228fa145fce156c5a6096df16b89d316fba1"
+  },
+  "actual_predecessor_observer_pid_checked": 12660,
+  "actual_predecessor_cmdline_checked": true,
+  "missing_pid_rejected": true,
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Six pure predecessor-decision checks only. The full queue runtime awaits a terminal predecessor and the actual formal study."
+}

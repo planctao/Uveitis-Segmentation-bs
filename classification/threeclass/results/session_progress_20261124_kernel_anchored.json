@@ -1,0 +1,128 @@
+{
+  "recorded_at_utc": "2026-11-23T22:12:38.561653+00:00",
+  "goal_status": "active",
+  "snapshot_only_not_live_status": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "continuous_search": {
+    "status": "running",
+    "pid": 22236,
+    "round": 329,
+    "completed_round": 328,
+    "completed_experiment_rounds": 328,
+    "proposal_iteration": 349907,
+    "legacy_proposal_iterations": 349843,
+    "feature": "multiscale_raw768",
+    "candidate_id": "9338bbbd736d",
+    "hypothesis": "Explore a less-tested family and change wd",
+    "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+    "time": "2026-11-24T06:12:30.018144+08:00",
+    "external_test_policy": "Never read or evaluate external results inside this loop."
+  },
+  "protected_milestone5_hashes_unchanged": {
+    "0": "085bdd18cf974e1dd7a1ebb5ed25e17ee19d3303adca363adde68250c01236f6",
+    "1": "86bd7b67a947f96e4caf518c425fc147d89a7ce96bbdf4e2be59128145936d32",
+    "2": "1daae3da2b87c85127128f5c1b065f7a4dbc54b8e3dbded8916c2c0097bcd176"
+  },
+  "patient_kernel": {
+    "status": "completed_and_independently_audited",
+    "candidates": 16,
+    "source_heads_reused": 12,
+    "kernel_systems": 48,
+    "passing_original_development_gates": 3,
+    "selected_candidate": "kernel_8b9caaa2c4aa",
+    "best_original_cv_macro_f1": 0.810817255069773,
+    "best_validation_macro_f1": 0.8906156424621677,
+    "result": "results/research_patient_kernel/comparison.json",
+    "verification": "results/research_patient_kernel/verification.json"
+  },
+  "patient_kernel_new_patient_confirmation": {
+    "status": "completed_and_audited",
+    "new_mlp_seed_fits": 18,
+    "kernel_systems": 18,
+    "gaussian_control_fits": 18,
+    "outer_split_seeds": [
+      20270301,
+      20270311
+    ],
+    "confirmation_gate_passed": false,
+    "result": "results/research_patient_kernel_repeat/comparison.json",
+    "verification": "results/research_patient_kernel_repeat/verification.json"
+  },
+  "crossfit_residual": {
+    "status": "completed_and_independently_audited",
+    "new_teacher_mlp_seed_fits": 36,
+    "source_heads_reused": 12,
+    "passing_development_gates": 0,
+    "result": "results/research_crossfit_kernel/comparison.json",
+    "verification": "results/research_crossfit_kernel/verification.json",
+    "diagnosis": "Honest targets increased residual norms from0.007-0.011 toabout0.33 but did not give a candidate meeting both original validation/CV gates."
+  },
+  "anchored_lora": {
+    "status": "completed_and_independently_audited",
+    "algorithm_version": 4,
+    "formal_seed_fits": 12,
+    "qualifying_adapters": 0,
+    "result": "results/research_lora_anchored/comparison.json",
+    "verification": "results/research_lora_anchored/verification.json",
+    "validation_macro_f1": {
+      "head16": 0.8886652370097384,
+      "unanchored16": 0.8886652370097384,
+      "probability_anchor": 0.8893107959516184,
+      "probability_feature_anchor": 0.8893107959516184
+    },
+    "actual_loss_batch": 16,
+    "gradient_accumulation": 1,
+    "complete_live_prediction_reproduction_passed": true,
+    "external_test_evaluated": false
+  },
+  "other_prior_turn_studies_preserved": {
+    "angular_seed_fits": 72,
+    "second_order_seed_fits": 60,
+    "all_negative_and_audited": true
+  },
+  "this_turn_new_completed_head_fits_excluding_lora": 54,
+  "no_new_external_evaluation": true,
+  "next_steps": [
+    "Keep the persistent validation-only architecture search live and inspect any new eligible development candidate.",
+    "Continue new controlled architecture ideas from the completed negative diagnostics; fixed-source crossfit gate, class-specific covariance and residual correction variants are not promoted.",
+    "Any future candidate still requires original patient CV plus previously unseen fixed patient partitions before freezing or external evaluation."
+  ],
+  "local_free_bytes": 483844096,
+  "class_covariance": {
+    "status": "completed_and_independently_density_checked",
+    "configurations": 4,
+    "source_heads_reused": 12,
+    "statistical_models": 24,
+    "passing_development_gates": 0,
+    "result": "results/research_class_covariance/comparison.json",
+    "verification": "results/research_class_covariance/verification.json"
+  },
+  "relocation": {
+    "manifest": "results/cache_cleanup/relocated_completed_experiments.json",
+    "relocated_bytes": 321022506,
+    "files": 897,
+    "original_paths_preserved": true,
+    "fingerprints_manifest_saved_after_move": true
+  },
+  "this_turn_new_completed_head_fits_including_lora": 66,
+  "crossfit_evidence_gate": {
+    "status": "completed_and_audited",
+    "fixed_candidates": 4,
+    "small_gate_fits": 48,
+    "teachers_reused": 36,
+    "new_mlp_fits": 0,
+    "passing_development_gates": 0,
+    "result": "results/research_crossfit_gate/comparison.json",
+    "verification": "results/research_crossfit_gate/verification.json"
+  },
+  "completion_summary": {
+    "new_mlp_or_adapter_seed_fits": 66,
+    "kernel_systems": 66,
+    "crossfit_residual_kernel_systems": 12,
+    "class_covariance_models": 24,
+    "small_gate_fits": 48,
+    "gate_gaussian_fits": 48,
+    "repeated_fixed_gaussian_control_fits": 18,
+    "all_studies_completed_and_audited": true
+  }
+}

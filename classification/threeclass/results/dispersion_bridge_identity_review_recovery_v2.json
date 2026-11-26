@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-11-25T09:26:24.762300+00:00",
+  "finding": "Code review found unlaunched bridgeV1 checked the dispersion observer cmdline for the still-running direct-patch predecessor. Pure decision cases did not cover actual cmdline lookup. OriginalV1 and pure-case proof preserved, never launched.",
+  "correction": "V2 uses an explicit predecessor_live helper checking continue_class_query_patch_evidence.py; actual12660cmdline and missingPID checked in addition to six pure decision cases.",
+  "code_sha256": {
+    "continue_dispersion_after_direct_patch.py": "c9897970ef0a93fe29c35dbdb107fe6809085679dc94a1c0888fc55cf8016076",
+    "continue_dispersion_after_direct_patch_v2.py": "08a5f2cc2c3590f27d7272b710b9d5734fb2b282e087a39a9744331e1d865e5a",
+    "verify_dispersion_after_direct_patch.py": "915132cbed85f512bd4bd26218e04089d8c6d304e79647783ce53a07aca06145",
+    "verify_dispersion_after_direct_patch_v2.py": "17bd2e8c3d5ec4ca2c3dbd0f7c74228fa145fce156c5a6096df16b89d316fba1"
+  },
+  "input_artifact_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_dispersion_after_direct_patch.json": "26cee0a9b1643da25066000e2c88df97a0ea5fe8a53193422872c8bbadff3500",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_dispersion_after_direct_patch_v2.json": "53fd7c0689287c7416376e52d82ba737faf0ef7da2fa3e0597d18387dc3affc7"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "model_predictions": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Prelaunch queue identity review recovery, not a scientific formula or performance correction."
+}

@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "pid": 49211,
+  "error": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/continue_patch_architecture_loop.py\", line 118, in main\n    main_run()\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/continue_patch_architecture_loop.py\", line 80, in main_run\n    query_state = wait_query()\n                  ^^^^^^^^^^^^\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/continue_patch_architecture_loop.py\", line 41, in wait_query\n    assert state.get('status') != 'failed', state\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'status': 'failed', 'pid': 50169, 'error': 'Traceback (most recent call last):\\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/register_patch_query_experiments.py\", line 181, in main\\n    try:run()\\n        ^^^^^\\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/register_patch_query_experiments.py\", line 129, in run\\n    assert np.array_equal(p,saved)\\n           ^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError\\n'}\n",
+  "external_test_evaluated": false
+}

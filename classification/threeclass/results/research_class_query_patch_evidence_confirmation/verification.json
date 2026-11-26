@@ -1,0 +1,2322 @@
+{
+  "passed": true,
+  "actual_seed_heads_checked": 126,
+  "actual_training_witnesses_checked": 90,
+  "generative_fits_checked": 18,
+  "fits": [
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "018ebac962cb67b0664e47c22ae0000794f87e8a222bd1dc220b5534cf0d75e6"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "3c48e682dcff7e588ecc7b3681870df1d6488d22c39a187576c137bc0051cbdc"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "3de37b23a6ef4cd80946931d5a85c862089a75a5810842406f740399c767c412"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "d59d13c2e27bb355366ccd5e14bb0a93fca999b08232768d9cf847affb6b8055"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "605c8734bef74b0fd72b5136f0bed8843991f97b799b81198ba2a4c3ee53caae"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "dd4f8496c94d595d47976f83d5cbf763acda89caebdeed9410bc711d4ae41d90"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "92375d8734ef9d6f1d33b37723813ee8d391faaf9fca32902ee32a2c373ef72c",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "1062daa9ebbd5b25e2d940edbb3e05d5cad7d5b0c5d4227c823c118a3cd8a036"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "5e0a5fd8ea73ca3228be109e586105da176f51924e05454b145903c525ef3f5f",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "bb7fbc343299fb7af080cfad8d3f172513ba383c5262c7169cdd92ef9178793b"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "60937302c8ab578679dd8a2600cbf223b86ee3baac72fbd9ed5601ada0838804",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "910090d6418c0c3cc017088ba334806d467e0642337f14c0b59d14ed17e19b9e"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "8c3caf0ff03ec10c285dd43dc0f84eacfc4fa1e0aeb7081dcdab91a98e36ecb7",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 5.960464477539063e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "60362b77db1129b2b874ed386e4961815fe07dd9e04f9fe07543239d2301d3cc"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "dfaf15327b6161bbc9a0aa3d96e76e4eebdb6be27ccfb7caa984a178f4557f3b",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 7.450580596923828e-09,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "31d8ca4f9c80471f1f36cae4f2a99e42e7fba8edfd02c884a4cd207fecbdbfb8"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "83087850599b3f15c01bf6e650a60b8a8657c2181cab34de56354e03b829e103",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.9802322387695312e-08,
+        "maximum_independent_forward_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "faa74e9191da953fcb427611ba319111493a560bfcb0a6c0a9c08e8661d718c2"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "71eef66953a430ead6124648b5d264610b069cee15ce62fcd1828e938e62848f",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_0/model.pt",
+      "source_checkpoint_sha256": "8c3caf0ff03ec10c285dd43dc0f84eacfc4fa1e0aeb7081dcdab91a98e36ecb7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 6.146728992462158e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "cdf75e6313bd6aea3a0dba7a79b7465a23e53d7857835fa21212c1636fe795ef"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "286c674c5847e4e058c6235fd51c4bde638cf2fd91bf973031361e3c2e831f9b",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_1/model.pt",
+      "source_checkpoint_sha256": "dfaf15327b6161bbc9a0aa3d96e76e4eebdb6be27ccfb7caa984a178f4557f3b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 3.725290298461914e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "eb7ae05b0c9a83a920f3347da699ea1bc8146c5097b5c52b29af9b4e6063fc93"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "80e4add83f57df2eb52236ff74864fc844742b55e819085a3ee5d42a2201ca14",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_2/model.pt",
+      "source_checkpoint_sha256": "83087850599b3f15c01bf6e650a60b8a8657c2181cab34de56354e03b829e103",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 4.6566128730773926e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "05caf58019e8374cbb9b3cbe8c1eb2d68f7f325d350485b64b5e094399ce3023"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "318b24016442559cd02d9d2c48bcd102a1968eca1da536aa580c2c7503b9e615",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_0/model.pt",
+      "source_checkpoint_sha256": "8c3caf0ff03ec10c285dd43dc0f84eacfc4fa1e0aeb7081dcdab91a98e36ecb7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 6.332993507385254e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "9a726d45f9ab0e66ce90f46fb105e86cdba54003851e33cad8ab2baec59d0adc"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "7c3184ee0099d371e058caa1dcb3076792aa15175125c4ca832347c4a0ad4378",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_1/model.pt",
+      "source_checkpoint_sha256": "dfaf15327b6161bbc9a0aa3d96e76e4eebdb6be27ccfb7caa984a178f4557f3b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.026798367500305e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "ff49d80c612e1a27b068f00e918f35221abd12aec2113ad2cded506af0d8423d"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "9cbc42ccec157c7326b230a945e204c82006661ea6b70f4c5f8b7ae38e421fba",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_2/model.pt",
+      "source_checkpoint_sha256": "83087850599b3f15c01bf6e650a60b8a8657c2181cab34de56354e03b829e103",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 4.377216100692749e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "af0367526272e3bfac6ce54beeaed9edb1eae1a0c52a519ee834e5c073e0e068"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "c5a7bb14fec0223265c44884d257fcfb1f8dbc6ebf8d0c89353dea1c124d5d06",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_0/model.pt",
+      "source_checkpoint_sha256": "8c3caf0ff03ec10c285dd43dc0f84eacfc4fa1e0aeb7081dcdab91a98e36ecb7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 6.426125764846802e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "6dbbfe6e7557b383370818a4b0eacc3eae01c577516e939a7c0d311587ac1ba4"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "8c803f291c63ee52c990b486e5d5c02afa60dcf08fb437502e467885cc54869c",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_1/model.pt",
+      "source_checkpoint_sha256": "dfaf15327b6161bbc9a0aa3d96e76e4eebdb6be27ccfb7caa984a178f4557f3b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.725290298461914e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "e8e84dbf2c47b2002670f19c514bd10f3f6e6df3557cdc4269bc177dac7c75a7"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "d0d219a3e768407954447531689315d4430596cadc30c5f15db5bd20f967cb5a",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_0/seed_2/model.pt",
+      "source_checkpoint_sha256": "83087850599b3f15c01bf6e650a60b8a8657c2181cab34de56354e03b829e103",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 4.377216100692749e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "586cf0314b493d6acbe6db83ecf6099414385f5c803b56d1f359be296617d6f3"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "79bb80c3a164bbc66c4ea6e132c19be45a17e0cae9f5723efba239368c185e83"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "c0168b91675603dd5b9b4245b8ffa5912276127d9a47c4a0034bb927492e1d8e"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "52d236424ae51ef9a5189945bb450fa61ce0814dc918bd1ec80f303ae8135dd5"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "e6dd80728abf0f61edee409afb1f572a5331e8d6489940c8656b803b9e8c27aa"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "a59eed4aaea541f7eb4a451ce19c2d66e22b456787de3b99225a4d8fee8cd98f"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "d384e16343d263c2aac3a530b9b79594aff70de973153c91dcb9aa3d1d167610"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "bd0ebb43e3f6443919c613b6d0c33406f4d5b7d0cf8bb08307b96ddc3c6554cc",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "441b8b820acaeca84a3ff03cf7f4b04cd27190fa1c6199e4f196d63fe253d6fc"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "6cfe35820960698c0b0658ef8aa25e3294a64998e9a1989fa25d99af57ffcaf0",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "b19e6599282a8092e367b0ba6e50da90e259e46099b76e95185c07c9d7e88cb4"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "387b4c87bbbfea35f8b55cba7c359b49bb4c069b0f4f840e541936c1dc46fe85",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.4007091522216797e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "d4736b8d46508fb5cf0c498d9651548c27d518d31e6433c34b72c0a920312dc0"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "a8cf465bd0455f0855b0f3e14d507f342a1f13e1beee15f6687dd6ec0410eb04",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.2218952178955078e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "f4b7aae347c6576e4234397a6634e32b6723bf16108835967300ea3244c0a665"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "736ee86a81a909c5f7fef08be6b4c837e4d2e715ccb52ed971169b716285b71c",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "a66bc5875bfbe6042d7acf92efabc3c3e26d85537a3c73398a03a0052ae0f121"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "208af80339301172b27f73d4fd0428e3aa0c024e17d6490258c876ca2dd6ea38",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "c5bdda2a899e9a2fea4cc79d95871d4e9789f84190010bb5501bd9b4ad873f24"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "eede617981631d48e99612ae5e7da2d80d796f0598e84a89667485d32e78d178",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_0/model.pt",
+      "source_checkpoint_sha256": "a8cf465bd0455f0855b0f3e14d507f342a1f13e1beee15f6687dd6ec0410eb04",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 4.377216100692749e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "48df95ec28b118cfd6d787c936d71663e9b84d302fae263a4e82cad35785d6ed"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "8c41440cef86335fdea122722dc230bd6340d77e14fca4e150b7727cedab3dff",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_1/model.pt",
+      "source_checkpoint_sha256": "736ee86a81a909c5f7fef08be6b4c837e4d2e715ccb52ed971169b716285b71c",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 6.356276571750641e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "f0109ffdb1a8e2b4a04c686b4985a049f9fb3ef020db074fef5bc51a3ec7480d"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "becf0f7784b194b04729a501062110d28bea87f9aaee0be08fbe34402df408da",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_2/model.pt",
+      "source_checkpoint_sha256": "208af80339301172b27f73d4fd0428e3aa0c024e17d6490258c876ca2dd6ea38",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 8.754432201385498e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "c958a39a838ab74792aac5070699f62bbea97f0c7b645976a4d30529b40d5078"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "fab54586af4142dbbf36f5737a8c45d7d02279976a8823bcd0a1db1e2042d31e",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_0/model.pt",
+      "source_checkpoint_sha256": "a8cf465bd0455f0855b0f3e14d507f342a1f13e1beee15f6687dd6ec0410eb04",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.725290298461914e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "12cf7328f407011b4b27f6f7620c2923185da597d52f13bfba47053c1e7540d4"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "dc68b625989d60af468c05c0d22c10926a16c50f7b744cefbae62e75dafe6e4a",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_1/model.pt",
+      "source_checkpoint_sha256": "736ee86a81a909c5f7fef08be6b4c837e4d2e715ccb52ed971169b716285b71c",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 6.472691893577576e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "113b193d46fae6de8b13fa124f20dcd0788994f66206892e213d4fcd8ecd4998"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "9d07de60250f22546c9537a514b787b76644b3f5e70b220b97524f4666874b17",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_2/model.pt",
+      "source_checkpoint_sha256": "208af80339301172b27f73d4fd0428e3aa0c024e17d6490258c876ca2dd6ea38",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 8.89413058757782e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "a99fb51d126d28a6490cf9a950c5d360667e9bda5070f7729c9ccd1314ac2334"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "0fd1742eb9e4a02a3f74ec4bd8e2d282a4b6cff600906807e86bc955acbcb8ae",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_0/model.pt",
+      "source_checkpoint_sha256": "a8cf465bd0455f0855b0f3e14d507f342a1f13e1beee15f6687dd6ec0410eb04",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 4.284083843231201e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "be808e9fc1481fb40058cefc36c1a156ea04b114c57e392ecea4f91e265c47fc"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "64faf8efa35a8a7ddf15dee953199823896bef77b4f4807f1f5bcf1392ee171d",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_1/model.pt",
+      "source_checkpoint_sha256": "736ee86a81a909c5f7fef08be6b4c837e4d2e715ccb52ed971169b716285b71c",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 6.542541086673737e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "0eda0066e5a5037dcea086195ea82b40252ab07c00a65a1f462fbc69cd45fda6"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "b9197f6e6774b3d761b9f3c7deab0fb1502a5b91bcd0252342e7188e009e8daa",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_1/seed_2/model.pt",
+      "source_checkpoint_sha256": "208af80339301172b27f73d4fd0428e3aa0c024e17d6490258c876ca2dd6ea38",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 8.89413058757782e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "e85fcee5a42c3f864adf513496b1af0cfe4fa5231832fe2a18c177108a316c1d"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "f8d2bb1f17fe9016dc757ce459bb091d30358c2d487164b7e0952f3a359e9403"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "424beba87d67d9e84a207f30c375dfcf432cfacca7c58bf66c9575f05d36cce8"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293601/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "5b6d5ae2d455d402c664c1c51fe18e6021fb2a6d15f1f9213a2b8469dff22527"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "68a937ba52a533c8a89dd93501c72c9c44d48828487dabe363916818af584073"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "dcf9a13811163c83ac646f93809200bb8dd2b07c87199b2086cb4c01f78d76f7"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293601/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "c24bb34c4846b33ea843436ff7af7c2c14b3566fbe7e5d7b5ddd0f6ca35bd779"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "93ca160eda27bff9a115e4503513dff452b1c4bb36001b07764b2b654cf7d7a6",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "819fb8d5671632f0d8086f15ed4cf2dc9945583a3f898b5cfd1c46ca43fbfca8"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "ed003acf7cafb42bded02b3814d24eae92bf2b701896806e260d9792d4ded129",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6987323760986328e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "db9690003f88792800d2ff67ea5bf9ec7edfe84cd2e01d831e534e7563cd6b8f"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "fc6ec78a4b27b9436aa1ecc4e9389afe2f53d2bb22baaec61486e9f91af07495",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6987323760986328e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293601/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "0a7e86a6c18d125ed2bfd4b8ce2eb997ea9e5e6595caf8d46346b37461382606"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "cf853ab598ae064c369df9cce660d2b04de65f3256a637db05fd8edffd443c3a",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "214804c107c16e49d59ca8f2a7bdda67514feb3436a8044497837415707258a7"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "15087d1b77ac70b3a9459e23b3b1e23794049f7e4dc3f1213de0047dc55a9ab6",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 5.960464477539063e-08,
+        "maximum_independent_forward_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "e9acc07b445c613dce0416a56aeb808210a322b71a4637b2ec86d66dafe2db2a"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "37b1e9919990a9915c1663090bc387a909cbf0d848103979ac1780ed320552e8",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "92175e42ceafcbd3b72d7ad02d57132f932d1cb060c12db9a72be099730abefc"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "8431f59c14e47c63e3c4d68e1856d9afbe887e7dd1a41e653afb45dc50043d80",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_0/model.pt",
+      "source_checkpoint_sha256": "cf853ab598ae064c369df9cce660d2b04de65f3256a637db05fd8edffd443c3a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 8.614733815193176e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "ecc0e01606069d6d1d033ad8a4d30b129752c3f606068480685ad4eef5caa440"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "16ba6bf745f6dd048730fa09f37c390c91c7a0eb0a5d7ebfeea0d44fbc735ca3",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_1/model.pt",
+      "source_checkpoint_sha256": "15087d1b77ac70b3a9459e23b3b1e23794049f7e4dc3f1213de0047dc55a9ab6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 9.988434612751007e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "c819e43fa944c03a2c134689b4b83eb65b2e6749161784da70d42628af3bb1c7"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "7a393a840810dd7c4a564f712d92501d29aae31e26b1273f6d1cbdd813eaa621",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_2/model.pt",
+      "source_checkpoint_sha256": "37b1e9919990a9915c1663090bc387a909cbf0d848103979ac1780ed320552e8",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 5.960464477539063e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293601/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "49483242efa0b1e9ccc3adb16325cc41f3012ae502638dfbb5910c2738d9e34a"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "5f919f86d766cd826631ce601a0ce054e304f373342041f780163626882fc63f",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_0/model.pt",
+      "source_checkpoint_sha256": "cf853ab598ae064c369df9cce660d2b04de65f3256a637db05fd8edffd443c3a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 8.475035429000854e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "bfa53d1dc65302716b9396c67552a31f1cf4cbbf31dc3737c34b64f9bb3b0b25"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "8b715208ce287acefbc1073fb5dad0cf5248e9b4298c05b6b375850698981e51",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_1/model.pt",
+      "source_checkpoint_sha256": "15087d1b77ac70b3a9459e23b3b1e23794049f7e4dc3f1213de0047dc55a9ab6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 9.138602763414383e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "ceb750be53f33d96d6e64987e76654fa87a7ce23683935bb4345cb8ea06be276"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "401055b7be5a01b7bb1d981a7b44e86b48ff1c63b16bdccb37ecb179f3f485e9",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_2/model.pt",
+      "source_checkpoint_sha256": "37b1e9919990a9915c1663090bc387a909cbf0d848103979ac1780ed320552e8",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.21540641784668e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293601/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "ea8cb1b6541ce6aafc1f6c30df74c1a97b812ed193dbd14e30f273f4ee4ae660"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "5bf899e2b974c7ec83f81fc1856d9cd26d455d8fe4c350800df90a01e7bcfed1",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_0/model.pt",
+      "source_checkpoint_sha256": "cf853ab598ae064c369df9cce660d2b04de65f3256a637db05fd8edffd443c3a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 8.544884622097015e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "ae6b39cccafb68a8c3629eb076ad7e3ecd443f9e687c5ded8fec5e7216acb80b"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "7b28dfc17e9d35a852e6b899a575102e84c045269957c8a7dcb84e296489f9e5",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_1/model.pt",
+      "source_checkpoint_sha256": "15087d1b77ac70b3a9459e23b3b1e23794049f7e4dc3f1213de0047dc55a9ab6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 1.0104849934577942e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "e9f25d320c9bd7ac99b16eeed887378ab2b88cc7c9562a22792b1a390876bd11"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293601,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "9dfc1595003e0c1bc8373524ad4349ff76dc3f1b05a3f6a7d8eaa52a93fb51a1",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293601/fold_2/seed_2/model.pt",
+      "source_checkpoint_sha256": "37b1e9919990a9915c1663090bc387a909cbf0d848103979ac1780ed320552e8",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.587935447692871e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293601/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "5056683de8674f4f46748ecbf64f94c72bc248cb9a4763661f3caae2a7bd9061"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "fe62d08618c54d185fc6d509ad40137e7a3d4a2f768a01480f2e23b445d724e7"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "40d31213b598a0079414c081d079303e233fe6dcecce608fad1b056b84e35a80"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "2ba6f1c6489fe341dce6e8b9cba5451d145b8c6e04d42c77424aa0cdacf4162c"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "d99a33714a840853cc5dd749b568fee819d0a78f5571a568efa4a3bc9deedbb0"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "60e17d8d401ca7b47644242eaac0fc27bff837595afa2959b7811392b6ad3187"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "72b19182704567c5ecbb078349aaa44fd1a595198b42024443e258432f942bef"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "8bbe81fc87368a34349c1f4d708d13ec2c5cd7954d79b39e3ed237a9c30eeb0f",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "e5f4007bd81a73973a8079213d5f637e0752c1adb99dfc62047b80a16d7ed29d"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "cfdbb5576de58bcd3ed08aa06044cb61d5721e6fb633c957d4e37d7b3ac63a2c",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "a72e39935c27b2b1470141e84ef756f4c5fa67ffa2f5720d7fd7ea233b107800"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "745ac358c41d51f3838c4f1798be2825b34050048cc7606f290914b2667d439d",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.6689300537109375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "b9d9bf6931669e52c99b4d8eb8558514779e9ef6dceb993d992af6aa5c9b1c99"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "4f7035d61b80edb8e0c090d1391a80428b1aa42b10ef3510eacc528c590ae6d6",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.519918441772461e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "4b2dcc2e63803f544bfb84e680ea3118c15e8e3bc9ecfa314df65584daa76a54"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "c63e13886e5e1a7fac3f9ad4eb68605eb80a4cd8995b0b6f3441cb8212dab293",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "0132c35087f3211325bead23524d8f355810a3d9bc24bb48fa70dadbda9b6bb9"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "2797e72fae6ebaf1cc00f3f7adfbc5a3fbf81b6c21637f7cfa0c14b2a6fdc86a",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.30385160446167e-08,
+        "maximum_independent_forward_error": 1.296401023864746e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "df6ff50137bf3b547cfe87364066f7c28631a807894fa34526f190c958283745"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "43d44c00005fcb35ea84f333b2512f028a23d2440e3ec3529869be2dedc1c55b",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_0/model.pt",
+      "source_checkpoint_sha256": "4f7035d61b80edb8e0c090d1391a80428b1aa42b10ef3510eacc528c590ae6d6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 4.7497451305389404e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "39d23df9cb3ef6ba9251ab84d972a05754f24de177c48ef6197688d82730c2f2"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "b5b154aa7cd4c72adec7db5db7838872c81ae5e817a6aba5ba8b5354557093b6",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_1/model.pt",
+      "source_checkpoint_sha256": "c63e13886e5e1a7fac3f9ad4eb68605eb80a4cd8995b0b6f3441cb8212dab293",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 5.774199962615967e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "c92ee120efbecd07f45700ee1406862a787d3640967359a044ae98b63b895eda"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "9d982deb24c25b81ece73d3fd5f47b36269da865a92ee61c948206f9841d6a01",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_2/model.pt",
+      "source_checkpoint_sha256": "2797e72fae6ebaf1cc00f3f7adfbc5a3fbf81b6c21637f7cfa0c14b2a6fdc86a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 7.12461769580841e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "1420fe01fec421e7047333bfa62b5ceb24ab5cbf2772b65a30763c6ae9207157"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "99ebd833d88aa7cac21674858614690379b39030893cfe061078f532c1adfd0b",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_0/model.pt",
+      "source_checkpoint_sha256": "4f7035d61b80edb8e0c090d1391a80428b1aa42b10ef3510eacc528c590ae6d6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 4.563480615615845e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "b87867d04c5cc6162c5d0fdc417dd394638362bccd402fc809107dcc8d535d86"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "7ef4013cc92818c66d3948f80b85d702d2924a211802417b5d028ff901bb0cec",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_1/model.pt",
+      "source_checkpoint_sha256": "c63e13886e5e1a7fac3f9ad4eb68605eb80a4cd8995b0b6f3441cb8212dab293",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.8673322200775146e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "2cc889c9120783fb2b9e7496191a5050aa6e266dbfb2ebd8b5655cc7cc70c0a7"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "3cb9313fc210aea2a6367a2e93f1dbf1f404e035852d91d7f01c2cc57dd6f516",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_2/model.pt",
+      "source_checkpoint_sha256": "2797e72fae6ebaf1cc00f3f7adfbc5a3fbf81b6c21637f7cfa0c14b2a6fdc86a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 7.241033017635345e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "4c5e214e870e44d5dc1fdf41b2e49345c7535b80c4bfd3f37c9c5bdbaef24221"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "7d7eba3aeca6931a0199afc0ed52e7a96f0c5d4ea2a1812138cd3c32f63ded89",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_0/model.pt",
+      "source_checkpoint_sha256": "4f7035d61b80edb8e0c090d1391a80428b1aa42b10ef3510eacc528c590ae6d6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 4.7963112592697144e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_0/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "01446a2bcf28a638eac49b282c289b216468a299d8bcfd158715c324b6a90fc4"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "f2a6c90c696a76f836d7ba9c7dcf9891dd270c2f9958ff5f79febd16c5f6571d",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_1/model.pt",
+      "source_checkpoint_sha256": "c63e13886e5e1a7fac3f9ad4eb68605eb80a4cd8995b0b6f3441cb8212dab293",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.8673322200775146e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_0/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "f7973a3dd28311f1136ed374a64882c1dfd154982bd86283f42eb7dc35ddba97"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 0,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "24000b321ea64b2ec1dadc1db422ce57e3e3c19843d74c79ccd07cfb133e1224",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_0/seed_2/model.pt",
+      "source_checkpoint_sha256": "2797e72fae6ebaf1cc00f3f7adfbc5a3fbf81b6c21637f7cfa0c14b2a6fdc86a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 7.28759914636612e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_0/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "646da0e21ae35bad58ca11f4bd3726d0634388bd41ca07b8488c7069a4f4c0e6"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "fdb7c9b51c5efce5f4a9e4d2a9e53e1de08813e08d3882cc2fa4fc897fbe763d"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "ed59509202f374d2c827b3535b97ccd40bb174e6c73a4f253129d65d07d94acf"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "4cee6814fe0ca284b30d2034f9fae97eba5a21f3becd74c96debb425e5ce7ead"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "381e81d52405f6c02ca0a89bcabf5258d1e32e4dc26b2697b3e5d013b4ab6cbb"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "f4b0f1d9efad99198e17113c5d8b07715896f3c4e6c2926f451fcb43c466bfef"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "c24bac3ed9abdd15cf5fc84218b86c3131dad36640bd263b25119a1c005e83f1"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "a8661392db12720d71899e1990834668a4e5f370d88cd045cfa0f46f408062a2",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "bf87367671d19749f44ca1a2d4488d3614850abd8b049a02a1f0fe7f620de83d"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "885f2424f011d9658380b55585060257c8e16d0d4c14e94972b4fa69f69f8952",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.5497207641601562e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "e7fd36c9e7267800860351b44ba97b682e869c94aa4970b5725a5ac2bed19352"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "14dc3425e63dbfd1f68f112151400cc4592e59c22a7d4ea16d38f22d555c5683",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "77b2ae1c3aa2d117bfa2c382dd6105fbb0c7fd2b307d7cf54630999db03faa09"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "cc7474785fe944f82e1abe96b6fe0e0aefb1e8036add7d459e75ebf6281c19e9",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.4901161193847656e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "71db4a1995eb2b94eb6886fad4943aff0feb63d9bb36b3e02aad9a8332138890"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "c44b0b75bdf2742887bb52675e7a3e33bbbea99a265e30790024f6584dc9900e",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "3ac21e3c8b7dd5382cbcadffe1b3306a3cde57fc0905414b3b003534b8842c26"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "4754c69ed003c0f6b015047f1ddd45719d64d8fc96cf1938923912c6ceb192b5",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.4901161193847656e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "0bf7ef8df3d53f8fe46e3066ebf800d2547dd9b65484a414cefd64319c428c5d"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "7c20e29bc0dc9c230e3f975e0ed347d8844a9ec4f483458d4a6ec5dee9eab65a",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_0/model.pt",
+      "source_checkpoint_sha256": "cc7474785fe944f82e1abe96b6fe0e0aefb1e8036add7d459e75ebf6281c19e9",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 3.3993273973464966e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "cea6090b3ef42faf7467e8368811f136ad0e790201ab3976915a1ad191047ca9"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "6521db16eac428dcb0b88e7c1259fdc847aad604954d20ecc482bcaa1b02e8ce",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_1/model.pt",
+      "source_checkpoint_sha256": "c44b0b75bdf2742887bb52675e7a3e33bbbea99a265e30790024f6584dc9900e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 5.611218512058258e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "c347577ae8d906476fe128afad601f3f6d0408e29f23e289aee8b5ddfc444566"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "022d51f984ac6761fd9090ea06cc5ed4d6cf7ae66fae07bdaa1641dbc8c8ddff",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_2/model.pt",
+      "source_checkpoint_sha256": "4754c69ed003c0f6b015047f1ddd45719d64d8fc96cf1938923912c6ceb192b5",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 3.969762474298477e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "a444df0610338ed12066027ba40b73d9b828211a6d5ca585fb8ca199a69babb3"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "952fe5a8fcadc51d81c7c2332316c429194fdda56eccdce1c7b44b59f8cd73cd",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_0/model.pt",
+      "source_checkpoint_sha256": "cc7474785fe944f82e1abe96b6fe0e0aefb1e8036add7d459e75ebf6281c19e9",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 2.898741513490677e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "fb6bfba821cd802de338581bedc1b7b748bca5860449b187ff4f7124a2a8f634"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "891edaac7f408a03aba93da1bfbc0a8efd16a1da49127f8ddd2fb162c2c091da",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_1/model.pt",
+      "source_checkpoint_sha256": "c44b0b75bdf2742887bb52675e7a3e33bbbea99a265e30790024f6584dc9900e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.6927092373371124e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "c3c0b347a29cf30d47d1d5470907a02bdfc2b00e68bb802e1e2681432d905c0d"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "340398087653f23f267869a0604131b4c4de6e41e7f5f3da8bc468597646f976",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_2/model.pt",
+      "source_checkpoint_sha256": "4754c69ed003c0f6b015047f1ddd45719d64d8fc96cf1938923912c6ceb192b5",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.864988684654236e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "329f5b34cf4d96d8eae3dd4360e6a053f8ac25fa13e8fa34943d1b326fafbda4"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "7e48671acb4826561e6b5d089d211359265bc8d4b5006ca5750a01b37ac36295",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_0/model.pt",
+      "source_checkpoint_sha256": "cc7474785fe944f82e1abe96b6fe0e0aefb1e8036add7d459e75ebf6281c19e9",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.4458935260772705e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_1/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "e2c1088e0e13b95db76d383b41708343e0d8b579cd35127ed437e71a805dd6af"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "87481aec25776a6afbaae6bf1e6e65ca71f867867e384ad596c2e7f1b6d06a10",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_1/model.pt",
+      "source_checkpoint_sha256": "c44b0b75bdf2742887bb52675e7a3e33bbbea99a265e30790024f6584dc9900e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.634501576423645e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_1/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "1205059023b7f65111640ca08abe2510caa07939f80362b42a4ce5d0dc688357"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 1,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "1f98d8c98bcef3cd29cfcb5ff05042d43d0fd293fd2e838c6a11a479b9fe4b7d",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_1/seed_2/model.pt",
+      "source_checkpoint_sha256": "4754c69ed003c0f6b015047f1ddd45719d64d8fc96cf1938923912c6ceb192b5",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 3.9814040064811707e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_1/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "188a879b906eda2a1b05782f45a26bf4218cbf566fdb06cc4cd1665116fa47c6"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "44edd6ca10fb0bfc9f55d6a31380d3fbf534b03d82f27e3e97deb4d499d7088f"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "f29640c445471eaab02ccc5e1df638a1c38177675a651107351b45af11a4881a"
+    },
+    {
+      "arm": "reference",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/reference/repeat_20293611/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "cf3b0a7aa01911493b455149fe019dbc1968d626dba6f5d2bcd74c0c3be9f560"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "f1338ae980ceadcb9f7805aa3564d62ac0adc7725ba38f63b2fcff0225238036"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "1fee21fcfe2d20f9e867f4d8ab2221c2a38ce8db3ec6baf614ae4e57edd3fbb1"
+    },
+    {
+      "arm": "subspace",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/subspace/repeat_20293611/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "8fba5a8042e56da04777c0aa03ed71a3c2be250e873f8dcd460ec00195cbddb3"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "0168871b8aa752f10a8fb28b7ab59a357e51f3caee2972b4a177177c7308239a",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.430511474609375e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "dd0daae2ca0db31b210ad5aad3ff239386a23665c2defa692012799b00c7c0c9"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "82b4774f757f3cd6910169e4e7c316f0415daeab30d7550d982ea4c69aa4b3bb",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.3560056686401367e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "a611ab4c8cba40b472ac93268d08ca3a01a59fbefead681bdd58575a010edb1e"
+    },
+    {
+      "arm": "large",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "75594db71bf9254a1f83021fba0bf823ef6681f8d1f0d2e0d683d19d1114b499",
+      "witness": {
+        "batch_size": 256,
+        "feature": "large_dual",
+        "full_task_restored": true,
+        "normal_projection_restored": true,
+        "maximum_projection_error": 1.341104507446289e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/large/repeat_20293611/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "e1e389a870f47788d5e779ecf93776caf57b727e0a6825c43278f96bc2d2e98f"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "585c446485575fa14cd850c386c967e1c930b65d59ec5979c4ee5a2af44fc055",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.862645149230957e-08,
+        "maximum_independent_forward_error": 1.1920928955078125e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "8d93bae2528a583547acb01aef0e6460e6e084097caaa4cb185e379523f1f355"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "74c68355b6cc8f581797f3096fa6ee597fd727d8500de823cfd59e6c921d9f3f",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.3560056686401367e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "471d98b6798fd6e09a09999e26eb0ae53764d81484e744f615f5bf76f4393073"
+    },
+    {
+      "arm": "token",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "390587baa63d30d077817b21b38e9e2d6f8d2474a8edd48ab278c47890a484ed",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.4901161193847656e-06
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "d869afd3ccdfe4d85be66c9a02854c694ee8c63b0a19148c6972a712bd3faa69"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "0b27f5576b42656667a4a053dcd9117ef478d68313e0332d6858e6f3ecc9110d",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_0/model.pt",
+      "source_checkpoint_sha256": "585c446485575fa14cd850c386c967e1c930b65d59ec5979c4ee5a2af44fc055",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 4.470348358154297e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "92add64be512dc83af1b39646f3cdcbbb7e59df51fd0b97a76dfbf252d26a5e0"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "1cf846cec36307b3ed097935659b67bf778b9250355a86c3e9aa093e530e2ec4",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_1/model.pt",
+      "source_checkpoint_sha256": "74c68355b6cc8f581797f3096fa6ee597fd727d8500de823cfd59e6c921d9f3f",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 5.3085386753082275e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "43e1500cdd1f882fb9157583fa88e8f8c2c8fd4e16db7e567df15c2b42e98009"
+    },
+    {
+      "arm": "value",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "d8273910482661e1f9df70dd7f3e5cc98dd53aeaf6c3a7c88ea6454faf5f5394",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_2/model.pt",
+      "source_checkpoint_sha256": "390587baa63d30d077817b21b38e9e2d6f8d2474a8edd48ab278c47890a484ed",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias",
+          "patch_queries"
+        ],
+        "trainable_parameters": 6146,
+        "complete_task_gradient_error": 7.450580596923828e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/value/repeat_20293611/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "cb92888935a26b4f8607842b0fe34feae60e57fee7737b8a1e18beeba5e2a333"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "ba0d66df46653cbf05ea68eb0465ca9b3d1572e0aa8d8379ab43b8c3423a925f",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_0/model.pt",
+      "source_checkpoint_sha256": "585c446485575fa14cd850c386c967e1c930b65d59ec5979c4ee5a2af44fc055",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.960464477539063e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "dc7c50aaee5958cb30831754f50c7c97534d06b7ba709576f33b912a7dd8bc5d"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "d4ae81d1fd2cb9b9be09b9993e12bd6249d6970b5f8c813f3e5edfc250c57ded",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_1/model.pt",
+      "source_checkpoint_sha256": "74c68355b6cc8f581797f3096fa6ee597fd727d8500de823cfd59e6c921d9f3f",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.587935447692871e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "02f7d091b33f377bd064402ac880785472513e31298d76f085fcb170def3fd54"
+    },
+    {
+      "arm": "matched_uniform",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "b321b80d47a291eae895917c9360345cd70ff3a9a39da91451c676cc928916bb",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_2/model.pt",
+      "source_checkpoint_sha256": "390587baa63d30d077817b21b38e9e2d6f8d2474a8edd48ab278c47890a484ed",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.960464477539063e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_uniform/repeat_20293611/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "b1bee1319fae7f8ffcab7bea6274d5cd9ea818129de7cee5848e62e440eb7f61"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "ff1797317aba470c518a04206db8b8690b059f4c6d93ac695133f7fe59feba84",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_0/model.pt",
+      "source_checkpoint_sha256": "585c446485575fa14cd850c386c967e1c930b65d59ec5979c4ee5a2af44fc055",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 4.842877388000488e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_2/seed_0/training_input_witness.npz",
+      "training_witness_sha256": "d280056ae5681dac09632941e6e17fd20839b3d6c60255f1d7cfb814099a3f3f"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "9c69ca0a4143dc9c84178e58b4be5869f237dee9edf06f06a76396168266cd39",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_1/model.pt",
+      "source_checkpoint_sha256": "74c68355b6cc8f581797f3096fa6ee597fd727d8500de823cfd59e6c921d9f3f",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 5.4016709327697754e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_2/seed_1/training_input_witness.npz",
+      "training_witness_sha256": "f228ba27f09f1dd73ae5f7363e8171a2f23200b3025591509553284f1ceb782a"
+    },
+    {
+      "arm": "matched_source_query",
+      "repeat": 20293611,
+      "fold": 2,
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "956a56b554daf3f44072a14e8069ce0493fb2c8aa522e10739a6ee0e28797155",
+      "source_checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/token/repeat_20293611/fold_2/seed_2/model.pt",
+      "source_checkpoint_sha256": "390587baa63d30d077817b21b38e9e2d6f8d2474a8edd48ab278c47890a484ed",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "patch_readout",
+          "patch_bias"
+        ],
+        "trainable_parameters": 4098,
+        "complete_task_gradient_error": 7.450580596923828e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true,
+        "source_normal_geometry_and_all_original_parameters_frozen": true
+      },
+      "training_witness_path": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence_confirmation/sources/matched_source_query/repeat_20293611/fold_2/seed_2/training_input_witness.npz",
+      "training_witness_sha256": "9a852c146b725aabbe49f0a17e917dbc86944038c8c2540d4325af29cabe059a"
+    }
+  ],
+  "matched_controls_required": [
+    "matched_uniform",
+    "matched_source_query"
+  ],
+  "checks": [
+    "Six unused patient/near-duplicate plans and all18geometryfiles frozen beforeallplannedfits",
+    "Allfit-only stats, disease maps, selected epochs, normalbuffers, stop/outer probabilities independently restored",
+    "All18normalL,18registerL,18directpatchcandidate and required36uniform/sourcequerycontrols actualCUDA complete tasks/alltrainable gradients replayed",
+    "All18Gaussian patientmoments, all declaredensembles and five/sevenpaired comparisons independently restored; fixedM7 arithmetic expanded in float64"
+  ]
+}

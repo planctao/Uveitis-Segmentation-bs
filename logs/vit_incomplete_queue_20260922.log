@@ -1,0 +1,3 @@
+[2026-09-22T17:59:42+08:00] START HMVF
+2026-09-22 17:59:44 | INFO | image preprocess: disabled
+2026-09-22 17:59:44 | INFO | train augmentations: HorizontalFlip(p=0.5, strength=1) -> VerticalFlip(p=0.2, strength=1) -> RandomAffine(p=0.8, strength=1) -> ForegroundResizedCrop(p=0.25, strength=1) -> RandomOrder(p=1, blocks=[BrightnessContrast(p=0.55, strength=0.75), Gamma(p=0.35, strength=0.75)]) -> OneOf(p=0.25, blocks=[GaussianNoise(p=1, strength=0.75), GaussianBlur(p=1, strength=0.75)])

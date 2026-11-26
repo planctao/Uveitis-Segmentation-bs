@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "fit_only_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "cache_legacy_register_max_error": 0.0,
+  "records": [
+    {
+      "rank": 4,
+      "kind": "shared",
+      "images": 8,
+      "trainable_parameters": 8192,
+      "maximum_complete_task_gradient_error": 2.026354195550084e-09,
+      "maximum_probability_error": 0.0,
+      "zero_adapter_source_probability_bitwise_identical": true,
+      "all_backbone_tail_and_head_parameters_frozen": true
+    },
+    {
+      "rank": 4,
+      "kind": "individual",
+      "images": 8,
+      "trainable_parameters": 8192,
+      "maximum_complete_task_gradient_error": 8.338247425854206e-09,
+      "maximum_probability_error": 8.381903171539307e-09,
+      "zero_adapter_source_probability_bitwise_identical": true,
+      "all_backbone_tail_and_head_parameters_frozen": true
+    },
+    {
+      "rank": 8,
+      "kind": "shared",
+      "images": 8,
+      "trainable_parameters": 16384,
+      "maximum_complete_task_gradient_error": 1.4649231161456555e-08,
+      "maximum_probability_error": 9.778887033462524e-09,
+      "zero_adapter_source_probability_bitwise_identical": true,
+      "all_backbone_tail_and_head_parameters_frozen": true
+    },
+    {
+      "rank": 8,
+      "kind": "individual",
+      "images": 8,
+      "trainable_parameters": 16384,
+      "maximum_complete_task_gradient_error": 7.265043677762151e-09,
+      "maximum_probability_error": 9.313225746154785e-09,
+      "zero_adapter_source_probability_bitwise_identical": true,
+      "all_backbone_tail_and_head_parameters_frozen": true
+    }
+  ],
+  "seconds": 16.08551025390625,
+  "peak_allocated_bytes": 2047713792,
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "checks": [
+    "8 actualtrainingimages only; label-free selectedpatchbank, exactzero anchoredcorrection; completeoriginaltask/querygradients independentfunctionaloracle with nonzeroB; sourcehead/tailfrozen beforeafter optimizer; tokenjointpermutation and sharedquery checks"
+  ],
+  "code_sha256": {
+    "register_patch_query.py": "ecd527d0db814a259740c6e2b76cad467feac1f35dcd059a66272c0a24243e15",
+    "register_patch_query_features.py": "ec1157f5077f37fe4e8fcb15aced4f60bc1c1a8a8c9fb872c22854b2de65dd12",
+    "audit_register_patch_query.py": "b6b390eb16a5e1663f78f140a98acf112aa5e1d374a988a3dae418531245d6b6",
+    "verify_register_patch_query_feasibility.py": "00c00bf074ffc0b3ec36e440d6ca5d560c5e6cda5098d456ac3348f04f3004f5"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "created_at_utc": "2026-11-24T21:40:49.540310+00:00",
+  "family": "class_query_patch_evidence",
+  "status": "preregistered_before_attention_coupling_outcome",
+  "classification_fits": 0,
+  "scores_evaluated": 0,
+  "training_launched": false,
+  "current_predecessor_state": {
+    "status": "training",
+    "pid": 77579,
+    "arm": "attention_query_shared_rank4",
+    "phase": "validation",
+    "seed": 1,
+    "external_test_evaluated": false
+  },
+  "evidence_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/query_selection_correction_structure/analysis.json": "a3d5bd1eef7dd6f615b8ee6cb6e59ef087ddc6a0ff85338365a3c054b863f4a5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_query_selection/independent_saved_output_review.json": "69e594e83c6660934bc46a00cea600abd3657497380f757733bac1020c629453",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_m8.json": "f51c3369a43d3b706479c48e13dec3a5c2c4248c155ae563310833f3d3d6dc74",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_attention_coupling/protocol.json": "16fcfff0a3f158696d71814599d5342099ba14818a65d44a4b78775683aa53eb",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_register_patch_query_bank.json": "f106c537b5b5067d21e6bd64e3e1296aad5d8177e02b1e9447bc1fd30dd3201c"
+  },
+  "hypothesis": "A direct local patch-evidence path may contribute class-specific information not obtained by modifying register contents or the existing frozen register reader. Test two pathology log-odds readouts over cached finalblock spatialvalues, including uniform/source-query controls and learned class-query attention. Completed retrieval variants corrected noM8errors afterfixedfusion. This descriptive observation does not establish a causal register bottleneck. Current reader-coupling results unknown.",
+  "architecture_plan": "Use the existing verified2091development sharedtop64 K/V/query cache, no extraction/newbackboneforwards. Freeze sourceM8L normalgeometry, normalization, allclassifierparameters, registerreader and DINOtail. Parameter-free pervectorRMS normalization (eps1e-6) of patchK/V and sourcequeries. Sourcequeryq=meanof4normalizedregisterqueries, thenRMSnormalize; logits=(q dot normalizedK)/8. Two pathology queries add trainable [2,16,64]templates to perimage/perview sourcequery; templates initializedN(0,.02) withseed20293500+seed. Keys/values do not receive new trainable projection. Perclasspool over64positions ineachof2views/16heads. Zero-initialized classreadout [2,2,16,64]+bias[2] maps flattened pools to2scores; shifts infection/noninfection=2tanh(score), normalshiftzero. Add corresponding shifts to ALLfine-disease logits perclass (preserves within-class conditional disease odds). Apply stable anchoredcoarseprobability residual p+p*(expm1(shift)-sum(p*expm1(shift)))/(1+sum(p*expm1(shift))) infloat64 thenfloat32; zero readout preserves source p/subtype BITWISE. Fineembedding/hidden unchanged; complete original task still includes coarseNLL andshifted subtypeaux.",
+  "configuration_plan": [
+    {
+      "name": "uniform_pool",
+      "pooling": "uniform",
+      "learned_query": false
+    },
+    {
+      "name": "source_query_pool",
+      "pooling": "source",
+      "learned_query": false
+    },
+    {
+      "name": "class_query_pool",
+      "pooling": "learned",
+      "learned_query": true
+    },
+    {
+      "name": "class_query_contrast",
+      "pooling": "contrast",
+      "learned_query": true
+    }
+  ],
+  "pooling_formulas": "uniform=mean64 normalizedV broadcastto2pathologies;source=sourcequeryattention@normalizedV broadcastto2;learned=classqueryattention@normalizedV;contrast=(classqueryattention-sourcequeryattention)@normalizedV. Thus templateszero: learned==source, contrast==0 evenwithnonzeroreadout; source and learned normalizeidenticalsourceq/K.",
+  "fixed_training": {
+    "initialization_and_order_seed_base": 20293500,
+    "batch_size": 256,
+    "optimizer": "AdamW",
+    "readout_learning_rate": 0.001,
+    "query_learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "max_epochs": 60,
+    "patience": 12,
+    "gradient_clip_norm": 3.0,
+    "epoch_zero_eligible": true,
+    "task": "Unchangedcompleteoriginaltaxonomy task/fit-onlypatientweights. Sourcehead eval; no stochastic components in newbranch. Originalpatient/duplicateisolatedplans. No tuningfromactivepredecessor."
+  },
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "StandaloneL and.1875rawB+.5625normalB+.25directPatchL. No weight/threshold search.",
+  "original_selection": "EveryarmstrictlyhigheroriginalCVthanM8 andvalidationF1>=M8. Learnedpool/contrast mustALSOstrictlybeatBOTHuniform_pool andsource_query_pool inoriginalCV, validationF1>=both, comparingstandaloneorfixedfusionconsistently. Uniform/source controls M8only. FreezehighesteligibleoriginalCVonce; no freshreselection.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20293601,
+      20293611
+    ],
+    "inner_seeds": [
+      20293624,
+      20293625,
+      20293626,
+      20293634,
+      20293635,
+      20293636
+    ],
+    "control_winner_fits": 90,
+    "control_winner_witnesses": 54,
+    "learned_winner_fits": 126,
+    "learned_winner_witnesses": 90,
+    "generative_fits": 18,
+    "geometry_fits": 18,
+    "matched_controls": "Learnedwinnerrequires18freshuniform+18freshsourcequerycontrols frommatchingfreshregisterLsources plus18candidate;72freshsourceheads total126. Controlwinner90with72freshsource+18candidate. Sameplannednewbranchreadoutcapacity, queryparametersonlylearnedarms; doNOTclaimmatchedtotalparameters.",
+    "gate": "Highermean6foldF1ANDpairedpatient95%lowerCI>0vsEACHM8/M7/M6/M5/fixedGaussian andBOTHmatchedcontrols forlearnedwinner. No freshselection."
+  },
+  "preflight_plan": "4actual256trainingimagecases: exactzerosourcep/subtype/fulltaskidentity; firstfulltaskallgradwitness; independentfrozenMLP+manualRMS/querypool/anchoredprobability/shifteddiseaselogitformula; arbitrarynonzerostateallgradients; withingrouplogoddsinvariant; normalanchorzero; probabilityextremes/finite/sum; classquerytemplatezero reductions; positionpermutation; nonzero learnedqueryclass/head sensitivity; oneengineeringoptimizerstepeach preservesALLfrozenparameters/buffers; ordinaryCUDArestoreBITWISE. Fullpatient/control/gate/originalengineproof beforeformalfit.",
+  "launch_condition": "Onlyaftercurrentreader-coupling48andrequiredconfirmationterminalnegative+independentoutputreviewpassed, retainedM8; allnewmodel/data/task/control/plan/gatepreflightspassed+dependenciesfrozen. Positivepredecessorrequiresrootreference review. ThispreregistrationdoesNOTlaunchanyclassifierfit.",
+  "scientific_limits": "Directpatchreadout standardattentioncomponents, controlledhypothesisnooriginalityclaim. Perheadselectedpositions differ; not jointlysameanatomicalpositions. Cache selectionusespretrainedregisterQwithhead64union, not disease lesionannotations. Querylearnedarms haveextraqueryparameters; no totalparametermatch. PostselectionOOFdescriptionsnotfresh/causal. Noexternalimages/outcomes/probabilities/automaticpromotion."
+}

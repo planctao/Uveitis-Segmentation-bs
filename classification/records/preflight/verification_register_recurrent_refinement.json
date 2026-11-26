@@ -1,0 +1,160 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "control",
+      "expected_field_evaluations": 1,
+      "m8_exact_control_error": 0.0,
+      "initial_m8_allgradient_error": 0.0,
+      "query_feedback_attention_change": 0.0,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.043081283569336e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 1.0
+    },
+    {
+      "kind": "euler2",
+      "expected_field_evaluations": 2,
+      "m8_exact_control_error": null,
+      "initial_m8_allgradient_error": 0.0,
+      "query_feedback_attention_change": 9.247660636901855e-05,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5087425708770752e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 0.33138471841812134
+    },
+    {
+      "kind": "euler4",
+      "expected_field_evaluations": 4,
+      "m8_exact_control_error": null,
+      "initial_m8_allgradient_error": 0.0,
+      "query_feedback_attention_change": 0.00013870000839233398,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.341104507446289e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 0.33139652013778687
+    },
+    {
+      "kind": "heun",
+      "expected_field_evaluations": 2,
+      "m8_exact_control_error": null,
+      "initial_m8_allgradient_error": 0.0,
+      "query_feedback_attention_change": 0.0001849532127380371,
+      "stream": "registers",
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.5459954738616943e-07,
+      "token_permutation_error": 3.4924596548080444e-10,
+      "hidden_query_attention_change": 0.33140820264816284
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "kind": "control",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "euler2",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "euler4",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "heun",
+      "stream": "registers",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_recurrent_refinement.py": "4630b7336a6f60d229b0ee73d211a91ed6294f521a7115aece1f5804eebb7e58",
+    "audit_register_recurrent_refinement.py": "d98f142a0d938f46ab9029f0925c80c5a9011c7abde45a95a9ce56fe881e276a",
+    "verify_register_recurrent_refinement.py": "7b51d6e0315fb27bb59f11702650256411e62b6c9ae935273a9c484a207c1eef",
+    "large_token_data.py": "f093038f30d9d23c2d0dd63587944d564fbedeaa6478143485b282eface4f461"
+  },
+  "checks": [
+    "Four actual256image complete tasks/allparametergradients and allnonzero readoutfeedbacksteps independently reconstructed",
+    "OriginalnormalL initialization/RNG/zeroreadout fulltask/basegradients identical; allparametergradients match singlepassM8 atdeclaredexisting tolerance; equalparameters and originalcontrol exacttrainedM8",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Intermediatehidden/attention traces and evaluationcounts verified; fixedtotalstep Euler/Heun updates independentlyunrolled; nonzero queryfeedback, tokenpermutation, optimizerupdates/frozenbuffers/strictrestore and fouractualCUDA firsttask/allgradientreplays"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

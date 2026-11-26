@@ -1,0 +1,80 @@
+{
+  "created_at_utc": "2026-11-24T19:29:36.349313+00:00",
+  "family": "register_patch_mass_calibration",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "The previous gated patch residual pools over selected64positions normalized to1 independentlyof their full-source attention mass. Completed24image diagnosis observed selectedmass .319/.234 onaverage and verylowperquerymass. Test whether restoring PERQUERY full-source selectedmass improves a frozenDINOtail+MLP patch residual relativeto fixed fit-onlymean damping. The prior nonlinear gated and readout+patch studies didnotimprove M8; this is a normalization-scale hypothesis, not proof of causalbottleneck or componentoriginality.",
+  "evidence_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/selected_attention_mass_diagnostic/analysis.json": "ed5d858df0f6726fbb75915bf1f8ebe146386483c44a610aca4ab6b3d6a48bd1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_gated_value/comparison.json": "1af1455647ab75301a7b4df07024ea19d2c8dd4ae13867f5278ef582f17b7dc4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_readout_adaptation/comparison.json": "44aeabb4fc6e5588e0731fe7af86dfcd1e0a1027e8d579327c3e9f26b6772ac3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/readout_patch_correction_structure/analysis.json": "261b0d2726e11ab72a637663c3eb7b66545237fa15acaa7c82f8e9a29a227c6f"
+  },
+  "architecture_plan": "Same frozen DINO-L tail and M8L register head, same perpatch nonlinear gated update delta_v=2*rho*B(SiLU(Az)*(Gz)) withrho=sqrt(mean(v^2)+1e-6), z=v/rho andBzero. Compute existing float64 selected-set attention a64. Multiply pooled residual a64@delta_v by s[b,view,head,query]. In source_mass arm, s is independently verified full-selected mass from cache including all5prefix keys in denominator. Then this equals fullnormalizedselectedweights@delta_v within unchanged strict cache tolerance. In constant_mass control, s is the mean source_mass across only fitting images, heads and queries separately for each view; never use stopping/outer/validation statistics. No newtrainable parameter or change to original head/tail, data/loss/optimizer. Mass1 mustreduce to existing Gated implementation; mass0 orBzero mustgive exactsourceidentity. Allmass/statbuffer bytes preserved in each checkpoint.",
+  "configuration_plan": [
+    {
+      "name": "source_mass_shared_rank4",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8,
+      "mass_mode": "source_mass"
+    },
+    {
+      "name": "source_mass_perhead_rank4",
+      "kind": "perhead",
+      "rank": 4,
+      "alpha": 8,
+      "mass_mode": "source_mass"
+    },
+    {
+      "name": "constant_mass_shared_rank4",
+      "kind": "shared",
+      "rank": 4,
+      "alpha": 8,
+      "mass_mode": "constant_mass"
+    },
+    {
+      "name": "constant_mass_perhead_rank4",
+      "kind": "perhead",
+      "rank": 4,
+      "alpha": 8,
+      "mass_mode": "constant_mass"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standaloneL and fixed .1875rawB+.5625normalB+.25candidateL; original12L/24B sources reused and not recounted. No newfusionweight/threshold search.",
+  "fixed_training": "Initialization/order20292900+seed; fourarms×4originalphases×3seeds, actualbatch256/AdamWlr.001wd.01/max60/patience12/clip3/epoch0eligible. Originalcomplete taxonomy task/patientclassweights/fit-stop-outergroups unchanged. Fit-onlymassmean buffer shape2, recomputed independently from each fitting partition.",
+  "preflight_plan": "VerifiedV2masscache(2091devimages,source6arraysbitwise,6CPUwitnesses,6freshviews) required. Fouractual256complete-task firstgradientwitnesses; zeroexactsourcep/subtype; arbitrarynonzeroadapter alltrainablegradients agree independent headwiseperpatch/fullweightedpool and frozenhead reconstruction; source-vs-constant differ when syntheticmasses vary; allone mass exactlyreduces preservedGatedmodel with matchingstate; allzero mass andclosedgate restore source; fullsetselected algebra check from sourceK/V witnesses; fit-onlymean estimator invariance to nonfitbuffer perturbation; original frozenparameters/buffers unchanged; ordinaryCUDA checkpointrestore bitwise. No classifierfit/score duringpreflight.",
+  "selection": "OriginalpatientCVstrictly>M8 ANDvalidationF1>=M8; freeze highesteligibleoriginalCV before freshpatientconfirmation. No reselection after fresh.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20293001,
+      20293011
+    ],
+    "inner_seeds": [
+      20293024,
+      20293025,
+      20293026,
+      20293034,
+      20293035,
+      20293036
+    ],
+    "source_mass_winner_fits": 108,
+    "source_mass_winner_witnesses": 72,
+    "constant_mass_winner_fits": 90,
+    "constant_mass_winner_witnesses": 54,
+    "generative_fits": 18,
+    "normal_geometry_fits": 18,
+    "matched_control": "If source_mass winner, refit its SAMEkind/rank constant_mass arm as an additional18headcontrol using samefreshregisterL source/fit-onlymean/init/order/hparams. Apply the same frozenstandalone/fusionweight to both; no control selection. If constant_masswins, no source-dependence superiorityclaim.",
+    "gate": "Fresh6foldmeanF1 higher ANDpairedpatient95percentlowerCI>0 againstEACH M8/M7/M6/M5/fixedGaussian; source_mass winner must ALSO exceed matchedconstant_mass control with highermeanF1 andpairedpatientlowerCI>0. Allfreshhead/split/geometry/task/gradient/Gaussian/ensemble independentaudit required."
+  },
+  "launch_condition": "No supervisedfit until Pair study/anyrequiredconfirmation terminalnegative, M8retained, fullmodel/cache/confirmationplanproofs passed and complete inputs/code/protocol frozen. PositivePair stopsfor rootreference review. Neverduplicate/resume failed originalcache or overwrite frozenresults.",
+  "external_test_policy": "Developmentonly; selection uses originaltrainOOF andval. Freshconfirmation uses original1717train only. No external images/outcomes/predictions or automaticpromotion/external scoring.",
+  "protocol": "runs/register_patch_mass_calibration/protocol.json",
+  "protocol_sha256": "1cd4a6981d6efec8898e3ad67bda27e45472a04f5b275f8f68bf6f2b100b2c97",
+  "pid": 69613,
+  "model_preflight": "verification_register_patch_mass_calibration_model.json",
+  "passing_development_gates": 0
+}

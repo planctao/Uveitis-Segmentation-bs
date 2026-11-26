@@ -1,0 +1,45 @@
+{
+  "created_at_utc": "2026-11-24T13:31:15.196055+00:00",
+  "family": "register_scale_factorization",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "M8 concatenates320/448 registerchannels and chooses the same registerindex for bothscales. Test separate register selection per scale block, using identical learnedparameters and same fit-only originalL/register geometry. Factorized-value/shared-attention control separates value-factorization from independent-attention effects; finalarm also normalizes eachscale separately. All independence statements apply to already normal-projected token blocks; the upstream joint normalPCA remains shared and can couple scales. No originalityclaim.",
+  "architecture_plan": "Same hidden256/query32/keyvalue32/zero32->256 .1 residual, exact original base/init/RNG. Fourarms: legacyM8control; two partial valueprojections with sharedattention from summed partialkeys; same partialvalues with independent2x4 softmax; independent attention plus separate1024D LayerNorm moments using same2048 affineparameters. Each2048->32 key/value weight is sliced byscale, sharedbias split inhalf, sums of pooledpartialvalues produce32D output. No additional parameters.",
+  "configuration_plan": [
+    {
+      "name": "legacy_control",
+      "kind": "legacy_control"
+    },
+    {
+      "name": "factored_shared",
+      "kind": "factored_shared"
+    },
+    {
+      "name": "factored_independent",
+      "kind": "factored_independent"
+    },
+    {
+      "name": "factored_scale_norm",
+      "kind": "factored_scale_norm"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL. Legacycontrol must recover exact M8 development probabilities. Preserve coefficients and then-current reference gates.",
+  "geometry_plan": "All four originalnormalL and four registerPCA32 spaces/all patient-nearduplicate plans frozen before48heads, exact historicalM8 geometry. Same joint normalPCA shared by allarms; no new fitted scale spaces.",
+  "launch_condition": "No classfits/scores until register_cosine all48 audits/24sources/16fusions and any freshconfirmation/package/promotion decision terminal. Real256image complete-task/allgradient and four actualCUDAwitness preflight; record independent scalepermutation invariance only after projection.",
+  "selection": "OriginalCV strictly above currentreference AND validation>=currentreference. Freeze highestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 versus EACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "engineering_preflight_refinement_before_classification": "Initial preflight found two engineering issues before any classification fits/scores: occasional float32 zero-readout base-gradient nonbit equality is now measured with atol1e-7/rtol1e-5 (zero outputs/loss/init/RNG remain exact; independent learned-fulltask tolerances unchanged). Independent scalepermutation is a property after BOTH normalprojection and tokennormalization; jointLayerNorm couples scale blocks. Check attentionoperator at that interface for both independentarms, full residual only for the separate-scalenorm arm. No effectiveness outcomes used.",
+  "model_preflight": "verification_register_scale_factorization.json",
+  "observed_maximum_zero_readout_base_gradient_error": 0.0,
+  "protocol": "runs/register_scale_factorization/protocol.json",
+  "protocol_sha256": "d98b56c6901631e7b0eace925cffc329a65dd0dbace67e19f47aaedf66e55a86",
+  "pid": 37463,
+  "retained_reference": "M8",
+  "audit_recovery_protocol": "runs/register_scale_factorization/audit_recovery_protocol_v2.json",
+  "audit_recovery_protocol_sha256": "dd56d1a2fd27c936f45a0551c9b4dbfd38ce25af88c1ce5f5c04352eae6bf323",
+  "audit_recovery_pid": 38498,
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_scale_factorization/comparison.json"
+}

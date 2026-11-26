@@ -8,14 +8,14 @@ from multistream_confirmation import combine
 
 
 def main():
-    parser = argparse.ArgumentParser(); parser.add_argument('--family', required=True, choices=['large_token_interaction', 'large_token_cross_attention', 'register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry'])
+    parser = argparse.ArgumentParser(); parser.add_argument('--family', required=True, choices=['large_token_interaction', 'large_token_cross_attention', 'register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry', 'base_token_evidence', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout'])
     family = parser.parse_args().family
     selection = json.loads((ROOT/'results'/('research_'+family)/'selection_before_repeat.json').read_text())['candidate']
     suffix = 'pair' if family == 'large_token_interaction' else 'cross'
-    source_key = 'source_'+family+'_arm' if family in ['register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry'] else 'source_token_'+suffix+'_arm'
+    source_key = 'source_'+family+'_arm' if family in ['register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry', 'base_token_evidence', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout'] else 'source_token_'+suffix+'_arm'
     source = selection.get(source_key, selection['name'])
-    weight = selection.get('m7_replacement_weight', 1.)
-    assert weight in [.25, 1.]
+    weight = selection.get('normalB_replacement_weight', selection.get('m7_replacement_weight', 1.))
+    assert weight in [.25, .5625, 1.]
     cases = []
     for phase in ['validation', 'fold_0', 'fold_1', 'fold_2']:
         paths = {'reference': ROOT/'runs/normal_subspace/zero_control'/phase/'predictions.npz',
@@ -42,7 +42,7 @@ def main():
         'candidate': selection['candidate_id'], 'replacement_weight': weight,
         'purpose': 'Arithmetic recovery for alreadyfrozen highestqualifyingoriginalCV candidate; no scoring/ranking.',
         'code_sha256': {name: sha(ROOT/name) for name in ['multistream_confirmation.py', 'verify_multistream_confirmation.py']},
-        'architecture_preflight_sha256': sha(ROOT/('verification_'+family+'.json')), 'external_test_evaluated': False})
+        'architecture_preflight_sha256': sha(ROOT/('verification_'+family+('_compact' if family=='register_recurrent_refinement' else '')+'.json')), 'external_test_evaluated': False})
     print('All four fixed candidate and M8 formulas independently recovered; zero fits/scores.', flush=True)
 
 

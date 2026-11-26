@@ -1,0 +1,50 @@
+{
+  "created_at_utc": "2026-11-24T14:37:07.426880+00:00",
+  "family": "register_recurrent_refinement",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "The original M8 registerhead obtains one query from the unrefined normalL hidden representation. Classifiercontexts and extrauntiedqueries failed developmentgates. Test sharedweight evidencefeedback: after registerresidual modifies hidden, recompute the query and re-read the same registerbank. A fixed total integrationlength1 distinguishes feedback from simply multiplying residualstrength. Standard sharedweight iterativeattention/numericalintegration ingredients; no originalityclaim. Preregister before routinginformation outcomes.",
+  "architecture_plan": "Exact originalnormalL/base/sidePCA32/LN2048/keyvalue32/query256->32/zero32->256 .1residual/init/RNG. Define f(h)=originalTokenQueryResidual(tokens,h).delta. Four equalparameter arms: originalcontrol h+f(h); twoEuler h1=h+.5f(h), h2=h1+.5f(h1); fourEuler h_j=h_{j-1}+.25f(h_{j-1}) for j1..4; Heun h+.5*(f(h)+f(h+f(h))). Sharedsamequery/key/value/readout acrossallsteps, keys/values may be reused deterministically. Originaltask unchanged; no extra dropout/RNG. Allnormalspaces andstatistics fittedonlyfitpatients. Atinitialzero readout outputs and taskidentical; sumweightedreadout gradients checked with numericaltolerance, not assumedbitwiseidentical for modifiedsteps. Full control exact M8.",
+  "configuration_plan": [
+    {
+      "name": "control",
+      "kind": "control"
+    },
+    {
+      "name": "euler2",
+      "kind": "euler2"
+    },
+    {
+      "name": "euler4",
+      "kind": "euler4"
+    },
+    {
+      "name": "heun",
+      "kind": "heun"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachstandalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL, originalM8control. Then-currentreferencegates; fixedcoefficients.",
+  "geometry_plan": "FouroriginalnormalL/fourregisternormalPCA32spaces and allpatient/near-duplicate fit/stop/outerplans frozenbefore48fits; exact historicalM8geometry. No preprocessing adds stopping/outerpatients.",
+  "preflight_plan": "Fourreal256image complete tasks/allparametergradients andactualCUDAwitnesses. Independently unroll every hiddenupdate with nonzero learnedreadout and backpropthroughallqueryfeedbackpaths; no detaching updatedhidden. Explicit intermediatehidden/attention traces match functionaloracle and actual numberofevaluations; scaleintegrations coefficients independently recovered. M8control trainedidentity and originalfirstwitness/GPUstopbits exact; CPUexistingtol plus samedecisions/discretemetrics. Samebaseinitialization/RNG/zeroresidual output; unregularizedinitialtask/basegradients and readoutgradient sum checked with declared existing tolerance. Tokenpermutation, nonzero queryfeedback effect, optimizerupdates/frozenbuffers/strictrestore.",
+  "launch_condition": "No classificationfits/scores until routinginformation all48audits/24sources/16fusions and any required freshconfirmation/package/promotion decision terminal; allpreflights and then-currentreference/code/artifactfreeze.",
+  "selection": "OriginalCV strictlyabove currentreference AND validation>=currentreference; freezehighestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_recurrent_refinement_compact.json",
+  "legacy_witness_model_preflight": "verification_register_recurrent_refinement.json",
+  "compact_witness_amendment_before_any_classification_fit": {
+    "classification_fits": 0,
+    "scores_evaluated": 0,
+    "purpose": "Retain complete firsttask/gradient evidence while omitting only redundant rawglobal/rawside/projectedtoken arrays; trainingtime SHA256/dtype/shape recorded, raw arrays independently rebuilt from frozenfeatures, projected array and allotheroutputs bitwise replayed on originalCUDA model before independentfunctional audit. All retainedcontrolarrays exactoriginalbits and omittedcontrolarrays exactoriginalSHA256. No gradient/probability tolerance changed.",
+    "legacy_files_preserved": true,
+    "launch_command": "python start_register_recurrent_refinement_compact.py",
+    "preflight_passed": true
+  },
+  "protocol": "runs/register_recurrent_refinement/protocol.json",
+  "protocol_sha256": "fcfe6e33e0ca4bb8b29666f6b509dd7dd9999530401e8231609ed7544d3368ce",
+  "pid": 42964,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_recurrent_refinement/comparison.json"
+}

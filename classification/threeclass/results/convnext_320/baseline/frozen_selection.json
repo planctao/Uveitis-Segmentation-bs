@@ -1,0 +1,236 @@
+{
+  "phase": "baseline",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "selection_rule": "Maximum validation image macro-F1; equal-probability three-seed ensemble; cascade thresholds selected only on validation; external labels not read for selection.",
+  "selected": {
+    "flat": {
+      "group": "00_global_flat_h128",
+      "mode": "flat",
+      "config": {
+        "arch": "global",
+        "mode": "flat",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "seeds": 3,
+      "thresholds": null,
+      "val": {
+        "n": 374,
+        "accuracy": 0.7540106951871658,
+        "balanced_accuracy": 0.752500507769916,
+        "macro_f1": 0.7624944291610958,
+        "log_loss": 0.8066149353981018,
+        "recall": {
+          "infectious": 0.7588652482269503,
+          "noninfectious": 0.7528735632183908,
+          "normal": 0.7457627118644068
+        },
+        "confusion_matrix": [
+          [
+            107,
+            34,
+            0
+          ],
+          [
+            35,
+            131,
+            8
+          ],
+          [
+            3,
+            12,
+            44
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.7496647144475395,
+        0.7537208018834934,
+        0.7665569696566273
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/00_global_flat_h128/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/00_global_flat_h128/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/00_global_flat_h128/seed_2/model.pt"
+      ]
+    },
+    "cascade_i": {
+      "group": "02_global_cascade_i_h128",
+      "mode": "cascade_i",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_i",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "seeds": 3,
+      "thresholds": [
+        0.55,
+        0.5
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.7620320855614974,
+        "balanced_accuracy": 0.7655685019613045,
+        "macro_f1": 0.7630241362081556,
+        "log_loss": 0.588834285736084,
+        "recall": {
+          "infectious": 0.8156028368794326,
+          "noninfectious": 0.7183908045977011,
+          "normal": 0.7627118644067796
+        },
+        "confusion_matrix": [
+          [
+            115,
+            26,
+            0
+          ],
+          [
+            35,
+            125,
+            14
+          ],
+          [
+            3,
+            11,
+            45
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.7391513302131227,
+        0.7495933382886814,
+        0.7442473716074653
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_2/model.pt"
+      ]
+    },
+    "cascade_n": {
+      "group": "04_global_cascade_n_h128",
+      "mode": "cascade_n",
+      "config": {
+        "arch": "global",
+        "mode": "cascade_n",
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "wd": 0.01,
+        "epochs": 120,
+        "patience": 18
+      },
+      "seeds": 3,
+      "thresholds": [
+        0.55,
+        0.5
+      ],
+      "val": {
+        "n": 374,
+        "accuracy": 0.7459893048128342,
+        "balanced_accuracy": 0.7597488369650972,
+        "macro_f1": 0.7505550461393867,
+        "log_loss": 0.5654491782188416,
+        "recall": {
+          "infectious": 0.7872340425531915,
+          "noninfectious": 0.6954022988505747,
+          "normal": 0.7966101694915254
+        },
+        "confusion_matrix": [
+          [
+            111,
+            30,
+            0
+          ],
+          [
+            36,
+            121,
+            17
+          ],
+          [
+            3,
+            9,
+            47
+          ]
+        ]
+      },
+      "seed_macro_f1": [
+        0.7472942139847584,
+        0.7437024374802151,
+        0.7475635359756877
+      ],
+      "checkpoints": [
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/04_global_cascade_n_h128/seed_0/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/04_global_cascade_n_h128/seed_1/model.pt",
+        "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/04_global_cascade_n_h128/seed_2/model.pt"
+      ]
+    }
+  },
+  "best": {
+    "group": "02_global_cascade_i_h128",
+    "mode": "cascade_i",
+    "config": {
+      "arch": "global",
+      "mode": "cascade_i",
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "wd": 0.01,
+      "epochs": 120,
+      "patience": 18
+    },
+    "seeds": 3,
+    "thresholds": [
+      0.55,
+      0.5
+    ],
+    "val": {
+      "n": 374,
+      "accuracy": 0.7620320855614974,
+      "balanced_accuracy": 0.7655685019613045,
+      "macro_f1": 0.7630241362081556,
+      "log_loss": 0.588834285736084,
+      "recall": {
+        "infectious": 0.8156028368794326,
+        "noninfectious": 0.7183908045977011,
+        "normal": 0.7627118644067796
+      },
+      "confusion_matrix": [
+        [
+          115,
+          26,
+          0
+        ],
+        [
+          35,
+          125,
+          14
+        ],
+        [
+          3,
+          11,
+          45
+        ]
+      ]
+    },
+    "seed_macro_f1": [
+      0.7391513302131227,
+      0.7495933382886814,
+      0.7442473716074653
+    ],
+    "checkpoints": [
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_0/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_1/model.pt",
+      "/root/autodl-tmp/uveitis_threeclass_20261124/runs/convnext_320/baseline/02_global_cascade_i_h128/seed_2/model.pt"
+    ]
+  }
+}

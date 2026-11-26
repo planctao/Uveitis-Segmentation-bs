@@ -1,0 +1,20 @@
+{
+  "observed_at_utc": "2026-11-23T20:54:26.880178+00:00",
+  "option": "Retinal-domain DINOv2 pretraining rather than general-purpose DINOv2",
+  "official_repository": "https://github.com/rmaphoh/RETFound_MAE",
+  "models": [
+    {
+      "id": "YukunZhou/RETFound_dinov2_meh",
+      "revision": "6dff4c76632983267a6ae3000f7852b1f8667d9c",
+      "gated": "auto"
+    },
+    {
+      "id": "YukunZhou/RETFound_dinov2_shanghai",
+      "revision": "6008478ae74791515baa29c77fec2872e7cfd08e",
+      "gated": "auto"
+    }
+  ],
+  "access_observation": "Official repository requires account registration and form submission. Provider metadata confirms gated access; no existing HuggingFace token in this environment. No weights downloaded and no access agreement submitted.",
+  "decision": "Do not depend on this optional model; continue experiments with existing authorized DINO weights.",
+  "available_large_artifact_filesystem": "/autodl-fs has about313GB free; existing study still uses its isolated root and original dataset is untouched."
+}

@@ -1,0 +1,103 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "training_images": 1717,
+  "feature_protocol_sha256": "ff137767ce34ef1593f0b0e61b5281a5b411c4cb833b4c8f0d558a4c4826f400",
+  "rows": [
+    {
+      "stream": "mid_regions",
+      "standardized": {
+        "token_count": 9,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": 0.07728725683186281,
+        "mean_token_effective_rank": 5.927220182602406,
+        "median_token_effective_rank": 5.932295011613823,
+        "within_image_token_variance_per_dimension": 0.8187711033160094,
+        "between_image_token_mean_variance_per_dimension": 0.1812298078459705
+      },
+      "normal_projected": {
+        "token_count": 9,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": 0.05475354334451416,
+        "mean_token_effective_rank": 6.060521045309969,
+        "median_token_effective_rank": 6.062343554936208,
+        "within_image_token_variance_per_dimension": 0.6873128126450574,
+        "between_image_token_mean_variance_per_dimension": 0.09919878415725025
+      },
+      "normal_patient_pca32_explained_mean_variance": 0.7686175921855017,
+      "normal_patients": 111
+    },
+    {
+      "stream": "late_regions_control",
+      "standardized": {
+        "token_count": 9,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": 0.34224264685807165,
+        "mean_token_effective_rank": 4.8684687339828185,
+        "median_token_effective_rank": 4.873503100572409,
+        "within_image_token_variance_per_dimension": 0.575138413638314,
+        "between_image_token_mean_variance_per_dimension": 0.4244555361534506
+      },
+      "normal_projected": {
+        "token_count": 9,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": 0.2709527285341881,
+        "mean_token_effective_rank": 5.099896433790704,
+        "median_token_effective_rank": 5.098098885027115,
+        "within_image_token_variance_per_dimension": 0.49342343643903896,
+        "between_image_token_mean_variance_per_dimension": 0.19906871475584512
+      },
+      "normal_patient_pca32_explained_mean_variance": 0.816467323082582,
+      "normal_patients": 111
+    },
+    {
+      "stream": "registers",
+      "standardized": {
+        "token_count": 4,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": -0.16296513951810807,
+        "mean_token_effective_rank": 2.2289575682416367,
+        "median_token_effective_rank": 2.237126721109863,
+        "within_image_token_variance_per_dimension": 0.8731678511224275,
+        "between_image_token_mean_variance_per_dimension": 0.12683245616390726
+      },
+      "normal_projected": {
+        "token_count": 4,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": -0.17915226596446346,
+        "mean_token_effective_rank": 2.327380987824468,
+        "median_token_effective_rank": 2.331232133383685,
+        "within_image_token_variance_per_dimension": 0.7603259573326262,
+        "between_image_token_mean_variance_per_dimension": 0.06388846416550396
+      },
+      "normal_patient_pca32_explained_mean_variance": 0.80577612077094,
+      "normal_patients": 111
+    },
+    {
+      "stream": "quadrants_control",
+      "standardized": {
+        "token_count": 4,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": 0.4909329731274953,
+        "mean_token_effective_rank": 2.384384564456203,
+        "median_token_effective_rank": 2.372840788433355,
+        "within_image_token_variance_per_dimension": 0.3626952885521282,
+        "between_image_token_mean_variance_per_dimension": 0.6353581537916356
+      },
+      "normal_projected": {
+        "token_count": 4,
+        "dimension": 1536,
+        "mean_pairwise_token_cosine": 0.38345604214314416,
+        "mean_token_effective_rank": 2.3751735852979015,
+        "median_token_effective_rank": 2.366809513113271,
+        "within_image_token_variance_per_dimension": 0.33058290895833237,
+        "between_image_token_mean_variance_per_dimension": 0.3000841204060381
+      },
+      "normal_patient_pca32_explained_mean_variance": 0.8147728723074831,
+      "normal_patients": 111
+    }
+  ],
+  "classification_predictions_or_scores_read": false,
+  "external_images_or_outcomes_read": false,
+  "interpretation": "Descriptive fit-only token diversity and predefined normal-space geometry; no classification effectiveness or clinical causality inferred.",
+  "code_sha256": "146f74774d2a7d76bcf5b91516af75b432486e47acf9a43385d1d4b8b92b53f4"
+}

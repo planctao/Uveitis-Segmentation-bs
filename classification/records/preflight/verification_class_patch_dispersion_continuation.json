@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "case": "failed",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "startup_missing_pid",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "same_live_pid",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "changed_pid",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "missing_pid_after_startup",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "exited_worker",
+      "expected": "reject",
+      "passed": true
+    }
+  ],
+  "observer_has_no_original_worker_launch_path": true,
+  "code_sha256": {
+    "continue_class_patch_dispersion.py": "7f48be35fe0a7ffe9951225bd003fbaa4a258425d391dd3e8b552dcacfe6139f",
+    "verify_class_patch_dispersion_continuation.py": "0967c35ea7083d0ce682878ab5b3833438c87db12bbd407c80cb46c2f1ac67ea",
+    "continue_query_selection_after_mass_v2.py": "888e2dc3510fc8869973798939425364d738afb8411de9ac1cd38864cffaa45e"
+  },
+  "reused_identity_proof": "verification_query_selection_continuation_v2.json",
+  "reused_identity_proof_sha256": "f1fd1e85c639195cbbfdee716173989e90476f76c1aa039e600209abf62b6f13",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_images_read": 0,
+  "child_processes_started": 0,
+  "reused_wait_identity_rule": "Use the already-proven missing-startup-PID rule; no worker restart path.",
+  "scope": "Seven actual wait-loop cases only; the full original/completion/confirmation queue still requires its actual formal run."
+}

@@ -1,0 +1,102 @@
+{
+  "time_utc": "2026-11-23T21:19:12.440150+00:00",
+  "previous_goal_turn_classification": "progress",
+  "goal_remains_active": true,
+  "completed_this_goal_turn": {
+    "mirror_trainable_arms": 5,
+    "mirror_frozen_prediction_control": 1,
+    "mirror_new_head_seed_fits": 60,
+    "gaussian_original_fits": 48,
+    "gaussian_fixed_prediction_candidates": 12,
+    "gaussian_confirmation_new_head_seed_fits": 18,
+    "gaussian_confirmation_generative_fits": 36,
+    "gaussian_confirmation_gate_passed": true,
+    "new_external_candidates_frozen_before_scoring": 1,
+    "raw_image_inference_verified": true
+  },
+  "frozen_gaussian_accuracy": {
+    "test_independent": 0.8599752168525403,
+    "test_ningbo": 0.8720472440944882
+  },
+  "frozen_reference_accuracy": {
+    "test_independent": 0.8636926889714994,
+    "test_ningbo": 0.8700787401574803
+  },
+  "external_policy": "No external outcome was used to change a model configuration or choose another external candidate. Both frozen models retained; small external differences do not establish superiority.",
+  "new_artifacts": [
+    "results/research_mirror",
+    "results/research_gaussian_evidence",
+    "results/research_gaussian_repeat",
+    "results/milestone_gaussian",
+    "predict_frozen_gaussian.py"
+  ],
+  "next_steps": [
+    "Verify the live v3 LoRA run finishes and its registered finalizer audits all12 formal seeds. Re-poll actual processes; never restart because an observation expires.",
+    "If v3 has eligible adapters, audit conditional per-fold real-image models separately before any later promotion. If no eligible adapters, record negative result without external scoring.",
+    "Continue new train-only architecture hypotheses and the live continuous controller. Keep test outcomes out of all configuration and threshold selection.",
+    "Local free space remains limited; /autodl-fs is read-only. Optional retinal-domain DINO weights require gated access and no HF token is present; neither condition blocks existing DINO experiments. No old project/dataset files changed."
+  ],
+  "states": {
+    "continuous_search": {
+      "status": "running",
+      "pid": 22236,
+      "round": 303,
+      "completed_round": 302,
+      "completed_experiment_rounds": 302,
+      "proposal_iteration": 349881,
+      "legacy_proposal_iterations": 349843,
+      "feature": "multiscale_raw768",
+      "candidate_id": "d56848f22854",
+      "hypothesis": "Explore a less-tested family and change aux",
+      "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+      "time": "2026-11-24T05:18:49.549010+08:00",
+      "external_test_policy": "Never read or evaluate external results inside this loop.",
+      "observed_actual_process": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/continuous.py "
+    },
+    "lora_adaptation_v3": {
+      "status": "training",
+      "pid": 26914,
+      "group": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/lora_adaptation_v3/03_rank8_blocks4",
+      "seed": 2,
+      "epoch": 3,
+      "batch": 1,
+      "total_batches": 430,
+      "seconds": 101.82739758491516,
+      "observed_actual_process": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/lora_experiments_seeded.py "
+    },
+    "lora_v3_finalize": {
+      "status": "waiting_for_v3",
+      "pid": 31011,
+      "source_pid": 26914,
+      "next_action": "Audit all completed formal seeds and update the report; no external scoring.",
+      "observed_actual_process": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/complete_lora_v3.py "
+    },
+    "mirror_study": {
+      "status": "completed",
+      "pid": 27735,
+      "new_seed_fits": 60,
+      "passing_development_gates": 0,
+      "external_test_evaluated": false,
+      "observed_actual_process": null
+    },
+    "gaussian_evidence": {
+      "status": "completed",
+      "pid": 29209,
+      "generative_fits": 48,
+      "composite_candidates": 12,
+      "passing_development_gates": 2,
+      "external_test_evaluated": false,
+      "observed_actual_process": null
+    },
+    "gaussian_repeat_cv": {
+      "status": "completed",
+      "pid": 29647,
+      "new_mlp_seed_fits": 18,
+      "generative_fits": 36,
+      "confirmation_gate_passed": true,
+      "external_test_evaluated": false,
+      "observed_actual_process": null
+    }
+  },
+  "free_gb": 1.10362624
+}

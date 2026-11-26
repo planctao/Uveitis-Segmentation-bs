@@ -1,0 +1,36 @@
+{
+  "split": "Originaltrainonly",
+  "images": 1717,
+  "patient_groups": 332,
+  "patient_group_fingerprint": "0f5b580dddc43acd0474f74bb541914b9fabd059fae715fd704a1f94082207cd",
+  "features": "GlobalCLSonly; trainimagenormalization, patientmean, centeredGramalignment",
+  "class_labels_used": false,
+  "comparisons": [
+    {
+      "a": "base320",
+      "b": "large320",
+      "linear_patient_CKA": 0.8595034041952827
+    },
+    {
+      "a": "base448",
+      "b": "large448",
+      "linear_patient_CKA": 0.8718786444735712
+    },
+    {
+      "a": "base_dual",
+      "b": "large_dual",
+      "linear_patient_CKA": 0.881428229355356
+    },
+    {
+      "a": "base320",
+      "b": "base448",
+      "linear_patient_CKA": 0.9418308708168769
+    },
+    {
+      "a": "large320",
+      "b": "large448",
+      "linear_patient_CKA": 0.9727993960251815
+    }
+  ],
+  "interpretation_limit": "Descriptive alignment does not establish feature quality, causal complementarity or predictive gains; all predeclared arms still run unchanged."
+}

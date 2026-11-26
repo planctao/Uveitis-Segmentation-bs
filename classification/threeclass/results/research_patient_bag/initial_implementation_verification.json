@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "checks": [
+    "Independent NumPy mean/attention bag probabilities, fine marginalization and full weighted auxiliary loss verified",
+    "Permutation and within-bag score-shift invariance, singleton behavior and selected numerical score derivatives checked",
+    "Patient/class bag weights independently verified; complete group batches exactly cover all images once without splitting bags",
+    "Common initialization, train/eval predictions and RNG match M5 exactly; zero auxiliary loss exactly matches original task",
+    "Auxiliary supervision reaches quality router and shared encoder; all gradients finite",
+    "Dropping training-only quality head strictly restores original M5 single-image inference"
+  ]
+}

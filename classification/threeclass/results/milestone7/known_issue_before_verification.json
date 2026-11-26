@@ -1,0 +1,8 @@
+{
+  "created_at_utc": "2026-11-24T08:24:00.281433+00:00",
+  "status": "superseded_before_image_inference_verification",
+  "issue": "The rank-zero raw reference checkpoint contains normal_* buffers; MultiScaleLoRA builds an ordinary Model and requires those no-op buffers to be stripped before strict loading. Frozen original package and code retained without modification.",
+  "corrected_draft": "predict_normal_large_blend_v2.py",
+  "replacement_package": "results/milestone7_normal_large_blend",
+  "training_or_score_changes": false
+}

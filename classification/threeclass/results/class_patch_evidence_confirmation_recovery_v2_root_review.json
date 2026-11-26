@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "created_at_utc": "2026-11-25T09:41:08.315657+00:00",
+  "finding": "Original48fits and saved-output review completed. Original observer failed in mutable reporting refresh before fresh confirmation. Original frozen fresh starter then correctly refused insufficient shared space before any protocol or fit. Historical completed archive relocated byte-for-byte, preserving absolute logical paths. Retry the unchanged fresh starter through a new observer only.",
+  "original_completed_fits": 48,
+  "original_observer_pid": 12660,
+  "old_worker_and_observer_and_bridge_absent": [
+    12654,
+    12660,
+    14083
+  ],
+  "original_failed_state_and_logs_sha256": {
+    "runs/class_query_patch_evidence/state.json": "b0935a1bd9af7ebd451b88aaa3fee8802d8a18c21e273c10683882f648d0d2af",
+    "runs/class_patch_evidence_continuation/state.json": "51c69c204e6726162227cb09cb9ae7796d4908776db684c7785ac788676dbe19",
+    "class_patch_evidence_continuation.log": "a3a5435882b885f3496d2a5c2d4118691a639f7606df0eb4800500da298482e0",
+    "runs/dispersion_after_direct_patch_v2/state.json": "64c2a5bfec1a3d190aed4eee342ee6558ede455fd41855821421c965c8729135",
+    "dispersion_after_direct_patch_v2.log": "8f5b66f47c8c191e17b6636e700c01832ba7ddbc04dcfa2b210190ba7e842fa2",
+    "class_query_patch_evidence_confirmation_original_start_failure.log": "c248c9d8b14b0239177371689006b3edbfa3be0f0cc1cf7c529ade0e2118af79"
+  },
+  "selected_candidate": "class_query_pool_m8replace",
+  "eligible_candidates": 2,
+  "selected_checkpoints_checked": 12,
+  "original_fresh_protocol_absent_before_recovery": true,
+  "shared_free_bytes_before_launch": 2608947200,
+  "original_frozen_startup_guard_unchanged": true,
+  "original_worker_restarted": false,
+  "mutable_reporting_excluded_from_scientific_code": [
+    "integrity_reporting.py",
+    "refresh_recent_progress.py",
+    "report.py",
+    "write_latest_results.py"
+  ],
+  "code_modules_checked": 123,
+  "frozen_artifacts_checked": 3597,
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "model_predictions": 0,
+  "external_images_read": 0,
+  "scope": "Source/input/result byte and saved decision checks; no model/task replay or promotion. Fresh126fits/90witnesses still required."
+}

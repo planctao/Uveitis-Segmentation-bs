@@ -1,0 +1,40 @@
+{
+  "created_at_utc": "2026-11-24T13:17:33.575158+00:00",
+  "family": "register_common_mode",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "M8 pools four DINO-L registers with hidden-conditioned attention. Token diversity diagnostics suggest substantial shared content. Separate image-wise common register content from differential register content to test whether the residual should emphasize shared context or token differences. This is an architectural ablation of M8; no claim of research originality.",
+  "architecture_plan": "Same original normalL model, fit-only normalPCA32, hidden256 query32, key/value32, zero readout32->256 scaled .1, identical parameters/init/RNG. Four pooling choices: original attention exactM8control; uniform mean via zeroed logits preserving all gradient paths; attentive values minus unweighted value mean; original attention after subtracting each image token mean before tokenLayerNorm. No extra parameters or preprocessing fitted on stopping/outer patients.",
+  "configuration_plan": [
+    {
+      "name": "attention_control",
+      "kind": "attention_control"
+    },
+    {
+      "name": "uniform_mean",
+      "kind": "uniform_mean"
+    },
+    {
+      "name": "centered_values",
+      "kind": "centered_values"
+    },
+    {
+      "name": "centered_tokens",
+      "kind": "centered_tokens"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Each standalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL. Original M8 attention control must recover exact development decisions/metrics. If reference advances, preserve formula and use then-current gates.",
+  "geometry_plan": "Four original normalL and four register normal spaces plus all fit/stop/outer patient/near-duplicate plans frozen before all48 heads; exact historical M8 spaces. Same shared geometry for all four parameter-matched arms.",
+  "launch_condition": "Only score after base_token_evidence all48 fits/audits/fusions terminal and any required fresh confirmation/package/promotion decision terminal. Real256-image independent complete-task/all-gradient and four actual CUDA witnesses before classification; freeze then-current reference and every dependency.",
+  "selection": "OriginalCV strictly above current reference and validation>=current reference. Freeze highest eligible originalCV before two unused patient3fold repeats; higher sixfold meanF1 AND paired patient95%lower>0 vs EACH current reference/M8/M7/M6/M5/fixedGaussian. No automatic external testing.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_common_mode.json",
+  "protocol": "runs/register_common_mode/protocol.json",
+  "protocol_sha256": "19d124fa6c3a97c9829c06b799a28fb468562de42fb3c4db2a1843f58327811d",
+  "pid": 35341,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_common_mode/comparison.json"
+}

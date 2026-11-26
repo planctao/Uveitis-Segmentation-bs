@@ -1,0 +1,81 @@
+{
+  "created_at_utc": "2026-11-25T09:12:39.981059+00:00",
+  "family": "class_patch_dispersion",
+  "status": "preregistered_before_direct_patch_outcome",
+  "classification_fits": 0,
+  "scores_evaluated": 0,
+  "training_launched": false,
+  "current_predecessor_state": {
+    "status": "training",
+    "pid": 12654,
+    "arm": "source_query_pool",
+    "phase": "validation",
+    "seed": 1,
+    "external_test_evaluated": false
+  },
+  "evidence_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_reference_m8.json": "f51c3369a43d3b706479c48e13dec3a5c2c4248c155ae563310833f3d3d6dc74",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/protocol.json": "8006a8ec78f58dc292c8931a17f922d21c20c9589e67dbe1a548e8af4173af3e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_class_query_patch_evidence_model.json": "6062fe88ea813b17fd8460a4b14904c11527fe48b14c8845196e4dcbb83f4568",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_register_patch_query_bank.json": "f106c537b5b5067d21e6bd64e3e1296aad5d8177e02b1e9447bc1fd30dd3201c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/research_register_patch_attention_coupling/comparison.json": "a605cfedd91aa2cd8deb2c3a188e6e5efc79bf9d66ffaf5cec129087f4a364d1"
+  },
+  "hypothesis": "Per-head spatial feature dispersion may carry class information not represented by pooled mean values. Compare weighted log-variance evidence against the corresponding already preregistered uniform/source-query mean controls. This is a controlled statistical-moment hypothesis, not a novelty or causal claim; current direct mean-readout study outcomes unknown.",
+  "architecture_plan": "Reuse the original verified sharedtop64 finalblock K/V/query bank and original M8L classifier source per phase/seed. Freeze every source classifier parameter, normal geometry, statistics, register reader and DINO tail. Uniform weights1/64 or the SAME fixed source-query attention as direct mean controls. Let z=RMS-normalized V(eps1e-6). Compute mu=sum a*z and second=sum a*z^2 in float64; var=clamp(second-mu^2,min0); evidence=log1p(var) castfloat32. No new attention query/projection/variance normalization or fit statistics. The same zero readout[2,2,16,64]+bias[2] creates two pathology scores, shift2tanh, normalshift0, anchored float64 coarse update and perclass fine-logit shift. Both arms4098trainable parameters, exactly equal to their corresponding mean control; query learning excluded.",
+  "configuration_plan": [
+    {
+      "name": "uniform_variance",
+      "pooling": "uniform",
+      "statistic": "log_variance",
+      "matched_mean": "uniform_pool"
+    },
+    {
+      "name": "source_query_variance",
+      "pooling": "source",
+      "statistic": "log_variance",
+      "matched_mean": "source_query_pool"
+    }
+  ],
+  "control_policy": "Reuse corresponding completed direct-patch uniform/source mean controls, same12original sources, init/order20293500+seed and optimizer/stopping. Original controls are24existing trajectories, not24newfits. Verify their own actual-task/model/fusion audits and saved review first. No refitting original mean controls or using their selected weights to initialize variance model. All variance models initialize from original M8L sources.",
+  "fixed_training": {
+    "initialization_and_order_seed_base": 20293500,
+    "batch_size": 256,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "max_epochs": 60,
+    "patience": 12,
+    "gradient_clip_norm": 3.0,
+    "epoch_zero_eligible": true,
+    "task": "Unchanged complete original taxonomy task and fit-only patient weights; source eval; patient/duplicate-isolated original plans."
+  },
+  "planned_new_seed_fits": 24,
+  "reused_original_mean_control_trajectories": 24,
+  "predeclared_new_scores": 4,
+  "fixed_fusions": "StandaloneL and .1875rawB+.5625normalB+.25varianceL. Exactly corresponding standalone/fused mean controls; no weight or threshold search.",
+  "original_selection": "Each variance arm strictly higher originalCV than BOTH M8 and corresponding mean control, validationF1>=BOTH. Freeze highest eligible CV once among four declared scores. Never select by validation alone or reselection on fresh repeats.",
+  "confirmation_plan": {
+    "outer_seeds": [
+      20293801,
+      20293811
+    ],
+    "inner_seeds": [
+      20293824,
+      20293825,
+      20293826,
+      20293834,
+      20293835,
+      20293836
+    ],
+    "supervised_fits": 108,
+    "actual_task_witnesses": 72,
+    "geometry_fits": 18,
+    "generative_fits": 18,
+    "roles": "72freshsourceheads+18variancecandidate+18correspondingfixedmeancontrol, same original initialization/order; 36sourcewitnesses+36candidate/controlwitnesses.",
+    "gate": "Higher6foldmeanF1 and pairedpatient95%lowerCI>0 against EACH M8/M7/M6/M5/fixedGaussian AND corresponding fresh mean control; no fresh selection."
+  },
+  "preflight_plan": "Actual256trainingimage cases for bothpoolings and both mean/logvariance modes; exact parent reduction for mean, zero-source p/subtype/fulltask identity, nonzero fulltask allgradients independently recomputed, first-task input witnesses, exact constant-V variancezero and query/key/V jointposition permutation, constructed equal-means/differentvariance separation and nonnegativity/finite edges, frozenweights after one engineeringoptimizerstep pervariancearm, ordinaryCUDArestoreBITWISE. Actual original/fresh engine,108fit plan/control/gates and startup success/reject proofs required before any formalfit.",
+  "launch_condition": "Only after current direct-patch48+requiredconfirmation terminalnegative, saved-output review passed, retainM8; all dispersion proofs/plans/controls/inputs/code frozen. Positive predecessor requires root reference review. This preregistration launches no classifier.",
+  "external_test_policy": "Development-only selection; no automatic external scoring or reference promotion.",
+  "scientific_limits": "Standard weighted diagonal-variance pooling, not full covariance/lesionlocalization or universal architecture novelty. Perhead cachedpositions differ. Same trainable counts do not make mean and variance statistical representations identical. Meancontrols reused only for original comparisons; fresh control retrained. Engineering forwards/backwards/steps are not classifier performance evidence."
+}

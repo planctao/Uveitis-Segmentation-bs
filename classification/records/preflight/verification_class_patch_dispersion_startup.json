@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "guard_cases": [
+    {
+      "case": "reject_duplicate_original",
+      "expected_rejection": "AssertionError",
+      "message": "Never duplicate a formal study.",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_active_predecessor",
+      "expected_rejection": "AssertionError",
+      "message": "The predecessor must complete before any new fit.",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_duplicate_fresh",
+      "expected_rejection": "AssertionError",
+      "message": "",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_unselected_fresh",
+      "expected_rejection": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/coupling-startup-guard-1kv7f6p1/results/research_class_patch_dispersion/selection_before_repeat.json'",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_unselected_formula_review",
+      "expected_rejection": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/coupling-startup-guard-cvf7434t/results/research_class_patch_dispersion/selection_before_repeat.json'",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_unstarted_saved_review",
+      "expected_rejection": "AssertionError",
+      "message": "Only completed studies can be reviewed; study has not started.",
+      "no_process_launch_or_file_mutation": true
+    },
+    {
+      "case": "reject_active_saved_review",
+      "expected_rejection": "AssertionError",
+      "message": "Never read active checkpoints.",
+      "no_process_launch_or_file_mutation": true
+    }
+  ],
+  "code_sha256": {
+    "start_class_patch_dispersion.py": "1f0a65e7bc9d8782ae544eefae4958cfcd2b55014f4381e1e149ac46f04f128b",
+    "start_class_patch_dispersion_confirmation.py": "99d66a87d72ea9f926615aa683df314924ff63b19398b3e18e036df6f2237883",
+    "verify_class_patch_dispersion_confirmation.py": "ed18edb557205708b5028f14d5b685947e4cce8113cf4673cb813a67a4f17a44",
+    "review_class_patch_dispersion_outputs.py": "7afa5e22685e9ca87db28bdd7c9dbb2896d9bc15c5a92f454b85aec93c362e27",
+    "verify_class_patch_dispersion_startup.py": "c9928db331a8f99a3e4c579a274ac6452fcfd843252d2414cd702ab6b18eb782"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "model_predictions": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Only rejected startup paths tested. Does not claim the unstarted original/fresh/full saved-output workflow has run. Actual prediction/restore/full-task engine checks are recorded separately."
+}

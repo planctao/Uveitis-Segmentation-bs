@@ -1,0 +1,11 @@
+{
+  "created_at_utc": "2026-11-24T16:58:27.305309+00:00",
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false,
+  "original_preregistration": "results/register_patch_readout_adaptation_preregistration_before_value_joint_gated_outcomes.json",
+  "original_preregistration_sha256": "eebac8c08983beb5ff38eb8f7b50f36bd8a54040d986f3f5b450f25a2443a90c",
+  "purpose": "Before anyclassificationfit/score, strengthen the futurefreshconfirmation with a matchedhead-only control, so patch effects cannot be attributed to readout refinement alone. Architecture/training/originalselection unchanged; preserve originalpreregistration bytes.",
+  "confirmation_policy": "Ifselectedwinnerisreadout_only:72freshsources+18head-onlyadapters=90fits/54CUDAwitnesses. Ifjointpatch/readoutwinner:72freshsources+18selectedadapters+18matchedreadout-onlycontrols=108fits/72CUDAwitnesses. Both18normalspaces/6unusedpatientplans/18Gaussianfits. Samefreshsource, readoutinitialization/optimizer/task/stoprule/order forcontrol; rank4sharedpatchweights frozenzero. Applyselectedstandaloneor.25fusionweighttoBOTHcandidateandmatchedcontrol.",
+  "confirmation_gate": "SamehighermeanF1 andpairedpatient95%lowerCI>0 vsEACH M8/M7/M6/M5/fixedGaussian; forjointwinner ALSOrequire meanF1higher andpairedpatient95%lowerCI>0 vsmatchedreadout-onlycontrol. No reselection fromconfirmationresults, noautomaticexternal scoring."
+}

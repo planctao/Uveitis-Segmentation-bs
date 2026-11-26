@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "protocol_sha256": "a3f132fb569636aa9be28371516facd07e8c3118b76fee0ef730115b722daf51",
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "single_original_validation_images_checked": 3,
+  "reviewed_adapter_models_checked": 4,
+  "adapter_image_checks": 12,
+  "image_cases": {
+    "omitted_from_github_snapshot": true,
+    "count": 3,
+    "source_list_sha256": "5b986a3b6d9c60b108dd44a54a13fc5b3a08066b713011292a226736bc48144c"
+  },
+  "adapter_checks": {
+    "omitted_from_github_snapshot": true,
+    "count": 12,
+    "source_list_sha256": "2e40bdcacafa718b2c3fe25229aa6587cae7201fc94d9ccdac41b292317347fa"
+  },
+  "maximum_probability_error": 0.00013971328735351562,
+  "feature_tolerance": {
+    "atol": 0.05,
+    "rtol": 0.005
+  },
+  "single_image_probability_tolerance": {
+    "atol": 0.005,
+    "rtol": 0.01
+  },
+  "scope_limit": "Engineering robustness check on exactly3preselectedvalidationimages and4completedjointadaptercheckpoints, not an accuracy score or gain test. Probability tolerance is preregistered separately from the exact-batch check because one-image float16 kernels can select different near-tied top64 positions. No exact bank equivalence is claimed for different batch shapes. Other adapters and full validation inference need their own candidate-specific checks.",
+  "new_model_fits": 0,
+  "new_candidate_scores": 0,
+  "external_images_read": 0,
+  "external_test_evaluated": false,
+  "seconds": 27.238144874572754,
+  "code_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verify_research_patch_single_image.py": "6a1c3e74bfd14d3395e514c323a3e20cffdcd5066bd6cc07281d66d7e5eb3c57"
+  }
+}

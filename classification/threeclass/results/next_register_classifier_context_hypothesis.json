@@ -1,0 +1,41 @@
+{
+  "created_at_utc": "2026-11-24T14:17:45.513868+00:00",
+  "family": "register_classifier_context",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "Previously free three-query register models failed developmentgates. Test classifier-weight-conditioned tokenqueries with no additional queryparameters: the existing subtypeclassifier weights provide class/disease semanticcontexts to the same hiddenquery projection. Gradient-detached context controls distinguish semanticcontext from backpropagationcoupling. Preregister before projection-freezing outcomes. Standard classifier-context/attention ingredients; no originalityclaim.",
+  "architecture_plan": "Original normalL/base/sidePCA32/LN2048/keyvalue32/query256->32/zero32->256 .1residual/init/RNG/fulltask. Four equal-total/trainable-parameter arms: originalhiddenquery exactM8control; classcontextlinked; same classcontextdetached; diseasecontextbalanced. Classcontext average existing256D subtypeclassifierrows percoarseclass and LayerNorm each withoutaffine; query=Wq(LNhidden[:,None]+normalizedcontext). Each query attends fourregisters; average3coarsequeries beforeoriginalreadout. Detachedonly stops gradient into contextclassifierweights. Diseasecontext uses eachsubtypeweightrow asquerycontext, poolsqueries with weight1/(3*numberofdiseasesincoarseclass) so eachcoarseclass total1/3. No added trainablequery/classpositionalparameter.",
+  "configuration_plan": [
+    {
+      "name": "hidden_control",
+      "kind": "hidden_control"
+    },
+    {
+      "name": "class_linked",
+      "kind": "class_linked"
+    },
+    {
+      "name": "class_detached",
+      "kind": "class_detached"
+    },
+    {
+      "name": "disease_balanced",
+      "kind": "disease_balanced"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachstandalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL, originalM8control. Then-currentreferencegates; fixed coefficients.",
+  "geometry_plan": "FouroriginalnormalL/fourregisternormalPCA32spaces and allpatient/near-duplicate fit/stop/outerplans frozen before48fits; exact historicalM8geometry. No preprocessing adds stopping/outerpatients.",
+  "preflight_plan": "Fourreal256imagecomplete tasks/allparametergradients and actualCUDAwitnesses. Originalbaseinit/RNG/zeroresidualfulltask/basegradients unchanged; originalcontrol trainedweights/firstwitness/GPUstopprobabilities bitwiseidentical and freshCPUprobs existingtolerance withsame decisions/discretemetrics. Learnedreadout gradientoracle includes classifierweights through context in linkedarms, excludes onlycontextpath in detachedarm. Joint tokenpermutation invariant; diseasequeries invariant to joint subtypeclassifierrow/map permutation; classbalancedqueryweights independentlyrecovered. Querycontext nonzero connectivity and optimizerupdates/frozenbuffers/strictrestore.",
+  "launch_condition": "No classfits/scores until projection_freezing all48audits/24sources/16fusions and any required freshconfirmation/package/promotion decision terminal; allpreflights and then-current reference/code/artifactfreeze.",
+  "selection": "OriginalCV strictlyabove currentreference AND validation>=currentreference; freeze highestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_classifier_context.json",
+  "protocol": "runs/register_classifier_context/protocol.json",
+  "protocol_sha256": "6bcbc3a8c97bb38669a608ae568029395fce6f2581012f3a85cd0e665879302c",
+  "pid": 41108,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_classifier_context/comparison.json"
+}

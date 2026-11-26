@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "pid": 24638,
+  "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/verify_large_lastblock_delta_lora_cache.py\", line 45, in <module>\n    main()\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/verify_large_lastblock_delta_lora_cache.py\", line 27, in main\n    cache,metadata=build_cache(frame,ids,parent)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/miniconda3/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/uveitis_threeclass_20261124/large_lastblock_delta_lora_cache.py\", line 62, in build_cache\n    assert torch.isfinite(cache).all() and torch.isfinite(rope).all()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "classification_fits": 0,
+  "classification_scores": 0
+}

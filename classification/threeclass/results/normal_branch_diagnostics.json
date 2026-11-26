@@ -1,0 +1,31 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "scope": "Train images only, retained trained seed0 normal branch, equal patient-label means. In-sample descriptive diagnostic, no classification-generalization or lesion-localization claim. Uniform-region replacement is an input intervention, not a physiological causal experiment.",
+  "summary": {
+    "0": {
+      "attention_entropy": 0.9845252750021815,
+      "centered_spatial_energy": 0.4975375653548703,
+      "all_region_energy": 0.864786719403715,
+      "uniform_region_js": 7.060678489061982e-05,
+      "uniform_region_changes_prediction": 0.0027009728622631847
+    },
+    "1": {
+      "attention_entropy": 0.9921272079182336,
+      "centered_spatial_energy": 0.4919492382435632,
+      "all_region_energy": 0.7437097427237805,
+      "uniform_region_js": 0.00010888357942837965,
+      "uniform_region_changes_prediction": 0.0
+    },
+    "2": {
+      "attention_entropy": 0.9941170991690191,
+      "centered_spatial_energy": 0.48314214437096203,
+      "all_region_energy": 0.6443992900538136,
+      "uniform_region_js": 7.426463991498086e-06,
+      "uniform_region_changes_prediction": 0.0
+    }
+  },
+  "patient_label_groups": 386,
+  "images": 1717,
+  "code_sha256": "25a5893067285a7724d702bb2239eb984edec4928fa85953e920854a4ba3c004",
+  "external_test_evaluated": false
+}

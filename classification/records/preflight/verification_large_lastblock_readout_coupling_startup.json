@@ -1,0 +1,179 @@
+{
+  "passed": true,
+  "success_path_protocol_constructed_without_launch": true,
+  "protocol_preview": "runs/large_lastblock_readout_coupling_startup/protocol_preview.json",
+  "protocol_preview_sha256": "c92857eb99fc5afb3d3ce6748e7bb49f34129947c002b0e6966a157889a9b51e",
+  "actual_development_image_bytes_frozen": 2091,
+  "conditional_fresh_training_rows": 1717,
+  "conditional_fresh_static_cases": [
+    {
+      "replacement_weight": 0.25,
+      "patient_plans": 6,
+      "fit_stop_outer_counts": [
+        [
+          904,
+          241,
+          572
+        ],
+        [
+          852,
+          292,
+          573
+        ],
+        [
+          852,
+          293,
+          572
+        ],
+        [
+          865,
+          280,
+          572
+        ],
+        [
+          882,
+          263,
+          572
+        ],
+        [
+          965,
+          179,
+          573
+        ]
+      ],
+      "supervised_fits": 126,
+      "actual_tasks": 90,
+      "scored_arms": [
+        "reference",
+        "subspace",
+        "large",
+        "token",
+        "fixed_gaussian",
+        "attention_joint",
+        "token_joint",
+        "readout_only",
+        "m6",
+        "m7",
+        "m8",
+        "candidate",
+        "matched_token_joint",
+        "matched_readout_only"
+      ],
+      "scope": "Actual common conditional builder only; no candidate or outcome fabricated, no formal fresh launch."
+    },
+    {
+      "replacement_weight": 1.0,
+      "patient_plans": 6,
+      "fit_stop_outer_counts": [
+        [
+          904,
+          241,
+          572
+        ],
+        [
+          852,
+          292,
+          573
+        ],
+        [
+          852,
+          293,
+          572
+        ],
+        [
+          865,
+          280,
+          572
+        ],
+        [
+          882,
+          263,
+          572
+        ],
+        [
+          965,
+          179,
+          573
+        ]
+      ],
+      "supervised_fits": 126,
+      "actual_tasks": 90,
+      "scored_arms": [
+        "reference",
+        "subspace",
+        "large",
+        "token",
+        "fixed_gaussian",
+        "attention_joint",
+        "token_joint",
+        "readout_only",
+        "m6",
+        "m7",
+        "m8",
+        "candidate",
+        "matched_token_joint",
+        "matched_readout_only"
+      ],
+      "scope": "Actual common conditional builder only; no candidate or outcome fabricated, no formal fresh launch."
+    }
+  ],
+  "fresh_seed_inventory_records": 687,
+  "inherited_validation_filter_exercised_in_parent_and_saved_maps": true,
+  "conditional_fresh_storage_estimate": {
+    "historical_source_family": "class_query_patch_evidence_confirmation",
+    "source_file_layout": [
+      {
+        "arm": "reference",
+        "source_fits": 18,
+        "files_per_fit": 6,
+        "observed_bytes": 110802234
+      },
+      {
+        "arm": "subspace",
+        "source_fits": 18,
+        "files_per_fit": 4,
+        "observed_bytes": 87285163
+      },
+      {
+        "arm": "large",
+        "source_fits": 18,
+        "files_per_fit": 5,
+        "observed_bytes": 216893015
+      },
+      {
+        "arm": "token",
+        "source_fits": 18,
+        "files_per_fit": 5,
+        "observed_bytes": 535187995
+      }
+    ],
+    "observed_72source_bytes": 950168407,
+    "source_growth_allowance_bytes": 95016841,
+    "compact_54fit_budget_bytes": 56623104,
+    "metadata_reserve_bytes": 134217728,
+    "expected_training_products": 684,
+    "required_free_bytes": 1236026080
+  },
+  "pre_outcome_review_rules_sha256": {
+    "runs/large_lastblock_readout_coupling_saved_review/protocol.json": "89fe7952da35fc3250bf356e0e9e2f1cf82078d0602aa4eb56ef14e809eb9655",
+    "runs/large_lastblock_readout_coupling_fresh_saved_review/rule_before_outcome.json": "356bfc3fd0be0d60fb6eb6ef5ae2bd3fd5eb5760753cc34e7928059450cda389",
+    "runs/large_lastblock_readout_coupling_completed_root_review/rule_before_outcome.json": "a1cc4015e77d67125e5dccf1c7684339d108fea698bece46fc6997be94b201c9",
+    "runs/large_lastblock_readout_coupling_fresh_root_review/rule_before_outcome.json": "137884bc5647689dbec933d2f0213d4b403793455766a8dd1f4f3f290badfb9b"
+  },
+  "code_sha256": {
+    "start_large_lastblock_readout_coupling.py": "76ed954e104019e768dbbf27be524855cb3fcf8c16fda1ad127bdf7b881e401c",
+    "start_large_lastblock_readout_coupling_confirmation.py": "f360b5ad97c6dd2d2c235efe9d689ee8211cda20204b85913bff16e8f9dcdde9",
+    "verify_large_lastblock_readout_coupling_startup.py": "75a3eaaaabff3c75450e218837621dbe235faf291f492bf639047c1d078cc1a6",
+    "verify_large_lastblock_readout_coupling_confirmation.py": "44690addf68c82a22aa6aa807d6edbc6e9623b6c6c64d9ac2381c29e32e8f9a9",
+    "observe_large_lastblock_readout_coupling.py": "2936b8d7d85539c1e6aacee94ff127503d26cd8253e0ac386a07d540e730a6dd",
+    "review_large_lastblock_readout_coupling_outputs.py": "6c8e17846d2b3ba3013dc0f1e60e1e4b17c4622fd0feba63e0d2d3ddac462181",
+    "review_large_lastblock_readout_coupling_fresh_outputs.py": "08e58655b9344514539880bbc67e71e0ea2de7e041c384b08b48bf6fa494bea6",
+    "review_large_lastblock_readout_coupling_completed_root.py": "05f8eb4439113bdd1362b57e0d7e0f61a51c22fb377a0f43581cfcc41f8a4775"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "new_model_predictions": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Full original success-path protocol construction. Conditional fresh common real-data builder for both allowed weights and filter routing; selected-outcome formula preflight remains required after a real eligible result. No formal protocols or training created."
+}

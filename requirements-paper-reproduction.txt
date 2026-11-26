@@ -1,0 +1,12 @@
+# Add to the existing torch 2.5.1+cu124 / torchvision 0.20.1 environment.
+# Mamba 2.2.4 was compiled locally with CUDA 12.4 on Python 3.12:
+# python -m pip install --no-deps --no-build-isolation mamba-ssm==2.2.4
+# The standalone causal-conv1d extension is optional: spectral Mamba uses
+# equivalent PyTorch depthwise conv and the actual CUDA selective-scan backend.
+timm==1.0.22
+einops==0.8.2
+mamba-ssm==2.2.4
+transformers==4.46.3
+huggingface-hub==0.36.2
+tokenizers==0.20.3
+safetensors==0.8.0

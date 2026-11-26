@@ -1,0 +1,1453 @@
+{
+  "passed": true,
+  "actual_seed_heads_checked": 48,
+  "actual_training_witnesses_checked": 48,
+  "fits": [
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "7217422f307edabfd9d76d191b51b2c1e76439d9e4fdc71ab9f0c38220b3eabb",
+      "training_witness_sha256": "b70eec8c2eb18d9bd6bd95ec874f6409aa3ea8aa60f3c3e9a2b09b32e74b8069",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 1.293028617510572e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "c808b051fb532ded273894d82914b88de57b0680a5243ac6e05b556906e32b07",
+      "training_witness_sha256": "56093858259d07c86c331ea8e2c0548b357055efe926cdbb5c8684616ded56d5",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 3.1594936444889754e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "1e43dcd52c6d854b73db23535c199f133dddf5f3b77f296854d6c1c7801c225a",
+      "training_witness_sha256": "e7513fe7e7150fd6a5d306c4179a96291ad40be49025943d8b7174b86cd33d7e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 3.1115732213038427e-10,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "03d6b69c9097ec7df502e230c9269720a12858b9c3c41d05b97467b1ef36a397",
+      "training_witness_sha256": "2020a9becff70e5517a9dd70b2b853519b1c1a205cc648ddbc0eb692db1f2546",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 2.6266206987202168e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "7230a5a6052cab55894093b9d1b3a0385d5b794db9cffca72d9aae89a81dcdb8",
+      "training_witness_sha256": "9fefc11321ccdc1b2329af76628b381b3b30f19383179ee6f3d7dd228f854a55",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 1.4551915228366852e-11,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "787c4fbf86f2c7d67f7cea68900b97b42579d1e0ab6b474a08aeceae38e12c65",
+      "training_witness_sha256": "d4e8335fe11b1c3766bb9f60f397dee8b1867d15e6ded0c097d9dd97ae6fc4eb",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 2.636761564644985e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "cac6cc884949858a83947f2a01f3f92996d8123d371daca4a5519160cbced49d",
+      "training_witness_sha256": "350eca06b8946e35ed65c504fcc073ae9ae4c87cdfa57300b6639b38c64fb36b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 1.939179128385149e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "decef0072defa8d798909a5ce094b4cd6e08e60f55b2aca76fdbb9480545be73",
+      "training_witness_sha256": "5b6a31dd512cf5a5bd6f5e5fa7400fcefb0b2c9e2b81f6f3f568c3a8ef37bcaf",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 1.7973434296436608e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "d2d36e32ae3598090364754f738b5e73831baab6b3150b2a8aabf557c380852c",
+      "training_witness_sha256": "86f7dd1f69c0bff72f9c819db98c8628e6b9bbeff8aeb16f957699e167b477c9",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 3.1722265703137964e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "85fc8a40d1e693afb1f6d045f7f232d05af2a1bc5d1376a737f8132bda91c24b",
+      "training_witness_sha256": "ee0a8a5b205d474e341a88e7db77c573d0d88d0e1082c6224191b03605d29b74",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 3.072364052059129e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "64f806fa9b15cb46a8842bf87427cd765b579f6eceeaaab2d772e2280624ab99",
+      "training_witness_sha256": "c3342446f5a6fda684f76e1fc0b016645aa9addfa240c76ef2ee4114beb3ac5a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 3.394234227016568e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank4",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "572ed1e5238f4dfb04a2df9166b478df8d05adc4f44338a64c3e403e19f72e9f",
+      "training_witness_sha256": "d67daef6670246a441a6b343853f8254071a06d5791e076474d708c5d847fb0b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 8704,
+        "complete_task_gradient_error": 4.054527380503714e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "870ac9d5f1eb7fbd126b7b5eb958fad6a097a3d846d18c5c118a0ffd59ebbce7",
+      "training_witness_sha256": "f95587ef42954a30bfdf049938c514bda125625cb6aba029bfbeb0fdb9988576",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 5.154106474947184e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "e3b43e81e32d2aedf2a4883e510dd0d10b912d81ffec3b45433916e47f4063da",
+      "training_witness_sha256": "bc9c419be6346eb4e14df2cf916683feb8ab3dfe8ec6e833dcd1c7c545c1b311",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.7065758584067225e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "ac5328dd9fadf4710fef1ed1d4b7b4635283fc4434cedb88fd61e1175764c980",
+      "training_witness_sha256": "a280d92c3ee2d8bd0096772821c144909454603a1bb826297ca0d82e08eda214",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.9705126419466978e-10,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "c96c0258f332e74b659c8beeb5fc5ded9b58fd56e15307ff996843abd8c7ac0e",
+      "training_witness_sha256": "65a7cd8b4dc6bdde6013bb2dfd655d133867696e4cb8384e68d4bdf898a035b6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.2760210665874183e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "007a1a40b9f30e57c7b3ade5cad7f2dcd9823bbc261b9e1c97efd1a6e7479545",
+      "training_witness_sha256": "f88460db4e2fd6798c2565ea998b62f8493b2649a6ad3e462475252496f447ed",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 7.275957614183426e-12,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "6e8af146020b0a006a9010d59859ff8a8d59f14f32a9a8a9d747b7485f053089",
+      "training_witness_sha256": "a1286e631c17b70f52a74917e566d21fa43ec0db18e98ed8a0c55705b0196336",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 9.633367881178856e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "2a74a94493a4b193afcfe1ee18a398f91f8d724f5a743953b4a1ba1bba28f246",
+      "training_witness_sha256": "94d6b97c72a146ed6228b06735a0b578f6815455c53f72332251fd24f2d246cd",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 9.089035302167758e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "c5b8ae400bd94fe3cc7b048760413fed9ecc1ea92ec32b881ae5bf01682b3b33",
+      "training_witness_sha256": "a080b18a331d4b0f29416cb73fa40ef1f1f9bf62a99487a558c60ea37c18197e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.1966221791226417e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "8920ef210fc53df5bb9c9ede0ce773be8deb86ad7e9d64d0b27a8d3c6121c98f",
+      "training_witness_sha256": "4dc9c2683d1b5ebd58022f800c104e330eb8e2319b2e28fe2ce7727452b47114",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.1995780369034037e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "d611acb33da384738101ef8f0ca6b41e91d9c9f6d37eab255b0aea8a7da2de47",
+      "training_witness_sha256": "94237a73ba70317721719dd0ae02948b41ddc7044a8f1ffff4c503cae8ece41b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.0157236829400063e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "b014fd61ff9bcc2d0b19382a484f0e1b4b942efce4e44286e143a9365fe9b32a",
+      "training_witness_sha256": "9d0f846fed677722f8e1c35ce1d6b1ed846bf6adc7f7f66f725b58aaaa5f7de3",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 1.912303559947759e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank4",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "7a487818fe6fcff721c2c5f0fdb9efc805a4107fd8cb0dc380d11aa12b7b832e",
+      "training_witness_sha256": "95b3f06765fa910a2b3e2ef3f9b29b04ef1eba6ec2b12ec5e8aef314600fda6d",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 16384,
+        "complete_task_gradient_error": 2.5193003239110112e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "e6f8c8fdac3dafe100bc9b22ee3848e663a90dfe668a8af6b42ec562692f0536",
+      "training_witness_sha256": "7a9a18b9cd313673655a55ff39740cfda6b0c943377e154dd7e186b31fb70eb7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 1.313992470386438e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "30118c2d050af5563d46f2a3777c09523dd8b85cccb6737810953661f5f4a593",
+      "training_witness_sha256": "843ee2b13c3da197c9a0a04a5c0f4fd6a0e11988fbeb9bd6fcec4bd59e1491f9",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 3.7241989048197865e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "9d195844395db26ba2382f3b91ee51b1675a2cecc102dc67d1052fbf45a21445",
+      "training_witness_sha256": "00117e4b51b2524a33b8dd9fabbf303b1fe8226b116e23463efb6bd3eece1e35",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 3.1115732213038427e-10,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "649fa22a769bdb4b717e13b45aeadd20857b3619920ebaff76777510a3e63999",
+      "training_witness_sha256": "b1194b0cdfb6fa83398de15e9360a16cbbf15132aef24769a586044a88b57518",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 2.8194335754960775e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "cc7b96e71de8106ec05cf740f2a909f1ec859386af719f4dbd54805843bc3146",
+      "training_witness_sha256": "f2232c29ccb3d79c80e8755727ba0db9c680b789379db379f48adfb825ddd909",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 1.4551915228366852e-11,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "375e8c136eff3c1db9ad570fe0acc3aeae04940b4ee645663309ff0666012742",
+      "training_witness_sha256": "e5855f53fca4c4894e95aa6bf08b1bc2c7bc0edf88e344abc9183247fcff7c0b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 2.9125658329576254e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "d7350fd03019fafb3ec9de471f5094bd7b74fb92fc392410c6d5752b1788aa47",
+      "training_witness_sha256": "081594c063cefa8a242db1f8040d1d8c2679dd07e2c73c6b4afe27315e5c8b0c",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 1.9888830138370395e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "d526bae5b7d367b3094eba8acb694510de09d32ab32fee404a5da399f7d8cc28",
+      "training_witness_sha256": "aa4ef75e51a3e5209138dd94174db430e570d468cbb001c06ae69de03e3228d8",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 2.076285454677418e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "1dcde1a4ce1bd5e1e73ad0e45d90caaa5fc23dac2bf7e8365efaabf86c1e90d5",
+      "training_witness_sha256": "9673d80e55b9b79059d7db8c8d3cbbedf3a476316f8aa8700e74555c9d41da12",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 4.537878339760937e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "d02a75847e9f0cabf3c50761846370127c0a8a4a9b7c7ad9bf61981de06248ff",
+      "training_witness_sha256": "a599ae611f704c9db2d4668b279115625e9e9e3761adf0fb2e3f3b7f323542dd",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 3.4179720387328416e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "06ba6fb2aa5d36dd9f716a2cb8a262bcddfedcb2d100a634bb41d5da6597f989",
+      "training_witness_sha256": "1f080fc24960d74076433728a82354f0d3a629d01ac38e327be077eae20b9b9a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 3.394234227016568e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "shared_q_shared_v_rank8",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "e9ff9881bb3a361a69cd328cfcbc4bb278d61b7ed56a6c7ab5a2cde44cc21b8e",
+      "training_witness_sha256": "2095fb13f7c0eea1f37d88088c7378e0ff8df3b767e2e756fd454b28fd9828dd",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 17408,
+        "complete_task_gradient_error": 4.1254679672420025e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "007a173c16cc8d8068e0bd72823f809460668c0d094f20a56a9db24f98b5c9a3",
+      "training_witness_sha256": "a89136335edbbceb8461098ddefa8e27bd58e6abc725ef4ced6b9b846c4aaad0",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 9.813447832129896e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "d6056f9f1976866f040a49d254a8f974b5737d95b83a4f13c469f8ca69866ed1",
+      "training_witness_sha256": "a3585854284a3337842b4db4b80fc4df5be529f008977812f1a3e1bfb5f32f26",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.6102717381727416e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "16d70c51f836ee1d7075ec79bad8e12ff9381127ef5dc02cf52f075ec0a795ef",
+      "training_witness_sha256": "115cbd265f5c204224ee5c303306729942b337a1d41ae7c7ba54b507fc78903a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.6694556848051434e-10,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "1feec6b6acaf9efbda054771d0f96d84cfb8ef4d0ea368eac99d780db9e4a587",
+      "training_witness_sha256": "72d62a4e21c4ae8088a000ffda7f5e94ded138c9975e94b1e84d0e3894bade56",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.2811142369173467e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "78bfc7bfc542b172eb9b183c0581b55de6f44d66353c1fe8b3ad2c57752db3df",
+      "training_witness_sha256": "e10da91fcbb06a470b8846e0c53cef5272512dfba6760e65148db3843bc542c6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 7.275957614183426e-12,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "a45b960a0b4f0f2759bedc892de9e6d905de4149844132c05649e0b7afac40b8",
+      "training_witness_sha256": "1eee6f1d793772a7cfe012a6fb0c74a1d84ca5eea0b22fb0448a53a1458d04d2",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.809530658647418e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "eae0d3f5af14547b76c5a13f59428b5d71f5d3a87158feedb1f618d8b4f483c9",
+      "training_witness_sha256": "17af973770f31a2c472acab1f7bb5ecc21e2e21073224f6e432f62d8a3f165dc",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.5303612599382177e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "bf7b29a5efaf28724f07c997447631ca7b29d34b67dcce6e9d28b3522814dd80",
+      "training_witness_sha256": "c3a5af7f52ac1e85759d9fbefe6ebc54ea811b7bd9fa08f2d301e8e3cf0a60e6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.2736904864141252e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "9562b3b2a9a718c943a6aed273ed6ca3eaecd7715c292fb67a1a3877ab46ff91",
+      "training_witness_sha256": "aac7de7ba7ffcf72045f4bdcf0f6f611acb4ef96a505a5f11da15dcca564a383",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.7691945686237887e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "b42daeac2068a7c24908816d7bf1d4494b39b2f7d6d4207a3de1b8eba89a43af",
+      "training_witness_sha256": "ac724d4e55fdb0960c4469f0e82e088859c7de4316ce38dfdec2a54143ef3c91",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.4944816939532757e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "0adb1b3fc39d06b7b5d6ac28cb54f25bb13937075594a70dd06c34708992035a",
+      "training_witness_sha256": "02fecaab8a0dd8ccb1cab96ee07b8d866ffca69975b23bd1272a48e1ed84ab02",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 1.9237347714806674e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    },
+    {
+      "arm": "individual_q_perhead_v_rank8",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "f7db6dcabfae5a93998479f1c6490280cff3bc746fdc0653bc881f242e66ba4e",
+      "training_witness_sha256": "b123fb87916aa3301f116c72f898359e6f784c20b31ccecd27d4ae24215b30e0",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_up",
+          "down.weight",
+          "up.weight"
+        ],
+        "trainable_parameters": 32768,
+        "complete_task_gradient_error": 3.2114257919602096e-09,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_head_tail_verified": true
+      }
+    }
+  ],
+  "frozen_register_source_heads_checked": 12,
+  "register_source_heads": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_0/model.pt",
+      "checkpoint_sha256": "88908e7720d773ca409cb97dc5867c37a8c7fe1d9d603e84451717ee31cffe0d",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_1/model.pt",
+      "checkpoint_sha256": "a52186d034e677dbba0d3f23dd18932b90ea9d3275cd2c54476145129a568e1b",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_2/model.pt",
+      "checkpoint_sha256": "c7b1a119feef7625fecfa0c95c2bff7df6c6a52b8c6ffe5790cc2a340e2db230",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.3709068298339844e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "9b7ccc0ff541aab81c5fbfc7b82ffbd9e165a4690ed59284fa66aee7da3e66ee",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.6689300537109375e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "65bdabf2788de1725ebd6eebca5b62caabf4e0ac1f418c398486ddda22fb41a3",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8069986253976822e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "ac6b140edfa752188d270b5e006872f1c0b21f69e3de71954c6ff1b18c9e2f0f",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 2.384185791015625e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "d460a5fde0dcf8678752f660baadc59a5fe08cd244025a1853dc44ad5e5f1450",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9e66ace92226fbf456990dbfd0f95d48b960f140f3891d3e1a55e2c1394e32cd",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "dc3b99cd2d40c92ad66dd7e24264ff2ffff10453d3609d953f14447ff78ceb0a",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 9.313225746154785e-09,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "9846a7d151446a296fd59c8368aa8b4e8044027434b917bbb16e114e130efe00",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.30385160446167e-08,
+        "maximum_independent_forward_error": 1.430511474609375e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "5d1af37546c206295ef2c91c5023002821e40f26c5edb383553608cc40c63408",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "0aec793f23f304a3f9401f9554d9b17c50ff1dafa9ac1873ecda56e37e9103b4",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      }
+    }
+  ],
+  "reused_fusion_source_heads_checked": 24,
+  "source_heads": [
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_0/model.pt",
+      "checkpoint_sha256": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_1/model.pt",
+      "checkpoint_sha256": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_2/model.pt",
+      "checkpoint_sha256": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_0/model.pt",
+      "checkpoint_sha256": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_1/model.pt",
+      "checkpoint_sha256": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_2/model.pt",
+      "checkpoint_sha256": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "d88244e9531a4655ae5875f1272aefd22f54ff53995d84f810cc7e1135a513e5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "666e5f037ec2d0d3a9b66c7c532db4a3094ba99ef648ac2d510eb5641ccb2733"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "f0104ecdbec7e01c63be873d752661b15894687b6061e3d6aed459a112c74efe"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "069024b449b9c6854193bfa5bdade86a172f5e7f41eaa7a2cc87efc1e30400cf"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "5e590d0d5a4497c9d76a67862654972a7ed5c7072a21d3f4976d95e5b8b3c0fc"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "136a4335107a7cc456374b60c9d60a312a9d83ba7f9beb9884b8cb99f652a0b3"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "a9fb3bb0925b42b0385816cb181872f3d619167a7a8d845fd63692ed73aa8f54"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9ed0f89422d82e67dbc576957d1d7a8f5ed80812e27fd38c9ee23509ead42c3b"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "f7895a90c2ab390ed64a2977511cb8677b49617ba1fed30c0d33b301592836bd"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "b0e40a5f6fce2eecedb58fe7e443a9ba83ef20c1f043b925bc04a92da9bb6454"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "e660541eeeb5cbb705590b0f1bfb8f42cc40b2965a707c87d7be8f959e44501d"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "29f1bca70e7d266e3320fc260871f2191aa9cd82922016eafbef75a4ba24d6d5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "c8f49d4702a1a67d26b2b2afa7d0771affdfbb7a36883da37d560af6c35d7f77"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "dda695a36c462b1cc907fb0c48286a1c8e1f8a58d792553bfac180a06080a55f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "6aa8e8b77db8fbaae1ecd5e6941650339961cf0baaa8a2074cabee593a17ea73"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "b3132e295a018cad9923ba7348680ede91793e380bfbd3dcb3e4afd80e896f28"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "8841bab05304629b71ddf2b33c0eabda66d1a8da0d36a2fdabe307b75d780fd0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "a0eba0367ff8f7260e55b936e1d998a749688492cb75f0c2a8b3bcfcca6c0341"
+    }
+  ],
+  "fixed_fusion_phases_checked": [
+    {
+      "source": "shared_q_shared_v_rank4",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "shared_q_shared_v_rank4",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "shared_q_shared_v_rank4",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "shared_q_shared_v_rank4",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "individual_q_perhead_v_rank4",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "individual_q_perhead_v_rank4",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "individual_q_perhead_v_rank4",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "individual_q_perhead_v_rank4",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "shared_q_shared_v_rank8",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "shared_q_shared_v_rank8",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "shared_q_shared_v_rank8",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "shared_q_shared_v_rank8",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "individual_q_perhead_v_rank8",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "individual_q_perhead_v_rank8",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "individual_q_perhead_v_rank8",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "individual_q_perhead_v_rank8",
+      "phase": "fold_2",
+      "images": 573
+    }
+  ],
+  "only_joint_adapters_trained": true,
+  "external_test_evaluated": false
+}

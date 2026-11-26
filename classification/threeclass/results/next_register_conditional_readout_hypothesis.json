@@ -1,0 +1,42 @@
+{
+  "created_at_utc": "2026-11-24T14:54:01.383388+00:00",
+  "family": "register_conditional_readout",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "M8 registerevidence currently adds a256D readout shift to the hidden representation. Test whether the same existingreadout should instead modulate hiddenchannels, without adding trainableparameters. Earlier normalL-to-B FiLM failed and is retained; this is a distinct originalM8 register-to-L intrabranch conditionalreadout with exactcontrol and boundedadd ablation. Standard gatedresidual/multiplicativeconditioning ingredients, no originalityclaim. Preregister before recurrentrefinement outcomes.",
+  "architecture_plan": "Exact originalnormalL/base/sidePCA32/LN2048/keyvalue32/query256->32/zero32->256/init/RNG/fulltask. Let u=existingreadout(originalregisterattentionpool) and z=LayerNorm(hidden256) with noaffine eps1e-5. Four equal-total/trainable-parameter arms: control delta=.1u originalM8; boundedadd delta=.1tanh(u); multiplicative delta=.1tanh(u)*z; hybrid delta=.1tanh(u)*(1+z)/sqrt2. No new parameters. Originalquery/key/value route remains, only readout application changes. Zero readout gives exactoriginalbaseoutput/task/basegradients; modifiedreadout gradients need not equal M8 and must be independentlyverified. Existing normalL-to-B FiLM is not repeated or claimedpositive.",
+  "configuration_plan": [
+    {
+      "name": "control",
+      "kind": "control"
+    },
+    {
+      "name": "bounded_add",
+      "kind": "bounded_add"
+    },
+    {
+      "name": "multiplicative",
+      "kind": "multiplicative"
+    },
+    {
+      "name": "hybrid",
+      "kind": "hybrid"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Eachstandalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL, originalM8control. Then-currentreferencegates; fixedcoefficients.",
+  "geometry_plan": "FouroriginalnormalL/fourregisternormalPCA32spaces and allpatient/near-duplicate fit/stop/outerplans frozenbefore48fits; exact historicalM8geometry. No preprocessing adds stopping/outerpatients.",
+  "preflight_plan": "Fourreal256image complete tasks/allparametergradients andactualCUDAcompactwitnesses. Independentreadout/tanh/affinefreehiddenLayerNorm/factors and allgradients with nonzero learnedreadout; no detaching hiddenfactor. Originalbaseinit/RNG/zeroreadouttask/basegradients exact; originalcontrol trainedstate/GPUstopprobs exact and allretainedwitnessarrays originalbits, omittedraw/projectedarrays originalSHA256. ExistingCPUtolerance plus samedecisions/discretemetrics. Independent normalization/readoutfactor traces, perimageconstant hidden forces zero multiplicativefactor; tokenpermutation, hiddenqueryconnectivity, optimizerupdates/frozenbuffers/strictrestore.",
+  "compact_witness_plan": "Use frozen compact_token_witness.py unmodifiedbasefulltask; completegradientvector and allsmallarrays retained, trainingtimeSHA256/dtype/shape for rawglobal/rawside/projectedtokens; independently rebuild rawfeatures and originalCUDA bitwiseforward beforefunctionaloracle. No tolerancechange.",
+  "launch_condition": "No classificationfits/scores until recurrent all48audits/24sources/16fusions and any required freshconfirmation/package/promotion decision terminal; allpreflights and then-currentreference/code/artifactfreeze.",
+  "selection": "OriginalCV strictlyabove currentreference AND validation>=currentreference; freezehighestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 vsEACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_conditional_readout.json",
+  "protocol": "runs/register_conditional_readout/protocol.json",
+  "protocol_sha256": "3a84b03e39d897079fc17ccea0f256d74ab18f5b1cdeb1f0e245baf7f2d91cba",
+  "pid": 43770,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_conditional_readout/comparison.json"
+}

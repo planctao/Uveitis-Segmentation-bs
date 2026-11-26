@@ -2,11 +2,13 @@ import pytest
 import torch
 
 from scripts.evaluate_ensemble_postprocess import (
+    RawThresholdSweep,
     parse_member,
     parse_weights,
     validate_member_configs,
     weighted_ensemble_logits,
 )
+from bs.multilabel import PaperDice
 
 
 def _config(image_size: list[int] | None = None) -> dict:
@@ -70,3 +72,34 @@ def test_weighted_ensemble_logits_rejects_bad_channel_weight_shape() -> None:
 
     with pytest.raises(ValueError, match="Per-channel weights"):
         weighted_ensemble_logits([logits_a, logits_b], [[0.5, 0.5, 0.0]], "prob")
+
+
+def test_raw_threshold_sweep_matches_individual_paper_dice_metrics() -> None:
+    logits = torch.tensor(
+        [
+            [
+                [[-2.0, 0.0], [1.0, 3.0]],
+                [[3.0, 1.0], [0.0, -2.0]],
+            ]
+        ]
+    )
+    mask = torch.tensor([[[0, 1], [2, 255]]])
+    thresholds = [0.25, 0.5, 0.75]
+
+    sweep = RawThresholdSweep(thresholds, ignore_index=255)
+    sweep.update(logits, mask)
+    result_by_threshold = {
+        tuple(row["threshold"]): row for row in sweep.summarize()["results"]
+    }
+
+    for threshold_1 in thresholds:
+        for threshold_2 in thresholds:
+            metric = PaperDice(ignore_index=255, threshold=[threshold_1, threshold_2])
+            metric.update(logits, mask)
+            expected = metric.compute()
+            actual = result_by_threshold[(threshold_1, threshold_2)]
+            assert actual["paper_dice_1"] == pytest.approx(expected["paper_dice_1"])
+            assert actual["paper_dice_2"] == pytest.approx(expected["paper_dice_2"])
+            assert actual["paper_macro_dice"] == pytest.approx(expected["paper_macro_dice"])
+            assert actual["paper_pred_pixels_1"] == expected["paper_pred_pixels_1"]
+            assert actual["paper_pred_pixels_2"] == expected["paper_pred_pixels_2"]

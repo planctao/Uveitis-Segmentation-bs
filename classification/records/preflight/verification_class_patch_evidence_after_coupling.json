@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "negative_terminal",
+      "expected": "negative",
+      "passed": true
+    },
+    {
+      "case": "positive_terminal",
+      "expected": "positive",
+      "passed": true
+    },
+    {
+      "case": "live_same_observer",
+      "expected": "wait",
+      "passed": true
+    },
+    {
+      "case": "changed_pid",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "exited_observer",
+      "expected": "reject",
+      "passed": true
+    },
+    {
+      "case": "failed_observer",
+      "expected": "reject",
+      "passed": true
+    }
+  ],
+  "code_sha256": {
+    "continue_class_patch_evidence_after_coupling.py": "49eac5269dd8999c5f41593c7884bc6542babdcdde8d13998a8e8df40159ce0d",
+    "verify_class_patch_evidence_after_coupling.py": "c6d9ef1e99a5ca1124ebe14eacf45cc75a029047ef960b3d24e191b266b5b123"
+  },
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "child_processes_started": 0,
+  "external_images_read": 0,
+  "scope": "Six pure predecessor-decision checks only. The full queue runtime awaits a terminal predecessor and the actual formal study."
+}

@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "phase": "validation",
+      "images": 374,
+      "maximum_formula_error": 5.960464477539063e-08
+    },
+    {
+      "phase": "fold_0",
+      "images": 572,
+      "maximum_formula_error": 5.960464477539063e-08
+    },
+    {
+      "phase": "fold_1",
+      "images": 572,
+      "maximum_formula_error": 5.960464477539063e-08
+    },
+    {
+      "phase": "fold_2",
+      "images": 573,
+      "maximum_formula_error": 5.960464477539063e-08
+    }
+  ],
+  "candidate": "class_query_pool_m8replace",
+  "replacement_weight": 0.25,
+  "new_seed_fits": 0,
+  "classification_scores_evaluated": 0,
+  "external_test_evaluated": false,
+  "purpose": "Recover the already frozen selection formulas; retain the exact adapter trainer and independent first-task auditor for fresh warmstarts.",
+  "architecture_preflight_sha256": "6062fe88ea813b17fd8460a4b14904c11527fe48b14c8845196e4dcbb83f4568",
+  "input_artifact_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/predictions.npz": "633633bc936d1d9730b2ef7868adc2518824f8cdb28d47059be85e24f9dcdbee",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/predictions.npz": "4e1f0bbbb889a1d870cf48dff3147882b7cc846f2aad11b3bc312794b47c8c5f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/validation/predictions.npz": "4d72712205b6c23c052c8a1486368726df748885ab4b9201f2c4cf8ab7710f5a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/predictions.npz": "3fb6814118b33c16f33dfc5fc601ab32e2d172bd511a9f7f9e1bee10e9156664",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool/validation/predictions.npz": "c68eaf13f7332ff45dcd707d9a9febff7eb564cb7251b52c5a858f656092b88e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool/validation/predictions.npz": "f4aaa890db191e6cce960b89d0c05cf49afd7315eb512ecf9499e6033addf13b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool/validation/predictions.npz": "c68eaf13f7332ff45dcd707d9a9febff7eb564cb7251b52c5a858f656092b88e",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool_m8replace/validation/predictions.npz": "7776db28235ee2eef76490456066484b3bb4522f0d6da71b37aba108ba8fac39",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/validation/predictions.npz": "79b67f3409e0701694acc0db5d874796f52820865b4b13d1f75a69583e6d9ff3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool_m8replace/validation/predictions.npz": "7bbec920360c87a2f2bcbd4f79ebc7c019396b14762464ec84244518a6ac33e4",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool_m8replace/validation/predictions.npz": "7776db28235ee2eef76490456066484b3bb4522f0d6da71b37aba108ba8fac39",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/predictions.npz": "40e9a0f496ae6f1b8f6fdc791ed825aa97b97268455cdcba87d08527f7668643",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/predictions.npz": "c820281330e81a4d3cf16095deb09f449d36dab677e02a00dc36bf37b0a1a931",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/fold_0/predictions.npz": "de718a6ac27b6cc4b84181d87fa59242e046bfdd17eadf10aa1340ee568ac2f9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/predictions.npz": "9077f2c381054ef07ab96f144d83522caf6945c7d4c3b4230f398cf30f04c27b",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool/fold_0/predictions.npz": "4ac263fd49e944be8b9b20711b3ca98de3d33e1010e1ce6c1c891dfefe2adbb8",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool/fold_0/predictions.npz": "d9c774ff1a53583c08f736c4a0c58fcb18eae29c45213a935f159b5dbcdd94dc",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool/fold_0/predictions.npz": "7a96339d4ae37feebd862f57ca56c860692f87e21d56f83e5932947690949681",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool_m8replace/fold_0/predictions.npz": "abb267b87f77b58f7c7e412b5d0696ea047f4e0011d041c09817e30a8b66d9c6",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_0/predictions.npz": "822dcfc4515a24425b72ee5f64ae2ac5def9ac8550d7029656fb6977632e2e0f",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool_m8replace/fold_0/predictions.npz": "7f5576953bb4cdd9c4de6570e18b60cfc263f420645839f65b53fe891227272a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool_m8replace/fold_0/predictions.npz": "13e8cb1d980f133035d9042bd75ad56ba93ebee20336c59d4718094c4e4b2632",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/predictions.npz": "05fd8a34648bf5eb6db6313e9933fd57ef84508efedb068ceb42a1958cca9ec9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/predictions.npz": "011ef53c43092ea827fa21ead64609c042ba03e8d913b98d09c4ddc099d32b79",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/fold_1/predictions.npz": "43faf9fc4574375c225266d03f805de7b92082f3d3cba7b11f9c73decb7145a0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/predictions.npz": "2c2a6484b2063860e4cd14e5f9be37492a09867ff0df909e2ca21c8e38aa0f10",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool/fold_1/predictions.npz": "4125f7dc1551ba52a6b09b50fe304b91c7a42b0a3a31cd9c5522d5cf0b82343c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool/fold_1/predictions.npz": "be7416ae5b7ecb3a7d5b243a967417d588f145b8e81ce4a3f86f48cb507dbcc8",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool/fold_1/predictions.npz": "aac05df5801a58cfdb9847771a55f5d5e5158440c7b00ce543e45c3830735e05",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool_m8replace/fold_1/predictions.npz": "9bb996c21b4d2424fb6311e0df74dd552900d7d6e3af27cb83e75de45c2296e0",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_1/predictions.npz": "6d36e7eb2625d2ad716f6f0628383d679da85467f1dd07836131ce012f604341",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool_m8replace/fold_1/predictions.npz": "89afff13c26729807a28d3e94d9bae38df8dd41e231a06b38d904f3d548d19db",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool_m8replace/fold_1/predictions.npz": "6e056fc966e31ffa62cc1a9993a8ce4e51cbc4ae4270a14507bf0b578c91e19d",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/predictions.npz": "c6c036ed5c08e4562271608dfbd1ee9b798f65162697b7bad6f641a690057bd5",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/predictions.npz": "fc71b365bb9bdfa4097a712a807af145d4d3ed5e54023f961fda7fb18a43eab1",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_large_reference/large_dual/fold_2/predictions.npz": "ba07f8eb260bb1a89d0963b573bdb8b8bb70a16a873cf934cb44712d2c2069cd",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/predictions.npz": "84d60fd4bd2c7b4a984e8b4da97c8ff3d1d400b5525db83dcaddf51e17208852",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool/fold_2/predictions.npz": "f27aa2aec6d43f31643f01c01b50782d13d8e73b0605e118934469ff21c6480a",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool/fold_2/predictions.npz": "c7f68b2a146cca93c3c618dce6ab8f5cfeca75b94455f5d604985847ec4b40b3",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool/fold_2/predictions.npz": "eb831b44d4717d32fcb6ab3f46a97b8611b2c21777d9968362fd4206eafd9365",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/class_query_pool_m8replace/fold_2/predictions.npz": "a0344192c5a92e3553c68e5758ea85740409cd99c26d86ebdf202268b8f432a9",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers_m7replace/fold_2/predictions.npz": "91d3c6b8ccbc165f1289196148895134a802b98fedae950b8075e37c6847ade2",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/uniform_pool_m8replace/fold_2/predictions.npz": "08dee90b18e14e89d34082c25a647a0d6549c6398b8dd3df0b428dbfe0885eba",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/class_query_patch_evidence/source_query_pool_m8replace/fold_2/predictions.npz": "86ef25496820679472f3bea7f00df825e2d3411356793151ddf8f0a7a9d6d378"
+  },
+  "code_sha256": {
+    "class_query_patch_evidence_confirmation.py": "664f32f62377bdbff7b97f8157d856748cff1735d23bccae0e159b5411f59084",
+    "verify_class_query_patch_evidence_confirmation.py": "6db910a5576950f25caec7bd00720d1ee5562e41e258d38f81664a9eda8b8878",
+    "class_query_patch_evidence_experiments.py": "a878ae8153da62eb41fefda52fc61f5398b67f36256e2fbad985253143df7450",
+    "class_query_patch_evidence_witness.py": "c102ffb5d1d662f53e8c8e75fbdc6536ce75ef55dd016e8606588dfd26608400"
+  }
+}

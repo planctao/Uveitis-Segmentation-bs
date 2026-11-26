@@ -62,30 +62,32 @@ def geometry_for(repeat, fold):
     assert np.array_equal(result['subspace']['normal_patients'], result['large']['normal_patients'])
     assert np.array_equal(result['large']['normal_patients'], result['token']['side_normal_patients'])
     for arm in ['token', 'multistream']:
-        for name, value in result['large'].items(): assert np.array_equal(value, result[arm][name])
+        base_arm = 'subspace' if arm == 'multistream' and 'side_tokens' in CANDIDATE_SIDES and result[arm]['side_center'].shape == (1536,) else 'large'
+        for name, value in result[base_arm].items(): assert np.array_equal(value, result[arm][name])
     for name in CANDIDATE_SIDES:
         assert np.array_equal(result['large']['normal_patients'], result['multistream'][side_key(name, 'normal_patients')])
     final_name = 'final_registers' if 'final_registers' in CANDIDATE_SIDES else 'side_tokens' if 'side_tokens' in CANDIDATE_SIDES else 'register_tokens'
-    for suffix in ['center', 'basis', 'eigenvalues', 'normal_patients']:
-        assert np.array_equal(result['token']['side_'+suffix], result['multistream'][side_key(final_name, suffix)])
+    if result['multistream'][side_key(final_name, 'center')].shape == result['token']['side_center'].shape:
+        for suffix in ['center', 'basis', 'eigenvalues', 'normal_patients']:
+            assert np.array_equal(result['token']['side_'+suffix], result['multistream'][side_key(final_name, suffix)])
     return result
 
 
 def combine(predictions, replacement_weight, independent=False):
     averaged = {arm: np.mean(values, axis=0) for arm, values in predictions.items()}
     raw, normal, large, token, candidate = [averaged[k] for k in ['reference', 'subspace', 'large', 'token', 'multistream']]
-    assert replacement_weight in [.25, 1.]
+    assert replacement_weight in [.25, .5625, 1.]
     if independent:
         raw, normal, large, token, candidate = [v.astype('float64') for v in [raw, normal, large, token, candidate]]
         averaged['m6'] = (.25*raw+.75*normal).astype('float32')
         averaged['m7'] = (.1875*raw+.5625*normal+.25*large).astype('float32')
         averaged['m8'] = (.1875*raw+.5625*normal+.25*token).astype('float32')
-        averaged['candidate'] = (.1875*raw+.5625*normal+.25*candidate).astype('float32') if replacement_weight == .25 else candidate.astype('float32')
+        averaged['candidate'] = ((.1875*raw+.5625*normal+.25*candidate) if replacement_weight == .25 else (.1875*raw+.5625*candidate+.25*token) if replacement_weight == .5625 else candidate).astype('float32')
     else:
         averaged['m6'] = (.25*raw+.75*normal).astype('float32')
         averaged['m7'] = (.75*averaged['m6']+.25*large).astype('float32')
         averaged['m8'] = (.75*averaged['m6']+.25*token).astype('float32')
-        averaged['candidate'] = (.75*averaged['m6']+.25*candidate).astype('float32') if replacement_weight == .25 else candidate.astype('float32')
+        averaged['candidate'] = ((.75*averaged['m6']+.25*candidate) if replacement_weight == .25 else (.1875*raw+.5625*candidate+.25*token) if replacement_weight == .5625 else candidate).astype('float32')
     return averaged
 
 
@@ -111,6 +113,8 @@ def restore_fold(frame, feature_sets, digest, protocol, repeat, fold, full_audit
             if full_audit and arm == 'multistream' and protocol['family'] == 'register_position_calibration':
                 for name in ['position_mean', 'position_scale', 'position_global_mean']:
                     assert np.array_equal(c['state_dict'][name].numpy(), geometry[name])
+            if full_audit and arm == 'multistream' and protocol['family'] == 'register_static_context':
+                assert np.array_equal(c['state_dict']['position_mean'].numpy(), geometry['position_mean'])
             if full_audit and arm == 'multistream' and protocol['family'] == 'register_geometry':
                 for name in ['register_joint_center', 'register_joint_basis', 'register_position_center', 'register_position_basis']:
                     assert np.array_equal(c['state_dict'][name].numpy(), geometry[name])
@@ -160,7 +164,7 @@ def run():
     protocol = json.loads((OUT/'protocol.json').read_text()); verify_frozen(protocol)
     selected = json.loads((ROOT/protocol['selection_record']).read_text())['candidate']
     assert selected['candidate_id'] == protocol['selected_candidate']
-    architecture_key = {'large_token_interaction':'token_pair_configuration', 'large_token_cross_attention':'token_cross_configuration', 'register_depth':'register_depth_configuration', 'register_multiquery':'register_multiquery_configuration', 'register_position_calibration':'register_position_calibration_configuration', 'register_geometry':'register_geometry_configuration'}[protocol['family']]
+    architecture_key = {'large_token_interaction':'token_pair_configuration', 'large_token_cross_attention':'token_cross_configuration', 'register_depth':'register_depth_configuration', 'register_multiquery':'register_multiquery_configuration', 'register_position_calibration':'register_position_calibration_configuration', 'register_geometry':'register_geometry_configuration', 'base_token_evidence':'base_token_evidence_configuration', 'register_common_mode':'register_common_mode_configuration', 'register_cosine':'register_cosine_configuration', 'register_scale_factorization':'register_scale_factorization_configuration', 'register_static_context':'register_static_context_configuration', 'register_projection_freezing':'register_projection_freezing_configuration', 'register_classifier_context':'register_classifier_context_configuration', 'register_routing_information':'register_routing_information_configuration', 'register_recurrent_refinement':'register_recurrent_refinement_configuration', 'register_conditional_readout':'register_conditional_readout_configuration'}[protocol['family']]
     assert selected[architecture_key] == protocol['selected_configuration']['architecture']
     frame, large, tokens, digest = load_all(); _, base, base_digest = load_data('multiscale_vit')
     assert digest == base_digest == protocol['manifest_sha256']
@@ -172,7 +176,14 @@ def run():
         assert depth_digest == digest and depth_frame.equals(frame)
         assert np.array_equal(multistream_features['final_registers'][:2091], tokens['registers'][:2091])
         for key in KEYS: assert np.array_equal(multistream_features[key][:2091], large[key][:2091])
-    elif protocol['family'] in ['register_multiquery', 'register_position_calibration', 'register_geometry']:
+    elif protocol['family'] == 'base_token_evidence':
+        from base_token_data import load_all as load_base_tokens
+        base_frame, candidate_base, base_tokens, candidate_digest = load_base_tokens()
+        assert candidate_digest == digest and base_frame.equals(frame)
+        for key in KEYS: assert np.array_equal(candidate_base[key][:2091], base[key][:2091])
+        multistream_features = {**candidate_base, 'side_tokens': base_tokens[selected['config']['token_evidence_stream']]}
+        del base_tokens
+    elif protocol['family'] in ['register_multiquery', 'register_position_calibration', 'register_geometry', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout']:
         multistream_features = token_features
     else:
         multistream_features = {**large, 'mid_tokens': tokens['mid_regions'], 'register_tokens': tokens['registers']}
@@ -194,16 +205,16 @@ def run():
             normalized, _ = normalize({'side_tokens': token_features['side_tokens']}, fit)
             token_geometry = {**geometry, **fit_side_geometry(tf, normalized['side_tokens'][fit])}
             np.savez_compressed(folder/'token_geometry.npz', **token_geometry)
-            pair_geometry = dict(geometry)
+            pair_geometry = dict(np.load(folder/'subspace_geometry.npz')) if protocol['family'] == 'base_token_evidence' else dict(geometry)
             for name in CANDIDATE_SIDES:
                 norm_side, _ = normalize({'side_tokens': multistream_features[name]}, fit)
                 side = fit_side_geometry(tf, norm_side['side_tokens'][fit])
                 pair_geometry.update({side_key(name, suffix): side['side_'+suffix] for suffix in ['center', 'basis', 'eigenvalues', 'normal_patients']})
-            if protocol['family'] == 'register_position_calibration':
+            if protocol['family'] in ['register_position_calibration', 'register_static_context']:
                 from register_position_calibration import fit_position_moments
                 from normal_subspace import independent_transform
                 projected = independent_transform(norm_side['side_tokens'][fit], pair_geometry['side_center'], pair_geometry['side_basis'], 1.)
-                scope = 'all' if protocol['configurations']['multistream']['register_position_kind'] == 'all_standardize' else 'normal'
+                scope = 'all' if protocol['family'] == 'register_static_context' or protocol['configurations']['multistream']['register_position_kind'] == 'all_standardize' else 'normal'
                 pair_geometry.update(fit_position_moments(tf, projected, scope))
             if protocol['family'] == 'register_geometry':
                 from register_geometry import fit_register_geometry
@@ -248,17 +259,19 @@ def run():
                 details[arm] = independent_geometry(tf, {k: v[fit] for k, v in normalized.items()}, geometries[arm])
             normalized, _ = normalize({'side_tokens': token_features['side_tokens']}, fit)
             details['token'] = independent_side_geometry(tf, normalized['side_tokens'][fit], geometries['token'])
+            candidate_norm, _ = normalize(feature_sets['multistream'], fit)
+            details['candidate_base'] = independent_geometry(tf, {key: candidate_norm[key][fit] for key in KEYS}, geometries['multistream'])
             details['multistream'] = {}
             for name in CANDIDATE_SIDES:
                 norm_side, _ = normalize({'side_tokens': multistream_features[name]}, fit)
                 side = {'side_'+suffix: geometries['multistream'][side_key(name, suffix)] for suffix in ['center', 'basis', 'eigenvalues', 'normal_patients']}
                 details['multistream'][name] = independent_side_geometry(tf, norm_side['side_tokens'][fit], side)
-            if protocol['family'] == 'register_position_calibration':
+            if protocol['family'] in ['register_position_calibration', 'register_static_context']:
                 from audit_register_position_calibration import independent_position_moments
                 from normal_subspace import independent_transform
                 g = geometries['multistream']
                 projected = independent_transform(norm_side['side_tokens'][fit], g['side_center'], g['side_basis'], 1.)
-                scope = 'all' if protocol['configurations']['multistream']['register_position_kind'] == 'all_standardize' else 'normal'
+                scope = 'all' if protocol['family'] == 'register_static_context' or protocol['configurations']['multistream']['register_position_kind'] == 'all_standardize' else 'normal'
                 details['position'] = independent_position_moments(tf, projected, g, scope)
             if protocol['family'] == 'register_geometry':
                 from audit_register_geometry import independent_register_geometry
@@ -313,7 +326,7 @@ def run():
 def main():
     import argparse
     global OUT, DEST, CANDIDATE_MODEL, CANDIDATE_LOSS, CANDIDATE_PREDICT, CANDIDATE_INDEPENDENT, CANDIDATE_WITNESS, CANDIDATE_SIDES
-    parser = argparse.ArgumentParser(); parser.add_argument('--family', required=True, choices=['large_token_interaction', 'large_token_cross_attention', 'register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry'])
+    parser = argparse.ArgumentParser(); parser.add_argument('--family', required=True, choices=['large_token_interaction', 'large_token_cross_attention', 'register_depth', 'register_multiquery', 'register_position_calibration', 'register_geometry', 'base_token_evidence', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout'])
     family = parser.parse_args().family
     OUT = ROOT/'runs'/(family+'_confirmation'); DEST = ROOT/'results'/('research_'+family+'_confirmation')
     if family == 'large_token_interaction':
@@ -336,11 +349,54 @@ def main():
         from register_position_calibration import RegisterPositionCalibrationModel as Candidate, token_evidence_loss as task
         from register_position_calibration_experiments import predict_cpu as predictor
         from audit_register_position_calibration import independent_probability as independent, audit_training_witness as witness
-    else:
+    elif family == 'register_geometry':
         from register_geometry import RegisterGeometryModel as Candidate, token_evidence_loss as task
         from register_geometry_experiments import predict_cpu as predictor
         from audit_register_geometry import independent_probability as independent, audit_training_witness as witness
-    CANDIDATE_SIDES = ['early_registers', 'middle_registers', 'final_registers'] if family == 'register_depth' else ['side_tokens'] if family in ['register_multiquery', 'register_position_calibration', 'register_geometry'] else ['mid_tokens', 'register_tokens']
+    elif family == 'base_token_evidence':
+        from base_token_evidence import BaseTokenEvidenceModel as Candidate, token_evidence_loss as task
+        from base_token_evidence_experiments import predict_cpu as predictor
+        from audit_base_token_evidence import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_common_mode':
+        from register_common_mode import RegisterCommonModeModel as Candidate, token_evidence_loss as task
+        from register_common_mode_experiments import predict_cpu as predictor
+        from audit_register_common_mode import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_cosine':
+        from register_cosine import RegisterCosineModel as Candidate, token_evidence_loss as task
+        from register_cosine_experiments import predict_cpu as predictor
+        from audit_register_cosine import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_scale_factorization':
+        from register_scale_factorization import RegisterScaleFactorizationModel as Candidate, token_evidence_loss as task
+        from register_scale_factorization_experiments import predict_cpu as predictor
+        from audit_register_scale_factorization import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_static_context':
+        from register_static_context import RegisterStaticContextModel as Candidate, token_evidence_loss as task
+        from register_static_context_experiments import predict_cpu as predictor
+        from audit_register_static_context import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_projection_freezing':
+        from register_projection_freezing import RegisterProjectionFreezingModel as Candidate, token_evidence_loss as task
+        from register_projection_freezing_experiments import predict_cpu as predictor
+        from audit_register_projection_freezing import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_classifier_context':
+        from register_classifier_context import RegisterClassifierContextModel as Candidate, token_evidence_loss as task
+        from register_classifier_context_experiments import predict_cpu as predictor
+        from audit_register_classifier_context import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_routing_information':
+        from register_routing_information import RegisterRoutingInformationModel as Candidate, token_evidence_loss as task
+        from register_routing_information_experiments import predict_cpu as predictor
+        from audit_register_routing_information import independent_probability as independent, audit_training_witness as witness
+    elif family == 'register_recurrent_refinement':
+        from register_recurrent_refinement import RegisterRecurrentRefinementModel as Candidate
+        from compact_token_witness import token_evidence_loss as task
+        from register_recurrent_refinement_compact_experiments import predict_cpu as predictor
+        from audit_register_recurrent_refinement_compact import independent_probability as independent, audit_training_witness as witness
+    else:
+        assert family == 'register_conditional_readout'
+        from register_conditional_readout import RegisterConditionalReadoutModel as Candidate
+        from compact_token_witness import token_evidence_loss as task
+        from register_conditional_readout_experiments import predict_cpu as predictor
+        from audit_register_conditional_readout import independent_probability as independent, audit_training_witness as witness
+    CANDIDATE_SIDES = ['early_registers', 'middle_registers', 'final_registers'] if family == 'register_depth' else ['side_tokens'] if family in ['register_multiquery', 'register_position_calibration', 'register_geometry', 'base_token_evidence', 'register_common_mode', 'register_cosine', 'register_scale_factorization', 'register_static_context', 'register_projection_freezing', 'register_classifier_context', 'register_routing_information', 'register_recurrent_refinement', 'register_conditional_readout'] else ['mid_tokens', 'register_tokens']
     CANDIDATE_MODEL, CANDIDATE_LOSS, CANDIDATE_PREDICT, CANDIDATE_INDEPENDENT, CANDIDATE_WITNESS = Candidate, task, predictor, independent, witness
     torch.set_num_threads(4)
     with (OUT/'runner.lock').open('a') as lock:

@@ -1,0 +1,83 @@
+{
+  "observed_at_utc": "2026-11-23T20:33:29.475925+00:00",
+  "goal_status": "active",
+  "current_frozen_model": "milestone5/63c585e70306",
+  "new_external_evaluations": 0,
+  "completed_this_session": {
+    "raw_resolution_fixed_arms": 4,
+    "raw_resolution_new_seed_fits": 48,
+    "fixed_probability_experts": 12,
+    "probability_experts_new_seed_fits": 0,
+    "new_patient_confirmation_seed_fits": 54,
+    "confirmation_gate_passed": false
+  },
+  "known_lora_issue": "V2 seeds were set after adapter construction. Retain v2 as exploratory; queued v3 seeds before construction and resets training RNG afterward. Twelve real constructors independently verified; initial adapters saved and hashed.",
+  "new_code_sha256": {
+    "analyze_raw_highres.py": "93017a6d19f4f413d7b21a81abb88f18b91e0317ef1220324f34b15237e08d65",
+    "resolution_probability_fusion.py": "cdbaa90731ed680c8a966cfd0839a044ee6dbe9539ec125867a79102252e4b73",
+    "resolution_repeat_cv.py": "7b5eadabc46495252b81ef647d875c3855bf3524b28d813c2f4b35a59c0bc075",
+    "lora_seed.py": "7c51807f5d5cf5e6e75144778cde9fdfb3e32d9f6ed297d204f0d9090b02e847",
+    "verify_lora_seed.py": "a09759af4d17ca08286b2e9b4e79ca1ed718067949b574eee78ccd95237263da",
+    "lora_experiments_seeded.py": "7895214c7fdb2efddab3cf312bdf2d0e8fb5786972ad811e00afa9f113f79e3a",
+    "lora_seeded_followup.py": "88a735391311e10d94780deb5e7674d548110f30e0637fcd28381748f92dae4f"
+  },
+  "states": {
+    "continuous_search": {
+      "status": "running",
+      "pid": 22236,
+      "round": 284,
+      "completed_round": 283,
+      "completed_experiment_rounds": 283,
+      "proposal_iteration": 349862,
+      "legacy_proposal_iterations": 349843,
+      "feature": "multiscale_vit",
+      "candidate_id": "1f1d6bd0d022",
+      "hypothesis": "Joint optimizer, regularization and capacity exploration after tested local proposals were exhausted",
+      "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+      "time": "2026-11-24T04:33:09.802068+08:00",
+      "external_test_policy": "Never read or evaluate external results inside this loop.",
+      "observed_process_command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/continuous.py "
+    },
+    "lora_adaptation_v2": {
+      "status": "training",
+      "pid": 22996,
+      "group": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/lora_adaptation_v2/03_rank8_blocks4",
+      "seed": 1,
+      "epoch": 1,
+      "batch": 251,
+      "total_batches": 430,
+      "seconds": 30.895331144332886,
+      "observed_process_command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/lora_experiments.py "
+    },
+    "lora_seeded_followup": {
+      "status": "waiting_for_v2",
+      "pid": 25518,
+      "source_pid": 22996,
+      "queued_script": "lora_experiments_seeded.py",
+      "reason": "Adapter initialization must be reproducible independently of arm order and resume position.",
+      "observed_process_command": "/root/miniconda3/bin/python -u /root/autodl-tmp/uveitis_threeclass_20261124/lora_seeded_followup.py "
+    },
+    "resolution_repeat_cv": {
+      "status": "completed",
+      "pid": 26234,
+      "new_seed_fits": 54,
+      "confirmation_gate_passed": false,
+      "external_test_evaluated": false,
+      "observed_process_command": null
+    },
+    "raw_highres": {
+      "status": "completed_development_experiments",
+      "pid": 24276,
+      "configurations": 4,
+      "external_test_evaluated": false,
+      "observed_process_command": null
+    }
+  },
+  "free_gb": 1.936760832,
+  "next_steps": [
+    "Let v2 finish, summarize all four ensembles as exploratory, then verify queued v3 starts. Do not restart living processes because an observation expires.",
+    "Audit v3 actual initialization hashes and AMP update counts; follow its conditional patient CV policy.",
+    "Keep milestone5 frozen. The raw768 probability expert failed predeclared repeated-patient confirmation; no held-out testing for these candidates.",
+    "Continue developing new structural hypotheses alongside the active controller; all model selection uses development data only."
+  ]
+}

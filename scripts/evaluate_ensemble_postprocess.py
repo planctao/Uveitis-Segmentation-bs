@@ -18,7 +18,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from bs.adaptive_threshold import build_threshold_adapter
-from bs.multilabel import PaperDice
+from bs.multilabel import PaperDice, masks_to_paper_targets
 from bs.fov import build_fov_masker
 from bs.intensity_refine import build_intensity_refiner
 from bs.paths import project_path
@@ -120,6 +120,63 @@ def summarize_threshold_sweep(metrics: dict[tuple[float, float], PaperDice]) -> 
         "best": best,
         "results": results,
     }
+
+
+class RawThresholdSweep:
+    """Accumulate an exact per-channel threshold sweep without mask postprocessing."""
+
+    def __init__(self, thresholds: list[float], ignore_index: int = 255) -> None:
+        self.thresholds = thresholds
+        self.ignore_index = int(ignore_index)
+        self.intersections = torch.zeros((len(thresholds), 2), dtype=torch.float64)
+        self.predicted = torch.zeros((len(thresholds), 2), dtype=torch.float64)
+        self.targets = torch.zeros(2, dtype=torch.float64)
+
+    def update(self, logits: torch.Tensor, mask: torch.Tensor) -> None:
+        probs = torch.sigmoid(logits.detach())
+        target, valid = masks_to_paper_targets(mask.detach(), self.ignore_index)
+        valid = valid.expand_as(target)
+        target = target.bool() & valid
+        dims = (0, 2, 3)
+
+        intersections = []
+        predicted = []
+        for threshold in self.thresholds:
+            pred = (probs >= threshold) & valid
+            intersections.append((pred & target).sum(dim=dims))
+            predicted.append(pred.sum(dim=dims))
+
+        self.intersections += torch.stack(intersections).to(device="cpu", dtype=torch.float64)
+        self.predicted += torch.stack(predicted).to(device="cpu", dtype=torch.float64)
+        self.targets += target.sum(dim=dims).to(device="cpu", dtype=torch.float64)
+
+    def summarize(self) -> dict[str, Any]:
+        dice = (
+            2.0 * self.intersections / (self.predicted + self.targets.unsqueeze(0)).clamp_min(1.0)
+        ).nan_to_num(0.0)
+        results = []
+        for threshold_1_idx, threshold_1 in enumerate(self.thresholds):
+            for threshold_2_idx, threshold_2 in enumerate(self.thresholds):
+                dice_1 = float(dice[threshold_1_idx, 0].item())
+                dice_2 = float(dice[threshold_2_idx, 1].item())
+                results.append(
+                    {
+                        "threshold": [threshold_1, threshold_2],
+                        "paper_dice_1": dice_1,
+                        "paper_dice_2": dice_2,
+                        "paper_macro_dice": (dice_1 + dice_2) / 2.0,
+                        "paper_pred_pixels_1": float(self.predicted[threshold_1_idx, 0].item()),
+                        "paper_pred_pixels_2": float(self.predicted[threshold_2_idx, 1].item()),
+                        "paper_target_pixels_1": float(self.targets[0].item()),
+                        "paper_target_pixels_2": float(self.targets[1].item()),
+                    }
+                )
+        results.sort(key=lambda item: item["paper_macro_dice"], reverse=True)
+        return {
+            "enabled": True,
+            "best": results[0] if results else None,
+            "results": results,
+        }
 
 
 def parse_member(value: str) -> tuple[Path, Path]:
@@ -294,15 +351,23 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         threshold_adapter=threshold_adapter,
     )
     sweep_metrics: dict[tuple[float, float], PaperDice] = {}
+    raw_threshold_sweep: RawThresholdSweep | None = None
     if args.threshold_sweep:
-        for threshold_pair in threshold_pairs(parse_threshold_grid(args.thresholds, base_config)):
-            sweep_metrics[threshold_pair] = PaperDice(
+        thresholds = parse_threshold_grid(args.thresholds, base_config)
+        if postprocessor is None and intensity_refiner is None and fov_masker is None:
+            raw_threshold_sweep = RawThresholdSweep(
+                thresholds,
                 ignore_index=int(base_config["data"]["ignore_index"]),
-                threshold=list(threshold_pair),
-                postprocessor=postprocessor,
-                intensity_refiner=intensity_refiner,
-                fov_masker=fov_masker,
             )
+        else:
+            for threshold_pair in threshold_pairs(thresholds):
+                sweep_metrics[threshold_pair] = PaperDice(
+                    ignore_index=int(base_config["data"]["ignore_index"]),
+                    threshold=list(threshold_pair),
+                    postprocessor=postprocessor,
+                    intensity_refiner=intensity_refiner,
+                    fov_masker=fov_masker,
+                )
     tta_cfg = metric_cfg.get("tta", {"enabled": False})
 
     with torch.no_grad():
@@ -315,6 +380,8 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                     logits_list.append(predict_with_tta(member.model, images, tta_cfg))
             logits = weighted_ensemble_logits(logits_list, weights, args.average)
             metric.update(logits, masks, images)
+            if raw_threshold_sweep is not None:
+                raw_threshold_sweep.update(logits, masks)
             for sweep_metric in sweep_metrics.values():
                 sweep_metric.update(logits, masks, images)
 
@@ -339,7 +406,9 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         ],
         **metric.compute(),
     }
-    if sweep_metrics:
+    if raw_threshold_sweep is not None:
+        result["threshold_sweep"] = raw_threshold_sweep.summarize()
+    elif sweep_metrics:
         result["threshold_sweep"] = summarize_threshold_sweep(sweep_metrics)
     return result
 

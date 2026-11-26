@@ -61,3 +61,13 @@ python classification/tools/verify_snapshot.py
 ~~~
 
 更新后同时核对本目录实验日志与实时状态，并检查 Git 暂存区只包含预期的代码和汇总记录。
+
+## 2026-11-26 结果汇总与汇报材料
+
+- [当前classification结果总览](RESULTS_SUMMARY_20261126.md)
+- [全部候选配置汇总CSV](RESULTS_ALL_CANDIDATES_20261126.csv)
+- [基线、两阶段、M1、M2：简洁版PDF](outputs/four_methods_plain_20261126/分类方法说明_简洁版.pdf)
+- [同版可编辑PPTX](outputs/four_methods_plain_20261126/分类方法说明_简洁版.pptx)
+- [M1矩形模块结构图](outputs/four_methods_plain_20261126/M1结构图_简洁版.png)
+
+本次更新含149份实验比较报告，并补齐汇总诊断、独立复核与协议记录。汇总材料的采集时间独立记录在来源JSON中；运行中的实验状态以SNAPSHOT_MANIFEST.json标记的文件快照为准。

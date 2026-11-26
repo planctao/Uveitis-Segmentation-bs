@@ -1,0 +1,1513 @@
+{
+  "passed": true,
+  "actual_seed_heads_checked": 48,
+  "actual_training_witnesses_checked": 48,
+  "fits": [
+    {
+      "arm": "readout_only",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "cfea5f5a02f058acb1c9c736d40dab78e79de883ed34cf0787bd536b99cc37be",
+      "training_witness_sha256": "a6c3fc474b7530e9a444b5aea78499bed6cfe9bef9451c75a510830b282a26e9",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 1.5823752619326115e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "edd459a2d1b32d0bdafbdff22fb2b503be1e32ed7fc90c57aa4762969be7c26c",
+      "training_witness_sha256": "b0e4e48e34d8a3218a53121f7a57c9f9411eef0ba8b2e926f7db5dcd5485fa44",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 5.4016709327697754e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "b1afd32b6954b53a609fabdae60d9307ecf2609e613af5c557df8ad5f23b18c4",
+      "training_witness_sha256": "7fff3de3683cec7b09ae60c9339b51b8f3a4b5a3f7327cc5f88707b0f38b1bf2",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 8.195638656616211e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "1bc6aaa775e9520815502b252957388bd3bd2b879728690bc74edef827ece853",
+      "training_witness_sha256": "44ac4ebf15f255c54c076dde3793f77ba93fff8381ca8de659d8be637e927bc6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 1.043081283569336e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "12a80577fc29c75cacac7dcfed00c037c8aeec20ef920002d961c438971532c9",
+      "training_witness_sha256": "801f39e6ede524d6ddd436cec6e88700f8914f96220872df61f2bb0750970e68",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 1.1781230568885803e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "390f9b3a86c648dde02cd07f3b9c5f0f10f461c958a70c71fbe16c527c0a3151",
+      "training_witness_sha256": "f47a3f3d257a5bbdc415bd9442a2b7e9ab91a9379c54cdd29a2d6c68fb466519",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 8.381903171539307e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "3b2a0ca1bc22131b1729296d4eb7549bf1d51c844c21c8192ba5b82184e02053",
+      "training_witness_sha256": "574daa76bb44e563c8e0a3803418bef42f81f3711393baaffbd3ad0c8ae089c0",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3341,
+        "complete_task_gradient_error": 5.820766091346741e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "4475dc356886646cf37b6223ba9ce63e23b4a8ce8dd8827a2e703e5c4e3148b5",
+      "training_witness_sha256": "566ea3907180b154438fc218eaccb52a739002af1f38adfbd098b5c10527182e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3341,
+        "complete_task_gradient_error": 3.4458935260772705e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "19530536045fbf811321f459d52b96497cc7ed020209d213ef88f8639eaa992d",
+      "training_witness_sha256": "3bf612bf66199a84da0fce2f5969c70ab72c5ed798a48038587ba9ca4e6673e6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3341,
+        "complete_task_gradient_error": 8.102506399154663e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "a69dbdc321696c6947dd78c8d2652cbb432eb67c080d260c074d94163b6a1b73",
+      "training_witness_sha256": "d4714885977757cb8f20876c6edb9413f30524ccdf1a9ce53d1bacd414586261",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 3.03611159324646e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "1a807d21a0a22f1f9565ff2aa62166eadaef3109840448262049aca5e3cfa4ca",
+      "training_witness_sha256": "c6f7bbbbe650077d29768499786328671c2666a96e6a21867048c6ad60c6df2a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 3.725290298461914e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_only",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "7a76e39632a38a371753d82c6d04753e72e3e085f8c88ed60fedd7ce60384c66",
+      "training_witness_sha256": "9e0537a9119961163d900f55bdda60d75b010950fd1bfdb9253849c8d056a1c6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 3598,
+        "complete_task_gradient_error": 1.6763806343078613e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "2e927c5984ad4b51b208a74fadb482fb3e573f241cfc76c7dbd909ea9202e706",
+      "training_witness_sha256": "8b89a9449494b602c44b1b72447d47ca95932bf8a99c4a1f46992dd689c6bfab",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 1.5823752619326115e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "63b63da07afc214ed3df32c4054c851541a6f1607c6af78baa6eceb8a375a1c4",
+      "training_witness_sha256": "5eaa064778c954a5fddb4d3c7904e8bd0f2266a805430d4ef875089c84bb911e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 5.4016709327697754e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "2a5cf00848a36cf06f4ce7d4be6d0d69c4009623971f4b4ba2077ed286db1253",
+      "training_witness_sha256": "bce05ee322b58edc9297555141dda65760fe84978b0695a8e047ca0769ef5169",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 8.195638656616211e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "4a19f4a471c827918f808f35df4f6cbdaa4a72fc2f906962eccdf9a812e4977a",
+      "training_witness_sha256": "47aefc8ca43010a832f6d2ba2cd35e73e26ad3995240c79bb34cfedbb92f5d7b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 1.043081283569336e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "5268c006d8456708df2d3a2220c5e8b1f8c52f9ef912ec04f977363d9f43cfae",
+      "training_witness_sha256": "ea7485d53bbf7d94ebec2ed27984cdf52ca2299814eddd7206d59a70f3a1560a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 1.1781230568885803e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "485a0497f5109118a4c9d5faf6d16f135559c5e70004fd838530384c468e9e61",
+      "training_witness_sha256": "49048d37a47622ec9043f7d4731281bb863dfb87ceef46bc7dee538d89f0f2fa",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 8.381903171539307e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "7c7f34ad485061045b4dfaf0fcf445ae299fbe06c2b123302135b05347d940db",
+      "training_witness_sha256": "8bcd995db3da60940cf3be92c95ad6e72a6bf4a5334641beea38c00961d1b34e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4109,
+        "complete_task_gradient_error": 5.820766091346741e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "a146f68c95347836001136da258665c2f17ee3d6568cd73a50a7219e8c541456",
+      "training_witness_sha256": "cfd4d9217d2c71f2747d47face013d0b211bc1f569ac7f414db4d1b8af2fa411",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4109,
+        "complete_task_gradient_error": 3.4458935260772705e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "bf3d3c69b385824781ce59d2289b6d806581c5dc660231676cfd92ffe5657acd",
+      "training_witness_sha256": "89ef853f87652714043d67ace4795875cdc576c04f5967af1487866b65157ce8",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4109,
+        "complete_task_gradient_error": 8.102506399154663e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "b817bd75cbdaf7ef4f7baac211b54f480732b954fab7ae349fbf3b845e306045",
+      "training_witness_sha256": "b3057a240b903b5ce8f998a2272062050b0d1acf9e3c31cbea51bfaaaad1366d",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 3.03611159324646e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "6320fa378785fa25af4aca10db2fd961d95e5e149b09cd7f853ff08f4a4a07ed",
+      "training_witness_sha256": "acdaf9a1a76f7651d91467611d1c96dd44b52f185b5483bee3b4e1ed55abe6cd",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 3.725290298461914e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_shared_rank4",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "81485cd10c7a95cdf3b3848bebaeef048eca08d037a4fbf0c3a1a6a992284d06",
+      "training_witness_sha256": "1bc868a4cd8429560976c3883167b3f4d94805b4e73bbc7c1f44854ffe1d5d86",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 4366,
+        "complete_task_gradient_error": 1.6763806343078613e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "e890b695c436680a5768bab29a542f619dfcfb4daa99925c1ab55b9bf083c2b6",
+      "training_witness_sha256": "ae653ae600910b2d5a95fe0475b7a116e9fd607547204dae2010cf24429f234b",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 1.5823752619326115e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "7b9eda2e7bd75b4c00adedc2db5ea34321cf3b5e3aee66e01d75e9bfcbd5a051",
+      "training_witness_sha256": "2aa2ec6e9934295eefdbe80fd2ebb711ee54428519ce139fb8f12666023a3ad3",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 5.4016709327697754e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "8e2d6a28abab94a9f1f1102e4d33afe35ff34eb8a15a3c2f8d7aef91fde669fd",
+      "training_witness_sha256": "95d3aa117ab966f60cd1e5aa23dd6cce25a516d439b67ecc98661669db79ed8e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 8.195638656616211e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "899ac769ab42728e9c6426356dc98a245e85cd7a2b64cfc7bdc85ac3c0311a34",
+      "training_witness_sha256": "bc2fe38c98359f33c7dc49571ab2f6d1879d4ca4a896f72c86ce9a5b4c093f33",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 1.043081283569336e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "b267bafa1ba8039604c1cae84fea8fe7f49016b32a0470882e1ca4044a3785a0",
+      "training_witness_sha256": "6e788e5eef8e71e4ce081209f760b2e28914450ec04feecb66406f16a7b36985",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 1.1781230568885803e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "f804dbe31265be4a03b918c6ec9d6e76b05d667d39e06567e679be2897d88aac",
+      "training_witness_sha256": "07ec50f1cc2e91ecb4a09d3672d0ee439873dfb03f3dcaaa83cc431cff353b7f",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 8.381903171539307e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "343334d861b646088f964d0e71acca9330af56f877aa0fbebf71b937d60e6ae1",
+      "training_witness_sha256": "8a84704fb92d074a17d5c8e60cd38b57a47052805d7417fa95926d090fdabdb7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15629,
+        "complete_task_gradient_error": 5.820766091346741e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "9a4975cbb3ce82b26192fbce71ffc2521f0a9f873b657b5a3e2008c2d6b5cc90",
+      "training_witness_sha256": "ebf44be48576891cdc88d03131f1a951756063738097a06671567777cfb6c5d8",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15629,
+        "complete_task_gradient_error": 3.4458935260772705e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "393bef790296fee45d21346c139001aad66f6081e3e01d2c92a9f984372361d0",
+      "training_witness_sha256": "98564c5323961418f5073227538ee58cf37e91300d5ce68e750650410070bb15",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15629,
+        "complete_task_gradient_error": 8.102506399154663e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "d57f111116b3ce9a3978749e8af6c80dcccca66f67ff1106f05bbec182980bb2",
+      "training_witness_sha256": "fc2c88bfacdeb445bd01765491fdb9b6103b1bf708e12c0a3d30a265daa9a09e",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 3.03611159324646e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "ac286eed77c991fd64ada97ecf2d06fd96da215658b82919d4a80daeabfc09ea",
+      "training_witness_sha256": "d38b9379c835ebcef99abbc12a5e8d0ae303d2dabcd77955bba245f4e51a33a2",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 3.725290298461914e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank4",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "ccf6982b2fd2d69c700bd3a5e7dd40648f9a0451241d4600552d0c6340d00ad8",
+      "training_witness_sha256": "c47de54f37ce68e6b7ecbd337d5deaef14e393d8c752e604a248d9fd4eb15b01",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 15886,
+        "complete_task_gradient_error": 1.6763806343078613e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint_sha256": "931231d64fa94d90ede802bfe95278b89192aea49e35ea94003fb8a0343ce655",
+      "training_witness_sha256": "48dd21f298587680b844bc2d4ad4ea72c5f8c6119e2c01d0c7c0faf6d8ed6654",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 1.5823752619326115e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint_sha256": "496bc92db37989419426fc614dba1b4cf75b88ea9774bc38117136f06c7fea4d",
+      "training_witness_sha256": "aa9e3708a901f923efea145f4a84d5390f9765be904ce2dd1103b5465f817c61",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 5.4016709327697754e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint_sha256": "7759a745e09551054bbbf3377d987045a1bb9f7b88622dd9e2068727026d26ba",
+      "training_witness_sha256": "926a114ec0e1f0782ebeaaae3491884ea2b4c2f7d2a326d9664c8b2ef52be9e6",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 8.195638656616211e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint_sha256": "7dab5795cc07e555fa6962378f4a83e50b94b774e4ee30410c628e4c64a7796c",
+      "training_witness_sha256": "60a3bc358130993876146a40fcca72f134e9c337cdfb01dd21e98fa089d04b8d",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 1.043081283569336e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint_sha256": "201c787d18f3000cf9db95db4e79e65e4ced213f744959c3584f99691146ea71",
+      "training_witness_sha256": "a71b00fa43a620f9d4e9e213887b6af0bbd3c64622a4257c44fcf2fda56ed2b3",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 1.1781230568885803e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint_sha256": "defcb3dce883977633d05b4f9f45f9749c3f364b7e1ec02e080a8a281195561b",
+      "training_witness_sha256": "67b86d883f0e28083c779d7cfe188149e7f5fedf2079d5646792c310972e0f9a",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 8.381903171539307e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint_sha256": "3f2c888cf1cf7cb4cdd77ce50464ddfabd39b46023b26c44c1956dd4e739b55f",
+      "training_witness_sha256": "acd499eaf9babe10f8c670741b5f8fe6b03b0b20c22974b73dd46c07977b0236",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 27917,
+        "complete_task_gradient_error": 5.820766091346741e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint_sha256": "49671fcc38262cf8345ced807f352cf5789c79a0724dbd9fa9914a74ea08852f",
+      "training_witness_sha256": "e7563b2be15b2783d075dbd96c279f9b8c4b77a1b2225def31d889b9b2408f1c",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 27917,
+        "complete_task_gradient_error": 3.4458935260772705e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint_sha256": "d8ea255a8d745e0733f766e409cde57d6ad5d8e051ac76a073ad2f80459957a4",
+      "training_witness_sha256": "f369bbcb52244ab407b8e43c95a8e2e7d25b211bbb7e07c9de375c49d1767724",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 27917,
+        "complete_task_gradient_error": 8.102506399154663e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint_sha256": "238f9154592d0da11cc39a0b500b6400f4401d27bc338236f3085c51503a7caf",
+      "training_witness_sha256": "30d0d604c93ef8a9d6c8407147bb45abfb253c47674fd7b0a1aa70628202ffa7",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 3.03611159324646e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint_sha256": "e2e0ba94622c560417f9885797eaa8dd8d9cfa845613f77ac392c6e19fa7ef22",
+      "training_witness_sha256": "7195b51fdaf89b4dc32260193e62326b3fb6adcb95a169fe57e31c0d37508902",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 3.725290298461914e-08,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    },
+    {
+      "arm": "readout_perhead_rank8",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint_sha256": "fd25645f90404f2fa513595e7642abb0940deb3983f2d1d3c458a92ad891ae70",
+      "training_witness_sha256": "85443f41e08f2aaa22f566c04c76270cba2505fa06a40b4151d800640dee1535",
+      "witness": {
+        "actual_images": 256,
+        "trainable_parameter_names": [
+          "value_down",
+          "value_gate",
+          "value_up",
+          "head.flat.delta.weight",
+          "head.flat.delta.bias"
+        ],
+        "trainable_parameters": 28174,
+        "complete_task_gradient_error": 1.6763806343078613e-07,
+        "original_cuda_outputs_sha256_restored": true,
+        "frozen_feature_bank_inputs_sha256_restored": true,
+        "frozen_source_head_tail_verified": true,
+        "only_final_readout_delta_and_planned_patch_tensors_trainable": true
+      }
+    }
+  ],
+  "frozen_register_source_heads_checked": 12,
+  "register_source_heads": [
+    {
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_0/model.pt",
+      "checkpoint_sha256": "88908e7720d773ca409cb97dc5867c37a8c7fe1d9d603e84451717ee31cffe0d",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_1/model.pt",
+      "checkpoint_sha256": "a52186d034e677dbba0d3f23dd18932b90ea9d3275cd2c54476145129a568e1b",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/validation/seed_2/model.pt",
+      "checkpoint_sha256": "c7b1a119feef7625fecfa0c95c2bff7df6c6a52b8c6ffe5790cc2a340e2db230",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.3709068298339844e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "9b7ccc0ff541aab81c5fbfc7b82ffbd9e165a4690ed59284fa66aee7da3e66ee",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.6689300537109375e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "65bdabf2788de1725ebd6eebca5b62caabf4e0ac1f418c398486ddda22fb41a3",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8069986253976822e-06
+      }
+    },
+    {
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "ac6b140edfa752188d270b5e006872f1c0b21f69e3de71954c6ff1b18c9e2f0f",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 2.384185791015625e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "d460a5fde0dcf8678752f660baadc59a5fe08cd244025a1853dc44ad5e5f1450",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9e66ace92226fbf456990dbfd0f95d48b960f140f3891d3e1a55e2c1394e32cd",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 2.2351741790771484e-08,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "dc3b99cd2d40c92ad66dd7e24264ff2ffff10453d3609d953f14447ff78ceb0a",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 9.313225746154785e-09,
+        "maximum_independent_forward_error": 1.8328428268432617e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "9846a7d151446a296fd59c8368aa8b4e8044027434b917bbb16e114e130efe00",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.30385160446167e-08,
+        "maximum_independent_forward_error": 1.430511474609375e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "5d1af37546c206295ef2c91c5023002821e40f26c5edb383553608cc40c63408",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.1175870895385742e-08,
+        "maximum_independent_forward_error": 1.5497207641601562e-06
+      }
+    },
+    {
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/large_token_evidence/registers/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "0aec793f23f304a3f9401f9554d9b17c50ff1dafa9ac1873ecda56e37e9103b4",
+      "actual_original_fulltask_witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 1.4901161193847656e-08,
+        "maximum_independent_forward_error": 1.3113021850585938e-06
+      }
+    }
+  ],
+  "reused_fusion_source_heads_checked": 24,
+  "source_heads": [
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_0/model.pt",
+      "checkpoint_sha256": "7c3d34e0888e753db7a9e10143dff6b4e69391b4ae87575f774be49107babfbb"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_1/model.pt",
+      "checkpoint_sha256": "e7c0e6baadd0acfd1d589d076f7c382bd117db2f1629953bc6232db81f1e7b8f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/validation/seed_2/model.pt",
+      "checkpoint_sha256": "69d97e41ab6f7bb5785c6e9719482d1f67836a8cbfaeb2eb8338ca021aa41bad"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_0/model.pt",
+      "checkpoint_sha256": "2ad5f4eeaf9f62dcb6492add6e080f90a8490f3d8901c8f979d6e7dd012ee22e"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_1/model.pt",
+      "checkpoint_sha256": "ac74533095343de4c6f2fb67b224d32868461464f0fc24436ccbfa619e05fde0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "validation",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/validation/seed_2/model.pt",
+      "checkpoint_sha256": "ddc0e39e13e87c2f68076ada676b81cadb6c8a1368764bb815153234a99cf463"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "d88244e9531a4655ae5875f1272aefd22f54ff53995d84f810cc7e1135a513e5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "666e5f037ec2d0d3a9b66c7c532db4a3094ba99ef648ac2d510eb5641ccb2733"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "f0104ecdbec7e01c63be873d752661b15894687b6061e3d6aed459a112c74efe"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_0/model.pt",
+      "checkpoint_sha256": "069024b449b9c6854193bfa5bdade86a172f5e7f41eaa7a2cc87efc1e30400cf"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_1/model.pt",
+      "checkpoint_sha256": "5e590d0d5a4497c9d76a67862654972a7ed5c7072a21d3f4976d95e5b8b3c0fc"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_0",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_0/seed_2/model.pt",
+      "checkpoint_sha256": "136a4335107a7cc456374b60c9d60a312a9d83ba7f9beb9884b8cb99f652a0b3"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "a9fb3bb0925b42b0385816cb181872f3d619167a7a8d845fd63692ed73aa8f54"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "9ed0f89422d82e67dbc576957d1d7a8f5ed80812e27fd38c9ee23509ead42c3b"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "f7895a90c2ab390ed64a2977511cb8677b49617ba1fed30c0d33b301592836bd"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_0/model.pt",
+      "checkpoint_sha256": "b0e40a5f6fce2eecedb58fe7e443a9ba83ef20c1f043b925bc04a92da9bb6454"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_1/model.pt",
+      "checkpoint_sha256": "e660541eeeb5cbb705590b0f1bfb8f42cc40b2965a707c87d7be8f959e44501d"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_1",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_1/seed_2/model.pt",
+      "checkpoint_sha256": "29f1bca70e7d266e3320fc260871f2191aa9cd82922016eafbef75a4ba24d6d5"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "c8f49d4702a1a67d26b2b2afa7d0771affdfbb7a36883da37d560af6c35d7f77"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "dda695a36c462b1cc907fb0c48286a1c8e1f8a58d792553bfac180a06080a55f"
+    },
+    {
+      "branch": "rawB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/zero_control/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "6aa8e8b77db8fbaae1ecd5e6941650339961cf0baaa8a2074cabee593a17ea73"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 0,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_0/model.pt",
+      "checkpoint_sha256": "b3132e295a018cad9923ba7348680ede91793e380bfbd3dcb3e4afd80e896f28"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 1,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_1/model.pt",
+      "checkpoint_sha256": "8841bab05304629b71ddf2b33c0eabda66d1a8da0d36a2fdabe307b75d780fd0"
+    },
+    {
+      "branch": "normalB",
+      "phase": "fold_2",
+      "seed": 2,
+      "checkpoint": "/root/autodl-tmp/uveitis_threeclass_20261124/runs/normal_subspace/normal_rank32_full/fold_2/seed_2/model.pt",
+      "checkpoint_sha256": "a0eba0367ff8f7260e55b936e1d998a749688492cb75f0c2a8b3bcfcca6c0341"
+    }
+  ],
+  "fixed_fusion_phases_checked": [
+    {
+      "source": "readout_only",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "readout_only",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "readout_only",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "readout_only",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "readout_shared_rank4",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "readout_shared_rank4",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "readout_shared_rank4",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "readout_shared_rank4",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "readout_perhead_rank4",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "readout_perhead_rank4",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "readout_perhead_rank4",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "readout_perhead_rank4",
+      "phase": "fold_2",
+      "images": 573
+    },
+    {
+      "source": "readout_perhead_rank8",
+      "phase": "validation",
+      "images": 374
+    },
+    {
+      "source": "readout_perhead_rank8",
+      "phase": "fold_0",
+      "images": 572
+    },
+    {
+      "source": "readout_perhead_rank8",
+      "phase": "fold_1",
+      "images": 572
+    },
+    {
+      "source": "readout_perhead_rank8",
+      "phase": "fold_2",
+      "images": 573
+    }
+  ],
+  "only_planned_readout_delta_and_patch_adapters_trained": true,
+  "external_test_evaluated": false
+}

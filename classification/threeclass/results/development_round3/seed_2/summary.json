@@ -1,0 +1,48 @@
+{
+  "cfg": {
+    "arch": "attention",
+    "mode": "flat",
+    "hidden": 64,
+    "dropout": 0.4,
+    "lr": 0.001,
+    "wd": 0.01,
+    "epochs": 120,
+    "patience": 18,
+    "taxonomy_only": true,
+    "fine_contrastive": 0.01,
+    "seed": 2
+  },
+  "epoch": 51,
+  "val": {
+    "n": 374,
+    "accuracy": 0.8716577540106952,
+    "balanced_accuracy": 0.8635321718873704,
+    "macro_f1": 0.8642208961144627,
+    "log_loss": 0.5221894425304854,
+    "recall": {
+      "infectious": 0.8865248226950354,
+      "noninfectious": 0.8735632183908046,
+      "normal": 0.8305084745762712
+    },
+    "confusion_matrix": [
+      [
+        125,
+        16,
+        0
+      ],
+      [
+        12,
+        152,
+        10
+      ],
+      [
+        1,
+        9,
+        49
+      ]
+    ]
+  },
+  "seconds": 3.089463472366333,
+  "parameters": 845584,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02"
+}

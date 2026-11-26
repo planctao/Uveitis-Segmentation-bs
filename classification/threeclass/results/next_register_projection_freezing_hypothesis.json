@@ -1,0 +1,41 @@
+{
+  "created_at_utc": "2026-11-24T14:04:40.347683+00:00",
+  "family": "register_projection_freezing",
+  "status": "completed_no_candidate_passed",
+  "scores_evaluated": 8,
+  "hypothesis": "M8 training-only diagnosis shows nearlyhard registerrouting and large learned keynorms; cosine/commonmode/factoredscale studies have failedtheir frozen developmentgates. Test whether learning every added query/key/value projection is necessary, or whether fixed random projections with trainable normalizers/readout reduce excess capacity. Independent of static-context effectiveness, preregister before that study is scored. This is a random-feature/capacity ablation, no noveltyclaim.",
+  "architecture_plan": "Identical M8sidehead initialization and frozenbackbone/basefulltask. Fourarms: fulloriginalcontrol, query+key LINEAR projections frozen at their initialrandomvalues, value LINEAR projection frozen, allthreequerykeyvalueLINEARs frozen. SharedtokenLayerNorm/queryLayerNorm and zero readout staytrainable; consequently frozenq/keyLINEAR does not claim fixed attentionrouting. Freeze via requires_grad=False so AdamW doesnotupdate/decay them. Sameforward and totalparameters, report true trainableparameters separately. Same fit-only originalL/registerPCA32.",
+  "configuration_plan": [
+    {
+      "name": "full_control",
+      "kind": "full_control"
+    },
+    {
+      "name": "freeze_qk",
+      "kind": "freeze_qk"
+    },
+    {
+      "name": "freeze_value",
+      "kind": "freeze_value"
+    },
+    {
+      "name": "freeze_qkv",
+      "kind": "freeze_qkv"
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "Standalone normalL plus fixed .1875rawB+.5625normalB+.25candidateL; unchangedM8fullcontrol. Same currentreferencegates; noalternatefusions selected afteroutcomes.",
+  "preflight_plan": "Fourreal256image fulltask/trainableparametergradient cases and actualCUDAfirsttaskwitnesses; frozenparameters restoreinitialbits atbestcheckpoint; frozenprojections noAdamWdecay; originalcontrol allstate/witness/GPUstopprobabilities exact and CPUprobabilities originaltolerance plus identicallabels/discretemetrics. Snapshot/check initialhashes forallparameters but actualgradientvector includes requires_grad trainableonly, record names/shapes. No frozenparameter silently counted as trained.",
+  "geometry_plan": "FouroriginalL/fourregisterspaces/allfitstopouter patient+near-duplicateplans frozen before48fits; exactM8 geometry. No newimages/features.",
+  "launch_condition": "No classfits/scores until static_context all48audits and any required freshconfirmation/package/promotion decision terminal, fourpreflights and then-current reference/code/artifactfreeze completed.",
+  "selection": "OriginalCV strictlyabove currentreference AND validation>=currentreference; freeze highestqualifyingCV before two unusedpatient3fold repeats; higher sixfoldmeanF1 AND pairedpatient95%lower>0 vs EACH currentreference/M8/M7/M6/M5/fixedGaussian. Noautomaticexternaltest.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_register_projection_freezing.json",
+  "protocol": "runs/register_projection_freezing/protocol.json",
+  "protocol_sha256": "e4e8cb0ed0bfe29e4bcec9e512e24b867bee704a334ea1015bb16a4d6782e7a6",
+  "pid": 39864,
+  "retained_reference": "M8",
+  "passing_development_gates": 0,
+  "comparison": "results/research_register_projection_freezing/comparison.json"
+}

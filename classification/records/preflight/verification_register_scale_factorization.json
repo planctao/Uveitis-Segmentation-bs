@@ -1,0 +1,148 @@
+{
+  "passed": true,
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "cases": [
+    {
+      "kind": "legacy_control",
+      "m8_exact_control_error": 0.0,
+      "post_projection_and_normalization_scale_permutation_error": null,
+      "maximum_zero_readout_base_gradient_error": 0.0,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.043081283569336e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 1.0
+    },
+    {
+      "kind": "factored_shared",
+      "m8_exact_control_error": null,
+      "post_projection_and_normalization_scale_permutation_error": null,
+      "maximum_zero_readout_base_gradient_error": 0.0,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.487787812948227e-07,
+      "token_permutation_error": 0.0,
+      "hidden_query_attention_change": 0.3313611149787903
+    },
+    {
+      "kind": "factored_independent",
+      "m8_exact_control_error": null,
+      "post_projection_and_normalization_scale_permutation_error": 8.149072527885437e-10,
+      "maximum_zero_readout_base_gradient_error": 0.0,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 2.6635825634002686e-07,
+      "token_permutation_error": 3.725290298461914e-09,
+      "hidden_query_attention_change": 0.33984625339508057
+    },
+    {
+      "kind": "factored_scale_norm",
+      "m8_exact_control_error": null,
+      "post_projection_and_normalization_scale_permutation_error": 8.149072527885437e-10,
+      "maximum_zero_readout_base_gradient_error": 0.0,
+      "batch_size": 256,
+      "tokens": 4,
+      "parameters": 1398192,
+      "maximum_complete_task_gradient_error": 1.555308699607849e-07,
+      "token_permutation_error": 6.51925802230835e-09,
+      "hidden_query_attention_change": 0.3361447751522064
+    }
+  ],
+  "base_normal_geometry": {
+    "global": {
+      "maximum_principal_cosine_error": 4.645247853041212e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.8786497891816225e-08
+    },
+    "regions": {
+      "maximum_principal_cosine_error": 5.04875230511459e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.8208333779922157e-08
+    },
+    "mid": {
+      "maximum_principal_cosine_error": 4.368930994758102e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 5.733068908497785e-08
+    },
+    "dispersion": {
+      "maximum_principal_cosine_error": 5.627038834887799e-09,
+      "normal_patients": 111,
+      "maximum_center_error": 2.934225462603024e-08
+    }
+  },
+  "side_normal_geometries": {
+    "registers": {
+      "normal_patients": 111,
+      "maximum_principal_cosine_error": 6.104103889015278e-09,
+      "maximum_center_error": 2.7872823049612805e-08
+    }
+  },
+  "actual_cuda_full_task_witnesses": [
+    {
+      "kind": "legacy_control",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "factored_shared",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "factored_independent",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    },
+    {
+      "kind": "factored_scale_norm",
+      "witness": {
+        "batch_size": 256,
+        "full_task_restored": true,
+        "initial_parameter_hashes_restored": true,
+        "token_count": 4,
+        "new_normal_token_space_query_attention_and_zero_readout_restored": true,
+        "maximum_parameter_gradient_error": 8.149072527885437e-09,
+        "maximum_independent_forward_error": 1.564621925354004e-06
+      }
+    }
+  ],
+  "code_sha256": {
+    "register_scale_factorization.py": "cd8e78d23b1c912dd7e95032cf25f6b2778f24ec0c1f3e96663e0459b4f5dec3",
+    "audit_register_scale_factorization.py": "d07a02eeca75c73391e4d7171a396c33ba2029a238a5d8a411daa7a46c302c24",
+    "verify_register_scale_factorization.py": "eddd946fddf6807335f40e5b867eef1bf720041bb8ed16062fe8fe7e9a1748e6",
+    "register_multiquery_data.py": "a41dc9ef8013c3edc1405cf7d0a44a071d7eaadba225a347ced956e85d4ea391"
+  },
+  "checks": [
+    "Four actual tokenstreams256image complete task/allparametergradients independently reconstructed",
+    "OriginalnormalL initialization/RNG/fulltask exact atzeroreadout; basegradients float32equivalent atol1e-7/rtol1e-5; equalparameters across all four attentionarms; dotcontrol exact M8trainedidentity",
+    "Fitnormalpatient tokenPCA recovered by Gram spectrum; independent projections/query/keys/values/attention/delta",
+    "Tokenpermutation invariance, independent scalepermutation invariance after projection AND tokennormalization; whole residual test only for separate-scalenorm arm; factorizedvalue controls, nonzero hiddenquery connectivity, optimizerupdates/frozenbuffers/strictrestore and fouractualCUDA firsttask/allgradientreplays"
+  ],
+  "classification_fits": 0,
+  "classification_scores": 0,
+  "external_test_evaluated": false
+}

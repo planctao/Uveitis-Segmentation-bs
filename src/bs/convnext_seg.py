@@ -12,7 +12,10 @@ from bs.dual_branch import CoreContourDualBranchHead, RdhDualBranchFusionHead
 from bs.edge import EdgeGuidedHead, GeodesicActiveContourHead
 from bs.edge import PDCBank
 from bs.rdh import ReactionDiffusionHead
+from bs.ssm import SelectiveSSM2D
 from bs.zab import ZABLeakageHead
+from bs.guided_upsample import GuidedLogitUpsampler
+from bs.photometric_levelset import PhotometricLevelSetHead
 
 
 class ConvNormAct(nn.Sequential):
@@ -50,6 +53,45 @@ class ChannelSpatialAttention(nn.Module):
         spatial_max = x.max(dim=1, keepdim=True).values
         spatial_gate = torch.sigmoid(self.spatial(torch.cat([spatial_avg, spatial_max], dim=1)))
         return x * spatial_gate
+
+
+class ProgressiveExpansionLite(nn.Module):
+    """Bounded PEL-3-style feature expansion for the fused FPN tensor.
+
+    U-PEN Mamba expands activations with first-, second-, and third-order
+    terms.  Applying raw powers to our pretrained decoder features is too
+    brittle, so this adaptation normalizes and bounds the feature first,
+    projects to a small bottleneck, and learns the expansion as a zero-init
+    residual.  The initial function is therefore exactly the original FPN.
+    """
+
+    def __init__(self, channels: int, bottleneck: int = 96) -> None:
+        super().__init__()
+        inner = max(32, int(bottleneck))
+        groups = 8 if inner % 8 == 0 else 1
+        self.norm = nn.GroupNorm(8 if channels % 8 == 0 else 1, channels)
+        self.down = nn.Sequential(
+            nn.Conv2d(channels, inner, kernel_size=1, bias=False),
+            nn.GroupNorm(groups, inner),
+            nn.GELU(),
+        )
+        self.expand = nn.Sequential(
+            nn.Conv2d(3 * inner, inner, kernel_size=1, bias=False),
+            nn.GroupNorm(groups, inner),
+            nn.GELU(),
+            nn.Conv2d(inner, inner, kernel_size=3, padding=1, groups=inner, bias=False),
+            nn.GroupNorm(groups, inner),
+            nn.GELU(),
+        )
+        self.up = nn.Conv2d(inner, channels, kernel_size=1, bias=False)
+        nn.init.zeros_(self.up.weight)
+        self.residual_scale = nn.Parameter(torch.tensor(0.1))
+
+    def forward(self, x: Tensor) -> Tensor:
+        bounded = torch.tanh(self.down(self.norm(x)))
+        expanded = torch.cat((bounded, bounded.square(), bounded * bounded.square()), dim=1)
+        enriched = self.expand(expanded)
+        return x + self.residual_scale * self.up(enriched)
 
 
 class EMCADLiteAttention(nn.Module):
@@ -133,6 +175,161 @@ class DynamicSkipMixture(nn.Module):
         # Keep the original fused width so the existing decoder neck/head is
         # unchanged; the routed feature is broadcast as a residual mixture.
         return x + (mixed.repeat(1, self.num_scales, 1, 1) - x) * 0.25
+
+
+class MambaVisionFusion(nn.Module):
+    """Hybrid local-convolution/SSM residual inspired by MambaVision.
+
+    Unlike the earlier S3RD logit-propagation head, this block uses a compact
+    selective SSM only to mix low-resolution FPN features. A local depthwise
+    convolution branch preserves leakage texture, and the zero-initialized
+    output projection leaves the pretrained ConvNeXt/FPN path unchanged at
+    initialization.
+    """
+
+    def __init__(
+        self,
+        channels: int,
+        inner_channels: int = 64,
+        d_state: int = 8,
+        max_spatial_size: int = 48,
+    ) -> None:
+        super().__init__()
+        inner = max(16, min(int(inner_channels), int(channels)))
+        groups = 8 if inner % 8 == 0 else 1
+        self.max_spatial_size = max(8, int(max_spatial_size))
+        self.in_proj = nn.Sequential(
+            nn.Conv2d(channels, inner, kernel_size=1, bias=False),
+            nn.GroupNorm(groups, inner),
+            nn.GELU(),
+        )
+        self.local_branch = nn.Sequential(
+            nn.Conv2d(inner, inner, kernel_size=3, padding=1, groups=inner, bias=False),
+            nn.GroupNorm(groups, inner),
+            nn.GELU(),
+            nn.Conv2d(inner, inner, kernel_size=1, bias=False),
+        )
+        self.global_branch = SelectiveSSM2D(
+            in_channels=inner,
+            out_channels=inner,
+            d_inner=max(16, inner // 2),
+            d_state=max(4, int(d_state)),
+            directions=4,
+            guide_channels=0,
+            ssm_stride=1,
+        )
+        self.fusion_gate = nn.Sequential(
+            nn.Conv2d(2 * inner, inner, kernel_size=1, bias=True),
+            nn.Sigmoid(),
+        )
+        self.out_proj = nn.Conv2d(inner, channels, kernel_size=1, bias=False)
+        nn.init.zeros_(self.out_proj.weight)
+        self.residual_scale = nn.Parameter(torch.tensor(0.1))
+
+    def _pool_global(self, x: Tensor) -> Tensor:
+        # Pooling geometry is fixed for exported inference models. Explicit
+        # Python sizes also avoid round(Tensor) when tracing this branch.
+        height, width = int(x.shape[-2]), int(x.shape[-1])
+        if max(height, width) <= self.max_spatial_size:
+            return x
+        scale = self.max_spatial_size / float(max(height, width))
+        size = (max(1, round(height * scale)), max(1, round(width * scale)))
+        return F.adaptive_avg_pool2d(x, size)
+
+    def forward(self, x: Tensor) -> Tensor:
+        reduced = self.in_proj(x)
+        local = self.local_branch(reduced)
+        # Selective recurrences are substantially more stable in fp32 on
+        # Turing GPUs. Bound their residual before returning to AMP dtype.
+        with torch.amp.autocast("cuda", enabled=False):
+            global_lowres = torch.tanh(self.global_branch(self._pool_global(reduced).float()))
+        global_lowres = global_lowres.to(dtype=reduced.dtype)
+        global_features = F.interpolate(
+            global_lowres, size=reduced.shape[-2:], mode="bilinear", align_corners=False
+        )
+        gate = self.fusion_gate(torch.cat([local, global_features], dim=1))
+        mixed = local + gate * global_features
+        return x + self.residual_scale * self.out_proj(mixed)
+
+
+class PEMambaVisionFusion(nn.Module):
+    """Sequential PE-lite + HMVF ablation block."""
+
+    def __init__(self, channels: int, bottleneck: int = 96) -> None:
+        super().__init__()
+        self.progressive_expansion = ProgressiveExpansionLite(channels, bottleneck=bottleneck)
+        self.mamba_fusion = MambaVisionFusion(
+            channels=channels, inner_channels=64, d_state=8, max_spatial_size=48
+        )
+
+    def forward(self, x: Tensor) -> Tensor:
+        return self.mamba_fusion(self.progressive_expansion(x))
+
+
+class ResidualLinearAttention2D(nn.Module):
+    """Linear-complexity spatial attention used by the MCADS restoration head."""
+
+    def __init__(self, channels: int, key_channels: int = 32) -> None:
+        super().__init__()
+        key_channels = max(8, min(int(key_channels), int(channels)))
+        groups = 8 if channels % 8 == 0 else 1
+        self.norm = nn.GroupNorm(groups, channels)
+        self.query = nn.Conv2d(channels, key_channels, kernel_size=1, bias=False)
+        self.key = nn.Conv2d(channels, key_channels, kernel_size=1, bias=False)
+        self.value = nn.Conv2d(channels, channels, kernel_size=1, bias=False)
+        self.output = nn.Conv2d(channels, channels, kernel_size=1, bias=False)
+        nn.init.zeros_(self.output.weight)
+        self.residual_scale = nn.Parameter(torch.tensor(0.1))
+
+    def forward(self, x: Tensor) -> Tensor:
+        batch, channels, height, width = x.shape
+        normalized = self.norm(x)
+        query = self.query(normalized).flatten(2).softmax(dim=1)
+        key = self.key(normalized).flatten(2).softmax(dim=2)
+        value = self.value(normalized).flatten(2)
+        context = torch.einsum("bkn,bcn->bkc", key, value)
+        attended = torch.einsum("bkc,bkn->bcn", context, query).reshape(
+            batch, channels, height, width
+        )
+        return x + self.residual_scale * self.output(attended)
+
+
+class SubpixelRestorationBlock(nn.Module):
+    def __init__(self, in_channels: int, out_channels: int) -> None:
+        super().__init__()
+        self.block = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels * 4, kernel_size=3, padding=1, bias=False),
+            nn.PixelShuffle(2),
+            nn.GroupNorm(8 if out_channels % 8 == 0 else 1, out_channels),
+            nn.GELU(),
+            ConvNormAct(out_channels, out_channels),
+        )
+
+    def forward(self, x: Tensor) -> Tensor:
+        return self.block(x)
+
+
+class MCADSRestorationHead(nn.Module):
+    """CVPR 2025 MCADS-inspired depth-to-space decoder for biomarker detail."""
+
+    def __init__(self, in_channels: int, out_channels: int) -> None:
+        super().__init__()
+        self.neck = nn.Sequential(
+            ConvNormAct(in_channels, 96),
+            ConvNormAct(96, 96),
+            nn.Dropout2d(0.1),
+        )
+        self.attention = ResidualLinearAttention2D(96, key_channels=32)
+        self.restore_1 = SubpixelRestorationBlock(96, 48)
+        self.restore_2 = SubpixelRestorationBlock(48, 24)
+        self.segmentation = nn.Conv2d(24, out_channels, kernel_size=1)
+
+    def forward(self, x: Tensor, output_size: tuple[int, int]) -> Tensor:
+        x = self.attention(self.neck(x))
+        x = self.restore_2(self.restore_1(x))
+        if x.shape[-2:] != output_size:
+            x = F.interpolate(x, size=output_size, mode="bilinear", align_corners=False)
+        return self.segmentation(x)
 
 
 class WaveletBoundaryAttention(nn.Module):
@@ -287,6 +484,12 @@ def build_attention(name: str, channels: int, reduction: int = 16) -> nn.Module:
         if channels % 4 != 0:
             raise ValueError("DynamicSkipMixture expects fused channels divisible by 4")
         return DynamicSkipMixture(channels=channels // 4, num_scales=4)
+    if normalized in {"mambavision", "mamba-vision", "hmvf", "hybrid-mamba"}:
+        return MambaVisionFusion(channels=channels, inner_channels=64, d_state=8, max_spatial_size=48)
+    if normalized in {"pe", "pe-lite", "pelite", "progressive-expansion"}:
+        return ProgressiveExpansionLite(channels=channels, bottleneck=96)
+    if normalized in {"pe-hmvf", "pe+hmvf", "pelite-hmvf", "progressive-expansion-hmvf"}:
+        return PEMambaVisionFusion(channels=channels, bottleneck=96)
     if normalized in {"wbe", "wbe-lite", "wavelet", "wavelet-boundary"}:
         return WaveletBoundaryAttention(channels=channels, bottleneck=96)
     if normalized in {"boundary", "boundary-lite", "boundary-refine", "br"}:
@@ -347,6 +550,13 @@ class ConvNeXtFPNDecoder(nn.Module):
         zab_bidirectional_strength: float = 0.0,
         zab_calibration_iterations: int = 3,
         zab_calibration_max_shift: float = 6.0,
+        fusion_mode: str = "sum",
+        logit_upsample: str = "bilinear",
+        guided_radius: int = 2,
+        guided_eps: float = 1e-2,
+        pls_monotone: bool = True,
+        pls_use_vessel: bool = True,
+        pls_bg_sigma: float = 32.0,
     ) -> None:
         super().__init__()
         self.deep_supervision = bool(deep_supervision)
@@ -486,6 +696,9 @@ class ConvNeXtFPNDecoder(nn.Module):
                 },
             )
             self.deep_supervision = False
+        elif self.head_type == "mcads":
+            self.mcads_head = MCADSRestorationHead(fused_channels, out_channels)
+            self.deep_supervision = False
         else:
             self.fuse = nn.Sequential(
                 ConvNormAct(fused_channels, decoder_channels),
@@ -498,6 +711,30 @@ class ConvNeXtFPNDecoder(nn.Module):
             if self.deep_supervision
             else nn.ModuleList()
         )
+        self.fusion_mode = str(fusion_mode).lower()
+        if self.fusion_mode not in {"sum", "equal", "fdg", "edg"}:
+            raise ValueError(f"Unsupported FPN fusion mode: {fusion_mode}")
+        # Construct after existing heads so common initialization and legacy
+        # checkpoint keys are preserved for the default additive FPN.
+        self.top_down_fusions = nn.ModuleList()
+        if self.fusion_mode != "sum":
+            from bs.recent_unet_methods import DifferenceGatedFusion
+
+            self.top_down_fusions.extend(
+                DifferenceGatedFusion(decoder_channels, mode=self.fusion_mode)
+                for _ in range(len(in_channels) - 1)
+            )
+        self.logit_upsample = str(logit_upsample).lower()
+        if self.logit_upsample not in {"bilinear", "guided", "pls"}:
+            raise ValueError(f"Unsupported logit_upsample: {logit_upsample}")
+        if self.logit_upsample in {"guided", "pls"} and self.head_type != "conv":
+            raise ValueError("guided/pls logit upsampling is only wired for head_type='conv'")
+        # Registered last so bilinear checkpoints keep identical keys.
+        if self.logit_upsample == "guided":
+            self.guided_upsampler = GuidedLogitUpsampler(out_channels, radius=guided_radius, eps=guided_eps)
+        if self.logit_upsample == "pls":
+            self.pls_head = PhotometricLevelSetHead(decoder_channels, out_channels, monotone=pls_monotone,
+                                                    use_vessel=pls_use_vessel, bg_sigma=pls_bg_sigma)
 
     def forward(
         self, features: list[Tensor], output_size: tuple[int, int], images: Tensor | None = None
@@ -505,7 +742,9 @@ class ConvNeXtFPNDecoder(nn.Module):
         pyramid = [layer(feature) for layer, feature in zip(self.lateral, features)]
         for idx in range(len(pyramid) - 1, 0, -1):
             upsampled = F.interpolate(pyramid[idx], size=pyramid[idx - 1].shape[-2:], mode="bilinear", align_corners=False)
-            pyramid[idx - 1] = self.smooth[idx - 1](pyramid[idx - 1] + upsampled)
+            combined = (pyramid[idx - 1] + upsampled if self.fusion_mode == "sum"
+                        else self.top_down_fusions[idx - 1](upsampled, pyramid[idx - 1]))
+            pyramid[idx - 1] = self.smooth[idx - 1](combined)
 
         target_size = pyramid[0].shape[-2:]
         fused = torch.cat(
@@ -593,8 +832,15 @@ class ConvNeXtFPNDecoder(nn.Module):
                 for key, value in auxiliary.items()
             }
             return seg_logits, resized_auxiliary
-        logits = self.fuse(fused)
-        logits = F.interpolate(logits, size=output_size, mode="bilinear", align_corners=False)
+        if self.head_type == "mcads":
+            return self.mcads_head(fused, output_size)
+        if self.logit_upsample == "pls" and images is not None:
+            head_feat = self.fuse[:-1](fused)
+            logits = self.pls_head(self.fuse[-1](head_feat), head_feat, images, output_size)
+        elif self.logit_upsample == "guided" and images is not None:
+            logits = self.guided_upsampler(self.fuse(fused), images, output_size)
+        else:
+            logits = F.interpolate(self.fuse(fused), size=output_size, mode="bilinear", align_corners=False)
         if not self.deep_supervision or not self.training:
             return logits
 
@@ -657,6 +903,13 @@ class DinoV3ConvNeXtSegmentationModel(nn.Module):
         zab_bidirectional_strength: float = 0.0,
         zab_calibration_iterations: int = 3,
         zab_calibration_max_shift: float = 6.0,
+        decoder_fusion_mode: str = "sum",
+        logit_upsample: str = "bilinear",
+        guided_radius: int = 2,
+        guided_eps: float = 1e-2,
+        pls_monotone: bool = True,
+        pls_use_vessel: bool = True,
+        pls_bg_sigma: float = 32.0,
     ) -> None:
         super().__init__()
         code_dir = str(Path(dinov3_code_dir).resolve())
@@ -682,6 +935,13 @@ class DinoV3ConvNeXtSegmentationModel(nn.Module):
             attention=decoder_attention,
             attention_reduction=decoder_attention_reduction,
             deep_supervision=decoder_deep_supervision,
+            fusion_mode=decoder_fusion_mode,
+            logit_upsample=logit_upsample,
+            guided_radius=guided_radius,
+            guided_eps=guided_eps,
+            pls_monotone=pls_monotone,
+            pls_use_vessel=pls_use_vessel,
+            pls_bg_sigma=pls_bg_sigma,
             head_type=head_type,
             edge_channels=edge_channels,
             edge_pdc_types=edge_pdc_types,

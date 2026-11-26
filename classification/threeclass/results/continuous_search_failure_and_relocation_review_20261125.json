@@ -1,0 +1,27 @@
+{
+  "created_at_utc": "2026-11-25T09:29:52.271891+00:00",
+  "passed": true,
+  "original_worker_pid": 2272,
+  "original_worker_confirmed_absent": true,
+  "last_state_preserved_during_relocation": {
+    "status": "running",
+    "pid": 2272,
+    "round": 1313,
+    "completed_round": 1312,
+    "completed_experiment_rounds": 1312,
+    "proposal_iteration": 350892,
+    "legacy_proposal_iterations": 349843,
+    "feature": "multiscale_raw768",
+    "candidate_id": "e3a4bd39c2a8",
+    "hypothesis": "Joint optimizer, regularization and capacity exploration after tested local proposals were exhausted",
+    "policy": "Six unseen configurations per real experiment round; joint-parameter fallback; periodic development CV; external results never read.",
+    "time": "2026-11-25T08:53:05.864745+08:00",
+    "external_test_policy": "Never read or evaluate external results inside this loop."
+  },
+  "failure_log_sha256": "fad9250eb1871d7ec9d23c2437f39675834ecf060d4f793ec121c714c39c4765",
+  "relocation_record": "results/continuous_search_storage_recovery_20261125.json",
+  "relocation_record_sha256": "365971a8d7b9c4e881b3c064c97356a6a50e4b8b48575663a96bb410ac216efc",
+  "partial_failed_candidate_preserved": "multiscale_raw768_e3a4bd39c2a8",
+  "generic_search_restart_performed": false,
+  "scope": "Genericsearch terminated on torch.save/ENOSPC.77482file byte-preserving relocation completed. Stale savedrunning status is not live; original partial trajectory retained. Formal research loop continues independently."
+}

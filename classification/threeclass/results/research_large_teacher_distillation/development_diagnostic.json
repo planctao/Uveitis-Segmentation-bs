@@ -1,0 +1,43 @@
+{
+  "manifest_sha256": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+  "rows": [
+    {
+      "phase": "validation",
+      "n": 374,
+      "large_corrects_m5": 13,
+      "large_breaks_m5": 17,
+      "both_wrong": 27,
+      "m5_total_errors": 40,
+      "m5_infection_noninfection_confusions": 25
+    },
+    {
+      "phase": "fold_0",
+      "n": 572,
+      "large_corrects_m5": 40,
+      "large_breaks_m5": 44,
+      "both_wrong": 73,
+      "m5_total_errors": 113,
+      "m5_infection_noninfection_confusions": 72
+    },
+    {
+      "phase": "fold_1",
+      "n": 572,
+      "large_corrects_m5": 37,
+      "large_breaks_m5": 31,
+      "both_wrong": 79,
+      "m5_total_errors": 116,
+      "m5_infection_noninfection_confusions": 90
+    },
+    {
+      "phase": "fold_2",
+      "n": 573,
+      "large_corrects_m5": 31,
+      "large_breaks_m5": 39,
+      "both_wrong": 70,
+      "m5_total_errors": 101,
+      "m5_infection_noninfection_confusions": 71
+    }
+  ],
+  "external_test_evaluated": false,
+  "interpretation": "L corrects some B errors but introduces comparable errors. Matching its label-free geometry was a fixed development hypothesis, not evidence of benefit. Most M5 errors concern infectious/noninfectious boundary."
+}

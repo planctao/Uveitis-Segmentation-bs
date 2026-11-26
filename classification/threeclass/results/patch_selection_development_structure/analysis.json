@@ -1,0 +1,153 @@
+{
+  "created_at_utc": "2026-11-24T17:43:32.701537+00:00",
+  "purpose": "Descriptive spatial support inspection after observing original selected training OOF errors. No new classifier or gain test. The exploratory mean summaries were inspected before this script was finalized.",
+  "scope": "Exactly1717 original training OOF rows, once each. Validation/external images and predictions excluded.",
+  "definitions": {
+    "union_fraction": "Distinct positions selected by any of16heads divided by grid positions; each head selects64 distinct positions. This union does not supply missing per-head key/value information.",
+    "mean_pair_overlap_fraction": "Mean intersection size/64 across all120 distinct head pairs; not an attention-probability measure.",
+    "normalized_selection_count_entropy": "Entropy of selection counts/1024 across grid positions, divided by log(grid positions). No attention weights or lesion labels are used.",
+    "equal_patient_mean": "Average per-patient descriptor means separately within each subset. Patients may occur in both correct/wrong subsets; no independence or significance claim."
+  },
+  "limitations": "Original OOF probabilities already participated in model selection. Small descriptive mean gaps do not identify or exclude a causal spatial bottleneck. There are no lesion annotations, and patch coverage cannot be interpreted as lesion coverage. The two resolutions have different grid sizes and the same64 positions/head.",
+  "new_model_fits": 0,
+  "new_model_predictions": 0,
+  "new_candidate_scores": 0,
+  "external_test_evaluated": false,
+  "source_input_sha256": {
+    "/root/autodl-tmp/uveitis_threeclass_20261124/metadata/manifest.csv": "2778cbc34db8d588770f036d0f1dba728cad631634697556a88e7daf25ea8c02",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/m8_development_error_structure/training_oof_cases.csv": "8335bd3d2961e8d8b2d9d334f5b5d90fb4e64c24659be7b0c50fa0e167d50956",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/results/m8_development_error_structure/analysis.json": "adf62237bb7cdf9396cdadbbf2968056256a663abfdf8c9558cc43d6174cb1f2",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/verification_register_patch_query_bank.json": "f106c537b5b5067d21e6bd64e3e1296aad5d8177e02b1e9447bc1fd30dd3201c",
+    "/root/autodl-tmp/uveitis_threeclass_20261124/runs/register_patch_query_bank/arrays/patch_indices.npy": "04d49254bd2fe3b1de47957b8ea1a24b3776f80ef7fd23b463b99569c5a1f076"
+  },
+  "summaries": [
+    {
+      "subset": "all_original_training_oof",
+      "images": 1717,
+      "patients": 332,
+      "image_mean": {
+        "view_320_union_fraction": 0.5492574257425743,
+        "view_320_mean_pair_overlap_fraction": 0.5028056597019996,
+        "view_320_normalized_selection_count_entropy": 0.8359965118226114,
+        "view_448_union_fraction": 0.3954081632653061,
+        "view_448_mean_pair_overlap_fraction": 0.432377587483013,
+        "view_448_normalized_selection_count_entropy": 0.7886926855182513
+      },
+      "equal_patient_mean": {
+        "view_320_union_fraction": 0.5507245852916131,
+        "view_320_mean_pair_overlap_fraction": 0.5039676222577004,
+        "view_320_normalized_selection_count_entropy": 0.8358592315783632,
+        "view_448_union_fraction": 0.39102042988868235,
+        "view_448_mean_pair_overlap_fraction": 0.4396897069262323,
+        "view_448_normalized_selection_count_entropy": 0.7863296746153416
+      }
+    },
+    {
+      "subset": "m8_correct",
+      "images": 1433,
+      "patients": 312,
+      "image_mean": {
+        "view_320_union_fraction": 0.5489096301465458,
+        "view_320_mean_pair_overlap_fraction": 0.503077023726448,
+        "view_320_normalized_selection_count_entropy": 0.83589249764862,
+        "view_448_union_fraction": 0.3948491818220659,
+        "view_448_mean_pair_overlap_fraction": 0.4331875872295883,
+        "view_448_normalized_selection_count_entropy": 0.7884265445363076
+      },
+      "equal_patient_mean": {
+        "view_320_union_fraction": 0.550450739711282,
+        "view_320_mean_pair_overlap_fraction": 0.5042070897215365,
+        "view_320_normalized_selection_count_entropy": 0.8357527910459438,
+        "view_448_union_fraction": 0.390695593246667,
+        "view_448_mean_pair_overlap_fraction": 0.4400871883992872,
+        "view_448_normalized_selection_count_entropy": 0.7861801035031294
+      }
+    },
+    {
+      "subset": "m8_wrong",
+      "images": 284,
+      "patients": 107,
+      "image_mean": {
+        "view_320_union_fraction": 0.5510123239436621,
+        "view_320_mean_pair_overlap_fraction": 0.5014364179870893,
+        "view_320_normalized_selection_count_entropy": 0.8365213439047586,
+        "view_448_union_fraction": 0.39822865766024723,
+        "view_448_mean_pair_overlap_fraction": 0.4282905112969484,
+        "view_448_normalized_selection_count_entropy": 0.7900355729377071
+      },
+      "equal_patient_mean": {
+        "view_320_union_fraction": 0.5491605667826461,
+        "view_320_mean_pair_overlap_fraction": 0.5029647773823993,
+        "view_320_normalized_selection_count_entropy": 0.8360574442274893,
+        "view_448_union_fraction": 0.3959105114109405,
+        "view_448_mean_pair_overlap_fraction": 0.43128711831298344,
+        "view_448_normalized_selection_count_entropy": 0.7889894226387985
+      }
+    },
+    {
+      "subset": "registerL_correct",
+      "images": 1406,
+      "patients": 315,
+      "image_mean": {
+        "view_320_union_fraction": 0.5485917496443812,
+        "view_320_mean_pair_overlap_fraction": 0.5032810462600759,
+        "view_320_normalized_selection_count_entropy": 0.8358113874468939,
+        "view_448_union_fraction": 0.3950761314483119,
+        "view_448_mean_pair_overlap_fraction": 0.43303068693693686,
+        "view_448_normalized_selection_count_entropy": 0.788502043437925
+      },
+      "equal_patient_mean": {
+        "view_320_union_fraction": 0.5502650645642873,
+        "view_320_mean_pair_overlap_fraction": 0.5044520603106845,
+        "view_320_normalized_selection_count_entropy": 0.8356868147009765,
+        "view_448_union_fraction": 0.3909534217463179,
+        "view_448_mean_pair_overlap_fraction": 0.4403515434055035,
+        "view_448_normalized_selection_count_entropy": 0.7861823614715933
+      }
+    },
+    {
+      "subset": "registerL_wrong",
+      "images": 311,
+      "patients": 112,
+      "image_mean": {
+        "view_320_union_fraction": 0.5522668810289388,
+        "view_320_mean_pair_overlap_fraction": 0.5006564844587352,
+        "view_320_normalized_selection_count_entropy": 0.8368334406723184,
+        "view_448_union_fraction": 0.396909246013518,
+        "view_448_mean_pair_overlap_fraction": 0.4294249899517685,
+        "view_448_normalized_selection_count_entropy": 0.7895545593604977
+      },
+      "equal_patient_mean": {
+        "view_320_union_fraction": 0.5515150669642856,
+        "view_320_mean_pair_overlap_fraction": 0.5019168346863486,
+        "view_320_normalized_selection_count_entropy": 0.8365501987593303,
+        "view_448_union_fraction": 0.39441763631473004,
+        "view_448_mean_pair_overlap_fraction": 0.4324886565954507,
+        "view_448_normalized_selection_count_entropy": 0.7884405043187368
+      }
+    },
+    {
+      "subset": "m8_infection_noninfection_confusion",
+      "images": 213,
+      "patients": 76,
+      "image_mean": {
+        "view_320_union_fraction": 0.5498474178403756,
+        "view_320_mean_pair_overlap_fraction": 0.501044723200313,
+        "view_320_normalized_selection_count_entropy": 0.8365353570409962,
+        "view_448_union_fraction": 0.4017557727316278,
+        "view_448_mean_pair_overlap_fraction": 0.4215626222613459,
+        "view_448_normalized_selection_count_entropy": 0.7920900970208571
+      },
+      "equal_patient_mean": {
+        "view_320_union_fraction": 0.5471774500170882,
+        "view_320_mean_pair_overlap_fraction": 0.5028821126190832,
+        "view_320_normalized_selection_count_entropy": 0.8359381833748675,
+        "view_448_union_fraction": 0.4005400956734368,
+        "view_448_mean_pair_overlap_fraction": 0.42274531265575155,
+        "view_448_normalized_selection_count_entropy": 0.7916232458463527
+      }
+    }
+  ],
+  "case_descriptors_sha256": "2fdf3a51759087e53feb56118ca82ed9a5432579c7a1909d49d438432112ec2b",
+  "code_sha256": "9b676c8d39f5d7d26eb01a2bbb9dba07d5d001ed164d8b9a9aa4f853c5059257"
+}

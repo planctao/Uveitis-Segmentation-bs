@@ -1,0 +1,51 @@
+{
+  "created_at_utc": "2026-11-24T17:15:13.942706+00:00",
+  "family": "inflammatory_pair_specialist",
+  "status": "completed_no_candidate_passed",
+  "classification_fits": 48,
+  "scores_evaluated": 8,
+  "hypothesis": "ExistingM8 originaltrainOOF has284errors,213infectious/noninfectiousconfusions(75percent),172M8errorswhenB/Lagreewrong. Test a localizedconditional-odds specialist for the clinicalabnormalitybranch, usingfrozenM8L hidden/token evidence. Preserve normalprobability exactly and moveprobabilitymass onlybetweeninfection/noninfection. This focuses on the requested abnormal-firstconditional discrimination. OriginalOOF alreadyusedinselection; descriptiveanalysisdoesnotestablishfreshbenefit. Standard conditionalodds/residualMLP ingredients, nooriginalityclaim.",
+  "evidence": "results/m8_development_error_structure/analysis.json",
+  "evidence_sha256": "adf62237bb7cdf9396cdadbbf2968056256a663abfdf8c9558cc43d6174cb1f2",
+  "architecture_plan": "OriginalM8Lhead/DINOtail/normalgeometry/featureencoder allfrozen/eval; no trainablepatchadapter. Useoriginalheadpostencoderembeddingh256, optionally concatenatedwithoriginaltokenattentionpooledvector32. Scalarresiduals arelinear or64GELUMLP, finalweight/biaszero. Delta=2*tanh(score), conditionalinfection/noninfection logodds shift. GivenoriginalpI,pN,p0 compute doubleprecision transferredmass=pI*pN*expm1(Delta)/(pI*exp(Delta)+pN), updatepI+=mass,pN-=mass andcopynormalp0exact. Atzerofinalscoreexpm1zero, sourceprobabilitiesexact. Original14diseaseauxlogits/embedding unchanged. Onlyscalarresidualnetworktrainable. Preserveoriginal3classcomplete taxonomy loss, fit-onlyweights and allauxterms; frozenauxterms contributeconstant andzeroparametergradient. This is a constrainedclinical conditionalresidual, not a newhardrouting classifier.",
+  "configuration_plan": [
+    {
+      "name": "hidden_linear",
+      "evidence": "hidden",
+      "hidden": 0
+    },
+    {
+      "name": "hidden_mlp64",
+      "evidence": "hidden",
+      "hidden": 64
+    },
+    {
+      "name": "hidden_token_linear",
+      "evidence": "hidden_token",
+      "hidden": 0
+    },
+    {
+      "name": "hidden_token_mlp64",
+      "evidence": "hidden_token",
+      "hidden": 64
+    }
+  ],
+  "planned_new_seed_fits": 48,
+  "predeclared_scores": 8,
+  "fixed_fusions": "EachstandaloneL andfixed .1875rawB+.5625normalB+.25candidateL. Original12L/24B reused/audited, neverrecounted. Normalprobabilityofthefixedfusion mustbeexactlyoriginalM8 normalprobabilityunderidenticalarithmetic.",
+  "fixed_training": "Init/order20292700+seed; actualbatch256, AdamWlr.001 wd.01 max60/patience12 clip3 epoch0eligible. Originalcomplete task/fit-onlypatientandclassweights, originalpatient/near-duplicatefit/stop/outerplans, noadditionalBCE/oversampling/tasktuning.",
+  "preflight_plan": "Fouractualrandom256completefirsttasks/inputoutputhash/alltrainablegradientwitnessreplay; zeronetworkexactsourcep/subtype/embedding; nonzero allparametersfinite/nonzerogradients againstindependentconditionalratio implementation andindependentfrozenheadreconstruction; normalclassprobabilitybitwiseunchangedforarbitrarypositive/negativeboundedshifts, pairmassconserved/finitepositivep includingnear0edges; scalarzeroexactidentity; originalhead/tail/buffersunchangedafteroptimizer; checkpointCUDArestorebitwise; actualmemory/runtime. No rawimages/featuresadded andno classifierfit/score.",
+  "launch_condition": "No supervisedfit until query/value/joint/gatedvalue/readout decisions andrequiredconfirmations terminal, M8retained, fullpreflightpassed andallsource/code/proof/referencebytesfrozen. Positivepredecessor stopsforreference review/redesign, neverduplicate orrestart oldfits.",
+  "selection": "OriginalCVstrictly>M8 ANDvalidationF1>=M8; freezehighestqualifyingCV. Separate90fit freshconfirmation72freshsources+18specialists on2unusedpatient3foldplans/18spaces/54CUDAwitnesses/18Gaussianfits; highermeanF1andpairedpatient95lower>0 vsEACH M8/M7/M6/M5/fixedGaussian; inspectabnormalconditionalerrorchange. Noautomaticexternal scoring.",
+  "external_test_evaluated": false,
+  "model_preflight": "verification_inflammatory_pair_specialist_model.json",
+  "confirmation_plan_preflight": "verification_inflammatory_pair_specialist_confirmation_plan.json",
+  "continuation_protocol": "runs/pair_specialist_continuation/protocol.json",
+  "continuation_protocol_sha256": "db182370b3a0c3eda418a4e04468001630fdbc70db2324873b467b9d86e7e749",
+  "continuation_pid": 58183,
+  "preregistration_sha256": "6bb2833d0a1382d309c17243413185f42f11ebe8db8a1c1af8b09a59df7f32c4",
+  "protocol": "runs/inflammatory_pair_specialist/protocol.json",
+  "protocol_sha256": "ef5c7212539b28ca72f4a08331a6cdd29b82d1bd0b21de4dfaa0766d499460a3",
+  "pid": 66799,
+  "passing_development_gates": 0
+}
